@@ -4762,4 +4762,76 @@ The 7-8 day estimate assumed legal research happens inside Sprint 0. It doesn't.
 
 ---
 
-*Last updated: 2026-03-30T19:43*
+*Last updated: 2026-03-30T19:55*
+
+---
+
+## Pulse 2026-03-30T19:55 — Three Final Positions
+
+---
+
+## Debate 96: Conversion Trigger — Final Product Strategist Position
+
+**Challenge:** "First sent devis" as conversion trigger was challenged by Product Strategist in 19:43 pulse. The Growth Strategist proposed it as the moment to trigger upgrade prompt. Product Strategist responds with final position.
+
+### Product Strategist — "First Paid Facture" + Safety Net
+
+**Assumption challenged:** The debate assumed "first sent devis" signals meaningful commitment. It doesn't. For Marc, sending devis is routine admin work — like writing an email. The act of *sending* tells us nothing about whether he sees value in paying us. Payment is the only honest signal of value delivered.
+
+**Key argument:** A paid facture means: devis accepted + work done + client paid. Three gates of real commitment. "First sent devis" rewards activity, not value. Marc could send 10 devis and never convert. D63's "situation financière push at 8pm" already handles the soft prompt for free users. The hard upgrade gate should only fire when money actually changed hands.
+
+**Verdict on D96:** RESOLVED — Conversion trigger = **first paid facture** (hard gate). Add a secondary soft trigger: if Marc has sent 3+ devis and zero paid factures, surface a gentle upsell prompt ("Unlock unlimited devis → upgrade"). This catches power users who are engaged but haven't closed a cycle — without punishing casual or new users.
+
+**Action Item:** Implement conversion at "first paid facture" (hard gate). Add 3-sent-devis soft prompt for non-converters.
+
+---
+
+## Debate 97: Sprint 0 Timeline — Final Technical Architect Position
+
+**Challenge:** The 7-8 day estimate was challenged by Technical Architect in 19:43 pulse as overcounting. D95's +1 day for solo dev was the contested assumption.
+
+### Technical Architect — "5 Days, With Conditions"
+
+**Assumption challenged:** D95 added +1 day because "solo dev +1 day (parallelization assumed two people)." This conflates coordination risk with throughput risk.
+
+**Key argument:** Parallelization buffers protect against *coordination failure between two engineers*. A solo dev on sequential, well-defined tasks has *throughput* risk, not coordination risk. Louis is the only dev. Sprint 0 tasks are now tightly scoped: TVA is a formula (not a lookup table), mentions légales are static template files (not a schema), client-type is a simple enum. These are not the tasks that expose solo dev fragility. The +1 day was valid when Sprint 0 scope was less settled. It no longer is.
+
+**Verdict on D95:** RESOLVED — **5 days** achievable if:
+1. Louis writes the 4 mentions légales templates *before* Sprint 0 starts (2h, pre-sprint, not in-sprint)
+2. Sprint 0 stays online-only (AsyncStorage deferred — already resolved)
+3. Scope holds to: TVA formula + sequential numbering + mentions légales renderer + client-type schema + REST API
+
+Any scope creep invalidates the estimate at any duration.
+
+**Action Item:** Louis: Confirm 2h block this week to write mentions légales templates. Gate for 5-day Sprint 0.
+
+---
+
+## Debate 98: Platform Default — Final Growth Strategist Position
+
+**Challenge:** iOS-first (D92) was challenged by Growth Strategist in 19:43 pulse. The persona's Android-heavy demographic was the core argument.
+
+### Growth Strategist — "Android-First Is the Correct Default"
+
+**Assumption challenged:** D92 assumed Apple's ecosystem dominance in SMB/tools markets. This conflates general consumer app patterns with B2B trade demographics. The "iOS = serious business user" heuristic is a Silicon Valley myth that does not survive contact with French rural demographics.
+
+**Key argument:** For 50-year-old French electricians, plumbers, and construction workers, Android is statistically dominant. Defaulting to iOS-first means building for the minority of your actual users first, then retrofitting for the majority. The geo-targeted poll in Week 1 should be a *validation checkpoint* — not the source of the strategic question. The poll should confirm the device split, not discover whether Android-first is right.
+
+**Verdict on D92:** RESOLVED — **Android-first is the correct default**. Week 1 geo-targeted poll confirms or denies. If Android is 65%+, iOS remains polish phase, not launch parity. Expo builds handle both — Android-first is sequencing, not a technical constraint.
+
+**Action Item:** Week 1: Ship Android beta to French target region. Run poll asking device type (factual, not "which platform should we prioritize"). Adjust iOS vs Android resource allocation in Week 2-3 based on results.
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D92 | Platform default | Android-first (updated from iOS-first). Week 1 poll validates. | 2026-03-30 |
+| D95 | Sprint 0 timeline | 5 days (updated from 7-8). Pre-condition: mentions légales templates pre-written. | 2026-03-30 |
+| D96 | Conversion trigger | First paid facture (hard gate) + 3-sent-devis soft prompt. | 2026-03-30 |
+| U16 | Mentions légales prep | Louis writes 4 templates this week (2h) — gate for 5-day Sprint 0. | 2026-03-30 |
+
+---
+
+*Last updated: 2026-03-30T19:55*

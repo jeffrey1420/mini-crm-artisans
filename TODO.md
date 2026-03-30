@@ -193,7 +193,7 @@ All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 - [ ] Use Expo for React Native setup (`npx create-expo-app`)
 - [ ] **D47 UPDATED:** Push notifications via Expo Notifications — budget 1-2 weeks (not "few hours"). If deadline can't accommodate: defer relances to v1.1, email-only as temporary bridge.
 - [ ] App Store + Play Store presence from Day 1 launch
-- [ ] Target both iOS and Android simultaneously from start — do not "do one platform then the other"
+- [ ] **D98 UPDATED:** Android-first as default (D92 updated). Marc has an Android phone — build for him first. iOS remains secondary polish phase. Week 1 poll validates split. If Android 65%+, iOS stays polish; if iOS majority, reverse priority.
 - [ ] Keep MVP scope tight: client list, job/reminder management, basic invoicing — no feature creep
 - [ ] PWA is NOT the mobile strategy — web-only is retired for this product
 
@@ -227,6 +227,8 @@ All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 **D95 NEW (Challenge from Technical Architect):** D90's parallelization assumption is organizational (two teams) not individual (solo dev). Realistic solo dev estimate: 7-8 days unless specific pre-conditions are confirmed. Three independent risks: (1) parallelization is organizational fiction for solo dev — adds +1 day, (2) mentions légales = legal research not template engineering — adds +0.5-1 day, (3) integration underbudgeted — adds +0.5 day.
 - [ ] **D95 CONFIRM before committing to 5.5-6.5 days:** Confirm Louis has pre-researched mentions légales legal text for all 4 client types. If not pre-researched: add 0.5-1 day to Sprint 0 OR defer mentions légales to Sprint 1 with plain text placeholder.
 - [ ] **D95 SCOPE CUTS:** Three cuts make 5.5-6.5 days achievable without pre-conditions: (1) defer mentions légales to Sprint 1 (plain text placeholder), (2) defer AsyncStorage to Sprint 1 (online-only), (3) single client type in Sprint 0. Without cuts: accept 7-day timeline.
+- [x] **D95 RESOLVED:** Sprint 0 = 5 days IF Louis writes 4 mentions légales templates before sprint (2h pre-sprint). Pre-condition is the gate — if not done, accept 6.5 days.
+- [ ] **D96 NEW:** Conversion trigger = first paid facture (hard gate). Secondary soft trigger: 3 sent devis with zero paid factures → gentle upsell prompt. NOT "first sent devis" as primary trigger.
 - [ ] **D81 NEW:** Sprint 0 = offline-first. WatermelonDB/expo-sqlite for local-first storage (~2 days mobile). Fastify API: add `updated_at` timestamps + accept client-generated UUIDs (~2 hours). Sync: last-write-wins with conflict UI. No changes to API endpoint contracts.
 - [ ] **D74 RESOLVED:** Sprint 0 = 8-10 days. Day 1: `client.type` enum (4 values) + mentions légales template engine (Handlebars/Nunjucks, 4 client-type templates, devis-only). Sprint 2 adds 8 combinations.
 - [ ] **D74 RESOLVED:** API key Sprint 0 scope: `@fastify/jwt` config (0.5-1 day). Full auth (Keychain, refresh rotation, logout) = Sprint 1. (API key replaces JWT per D78)
@@ -714,3 +716,17 @@ The following were overengineered or wrong:
 - [ ] **D96 NEW:** Day 14 human check-in: Louis sends WhatsApp to all active Free users — "Salut Marc, comment ça se passe ?" Not a sales pitch. A conversation. The conversion happens here, not via push notification.
 - [ ] **D97 NEW:** Sprint 0 pre-work this week: Louis spends 2 hours researching and writing the 4 mentions légales templates (particulier, pro-français, pro-UE, pro-hors-UE). Sprint 0 then targets 5 days, not 7-8.
 - [ ] **D98 NEW:** Week 1 platform validation poll: if Android majority (>55%) in Caen artisan sample → Android-first. If iOS majority → iOS-first. Don't assume iOS is the default for this persona.
+
+## New from Pulse 2026-03-30T19:55 — Three Specialist Resolutions
+
+### Resolved (D92, D95, D96):
+- **D92 (Platform default):** RESOLVED — Android-first is the correct default for French artisan persona. Marc has an Android phone; working-class trades skew Android. iOS-first was a Silicon Valley stereotype. Week 1 poll confirms or denies. Expo builds handle both — Android-first is sequencing, not a technical constraint.
+- **D95 (Sprint 0 timeline):** RESOLVED — 5 days IF Louis writes mentions légales templates before sprint (2h pre-sprint, pre-sprint dependency). Pre-condition is the gate. Coordination risk (two-person buffer) ≠ throughput risk (solo dev). Sprint 0 tasks are tightly scoped (TVA = formula, mentions légales = template files). If templates not pre-written: accept 6.5 days.
+- **D96 (Conversion trigger):** RESOLVED — Conversion trigger = first paid facture (hard gate). Secondary soft trigger: 3+ sent devis with zero paid factures → gentle upsell prompt. "First sent devis" alone is insufficient — it rewards activity, not value. Human WhatsApp check-in by Louis at Day 14 remains the actual conversion mechanism.
+
+### New Action Items from this pulse:
+- [x] **D92 RESOLVED:** Android-first as default. Week 1 poll validates. If Android 65%+, iOS stays polish phase. Update mobile build sequencing in Sprint 0 planning.
+- [x] **D95 RESOLVED:** Sprint 0 = 5 days (gate: mentions légales templates pre-written). Update sprint planning.
+- [x] **D96 RESOLVED:** Conversion trigger = first paid facture. Update conversion design spec.
+
+*Last updated: 2026-03-30T19:55*
