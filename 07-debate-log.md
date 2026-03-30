@@ -441,4 +441,79 @@ The CAC math is compelling and the trade fair argument deserves scrutiny. Howeve
 
 ---
 
-*Pulse update: 3 new debates added, 2026-03-30T09:45:00Z*
+## Debate 13: OVH Self-Hosted Postgres — Operational Debt vs Migration Debt
+
+### The Disagreement
+
+- **Technical Architect (challenging):** "OVH VPS self-hosted Postgres isn't 'data sovereignty' — it's outsourcing your SRE team to no one."
+- **Debate 9 Resolution:** "Self-hosted Postgres on OVH from day one — answers every compliance question, no DPA needed."
+
+### The Argument
+
+Challenger's position:
+- OVH VPS is a bare VM — you own ALL operational burden: backups (pg_dump cron), connection pooling (PgBouncer), monitoring, security patches, OS updates, disk full handling
+- A 3-person team cannot be on call for database incidents while also building product
+- "No migration debt" is a seductive lie — you're not avoiding operational complexity, you're permanently owning it
+- OVH VM failures are real; disk loss happens; one bad `apt upgrade` and you're restoring from a backup you hope works
+- If a French plumber's customer data disappears because your cron job failed, "but it's on OVH" won't comfort anyone
+
+Debate 9 rationale:
+- Supabase Frankfurt addresses EU concern
+- "Toutes les données sont sur OVH" is a sales differentiator
+- No DPA, no SCCs, no trust exercise with a third party
+
+### Resolution
+
+**UNRESOLVED — Strong challenge, not yet resolved**
+
+The operational burden argument is serious. A 3-person startup cannot do real DevOps/SRE while also shipping product. The "no migration debt" framing may be wrong — permanent operational debt is arguably worse than a one-time migration.
+
+**Compromise path:** OVH Cloud SQL (managed Postgres, not bare VPS) — same "données en France" sales story, zero server maintenance. Free tier to start, scales with revenue.
+
+**Key insight:** "Data sovereignty" and "operational control" are not the same as "no operational burden." Self-hosted means self-operated.
+
+---
+
+## Debate 14: Kanban vs Client Timeline — Core View
+
+### The Disagreement
+
+- **Product Strategist (challenging):** "Kanban is a developer fantasy dressed up as a feature. Artisans don't think in pipeline stages."
+- **Debate 7 Resolution:** "Kanban pipeline is essential — 4 fixed columns (Devis, Accepté, En cours, Terminé) as MVP."
+
+### The Argument
+
+Challenger's position:
+- Marc (plumber) does half his quotes verbally and starts the job before writing the price — the "Devis → Accepté" flow is imaginary for him
+- The real question is "I talked to Madame Dupont last Tuesday about her leak. Where are we on that?" — that's a client context question, not a pipeline stage question
+- WhatsApp already wins because it has client context (all messages in one thread). You're competing with that, not with Trello
+- Kanban forces a project management framework onto people who don't manage projects
+- Jean-Pierre (55, tech-resistant) won't drag cards across columns — that's not how his brain works
+
+Debate 7 rationale:
+- Pipeline is the core differentiator vs. WhatsApp
+- Visual > text list
+- Sophie's team needs shared view
+
+### Resolution
+
+**UNRESOLVED — Kanban's value is being questioned at the foundation**
+
+The client timeline argument is more authentic to how artisans actually work. But Kanban advocates would argue that visual pipeline = understanding of business health at a glance.
+
+**Compromise path:** Client Timeline as home screen (reverse-chronological feed per client — calls, messages, quotes, jobs, notes). Kanban moves to a secondary "Jobs" tab — optional, not forced. Sophie's team can use it. Jean-Pierre doesn't have to.
+
+**Key insight:** The pain point is "where did I leave off with this client?" not "what stage is this deal?" Timeline answers both. Kanban answers neither for solo artisans.
+
+---
+
+## Debate 15: Pricing — Cost-Plus vs ROI Anchor (Attempted, Incomplete)
+
+- **Growth Strategist (challenging):** €29/month underprices the product and signals "cheap app for people who can't afford real tools"
+- **Proposed argument:** €29 = €0.97/day. Artisans charge €50-150/hour. The app saves 2h/week = €100/week = €400/month. Price should be €79-149/month for solo tier.
+
+**Status: Agent timed out — debate not completed. Flagged for next pulse.**
+
+---
+
+*Pulse update: 3 new debates (13, 14, 15 attempted), 2026-03-30T09:53:00Z*
