@@ -3924,3 +3924,110 @@ Real relationship benefits don't require a named tier to deliver them. The first
 ---
 
 *Last updated: 2026-03-30T18:15*
+
+---
+
+## Pulse 2026-03-30T18:27 — Three New Debates
+
+---
+
+## Debate 86: D81 — Sprint 0 Should Be Offline-Capable, Not Offline-First
+
+**Challenge:** Technical Architect challenges D81 ("offline-first required at launch") — argues the 8-10 day Sprint 0 cannot absorb 5-7 days of offline sync complexity for a solo artisan with 98%+ French mobile network coverage.
+
+### Technical Architect — Offline-First Is Over-Engineered for v1
+
+**Assumption challenged:** D81 ("offline-first required at launch") was decided after switching to React Native via Expo, as if the stack change eliminated the complexity of offline-first. It didn't. WatermelonDB/expo-sqlite + background sync + conflict resolution UI = 5-7 days, not 2.
+
+**Core argument:**
+
+D81's "2 days mobile work" estimate was never broken down into real work units. The actual cost:
+1. **Conflict resolution UI (~1 day):** When Marc creates a devis offline and his data syncs against updated server state — who wins? Last-write-wins sounds simple until you show Marc what was overwritten.
+2. **Sync testing (~1 day):** Offline sync bugs are the hardest mobile bugs to reproduce. Solo developer + tight sprint = production incidents shipped undetected.
+3. **Offline edge cases (~1 day):** Partial sync failures, deleted-client-during-offline scenarios. The 20% of cases that consume 80% of debugging time.
+
+Total: 3-5 extra days on top of an already-tight 8-10 day sprint. The "2 day" estimate was optimistic.
+
+**Additional challenges:**
+- Marc is solo. He has one phone. There is no multi-device conflict in v1. Conflict resolution UI built for future multi-user = solving a problem that doesn't exist yet.
+- Mobile data coverage in France is 98%+ population. Job sites have signal. True offline (basements, rural) affects <5% of sessions. Building infrastructure for edge cases at Sprint 0's expense is over-engineering.
+
+**Proposed resolution:** Sprint 0 = Offline-Capable:
+- **Optimistic UI:** Actions reflect immediately, server request fires in background
+- **Retry queues:** Failed requests queue locally with exponential backoff
+- **Cached data:** AsyncStorage for last 10 clients/recent devis
+- **No local DB:** WatermelonDB deferred to v1.2
+- **Backend:** `updated_at` + client-generated UUIDs only (~2 hours)
+
+**VERDICT on D81:** REVERSED — Sprint 0 = offline-capable (optimistic UI + retry queues + AsyncStorage). True offline-first (WatermelonDB + background sync + conflict UI) deferred to v1.2. Saves 3-5 sprint days. Devis flow ships faster.
+
+---
+
+## Debate 87: D85 — Expert-Comptable Outreach Week 1 Is Premature
+
+**Challenge:** Growth Strategist challenges D85's decision to begin cold expert-comptable outreach in Week 1 — argues cold outreach before any production users wastes the highest-trust GTM asset.
+
+### Growth Strategist — The Highest-Trust Referral Channel, Wasted Cold
+
+**Assumption challenged:** D85 — expert-comptable outreach begins Week 1, asking to be added to recommended software lists.
+
+**Core argument:**
+
+An expert-comptable who recommends software to artisan clients is making a professional endorsement affecting compliance and record-keeping for years. That recommendation only has weight if the accountant has seen the product work in practice. Cold outreach in Week 1 — before any beta artisan has used the product, before mentions légales have been validated in production, before a single testimonial exists — is not a recommendation request. It is a cold sales pitch that the accountant will correctly dismiss.
+
+**Four specific challenges:**
+1. **The first question has no answer:** "Which clients use this?" / "Can I see a correct BTP facture?" — We have no beta users, no production data, no validated mentions légales.
+2. **Failed cold outreach burns the relationship:** There are 20-50 relevant expert-comptables in a reasonable Caen radius. Each unanswered or rejected outreach closes a door. The window for re-engagement after "come back when you have clients" is effectively forever.
+3. **"Add to your software list" is not a warm ask:** Best-case Week 1 outcome is "send me more info" — an email in a folder they'll forget. Getting on a recommended list requires social proof: real users, real documents, real compliance validation.
+4. **Free tier means artisan adoption comes first:** By Week 4-6, there will be real beta users with real sent devis. These are the users the expert-comptable needs to hear about. "I have 15 artisans using this in production" is a completely different conversation from "we're building something."
+
+**One exception (D85 correct):** GetApp/Capterra profiles claimed in Week 1 — this is infrastructure, not outreach. It should be executed immediately.
+
+**Proposed resolution:** Expert-comptable outreach moves to Week 4-6, with prerequisites:
+1. 10-20 active beta users with real production devis
+2. 1-2 written testimonials from real artisans
+3. Production-validated mentions légales (real documents, not mockups)
+4. A sample BTP devis the accountant can review
+
+Outreach framing changes: "We have artisans in your area using this — would you like to see how it handles BTP client mentions?" (consultative, not transactional)
+
+**VERDICT on D85:** PARTIALLY REVERSED — Week 1 action: claim GetApp/Capterra profiles only. Expert-comptable outreach moves to Week 4-6 with prerequisites. Phase 2 (data-sync portal) unchanged.
+
+---
+
+## Debate 88: D83 — The 8pm Fixed Notification Assumes a User Rhythm That Was Never Validated
+
+**Challenge:** Product Strategist challenges D83's "soir ritual" push at 8pm Paris — argues it's a cultural stereotype that will cause notification opt-out and uninstall.
+
+### Product Strategist — Configurable + Event-Driven Replaces Fixed-Time Push
+
+**Assumption challenged:** D83 — "situation financière = server-computed push notification at 8pm Paris" as "the soir ritual."
+
+**Core argument:**
+
+Nobody ran a time-use study on French artisans' evening routines. The "8pm, after kids are in bed, doing chiffrage" detail is vivid but fabricated — it sounds like a user description, it's a product manager's imagination.
+
+**French artisan reality:**
+- Construction/trades day runs 7am-7pm
+- Dinner as late as 8:30-9pm with family
+- Admin happens in fragments: 5 minutes between jobs, quick WhatsApp check at lunch, invoice sent from van before next site
+- No dedicated evening ritual slot exists for most
+
+**Four specific challenges:**
+1. **8pm = dinner time.** Notification interrupts family dinner. Irritation, not engagement. One badly-timed notification = push disabled permanently.
+2. **Timezone ignorance.** "8pm Paris" fires at 7:35pm in Marseille, 9pm in Strasbourg. For artisans in Alsace, it's a late-night interruption, not an admin moment.
+3. **8pm assumes Paris-timezone artisan.** France spans 1-hour time zone. Strasbourg and Marseille users get the notification at objectively wrong times.
+4. **Fixed daily digest is passive.** "Here's your financial summary whether you need it or not" is low-relevance noise. Event-driven notification ("devis pending 3 days") is high-relevance signal.
+
+**Proposed resolution:** Replace fixed 8pm with:
+1. **Configurable window in onboarding** — Morning (8-9am), Midday (12-1pm), Evening (7-9pm). User chooses. Respects schedule diversity across France.
+2. **Event-driven triggers** — "Vous avez un devis en attente depuis 3 jours" fires only when a devis has been unanswered 3+ days. "Cette facture est impayée depuis 15 jours" fires only when aging threshold crossed. Not a daily digest — actionable business events.
+3. **Night mode guardrail** — never send push after 10pm local time.
+
+The financial snapshot still exists — as an in-app report Marc opens when he wants business intelligence. Push reserved for actionable events.
+
+**VERDICT on D83:** REFINED — Fixed 8pm notification REPLACED with: configurable notification window (user choice) + event-driven triggers + timezone awareness + night guardrail. Core insight of D83 preserved (push > pull, notification > dashboard). Execution corrected.
+
+---
+
+*Last updated: 2026-03-30T18:27*

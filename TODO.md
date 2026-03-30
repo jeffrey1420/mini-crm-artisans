@@ -36,15 +36,15 @@
 | D57 | Architecture | API-first preferred (Fastify + static) but deferred to post-MVP unless Nuxt 3 actively blocks Sprint 0. | Pulse 14:57 (Architect+Growth) | 2026-03-30 |
 | D59 | Pricing credibility | Kill €19 founding member offer. Replace with early access €29 locked for life. Guerrilla price validation with micro-artisan rate anchors. | Debate 62 (Technical Architect) | 2026-03-30 |
 | D63 | Free tier pull | UPDATED — Situation financière = server-computed push notification at 8pm Paris, NOT in-app dashboard. Free tier gets daily notification. €29 tier gets full snapshot + in-app drill-down. | Debate 83 (Product Strategist) | 2026-03-30 |
-| D64 | Sprint 0 timeline | UPDATED — Sprint 0 = 8-10 days for full scope (offline-first + mentions légales + WhatsApp PDF + real device testing). If 5-day target required: reduce scope (drop mentions légales, plain text WhatsApp share instead of PDF). | Debate 84 (Technical Architect) | 2026-03-30 |
+| D64 | Sprint 0 timeline | UPDATED — Sprint 0 = 5-7 days (D86 reversed offline-first, recovering 3-5 days). Full scope: offline-capable + mentions légales + WhatsApp PDF + real device testing. | Debate 84/86 (Technical Architect) | 2026-03-30 |
 | D70 | Document archive | RESOLVED — document archive PRIMARY, financial snapshot to €29 tier. | Pulse 16:44 | 2026-03-30 |
 | D71 | Sprint 0 scope | RESOLVED — 5 days, sequential numbering deferred to Sprint 2 (factures). | Pulse 16:44 | 2026-03-30 |
 | D72 | Expert-comptable Phase 1 | UPDATED — Expert-comptable outreach = Week 1 (recommendation channel, not data-sync). Data-sync portal = Phase 2. GetApp/Capterra profiles claimed before launch. | Debate 85 (Growth Strategist) | 2026-03-30 |
-| D81 | Offline-first | REQUIRED at launch. WatermelonDB/expo-sqlite local-first. Fastify adds updated_at + client-UUID. Sync: last-write-wins + conflict UI. API contracts unchanged. Sprint 0 +2 days. | debate-OfflineFirst.md | 2026-03-30 |
+| D81 | Offline-first | REVERSED — Sprint 0 = offline-capable (optimistic UI + retry queues + AsyncStorage). WatermelonDB/expo-sqlite + background sync + conflict UI deferred to v1.2. Sprint 0 recovers 3-5 days. | Debate 86 (Technical Architect) | 2026-03-30 |
 | D82 | Digital peer communities | Retention/engagement spaces, NOT acquisition channels. WhatsApp groups + Facebook = brand recall + peer support. SEO = primary digital discovery. Prescriber = highest-trust acquisition. | debate-DigitalChannels.md | 2026-03-30 |
-| D83 | Situation financière delivery | Server-computed push notification at 8pm Paris. Free tier gets daily notification. €29 tier gets full snapshot + in-app drill-down. Sprint 0 adds: push infra + nightly aggregation job. | Debate 83 (Product Strategist) | 2026-03-30 |
+| D83 | Situation financière delivery | REFINED — Configurable notification window (morning/midday/evening, user chooses) + event-driven triggers (devis unanswered 3+ days, facture unpaid 15+ days) + timezone awareness + 10pm night guardrail. Server-computed nightly aggregation retained. Sprint 0 adds: push infra + notification preference capture + nightly job. | Debate 83/88 (Product Strategist) | 2026-03-30 |
 | D84 | Sprint 0 realistic timeline | 8-10 days for full scope. 5-day option: drop mentions légales, plain text WhatsApp share. Real device testing required — not skippable. | Debate 84 (Technical Architect) | 2026-03-30 |
-| D85 | Expert-comptable outreach | MOVED from Phase 2 to Sprint 0. Week 1 cold outreach to 5 expert-comptables in Caen area (BTP clients). Ask: add to recommended software list. GetApp/Capterra profiles before launch. Data-sync portal = Phase 2. | Debate 85 (Growth Strategist) | 2026-03-30 |
+| D85 | Expert-comptable outreach | PARTIALLY REVERSED — Week 1: GetApp/Capterra profiles only. Outreach moves to Week 4-6 with prerequisites (10-20 active beta users, testimonials, production mentions légales validated). Data-sync portal = Phase 2. | Debate 85/87 (Growth Strategist) | 2026-03-30 |
 
 ## 🔄 Reopened This Pulse (Resolved in 15:17 Pulse)
 
@@ -140,8 +140,8 @@ All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 - [ ] **D63 RESOLVED:** Design the "situation financière" snapshot for Free tier home — automatically-produced weekly output showing: outstanding devis (with days-open), pending factures (aging buckets: 15/30/45/60+ days), revenue this month vs last month, dormant clients (30+ days inactive). This is the Free tier's primary value output. Push-ready content. Notification channel debates are secondary until this exists. (Debate 63)
 - [ ] If prototype not ready in 1 week: proceed to build anyway, validate post-launch (Debate 31)
 - [ ] Sprint 0: Fastify + Postgres only (NOT Nuxt 3). Compliance foundations first (3-4 days): TVA per-line schema, sequential numbering engine, mentions légales renderer, client-type schema. Sprint 1 = client+devis flow. Sprint 2 = facture+email relances. (Debates 54/64)
-- [ ] **D81 NEW:** Sprint 0 is offline-first. Mobile: WatermelonDB/expo-sqlite for local-first storage (~2 days mobile work). Backend: add `updated_at` timestamps + accept client-generated UUIDs on all entities (~2 hours). Sync: last-write-wins with conflict UI. No changes to API endpoint contracts.
-- [ ] **D81 UPDATED:** Sprint 0 timeline updated to 7 days (was 5 days, +2 days for offline-first). Offline-first is required at launch — D9's "no offline" decision was made before React Native stack was chosen and no longer applies.
+- [ ] **D81 NEW (SUPERSEDED by D86):** Sprint 0 is offline-first. WatermelonDB/expo-sqlite for local-first storage (~2 days mobile work). Backend: add `updated_at` timestamps + accept client-generated UUIDs on all entities (~2 hours). Sync: last-write-wins with conflict UI. No changes to API endpoint contracts.
+- [ ] **D81 UPDATED (SUPERSEDED by D86):** Sprint 0 timeline updated to 7 days (was 5 days, +2 days for offline-first). Offline-first is required at launch — D9's "no offline" decision was made before React Native stack was chosen and no longer applies.
 - [x] **D57 RESOLVED:** API-first (Node/Fastify + static landing + JWT) preferred. Nuxt 3 deferred unless blocking Sprint 0. OVH managed Postgres retained. (Debate 61)
 - [x] **D58 RESOLVED:** Email relances in v1 (Sprint 2, 1-2 days). Expo Push relances in v1.1. (Debate 58)
 - [x] **D56 RESOLVED:** 40% WoM figure RETIRED. Measurement protocol: "Comment connaissez-vous?" at signup + referral codes. Month 3 target: 20% peer referral. (Debate 60)
@@ -216,9 +216,9 @@ All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 - [ ] **D85 NEW:** GetApp and Capterra profiles claimed and optimized BEFORE launch — admin handlers search here first. Free to claim, takes an afternoon.
 - [ ] **D85 NEW:** Expert-comptable data-sync portal = Phase 2 (distinct from recommendation outreach). Phase 2 requires: real users + testimonials + accountant has seen it work.
 
-### Sprint 0 Build (D54 + D71 + D74 + D81 + D84 — 8-10 Days, Offline-First)
+### Sprint 0 Build (D54 + D71 + D74 + D81 + D84 — 5-7 Days, Offline-Capable)
 
-**D84 UPDATED:** Sprint 0 = 8-10 days for full scope (not 5 days). Offline-first (D81) + mentions légales + WhatsApp PDF + real device testing = 8.5 days realistic. If 5-day target required: drop mentions légales (defer to Sprint 1), use plain text WhatsApp share instead of PDF.
+**D84 UPDATED:** Sprint 0 = 5-7 days (REVERTED from 8-10 days). D86 reversed D81 offline-first requirement. Offline-capable (optimistic UI + retry queues + AsyncStorage) + mentions légales + WhatsApp PDF + real device testing = 5-7 days realistic.
 - [ ] **D81 NEW:** Sprint 0 = offline-first. WatermelonDB/expo-sqlite for local-first storage (~2 days mobile). Fastify API: add `updated_at` timestamps + accept client-generated UUIDs (~2 hours). Sync: last-write-wins with conflict UI. No changes to API endpoint contracts.
 - [ ] **D74 RESOLVED:** Sprint 0 = 8-10 days. Day 1: `client.type` enum (4 values) + mentions légales template engine (Handlebars/Nunjucks, 4 client-type templates, devis-only). Sprint 2 adds 8 combinations.
 - [ ] **D74 RESOLVED:** API key Sprint 0 scope: `@fastify/jwt` config (0.5-1 day). Full auth (Keychain, refresh rotation, logout) = Sprint 1. (API key replaces JWT per D78)
@@ -226,7 +226,7 @@ All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 - [ ] **D54 RESOLVED:** TVA arrondi commercial calculator: `Math.round(v * 100) / 100`. No BOFiP lookup required.
 - [ ] **D71 RESOLVED:** Mentions légales = 4 templates (devis × client type). 8 combinations (devis + facture) = Sprint 2 scope.
 - [ ] **D83 NEW:** Push notification infra + nightly aggregation job added to Sprint 0 scope. Server computes financial snapshot nightly. Push at 8pm Paris. Free tier gets daily notification (limited depth). €29 tier gets full snapshot + in-app drill-down.
-- [ ] **D84 NEW:** If 5-day Sprint 0 needed: reduce scope — drop mentions légales (Sprint 1), plain text WhatsApp share (not PDF). Ship offline storage + basic devis flow only.
+- [ ] **D84 UPDATED:** 5-7 day Sprint 0 now achievable without scope cuts (D86 reversed offline-first overhead). Mentions légales retained. If timeline pressure: drop mentions légales (defer to Sprint 1), use plain text WhatsApp share instead of PDF.
 
 ### Pricing (D5 + D59 + D75 + D77 — €29 Single Price Point)
 - [x] **D75 UPDATED (Debate 77):** "Membre fondateur" framing KILLED. Discount framing trains users to wait for promotions. Replaced with "Accès Fondateur" — relationship benefits without price anchoring.
@@ -619,3 +619,18 @@ The following were overengineered or wrong:
 - [x] **D77 RESOLVED:** Scarcity signal = Louis's limited personal onboarding capacity (direct WhatsApp access), not arbitrary slot count or seats remaining.
 - [x] **D78 RESOLVED:** Replace JWT with API key auth in Sprint 0 — `artisan.api_key UUID DEFAULT gen_random_uuid()` in schema. Sprint 0 auth deliverable: `POST /api/auth/verify` + Expo SecureStore stub, ~2 hours. JWT re-evaluate for v2 only if multi-user confirmed. (Debate 78)
 - [x] **D79 RESOLVED:** Expert-comptable = Phase 1 validation asset, not GTM channel. U12 split: U12a (validation script — action this week) + U12b (referral script — action Phase 2). Louis's meeting: show flow → get reaction → ask what would make them comfortable recommending. NOT: ask for referrals. Phase 2 triggers: real users + testimonials + accountant has seen it work. (Debate 79)
+
+## New from Pulse 2026-03-30T18:27
+
+### Resolved (D81, D85, D88):
+- **D81 (Offline-first):** REVERSED — Sprint 0 = offline-capable (optimistic UI + retry queues + AsyncStorage cache). WatermelonDB/expo-sqlite deferred to v1.2. Saves 3-5 sprint days. (Debate 86)
+- **D85 (Expert-comptable outreach):** PARTIALLY REVERSED — Week 1: claim GetApp/Capterra profiles only. Expert-comptable outreach moves to Week 4-6 with prerequisites: 10-20 active beta users, 1-2 testimonials, production-validated mentions légales, sample BTP devis for review. (Debate 87)
+- **D88 (8pm notification):** REFINED — Fixed 8pm notification REPLACED with: configurable notification window (morning/midday/evening, user chooses in onboarding) + event-driven triggers (devis pending 3+ days, facture 15+ days unpaid) + timezone awareness + 10pm night guardrail. (Debate 88)
+
+### New Action Items from this pulse:
+- [ ] **D81 NEW:** Sprint 0 = offline-capable. Implement optimistic UI (immediate local feedback, background server sync), retry queues with exponential backoff, AsyncStorage cache for last 10 clients/recent devis. No WatermelonDB until v1.2.
+- [ ] **D81 UPDATED:** Sprint 0 timeline reverts to 5-7 days (was 8-10 with offline-first). Those recovered 3-5 days go to devis flow and real device testing.
+- [ ] **D85 UPDATED:** Expert-comptable outreach DEFERRED to Week 4-6. Prerequisites: 10-20 active beta users, 1-2 testimonials, production mentions légales, sample BTP devis. Week 1: claim GetApp/Capterra profiles only.
+- [ ] **D88 NEW:** Add notification preference to onboarding flow — "Quand voulez-vous recevoir vos rappels?" Morning / Midday / Evening. Default to user's stated preference.
+- [ ] **D88 NEW:** Replace daily 8pm financial digest push with event-driven triggers: (1) devis unanswered 3+ days → "Ce devis attend une réponse depuis 3 jours", (2) facture unpaid 15+ days → "Cette facture est impayée depuis 15 jours"
+- [ ] **D88 NEW:** Timezone guardrail — push notification send time adjusts for user's declared timezone (not "Paris time" for all of France)
