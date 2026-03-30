@@ -400,6 +400,50 @@ The push notification reliability argument is compelling. If reminders are the c
 
 ---
 
+## Debate 11 (REVISED): PWA First, Native Within 6 Months — Challenging Capacitor's Hidden Costs
+
+### The Disagreement
+
+- **Technical Architect (Capacitor from day one):** "Android push is unreliable, iOS push is impossible with PWA. Capacitor wraps web code in native shells — same codebase, same team, real FCM notifications."
+- **Revised position:** "Capacitor's hidden costs outweigh its benefits at launch. PWA first, native within 6 months post-launch."
+
+### The Argument
+
+**1. Two app stores = two full-time support burdens from day one.**
+
+Capacitor doesn't eliminate complexity — it adds a wrapper layer. You now have: web app bugs + iOS App Store review cycles + Google Play policy changes + native crash reporting + app store listing management. For a 3-person team shipping an MVP in 3 months, App Store review rejections (7-14 days) can kill your launch timing entirely. PWA deploys when you deploy.
+
+**2. "Same codebase, same cost" is technically true and strategically false.**
+
+Capacitor's hidden costs aren't engineering — they're operational: App Store screenshots (3 sizes × 2 platforms = 6 assets), update review cycles for every sprint, 1-star reviews from users who can't install on iOS 15, support emails about "is this app safe?" from Android users who found it on Google Play instead of your website. These are real hours that don't show up in the "same codebase" calculation.
+
+**3. Push notifications as #1 retention driver is unproven for this audience.**
+
+The assumption: "reminders that FIRE = product delivers value." But Jean-Pierre (55, tech-resistant) doesn't rely on push notifications — he relies on habit, phone calls, and WhatsApp. Push notifications are a SaaS retention mechanism borrowed from consumer apps. For artisans, the retention driver is likely "I got paid because the app reminded me to send the reminder" — which is a value/delivery story, not a notification reliability story. If the invoice gets sent because of in-app logic, not because of push, the notification is a nice-to-have, not the core promise.
+
+**4. PWA push is improving — by 6 months post-launch, it may be sufficient.**
+
+Web Push on Android Chrome has improved significantly. Safari now supports web push on iOS (16.4+). The gap is closing. PWA at launch with web push as a fallback is acceptable for an MVP. Native push via FCM/APNS can be the upgrade sold at 6 months when the team has bandwidth and real user feedback about notification reliability.
+
+**5. The real retention lever is value delivery, not notification format.**
+
+If a user receives a push notification but the invoice was already sent manually via WhatsApp, the notification didn't retain them — the value did. The product needs to be so embedded in the workflow that missing a push is painful, not just annoying. That workflow integration (client history, quote generation, invoice math) is what creates switching costs. A push notification on a low-engagement app is just noise.
+
+### Revised Position
+
+**PWA first (launch), native within 6 months (post-launch when revenue funds it).**
+
+Rationale:
+- Launch in 3 months without App Store dependency
+- Web push notifications as bridge (improving, not perfect, but functional)
+- Native push as paid upgrade story at 6 months — "get reliable push with our native app"
+- 6 months of user data tells you WHICH notification failures actually caused churn
+- Revenue from first 50 paying users funds the native development sprint
+
+**Key insight:** "Capacitor is easy" underestimates the non-engineering costs. The question isn't "can we build it?" — it's "can we operate it at launch with 3 people and an MVP timeline?" The answer is no.
+
+---
+
 ## Debate 12: GTM Strategy — Trade Fairs vs Digital-First Acquisition
 
 ### The Disagreement
@@ -626,6 +670,35 @@ Position B (Simplicity-first) concerns:
 
 ---
 
+## Debate 16 — Landing Page Angle: Product Strategist's Challenge to Position B
+
+### Position: Against Simplicity-First ("Simple comme WhatsApp")
+
+**1. You're competing with free, and you just told them about it.**
+"Simple comme WhatsApp" is a comparison to a *free* app. You've just told a craftsman your €49/month tool is "like WhatsApp." That's not a value prop — that's surrender. The simplicity claim had better mean something more than "feels familiar." If the headline implies the product's only advantage is being WhatsApp-adjacent, you've invalidated the price before you've made the sale.
+
+**2. Simplicity is table stakes, not a benefit.**
+Nobody buys a tool because it's "simple." They buy because something painful stops happening. The buying trigger is emotional: "I just lost Madame Martin's phone number AGAIN." That pain is not complexity — it's consequence. "Simple comme WhatsApp" describes the interface. "Gagnez 2h/semaine" describes the relief. One answers a feature question nobody asked. The other answers the pain that opened the browser tab.
+
+**3. "Simple" attracts the wrong customer.**
+Position B says artisans are skeptical of SaaS promises. True. But "simple comme WhatsApp" doesn't filter for skeptical artisans — it filters for low-commitment users who want the cheapest-looking option. ROI framing attracts professionals who have budget authority and intent. At €29-89/month, you want the artisan who sees a tool, not the artisan who's comparing free apps.
+
+**4. The new angle for Position A: Specificity + Control.**
+"Gagnez 2h/semaine" is directionally right but too vague. Here's the upgrade: *specificity signals credibility*. "Gagnez 1h48 par semaine" (€49 ÷ €25/hr) sounds measured, not marketing. It sounds like someone actually did the math. And the deeper emotional frame is **control**, not efficiency: "Reprenez le contrôle de vos devis et factures" speaks to the feeling artisans describe — they're not "inefficient," they're *overwhelmed*. Control is aspirational. Efficiency is a spreadsheet.
+
+### Proposed Landing Page Bridge
+
+> **Headline:** "Gagnez 2 heures par semaine sur vos devis et factures"
+> **Subhead:** "L'outil de gestion conçu pour les artisans qui en ont ras-le-bol de courir après leurs clients — sans复杂多余的功能"
+
+**Why this works:** "2 heures par semaine" is the ROI hook. "Ras-le-bol de courir" hits the emotional trigger ("lost Madame Martin's number again"). Simplicity is implicit in the product story — you don't need to announce it in the headline. Let users discover "c'est simple comme WhatsApp" in the onboarding, not in the headline.
+
+---
+
+*Debate 16 contribution: Product Strategist — 2026-03-30T10:19:00Z*
+
+---
+
 ## Debate 16: Home View — Client Timeline vs. Dashboard (Stats-First)
 
 ### The Disagreement
@@ -664,7 +737,39 @@ These aren't mutually exclusive forever, but the home view choice shapes the pro
 
 ---
 
-*Debate 16 added: 2026-03-30T10:11:00Z*
+## Debate 16 (ADDENDUM): Dashboard Challenger — Growth Strategist Position
+
+### The Challenge
+
+I'm challenging the Client Timeline home decision from Debate 14. Here's why the Dashboard wins on retention math alone.
+
+**1. WhatsApp familiarity is a ceiling, not a selling point.**
+
+Yes, artisans know WhatsApp. That's also the problem — if your product feels like WhatsApp, why pay €29/month? You're not competing with "nothing." You're competing with "the thing they're already using for free." Familiarity doesn't create desire. It creates a low-expectation commodity trap.
+
+**2. Client Timeline is a passive tool. Dashboard creates a daily habit.**
+
+Timeline answers "what happened with client X?" — you open it when you remember. Dashboard answers "what needs my attention TODAY?" — you open it every morning because it's useful. A plumber checks his phone before leaving for jobs. If Dashboard shows "3 quotes awaiting response >7 days," that's the trigger. Timeline shows you an archive. Dashboard shows you work. The retention math flips entirely when the app becomes a daily command center instead of an historical log.
+
+**3. Proposed minimal solo artisan Dashboard (not a BI tool — 4 things only):**
+- **"À suivre"** — clients with open quotes >5 days, no response
+- **"Relances dues"** — overdue invoice reminders (the core paid feature)
+- **"Devis en attente"** — quotes sent, awaiting accept/refuse
+- **"Ce mois-ci"** — revenue this month vs. last month (1 number)
+
+That's it. Not a analytics dashboard. Just "here's what needs attention right now."
+
+**4. The retention math changes completely.**
+
+With Timeline home: artisan opens app when they remember → sees client history → closes app. No urgency, no habit, no "I need this tomorrow." With Dashboard home: artisan opens app every morning → sees 2 things need attention → acts → product proves its value daily → churn drops. Habit formation is the only durable moat for a solo artisan SaaS at €29/month. Dashboard builds habit. Timeline doesn't.
+
+**5. "Never lose track" is solved by BOTH — but Dashboard also solves "never miss an opportunity."**
+
+Client Timeline delivers on "never lose track." Dashboard delivers on that AND "never miss a follow-up." A €29/month tool that only organizes is a digital filing cabinet. A €29/month tool that shows you what needs action TODAY is indispensable. That's the difference between an app they keep and an app they open.
+
+---
+
+*Growth Strategist challenger position added: 2026-03-30T10:19:00Z*
 
 ---
 

@@ -59,4 +59,18 @@ The following were overengineered or wrong:
 
 ---
 
-*Last updated: 2026-03-30*
+| U3 | Landing page | ROI vs simplicity framing | New: Product Strategist argues against "Simple comme WhatsApp" — ROI-first + control framing stronger |
+| U4 | Home view | Client Timeline vs Dashboard | New: Growth Strategist argues Dashboard-first creates daily habit, Timeline is passive |
+| U5 | PWA vs Native | Capacitor from day one | REVISED: PWA first (launch), native within 6 months — Debate 11 revision |
+
+---
+
+## New from Pulse 2026-03-30T10:19
+
+- **Debate 11 revision:** PWA first at launch, native app within 6 months post-launch (Capacitor hidden costs underestimated at 3-person MVP)
+- **Landing page (U3):** Product Strategist challenges "Simple comme WhatsApp" — attracts wrong customer, signals low value vs free; proposes "Gagnez 2h/semaine" + "ras-le-bol de courir" emotional hook
+- **Home view (U4):** Growth Strategist argues Dashboard-first ("À suivre", "Relances dues", "Devis en attente", "Ce mois-ci") creates daily habit vs Timeline's passive archive behavior
+
+---
+
+*Last updated: 2026-03-30T10:19*
