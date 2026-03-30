@@ -1278,3 +1278,117 @@ Not the client count limit. Not the upgrade prompt. The *ritual*. Every evening 
 
 *Last updated: 2026-03-30T13:15*
 
+
+---
+
+## Pulse 2026-03-30T13:28 — Three New Debates
+
+---
+
+## Debate 52: D49 — Prescriber Networks Cannot Lead GTM
+
+**Challenge:** D48/D49 — Product Strategist argued prescriber networks (architects, property managers) should lead GTM because they create pull-through demand. Growth Strategist challenges this assumption.
+
+### Growth Strategist — Digital Channels Must Not Be Demoted
+
+**Assumption challenged:** That prescriber networks create meaningful pull-through demand for software adoption among French artisans. In reality, architects and property managers recommend *artisans* to clients — not software tools to artisans. The direction of influence is wrong.
+
+**Core argument:**
+
+The prescriber pull-through thesis works for materials (specify Brand X tile → Brand X gets the project) but collapses entirely for administrative software that runs in the background of an artisan's business. When a property manager vets a contractor, they're assessing reliability, craftsmanship, pricing — not whether the artisan uses a specific devis tool. The pull-through demand argument is structurally incorrect.
+
+Meanwhile, WhatsApp artisan groups ARE active recommendation engines. When a trusted peer vouches for a tool — "I've been using this for three months and it replaced my Excel tracker" — that's discovery. That's purchase intent crystallizing in real time. The 40% word-of-mouth weighting in the existing strategy validates this mechanism. WhatsApp groups aren't separate from the discovery pathway — they ARE the discovery pathway, amplified by trust.
+
+Speed is also decisive. Prescriber networks require months of relationship building, specification processes, networking. Digital channels can be seeded in days. For a startup with limited runway, activation speed is a strategic variable.
+
+**VERDICT on D49:** D48 priority order stands. Digital channels (WhatsApp/Facebook/SEO) → Specialist retailers → Prescriber networks → Wholesaler. U11 (prescriber audit) still worth doing — if >30% of Marc's new jobs come via prescriber recommendation, revisit priority. But as of now, prescriber networks cannot lead GTM for software adoption.
+
+---
+
+## Debate 53: D50 — Email-Only Relances at v1 Launch Is Acceptable
+
+**Challenge:** D41/D47/D50 — Previous Technical Architect argued Expo Push MUST ship at launch because email-only relances create feature-comparison disqualification on GetApp/Capterra. Technical Architect challenges this framing.
+
+### Technical Architect — The Fear Is Theatrical, The Opportunity Cost Is Real
+
+**Assumption challenged:** That GetApp/Capterra comparison platform disqualification is a meaningful launch risk, and that the previous Technical Architect's framing justifies front-loading 1-2 weeks of engineering on relances at the expense of the devis flow.
+
+**Core argument:**
+
+**On GetApp/Capterra:** Artisan software discovery runs through peer referral, not comparison-site browsing. Comparison platforms are used by researchers and procurement teams at companies with 50+ employees evaluating enterprise tools. Solo artisans deciding in minutes don't browse GetApp — they ask a peer. The "disqualification" risk is real for a different product. The 50-user complaint threshold framing is reactive damage control masquerading as proactive strategy.
+
+**On opportunity cost:** D41/D47 established Expo Push = 1-2 weeks. That same sprint could ship the devis flow — the feature that directly converts trials to paying customers. Relances are retention mechanics. Devis is revenue mechanics. In v1 with constrained engineering, the priority is unambiguous.
+
+**On early user behavior:** "80% of users won't touch relances in week 1" is consistent with every B2B SaaS onboarding curve. Early users are learning the core workflow. Reminders are a day-30+ feature. Email relances at launch cover the use case for users who need it, while engineering goes toward the conversion flow.
+
+**On roadmap as shield:** "Push notifications in Q3" as a public roadmap statement neutralizes the GetApp/Capterra concern without shipping a feature before it's ready.
+
+**VERDICT on D50:** Email-only relances at v1 launch is acceptable. Expo Push ships in v1.1. Engineering bandwidth for v1 = devis flow, not relances. D41/D47 updated accordingly.
+
+---
+
+## Debate 54: D51 — Habit Formation Is Unmeasurable and Unreliable as Primary Conversion
+
+**Challenge:** D43/D46/D51 — Growth Strategist argued Free tier → Habit → Dependency → Subscription is the correct conversion model. Product Strategist challenges the habit formation thesis.
+
+### Product Strategist — Forcing Functions Beat Hope
+
+**Assumption challenged:** That the 2-minute evening devis ritual will become "load-bearing" for Marc and trigger conversion through dependency. This is fanfiction, not product strategy.
+
+**Core argument:**
+
+**Habits form around pain, not convenience.** BJ Fogg's research — the foundation of all habit formation thinking — is explicit: behaviors become automatic when they solve an existing struggle. Marc's WhatsApp/excel system isn't causing him friction. He's in equilibrium. The evening ritual with our product is a pleasant alternative, not a lifeline. That's preference drift at best — not habit formation.
+
+**The math is brutal.** If the habit model requires months of daily engagement before conversion, you're burning server costs on free users who have zero reason to upgrade. The Free tier's generous limits (10 clients, 5 devis) mean Marc never hits a wall. He coasts. You fund his comfort indefinitely.
+
+**"Load-bearing" only triggers under pressure.** A ritual becomes load-bearing when something breaks if it's absent. But nothing breaks for Marc. His business runs fine. The Growth Strategist is describing a dependency that requires the Free tier to be insufficient — which we deliberately made it *not*.
+
+**The actual conversion triggers for this audience:** External forcing functions — a client demands a proper invoice with specific formatting, a competitor outage, a peer in a WhatsApp group mentions a feature Marc can't live without. These are events, not rituals.
+
+**VERDICT on D51:** The habit formation thesis is seductive but unmeasurable as primary strategy. Accept it as a secondary retention KPI (daily evening open rate), not as the primary conversion mechanism. Design for forcing functions: peer referral in WhatsApp groups, limit-hit conversion, and competitive displacement. D43/D46/D6 updated: retain daily engagement tracking, but don't optimize for habit as the conversion lever.
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D1 | Positioning | Kill "CRM" — devis, factures, relances | 2026-03-30 |
+| D2 | MVP scope | 4 features, SEQUENCED sprints. Sprint 0 = minimum devis flow (3-5d, flow-first). Sprint 1 = client+devis. Sprint 2 = facture+relances. | 2026-03-30 |
+| D3 | Primary persona | Marc — solo smartphone-native artisan | 2026-03-30 |
+| D4 | Stack | Single managed Postgres | 2026-03-30 |
+| D5 | Pricing | Free + €29 two-tier. No €19 SKU. Drop €49/€79. Value anchor: "2h/week = 1h labor = €29/month." | 2026-03-30 |
+| D6 | Trial | No time-limited trial. Free tier IS the trial. Engagement: forcing function + limit-hit primary, habit tracking secondary. | 2026-03-30 |
+| D7 | Architecture | Nuxt 3 + OVH managed Postgres | 2026-03-30 |
+| D8 | E-invoicing | v2 feature | 2026-03-30 |
+| D9 | Not MVP | No Kanban, no multi-user, no offline, no API keys | 2026-03-30 |
+| D10 | Buyer trigger | "Admin pain" not "CRM need" | 2026-03-30 |
+| D11 | Mobile | React Native from Day 1 via Expo | 2026-03-30 |
+| D12 | Landing page | Simplicity-first — "Vos devis et factures, sans vous prendre la tête" | 2026-03-30 |
+| D13 | Home view | Job-first — Active Job Card as home anchor | 2026-03-30 |
+| D14 | E-invoicing timing | v2 — NOT Day 1 | 2026-03-30 |
+| D15 | Relances differentiator | DE-EMPHASIZED — secondary feature below fold | 2026-03-30 |
+| D16 | Trial length | No countdown trial — Free tier IS the trial | 2026-03-30 |
+| D17 | Mobile strategy | React Native from Day 1 via Expo. Email-only relances at v1 launch. Expo Push in v1.1. | 2026-03-30 |
+| D41 | Notification infra | Email-only relances at v1 launch. Expo Push in v1.1. | 2026-03-30 |
+| D43 | Free tier activation | REFINED — forcing function + limit-hit primary, habit tracking secondary. | 2026-03-30 |
+| D46 | Free tier limits | Do NOT lower limits from 10/5. Trust-building before limit enforcement. | 2026-03-30 |
+| D47 | Expo Push estimate | 1-2 weeks, not "few hours." Budget properly or defer to v1.1. | 2026-03-30 |
+| D48 | Wholesaler GTM | Not primary GTM. Digital + specialist retailers first. Wholesaler secondary. | 2026-03-30 |
+| D49 | GTM Priority | D48 priority order stands. Digital channels → Specialist retailers → Prescriber networks → Wholesaler. | 2026-03-30 |
+| D50 | Push at launch | Email-only at v1. Expo Push in v1.1. Engineering → devis flow first. | 2026-03-30 |
+| D51 | Free tier conversion | Habit formation is secondary retention KPI, not primary conversion mechanism. Design for forcing functions + limit-hit. | 2026-03-30 |
+| D52 | Prescriber GTM | U11 audit still valuable but cannot lead GTM for software adoption among artisans. | 2026-03-30 |
+
+| U1 | Discovery | REPLACED — readiness protocol | 2026-03-30 |
+| U2 | E-invoicing platform | Factea first when v2 | 2026-03-30 |
+| U7 | Domain | DEFERRED — subdomain/Carrd until MVP validated | 2026-03-30 |
+| U8 | WhatsApp acquisition | CLOSED — no WhatsApp CTA in devis | 2026-03-30 |
+| U9 | Free tier activation | REFINED — forcing function + limit-hit primary, habit tracking secondary | 2026-03-30 |
+| U10 | GTM: Wholesaler | REFINED — digital + specialist retailers first, wholesaler secondary | 2026-03-30 |
+| U11 | Prescriber audit | Audit still valuable — if >30% of Marc's new jobs via prescriber, revisit GTM priority | 2026-03-30 |
+
+---
+
+*Last updated: 2026-03-30T13:28*
+

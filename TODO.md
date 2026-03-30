@@ -42,6 +42,32 @@
 |----|-------|----------|
 | — | — | All previously unresolved items are now resolved or deferred (see tables above) |
 
+---
+
+## New from Pulse 2026-03-30T13:28
+
+### Resolved (D49, D50, D51):
+- **D49 (GTM Priority):** Growth Strategist won — D48 priority order stands. Digital channels (WhatsApp/Facebook/SEO) → Specialist retailers → Prescriber networks → Wholesaler. Prescribers cannot lead GTM because they recommend artisans to clients, not tools to artisans. U11 audit still worth doing.
+- **D50 (Push at Launch):** Technical Architect won — email-only relances at v1 launch is acceptable. Expo Push in v1.1. Engineering bandwidth goes to devis flow, not relances. GetApp/Capterra fear overstates comparison-site impact for artisan discovery.
+- **D51 (Free tier conversion):** Product Strategist won — habit formation is seductive but unmeasurable as primary conversion mechanism. Habits form around pain, not convenience. Design for forcing functions + limit-hit as primary. Habit tracking becomes secondary retention KPI (daily engagement rate).
+
+### Challenged assumptions this pulse:
+1. Prescriber networks create software adoption pull-through for artisans (Growth Strategist challenged: wrong direction of influence)
+2. GetApp/Capterra disqualification is meaningful launch risk (Technical Architect challenged: artisan discovery = peer referral, not comparison browsing)
+3. Habit formation → dependency → subscription is the correct conversion model (Product Strategist challenged: habits form around pain, not convenience; external forcing functions are the real trigger)
+
+### New action items from this pulse:
+- [ ] **D50 NEW:** Public roadmap statement: "Push notifications in Q3" — neutralizes GetApp/Capterra concern without shipping before ready
+- [ ] **D50 NEW:** Engineering priority for v1 = devis flow. Relances = v1.1 feature. Do not deprioritize devis for notifications.
+- [ ] **D51 NEW:** Track daily evening open rate as secondary retention KPI (not primary conversion metric)
+- [ ] **D51 NEW:** Design upgrade prompts for forcing function moments: competitor outage, client demands professional invoice, peer referral in WhatsApp group
+- [ ] **D51 NEW:** Keep Free tier generous (10/5) — do not reduce to create artificial pressure
+- [ ] **U11 UPDATED:** Execute prescriber audit (architects, property managers) — if >30% of new jobs come via prescriber, revisit GTM priority order
+
+---
+
+*Last updated: 2026-03-30T13:28*
+
 ## 📋 Current TODO
 
 ### Before Building (Do First)
