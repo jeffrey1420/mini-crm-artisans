@@ -82,4 +82,12 @@ The following were overengineered or wrong:
 
 ---
 
-*Last updated: 2026-03-30T10:19*
+## New from Pulse 2026-03-30T10:46
+
+- **Debate 17 addendum (E-invoicing):** Product Strategist argues 2-3 sprint estimate is fiction — Factur-X XML schema + PPF integration = 6-8 sprints minimum. Regulatory deadline (Sept 2026) is not a notional target. Argues Day 1 e-invoicing isn't scope creep — it's the feature. Still UNRESOLVED but adds important technical complexity to the timeline assumption.
+- **Debate 16 addendum B (Home view):** Technical Architect challenges Dashboard "indispensable" claim — indispensable ≠ wanted. "Relances dues" is an alarm about undone tasks, not a reason to open the app. Guilt-driven urgency creates avoidance, not habit. Moat = becoming a place Marc *wants* to be, not a task manager with invoices.
+- **Debate 16 addendum C (Landing page):** Growth Strategist defends WhatsApp comparison — for Marc, WhatsApp is the OS of his business life, not a "free consumer app." WhatsApp signal reduces cognitive friction at signup. Value is in the features, not the comparison. Recommend keeping WhatsApp in subhead.
+
+---
+
+*Last updated: 2026-03-30T10:46*

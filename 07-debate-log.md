@@ -956,3 +956,73 @@ This is a direct challenge to a resolved debate. The Growth Strategist's argumen
 ---
 
 *Last updated: 2026-03-30T10:31:00Z — Pulse update: 3 new debates spawned and logged*
+
+---
+
+## Debate 17 (ADDENDUM) — E-Invoicing: Challenging the "2-3 Sprint" Assumption
+
+### Contribution: Product Strategist (arguing FOR Day 1)
+
+**Challenging the 2-3 sprint assumption — and the entire logic built on it.**
+
+The case against Day 1 e-invoicing rests heavily on a quiet fiction: that integrating with a private provider like Factea or Tebilis is a "2-3 sprint" engineering problem. It is not.
+
+First, the API surface of a French e-invoicing provider is not a simple REST wrapper. These providers implement the Peppol BIS / Factur-X schema stack. That's XML validation, semantic checks, party identification via SIRET/SIREN lookup, and transmission protocols that interact with the PPF (Plateforme Publique de Facturation). A 3-person team building a compliant invoice generation pipeline — not just sending PDFs, but generating valid Factur-X XML — is not 2-3 sprints. It's 6-8 minimum.
+
+Second: even if you hit 3 sprints, you ship in Month 3 of a 6-month runway. You then have 3 months of real-world traffic against a mandate that is being enforced, with no field data, no edge cases caught, no support muscle built.
+
+Third: "MVP scope discipline is more important than regulatory timing" is only true when the deadline is someone else's problem. September 2026 is not a notional roadmap target. It is a government-enforced date with real penalties.
+
+The external review said "sell admin pain relief, not CRM identity." E-invoicing compliance IS the ultimate admin pain relief for September 2026. Marc doesn't think about it today — but he will, starting in Q2 2026, when he hears about the mandate. By then, you want to already be in his workflow.
+
+**Day 1 e-invoicing isn't scope creep. It's the feature.**
+
+*Added: 2026-03-30T10:46:00Z*
+
+---
+
+## Debate 16 (ADDENDUM B) — Home View: Challenging "Indispensable = Wanted"
+
+### Contribution: Technical Architect (challenging Dashboard assumption #4)
+
+**Indispensable is not the same as wanted.**
+
+There's a crucial difference between a tool you open because you need to and a tool you open because you want to.
+
+For Marc, the plumber, WhatsApp is already indispensable — but it doesn't feel like work. Now consider what the Dashboard actually delivers: "Relances dues" (follow-ups due). "Devis en attente" (pending quotes). These are not reminders of good things — they're alarms about undone tasks. The moment Marc opens this app and sees "3 relances dues," he's not thinking "this app is indispensable." He's thinking "oh god, I still haven't done that."
+
+Dashboard-first architecture positions this product as a task manager, a to-do list with invoices attached. That's administrative overhead. That's the feeling of being behind. French artisans didn't wake up wanting to manage their business better. They woke up wanting to fix pipes, collect payments, and get on with their day.
+
+The Timeline, by contrast, is ambient. It's a record of activity, not a list of failures. When Marc remembers a client, it's there. It supports his workflow without demanding new cognitive overhead.
+
+You can't build habit through guilt. Notification-driven urgency creates avoidance, not engagement.
+
+**The moat isn't the dashboard. The moat is becoming the place Marc wants to be.**
+
+*Added: 2026-03-30T10:46:00Z*
+
+---
+
+## Debate 16 (ADDENDUM C) — Landing Page: Defending the WhatsApp Comparison
+
+### Contribution: Growth Strategist (challenging the Product Strategist's position)
+
+**Challenging "WhatsApp comparison signals low value" — it signals zero friction.**
+
+Here's the problem with killing the WhatsApp reference: you're optimizing for how *we* perceive WhatsApp (free, basic, consumer-grade) instead of how Marc perceives it (the entire operating system of his business life).
+
+Marc doesn't think in categories like "SaaS pricing tiers" or "enterprise vs. indie tools." He thinks in WhatsApp. His clients text him there. His supplier group is there. His wife manages the family calendar there. WhatsApp isn't "free and basic" to him — it's the platform that works, that everyone uses, that requires zero training.
+
+For Marc, "Simple comme WhatsApp" isn't a diminishment. It's a promise of zero friction. It says: you already know how to use this.
+
+The Product Strategist's argument assumes value = formality. But Marc isn't buying status symbols. He's buying relief from the paper chaos on his van's passenger seat. If "WhatsApp-energy" gets him to actually try the product — that's the whole game at signup.
+
+What kills conversion isn't comparing to WhatsApp. It's comparing to WhatsApp without also solving his actual problem.
+
+**Recommendation: Keep the WhatsApp signal. It's load-bearing for trust, not for value perception.** The real work is in the subhead — making sure the feature promise is specific enough that Marc sees his own pain solved.
+
+*Added: 2026-03-30T10:46:00Z*
+
+---
+
+*Pulse update: 2026-03-30T10:46:00Z*
