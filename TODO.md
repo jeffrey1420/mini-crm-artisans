@@ -812,10 +812,10 @@ The following were overengineered or wrong:
 
 ## New from Pulse 2026-03-30T21:13
 
-### Reopened (D95, U7, D96/D104):
+### Reopened (D95, U7, D96/D104) — ALL RESOLVED in 21:27 Pulse:
 - **D95 (Sprint 0 timeline):** REOPENED — Product Strategist argues 5-day estimate assumes parallelization that doesn't exist for a solo developer. U16 (mentions légales templates) is not started. Supabase signup is unconfirmed. Without both pre-conditions confirmed, realistic estimate is 6.5-7 days.
 - **U7 (Domain deferral):** REOPENED — Growth Strategist argues "wait for guerrilla test" is structurally indefinite because test prerequisites (prototype + scheduled session) don't exist yet. Domain absence blocks expert-comptable outreach and GetApp/Capterra credibility. Fix: buy domain now (park it), defer brand decision.
-- **D96/D104 (Conversion trigger):** REOPENED — Technical Architect argues the conversion trigger (limit-hit OR first paid facture) assumes formal written devis exist. French BTP runs on verbal agreements. Marc with 6-7 steady clients may never send a formal devis — both triggers are structurally blind to this archetype.
+- **D96/D104 (Conversion trigger):** RESOLVED (Debate 110) — Dual-path conversion. Path A (formal-devis): limit-hit OR first paid facture. Path B (verbal-agreement): 45 consecutive days active OR 7+ jobs logged OR 5+ active clients managed. Day 14 WhatsApp check-in applies to both archetypes.
 
 ### Challenged assumptions this pulse:
 1. Sprint 0 can start today (Product Strategist challenged: U16 not done, Supabase signup unconfirmed — pre-conditions not met)
