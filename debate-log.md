@@ -3239,3 +3239,160 @@ Facture mentions légales errors trigger penal sanctions under Code de commerce 
 
 ---
 
+
+---
+
+## Pulse 2026-03-30T17:17 — Three Specialist Debates
+
+---
+
+## Debate 74: Sprint 0 — 5 Days Is Defensible With Scope Clarifications
+
+**Challenge:** The Sprint 0 5-day estimate was challenged on three grounds: (1) JWT auth is 2-3 days not 0.5-1, (2) mentions légales requires 8 combinations not 4, (3) missing devis status enum will require Sprint 1 retrofit.
+
+### Technical Architect — Sprint 0 Scope Clarification Case
+
+**Assumption challenged:** The three challenges conflate "production-ready" with "Sprint 0 scope." Sprint 0 delivers compliance foundations + API contract — not a finished product.
+
+**Core argument:**
+
+**On JWT (partially conceded):** Sprint 0 JWT scope is contract-first API design (0.5-1 day), not production auth with Keychain + refresh queue (1.5-2 days). Define OpenAPI spec for auth endpoints, implement stub handlers, configure `@fastify/jwt` with correct TTLs. Full auth (Keychain, refresh rotation, logout handler) = Sprint 1. The challenge attacked a strawman of what Sprint 0 needs.
+
+**On mentions légales (rebutted):** The 8-combination problem is Sprint 2 scope. Sprint 0 builds devis only (Sprint 1 = client file + devis, Sprint 2 = factures). Devis × 4 client types = 4 templates in Sprint 0. Sprint 2 adds 4 facture combinations. The 4-template math was too naive (static files); correct implementation is a template engine with client-type conditionals (~0.25 days over original estimate).
+
+**On devis status (fully conceded, cost disputed):** Adding `devis.status TEXT DEFAULT 'draft'` is 30 minutes of schema work, not 0.5-1 days. The challenge conflates "add the column" with "build the state machine." The former belongs in Sprint 0; the latter is Sprint 1.
+
+**Net adjustment to 5-day estimate: +0.35 days** — within normal slack.
+
+**VERDICT on D71/D73:**
+
+RESOLVED — Sprint 0 remains 5 days with explicit scope clarifications:
+
+- **JWT Sprint 0 scope:** Contract + stubs + `@fastify/jwt` config (0.5-1 day). Full auth = Sprint 1.
+- **Mentions légales Sprint 0 scope:** 4 templates (devis × client type only). 8 combinations = Sprint 2.
+- **`devis.status TEXT DEFAULT 'draft'`:** Added in Sprint 0 schema (30 min). State machine = Sprint 1.
+- **What Sprint 0 does NOT include:** Production auth (Keychain, refresh queue), full state machine, facture mentions légales.
+
+---
+
+## Debate 75: Pricing Anchor — €29 Is Right, But Trust Signals Must Precede Price
+
+**Challenge:** The €29 anchor was challenged on three grounds: (1) wrong artisan rate inputs (€50-80/h vs €35/h), (2) missing trust signals before price, (3) lifetime lock creates pricing ceiling.
+
+### Product Strategist — €29 Defended, Trust Signals Required
+
+**Assumption challenged:** The "one hour of labor" frame was meant for Marc (the artisan). It wasn't — it was meant for the advisor (expert-comptable, prescriber, spouse). The €50-80/h rate error targeted the wrong audience.
+
+**Core argument:**
+
+**Challenge 1 (wrong rate) — conceded in part:** The €35/h rate is more accurate than €50-80/h. Fix language to "moins d'une heure de main d'œuvre." The anchor still works — "less than one hour of a plumber's labor per month" is accessible and credible. But redirect the frame toward advisors in secondary copy, not as the primary landing page hook.
+
+**Challenge 2 (missing trust signals) — fully conceded:** This is the real problem. Tolteck at €19 with 40k users has social proof Louis can't match at launch. Free tier removes the money barrier but doesn't answer "will this work?" Social proof signals must precede the €29 price on the landing page: (1) at least one specific beta testimonial, (2) concrete social proof number, (3) founding member framing with teeth.
+
+**Challenge 3 (lifetime lock) — pushed back:** The lifetime lock isn't wrong — "early access promotion" execution is wrong. "Membre fondateur" with 4 explicit benefits (locked price, named in app, direct founder access, roadmap vote) converts a price promotion into a relationship offer. The €19 intro → €29 proposal is rejected: it's a retroactive change to an existing commitment that trains users to wait for promotions.
+
+**VERDICT on D5:**
+
+RESOLVED — €29 anchor stands with conditions:
+- Value anchor updated to "moins d'une heure de main d'œuvre par mois"
+- Trust signals required before €29 appears on landing page
+- "Membre fondateur" framing (not "early access"), 4-benefit package
+- Price escalation: €29 founding (50 users) → €39 standard → €49 professional
+
+---
+
+## Debate 76: Free Tier Conversion — The "Better Free Tier" Trap Has No Trigger
+
+**Challenge:** D40 → D43 → D46 → D51 → D63 → D70 cycled through Free tier improvements without ever defining the conversion mechanism. Every resolution made Free tier more satisfying — which is correct for acquisition but leaves €29 upgrade with no trigger.
+
+### Growth Strategist — Named: "Better Free Tier" Trap. Resolution: "First Accepted Devis" Trigger
+
+**Assumption challenged from D70:** Document archive = primary Free tier value; financial snapshot = secondary €29 feature. These are not sequential features — they are a single conversion mechanism.
+
+**Core argument:**
+
+**The structural flaw:** The debate chain improved the Free tier correctly. D70's document archive IS the right primary value. But a Free tier that solves the primary job (professional document archive) is a complete product. €29 has no reason to exist unless the conversion mechanism is defined.
+
+**Three structural problems confirmed:**
+1. Document archive makes Free tier satisfying — not "almost satisfying enough to upgrade"
+2. 80% limit notification ("vous êtes presque à votre limite") = anxiety without agency — Marc thinks "I have one more devis," not "I need to upgrade"
+3. €29 tier delivers "everything else" — which is nothing specific
+
+**The conversion mechanism:** The trigger is NOT limit proximity. It is the **first accepted devis** — the moment Marc's first real transaction happens and he needs the full business toolkit:
+
+- "Votre devis pour Dupont a été accepté" = business event Marc cares about
+- He now needs: facture flow (€29), financial snapshot (€29), automatic relances (€29)
+- Before accepted devis: he's evaluating. After: he's running his business on the app.
+
+**The financial snapshot repositioned:** Not a dashboard — a pipeline nerve center: "Vous avez €4,200 en devis acceptés en attente de paiement." The archive creates the data. The snapshot creates the urgency. They are a single conversion mechanism.
+
+**VERDICT on D43/D46/D51/D63/D70:**
+
+RESOLVED — D70 REFINED. The "Better Free Tier" trap is named:
+- **Free tier:** Document archive (acquisition). Build value.
+- **€29 tier:** Financial snapshot + automatic relances on accepted devis (conversion). Create urgency.
+- **Conversion trigger:** First accepted devis fires upgrade prompt — not 80% limit notification.
+- **80% notification deprecated** — replaced with accepted-devis milestone notification.
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D1 | Positioning | Kill "CRM" — devis, factures, relances | 2026-03-30 |
+| D2 | MVP scope | 4 features, SEQUENCED sprints. Sprint 0 (5d Fastify + Postgres compliance foundations). Sprint 1 (client+devis). Sprint 2 (factures + sequential numbering + email relances). | 2026-03-30 |
+| D3 | Primary persona | Marc — solo smartphone-native artisan | 2026-03-30 |
+| D4 | Stack | Single managed Postgres | 2026-03-30 |
+| D5 | Pricing | €29/month. Value anchor: "moins d'une heure de main d'œuvre." Trust signals required before €29 appears. Membre fondateur framing (not early access). Price escalation: €29 founding (50) → €39 standard → €49 professional. | 2026-03-30 |
+| D6 | Trial | No time-limited trial. Free tier IS the trial. | 2026-03-30 |
+| D7 | Architecture | Fastify + Postgres + static landing page. Nuxt 3 retired from backend. | 2026-03-30 |
+| D8 | E-invoicing | v2 feature | 2026-03-30 |
+| D9 | Not MVP | No Kanban, no multi-user, no offline, no API keys | 2026-03-30 |
+| D10 | Buyer trigger | "Admin pain" not "CRM need" | 2026-03-30 |
+| D11 | Mobile | React Native from Day 1 via Expo | 2026-03-30 |
+| D12 | Landing page | Simplicity-first — "Vos devis et factures, sans vous prendre la tête." | 2026-03-30 |
+| D13 | Home view | Job-first — Active Job Card as home anchor | 2026-03-30 |
+| D14 | E-invoicing timing | v2 — NOT Day 1 | 2026-03-30 |
+| D15 | Relances differentiator | DE-EMPHASIZED — secondary feature below fold | 2026-03-30 |
+| D16 | Trial length | No countdown trial — Free tier IS the trial | 2026-03-30 |
+| D17 | Mobile strategy | React Native from Day 1 via Expo. Email-only relances at v1. Expo Push in v1.1. | 2026-03-30 |
+| D40 | Engagement channel | Channel secondary to Free tier output design. | 2026-03-30 |
+| D41 | Notification infra | Email-only relances at v1 launch. Expo Push in v1.1. | 2026-03-30 |
+| D42 | WhatsApp referral | CLOSED — no WhatsApp CTA in devis | 2026-03-30 |
+| D43 | Free tier activation | Output design primary, channel secondary. | 2026-03-30 |
+| D46 | Free tier limits | Do NOT lower limits from 10/5. Trust-building before limit enforcement. | 2026-03-30 |
+| D47 | Expo Push estimate | 1-2 weeks. Budget properly or defer to v1.1. | 2026-03-30 |
+| D48 | Wholesaler GTM | Not primary. Digital + specialist retailers first. | 2026-03-30 |
+| D49 | GTM Priority | Digital → Specialist retailers → Prescriber → Wholesaler. | 2026-03-30 |
+| D50 | Push at launch | Email-only at v1. Expo Push in v1.1. | 2026-03-30 |
+| D51 | Free tier conversion | Forcing function + limit-hit PRIMARY. Habit tracking SECONDARY. | 2026-03-30 |
+| D53 | Landing page | Simplicity-first RETAINED. H1: "Sans vous prendre la tête." H2: 5-min specific claim. | 2026-03-30 |
+| D54 | Sprint 0 | Compressed compliance sprint (5 days). TVA arrondi commercial, sequential numbering, client-type, mentions légales (devis only), `devis.status` column. JWT = contract+stubs. | 2026-03-30 |
+| D55 | Buyer-user split | Dual-persona GTM. Marc = economic buyer. Admin handler = operational user. Expert-comptable = Phase 1. | 2026-03-30 |
+| D56 | WoM attribution | 40% figure RETIRED. WoM = Month 3+ lagging indicator. Measurement: "Comment connaissez-vous?" + referral codes. | 2026-03-30 |
+| D57 | Architecture | Fastify + Postgres + static landing page. Nuxt 3 retired. | 2026-03-30 |
+| D59 | Pricing credibility | €29 anchor defended. Trust signals required before price. Membre fondateur framing. | 2026-03-30 |
+| D63 | Free tier pull | Professional document archive = PRIMARY Free tier value. Financial snapshot = €29 conversion trigger. | 2026-03-30 |
+| D70 | Document archive | RESOLVED — document archive PRIMARY, financial snapshot to €29 tier as conversion mechanism. | 2026-03-30 |
+| D71 | Sprint 0 scope | RESOLVED — 5 days with clarifications. JWT = contract+stubs. Mentions légales = 4 templates (devis only). `devis.status` = 30-min schema addition. | 2026-03-30 |
+| D72 | Expert-comptable Phase 1 | Expert-comptable = Phase 1 (warm access). U12 actioned this week. | 2026-03-30 |
+| D74 | Sprint 0 timeline | RESOLVED — 5 days defended with scope clarifications. No timeline extension required. | 2026-03-30 |
+| D75 | Pricing anchor | RESOLVED — €29 defended. Value anchor updated. Trust signals required. Membre fondateur framing. | 2026-03-30 |
+| D76 | Free tier conversion | RESOLVED — "Better Free Tier" trap named. Conversion trigger = first accepted devis. 80% notification deprecated. | 2026-03-30 |
+
+| U1 | Discovery | REPLACED — readiness protocol | 2026-03-30 |
+| U2 | E-invoicing platform | Factea first when v2 | 2026-03-30 |
+| U7 | Domain | DEFERRED — subdomain/Carrd until MVP validated | 2026-03-30 |
+| U8 | WhatsApp acquisition | CLOSED — no WhatsApp CTA in devis | 2026-03-30 |
+| U9 | Free tier activation | Output design primary (document archive), channel secondary | 2026-03-30 |
+| U10 | GTM: Wholesaler | Digital + specialist retailers first | 2026-03-30 |
+| U11 | Prescriber audit | If >30% of new jobs via prescriber, revisit GTM priority | 2026-03-30 |
+| U12 | Expert-comptable playbook | Phase 1 — initiate this week via Louis's existing accountant | 2026-03-30 |
+| U13 | WoM measurement | "Comment connaissez-vous?" at signup + referral codes. Month 3 target: 20%. | 2026-03-30 |
+| U15 | Guerrilla validation | Three-phase: observe → quantify pain → payment. Workshop via warm network, not wholesaler. | 2026-03-30 |
+
+---
+
+*Last updated: 2026-03-30T17:17*
+

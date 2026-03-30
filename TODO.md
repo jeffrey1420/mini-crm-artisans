@@ -204,6 +204,28 @@ All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 - [ ] **D48 NEW:** Tertiary GTM = prescriber networks (architects, property managers) — pull-through demand at job site level
 - [ ] Wholesaler presence (Gedimat/Point P counter displays) = secondary brand-awareness only, not primary acquisition
 
+### Sprint 0 Build (D54 + D71 + D74 — 5 Days, Compliance Foundations)
+- [ ] **D74 RESOLVED:** Sprint 0 = 5 days. Day 1: `client.type` enum (4 values) + mentions légales template engine (Handlebars/Nunjucks, 4 client-type templates, devis-only). Sprint 2 adds 8 combinations.
+- [ ] **D74 RESOLVED:** JWT Sprint 0 scope = contract + stubs + `@fastify/jwt` config (0.5-1 day). Full auth (Keychain, refresh rotation, logout) = Sprint 1.
+- [ ] **D74 RESOLVED:** `devis.status TEXT DEFAULT 'draft'` added in Sprint 0 schema (30 min). State machine = Sprint 1.
+- [ ] **D54 RESOLVED:** TVA arrondi commercial calculator: `Math.round(v * 100) / 100`. No BOFiP lookup required.
+- [ ] **D71 RESOLVED:** Mentions légales = 4 templates (devis × client type). 8 combinations (devis + facture) = Sprint 2 scope.
+
+### Pricing (D5 + D59 + D75 — €29 Anchor)
+- [ ] **D75 RESOLVED:** Value anchor updated to "Moins d'une heure de main d'œuvre par mois." (less than one hour of labor per month)
+- [ ] **D75 RESOLVED:** Trust signals required BEFORE €29 appears on landing page: (1) at least one specific beta testimonial, (2) concrete social proof number, (3) founding member framing with explicit benefits
+- [ ] **D75 RESOLVED:** "Membre fondateur" framing (not "early access"). 4 benefits: locked price + named in app + direct founder access + roadmap vote. First 50 slots, then €39 standard.
+- [ ] **D75 RESOLVED:** €19 intro → €29 proposal REJECTED. Price escalation: €29 founding → €39 standard → €49 professional.
+- [ ] **D59 RESOLVED:** SEPA direct debit — evaluate Stripe SEPA integration (French artisans skeptical of credit card subscriptions).
+
+### Free Tier + Conversion (D43 + D46 + D63 + D70 + D76)
+- [ ] **D76 RESOLVED:** "Better Free Tier" trap named — every Free tier improvement without a conversion trigger makes the product harder to monetize. Document this risk.
+- [ ] **D76 RESOLVED:** Conversion trigger = first accepted devis (not 80% limit notification). "Votre devis pour [Client] a été accepté — passez à €29 pour suivre ce qui vous est dû."
+- [ ] **D76 RESOLVED:** 80% "vous êtes presque à votre limite" notification DEPRECATED. Replace with accepted-devis milestone notification.
+- [ ] **D76 RESOLVED:** Free tier = document archive (acquisition). €29 tier = financial snapshot + automatic relances on accepted devis (conversion). These are different jobs, not sequential tiers.
+- [ ] **D63 RESOLVED:** Document archive = PRIMARY Free tier value. Financial snapshot (outstanding accepted devis, pipeline value, automatic relances) = €29 tier conversion trigger.
+- [ ] **D70 RESOLVED:** Financial snapshot content: "Vous avez €X en devis acceptés en attente de paiement" — not a dashboard, a pipeline nerve center.
+
 ## 🚫 What We Deleted
 
 The following were overengineered or wrong:
@@ -540,3 +562,22 @@ The following were overengineered or wrong:
 - [ ] **Debate 74 NEW:** Define specific conversion mechanism — what is the exact moment/condition when Marc decides to pay €29? Not "better Free tier" — a specific trigger. If it can't be defined, the conversion model is broken.
 - [ ] **Debate 75 UPDATED:** Recalibrate value anchor to €35/h (realistic artisan rate). Kill lifetime €29 lock. Replace with "€19 early access for first 3 months → €29 standard."
 - [ ] **Debate 75 NEW:** Add social proof signals to landing page BEFORE €29 price appears (testimonials, expert-comptable mention, usage numbers) — reduce price credibility gap for unknown product.
+
+---
+
+## New from Pulse 2026-03-30T17:17 — Three Specialist Debates Resolved
+
+### Resolved (D74, D75, D76):
+- **D74 (Sprint 0 timeline):** Technical Architect defended 5-day estimate with scope clarifications. JWT Sprint 0 scope = contract + stubs (0.5-1 day). Full auth = Sprint 1. Mentions légales = 4 templates (devis only; 8 = Sprint 2). `devis.status TEXT DEFAULT 'draft'` added in Sprint 0 (30 min). No timeline extension. D71 REFINED.
+- **D75 (Pricing anchor):** Product Strategist defended €29 anchor. Value anchor updated to "moins d'une heure de main d'œuvre." Trust signals required before €29 appears. "Membre fondateur" framing (not "early access") with 4 explicit benefits. €19 intro → €29 rejected. Price escalation: €29 founding → €39 standard → €49 professional. D5/D59 REFINED.
+- **D76 (Free tier conversion):** Growth Strategist named "Better Free Tier" trap. Conversion trigger = first accepted devis (not 80% limit notification). Free tier = document archive (acquisition). €29 tier = financial snapshot + automatic relances (conversion). 80% notification deprecated. D43/D46/D51/D63/D70 REFINED.
+
+### New Action Items from this pulse:
+- [ ] **D74 NEW:** Sprint 0 Day 1 — `client.type` enum (4 values) + mentions légales template engine (Handlebars/Nunjucks, 4 client-type templates). Devis × client type only. Sprint 2 adds 4 more for factures.
+- [ ] **D74 NEW:** Sprint 0 JWT = contract + stubs + `@fastify/jwt` config (0.5-1 day). Full auth (Keychain, refresh queue, logout) = Sprint 1 deliverable.
+- [ ] **D74 NEW:** Sprint 0 schema: `devis.status TEXT DEFAULT 'draft'` — 30 min. State machine (valid transitions, expiration cron) = Sprint 1.
+- [ ] **D75 NEW:** Trust signals required BEFORE €29 appears on landing page: (1) specific beta testimonial, (2) concrete social proof number ("500+ devis envoyés"), (3) "Membre fondateur" framing with 4 explicit benefits.
+- [ ] **D75 NEW:** Price escalation path documented: €29 founding (50 users) → €39 standard → €49 professional tier. No retroactive price changes for founding members.
+- [ ] **D76 NEW:** Accepted-devis conversion notification: "Votre devis pour [Client] a été accepté. Passez à €29 pour suivre ce qui vous est dû." — fires on first `devis.status = accepted`, not on 80% limit proximity.
+- [ ] **D76 NEW:** €29 tier delivers: (1) financial snapshot ("vous avez €X en devis acceptés en attente de paiement"), (2) automatic email relances at 14/30/60 days on accepted devis. Not a dashboard — a pipeline nerve center.
+- [ ] **D76 NEW:** 80% "vous êtes presque à votre limite" notification DEPRECATED — replace in product spec with accepted-devis milestone trigger.
