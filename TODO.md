@@ -124,6 +124,9 @@ All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 
 ### Before Building (Do First)
 - [ ] U1 readiness check: (1) Figma/clickable devis-creation prototype, (2) guerrilla test scheduled (5 artisans at Point P/Gedimat), (3) pain confirmed by competitive analysis, (4) feature set frozen
+- [ ] **D64 UPDATED:** Sprint 0 starts with Fastify + Postgres API (NOT Nuxt 3). Day 1 = Postgres schema + TVA service + sequential numbering service + mentions légales renderer. Day 3 = working REST API consumed by React Native. (Debate 64)
+- [ ] **D65 NEW:** U15 guerrilla discovery protocol — three-phase: (1) 20-min observation of actual admin workflow, no demo; (2) pain quantification (time spent, emotional weight, revenue risk); (3) payment conversation only if pain confirmed. (Debate 65)
+- [ ] **D63 NEW:** Free tier needs self-generating pull — a dashboard/report (e.g., "situation financière" snapshot with outstanding devis and pending factures) that creates desire to return. Notification channel debates are premature until this exists. (Debate 63)
 - [ ] If prototype not ready in 1 week: proceed to build anyway, validate post-launch (Debate 31)
 - [ ] Sprint 0: Compressed compliance sprint (3-4 days). TVA per-line schema (5.5/10/20%), sequential numbering engine (gapless, server-enforced), mentions légales renderer (template-based, client-type-aware), client-type schema. THEN Sprint 1 = client+devis flow. Sprint 2 = facture+relances. (Debate 54)
 - [x] **D57 RESOLVED:** API-first (Node/Fastify + static landing + JWT) preferred. Nuxt 3 deferred unless blocking Sprint 0. OVH managed Postgres retained. (Debate 61)
@@ -382,5 +385,22 @@ The following were overengineered or wrong:
 
 ---
 
-*Last updated: 2026-03-30T13:15*
+*Last updated: 2026-03-30T15:33*
+
+## New from Pulse 2026-03-30T15:33
+
+### Reopened (D63, D64, D65):
+- **D63 (Free tier activation):** Product Strategist won — channel (email/push/WhatsApp) is the wrong variable. Free tier needs self-generating pull: a dashboard/report that makes artisans *want* to return, not notifications dragging them back. D40 RESTATED.
+- **D64 (Sprint 0 architecture):** Technical Architect won — "defer to post-MVP" is a sunk cost trap. Fastify + Postgres must START Sprint 0. Sprint 0 with Nuxt 3 means business logic inside Nuxt server routes; post-MVP migration never happens. D57 REOPENED.
+- **D65 (U15 validation):** Growth Strategist won — customer discovery (observe pain, quantify time/emotional weight) must precede price questions. "Show demo, ask WTP" puts you in persuasion mode. Three-phase guerrilla session: observe → quantify → payment. U15 UPDATED.
+
+### Challenged assumptions this pulse:
+1. Engagement channel (email vs push vs WhatsApp) is the activation lever (Product Strategist challenged: channel is secondary to whether Free tier creates pull — a report/dashboard that generates desire to return)
+2. "Defer API-first to post-MVP" is safe (Technical Architect challenged: deferral becomes permanent; Fastify+Postgres is faster for Sprint 0 anyway)
+3. Price validation with a demo is the right first guerrilla step (Growth Strategist challenged: observe pain first, ask about payment only if pain confirmed)
+
+### New action items from this pulse:
+- [ ] **D63 NEW:** Free tier self-generating pull — design a dashboard/report (e.g., "situation financière" snapshot: outstanding devis, pending factures, aging report) that creates desire to return. Notification channel debates premature until this exists.
+- [ ] **D64 UPDATED:** Sprint 0 starts with Fastify + Postgres API (NOT Nuxt 3). Day 1: Postgres schema + TVA service + sequential numbering service + mentions légales renderer. Day 3: REST API consumed by React Native. Nuxt 3 never touches the backend.
+- [ ] **D65 UPDATED:** U15 three-phase guerrilla session — (1) 20-min observation of actual admin workflow, no demo; (2) pain quantification (time spent/week, emotional weight 1-10, lost revenue from forgotten devis); (3) payment conversation only if pain confirmed. Remove "show demo, ask price" from U15.
 

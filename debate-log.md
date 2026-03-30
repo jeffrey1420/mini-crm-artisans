@@ -2221,4 +2221,103 @@ The architecture decision affects: developer velocity (medium-term), hosting cos
 
 ---
 
-*Last updated: 2026-03-30T15:17*
+*Last updated: 2026-03-30T15:33*
+
+---
+
+## Pulse 2026-03-30T15:33 — Three New Debates
+
+---
+
+## Debate 63: D40 — Engagement Channel Is the Wrong Variable
+
+**Challenge:** D40 (engagement channel) — The debate has cycled through email → push → WhatsApp opt-in without ever questioning whether any notification channel can save a Free tier that doesn't create genuine value. Product Strategist challenges the premise.
+
+### Product Strategist — Free Tier Needs Self-Generating Pull, Not Better Notifications
+
+**Assumption challenged:** That engagement channel (email vs push vs WhatsApp opt-in) is a meaningful lever for Free tier activation.
+
+**Core argument:**
+
+**The channel debate is polishing a product that hasn't proven its worth.** A reminder — delivered via any channel — only works if the artisan already believes the product is worth using. If the first-use experience doesn't deliver a clear "I needed this," no notification cadence will recover them. You're debating the recall mechanism on a product that hasn't yet proven its value.
+
+**The WhatsApp opt-in path is a high-cost ask for a low-value exchange.** You're asking an artisan to give a phone number + opt-in to WhatsApp business API for what? To receive a nudge that their trial is expiring? If the value of the product doesn't justify the opt-in, the channel change produces resentment, not activation.
+
+**"Free tier feels empty without prompting" is the signal, not the problem.** That artisans need to be told to come back tells you the product isn't creating pull. Debating email vs. push vs. WhatsApp is like noting a patient has no appetite and responding by debating whether to use a blue or red spoon for the food they won't eat.
+
+**Proposed reframe for D40:** The Free tier must deliver a self-generating pull — a report, a dashboard, a financial snapshot — that makes the artisan *want* to return to consume value, not be dragged back by a notification. Example: an automatically-produced "situation financière" snapshot showing outstanding devis and pending factures. The artisan wants to check it — it's output, not input.
+
+**D63 Verdict requested:** D40 RESTATED — engagement channel is SECONDARY. The Free tier must first deliver something artisans want to come back to see. Until that exists, channel debates are premature.
+
+---
+
+## Debate 64: D57 — "Defer to Post-MVP" Is a Sunk Cost Trap
+
+**Challenge:** D57 (API-first architecture deferral) — The resolution punted: "API-first preferred but deferred to post-MVP unless Nuxt 3 actively blocks Sprint 0." Technical Architect challenges the "defer" framing.
+
+### Technical Architect — API-First Must Start at Sprint 0
+
+**Assumption challenged:** That API-first architecture can wait until post-MVP without becoming permanently deferred.
+
+**Core argument:**
+
+**The "defer" escape hatch will never close.** When Sprint 0 starts with Nuxt 3, every hour spent learning Nuxt routing, server routes, and `useFetch` patterns makes migration to API-first later more expensive, not less. The team will have written business logic inside Nuxt server routes, learned Nuxt conventions, and a codebase where "let's rip out the backend" feels like a rewrite. Post-MVP migrations of this type almost never happen — the product ships, bugs appear, features land, and the deferred decision becomes permanent.
+
+**Sprint 0 deliverables are backend-first — Nuxt adds friction without value.** TVA per-line schema, sequential numbering enforcement, mentions légales renderer — none of these require a UI framework. In fact, UI frameworks actively complicate all three. TVA calculations should live in a service layer, not a Nuxt server route that blends routing, validation, and business logic. Sequential numbering requires transactional semantics — raw SQL or a dedicated service, not a Nuxt composable.
+
+**Fastify + Postgres is faster to Sprint 0 than Nuxt 3 + Postgres.** Initial setup: `npm create fastify` + `pg` vs. `npx nuxi init` + module installs. Time to first API route: <5 minutes vs. 15-20 minutes of convention setup. Nuxt's opinionation is valuable for a full-stack Vue app; for a React Native mobile app + static landing page, it's pure overhead on the backend side.
+
+**API-first is the actual mobile-native architecture.** The product is React Native. The mobile app is an HTTP client. When you build Nuxt 3 backend, you are building a server framework that the mobile app will never use for its primary purpose. The mobile app talks to an API — that API should be built as an API, not as a web framework with SSR capabilities no mobile app will use.
+
+**D64 Verdict requested:** D57 UPDATED — API-first (Fastify + Postgres) must START at Sprint 0, not be deferred. Sprint 0 with Fastify: Day 1 = Postgres schema + TVA service + sequential numbering service + mentions légales template renderer. Day 3 = working REST API consumed by React Native. No Nuxt dependency for the backend.
+
+---
+
+## Debate 65: U15 — Customer Discovery Must Precede Price Validation
+
+**Challenge:** U15 (guerrilla price validation) — The D59 resolution proposed "show 5 artisans a demo, ask what they'd pay." Growth Strategist challenges this sequencing.
+
+### Growth Strategist — Observe Pain Before Asking About Price
+
+**Assumption challenged:** That showing a demo and asking willingness-to-pay is the correct first validation step.
+
+**Core argument:**
+
+**Price presupposes pain, not the other way around.** Asking "would you pay €29/month?" to an artisan who hasn't articulated their admin burden is meaningless. They've already solved it (badly, in their own view) with WhatsApp + Excel. You can't jump to price sensitivity when you haven't established whether they experience the admin task as a burden worth solving.
+
+**Market existence ≠ felt pain for this specific user.** Pennylane, Indy, and Freebe existing proves a market exists — not that the French artisan in front of you feels the devis/facture cycle as acute pain. Many artisans have built workarounds they're comfortable with. Comfortable ≠ optimal, but comfortable is a real barrier that must be understood before you can ask whether they'd pay to change it.
+
+**A demo puts you in persuasion mode, not discovery mode.** Showing a demo to someone who hasn't described their admin workflow first means they'll politely nod and say "yes that looks nice." You get enthusiasm, not data. The demo creates social pressure to be positive. The 20-minute observation creates a baseline from which you can actually measure reaction.
+
+**Time spent and emotional weight are the real metrics, not Willingness to Pay.** WTP is downstream of pain intensity. Without knowing (a) how much time they spend on devis/factures per week, (b) how they feel about that task, and (c) what happens when they don't follow up — the WTP answer is unreliable.
+
+**Proposed alternative — three-phase guerrilla session:**
+
+*Phase 1 — Observation (20 minutes, no demo, no pitch):* Watch the artisan do their actual admin. Ask them to talk out loud. Measure: time on devis/facture/relance cycle, number of manual steps, where they get stuck or frustrated.
+
+*Phase 2 — Problem quantification (10 minutes):* "How much time per week on devis and factures?" "What happens when a client doesn't pay — do you follow up?" "Have you ever lost a client because of a forgotten devis?" Rate pain 1-10.
+
+*Phase 3 — Payment conversation (5 minutes, only if pain is confirmed):* Only after observing their workflow and hearing them describe the pain — then show a 2-minute demo. Then ask: "Based on what you just described, what would that be worth to you?"
+
+**D65 Verdict requested:** U15 UPDATED — replace "show demo, ask price" with three-phase guerrilla discovery: observe first, quantify pain, then ask about payment only if pain is confirmed. U1 readiness protocol updated accordingly.
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D56 | WoM attribution | RESOLVED — 40% figure RETIRED. WoM as lagging indicator confirmed. | 2026-03-30 |
+| D57 | Architecture | REFINED — API-first must START Sprint 0 (Debate 64) | 2026-03-30 |
+| D59 | Pricing | REFINED — Kill €19 founding offer. Early access €29 locked for life. | 2026-03-30 |
+| D63 | Free tier activation | RESTATED — channel secondary. Free tier needs self-generating pull (report/dashboard) before notification channel debates matter. | 2026-03-30 |
+| D64 | Sprint 0 architecture | REOPENED — API-first (Fastify + Postgres) must start Sprint 0, not deferred. | 2026-03-30 |
+| D65 | U15 validation | REOPENED — customer discovery (observe pain) must precede price validation. Three-phase guerrilla session proposed. | 2026-03-30 |
+
+| U13 | WoM measurement | "Comment connaissez-vous?" at signup + referral codes. Month 3 target: 20%. | 2026-03-30 |
+| U14 | Sprint 0 stack | RESOLVED by D64 — Fastify + Postgres at Sprint 0 start, not Nuxt 3. | 2026-03-30 |
+| U15 | Guerrilla validation | UPDATED by D65 — three-phase: observe → quantify pain → payment conversation. | 2026-03-30 |
+
+---
+
+*Last updated: 2026-03-30T15:33*
