@@ -9,7 +9,7 @@
 | D1 | Positioning | Kill "CRM" — sell "devis, factures, relances" | External review | 2026-03-30 |
 | D2 | Sprint 1 timeline | RESOLVED — Sprint 1a (Days 1-5: client file + devis flow) + Sprint 1b (Days 6-10: PDF + mentions légales + sharing + polish). Parallelization of backend and mobile on PDF endpoint recovers 3-5 days. Sequential numbering is 1 day, not 2. Viable 2-week sprint. | Debate 68 (Technical Architect) | 2026-03-30 |
 | D3 | Primary persona | Marc — solo smartphone-native artisan | External review | 2026-03-30 |
-| D4 | Stack | Single managed Postgres, NOT per-customer VPS | External review | 2026-03-30 |
+| D4 | Stack | **Supabase** (self-hosted on OVH or EU-hosted). Fastify + Postgres + Coolify retired for v1. All prior Postgres schema work transfers directly to Supabase. | Debate 100 (Technical Architect) | 2026-03-30 |
 | D5 | Pricing | Free + €29 two-tier. No €19 SKU. Drop €49/€79. Value anchor: "2h/week = 1h labor = €29/month." | Debate 33 (Product Strategist) | 2026-03-30 |
 | D6 | Trial | No time-limited trial. Free tier IS the trial (10 clients, 5 active devis). Conversion happens at Free limit. Engagement: restated by D43 — channel secondary, Free tier design determines activation. 80% limit heads-up notification. No countdown emails. | Debates 38/43 (Product Strategist) | 2026-03-30 |
 | D7 | Architecture | Nuxt 3 + OVH managed Postgres — REFINED: API-first preferred but deferred to post-MVP unless blocking Sprint 0 | Growth+Architect | 2026-03-30 |
@@ -33,8 +33,8 @@
 | D54 | Sprint 0 TVA | RESOLVED — arrondi commercial is the standard (not arithmétique vs bancaire binary). `Math.round(v * 100) / 100` is the Sprint 0 default. Audit risk is €30-80/year, not €600. No BOFiP lookup required. Sprint 0 TVA calculator implement with arrondi commercial. | Debate 69 (Technical Architect) | 2026-03-30 |
 | D55 | Buyer-user split | Dual-persona GTM. Marc = economic buyer (primary). Admin handler = operational user (secondary). Expert-comptable = Phase 2. | Debate 55 (Growth Strategist) | 2026-03-30 |
 | D56 | WoM attribution | WoM = Month 3+ lagging indicator. Digital acquisition PRIMARY at launch. "Comment connaissez-vous?" at signup. Referral codes in v1. Month 3 target: 20% peer referral. | Pulse 14:57 (Product+Growth) | 2026-03-30 |
-| D57 | Architecture | API-first preferred (Fastify + static) but deferred to post-MVP unless Nuxt 3 actively blocks Sprint 0. | Pulse 14:57 (Architect+Growth) | 2026-03-30 |
-| D59 | Pricing credibility | Kill €19 founding member offer. Replace with early access €29 locked for life. Guerrilla price validation with micro-artisan rate anchors. | Debate 62 (Technical Architect) | 2026-03-30 |
+| D57 | Architecture | SUPERSEDED by D100 — Supabase (self-hosted or EU-hosted). Fastify retired for v1. Static landing page + Supabase backend. | Debate 100 (Technical Architect) | 2026-03-30 |
+| D59 | Pricing credibility | **SUPERSEDED by U15 (Debate 101):** Founding member offer ELIMINATED. No lifetime deal. No founding/access tier. Replace with "Support Prioritaire" (relationship benefits: direct WhatsApp to Louis, roadmap vote, named credits). Single €29/month price, no founding/standard tiers. | Debate 101 (Growth Strategist) | 2026-03-30 |
 | D63 | Free tier pull | UPDATED — Situation financière = server-computed push notification at 8pm Paris, NOT in-app dashboard. Free tier gets daily notification. €29 tier gets full snapshot + in-app drill-down. | Debate 83 (Product Strategist) | 2026-03-30 |
 | D64 | Sprint 0 timeline | UPDATED — Sprint 0 = 5-7 days (D86 reversed offline-first, recovering 3-5 days). Full scope: offline-capable + mentions légales + WhatsApp PDF + real device testing. | Debate 84/86 (Technical Architect) | 2026-03-30 |
 | D70 | Document archive | RESOLVED — document archive PRIMARY, financial snapshot to €29 tier. | Pulse 16:44 | 2026-03-30 |
@@ -48,7 +48,12 @@
 | D89 | Situation financière notification | RESOLVED — event-only notification (first accepted devis). Configurable digest window REMOVED. D76 conversion trigger = notification trigger. | Debate 89 (Product Strategist) | 2026-03-30 |
 | D90 | Sprint 0 timeline estimate | RESOLVED — 5.5-6.5 days with parallel backend + mobile tracks. API contract defined Day 1. | Debate 90 (Technical Architect) | 2026-03-30 |
 | D91 | Expert-comptable validation vs referral | RESOLVED — U12 split: validation (Week 1, Louis's own, no prerequisites) ≠ referral (Week 4-6, with testimonials). | Debate 91 (Growth Strategist) | 2026-03-30 |
-| D95 | Sprint 0 parallelization | CHALLENGED — 5.5-6.5 day estimate assumes organizational parallelism (two teams) applied to solo dev. Three independent risks: (1) solo dev sequential, not parallel (+1 day), (2) mentions légales = legal research, not template engineering (+0.5-1 day), (3) integration underbudgeted (+0.5 day). Realistic solo dev estimate: 7-8 days without scope cuts. | Debate 95 (Technical Architect) | 2026-03-30 |
+| D95 | Sprint 0 timeline | RESOLVED — 5 days achievable IF: (1) mentions légales templates pre-written before sprint (2h, U16), (2) Supabase replaces Fastify+Postgres+Coolify (eliminates infra setup), (3) scope holds. Without pre-conditions: accept 6.5-7 days. | Debates 95/97/100 (Technical Architect) | 2026-03-30 |
+| D96 | Conversion trigger | First paid facture (hard gate) + 3-sent-devis soft prompt for non-converters. | Debate 96 (Product Strategist) | 2026-03-30 |
+| D97 | Sprint 0 prep | Louis writes 4 mentions légales templates this week (2h) — gate for 5-day Sprint 0. | Debate 97 (Technical Architect) | 2026-03-30 |
+| D98 | Platform default | Android-first. Week 1 geo-targeted poll validates. If Android ≥65%, iOS stays polish phase. | Debate 98 (Growth Strategist) | 2026-03-30 |
+| D99 | Usage-based pricing | DIRECTIONALLY RESOLVED — €1.50/devis sent, capped at €29/month superior for artisan cash flow. Open risk: D96 conversion trigger ("first paid facture") conflicts with usage-based billing trigger. Louis to evaluate implementation complexity. If complex: flat-rate €29 at launch, usage-based v1.1. | Debate 99 (Product Strategist) | 2026-03-30 |
+| U15 | Founding member offer | ELIMINATED — no lifetime deal, no founding/access tier, no "50 places" scarcity. Single €29/month. Replaced by "Support Prioritaire" (direct WhatsApp to Louis, roadmap vote, named credits). | Debate 101 (Growth Strategist) | 2026-03-30 |
 
 ## 🔄 Reopened This Pulse (Resolved in 15:17 Pulse)
 
@@ -220,7 +225,9 @@ All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 - [ ] **D85 NEW:** GetApp and Capterra profiles claimed and optimized BEFORE launch — admin handlers search here first. Free to claim, takes an afternoon.
 - [ ] **D85 NEW:** Expert-comptable data-sync portal = Phase 2 (distinct from recommendation outreach). Phase 2 requires: real users + testimonials + accountant has seen it work.
 
-### Sprint 0 Build (D54 + D71 + D74 + D81 + D84 — 5.5-7 Days, Offline-Capable)
+### Sprint 0 Build (D54 + D71 + D74 + D81 + D84 + D100 — 5 Days, Supabase Backend)
+
+**D100 (Debate 100) RESOLVED:** Sprint 0 backend = Supabase (self-hosted on OVH or EU-hosted). Fastify + Postgres + Coolify retired. Prior Postgres schema work transfers directly to Supabase. Eliminates 2-4h of Coolify setup + 15-20h of Fastify scaffold. React Native connects via Supabase JS client.
 
 **D84 UPDATED:** Sprint 0 = 5.5-6.5 days (D90, per Technical Architect). D86 reversed D81 offline-first requirement. Offline-capable (optimistic UI + retry queues + AsyncStorage) + mentions légales + WhatsApp PDF + real device testing = 5.5-6.5 days IF pre-conditions met.
 
@@ -229,14 +236,15 @@ All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 - [ ] **D95 SCOPE CUTS:** Three cuts make 5.5-6.5 days achievable without pre-conditions: (1) defer mentions légales to Sprint 1 (plain text placeholder), (2) defer AsyncStorage to Sprint 1 (online-only), (3) single client type in Sprint 0. Without cuts: accept 7-day timeline.
 - [x] **D95 RESOLVED:** Sprint 0 = 5 days IF Louis writes 4 mentions légales templates before sprint (2h pre-sprint). Pre-condition is the gate — if not done, accept 6.5 days.
 - [ ] **D96 NEW:** Conversion trigger = first paid facture (hard gate). Secondary soft trigger: 3 sent devis with zero paid factures → gentle upsell prompt. NOT "first sent devis" as primary trigger.
-- [ ] **D81 NEW:** Sprint 0 = offline-first. WatermelonDB/expo-sqlite for local-first storage (~2 days mobile). Fastify API: add `updated_at` timestamps + accept client-generated UUIDs (~2 hours). Sync: last-write-wins with conflict UI. No changes to API endpoint contracts.
-- [ ] **D74 RESOLVED:** Sprint 0 = 8-10 days. Day 1: `client.type` enum (4 values) + mentions légales template engine (Handlebars/Nunjucks, 4 client-type templates, devis-only). Sprint 2 adds 8 combinations.
-- [ ] **D74 RESOLVED:** API key Sprint 0 scope: `@fastify/jwt` config (0.5-1 day). Full auth (Keychain, refresh rotation, logout) = Sprint 1. (API key replaces JWT per D78)
+- [ ] **D100 NEW:** Supabase setup (Day 1): create project, configure auth (email/password), set up Postgres schema (transfers from prior debates). Self-hosted on OVH or EU-hosted (Louis to decide). No Coolify dependency.
+- [ ] **D81 NEW:** Sprint 0 = offline-capable (optimistic UI + retry queues). WatermelonDB/expo-sqlite deferred to v1.2. Supabase handles auth, storage, realtime.
+- [ ] **D74 RESOLVED:** Sprint 0 scope: client.type enum (4 values) + mentions légales template engine (Handlebars/Nunjucks, 4 client-type templates, devis-only). Sprint 2 adds 8 combinations.
+- [ ] **D74 RESOLVED:** Auth: Supabase auth (email/password). API key replaces JWT per D78.
 - [ ] **D74 RESOLVED:** `devis.status TEXT DEFAULT 'draft'` added in Sprint 0 schema (30 min). State machine = Sprint 1.
 - [ ] **D54 RESOLVED:** TVA arrondi commercial calculator: `Math.round(v * 100) / 100`. No BOFiP lookup required.
 - [ ] **D71 RESOLVED:** Mentions légales = 4 templates (devis × client type). 8 combinations (devis + facture) = Sprint 2 scope.
 - [ ] **D83 NEW:** Push notification infra + nightly aggregation job added to Sprint 0 scope. Server computes financial snapshot nightly. Push at 8pm Paris. Free tier gets daily notification (limited depth). €29 tier gets full snapshot + in-app drill-down.
-- [ ] **D84 UPDATED:** 5.5-6.5 day Sprint 0 achievable if pre-conditions met (D95). Mentions légales retained. If timeline pressure: drop mentions légales (defer to Sprint 1), use plain text WhatsApp share instead of PDF.
+- [ ] **D84 UPDATED:** 5.5-6.5 day Sprint 0 achievable if pre-conditions met (D95) AND Supabase replaces Fastify+Postgres+Coolify (D100). Mentions légales retained. If timeline pressure: drop mentions légales (defer to Sprint 1), use plain text WhatsApp share instead of PDF.
 
 ### Pricing (D5 + D59 + D75 + D77 — €29 Single Price Point)
 - [x] **D75 UPDATED (Debate 77):** "Membre fondateur" framing KILLED. Discount framing trains users to wait for promotions. Replaced with "Accès Fondateur" — relationship benefits without price anchoring.
@@ -245,13 +253,14 @@ All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 - [x] **D75 UPDATED (Debate 77):** 4 benefits retained, reframed as relationship benefits (not price benefits): (1) named in app credits, (2) direct WhatsApp to Louis, (3) roadmap vote, (4) monthly priority vote. No locked price benefit.
 - [x] **D75 RESOLVED:** Value anchor: "Moins d'une heure de main d'œuvre par mois." Trust signals required BEFORE €29 appears on landing page: (1) at least one specific beta testimonial, (2) concrete social proof number, (3) founding member framing with explicit benefits.
 - [x] **D59 RESOLVED:** SEPA direct debit — evaluate Stripe SEPA integration (French artisans skeptical of credit card subscriptions).
-- [ ] **Landing page pricing copy:** Replace "Membre fondateur — €29 puis €39" with "Accès Fondateur" ELIMINATED (Debate 80). Single €29/month, no tier. Language: "Essayez gratuitement. Quand vous êtes prêt, c'est €29/mois. Louis répond sur WhatsApp en moins de 24h."
-- [ ] **D80 NEW:** Kill "Accès Fondateur" tier entirely — no named founding/access tier. Relationship benefits delivered through onboarding experience, not tier labels. All early users get: direct WhatsApp support (écrivez à Louis), credits section listing early supporters, roadmap vote as launch mechanic. No tier badge anywhere in the product.
-- [ ] **D80 NEW:** Scarcity signal = temporary launch offer: "Les 50 premiers utilisateurs inscrits reçoivent un appel de découverte avec Louis." — time-limited onboarding, not a permanent product tier.
+- [x] **U15 (Debate 101) RESOLVED:** Founding member offer ELIMINATED. No lifetime deal. No founding/access tier. No "50 places" scarcity. Replace "Accès Fondateur" with "Support Prioritaire" — relationship benefits (direct WhatsApp to Louis, roadmap vote, named credits), not price discount. Single €29/month everywhere.
+- [ ] **Landing page pricing copy:** Single €29/month. No founding tier. Language: "Essayez gratuitement. Quand vous êtes prêt, c'est €29/mois. Louis répond sur WhatsApp en moins de 24h."
+- [ ] **D99 (Usage-based pricing) — OPEN:** Louis to evaluate implementation complexity of per-devis billing trigger vs D96's "first paid facture" conversion trigger. If complex: flat-rate €29 at launch, usage-based v1.1.
+- [ ] **D99 Direction:** €1.50/devis sent, capped at €29/month — superior for artisan seasonality. Not committed until implementation complexity confirmed.
 
 ### Free Tier + Conversion (D43 + D46 + D63 + D70 + D76 + D83)
 - [ ] **D76 RESOLVED:** "Better Free Tier" trap named — every Free tier improvement without a conversion trigger makes the product harder to monetize. Document this risk.
-- [ ] **D76 RESOLVED:** Conversion trigger = first accepted devis (not 80% limit notification). "Votre devis pour [Client] a été accepté — passez à €29 pour suivre ce qui vous est dû."
+- [ ] **D96 RESOLVED:** Conversion trigger = first paid facture (hard gate). "Votre facture pour [Client] a été payée — voulez-vous continuer à suivre vos paiements avec nous?" Secondary: 3 sent devis + zero paid factures → gentle upsell prompt.
 - [ ] **D76 RESOLVED:** 80% "vous êtes presque à votre limite" notification DEPRECATED. Replace with accepted-devis milestone notification.
 - [ ] **D76 RESOLVED:** Free tier = document archive (acquisition). €29 tier = financial snapshot + automatic relances on accepted devis (conversion). These are different jobs, not sequential tiers.
 - [ ] **D63 RESOLVED:** Document archive = PRIMARY Free tier value. Financial snapshot (outstanding accepted devis, pipeline value, automatic relances) = €29 tier conversion trigger.

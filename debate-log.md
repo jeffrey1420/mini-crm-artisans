@@ -4927,4 +4927,128 @@ Founding member users tend to be deal hunters with high churn risk — the oppos
 
 ---
 
-*Last updated: 2026-03-30T20:08*
+*Last updated: 2026-03-30T20:24*
+
+---
+
+## Pulse 2026-03-30T20:24 — Three Specialist Debates Resolved
+
+---
+
+## Debate 99: D68 — Usage-Based Pricing: RESOLVED (Directionally)
+
+**Specialist:** Product Strategist
+**Pulse file:** pulse-2022-strategist.md
+
+### Product Strategist — Usage-Based Case (Final Position)
+
+**Core argument:** Flat-rate €29/month ignores French BTP seasonality. Jan-Feb activity drops 20-30%. Artisan pays €29 even with near-zero income, creating psychological friction and churn. Usage-based (€1.50/devis sent, capped at €29) aligns payment with value and cash flow reality.
+
+**Key arguments:**
+1. January friction eliminated — artisan sends 3 devis → pays €4.50. No resentment.
+2. Retention improves — low-activity months don't trigger cancellation
+3. Competitive differentiation — no competitor offers usage-based for this market
+4. The cap at €29 protects revenue ceiling (same as flat rate for power users)
+5. Converts flat-rate "simplifies for us" selfishness into "simplifies for client" honesty
+
+**Counter-arguments addressed:**
+- "Simpler to understand": Usage-based IS simpler for the client — maps to how they think (Spotify model)
+- "Predictable revenue": Usage-based has better long-term predictability (lower churn = more consistent revenue)
+- "Implementation complexity": Not a strategic argument — it's a technical problem to solve
+
+### Verdicts on D99 and D68:
+
+**D99 RESOLVED (Directionally):** Usage-based pricing (€1.50/devis, capped at €29) is the superior model for this persona and market. However: implementation complexity must be confirmed before committing. The conversion trigger ("first paid facture") needs to be reconciled with usage-based billing — if users convert at first paid facture, not at first sent devis, the billing trigger needs to be rethought.
+
+**Open risk:** If the product converts at "first paid facture" (hard gate, D96), then usage-based billing may not trigger until a paid invoice exists — potentially weeks after signup. This gap needs resolution before D99 becomes implementation-ready.
+
+**Action item:** Louis to evaluate implementation complexity of per-devis billing trigger. If complex: defer usage-based to v1.1, ship flat-rate at launch. If tractable: ship usage-based from Day 1.
+
+---
+
+## Debate 100: D4 — Supabase vs Fastify+Postgres+Coolify: RESOLVED
+
+**Specialist:** Technical Architect
+**Pulse file:** pulse-2022-architect.md
+
+### Technical Architect — Supabase Case (Final Position)
+
+**Core argument:** Fastify + Postgres + Coolify consumes 30-40% of Sprint 0 on infrastructure before a single feature ships. Coolify setup (2-4h), Fastify scaffold (15-20h), Postgres RLS + migrations (hours more) — all compete directly with feature work on a 5-day sprint. Supabase eliminates all of it.
+
+**Key arguments:**
+1. **Infra vs feature trade-off:** 30-40% of Sprint 0 on plumbing is unacceptable for a 5-day sprint
+2. **Same Postgres schema:** Supabase IS Postgres — prior schema debate work is not wasted
+3. **Auth, storage, realtime:** All included, tested, production-ready
+4. **French data sovereignty:** EU-hosted Supabase (Frankfurt) satisfies GDPR. Self-hosted Supabase on OVH = same data residency as Coolify plan.
+5. **Vendor lock-in is thin:** Supabase is open-source, self-hostable. Fastify + hand-rolled auth is harder to migrate.
+6. **E-invoicing v2:** Postgres under Supabase supports any compliance query needed. Not a distinguishing factor.
+
+**Counter-arguments addressed:**
+- "Full control": Full control of a broken sprint is worthless. Supabase's managed infra means fewer 2am failures.
+- "BaaS pricing at scale": v1 problem for when there's revenue to optimize. Not a Day 1 concern.
+- "Supabase adds latency": 20-40ms delta vs 5-15ms for OVH-hosted — imperceptible for mobile app usage.
+
+### Verdict on D4:
+
+**D4 RESOLVED — UPDATED:** Sprint 0 backend = **Supabase** (self-hosted on OVH or EU-hosted). Fastify + Postgres + Coolify retired for v1.
+
+Implications:
+- No Coolify setup required — eliminates 2-4h of infra work
+- Auth: `supabase.auth` (email/password) — done
+- Storage: `supabase.storage` for PDF devis/factures
+- React Native connects via Supabase JS client or REST API
+- Postgres schema work (from prior debates) transfers directly
+
+**Action item:** Louis to evaluate Supabase self-hosted vs EU-hosted decision. Self-hosted on existing OVH VPS = no new infra. EU-hosted = fastest path.
+
+---
+
+## Debate 101: U15 — Founding Member Offer: RESOLVED
+
+**Specialist:** Growth Strategist
+**Pulse file:** pulse-2022-growth.md
+
+### Growth Strategist — Against Founding Member (Final Position)
+
+**Core argument:** "Membre fondateur" signals beta/unproven to risk-averse French artisans. €90 lifetime deal undermines €29/month recurring value proposition and trains users to wait for discounts.
+
+**Key arguments:**
+1. **Beta signal:** "Fondateur" = "produit en test" for 45-55 year old risk-averse artisans
+2. **Lifetime deprecation:** €90 lifetime = 3 months revenue. Signals the team doesn't believe in retention.
+3. **Wrong user profile:** Lifetime deal hunters ≠ ideal early customers. Attracts deal-seekers, not evangelists.
+4. **Factic urgency:** "50 places" without traction = arbitrary number that triggers skepticism, not conversion
+5. **Wrong conversion model:** Real evangelists are users paying €29/month whose workflow depends on the product — not users who paid €90 once
+
+**Counter-arguments addressed:**
+- "Founding members create evangelists": Real evangelists are created by demonstrated value, not discount labels
+- "Scarcity creates urgency": Only works after traction. Without users, "50 places" is a transparent sales tactic.
+- "Tests price sensitivity": Price sensitivity tested better via conversation with real artisans, not a lifetime deal
+
+### Verdict on U15:
+
+**U15 RESOLVED:** No founding member offer. No lifetime deal. No founding/access tier labels.
+
+Pricing at launch:
+- **Free tier** (10 clients, 5 active devis) — no time limit, no "trial" countdown
+- **€29/month** — single price, no founding/standard/professional tiers
+- **"Support Prioritaire"** (not "Accès Fondateur"): direct WhatsApp to Louis, roadmap vote, named credits — relationship benefits without price discount
+- No "50 places" or any scarcity framing
+
+**What replaces founding member urgency:** Social proof (even at X=10 users), free tier as the trial mechanism, constant €29 price signal.
+
+**Action item:** Landing page and onboarding to reflect "Support Prioritaire" benefit framing (relationship, not discount). Remove all founding/founding member/founding price language.
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------| 2026-03-30 |
+| D4 | Backend architecture | **Supabase** (self-hosted on OVH or EU-hosted). Fastify+Postgres+Coolify retired for v1. | 2026-03-30 |
+| D68 | Pricing model | **Usage-based directionally superior** (€1.50/devis, cap €29). Reconciliation needed with D96 (conversion trigger = first paid facture). Open: if billing trigger too complex, fall back to flat-rate. | 2026-03-30 |
+| D92 | Platform default | Android-first. Week 1 poll validates. | 2026-03-30 |
+| D95 | Sprint 0 timeline | 5 days. Pre-condition: mentions légales templates pre-written. | 2026-03-30 |
+| D96 | Conversion trigger | First paid facture (hard gate) + 3-sent-devis soft prompt. | 2026-03-30 |
+| U15 | Founding member offer | **ELIMINATED.** No founding tier, no lifetime deal. "Support Prioritaire" (relationship benefits) replaces discount framing. | 2026-03-30 |
+| U16 | Mentions légales prep | Louis writes 4 templates this week (2h) — gate for 5-day Sprint 0. | 2026-03-30 |
+| D99 | Usage-based pricing | **Directionally resolved** — usage-based (€1.50/devis, cap €29) superior for artisan cash flow. Implementation complexity TBD — Louis to evaluate. If complex: flat-rate at launch, usage-based v1.1. | 2026-03-30 |
