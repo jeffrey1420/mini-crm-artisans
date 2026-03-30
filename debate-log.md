@@ -3822,4 +3822,105 @@ Real relationship benefits don't require a named tier to deliver them. The first
 
 ---
 
-*Last updated: 2026-03-30T17:59*
+---
+
+## Pulse 2026-03-30T18:15 — Three Resolutions
+
+---
+
+### Prior Pulse — Three Resolved (Incorporated This Pulse)
+
+**D81 (Offline-first):** RESOLVED — Required at launch. WatermelonDB/expo-sqlite local-first storage. Fastify API adds updated_at + client-generated UUIDs. Sync: last-write-wins with conflict UI. No changes to API endpoint contracts. Sprint 0 timeline +2 days.
+
+**D82 (Digital peer communities):** RESOLVED — Retention/engagement spaces, NOT acquisition channels. WhatsApp groups and Facebook = brand recall + peer support for existing users. SEO = primary digital discovery. Prescriber networks = highest-trust acquisition channel (institutional digital comms, not peer communities).
+
+**D77 (Accès Fondateur tier):** RESOLVED — ELIMINATED as a product tier. Relationship benefits delivered through onboarding experience. No tier badge. Single €29/month forever. Scarcity = temporary launch offer (first 50 users get Louis's onboarding call), not a permanent tier.
+
+---
+
+## Debate 83: D63 — Situation Financière as Push Notification, Not Dashboard
+
+**Challenge:** D63 resolved "situation financière" = PRIMARY Free tier value. But D63 assumed it lives in-app as a dashboard. Product Strategist challenges this.
+
+### Product Strategist — Push, Not Pull, Case
+
+**Assumption challenged from D63:** "Situation financière" as an in-app dashboard requires Marc to remember to open the app and navigate to it. For a 45-55yo BTP artisan with碎片化的 moments between job sites, this is friction that kills the daily habit.
+
+**Core argument:** Offline-first means local writes. The "situation financière" on his home screen might be stale for hours after sync. An in-app dashboard that shows outdated numbers is worse than no dashboard — it signals the product isn't working.
+
+**Why push beats pull:**
+1. **8pm Paris delivery** = his natural admin time, after kids are in bed, when he's doing chiffrage and devis work. The snapshot arrives at exactly the moment he needs it.
+2. **Server computes, push delivers.** Fresh data every evening regardless of when he last opened the app. The snapshot is always accurate.
+3. **Dormant Free user conversion.** A Free user who hasn't opened the app in 9 days still receives the 8pm notification. "Vous avez 3 devis en attente totaling €4,200" is a conversion trigger even for dormant users.
+4. **The "soir ritual" from Debate 43 is now resolved.** Push, not pull. The appointment comes to him.
+
+**Technical architecture:**
+- Local: offline writes queue for sync
+- Server: nightly aggregation job (all synced data)
+- Push: 8pm Paris, notification with summary + link to in-app drill-down
+- Free tier: daily snapshot notification (limited depth)
+- €29 tier: full financial snapshot + in-app drill-down
+
+**VERDICT on D63:** UPDATED — "situation financière" is a server-computed push notification at 8pm Paris, NOT an in-app dashboard. Free tier gets the notification. €29 tier gets full snapshot + drill-down. Sprint 0 adds: push notification infrastructure + nightly aggregation job.
+
+---
+
+## Debate 84: Sprint 0 Timeline — 3-5 Days vs 8-10 Days
+
+**Challenge:** The debate log cites Sprint 0 = 3-5 days minimum devis flow. Technical Architect argues this is underestimated by 2-3x for a solo developer shipping production-grade offline-first software.
+
+### Technical Architect — 8-10 Days Case
+
+**Assumption challenged from prior Sprint 0 estimates:** Offline-first was estimated as "+2 days" or "2 hours." WatermelonDB integration alone is 1-2 days for someone who hasn't used it before, including schema definition, sync adapter, and conflict resolution strategy.
+
+**Realistic breakdown:**
+
+| Component | Days |
+|---|---|
+| WatermelonDB/expo-sqlite + sync layer | 2.0 |
+| Fastify API: updated_at + client-UUID | 0.5 |
+| Auth: SecureStore + API key attachment | 1.0 |
+| Mentions légales: 4 Handlebars templates (real legal text) | 1.0 |
+| Devis flow: client → line items (TVA) → preview → share | 2.5 |
+| Offline indicator UI + conflict resolution UI | 0.5 |
+| Real device testing (Android, not simulator) | 1.0 |
+| **Total** | **8.5 days** |
+
+**Key risks not in 3-5 day estimate:**
+- WhatsApp PDF sharing (html-to-pdf on mobile) = non-trivial, could eat a day
+- Mentions légales templates require actual French legal research per client type — can't ship lorem ipsum
+- Real device testing for offline behavior is essential, not optional
+
+**Two options:**
+- **Option A (realistic):** Accept 8-10 day Sprint 0 with full scope
+- **Option B (if 5-day target):** Drop mentions légales (defer to Sprint 1), replace WhatsApp PDF with plain text share (placeholder), ship offline storage + basic devis flow only
+
+**VERDICT on Sprint 0 timeline:** 8-10 days for full scope. If deadline requires 5-day Sprint 0: reduce scope per Option B. Do not ship broken offline sync or skip real device testing.
+
+---
+
+## Debate 85: U12 — Expert-Comptable Outreach: Phase 2 vs Week 1
+
+**Challenge:** D55 resolved expert-comptable = Phase 2, citing "relationship-dependent, 6-18 month build time." Growth Strategist argues this conflates two distinct things: expert-comptable as *data-sync partner* (Phase 2) vs expert-comptable as *recommendation channel* (Sprint 0).
+
+### Growth Strategist — Week 1 Case
+
+**Assumption challenged from D55:** Phase 2 was defined as "expert-comptable access for data sync (expert-comptable portal)." But that's different from being on the recommended software list that expert-comptables already maintain for Pennylane, Indy, and Cegid.
+
+**Core argument:** Every expert-comptable with 50 artisan clients = 50 warm introductions to the admin handler persona (D55's secondary persona). Marc doesn't search "logiciel devis facture." He asks his accountant. If the accountant says "use this one," the admin handler signs up that afternoon.
+
+**Why this works in Week 1:**
+1. **Cold outreach, not relationship building.** Email + one-pager + free account offer to 5 expert-comptables in Caen who service BTP clients. 2-week sprint. Not a dinner, not a partnership.
+2. **Admin handler IS in the room.** Expert-comptable staff already recommend Pennylane. Getting on that list is a cold call, not an 18-month relationship.
+3. **GetApp/Capterra profiles claimable in an afternoon.** D55 action item — these are discovery surfaces for admin handlers. Must exist at launch.
+4. **Positioning is ready:** "Your artisan clients struggle with mentions légales and TVA compliance. This is the tool you can confidently recommend — it handles these correctly so you see clean fichiers."
+
+**The distinction that D55 missed:**
+- Data-sync with expert-comptable = Phase 2 (requires technical integration, relationships)
+- Expert-comptable as recommendation channel = Sprint 0 (cold outreach, one-pager, free account)
+
+**VERDICT on U12:** MOVED from Phase 2 to Sprint 0. Expert-comptable outreach begins Week 1. Goal: 5 expert-comptables in Caen area willing to trial and add to recommended software list. GetApp/Capterra profiles claimed before launch. Phase 2 (data-sync portal) unchanged.
+
+---
+
+*Last updated: 2026-03-30T18:15*

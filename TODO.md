@@ -14,7 +14,7 @@
 | D6 | Trial | No time-limited trial. Free tier IS the trial (10 clients, 5 active devis). Conversion happens at Free limit. Engagement: restated by D43 — channel secondary, Free tier design determines activation. 80% limit heads-up notification. No countdown emails. | Debates 38/43 (Product Strategist) | 2026-03-30 |
 | D7 | Architecture | Nuxt 3 + OVH managed Postgres — REFINED: API-first preferred but deferred to post-MVP unless blocking Sprint 0 | Growth+Architect | 2026-03-30 |
 | D8 | E-invoicing | v2 feature (Chorus Pro compatible) | External review | 2026-03-30 |
-| D9 | Not MVP | No Kanban, no multi-user, offline-first with background sync (D81), no API keys | External review | 2026-03-30 |
+| D9 | Not MVP | No Kanban, no multi-user, no API keys. Offline-first with background sync. | External review + D81 | 2026-03-30 |
 | D10 | Buyer trigger | "Admin pain" not "CRM need" | External review | 2026-03-30 |
 | D11 | Mobile | React Native from Day 1 via Expo. Push notifications: Expo Push at launch (budget 1-2 weeks). | Debates 27/44/47 (Technical Architect) | 2026-03-30 |
 | D12 | Landing page | Simplicity-first — H1: "Vos devis et factures, sans vous prendre la tête." H2: "Créez et envoyez votre premier devis en 5 minutes. Depuis votre téléphone." Proof lives in Free tier. | Debates 19/53 (Product Strategist) | 2026-03-30 |
@@ -35,11 +35,16 @@
 | D56 | WoM attribution | WoM = Month 3+ lagging indicator. Digital acquisition PRIMARY at launch. "Comment connaissez-vous?" at signup. Referral codes in v1. Month 3 target: 20% peer referral. | Pulse 14:57 (Product+Growth) | 2026-03-30 |
 | D57 | Architecture | API-first preferred (Fastify + static) but deferred to post-MVP unless Nuxt 3 actively blocks Sprint 0. | Pulse 14:57 (Architect+Growth) | 2026-03-30 |
 | D59 | Pricing credibility | Kill €19 founding member offer. Replace with early access €29 locked for life. Guerrilla price validation with micro-artisan rate anchors. | Debate 62 (Technical Architect) | 2026-03-30 |
-| D63 | Free tier pull | Professional document archive = PRIMARY Free tier value. Financial snapshot moves to €29 tier. | Debate 70 (Product Strategist) | 2026-03-30 |
-| D64 | Sprint 0 timeline | Sprint 0 = 5 days. Sequential numbering deferred to Sprint 2. Dependency chain confirmed. | Debate 71 (Technical Architect) | 2026-03-30 |
+| D63 | Free tier pull | UPDATED — Situation financière = server-computed push notification at 8pm Paris, NOT in-app dashboard. Free tier gets daily notification. €29 tier gets full snapshot + in-app drill-down. | Debate 83 (Product Strategist) | 2026-03-30 |
+| D64 | Sprint 0 timeline | UPDATED — Sprint 0 = 8-10 days for full scope (offline-first + mentions légales + WhatsApp PDF + real device testing). If 5-day target required: reduce scope (drop mentions légales, plain text WhatsApp share instead of PDF). | Debate 84 (Technical Architect) | 2026-03-30 |
 | D70 | Document archive | RESOLVED — document archive PRIMARY, financial snapshot to €29 tier. | Pulse 16:44 | 2026-03-30 |
 | D71 | Sprint 0 scope | RESOLVED — 5 days, sequential numbering deferred to Sprint 2 (factures). | Pulse 16:44 | 2026-03-30 |
-| D72 | Expert-comptable Phase 1 | Expert-comptable = Phase 1 (warm access, not cold build). U12 actioned this week. | Pulse 16:44 | 2026-03-30 |
+| D72 | Expert-comptable Phase 1 | UPDATED — Expert-comptable outreach = Week 1 (recommendation channel, not data-sync). Data-sync portal = Phase 2. GetApp/Capterra profiles claimed before launch. | Debate 85 (Growth Strategist) | 2026-03-30 |
+| D81 | Offline-first | REQUIRED at launch. WatermelonDB/expo-sqlite local-first. Fastify adds updated_at + client-UUID. Sync: last-write-wins + conflict UI. API contracts unchanged. Sprint 0 +2 days. | debate-OfflineFirst.md | 2026-03-30 |
+| D82 | Digital peer communities | Retention/engagement spaces, NOT acquisition channels. WhatsApp groups + Facebook = brand recall + peer support. SEO = primary digital discovery. Prescriber = highest-trust acquisition. | debate-DigitalChannels.md | 2026-03-30 |
+| D83 | Situation financière delivery | Server-computed push notification at 8pm Paris. Free tier gets daily notification. €29 tier gets full snapshot + in-app drill-down. Sprint 0 adds: push infra + nightly aggregation job. | Debate 83 (Product Strategist) | 2026-03-30 |
+| D84 | Sprint 0 realistic timeline | 8-10 days for full scope. 5-day option: drop mentions légales, plain text WhatsApp share. Real device testing required — not skippable. | Debate 84 (Technical Architect) | 2026-03-30 |
+| D85 | Expert-comptable outreach | MOVED from Phase 2 to Sprint 0. Week 1 cold outreach to 5 expert-comptables in Caen area (BTP clients). Ask: add to recommended software list. GetApp/Capterra profiles before launch. Data-sync portal = Phase 2. | Debate 85 (Growth Strategist) | 2026-03-30 |
 
 ## 🔄 Reopened This Pulse (Resolved in 15:17 Pulse)
 
@@ -207,13 +212,21 @@ All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 - [ ] **D48 NEW:** Secondary GTM = specialist retailers who serve solo artisans (not generalist wholesaler chains)
 - [ ] **D82 UPDATED:** Prescriber networks = highest-trust ACQUISITION channel — but through institutional digital comms (email, professional portals), not peer communities. Architect/property manager → artisan discovery happens in professional contexts, not WhatsApp groups.
 - [ ] Wholesaler presence (Gedimat/Point P counter displays) = secondary brand-awareness only, not primary acquisition
+- [ ] **D85 NEW:** Expert-comptable outreach = Week 1 (not Phase 2). Cold outreach to 5 expert-comptables in Caen area who service small BTP/construction clients. Ask: add to recommended software list for new artisan clients. Positioning: "Your artisan clients struggle with mentions légales and TVA compliance — this handles it correctly."
+- [ ] **D85 NEW:** GetApp and Capterra profiles claimed and optimized BEFORE launch — admin handlers search here first. Free to claim, takes an afternoon.
+- [ ] **D85 NEW:** Expert-comptable data-sync portal = Phase 2 (distinct from recommendation outreach). Phase 2 requires: real users + testimonials + accountant has seen it work.
 
-### Sprint 0 Build (D54 + D71 + D74 — 5 Days, Compliance Foundations)
-- [ ] **D74 RESOLVED:** Sprint 0 = 5 days. Day 1: `client.type` enum (4 values) + mentions légales template engine (Handlebars/Nunjucks, 4 client-type templates, devis-only). Sprint 2 adds 8 combinations.
-- [ ] **D74 RESOLVED:** JWT Sprint 0 scope = contract + stubs + `@fastify/jwt` config (0.5-1 day). Full auth (Keychain, refresh rotation, logout) = Sprint 1.
+### Sprint 0 Build (D54 + D71 + D74 + D81 + D84 — 8-10 Days, Offline-First)
+
+**D84 UPDATED:** Sprint 0 = 8-10 days for full scope (not 5 days). Offline-first (D81) + mentions légales + WhatsApp PDF + real device testing = 8.5 days realistic. If 5-day target required: drop mentions légales (defer to Sprint 1), use plain text WhatsApp share instead of PDF.
+- [ ] **D81 NEW:** Sprint 0 = offline-first. WatermelonDB/expo-sqlite for local-first storage (~2 days mobile). Fastify API: add `updated_at` timestamps + accept client-generated UUIDs (~2 hours). Sync: last-write-wins with conflict UI. No changes to API endpoint contracts.
+- [ ] **D74 RESOLVED:** Sprint 0 = 8-10 days. Day 1: `client.type` enum (4 values) + mentions légales template engine (Handlebars/Nunjucks, 4 client-type templates, devis-only). Sprint 2 adds 8 combinations.
+- [ ] **D74 RESOLVED:** API key Sprint 0 scope: `@fastify/jwt` config (0.5-1 day). Full auth (Keychain, refresh rotation, logout) = Sprint 1. (API key replaces JWT per D78)
 - [ ] **D74 RESOLVED:** `devis.status TEXT DEFAULT 'draft'` added in Sprint 0 schema (30 min). State machine = Sprint 1.
 - [ ] **D54 RESOLVED:** TVA arrondi commercial calculator: `Math.round(v * 100) / 100`. No BOFiP lookup required.
 - [ ] **D71 RESOLVED:** Mentions légales = 4 templates (devis × client type). 8 combinations (devis + facture) = Sprint 2 scope.
+- [ ] **D83 NEW:** Push notification infra + nightly aggregation job added to Sprint 0 scope. Server computes financial snapshot nightly. Push at 8pm Paris. Free tier gets daily notification (limited depth). €29 tier gets full snapshot + in-app drill-down.
+- [ ] **D84 NEW:** If 5-day Sprint 0 needed: reduce scope — drop mentions légales (Sprint 1), plain text WhatsApp share (not PDF). Ship offline storage + basic devis flow only.
 
 ### Pricing (D5 + D59 + D75 + D77 — €29 Single Price Point)
 - [x] **D75 UPDATED (Debate 77):** "Membre fondateur" framing KILLED. Discount framing trains users to wait for promotions. Replaced with "Accès Fondateur" — relationship benefits without price anchoring.
@@ -226,13 +239,14 @@ All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 - [ ] **D80 NEW:** Kill "Accès Fondateur" tier entirely — no named founding/access tier. Relationship benefits delivered through onboarding experience, not tier labels. All early users get: direct WhatsApp support (écrivez à Louis), credits section listing early supporters, roadmap vote as launch mechanic. No tier badge anywhere in the product.
 - [ ] **D80 NEW:** Scarcity signal = temporary launch offer: "Les 50 premiers utilisateurs inscrits reçoivent un appel de découverte avec Louis." — time-limited onboarding, not a permanent product tier.
 
-### Free Tier + Conversion (D43 + D46 + D63 + D70 + D76)
+### Free Tier + Conversion (D43 + D46 + D63 + D70 + D76 + D83)
 - [ ] **D76 RESOLVED:** "Better Free Tier" trap named — every Free tier improvement without a conversion trigger makes the product harder to monetize. Document this risk.
 - [ ] **D76 RESOLVED:** Conversion trigger = first accepted devis (not 80% limit notification). "Votre devis pour [Client] a été accepté — passez à €29 pour suivre ce qui vous est dû."
 - [ ] **D76 RESOLVED:** 80% "vous êtes presque à votre limite" notification DEPRECATED. Replace with accepted-devis milestone notification.
 - [ ] **D76 RESOLVED:** Free tier = document archive (acquisition). €29 tier = financial snapshot + automatic relances on accepted devis (conversion). These are different jobs, not sequential tiers.
 - [ ] **D63 RESOLVED:** Document archive = PRIMARY Free tier value. Financial snapshot (outstanding accepted devis, pipeline value, automatic relances) = €29 tier conversion trigger.
 - [ ] **D70 RESOLVED:** Financial snapshot content: "Vous avez €X en devis acceptés en attente de paiement" — not a dashboard, a pipeline nerve center.
+- [ ] **D83 UPDATED:** Situation financière = server-computed push notification at 8pm Paris (not in-app dashboard). The "soir ritual" is resolved: push arrives at 8pm, his natural admin time. Server aggregation ensures fresh data even for users offline for days. Free tier gets daily notification; €29 tier gets full snapshot + in-app drill-down.
 
 ## 🚫 What We Deleted
 
