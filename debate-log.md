@@ -2789,3 +2789,130 @@ Ask: "How much time per week on devis/factures?" "What happens when you forget t
 ---
 
 *Last updated: 2026-03-30T16:31*
+
+---
+
+## Pulse 2026-03-30T16:44 — Three Resolved
+
+---
+
+## Debate 70 (D63): Document Archive Resolves the Free Tier Value Debate
+
+**Challenge:** D63 (REOPENED at 16:31) — Product Strategist challenged the "situation financière" snapshot as primary Free tier pull. Three specialist agents debated.
+
+### Product Strategist — Document Archive Wins
+
+**Assumption challenged:** That a financial snapshot (outstanding devis, pending factures, revenue vs last month) is the primary value a French artisan wants from a Free tier product.
+
+**Core argument:**
+
+1. **The snapshot positions us as mini-accounting software.** Pennylane and Indy already own that territory with banking integrations, auto-categorization, and reconciliation. A basic financial snapshot at €0 competes with their paid tiers — a losing position.
+
+2. **The artisan's job is creating documents, not reviewing dashboards.** Marc is a plumber, not a CFO. He thinks in terms of clients, jobs, and documents sent — not aging buckets and revenue trends. The document archive is closer to his actual workflow than a financial summary.
+
+3. **The archive creates retention mechanics the snapshot doesn't.** A document archive grows more valuable over time. Every sent devis and facture is an asset. When he needs to find "the devis I sent to Dupont in March 2024" and can't — that's the upgrade trigger. The snapshot is a view; the archive is an asset that compounds.
+
+4. **Financial snapshot moves to €29 tier, not Free.** The Free tier gets the archive (differentiated, low-cost to implement). The €29 tier gets the financial snapshot (deeper business intelligence).
+
+**Verdict on D70 (D63):** RESOLVED — Primary Free tier value = professional document archive. Every devis/facture sent, organized by client, full-text searchable, beautiful PDF renderer. Financial snapshot (outstanding devis aging, revenue vs last month) moves to €29 tier or removed. D63 resolution updated accordingly.
+
+---
+
+## Debate 71 (D64): Sprint 0 = 5 Days, Sequential Numbering Deferred to Sprint 2
+
+**Challenge:** D64 (REOPENED at 16:31) — Technical Architect argued Sprint 0 is 3-4 days with full parallelization. Growth Strategist argues 5 days with sequential dependency chain and legal scope clarification.
+
+### Technical Architect — Dependency Chain Confirmed, 5 Days
+
+**Assumption challenged:** That TVA, mentions légales, sequential numbering, and client-type schema can run as parallel workstreams over 3-4 days.
+
+**Core argument:**
+
+1. **The workstreams are sequential, not parallel.** client.type → mentions légales template → line item schema → TVA calculator. Each step's output is the next step's input. Parallel development means merge conflicts and integration failures.
+
+2. **Sequential numbering for devis is legally unnecessary.** Under French commercial law (Code de commerce, Article L.221-2), gapless sequential numbering is required for **invoices (factures)**, not estimates (devis). A devis can use simple UUID or a user-facing reference like `DEVIS-2026-0342`. Removing sequential numbering from Sprint 0 saves an entire day and eliminates a compliance-critical feature from the critical path.
+
+3. **The honest estimate: 5 days.** Day 1: client.type enum + 4 mentions légales template files. Day 2: line item schema + TVA rate field (5.5/10/20%) + arrondi commercial calculator. Day 3: Devis document model (minimal, no facture yet). Days 4-5: Fastify REST API scaffold + JWT auth + CRUD endpoints for React Native integration. No slack, no parallelization shortcut.
+
+**Verdict on D71 (D64):** RESOLVED — Sprint 0 = 5 days (not 3-4). Sequential numbering removed from Sprint 0 scope entirely (devis doesn't need it legally; it's a Sprint 2 facture concern). Sprint 0 scope: Fastify + Postgres compliance foundations, client.type + mentions légales + line item schema + TVA engine. Sprint 1 = client file + devis flow. Sprint 2 = factures + sequential numbering engine + email relances.
+
+---
+
+## Debate 72 (D55): Expert-Comptable Outreach Is Phase 1, Not Phase 2
+
+**Challenge:** D55 (REOPENED at 16:31) — Growth Strategist argued expert-comptable outreach requires 6-18 months of relationship building. Product Strategist challenges this conflates cold outreach with Louis's warm existing relationship.
+
+### Growth Strategist — Warm Access Changes the Timeline
+
+**Assumption challenged:** That expert-comptable outreach requires a 6-18 month build because all outreach is cold.
+
+**Core argument:**
+
+1. **Louis already has an expert-comptable.** This is not a cold lead. This is a trusted professional who already serves Louis's business. The first conversation is warm, high-trust, and costs nothing.
+
+2. **Expert-comptables routinely recommend software — it's a service they provide.** They already have processes for evaluating tools and recommending them to clients. We are not asking for a favor; we are offering a referral partnership that serves their clients.
+
+3. **One warm conversation = access to an entire network.** A single expert-comptable with 30-50 SMB clients (all sole traders and artisans) creates simultaneous access to the admin handler persona — the operational buyer who actually converts, not the economic buyer who signs checks.
+
+4. **The admin handler discovers tools through her accountant, not through WhatsApp groups.** The peer referral through artisan WhatsApp groups reaches Marc. The expert-comptable referral reaches the admin handler who manages the administrative work and makes the upgrade decision. These are different conversion paths; the expert-comptable path is higher-intent.
+
+5. **6-18 month timeline applies to cold outreach. Louis has warm.** Phase 2 was defined for building credibility signals, case studies, and referral infrastructure from scratch. None of that applies to a warm introduction from an existing client.
+
+**Verdict on D72 (D55):** RESOLVED — Expert-comptable outreach moves from Phase 2 to Phase 1. Louis initiates this week: (1) ask his own expert-comptable if they recommend software to clients, (2) offer a demo, (3) request introductions to 2-3 colleague accountants. Target: 3 expert-comptables referencing 50+ sole trader clients by Month 2. U12 playbook actioned immediately. D55 updated accordingly.
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D1 | Positioning | Kill "CRM" — devis, factures, relances | 2026-03-30 |
+| D2 | MVP scope | 4 features, SEQUENCED. Sprint 0 (5d Fastify + Postgres compliance foundations). Sprint 1 (client+devis). Sprint 2 (factures + sequential numbering + email relances). | 2026-03-30 |
+| D3 | Primary persona | Marc — solo smartphone-native artisan | 2026-03-30 |
+| D4 | Stack | Single managed Postgres | 2026-03-30 |
+| D5 | Pricing | Free + €29 two-tier. No €19 SKU. Drop €49/€79. | 2026-03-30 |
+| D6 | Trial | No time-limited trial. Free tier IS the trial. | 2026-03-30 |
+| D7 | Architecture | Fastify + Postgres + static landing page. Nuxt 3 retired from backend. | 2026-03-30 |
+| D8 | E-invoicing | v2 feature | 2026-03-30 |
+| D9 | Not MVP | No Kanban, no multi-user, no offline, no API keys | 2026-03-30 |
+| D10 | Buyer trigger | "Admin pain" not "CRM need" | 2026-03-30 |
+| D11 | Mobile | React Native from Day 1 via Expo | 2026-03-30 |
+| D12 | Landing page | Simplicity-first — "Vos devis et factures, sans vous prendre la tête." | 2026-03-30 |
+| D13 | Home view | Job-first — Active Job Card as home anchor | 2026-03-30 |
+| D14 | E-invoicing timing | v2 — NOT Day 1 | 2026-03-30 |
+| D15 | Relances differentiator | DE-EMPHASIZED — secondary feature below fold | 2026-03-30 |
+| D16 | Trial length | No countdown trial — Free tier IS the trial | 2026-03-30 |
+| D17 | Mobile strategy | React Native from Day 1 via Expo. Email-only relances at v1. Expo Push in v1.1. | 2026-03-30 |
+| D40 | Engagement channel | RESTATED — channel secondary to Free tier output design. | 2026-03-30 |
+| D41 | Notification infra | Email-only relances at v1 launch. Expo Push in v1.1. | 2026-03-30 |
+| D42 | WhatsApp referral | CLOSED — no WhatsApp CTA in devis | 2026-03-30 |
+| D43 | Free tier activation | Output design primary, channel secondary. | 2026-03-30 |
+| D46 | Free tier limits | Do NOT lower limits from 10/5. Trust-building before limit enforcement. | 2026-03-30 |
+| D47 | Expo Push estimate | 1-2 weeks. Budget properly or defer to v1.1. | 2026-03-30 |
+| D48 | Wholesaler GTM | Not primary. Digital + specialist retailers first. | 2026-03-30 |
+| D49 | GTM Priority | Digital → Specialist retailers → Prescriber → Wholesaler. | 2026-03-30 |
+| D50 | Push at launch | Email-only at v1. Expo Push in v1.1. | 2026-03-30 |
+| D51 | Free tier conversion | Forcing function + limit-hit PRIMARY. Habit tracking SECONDARY. | 2026-03-30 |
+| D53 | Landing page | Simplicity-first RETAINED. H1: "Sans vous prendre la tête." H2: 5-min specific claim. | 2026-03-30 |
+| D54 | Sprint 0 | Compressed compliance sprint (3-4d): TVA, sequential numbering, mentions légales, client-type. — UPDATED: Sprint 0 = 5d per D71. | 2026-03-30 |
+| D55 | Buyer-user split + expert-comptable | Dual-persona GTM. Marc = economic buyer. Admin handler = operational user. Expert-comptable = Phase 1 (updated from Phase 2). | 2026-03-30 |
+| D56 | WoM attribution | 40% figure RETIRED. WoM = Month 3+ lagging indicator. Measurement protocol: "Comment connaissez-vous?" + referral codes. | 2026-03-30 |
+| D57 | Architecture | Fastify + Postgres + static landing page. Nuxt 3 retired. | 2026-03-30 |
+| D59 | Pricing | Kill €19 founding offer. Early access €29 locked for life. | 2026-03-30 |
+| D63 | Free tier pull | RESOLVED — professional document archive = PRIMARY Free tier value. Financial snapshot moves to €29 tier. Archive: every devis/facture sent, organized by client, searchable, beautiful. | 2026-03-30 |
+| D64 | Sprint 0 timeline | RESOLVED — Sprint 0 = 5 days (not 3-4). Sequential numbering removed (devis scope, not Sprint 0). Dependency chain confirmed: client.type → mentions légales → line item schema → TVA engine. | 2026-03-30 |
+| D70 | Document archive vs snapshot | RESOLVED — document archive PRIMARY, financial snapshot to €29 tier. | 2026-03-30 |
+| D71 | Sprint 0 scope | RESOLVED — 5 days, sequential numbering deferred to Sprint 2 (factures). | 2026-03-30 |
+| D72 | Expert-comptable Phase 1 | RESOLVED — expert-comptable outreach = Phase 1 (warm access, not cold build). U12 actioned this week. | 2026-03-30 |
+
+| U1 | Discovery | REPLACED — readiness protocol | 2026-03-30 |
+| U2 | E-invoicing platform | Factea first when v2 | 2026-03-30 |
+| U7 | Domain | DEFERRED — subdomain/Carrd until MVP validated | 2026-03-30 |
+| U8 | WhatsApp acquisition | CLOSED — no WhatsApp CTA in devis | 2026-03-30 |
+| U9 | Free tier activation | Output design primary (document archive), channel secondary | 2026-03-30 |
+| U10 | GTM: Wholesaler | Digital + specialist retailers first | 2026-03-30 |
+| U11 | Prescriber audit | If >30% of new jobs via prescriber, revisit GTM priority | 2026-03-30 |
+| U12 | Expert-comptable playbook | MOVED TO PHASE 1 — initiate this week via Louis's existing accountant | 2026-03-30 |
+| U13 | WoM measurement | "Comment connaissez-vous?" at signup + referral codes. Month 3 target: 20%. | 2026-03-30 |
+| U15 | Guerrilla validation | Three-phase: observe → quantify pain → payment. Workshop via warm network, not wholesaler. | 2026-03-30 |
+

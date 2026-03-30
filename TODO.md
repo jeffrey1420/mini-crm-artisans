@@ -35,6 +35,11 @@
 | D56 | WoM attribution | WoM = Month 3+ lagging indicator. Digital acquisition PRIMARY at launch. "Comment connaissez-vous?" at signup. Referral codes in v1. Month 3 target: 20% peer referral. | Pulse 14:57 (Product+Growth) | 2026-03-30 |
 | D57 | Architecture | API-first preferred (Fastify + static) but deferred to post-MVP unless Nuxt 3 actively blocks Sprint 0. | Pulse 14:57 (Architect+Growth) | 2026-03-30 |
 | D59 | Pricing credibility | Kill €19 founding member offer. Replace with early access €29 locked for life. Guerrilla price validation with micro-artisan rate anchors. | Debate 62 (Technical Architect) | 2026-03-30 |
+| D63 | Free tier pull | Professional document archive = PRIMARY Free tier value. Financial snapshot moves to €29 tier. | Debate 70 (Product Strategist) | 2026-03-30 |
+| D64 | Sprint 0 timeline | Sprint 0 = 5 days. Sequential numbering deferred to Sprint 2. Dependency chain confirmed. | Debate 71 (Technical Architect) | 2026-03-30 |
+| D70 | Document archive | RESOLVED — document archive PRIMARY, financial snapshot to €29 tier. | Pulse 16:44 | 2026-03-30 |
+| D71 | Sprint 0 scope | RESOLVED — 5 days, sequential numbering deferred to Sprint 2 (factures). | Pulse 16:44 | 2026-03-30 |
+| D72 | Expert-comptable Phase 1 | Expert-comptable = Phase 1 (warm access, not cold build). U12 actioned this week. | Pulse 16:44 | 2026-03-30 |
 
 ## 🔄 Reopened This Pulse (Resolved in 15:17 Pulse)
 
@@ -490,3 +495,19 @@ The following were overengineered or wrong:
 - [ ] **D55 NEW:** Remove "6-18 month build" framing — warm outreach via existing accountant is not the same as cold outreach
 
 
+
+---
+
+## New from Pulse 2026-03-30T16:44 — Three Resolved
+
+### Resolved (D70, D71, D72):
+- **D70/D63 (Free tier pull):** RESOLVED — professional document archive = PRIMARY Free tier value. Every devis/facture sent, organized by client, full-text searchable, beautiful PDF renderer. Financial snapshot (outstanding devis aging, revenue vs last month) moves to €29 tier. Competitive mispositioning avoided: Pennylane/Indy do financial dashboards better.
+- **D71/D64 (Sprint 0):** RESOLVED — Sprint 0 = 5 days (not 3-4). Dependency chain confirmed: client.type → mentions légales → line item schema → TVA calculator. Sequential numbering removed from Sprint 0 scope — devis doesn't legally require it; it's a Sprint 2 (factures) concern. Sprint 0 scope: Fastify + Postgres, client.type + mentions légales + TVA engine + Devis document model + REST API scaffold.
+- **D72/D55 (Expert-comptable):** RESOLVED — expert-comptable outreach moves from Phase 2 to Phase 1. Louis initiates this week via existing accountant. One warm conversation = access to professional network of 30-50 SMB clients. Admin handler (operational buyer who converts) discovered through accountant referral, not artisan WhatsApp groups. U12 to be actioned immediately.
+
+### Action items from this pulse:
+- [ ] **D70 NEW:** Design the professional document archive as the Free tier home — every sent devis/facture, organized by client, searchable. Primary pull mechanism.
+- [ ] **D70 NEW:** Financial snapshot (outstanding devis aging, revenue vs last month) moved to €29 tier feature list.
+- [ ] **D71 NEW:** Sprint 0 = 5 days. Sequential numbering removed entirely from Sprint 0. Fastify + Postgres only. Days 1-2: client.type + mentions légales + line item schema + TVA arrondi commercial engine. Days 3-4: Devis document model. Days 4-5: REST API scaffold + JWT auth for React Native integration.
+- [ ] **D72 NEW:** U12 (expert-comptable playbook) — initiate this week. Louis asks his accountant: (1) do you recommend software to clients? (2) would you demo? (3) can you intro 2-3 colleagues? Target: 3 expert-comptables referencing 50+ sole trader clients by Month 2.
+- [ ] **D72 NEW:** Expert-comptable GTM = Phase 1 parallel track alongside digital channels. Warm outreach timeline is days, not months.

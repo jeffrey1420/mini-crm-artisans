@@ -30,7 +30,7 @@ D63 confused "output we can generate automatically" with "output that creates up
 
 Instead of a financial summary on the Free tier home screen, surface a **"your recent devis"** view — showing the last devis he sent, formatted exactly as the client saw it. The visual is the devis itself, not a graph. The message: "This is what your clients see."
 
-Clean typography. Clear line items. A layout that communicates competence before the client reads a single word. That artifact travels outside the app, gets forwarded to a spouse for approval, sits in an inbox for three days before a decision.
+Clean typography. Clear line items. A layout that communicates competence before the client reads a word. That artifact travels outside the app, gets forwarded to a spouse for approval, sits in an inbox for three days.
 
 A financial snapshot is consumed once, by Marc, in a review moment. A devis is consumed multiple times, by clients, in decision moments. **The devis has more reach and more differentiation value.**
 
