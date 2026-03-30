@@ -6072,3 +6072,205 @@ Use `expo-print` (or `react-native-html-to-pdf` via bridge) to render PDFs entir
 ---
 
 *Last updated: 2026-03-30T22:30*
+
+---
+
+*Last updated: 2026-03-30T22:43*
+
+---
+
+## Pulse 2026-03-30T22:43 — Three New Challenges
+
+---
+
+## Debate 123: D12 — "Sans vous prendre la tête" Attracts the Wrong Buyer
+
+**Challenge:** D12 (simplicity-first landing page) — Product Strategist challenges the assumption that simplicity framing converts the acute-pain buyer.
+
+### Product Strategist — Competence Frame Beats Simplicity Frame
+
+**Assumption challenged:** "Sans vous prendre la tête" is the right frame for converting French artisan buyers. The debate treated this as settled — artisans hate admin, they want it easy, lead with ease. But the debate never interrogated *which buyer* this frame activates.
+
+**Core argument:**
+
+"Sans vous prendre la tête" is an avoidance frame. It promises: *this won't give you a headache.* That's appealing to the artisan who already has a system (messy as it is) and is mildly annoyed at switching. This buyer is not in pain. He's comfortable enough. He's browsing.
+
+But the artisan you need to convert is not browsing. He's the one who forgot to send a devis last week, got chewed out by a client, and is now staring at a stack of invoices he hasn't followed up on in two months. He's late on his VAT declaration. He's not avoiding admin — he's drowning in it. He doesn't want something *easy*. He wants something that *works* so he stops getting burned.
+
+**The filtering effect:**
+- Avoidance buyer (browsing, mildly annoyed) responds to "simple like WhatsApp" — but converts slowly and churns when friction appears
+- Acute pain buyer (forgotten devis, client chasing, VAT mistakes) responds to "competence infrastructure" — recognizes himself immediately, converts fast, stays because the tool solves his specific problem
+
+Simplicity framing is vague. Pain framing is specific. Specificity converts.
+
+**The 5-minute verification constraint:**
+Whatever the landing page promises, the free trial must deliver proof within 5 minutes:
+- *Ease* is hard to prove quickly — requires the user to do something, evaluate their feelings, decide. Slow and subjective.
+- *Competence* is fast to prove — user creates a devis, sends it, gets confirmation, sets a relance. In 5 minutes they have a concrete result answering their specific pain.
+
+If the landing page promises "you won't have to think about admin," the free trial has to slowly reassure. If it promises "you'll never miss a paiement again," the free trial delivers a quick win that feels like proof.
+
+**Proposed revised frame:**
+Replace "Sans vous prendre la tête" with a competence frame:
+> "Arrêtez de courir après vos paiements."
+> "Vos devis envoyés. Vos factures payées. Vos clients suivis."
+
+This is not about being complicated or sophisticated — it's about positioning the tool as competence infrastructure. The thing that means you never again have to be the artisan who forgot, who chased badly, who sent a devis with a typo because you were rushing.
+
+**Verdict on D12:** REOPENED — "Simplicity-first" is the right design philosophy for the product, but the wrong messaging frame for the landing page. The landing page should speak to the pain. Simplicity is proven in the trial, not promised on the homepage.
+
+---
+
+## Debate 124: D100 — Supabase Exit Strategy Has No Exit Trigger
+
+**Challenge:** D100 (Supabase EU-hosted) — Technical Architect challenges the assumption that a revenue-based migration trigger (€5k/mo or 50 users) is the right mechanism.
+
+### Technical Architect — Usage-Based Exit Trigger Required
+
+**Assumption challenged:** "Migrate at 50 users" (premature) or "revisit at €5k/mo" (too late) — both revenue-based triggers are either too early or too late, and both are lagging indicators.
+
+**Core argument:**
+
+Revenue-based triggers tell you what happened. Usage tells you what's about to happen.
+
+At 50 paying users (€1,450/mo gross), Supabase bill is ~€50-150/mo. Migration cost eats 3-6 months of savings. At that stage, you're still in product-market fit discovery — schema is shifting, query patterns unproven. Migrating now means migrating twice or locking in a schema you don't yet understand.
+
+At €5k/mo (~170-200 paying users), you've accumulated exactly the conditions that make migration hard: documents in blob storage, user-generated content, established query patterns, production data that can't be lost. This is when migration is most disruptive and most expensive in opportunity cost.
+
+The real cost curve: at 200 paying users (€5,800/mo revenue), Supabase bill lands at €300-600/mo (compute, storage, bandwidth, auth overhead). That's **5-10% of revenue going to Supabase** — before Louis pays himself, before taxes, before marketing. At 500 users (€14,500/mo), the bill could be €600-1,200/mo — a compounding margin squeeze.
+
+**The composite usage-based exit trigger:**
+
+Not revenue. Not user count. A specific measurable condition where migration window is open and economics are favorable:
+
+**Trigger:** 3 consecutive months where total stored documents >10,000 AND monthly active users >100 AND Supabase bill >€150/mo.
+
+This is a leading indicator — it signals you're approaching the cost curve before you're drowning in it. At 10k documents and 100 MAU, you're generating enough usage to need migration but not so much that migration is catastrophically complex.
+
+**Target stack:**
+- Primary: OVH VPS (备用) + Coolify for containerized Postgres + API service
+- Alternative: Hetzner (cheaper, EU-hosted) + Coolify
+- Database: Managed Postgres on OVH or Hetzner (€10-20/mo for 4-8GB, 100GB SSD — covers 10k documents easily)
+
+At 100 MAU, OVH managed Postgres costs ~€20/mo. The entire migration target stack costs €40-60/mo vs €300-600/mo on Supabase. That's €3,600-6,500/yr saved at 200 users.
+
+**The architectural requirement:**
+
+Build Supabase schema with a thin abstraction layer (repository pattern, raw SQL for critical paths) so the exit is a migration task, not a rewrite. This is Day 1 engineering, not a v2 concern.
+
+**Verdict on D100:** SUPERSEDED — Supabase remains the correct Sprint 0 choice. But D100 needs an addendum: explicit usage-based exit trigger (10k docs + 100 MAU + €150/mo bill), target stack defined (OVH/Hetzner + Coolify + managed Postgres), and a thin abstraction layer in the schema design from Day 1.
+
+---
+
+## Debate 125: D72/D91 — Expert-Comptable Is a Month 4+ Channel, Not Month 1-2
+
+**Challenge:** D72 and D91 (expert-comptable outreach timing) — Growth Strategist challenges the assumption that a French expert-comptable will validate software in Week 1 and refer clients in Week 4-6.
+
+### Growth Strategist — Compliance Liability Makes Expert-Comptable a Phase 2 Channel
+
+**Assumption challenged:** Expert-comptable outreach is a Month 1-2 GTM lever because accountants are trusted by artisans and relationship-building is sufficient to generate referrals.
+
+**Core argument:**
+
+The debate treated expert-comptable recommendation as a relationship and trust problem. It is not. It is a **professional liability problem** — and that distinction collapses the entire Week 1-6 timeline.
+
+Under French law, an expert-comptable is bound by professional standards that make recommending non-compliant invoice software genuinely risky. Specific exposure:
+
+1. **TVA rate accuracy** — French VAT (5.5%, 10%, 20%) is context-dependent by service type, material vs. labor split, region. Recommending a tool that applies the wrong rate implicates the accountant in the client's fiscal non-compliance.
+
+2. **Mentions légales completeness** — French invoices require a specific set of legal mentions (SIRET, SIREN, RCS, TVA intracommunautaire, articles-worth mention, etc.). A tool generating incomplete mentions légales creates liability for the accountant who recommended it.
+
+3. **Sequential numbering integrity** — French fiscal law requires sequential invoice numbers without gaps. A bug breaking numbering exposes the recommending accountant to complicity in fiscal fraud — even if unintentional.
+
+An expert-comptable will not stake their professional license on a product reviewed for 20 minutes in Week 1. The real compliance review cycle:
+
+- Test invoices under real conditions
+- Review of edge cases (credit notes, pro-format devis, international clients)
+- Internal firm discussion and potentially malpractice carrier review
+- Actual artisan clients using it in production
+
+**3-6 months minimum. Not negotiable.**
+
+**The timeline mismatch:**
+
+Week 1 validation ("Louis's accountant says it looks ok") produces a favor, not a commercial signal. It carries zero recommendation drive to other accountants' artisan client bases.
+
+Week 4-6 referral requires testimonials from real artisan users who've been through an expert-comptable review cycle. But an artisan who has used the tool for 4-6 weeks has not had their invoices reviewed by an accountant. "It works fine" ≠ "my accountant reviewed the output and it is compliant." That distinction is the entire value of the expert-comptable referral channel.
+
+**The practical consequence:**
+
+If the team pursues Week 1 expert-comptable outreach as a referral channel, the accountant delays any client recommendation until their own review is complete. That review cannot realistically happen in under 3 months. The Week 4-6 referral milestone silently slips to Month 5-6. Meanwhile the GTM calendar is built on a false assumption about this channel's contribution timing.
+
+**Prescriber networks (architects, property managers, main contractors) have no professional liability exposure.** They are not certifying fiscal compliance — they are suggesting a tool. Their recommendation is social/professional ("I work with guys who use this and it's fine") rather than compliance-backed. This makes them the correct Month 1-3 referral engine:
+
+- They can recommend immediately after personal use
+- No legal review cycle required
+- Marc trusts their prescriber's opinion as much as an accountant's — without the 3-6 month wait
+- "Comment connaissez-vous?" data at signup validates whether prescribers are driving signups
+
+**Proposed revised GTM assumption:**
+
+| Channel | Month 1-3 | Month 4-6 | Month 7+ |
+|---------|-----------|-----------|----------|
+| Digital (SEO + WhatsApp/Facebook) | PRIMARY | PRIMARY | PRIMARY |
+| Specialist retailers | SECONDARY | ACTIVE | ACTIVE |
+| Prescriber networks (architects, property managers) | **ELEVATED — PRIMARY for Month 1-3** | ACTIVE | ACTIVE |
+| Expert-comptable | **Phase 2 — NOT Week 1** | **Initiate compliance review cycle** | Referral (after real artisan review cycle complete) |
+
+**Verdict on D72/D91:** REOPENED — Expert-comptable outreach should be Phase 2 (Month 4+) after real artisan users have been through a compliance review cycle. D91 (validation vs referral distinction) is correct but the timeline is wrong by 3-4 months. Elevate prescriber networks as primary GTM for Month 1-3.
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D1 | Positioning | Kill "CRM" — devis, factures, relances | 2026-03-30 |
+| D2 | MVP scope | 4 features, SEQUENCED sprints | 2026-03-30 |
+| D5 | Pricing | Free + €29 two-tier | 2026-03-30 |
+| D6 | Trial | No time-limited trial. Free tier IS the trial | 2026-03-30 |
+| D12 | Landing page | **REOPENED — competence frame vs simplicity frame** | 2026-03-30T22:43 |
+| D13 | Home view | Job-first — Active Job Card | 2026-03-30 |
+| D14 | E-invoicing timing | v2 — NOT Day 1 | 2026-03-30 |
+| D15 | Relances differentiator | DE-EMPHASIZED — secondary feature below fold | 2026-03-30 |
+| D72 | Expert-comptable outreach | **REOPENED — Phase 2 (Month 4+), not Week 1** | 2026-03-30T22:43 |
+| D85 | GetApp/Capterra | **RESOLVED — REMOVED from TODO.** | 2026-03-30 |
+| D91 | Expert-comptable validation vs referral | **REOPENED — validation timeline wrong by 3-4 months** | 2026-03-30T22:43 |
+| D95 | Sprint 0 timeline | 5 days (target) / 6.5 days (floor) | 2026-03-30 |
+| D99 | Pricing structure | Flat €29/month + €260/year annual | 2026-03-30 |
+| D100 | Architecture | Supabase EU-hosted (Frankfurt) — **REOPENED: add usage-based exit trigger** | 2026-03-30T22:43 |
+| D114 | PDF Sprint 0 gate | expo-print Sprint 0 prototype, Sprint 1b storage migration | 2026-03-30 |
+| D121 | PDF Sprint 0 gate | expo-print Sprint 0 prototype, Sprint 1b storage migration | 2026-03-30 |
+
+| U1 | Discovery | Readiness protocol | 2026-03-30 |
+| U2 | E-invoicing platform | Factea first when v2 | 2026-03-30 |
+| U7 | Domain | Buy now, park it | 2026-03-30 |
+
+---
+
+*Last updated: 2026-03-30T22:43*
+
+---
+
+## New from Pulse 2026-03-30T22:43 — Three New Challenges
+
+### Reopened (D12, D72/D91, D100)
+
+- **D12 (Landing page):** Product Strategist challenged — "Sans vous prendre la tête" attracts avoidance-motivated buyers, not acute-pain buyers. The artisan who responds to simplicity is comfortable enough, not drowning. Acute-pain buyers (forgotten devis, client chasing, VAT mistakes) want competence and reliability, not cognitive ease. Proposed: competence frame ("Arrêtez de courir après vos paiements") + trial delivers proof in 5 minutes.
+- **D72/D91 (Expert-comptable timing):** Growth Strategist challenged — French expert-comptables have professional liability exposure. They will not recommend software they haven't personally vetted for compliance (TVA rates, mentions légales accuracy, sequential numbering integrity). Compliance review cycle = 3-6 months minimum. Expert-comptable = Phase 2 channel, not Month 1-2. Prescriber networks (architects, property managers) elevated as primary Month 1-3 GTM.
+- **D100 (Supabase exit):** Technical Architect challenged — revenue-based triggers ("50 users" or "€5k/mo") are either premature or too late, and both are lagging indicators. Proposed: composite usage-based exit trigger (10k docs + 100 MAU + €150/mo Supabase bill), target stack (OVH/Hetzner + Coolify + managed Postgres), thin abstraction layer from Day 1.
+
+### Challenged assumptions this pulse:
+1. "Simplicity-first" landing page frame converts acute-pain buyers (Product Strategist — wrong buyer filtered)
+2. Expert-comptable outreach is a Month 1-2 GTM lever (Growth Strategist — compliance liability collapses timeline)
+3. Revenue-based migration trigger is the right Supabase exit mechanism (Technical Architect — usage-based is the leading indicator)
+
+### New action items from this pulse:
+- [ ] **D12 REOPENED:** A/B test landing page — simplicity frame ("Sans vous prendre la tête") vs competence frame ("Arrêtez de courir après vos paiements"). Run with beta users before launch. Measure: time-on-page, signup rate, Day-7 retention.
+- [ ] **D72/D91 UPDATED:** Expert-comptable outreach moved to Phase 2 (Month 4+). Do not budget Week 1 hours for it. Prescriber networks (architects, property managers) become primary Month 1-3 GTM. Document this change in GTM strategy.
+- [ ] **D100 UPDATED:** Add explicit Supabase exit trigger to D100: 3 consecutive months where (total_docs > 10,000 AND MAU > 100 AND Supabase_bill > €150/mo). Define target stack: OVH or Hetzner VPS + Coolify + managed Postgres (€40-60/mo at 100 MAU vs €300-600 Supabase). Add thin abstraction layer in schema design from Day 1.
+- [ ] **D124 NEW:** Document the Supabase exit plan in architecture notes. Include: trigger metrics, target stack specs, migration estimated effort (2-3 days for data migration, 1 day for schema transfer).
+
+---
+
+*Last updated: 2026-03-30T22:43*

@@ -936,3 +936,21 @@ The following were overengineered or wrong:
 - [ ] **D114 UPDATED:** PDF generation = 7th Sprint 0 gate item. expo-print in-memory preferred. Mentions légales embedded in HTML string (no template file needed in Sprint 0). Handlebars/Nunjucks (D74) deferred to Sprint 1 if needed.
 
 *Last updated: 2026-03-30T22:18*
+
+---
+
+## New from Pulse 2026-03-30T22:43 — Three New Challenges
+
+### Reopened (D12, D72/D91, D100)
+
+- **D12 (Landing page):** Product Strategist challenged — "Sans vous prendre la tête" attracts avoidance-motivated buyers, not acute-pain buyers. Proposed alternative: competence frame ("Arrêtez de courir après vos paiements") + trial delivers proof in 5 minutes.
+- **D72/D91 (Expert-comptable timing):** Growth Strategist challenged — French expert-comptables have professional liability exposure (TVA accuracy, mentions légales completeness, sequential numbering integrity). Compliance review cycle = 3-6 months minimum. Expert-comptable = Phase 2 channel, not Month 1-2. Prescriber networks elevated as primary Month 1-3 GTM.
+- **D100 (Supabase exit):** Technical Architect challenged — revenue-based triggers ("50 users" or "€5k/mo") are either premature or too late. Proposed: composite usage-based exit trigger (10k docs + 100 MAU + €150/mo Supabase bill), target stack (OVH/Hetzner + Coolify + managed Postgres), thin abstraction layer from Day 1.
+
+### New Action Items:
+- [ ] **D12 REOPENED:** A/B test landing page — simplicity frame ("Sans vous prendre la tête") vs competence frame ("Arrêtez de courir après vos paiements"). Run with beta users before launch. Measure: time-on-page, signup rate, Day-7 retention.
+- [ ] **D72/D91 UPDATED:** Expert-comptable outreach moved to Phase 2 (Month 4+). Do not budget Week 1 hours for it. Prescriber networks (architects, property managers) become primary Month 1-3 GTM. Update GTM strategy doc accordingly.
+- [ ] **D100 UPDATED:** Add explicit Supabase exit trigger to D100: 3 consecutive months where (total_docs > 10,000 AND MAU > 100 AND Supabase_bill > €150/mo). Define target stack: OVH or Hetzner VPS + Coolify + managed Postgres (€40-60/mo at 100 MAU vs €300-600 Supabase). Add thin abstraction layer in schema design from Day 1.
+- [ ] **D124 NEW:** Document Supabase exit plan in architecture notes: trigger metrics, target stack specs, migration estimated effort (2-3 days data migration, 1 day schema transfer).
+
+*Last updated: 2026-03-30T22:43*
