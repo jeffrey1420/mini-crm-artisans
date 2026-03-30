@@ -4553,3 +4553,213 @@ If the conversion trigger moves to "first sent devis," the €29 tier must diffe
 **Verdict on D76/D89:** REOPENED — The "first accepted devis" conversion trigger assumes a three-step chain that regularly fails in French artisan markets. Verbal agreements, repeat client relationships, and missing status updates all break the chain. Proposed replacement: "first sent devis" as primary conversion trigger. "First accepted devis" becomes a secondary notification within the €29 tier (financial snapshot), not the primary conversion trigger for Free → €29.
 
 *Last updated: 2026-03-30T19:15*
+
+---
+
+## Pulse 2026-03-30T19:32 — Technical Architect Response to D95
+
+---
+
+## Debate 95: Sprint 0 — Scope Cuts Create More Work, Not Less
+
+**Challenge:** D95 (Technical Architect — same role) argued 5.5-6.5 days is unachievable for a solo dev and proposed three scope cuts: defer mentions légales, defer AsyncStorage, single client type. This position challenges those cuts directly.
+
+### Technical Architect — Against Scope Cuts
+
+**Assumption challenged from D95:** Scope cuts (defer mentions légales, defer AsyncStorage, single client type) make Sprint 0 achievable by removing work. Wrong in all three cases. Scope cuts do not remove work — they transfer it to Sprint 1, where they create more damage.
+
+---
+
+**Challenge 1: Deferring mentions légales transfers work to Sprint 1, where it collides with factures**
+
+D95's proposed cut: "plain text placeholder in Sprint 0, legal templates in Sprint 1."
+
+This is presented as scope reduction. It isn't. Sprint 1 already has a job: build factures + sequential numbering + email relances. Adding mentions légales legal research to Sprint 1 means Sprint 1 has two jobs — build factures AND research legal text. You've compressed Sprint 1 without removing work. You've just deferred it into a sprint that already has a full plate.
+
+The collision: mentions légales for factures require the same client-type discrimination as mentions légales for devis. If Sprint 0 ships with "particulier only" and Sprint 1 adds client-type routing, the mentions légales templates in Sprint 1 will need rebuilding when the client-type schema arrives. The legal text research for professionnel and étranger client types doesn't disappear — it gets done under time pressure in Sprint 1, alongside building the entire facture flow.
+
+Do it once, correctly, in Sprint 0. Or do it twice, under pressure, in Sprint 0 and Sprint 1.
+
+---
+
+**Challenge 2: Single client type in Sprint 0 creates schema debt that costs more in Sprint 1**
+
+D95's proposed cut: "particulier only in Sprint 0, client-type routing added in Sprint 1."
+
+The problem: client.type enum touches everything:
+- The mentions légales template renderer (particulier vs professionnel vs étranger requires different legal text)
+- The devis → facture migration (a professionnel's devis converts to a professionnel's facture with specific mentions)
+- The TVA intracom logic (only applies to professionnel UE/hors-UE, not to particuliers)
+
+If Sprint 0 ships with `client.type = particuler` hardcoded everywhere, Sprint 1 adds the enum and must audit every rendering and calculation surface that assumed one client type. This is retrofit archaeology, not feature development.
+
+The schema work (adding `client.type TEXT DEFAULT 'particulier'`) is 30 minutes. The integration audit across two sprints is 1-2 days. You've saved 30 minutes in Sprint 0 and added 2 days of Sprint 1 debt.
+
+---
+
+**Challenge 3: AsyncStorage deferral is acceptable — but only because D86 resolved offline-capable, not offline-first**
+
+D95's proposed cut: "defer AsyncStorage + retry queue to Sprint 1."
+
+This is the most defensible cut — but only because D86 already resolved that offline-first (WatermelonDB + full sync) is deferred to v1.2. The AsyncStorage deferral is consistent with D86's architecture. It is not independently justified by D95's timeline argument.
+
+---
+
+**Challenge 4: The real efficiency win is not cutting scope — it is accepting 7-8 days and building the right thing**
+
+D95 argues: cut mentions légales, cut AsyncStorage, cut to single client type → Sprint 0 fits in 5.5-6.5 days.
+
+The hidden cost: every cut creates Sprint 1 work. Sprint 1 was already resolved as "client file + devis flow + PDF generation + WhatsApp share" — a full plate. Adding mentions légales legal research, client-type schema migration, and retry queue debugging to Sprint 1 means Sprint 1 slips. Sprint 2 slips with it.
+
+The 5.5-6.5 day estimate buys a faster Sprint 0 at the cost of a slower, more chaotic Sprint 1. That's debt-financed timeline.
+
+The alternative: accept 7-8 days for Sprint 0. Build the correct schema from the start. Sprint 1 is then unencumbered — builds the flow on top of a schema that doesn't need migration.
+
+7-8 days for a correct foundation is cheaper than 5.5-6.5 days plus a Sprint 1 rebuild.
+
+---
+
+**Challenge 5 (meta): The "5.5-6.5 days" debate is premature. There is no written Sprint 0 spec.**
+
+Before debating days, Sprint 0 needs a written, agreed deliverable document. Without it, "days" is just a guess.
+
+What does "Sprint 0 done" actually mean? The debate log says "Fastify + Postgres compliance foundations" and "API contract defined by end of Day 1" — but there is no written spec answering:
+- What exactly is in each mentions légales template? (Not "the correct French legal text" — the actual text)
+- What is the exact API contract? (Endpoint names, request/response shapes, auth method)
+- What does "Sprint 0 done" mean in terms of a working artifact? (An API that can receive POST /devis? A mobile app that can display a devis? Both?)
+- What are the acceptance criteria? (Not "compliance foundations" — specific test cases)
+
+Until these are written, the day-count debate is theological. You cannot estimate a sprint without a spec.
+
+**Verdict on D95's scope cuts:**
+
+The three proposed cuts are partially valid (AsyncStorage) but wrong in premise — they transfer work, not remove it. Mentions légales deferral rejected: Sprint 1 already has factures + relances; adding legal text research is how you get a 3-week Sprint 1. Client.type deferral rejected: schema debt costs more than Sprint 0 time saved.
+
+**Net verdict: Accept 7-8 days with full scope. Write the Sprint 0 SPEC first. The days debate is premature without it.**
+
+**D95 Resolution: REFINED — Sprint 0 = 7-8 days with full scope. Scope cuts rejected. Sprint 0 SPEC must be written before estimation is valid.**
+
+---
+
+## Pulse 2026-03-30T19:43 — Three Specialist Debates
+
+---
+
+## Debate 96: D76/D89 — "First Sent Devis" Fires Too Early; "First Paid Facture" Is the Real Moment
+
+**Challenge:** D76/D89 (conversion trigger) — Growth Strategist at 19:15 argued "first accepted devis" chain breaks too often and proposed "first sent devis" as the replacement trigger.
+
+### Product Strategist — "First Sent Devis" Fires Before Value Is Proven
+
+**Assumption challenged from D76/D89:** That "first sent devis" is the right conversion trigger because it fires without requiring client participation or status updates.
+
+**Core argument:**
+
+**"First sent devis" fires the moment Marc clicks a button.** His devis could sit unanswered for a week. His client could ghost him. He's sending devis to regular clients who already know the price verbally. At the exact moment of clicking send, nothing has happened yet. The product has not solved a problem — it's started a process. Asking for €29 at this moment means asking for money before any value is demonstrated.
+
+**The correct trigger: "first paid facture."**
+
+This is the moment the product actually delivers. Marc created the invoice. Sent it. Client paid it. Money arrived. The full loop closed. That's when Marc thinks "this tool works." Not "I typed numbers into a PDF." Not "I emailed someone who may never respond." Paid. In his account. Real value, tangible, attributable.
+
+Conversion psychology is clear: you convert people when they're holding proof of value in their hands — not when they're hoping for it. "First paid facture" means the artisan has already experienced the core promise of the product: stop chasing money manually, get paid. Convert *after* that moment, when the feeling is fresh and attributable.
+
+**The deeper flaw: both sides treat conversion as a notification.**
+
+"First accepted devis" and "first sent devis" share the same assumption: the software detects an event and fires a push notification. Click here, pay now! This is not how you sell to a 50-year-old French artisan. These people respond to relationships, not algorithms. They distrust apps that nag them for money.
+
+**The better model: 14 days Free, then Louis on WhatsApp.**
+
+- Days 1–14: Marc uses the product freely. No pressure.
+- Day 14: Louis (a real human) sends a WhatsApp check-in — not a sales pitch, a conversation.
+  > *"Salut Marc, comment ça se passe ? Tu as pu tester un peu l'outil ? Des questions, des bloqueurs ?"*
+
+This is how artisans buy. They buy from people they trust who check on them. The "first paid facture" milestone tells Louis *when* to make that call — not as a push notification, but as a conversation prompt.
+
+**Verdict on D76/D89:** REOPENED — Product Strategist argues "first sent devis" fires too early. "First paid facture" is the right conversion moment (when value is proven). Push notification conversion is the wrong model entirely — human WhatsApp check-in at Day 14 is the correct mechanism. D76/D89 not yet resolved.
+
+---
+
+## Debate 97: D95 — Sprint 0 Estimate Is a Preparation Problem, Not a Scope Problem
+
+**Challenge:** D95 (Sprint 0 timeline) — Technical Architect at 19:32 argued Sprint 0 = 7-8 days because mentions légales legal research must be done during Sprint 0.
+
+### Technical Architect — Pre-Sprint Prep Removes the Research Dependency
+
+**Assumption challenged from D95:** That mentions légales legal text research is a Sprint 0 task. It is not. It is a pre-sprint preparation task — and it has not been done yet.
+
+**Core argument:**
+
+The 7-8 day estimate accepted in D95 conflates two separate activities:
+1. Pre-sprint prep: research and write the 4 mentions légales templates (legal/administrative work, 2 hours)
+2. Sprint 0 engineering: build the Fastify + Postgres compliance foundations (coding work)
+
+If Louis spends 2 hours this week writing the 4 mentions légales templates:
+```
+/mentions-legales/particulier.md
+/mentions-legales/pro-francais.md
+/mentions-legales/pro-ue.md
+/mentions-legales/pro-hors-ue.md
+```
+...then Sprint 0 starts with ready-to-paste templates. The engineering task becomes:
+- Copy-paste 4 templates → 30 minutes
+- TVA calculator (well-defined French VAT rules) → 1 day
+- Sequential numbering engine (AAAA-MM-XXXX format) → 1 day
+- Postgres schema for clients, devis, factures → 1 day
+
+**That's 3-4 days of pure engineering.** Sprint 0 fits in 5 days with buffer.
+
+The 7-8 day estimate assumed legal research happens inside Sprint 0. It doesn't. Legal research is a pre-sprint dependency — like buying ingredients before cooking, not cooking while grocery shopping.
+
+**The real blocker is prep work, not scope.** Sprint 0 is not the place to discover what legal text is required. Sprint 0 starts when all dependencies are resolved.
+
+**Action item:** Louis spends 2 hours this week writing the 4 mentions légales templates. Sprint 0 then targets 5 days (not 7-8), because there's nothing left to research — just engineering.
+
+**Verdict on D95:** REOPENED — Technical Architect argues 7-8 day estimate is inflated because it includes pre-sprint prep work. If mentions légales templates are pre-researched this week, Sprint 0 becomes 5 days. D95 refined but not yet resolved.
+
+---
+
+## Debate 98: D92 — iOS-First Is the Wrong Default for French Artisans
+
+**Challenge:** D92 (App Store launch strategy) — resolved to iOS-first based on "iOS users skew business" and "Android Play Store moderation risk."
+
+### Growth Strategist — Android-First Is the Right Default for This Persona
+
+**Assumption challenged from D92:** That iOS is the default platform for a B2B tool targeting French artisans aged 45-55.
+
+**Core argument:**
+
+**Wrong persona assumption.** Marc is a 50-year-old French electrician. He wakes up at 6:30, drives to job sites, manages quotes on his phone between appointments. He's been in the trades for 25 years. He owns a Samsung or Xiaomi — not because he's cheap, but because Android is what working people in the trades use. The French artisan/construction market skews Android. "iOS = serious business user" is a Silicon Valley stereotype that doesn't survive contact with French rural demographics.
+
+**"Business user = iPhone" is lazy thinking.** Yes, iOS has higher ARPU in B2C consumer apps. This is B2B for tradespeople. You're not selling to startup founders. You're selling to a 52-year-old plumber who upgraded from a Nokia to a Xiaomi. Defaulting to iOS-first means defaulting to the segment that is NOT your primary buyer.
+
+**Android Play Store moderation is NOT a blocker.** A legitimate B2B finance app with proper legal documentation (SIRET, legal mentions, CGV) gets reviewed in 24-72 hours. Apple's review process is slower and more arbitrary for B2B finance apps. Android has the lower friction path to market.
+
+**Android APK distribution is a feature.** Android APK installation enables direct distribution without App Store gatekeeping — via website, prescriber networks, USB stick at trade shows. For a B2B tool targeting risk-averse older users, "here's the APK, install it" is a legitimate channel.
+
+**What should happen:** The geo-targeted poll in Week 1 is the right mechanism. But the default should be Android-first, not iOS-first. Run the poll. If data says iOS, go iOS. But don't start from a Silicon Valley assumption about who "serious business users" are.
+
+**Verdict on D92:** REOPENED — Growth Strategist argues iOS-first default is wrong for French artisan persona. Android-first should be the default, validated by the Week 1 poll. D92 not yet resolved.
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D92 | App Store launch | iOS-first — REOPENED Debate 98 (Android-first case made) | 2026-03-30 |
+| D95 | Sprint 0 timeline | 7-8 days — REOPENED Debate 97 (prep work challenge) | 2026-03-30 |
+| D96 | Conversion trigger | "First sent devis" challenged — "first paid facture" + human WhatsApp check-in proposed | 2026-03-30 |
+| D97 | Sprint 0 prep | Mentions légales templates should be pre-researched this week (2h), reducing Sprint 0 to 5 days | 2026-03-30 |
+| D98 | Platform default | iOS-first challenged — Android-first argued for French artisan persona | 2026-03-30 |
+
+| U1 | Discovery | REPLACED — readiness protocol | 2026-03-30 |
+| U2 | E-invoicing platform | Factea first when v2 | 2026-03-30 |
+| U7 | Domain | DEFERRED — subdomain/Carrd until MVP validated | 2026-03-30 |
+| U8 | WhatsApp acquisition | CLOSED — no WhatsApp CTA in devis | 2026-03-30 |
+| U12 | Expert-comptable playbook | Phase 2 — relationship-dependent | 2026-03-30 |
+| U15 | Price validation | Guerrilla price validation + founding member offer | 2026-03-30 |
+| U16 | Mentions légales prep | NEW — Louis researches and writes 4 mentions légales templates this week (2h). Sprint 0 then targets 5 days. | 2026-03-30 |
+
+---
+
+*Last updated: 2026-03-30T19:43*

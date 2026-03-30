@@ -701,3 +701,16 @@ The following were overengineered or wrong:
 - [ ] **D76/D89 NEW:** UX forcing function: 24h after sending a devis, prompt "Client accepted? Tap yes → we update the status." This maintains accepted-devis data for the €29 tier financial snapshot without making it the conversion trigger.
 - [ ] **D76/D89 NEW:** €29 tier differentiation: client limit (10 on Free vs unlimited on €29), relances, financial snapshot. First sent devis fires the conversion ask; accepted-devis data enriches the €29 tier experience.
 - [ ] **D76/D89 NEW:** Landing page + onboarding messaging update: "Créez et envoyez votre premier devis en 5 minutes" — the first sent devis moment is the core value moment, not the accepted-devis moment.
+
+## New from Pulse 2026-03-30T19:43 — Three Specialist Debates
+
+### Reopened (D76/D89, D92, D95):
+- **D76/D89 (Conversion trigger):** REOPENED again — Product Strategist argues "first sent devis" fires too early (no value proven yet). Proposes "first paid facture" as the conversion trigger (real value moment) + human WhatsApp check-in by Louis at Day 14 (actual conversion mechanism for French artisans).
+- **D92 (Platform default):** REOPENED — Growth Strategist argues iOS-first is wrong default for French artisan persona (Android skews working-class trades). Proposes Android-first with Week 1 validation poll. "Business user = iPhone" is a Silicon Valley stereotype.
+- **D95 (Sprint 0 timeline):** REOPENED — Technical Architect argues 7-8 day estimate conflates pre-sprint prep (legal research) with sprint work. If mentions légales templates are pre-researched this week (2h), Sprint 0 becomes 5 days.
+
+### New Action Items from this pulse:
+- [ ] **D96 NEW:** Conversion trigger restated — Product Strategist proposes "first paid facture" (not "first sent devis") as conversion trigger, because it fires when value is proven (money received), not when action is taken (devis sent). Push notification conversion model challenged — human WhatsApp check-in by Louis at Day 14 is the correct mechanism.
+- [ ] **D96 NEW:** Day 14 human check-in: Louis sends WhatsApp to all active Free users — "Salut Marc, comment ça se passe ?" Not a sales pitch. A conversation. The conversion happens here, not via push notification.
+- [ ] **D97 NEW:** Sprint 0 pre-work this week: Louis spends 2 hours researching and writing the 4 mentions légales templates (particulier, pro-français, pro-UE, pro-hors-UE). Sprint 0 then targets 5 days, not 7-8.
+- [ ] **D98 NEW:** Week 1 platform validation poll: if Android majority (>55%) in Caen artisan sample → Android-first. If iOS majority → iOS-first. Don't assume iOS is the default for this persona.
