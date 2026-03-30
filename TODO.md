@@ -124,11 +124,11 @@ All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 
 ### Before Building (Do First)
 - [ ] U1 readiness check: (1) Figma/clickable devis-creation prototype, (2) guerrilla test scheduled (5 artisans at Point P/Gedimat), (3) pain confirmed by competitive analysis, (4) feature set frozen
-- [ ] **D64 UPDATED:** Sprint 0 starts with Fastify + Postgres API (NOT Nuxt 3). Day 1 = Postgres schema + TVA service + sequential numbering service + mentions légales renderer. Day 3 = working REST API consumed by React Native. (Debate 64)
-- [ ] **D65 NEW:** U15 guerrilla discovery protocol — three-phase: (1) 20-min observation of actual admin workflow, no demo; (2) pain quantification (time spent, emotional weight, revenue risk); (3) payment conversation only if pain confirmed. (Debate 65)
-- [ ] **D63 NEW:** Free tier needs self-generating pull — a dashboard/report (e.g., "situation financière" snapshot with outstanding devis and pending factures) that creates desire to return. Notification channel debates are premature until this exists. (Debate 63)
+- [ ] **D64 RESOLVED:** Sprint 0 starts with Fastify + Postgres API (NOT Nuxt 3). Day 1 = Postgres schema (TVA per-line, sequential numbering, mentions légales, client-type) + Fastify scaffold. Day 2 = TVA service + sequential numbering engine + mentions légales renderer. Day 3 = full CRUD REST API ready for React Native integration. Nuxt 3 retired from backend — static landing page only. (Debate 64)
+- [ ] **D65 RESOLVED:** U15 three-phase guerrilla protocol — (1) 20-min observation of actual admin workflow, no demo, no pitch; (2) pain quantification (time spent/week, emotional weight 1-10, lost revenue from forgotten devis); (3) payment conversation ONLY if pain is confirmed. Remove "show demo, ask price" from U15. (Debate 65)
+- [ ] **D63 RESOLVED:** Design the "situation financière" snapshot for Free tier home — automatically-produced weekly output showing: outstanding devis (with days-open), pending factures (aging buckets: 15/30/45/60+ days), revenue this month vs last month, dormant clients (30+ days inactive). This is the Free tier's primary value output. Push-ready content. Notification channel debates are secondary until this exists. (Debate 63)
 - [ ] If prototype not ready in 1 week: proceed to build anyway, validate post-launch (Debate 31)
-- [ ] Sprint 0: Compressed compliance sprint (3-4 days). TVA per-line schema (5.5/10/20%), sequential numbering engine (gapless, server-enforced), mentions légales renderer (template-based, client-type-aware), client-type schema. THEN Sprint 1 = client+devis flow. Sprint 2 = facture+relances. (Debate 54)
+- [ ] Sprint 0: Fastify + Postgres only (NOT Nuxt 3). Compliance foundations first (3-4 days): TVA per-line schema, sequential numbering engine, mentions légales renderer, client-type schema. Sprint 1 = client+devis flow. Sprint 2 = facture+email relances. (Debates 54/64)
 - [x] **D57 RESOLVED:** API-first (Node/Fastify + static landing + JWT) preferred. Nuxt 3 deferred unless blocking Sprint 0. OVH managed Postgres retained. (Debate 61)
 - [x] **D58 RESOLVED:** Email relances in v1 (Sprint 2, 1-2 days). Expo Push relances in v1.1. (Debate 58)
 - [x] **D56 RESOLVED:** 40% WoM figure RETIRED. Measurement protocol: "Comment connaissez-vous?" at signup + referral codes. Month 3 target: 20% peer referral. (Debate 60)
@@ -382,6 +382,27 @@ The following were overengineered or wrong:
 1. Digital channels = where Marc discovers tools (Product Strategist challenged: confuses communication habitat with discovery pathway; prescriber endorsement at moment of new project is 10x higher intent)
 2. Email-only relances = acceptable bridge at launch (Technical Architect challenged: feature comparison disqualification happens before signup, not after; 50-user complaint threshold is reactive)
 3. Conversion = limit-hit or contextual prompt (Growth Strategist challenged: solo artisans in equilibrium don't feel capacity anxiety; habit → dependency → subscription is the correct model)
+
+---
+
+*Last updated: 2026-03-30T15:46*
+
+## New from Pulse 2026-03-30T15:46
+
+### Resolved (D63, D64, D65):
+- **D63 (Free tier pull):** RESOLVED — "situation financière" snapshot (outstanding devis, pending factures, revenue vs last month, dormant clients) is the Free tier's primary value output. Notification channel debates are secondary until this exists.
+- **D64 (Sprint 0 stack):** RESOLVED — Fastify + Postgres must START Sprint 0. Nuxt 3 retired from backend. Day 1 = Postgres schema + Fastify scaffold. Day 2 = TVA service + sequential numbering + mentions légales. Day 3 = REST API ready for React Native integration.
+- **D65 (U15 discovery):** RESOLVED — three-phase guerrilla session: observe first (20 min, no demo), quantify pain (time/emotional weight), payment conversation only if pain confirmed. "Show demo, ask price" removed from U15.
+
+### Challenged assumptions this pulse:
+1. Engagement channel is the lever for Free tier activation — challenged: channel is secondary to whether Free tier delivers compelling output worth returning to see
+2. "Defer API-first to post-MVP" is safe — challenged: Sprint 0 work IS the business logic foundation; migration cost scales with integration depth; deferral becomes permanent
+3. "Show demo, ask price" as first validation step — challenged: demo-first puts artisan in audience mode; pain must be observed before payment questions
+
+### New action items from this pulse:
+- [ ] **D63 NEW:** Design the "situation financière" snapshot — weekly auto-produced output: outstanding devis (days-open), pending factures (aging buckets: 15/30/45/60+ days), revenue this month vs last month, dormant clients (30+ days inactive). Push-ready content. Primary Free tier value output.
+- [ ] **D64 NEW:** Sprint 0 Day 1 — Fastify + Postgres schema (TVA per-line, sequential numbering, mentions légales renderer, client-type). NOT Nuxt 3. Mobile team integrates against REST from Day 3.
+- [ ] **D65 UPDATED:** U15 three-phase protocol — observe first (no demo), quantify pain, payment only if confirmed. Remove "show demo, ask price" entirely.
 
 ---
 

@@ -2225,6 +2225,152 @@ The architecture decision affects: developer velocity (medium-term), hosting cos
 
 ---
 
+## Pulse 2026-03-30T15:46 — Three Resolved
+
+---
+
+## Debate 66: D63 — Free Tier Needs Self-Generating Pull, Not Better Notifications
+
+**Challenge:** D40/D43/D46/D51 cycled through engagement channels (email → push → WhatsApp) and conversion models (limit-hit, habit formation) without questioning whether the Free tier itself creates desire to return. Product Strategist argues all of these are secondary to a missing element: a compelling output that makes artisans want to come back.
+
+### Product Strategist — D63 Resolution
+
+**Assumption challenged from D40/D43/D46/D51:** All four debates assumed the Free tier activation problem is solvable via better notifications or better timing. D40 selected a channel (push + WhatsApp opt-in). D43/D46 refined limit design. D51 proposed habit formation. None addressed the root question: what does the Free tier give artisans that they actively want to consume?
+
+**The core flaw across all four debates:** A notification — regardless of channel — only recovers users who already believe the product is worth opening. If the first session didn't deliver a clear "this is useful," no cadence of reminders recovers them. You're debating the recall mechanism on a product that hasn't proven its value.
+
+**The equilibrium problem for D43/D46:** Marc is in equilibrium. He has 6-7 steady clients, not a growing business. Hitting 10 clients doesn't trigger upgrade desire — it triggers "I'll just stay on the free plan." Limit proximity without felt value first is a wall, not a trigger.
+
+**The habit formation problem for D51:** Habits form around pain, not convenience. A daily reminder to do something annoying (input work) is not a habit — it's a chore. The 2-minute evening devis ritual only becomes load-bearing if it relieves an existing friction. Without that friction, it's just another app notification competing for attention.
+
+**Proposed self-generating pull mechanism:**
+
+The **"situation financière" snapshot** — automatically produced weekly, surfaced as the Free tier home screen:
+
+- Outstanding devis (pending acceptance, with days-open)
+- Pending factures (sent but unpaid, aging buckets: 15/30/45/60+ days)
+- Revenue this month vs. last month
+- Clients with no activity in 30+ days
+
+This is output the artisan *wants* to consume. It answers "how is my business right now?" — not "where did I leave off in the app?" The snapshot is a reason to open the app on its own merits. The notification that brings him back is secondary; the thing he wants to see is primary.
+
+**Why this is different from a dashboard:** A dashboard requires navigation and interaction. The snapshot is push-ready content — it can live in a push notification ("Votre chiffre d'affaires a baissé de 12% ce mois — voir pourquoi") or a weekly digest. The artisan consumes value without doing work first.
+
+**Verdict on D63:** RESOLVED — D40 RESTATED. Engagement channel is secondary to whether the Free tier delivers something artisans want to consume before being prompted. The "situation financière" snapshot is the Free tier's primary value output. Until it exists, notification channel debates are premature.
+
+---
+
+## Debate 67: D64 — Fastify + Postgres Must Start Sprint 0
+
+**Challenge:** D57 deferred API-first to post-MVP ("unless Nuxt 3 actively blocks Sprint 0"). Technical Architect argues the deferral will become permanent and that Fastify + Postgres is faster to Sprint 0 than Nuxt 3 + Postgres, making the deferral both unnecessary and harmful.
+
+### Technical Architect — D64 Resolution
+
+**Assumption challenged from D57:** The "defer to post-MVP" escape hatch was treated as a reasonable compromise — keep building in Nuxt, migrate later if ROI positive. Technical Architect argues: Sprint 0 work IS the business logic foundation. Migration cost scales with integration depth. The "defer" resolution guarantees the migration never happens because the Nuxt routes become entangled with the TVA engine, sequential numbering logic, and mentions légales renderer — all of which must be extracted and rewritten.
+
+**The Sprint 0 deliverables are backend-service problems, not UI problems:**
+- TVA per-line calculator (5.5/10/20% rates, per line, with rounding)
+- Sequential invoice numbering engine (gapless, cancel-aware, server-enforced)
+- Mentions légales renderer (template file, client-type conditional)
+- Client schema with type discrimination
+
+None of these require a UI framework. Nuxt's SSR, file-based routing, and server route conventions add overhead precisely where the problem doesn't need it.
+
+**Fastify + Postgres is faster to Sprint 0:**
+- Day 1: Postgres schema + `npm create fastify` + first GET /health → <2 hours setup. TVA service with unit tests. Sequential numbering sequence + constraint.
+- Day 2: POST /factures with validation + mentions légales template renderer. Full CRUD scaffolding.
+- Day 3: Docker Compose (app + Postgres), first mobile integration test via REST.
+
+With Nuxt 3: Days 1-2 spent learning Nuxt server route conventions, `useFetch` vs `useAsyncData`, hydration edge cases. The backend logic is still TODO.
+
+**The architectural cleanliness argument:** React Native (Expo) is an HTTP client. It talks to REST/GraphQL endpoints. A Fastify API is a first-class REST API — direct, no framework middleware tax. Nuxt API routes are a web framework's interpretation of REST, with conventions designed for server-rendered web apps.
+
+**Verdict on D64:** RESOLVED — D57 REFINED. Fastify + Postgres must START Sprint 0, not be deferred. Sprint 0 Day 1 deliverables: Postgres schema (TVA, sequential numbering, mentions légales, client-type) + Fastify project scaffold. Mobile team integrates against REST API from Day 3. Nuxt 3 is retired from the backend — static landing page only if needed.
+
+---
+
+## Debate 68: D65 — Three-Phase Discovery Must Precede Price Validation
+
+**Challenge:** U15 (and D59's price validation method) proposed "show demo, ask willingness-to-pay" as the guerrilla validation step. Growth Strategist argues this skips pain validation entirely — showing a demo before observing actual workflow puts the artisan in audience mode, not discovery mode.
+
+### Growth Strategist — D65 Resolution
+
+**Assumption challenged from D59/U15:** "Show demo, then ask what you'd pay" assumes the artisan's pain is already known and that price is the primary unknown. Neither is true. Pain is unconfirmed — it was assumed from competitive analysis (Pennylane, Indy, Freebe exist = pain exists), not observed. And price sensitivity is downstream of pain intensity — meaningless without the upstream data.
+
+**The demo-first problem:** An artisan who watches a demo nods politely. The product looks polished. The framing makes sense. He says "yes that could be useful." You get enthusiasm, not data. You've put him in audience mode — he's watching your vision, not revealing his own. The 20-minute observation before any demo tells you things no amount of post-demo conversation can surface.
+
+**The three-phase sequence is non-negotiable:**
+
+**Phase 1 — 20-minute observation, zero demo.** Watch the actual admin workflow. Where does he hesitate? What makes him sigh? What workarounds has he built? This is the foundation. Without pain observation, everything downstream is speculation.
+
+**Phase 2 — Quantification.** Only after you've *seen* pain can you measure it. Time spent per week on devis/factures/relances. Emotional weight (1-10). What happens when a devis is forgotten. What happens when a client doesn't pay. These questions only land when both of you know what they're referring to.
+
+**Phase 3 — Payment conversation.** Conditional on pain confirmed. If the observed workflow doesn't reveal genuine friction, you skip the payment conversation entirely — you've validated that this artisan isn't your user, which is also valuable data.
+
+**The challenge to the debate log:** "Pain is confirmed" is treated as a checkbox. It isn't. It's the entire point. Skip to payment and you're validating your own optimism, not the market's reality.
+
+**Verdict on D68:** RESOLVED — U15 UPDATED. Replace "show demo, ask WTP" with three-phase guerrilla session: observe first, quantify pain, then payment conversation only if pain is confirmed. U1 readiness protocol updated accordingly.
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D1 | Positioning | Kill "CRM" — devis, factures, relances | 2026-03-30 |
+| D2 | MVP scope | 4 features, SEQUENCED sprints. Sprint 0 = Fastify + Postgres compliance foundations (3-4d). Sprint 1 = client+devis flow. Sprint 2 = facture+email relances. | 2026-03-30 |
+| D3 | Primary persona | Marc — solo smartphone-native artisan | 2026-03-30 |
+| D4 | Stack | Single managed Postgres | 2026-03-30 |
+| D5 | Pricing | Free + €29 two-tier. No €19 SKU. Drop €49/€79. Value anchor: "2h/week = 1h labor = €29/month." | 2026-03-30 |
+| D6 | Trial | No time-limited trial. Free tier IS the trial. | 2026-03-30 |
+| D7 | Architecture | Nuxt 3 RETIRED from backend. Fastify + Postgres + static landing page. | 2026-03-30 |
+| D8 | E-invoicing | v2 feature | 2026-03-30 |
+| D9 | Not MVP | No Kanban, no multi-user, no offline, no API keys | 2026-03-30 |
+| D10 | Buyer trigger | "Admin pain" not "CRM need" | 2026-03-30 |
+| D11 | Mobile | React Native from Day 1 via Expo | 2026-03-30 |
+| D12 | Landing page | Simplicity-first — "Vos devis et factures, sans vous prendre la tête." | 2026-03-30 |
+| D13 | Home view | Job-first — Active Job Card as home anchor | 2026-03-30 |
+| D14 | E-invoicing timing | v2 — NOT Day 1 | 2026-03-30 |
+| D15 | Relances differentiator | DE-EMPHASIZED — secondary feature below fold | 2026-03-30 |
+| D16 | Trial length | No countdown trial — Free tier IS the trial | 2026-03-30 |
+| D17 | Mobile strategy | React Native from Day 1 via Expo. Email-only relances at v1. Expo Push in v1.1. | 2026-03-30 |
+| D40 | Engagement channel | RESTATED — channel is SECONDARY. Free tier needs self-generating pull (output/report) before notification channel debates matter. | 2026-03-30 |
+| D41 | Notification infra | Email-only relances at v1 launch. Expo Push in v1.1. | 2026-03-30 |
+| D42 | WhatsApp referral | CLOSED — no WhatsApp CTA in devis | 2026-03-30 |
+| D43 | Free tier activation | RESTATED — channel secondary to Free tier output design. | 2026-03-30 |
+| D46 | Free tier limits | Do NOT lower limits from 10/5. Trust-building before limit enforcement. | 2026-03-30 |
+| D47 | Expo Push estimate | 1-2 weeks. Budget properly or defer to v1.1. | 2026-03-30 |
+| D48 | Wholesaler GTM | Not primary. Digital + specialist retailers first. | 2026-03-30 |
+| D49 | GTM Priority | Digital → Specialist retailers → Prescriber → Wholesaler. | 2026-03-30 |
+| D50 | Push at launch | Email-only at v1. Expo Push in v1.1. | 2026-03-30 |
+| D51 | Free tier conversion | Forcing function + limit-hit PRIMARY. Habit tracking SECONDARY. | 2026-03-30 |
+| D53 | Landing page | Simplicity-first RETAINED. H1: "Sans vous prendre la tête." H2: 5-min specific claim. | 2026-03-30 |
+| D54 | Sprint 0 | Compressed compliance sprint (3-4d): TVA, sequential numbering, mentions légales, client-type. | 2026-03-30 |
+| D55 | Buyer-user split | Dual-persona GTM. Marc = economic buyer. Admin handler = operational user. Expert-comptable = Phase 2. | 2026-03-30 |
+| D56 | WoM attribution | 40% figure RETIRED. WoM = Month 3+ lagging indicator. Measurement protocol: "Comment connaissez-vous?" + referral codes. | 2026-03-30 |
+| D57 | Architecture | Fastify + Postgres + static landing page. D7 (Nuxt 3) RETIRED. | 2026-03-30 |
+| D59 | Pricing | Kill €19 founding offer. Early access €29 locked for life. Guerrilla price validation with artisan rate anchors. | 2026-03-30 |
+| D63 | Free tier pull | RESOLVED — "situation financière" snapshot (outstanding devis, pending factures, revenue vs last month, dormant clients) is the Free tier's primary value output. Notification channel debates are secondary until this exists. | 2026-03-30 |
+| D64 | Sprint 0 stack | RESOLVED — Fastify + Postgres must START Sprint 0, not deferred. D57 REFINED. Nuxt 3 retired from backend. | 2026-03-30 |
+| D65 | U15 discovery | RESOLVED — three-phase guerrilla: observe first (20 min, no demo), quantify pain (time/emotional weight), payment conversation only if pain confirmed. U15 UPDATED. | 2026-03-30 |
+
+| U1 | Discovery | REPLACED — readiness protocol | 2026-03-30 |
+| U2 | E-invoicing platform | Factea first when v2 | 2026-03-30 |
+| U7 | Domain | DEFERRED — subdomain/Carrd until MVP validated | 2026-03-30 |
+| U8 | WhatsApp acquisition | CLOSED — no WhatsApp CTA in devis | 2026-03-30 |
+| U9 | Free tier activation | RESTATED — output/report design primary, notification channel secondary | 2026-03-30 |
+| U10 | GTM: Wholesaler | Digital + specialist retailers first | 2026-03-30 |
+| U11 | Prescriber audit | If >30% of new jobs via prescriber, revisit GTM priority | 2026-03-30 |
+| U12 | Expert-comptable playbook | Phase 2 | 2026-03-30 |
+| U13 | WoM measurement | "Comment connaissez-vous?" at signup + referral codes. Month 3 target: 20% peer referral. | 2026-03-30 |
+| U15 | Guerrilla validation | UPDATED — three-phase: observe → quantify pain → payment (only if pain confirmed). Not "show demo, ask price." | 2026-03-30 |
+
+---
+
+*Last updated: 2026-03-30T15:46*
+
+---
+
 ## Pulse 2026-03-30T15:33 — Three New Debates
 
 ---
