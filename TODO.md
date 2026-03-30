@@ -19,15 +19,18 @@
 | D11 | PWA vs Native | PWA first (launch), native within 6 months | Debate 11 revision | 2026-03-30 |
 | D12 | Landing page | Simplicity-first — "Vos devis et factures, sans vous prendre la tête" | Debate 19 (Product Strategist) | 2026-03-30 |
 | D13 | Home view | Job-first — Active Job Card as home anchor, not Dashboard or Timeline | Debate 20 (Technical Architect) | 2026-03-30 |
-| D14 | E-invoicing timing | v2 — NOT Day 1 (Debate 21 Growth Strategist) | Debate 21 | 2026-03-30 |
+| D14 | E-invoicing timing | v2 — NOT Day 1 (Debate 21 Growth Strategist) | Debate 21 |
+| D15 | Relances differentiator | Secondary feature only — below fold, "Fonctionnalités" section. Frame as "Suivi de paiement" not "Relances automatiques." Not in hero. | Debate 25 (Product Strategist) |
+| D16 | Trial length | 14 days (updated from 30). No credit card at signup. Email drip: day 7, 3, 1. | Debate 26 (Growth Strategist) |
+| D17 | Mobile strategy | React Native from Day 1 via Expo (updated from PWA-first). Single codebase, APNS/FCM push, App Store from launch. | Debate 27 (Technical Architect) | 2026-03-30 |
 
 ## 🔄 Reopened This Pulse (Need Resolution)
 
 | ID | Topic | Issue | Source |
 |----|-------|-------|--------|
-| D15 | Relances differentiator | Product Strategist argues relances should be DE-EMPHASIZED on landing — not the hero hook | Debate 22 |
-| D16 | Trial length | Growth Strategist argues 30 days → 14 days (GTM doc already said 14) | Debate 23 |
-| D17 | Mobile strategy | Technical Architect argues PWA-first → React Native from Day 1 | Debate 24 |
+| D15 | Relances differentiator | DE-EMPHASIZED — secondary feature below fold, "Fonctionnalités" section only. NOT in hero. Frame as "Suivi de paiement." | RESOLVED — Debate 25 |
+| D16 | Trial length | 14 days, no credit card at signup, aggressive email drip in final week | RESOLVED — Debate 26 |
+| D17 | Mobile strategy | React Native from Day 1 (via Expo). PWA-first retired. | RESOLVED — Debate 27 |
 
 ## 🔄 Still Unresolved
 
@@ -43,9 +46,9 @@
 - [ ] Pick one: Tolteck competitor or Tolteck complement?
 - [ ] Buy domain (U7) — something memorable for devis/factures tool
 - [ ] Build the Active Job Card data model (`jobs.status`, `jobs.scheduled_date`, `jobs.updated_at`)
-- [ ] RESOLVE D15: Remove "relances" from landing page hero — simplicity-first stays, relances as secondary feature only
-- [ ] RESOLVE D16: Confirm trial = 14 days (no credit card at signup, email drip in final week)
-- [ ] RESOLVE D17: Decide between PWA-first (D11) vs React Native from Day 1
+- [x] RESOLVE D15: Relances = secondary feature below fold. "Fonctionnalités" section only. NOT in hero.
+- [x] RESOLVE D16: Trial = 14 days. No credit card at signup. Email drip day 7, 3, 1.
+- [x] RESOLVE D17: React Native from Day 1 via Expo. PWA-first retired.
 
 ### MVP Build (After Discovery)
 - [ ] Client file feature
@@ -60,18 +63,34 @@
 - [ ] "Relances dues" and "Devis en attente" move to secondary "À suivre" tab (not home screen)
 - [ ] Client Timeline remains accessible from client profile (not home)
 
-### Landing Page Build (D12 — Simplicity-first)
+### Landing Page Build (D12 + D15 — Simplicity-first, Relances de-emphasized)
 - [ ] Headline: "Vos devis et factures, sans vous prendre la tête."
 - [ ] Subheadline: "Pas de formation. Pas de tableau comparatif. Vous envoyez votre premier devis en 5 minutes, depuis votre téléphone."
 - [ ] Remove "Vos clients vous payent en 48h" from primary headline (keep as social proof below fold)
 - [ ] Keep WhatsApp mention in subhead or features section (not as primary hook)
 - [ ] Add peer social proof (French tradespeople testimonials) — secondary, not primary
 - [ ] NO ROI claims on landing page — simplicity + outcome framing only
+- [ ] Relances = Feature #4 or #5 in "Fonctionnalités" section. NOT in hero. Frame as "Suivi de paiement" or "Rappels" (soft language). Artisan controls it — not "we text your client."
 
 ### E-Invoicing v2 (D14 — Not Day 1)
 - [ ] Remove "Day 1 e-invoicing" from any planning assumptions
 - [ ] When v2 time: evaluate Factea first (API quality + Peppol + solo artisan pricing)
 - [ ] E-invoicing inbox + "E-invoice ready" badge = v2 feature, not launch feature
+
+### Mobile Build (D17 — React Native from Day 1)
+- [ ] Use Expo for React Native setup (`npx create-expo-app`)
+- [ ] Push notifications via Expo Notifications (APNS on iOS, FCM on Android) — not web push
+- [ ] App Store + Play Store presence from Day 1 launch
+- [ ] Target both iOS and Android simultaneously from start — do not "do one platform then the other"
+- [ ] Keep MVP scope tight: client list, job/reminder management, basic invoicing — no feature creep
+- [ ] PWA is NOT the mobile strategy — web-only is retired for this product
+
+### Trial Flow (D16 — 14 days, no credit card)
+- [ ] Trial length = 14 days (not 30)
+- [ ] No credit card at signup — friction kills conversion at awareness stage
+- [ ] Email drip sequence: Day 7 ("How's it going?"), Day 3 ("Last 3 days left"), Day 1 ("Trial ends tomorrow — ready to start?")
+- [ ] Credit card capture introduced at Day 7-10 for engaged users (in-app prompt, not email block)
+- [ ] Aha moments by day: Day 1 (clients organized), Day 5 (quote sent from phone), Day 10 (follow-up reminder received)
 
 ## 🚫 What We Deleted
 
