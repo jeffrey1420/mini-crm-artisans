@@ -854,3 +854,25 @@ The following were overengineered or wrong:
 
 *Last updated: 2026-03-30T21:38*
 
+
+---
+
+## New from Pulse 2026-03-30T21:55 — Three Resolutions
+
+### Resolved (D111, D112, D113):
+- **D111 (Job logging in Sprint 1):** RESOLVED — Job logging (Active Job Card, D13) is Sprint 1 non-negotiable. Dual-path conversion architecture (D110) requires both Path A (formal-devis artisan) and Path B (verbal-agreement artisan) operational at launch. Path B has no entry point without job logging. Sprint 1 scope updated: client file + devis flow + Active Job Card. PDF, mentions légales full engine, WhatsApp sharing moved to Sprint 1b.
+- **D112 (Expert-comptable conflict of interest):** RESOLVED — Louis's existing accountant is a validation asset, not a sales channel. The conflict of interest creates structural incentives for passive non-execution. Expert-comptable GTM = cold outreach to 3-5 conflict-free expert-comptables in Caen area. Louis's existing accountant = validation conversation only.
+- **D113 (Sprint 0 blockers):** RESOLVED — Sprint 0 cannot start until all six gate criteria are confirmed. All six must be committed to git and signed off. Sprint 0 = 5 days from gate-open.
+
+### Action Items from this pulse:
+- [ ] **D111 NEW:** Sprint 1 scope updated — client file + devis flow + Active Job Card (job logging) are all Sprint 1 non-negotiables. PDF generation, mentions légales full engine, WhatsApp sharing moved to Sprint 1b.
+- [ ] **D112 UPDATED:** Expert-comptable GTM = cold outreach to 3-5 conflict-free expert-comptables in Caen area (no relationship to Louis). Louis's existing accountant = validation conversation only ("can I show you and get honest feedback?"). Remove "ask for referrals" from Louis's existing accountant conversation.
+- [ ] **D113 NEW:** Sprint 0 gate criteria — all six must be confirmed before sprint starts:
+  1. 4 mentions légales templates in git (U16 ✓)
+  2. Supabase project dashboard visible (EU region)
+  3. 1-page Sprint 0 scope document in git
+  4. API contract defined (shared types or OpenAPI)
+  5. Navigation library chosen (Expo Router recommended)
+  6. PDF generation approach chosen (Supabase Edge Function recommended)
+
+*Last updated: 2026-03-30T21:55*

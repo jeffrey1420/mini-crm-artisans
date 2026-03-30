@@ -5632,3 +5632,184 @@ D96 is RETIRED in its current form. Replaced with dual-path conversion:
 
 *Last updated: 2026-03-30T21:38*
 
+
+---
+
+## Pulse 2026-03-30T21:55 — Three Specialist Debates (Automated Pulse)
+
+---
+
+## Debate 111: Job Logging — Sprint 1 Non-Negotiable
+
+**Role:** Product Strategist
+
+**The Core Problem: Path B Has No Entry Point Without Job Logging**
+
+D110 established a critical architectural truth: we have two distinct conversion paths. Path A (formal-devis artisan) enters through devis flow. Path B (verbal-agreement artisan who never sends formal devis) enters through job logging. These are not parallel tracks of equal importance — they represent two fundamentally different market segments. And here is the uncomfortable reality: **D110 identified Path B as the majority of our target market.**
+
+If job logging slips to v1.2, Path B does not exist at launch. Full stop. This is not a degraded experience for verbal-agreement artisans — it is a complete absence of their conversion path. They land on the product, see no entry point that matches how they actually work, and leave.
+
+**The Flawed Assumption: "Devis Flow Is Primary, Job Logging Is Secondary"**
+
+This assumption — embedded in the current sprint prioritization — was built for Path A. It reflects the formal-devis artisan's reality: you create a devis, you win the job, you log work against it. In that flow, devis is primary and job logging is downstream.
+
+But Path B **inverts this entirely**. For the verbal-agreement artisan:
+1. The client says "yes" over the phone or in person — no devis ever exists
+2. Work begins immediately, logged in a notebook, a voice memo, or nowhere formal
+3. The first digital touchpoint is **starting a job card** — not creating a devis
+
+For this archetype, job logging **is** the primary workflow. The devis flow is irrelevant — they will never use it. Treating job logging as secondary, as something to bolt on after the "real" feature (devis) ships, means optimizing for the minority segment while abandoning the majority.
+
+**The Conversion Mathematics Are Clear**
+
+Path A artisans convert through devis creation → acceptance → job start. Path B artisans convert through job creation → work logging → invoice. These are parallel funnels serving different users.
+
+If Sprint 1 ships only Path A:
+- Path A users get a complete experience (devis → job)
+- Path B users get **nothing** — no entry point, no conversion, no value
+
+If Sprint 1 ships both paths:
+- Path A users get the full devis-first experience
+- Path B users get their job-first experience
+- We capture **both** market segments from day one
+
+**The Technical Reality**
+
+Job logging (D13: Active Job Card) does not require devis flow to function. A job card can be created standalone — client name, description, start date. Work entries can be logged against it. Invoices can be generated from logged work. The full Path B conversion works without a single devis ever being created.
+
+The technical dependency argument for deferral does not hold. Job logging can ship independently. The only reason to delay it is prioritization choice — and that choice, if made, sacrifices the majority segment on behalf of the minority.
+
+**We defined Path A and Path B as co-equal conversion paths in D110.** That resolution carries an obligation: **both paths must be live at launch or the dual-path strategy is a fiction**. Shipping one path and promising the other later is not a phased rollout — it is an incomplete product for half the market.
+
+**Assumption challenged:** The assumption that "job logging is secondary to devis flow" — a prioritization framing designed for Path A (formal-devis artisan) that has been incorrectly applied as a universal truth, when in fact it is inverted for Path B (verbal-agreement artisan), who represents the majority segment.
+
+**Verdict requested:** D13 (Active Job Card / Job Logging) is designated a Sprint 1 non-negotiable. The dual-path conversion architecture requires both Path A and Path B to be operational at launch. Deferring job logging to v1.2 means shipping an incomplete product for the majority segment.
+
+---
+
+## Debate 112: Expert-Comptable Outreach — The Conflict of Interest Problem
+
+**Role:** Growth Strategist
+
+**The Assumption Being Challenged:**
+
+The debate log treats "warm access via Louis's existing accountant" as equivalent to "immediate outreach opportunity." This conflates proximity with credibility, and access with influence. They are not the same thing.
+
+**The Core Problem: Structural Conflict of Interest**
+
+Louis's accountant serves artisan clients. These are the accountant's existing revenue relationships. When Louis asks his accountant to recommend Louis's tool to these clients, he is asking the accountant to do something professionally awkward at minimum, potentially self-damaging at worst.
+
+Consider the incentive structure: if an artisan client adopts Louis's tool and it affects how they manage customers, invoices, or communications, what happens to the accountant's relationship with that client? The accountant becomes associated with a tool they didn't recommend, one that may create more bookkeeping complexity, or worse — may work poorly and reflect negatively on the accountant who handed it out. The accountant gains nothing from a successful referral and absorbs all downside risk from a failed one.
+
+This isn't paranoia. This is standard professional self-interest. And it's the precise reason the accountant will almost certainly NOT execute.
+
+**Why Passive Non-Execution Is the Most Likely Outcome**
+
+The debate log assumes the accountant will either actively refer or actively refuse. In reality, a third outcome dominates: agreement followed by inaction.
+
+Here's how it plays out: Louis asks. The accountant says "sure, send me some materials." Louis sends materials. The accountant files them somewhere and never mentions the tool to a single client. Six months later, Louis checks in. The accountant says "yes, I meant to bring it up with a few people."
+
+This isn't dishonesty. It's social friction compounded by misaligned incentives. The accountant doesn't want to disappoint Louis (relationship cost), doesn't want to damage existing client relationships (professional cost), and doesn't personally benefit from pushing the tool (no incentive). The path of least resistance is to appear cooperative while doing nothing.
+
+**Why Louis's Existing Accountant Cannot Be a First Domino**
+
+A first domino must be someone who:
+1. Has motivation to act
+2. Faces no structural barrier to acting
+3. Gains from the outcome
+
+Louis's accountant fails all three. The expert-comptables who should be targeted first are those with ZERO relationship to Louis — people who can evaluate the tool on its merits, who face no conflict of interest, and who might genuinely benefit from a partnership.
+
+**The Strategic Implication**
+
+Stop treating warm access as a shortcut. It's actually slower than cold outreach in this case, because warm access with conflict of interest produces behavior that looks like progress but generates zero traction.
+
+Louis should pursue his existing accountant relationship for advice, not referrals. Ask the accountant which artisans would be good targets. Use that intel for cold outreach. But do not ask the accountant to be the vector.
+
+**Assumption challenged:** "Warm access via Louis's existing accountant = immediate outreach opportunity"
+
+**Verdict requested:** The first expert-comptable outreach should NOT be to Louis's existing accountant. The relationship creates a conflict of interest that produces passive non-execution, not referrals. Phase 1 expert-comptable outreach should target an unconnected accountant in the same vertical — someone with incentive, no conflict, and genuine client need. Louis's existing accountant is a validation asset, not a sales channel.
+
+---
+
+## Debate 113: Sprint 0 — Six Items Must Be Confirmed Before Day 1
+
+**Role:** Technical Architect
+
+**The Core Argument**
+
+Sprint 0 is not a state of mind. It is a **gate**, not a vibe. Before the team writes a single line of product code, six architectural decisions must be confirmed and committed to git. These are not preferences — they are **load-bearing walls** for the entire project.
+
+**1. Mentions légales templates (U16) — The visible iceberg tip.**
+
+Having four legal templates in git is a regulatory checkbox. But treating it as the green light for Sprint 0 is like getting a driver's license and declaring you're ready for the Indy 500. The license is necessary. It is not sufficient.
+
+**2. Supabase project not created — You cannot authenticate, you cannot store, you cannot prototype.**
+
+Every feature in this Mini-CRM touches the database. Without a live Supabase project, the team is writing blind. Integration tests cannot run. Auth flow cannot be validated. This is a hard dependency for every single Sprint 1 ticket.
+
+**3. 1-page Sprint 0 spec missing — The single most likely item to be skipped, and the most dangerous to skip.**
+
+This spec is the contract between product and engineering. Without it, the team has no shared definition of what "done" means for Sprint 0 deliverables. No scope boundary. No agreed-upon tech stack decisions documented. The 1-page spec is not paperwork. It is the **source of truth** when disputes arise.
+
+**4. API contract not defined — The integration risk that kills sprints.**
+
+We are building a full-stack app with frontend and backend. If the API contract is not agreed upon before development starts, the frontend and backend teams will diverge. A defined API contract (even a draft OpenAPI spec) allows parallel development. Without it, you have sequential development masquerading as agile.
+
+**5. Navigation library not chosen — Routing is the skeleton of the app.**
+
+Changing navigation libraries mid-project is a rewrite. Without a committed choice, code review becomes a religious war and PRs go stale.
+
+**6. PDF generation approach not chosen — Document generation is a core feature.**
+
+PDF generation is not a feature you bolt on at the end. It touches data modeling (line items, taxes, branding), API design (what endpoints serve document data), and frontend rendering (preview before send). Choosing between @react-pdf/renderer, pdfmake, or a headless-Chrome approach changes your entire data pipeline.
+
+**The Real Risk: The "We'll Figure It Out In Sprint 1" Trap**
+
+The most dangerous assumption on this project is that Sprint 0 is a **checklist**, not a **planning session**. The mentions légales templates are a checklist item. The 1-page spec and API contract are *planning work*. Teams under pressure skip the planning and call the checklist "done." Then they arrive at Sprint 1 with no shared understanding, no agreed interfaces, and no skeleton architecture.
+
+**Sprint 0 is not complete when the easy tasks are done. It is complete when the hard architectural decisions are committed and signed off.**
+
+All six items must be resolved. All six must be in git. All six must have a thumbs-up from both the Product Owner and the Technical Lead. Only then is the gate open.
+
+**Assumption challenged:** "Sprint 0 can start as soon as U16 (mentions légales templates) is done" — this conflates a checklist item with a planning session. U16 completion is necessary but nowhere near sufficient.
+
+**Verdict requested:** Sprint 0 cannot begin until all six items are confirmed and committed to git. The 1-page spec and API contract are the most critical and most likely to be skipped — add explicit checklist items for both.
+
+---
+
+## Resolutions — Pulse 2026-03-30T21:55
+
+### D111 RESOLVED — Job Logging Is Sprint 1 Non-Negotiable
+
+The argument is correct. Path B (verbal-agreement artisan) represents the majority segment. Deferring job logging to v1.2 means Path B doesn't exist at launch. The dual-path conversion architecture (D110) requires both paths operational at launch.
+
+**D13 Sprint 1 scope updated:** Active Job Card (job logging) is added to Sprint 1 as a non-negotiable. Sprint 1 now contains: client file + devis flow + Active Job Card (job logging). PDF generation, mentions légales full engine, and WhatsApp sharing are moved to Sprint 1b.
+
+### D112 RESOLVED — Louis's Accountant Is a Validation Asset, Not a Sales Channel
+
+The conflict of interest argument is correct and decisive. Louis's existing accountant cannot be the first expert-comptable GTM domino. The relationship creates structural incentives for passive non-execution.
+
+**D72/U12 UPDATED:**
+- Louis's existing accountant: validation conversation only ("can I show you and get honest feedback?"). Not a referral request.
+- Expert-comptable outreach: cold outreach to 3-5 unconnected expert-comptables in Caen area who serve BTP/artisan clients. No conflict of interest. Genuine evaluation.
+- Phase 1 expert-comptable GTM = cold outreach to conflict-free accountants, not warm outreach to Louis's existing network.
+
+### D113 RESOLVED — Sprint 0 Cannot Start Without All Six Blockers Confirmed
+
+The checklist-vs-planning-session distinction is correct. U16 completion alone does not open the Sprint 0 gate.
+
+**Sprint 0 gate criteria (all six must be confirmed):**
+1. 4 mentions légales templates committed to git ✓ (U16)
+2. Supabase project dashboard visible (EU region, Frankfurt)
+3. 1-page Sprint 0 scope document committed to git
+4. API contract defined (shared types file or OpenAPI spec)
+5. Navigation library chosen (Expo Router recommended)
+6. PDF generation approach chosen (server-side via Supabase Edge Function recommended)
+
+**Sprint 0 timeline updated:** 5 days from gate-open. Gate opens when all six are confirmed. Sprint does not start until all six are resolved.
+
+---
+
+*Last updated: 2026-03-30T21:55*
+
