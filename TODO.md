@@ -806,3 +806,27 @@ The following were overengineered or wrong:
 - [ ] **D107 NEW:** "Free forever" trap prevention — the upgrade prompt fires when Marc can see what he's missing, not when he's desperate. Curiosity > desperation as conversion mechanism.
 
 *Last updated: 2026-03-30T20:53*
+
+---
+
+## New from Pulse 2026-03-30T21:13
+
+### Reopened (D95, U7, D96/D104):
+- **D95 (Sprint 0 timeline):** REOPENED — Product Strategist argues 5-day estimate assumes parallelization that doesn't exist for a solo developer. U16 (mentions légales templates) is not started. Supabase signup is unconfirmed. Without both pre-conditions confirmed, realistic estimate is 6.5-7 days.
+- **U7 (Domain deferral):** REOPENED — Growth Strategist argues "wait for guerrilla test" is structurally indefinite because test prerequisites (prototype + scheduled session) don't exist yet. Domain absence blocks expert-comptable outreach and GetApp/Capterra credibility. Fix: buy domain now (park it), defer brand decision.
+- **D96/D104 (Conversion trigger):** REOPENED — Technical Architect argues the conversion trigger (limit-hit OR first paid facture) assumes formal written devis exist. French BTP runs on verbal agreements. Marc with 6-7 steady clients may never send a formal devis — both triggers are structurally blind to this archetype.
+
+### Challenged assumptions this pulse:
+1. Sprint 0 can start today (Product Strategist challenged: U16 not done, Supabase signup unconfirmed — pre-conditions not met)
+2. "Wait for guerrilla test" is a safe deferral for domain purchase (Growth Strategist challenged: circular dependency, no timeline because test prerequisites don't exist)
+3. Limit-hit OR first paid facture triggers conversion (Technical Architect challenged: both assume formal written devis exist, which verbal-agreement artisans never produce)
+
+### New action items from this pulse:
+- [ ] **D95 NEW:** CONFIRM U16 (4 mentions légales templates) is done before Sprint 0 starts. If not done: accept 6.5-7 days, not 5.
+- [ ] **D95 NEW:** CONFIRM Supabase signup is complete before Sprint 0 starts. If not done: add 2-4h to Day 1 for account creation + RLS policy design + migration workflow.
+- [ ] **D95 NEW:** If either pre-condition is incomplete, update Sprint 0 estimate to 6.5-7 days. Do not try to squeeze a realistic 6.5-7 day sprint into a 5-day window.
+- [ ] **U7 UPDATED:** Buy domain now (park it), defer brand decision. Domain = infrastructure, not branding. A parked domain costs €10-15/year and blocks nothing. Expert-comptable outreach and GetApp/Capterra setup need a proper domain to look credible.
+- [ ] **D96/D104 NEW:** Define conversion trigger for repeat-client, verbal-agreement archetype — the artisan who never sends formal written devis because his clients don't require them. What makes this artisan convert from Free to €29?
+- [ ] **D96/D104 NEW:** If verbal-agreement archetype is a significant portion of target market, the product's addressable market may be smaller than the feature set implies. Validate in guerrilla test: what % of Marc's clients require formal written devis vs pay on verbal approval?
+
+*Last updated: 2026-03-30T21:13*

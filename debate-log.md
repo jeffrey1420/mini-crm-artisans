@@ -5289,3 +5289,84 @@ Marc hits 5/5, sees "passer à €29 or supprimer un ancien devis." He suppresse
 
 *Last updated: 2026-03-30T20:53*
 
+
+---
+
+## Pulse 2026-03-30T21:13 — Three New Challenges
+
+---
+
+## Debate 108: Sprint 0 — 5-Day Estimate Assumes Parallelization That Doesn't Exist
+
+**Challenge:** D95 (5-day Sprint 0) — Product Strategist challenges the assumption that 5 days is achievable given Louis is a solo developer with unstarted pre-conditions.
+
+### Product Strategist — Solo Dev Reality Check
+
+**Assumption challenged:** That the 5-day Sprint 0 timeline is achievable because tasks are "tightly scoped" and "parallelizable."
+
+**Core argument:**
+
+**The U16 pre-condition is not done.** Louis has not written the 4 mentions légales templates. U16 was scheduled for "this week." Sprint 0 cannot start today — it can only start after 2 hours of mentions légales research. Without those templates written, Sprint 0 is 6.5-7 days, not 5.
+
+**The parallelization assumption is wrong for a solo dev.** The debate correctly noted that Louis is solo — so there's no coordination overhead. But this gets the solo dev problem backwards. The risk isn't coordination failure between two engineers. The risk is that a solo dev who hits an unexpected edge case has no one to unblock him. When the TVA per-line formula has a rounding edge case, Louis can't pair-program past it. When Supabase RLS policies block a migration, there's no teammate who sees the solution immediately. The Technical Architect's original +1 day buffer was dismissed — but that buffer was never about coordination overhead. It was about solo dev throughput risk.
+
+**The "10-minute Supabase signup" is misleading.** EU-hosted Supabase signup takes 10 minutes. But being ready to ship features from Supabase takes longer: RLS policy design (1-2h), migration workflow, environment variables, local dev setup. The 10-minute estimate covers account creation, not API-readiness.
+
+**Louis hasn't confirmed the pre-conditions are done:**
+- U16 (mentions légales templates): NOT STARTED
+- Supabase signup: UNCONFIRMED
+- Sprint 0 is not ready to start today
+
+**VERDICT on D95:** REOPENED — Sprint 0 5-day estimate requires confirmation that U16 is done AND Supabase is signed up. If either is incomplete, the realistic estimate is 6.5-7 days. The current 5-day estimate sets Louis up to cut corners under pressure — not acceptable for a compliance-heavy Sprint 0 where mistakes (TVA rounding, mentions légales) have legal consequences.
+
+---
+
+## Debate 109: U7 — Domain Deferral Is a Circular Dependency Trap
+
+**Challenge:** U7 (domain purchase) — Growth Strategist challenges the "wait for guerrilla test" deferral, arguing it's structurally indefinite and actively blocks pre-Sprint-0 outreach work.
+
+### Growth Strategist — The Circular Dependency
+
+**Assumption challenged:** That deferring domain purchase until "after MVP validation" is a safe deferral, not an indefinite one.
+
+**Core argument:**
+
+**The guerrilla test prerequisites don't exist.** The readiness protocol that replaced U1 has two preconditions: (1) Figma prototype of devis creation flow — doesn't exist yet, (2) guerrilla test scheduled at a wholesaler — not on anyone's calendar. "Post-guerrilla-test" could mean two weeks from now. Or four. There's no deadline.
+
+**Domain absence blocks expert-comptable outreach.** D91 resolved that Louis should book his own expert-comptable this week for validation. Cold outreach with a `lschvn.foo` subdomain signals side project, not trusted business tool. An email from `contact@alize.fr` (or whatever the eventual brand) looks different from one with a free subdomain.
+
+**Domain absence undermines GetApp/Capterra credibility.** D94 says claim Week 1, publish Week 3-4. An empty profile on a comparison site with a `lschvn.foo` subdomain is worse than no profile — it flags the product as early-stage before a single screenshot exists.
+
+**"False progress" cuts both ways.** The verdict warned that buying a domain creates cognitive commitment that makes pivots harder. But "domain can wait indefinitely" creates its own inertia — every week without a real domain is another week of building on infrastructure that communicates "side project" to every professional contact.
+
+**The fix is surgical, not expensive:** Buy the domain now, park it, settle the branding in Sprint 0. Defer the *name decision*, not the *domain purchase*. A parked domain costs €10-15/year and blocks nothing.
+
+**VERDICT on U7:** REOPENED — U7 deferral should be refined: buy the domain now (park it), defer the brand/name decision. The domain purchase is infrastructure, not branding. Domain absence actively blocks expert-comptable outreach and comparison site credibility. "Wait for guerrilla test" has no timeline because the test prerequisites don't exist yet.
+
+---
+
+## Debate 110: Conversion Trigger — Built for the Wrong Artisan Archetype
+
+**Challenge:** D96/D104 (conversion trigger) — Technical Architect challenges the assumption that limit-hit or first-paid-facture triggers conversion for the primary persona (Marc with 6-7 steady clients on verbal agreements).
+
+### Technical Architect — French BTP Runs on Verbal Agreements
+
+**Assumption challenged:** That a formal written devis precedes payment — and therefore the conversion trigger (limit-hit OR first paid facture) fires when Marc crosses a threshold.
+
+**Core argument:**
+
+**French BTP runs on verbal agreements.** Marc's steady clients call him, he shows up, the work gets done. No formal devis. No paper trail in the app. The primary persona — solo artisan with 6-7 established clients, repeat work, verbal approvals — represents a large segment of the market the product is designed for. For this archetype, the app's core value (professional devis creation) is irrelevant. He doesn't send formal devis to people who already trust him.
+
+**The limit-hit trigger doesn't fire for this archetype.** 5 active devis / 10 clients limits only matter if Marc is creating formal written devis. For an artisan whose client relationships are managed by phone calls and WhatsApp messages, those limits are invisible. He can operate for months, even years, inside the Free tier without ever hitting the hard gate — not because the product failed him, but because his business never produced the formal document that the conversion mechanism requires.
+
+**The first paid facture trigger is worse.** It requires: (1) formal devis sent, (2) client formally accepts, (3) client pays. For a verbal-agreement workflow, none of these steps exist. The trigger fires on ~5% of new-client situations, zero for repeat-client situations.
+
+**This isn't a limit calibration problem.** The debate has spent cycles arguing 5 vs 10 devis, first-paid vs first-sent. These are the wrong arguments. The real problem: the conversion architecture assumes formal documents drive the business. For the artisan who operates on relationships and verbal commitments, both the limit-hit and the paid-facture triggers are structurally blind.
+
+**The real question never resolved:** What conversion trigger fires for the artisan who never sends a formal devis because his clients don't require one?
+
+**VERDICT on D96/D104:** REOPENED — The conversion trigger (limit-hit or first paid facture) assumes formal written devis exist. For French BTP verbal agreement workflows, both triggers may never fire. A different conversion mechanism is needed for the repeat-client, verbal-agreement archetype — or the product's addressable market is smaller than the feature set implies.
+
+---
+
+*Last updated: 2026-03-30T21:13*
