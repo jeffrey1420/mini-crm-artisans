@@ -511,3 +511,32 @@ The following were overengineered or wrong:
 - [ ] **D71 NEW:** Sprint 0 = 5 days. Sequential numbering removed entirely from Sprint 0. Fastify + Postgres only. Days 1-2: client.type + mentions légales + line item schema + TVA arrondi commercial engine. Days 3-4: Devis document model. Days 4-5: REST API scaffold + JWT auth for React Native integration.
 - [ ] **D72 NEW:** U12 (expert-comptable playbook) — initiate this week. Louis asks his accountant: (1) do you recommend software to clients? (2) would you demo? (3) can you intro 2-3 colleagues? Target: 3 expert-comptables referencing 50+ sole trader clients by Month 2.
 - [ ] **D72 NEW:** Expert-comptable GTM = Phase 1 parallel track alongside digital channels. Warm outreach timeline is days, not months.
+
+---
+
+## New from Pulse 2026-03-30T16:57
+
+### Three New Debates (Technical Architect, Growth Strategist, Product Strategist)
+
+**Debate 73 (Technical Architect):** Sprint 0 5-day estimate challenged on three independent grounds:
+1. JWT auth is 2-3 days (not 0.5-1 day) — scaffold ≠ production auth system
+2. Mentions légales require 8 combinations (4 templates insufficient) — template engineering required
+3. "Minimal" Devis model missing status enum guarantees Sprint 1 retrofitting mid-development
+
+**Revised Sprint 0 estimate: 7 days OR 5 days with reduced scope (auth bypass + 4 template combos + status enum).**
+
+**Debate 74 (Growth Strategist — D43/D46/D51/D70):** Free tier conversion framework challenged — the Product Strategist keeps winning debates by improving Free tier quality, which reduces conversion pressure. No specific conversion mechanism has been defined for "how a Marc at 4/5 devis decides to pay €29." D43/D46/D51/D70 REOPENED.
+
+**Debate 75 (Product Strategist — D5/D59):** €29 price anchor challenged:
+1. Wrong input variable: artisan billing rate €30-45/h (not €50-80/h), so €29 = 50min not 1h
+2. €29 for unknown product vs established competitors (Tolteck €19, Obat €17) creates trust barrier before Free tier proves value
+3. Lifetime €29 lock creates pricing ceiling that prevents future increases
+
+### Action Items from this pulse:
+- [ ] **Debate 73 UPDATED:** Sprint 0 revised to 7 days OR 5 days with auth bypass (API key temp) + 4 mentions légales combos (factures only) + devis.status enum in Sprint 0 schema
+- [ ] **Debate 73 NEW:** JWT auth deferred to Sprint 1 — use API key bypass or no-auth for Sprint 0 mobile integration. Fastify JWT scaffold can ship in Sprint 0 but production auth (refresh rotation, Keychain storage, refresh queue) ships Sprint 1.
+- [ ] **Debate 73 NEW:** Mentions légales scoped to 4 most-critical combinations (particulier facture, professionnel français facture, professionnel UE facture, professionnel hors-UE facture). Devis inherits from client type only. Full 8-combination system deferred to Sprint 2.
+- [ ] **Debate 73 NEW:** Devis status enum (draft/sent/accepted/rejected/expired) added to Sprint 0 schema — 30min of schema work that saves Sprint 1 migration.
+- [ ] **Debate 74 NEW:** Define specific conversion mechanism — what is the exact moment/condition when Marc decides to pay €29? Not "better Free tier" — a specific trigger. If it can't be defined, the conversion model is broken.
+- [ ] **Debate 75 UPDATED:** Recalibrate value anchor to €35/h (realistic artisan rate). Kill lifetime €29 lock. Replace with "€19 early access for first 3 months → €29 standard."
+- [ ] **Debate 75 NEW:** Add social proof signals to landing page BEFORE €29 price appears (testimonials, expert-comptable mention, usage numbers) — reduce price credibility gap for unknown product.
