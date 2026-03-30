@@ -1045,3 +1045,23 @@ The following were overengineered or wrong:
 - [ ] **D56 NEW:** Month 1-3 GTM execution order: Week 1 (referral tracking + personal network), Week 2 (prescriber list), Week 3-4 (first prescriber outreach calls), Month 2 (GetApp/Capterra profiles published with beta reviews).
 
 *Last updated: 2026-03-30T23:31*
+
+---
+
+## New from Pulse 2026-03-30T23:48 — Three Resolved (D56, D81/C, D93)
+
+### Resolved
+- **D56 (SEO as Month 1-3 primary):** Growth Strategist won — SEO is the only channel Louis can execute alone with compounding returns. Community seeding pushed to Month 4+. Prescriber cold outreach Month 4+. Warm personal network introductions Month 1-3.
+- **D81/C (Offline architecture):** Technical Architect won — expo-sqlite replaces AsyncStorage + retry queue. Background sync worker. Server-wins. +1 day to Sprint 0.
+- **D93 (Onboarding):** Product Strategist won — office hours link moves from onboarding to Settings/Help. No call offered during onboarding. Discovery calls replaced with guerrilla test at Point P.
+
+### New action items from this pulse:
+- [ ] **D56 NEW:** Write one SEO-optimized landing page targeting "logiciel devis facture artisan" — no blog, no content engine, just one high-intent conversion page with U3 simplicity frame. Ship with Sprint 0.
+- [ ] **D56 NEW:** "Comment avez-vous connu l'app?" tracking live from Day 1 signup.
+- [ ] **D56 NEW:** Claim and optimize GetApp/Capterra profiles Week 1, publish Week 3-4 (admin handler audience — secondary discovery path).
+- [ ] **D81/C NEW:** Sprint 0 includes expo-sqlite local persistence (not AsyncStorage). Background sync worker with `sync_status` enum (pending/synced/conflict). Server-wins conflict resolution.
+- [ ] **D81/C NEW:** Add 1 day to Sprint 0 estimate for expo-sqlite integration.
+- [ ] **D81/C NEW:** Sprint 0 cut order if needed: mentions légales plain text placeholder → WhatsApp PDF styling → client type field. Never cut SQLite.
+- [ ] **D93 NEW:** Office hours link lives in Settings → Help only. Not in onboarding flow. Last resort.
+- [ ] **D93 NEW:** Guerrilla test at Point P in Week 1 of Sprint 1 — 5 artisans with 90-second wizard prototype. Not warm-network discovery calls.
+- [ ] **D93 NEW:** If Sprint 1 guerrilla testing shows friction points solvable by human touch, office hours re-emerges with different positioning ("Louis is a real artisan tech guy") not as onboarding infrastructure.

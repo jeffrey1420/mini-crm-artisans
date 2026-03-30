@@ -6726,3 +6726,101 @@ Month 1-3 GTM priority order:
 
 *Last updated: 2026-03-30T23:31*
 
+
+---
+
+## Pulse 2026-03-30T23:48 — Three Resolved (D56 Final, D81/C, D93)
+
+### Debate 129: D56 — SEO as Month 1-3 Primary Channel (FINAL)
+
+**Challenge:** The 23:21 verdict pushed SEO to Month 6+ and community seeding to Month 4+. The 23:31 verdict identified Louis has no BTP social capital for community seeding or cold prescriber outreach. But no formal resolution of what Month 1-3 digital acquisition looks like.
+
+### Growth Strategist — SEO Is the Only Executable Month 1-3 Channel
+
+**Assumption challenged:** "Prescriber outreach is the Month 1-3 primary channel." — and by extension, "SEO is Month 6+."
+
+The 23:31 verdict correctly identified that Louis has no BTP social capital for community seeding. The same logic applies to cold prescriber outreach. Building prescriber relationships from zero in Month 1-3 is a 6-month project. SEO requires only content and a domain.
+
+**Core argument:**
+1. SEO compounds; prescriber outreach doesn't. A ranked article serves every artisan in France next month. A prescriber relationship serves one.
+2. "Month 6+ SEO" means starting from zero domain authority just as the product gains traction — a 6-month head-start gap to climb.
+3. Louis writes the content himself (knows the product), ships it with Sprint 0, Google indexes in weeks.
+4. French artisans DO search for software solutions — bottom-of-funnel transactional queries like "logiciel devis facture artisan android."
+
+**What "SEO as Month 1 primary" means in practice:**
+- Target 3-5 transactional keywords in devis/facture/gestion artisan problem space
+- One landing page optimized for conversion (U3 simplicity frame, U6 headline)
+- Basic on-page SEO — no blog for Month 1
+- "Comment avez-vous connu l'app?" tracking live from Day 1
+- Community seeding (Month 4+) amplifies what SEO started
+
+**Assumptions retired:**
+- "SEO is Month 6+" — RETIRED
+- "Prescriber outreach is Month 1-3 primary" — CORRECTED to warm only (existing relationships)
+- "Community seeding is Month 1-3" — RETIRED (Month 4+)
+
+**Verdict on D56:** SEO is Month 1-3 primary digital acquisition channel. One high-intent landing page targeting "logiciel devis facture artisan," shipped with Sprint 0. Community seeding Month 4+. Prescriber outreach cold starts Month 4+. Personal network warm introductions Month 1-3.
+
+---
+
+### Debate 130: D81/C — expo-sqlite Replaces AsyncStorage + Retry Queue
+
+**Challenge:** D81/C (REOPENED at 23:21) — The settled assumption that "AsyncStorage + retry queue = sufficient offline capability for v1" was never formally resolved.
+
+### Technical Architect — Offline Theatre Is Not Offline Capability
+
+**Assumption challenged:** "AsyncStorage + retry queue is sufficient for v1 offline capability."
+
+**Core argument:**
+AsyncStorage is key-value storage. It corrupts on phone death. It has no query capabilities. It cannot model a job with line items, photos, and relations. The retry queue sits on top of AsyncStorage — so when AsyncStorage loses data, the queue loses data too. This is not resilient architecture; it is fragile architecture with extra steps.
+
+The retry queue fails on OS process kills, app backgrounding, and phone reboots mid-write. For an artisan logging 4 hours of labour on a rural job site, phone dying is not theoretical — it's Tuesday. Lost job entries = lost revenue tracking = lost faith in the product.
+
+The "1-2 day cost" framing is the most dangerous settled assumption. The alternative doesn't ship debugging time instead of building time. The retry queue needs its own error handling, partial-sync recovery, dead-queue detection, and manual override UI — hidden days spread across every subsequent sprint.
+
+**Verdict on D81/C:** RESOLVED — Sprint 0 uses **expo-sqlite** as local persistence. Background sync worker (not retry queue) reads `sync_status` flags. Server-wins conflict resolution. No conflict UI until v1.2. Sprint 0 impact: **+1 day**. AsyncStorage removed from offline architecture entirely.
+
+**Cut order if Sprint 0 needs buffer:** mentions légales plain text placeholder → WhatsApp PDF styling → client type field. Never cut the local database.
+
+---
+
+### Debate 131: D93 — Office Hours Link Moved to Settings (Not Onboarding)
+
+**Challenge:** D93 (REOPENED at 23:21) — The "opt-in office hours link" replacement was proposed but never challenged on whether it undermines the "Sans vous prendre la tête" signal.
+
+### Product Strategist — "Opt-In Office Hours" Is a Conversion Anxiety Signal
+
+**Assumption challenged:** "Office hours (opt-in) is the right way to deliver human touch in onboarding."
+
+**Core argument:**
+When "book a call" appears anywhere in onboarding — even opt-in, even de-emphasized — it implicitly answers a question the artisan hasn't asked yet: *"Do I need help to use this?"*
+
+This is the exact inverse of the product's core promise. "Sans vous prendre la tête" means "you don't need help." "Book a call with us" means "you probably do." Every artisan who hesitates before clicking "office hours" has now doubt-tested the product's ease.
+
+The second problem: "5 discovery calls with warm contacts" validates whether people who already trust Louis would take a call — not whether cold-signup artisans (who found the app, downloaded it, opened it at 6pm on a Tuesday) need human onboarding. Guerrilla testing at Point P with a wizard prototype captures the actual stress environment and answers: "Can a real artisan on a real job site create a devis in 90 seconds?"
+
+**Verdict on D93:** RESOLVED — Free tier onboarding at launch:
+1. 90-second wizard with sensible defaults (business name, métier, EUR, 30-day payment terms)
+2. First screen after signup: "Créer un devis" immediately available. No slot booking. No call offered. No "are you ready?" modal.
+3. Office hours link lives in **Settings → Help**, not onboarding. Last resort, not a suggested path.
+4. Drop the 5 discovery calls. Replace with: guerrilla test at Point P in Week 1 of Sprint 1.
+5. If Sprint 1 guerrilla testing shows real friction points that human touch solves, office hours becomes a growth lever — positioned as "Louis is a real artisan tech guy" not "our product requires a call."
+
+**What stays settled:**
+- Mandatory Guided Creation Flow: killed
+- 5-minute/evening slot booking: killed
+- Contact import as primary path: killed
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D56 | Digital acquisition (Month 1-3) | SEO as primary — one high-intent landing page shipped with Sprint 0 | 2026-03-30T23:48 |
+| D81/C | Offline architecture | expo-sqlite + background sync worker. Server-wins. +1 day to Sprint 0. AsyncStorage removed. | 2026-03-30T23:48 |
+| D93 | Onboarding | 90-second wizard ships. Office hours link → Settings/Help. No call in onboarding flow. Discovery calls → guerrilla test at Point P. | 2026-03-30T23:48 |
+
+---
+
+*Last updated: 2026-03-30T23:48*
