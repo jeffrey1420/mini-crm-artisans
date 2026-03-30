@@ -1,56 +1,62 @@
-# Mini-CRM — Resolved Decisions & TODO
+# Mini-CRM → Devis & Factures — Resolved Decisions & TODO
 
-> Auto-generated from debate log. Updated by 5-min pulse agents.
+> **Pivot applied 2026-03-30** — Based on external review. Full pivot from "CRM for artisans" to "devis/factures/relances tool."
 
 ## ✅ Resolved Decisions
 
 | ID | Topic | Decision | Source | Date |
 |----|-------|----------|--------|------|
-| D1 | Mobile-first | Mobile-first, responsive desktop | Product Strategist | 2026-03-30 |
-| D2 | Pricing | €29/€49/€89 tiered (Solo €29 unchanged, Pro €49, Business €89 up from €79) | Growth Strategist | 2026-03-30 |
-| D3 | Stack | Nuxt 3 + Supabase → REVISED to OVH self-hosted Postgres | Technical Architect | 2026-03-30 |
-| D4 | Multi-user | Single-user MVP, multi-user in Q2 | Technical Architect | 2026-03-30 |
-| D5 | Offline mode | Online-first MVP, offline within 6 months | Compromise | 2026-03-30 |
-| D6 | Payments | Stripe + CB first, Lyf Pay Year 2 | Growth Strategist | 2026-03-30 |
-| D7 | Kanban | 4-column (Devis/Accepté/En cours/Terminé), tap-to-move — REVISED: secondary tab only | Debate 14 resolution | 2026-03-30 |
-| D14 | Core view | Client Timeline home, Kanban in secondary "Jobs" tab | Debate 14 resolution | 2026-03-30 |
-| D8 | Trial length | 30 days (was 14 vs 30) | Growth Strategist | 2026-03-30 |
-| D9 | Stack (revisited) | OVH self-hosted Postgres day-one (was Supabase) — REVISED: bare VPS replaced with OVH Cloud SQL managed Postgres | Tech Architect (Debate 13 revision) | 2026-03-30 |
-| D13 | Database ops | OVH Cloud SQL managed Postgres (not bare VPS) — self-hosted = not self-operated | Debate 13 resolution | 2026-03-30 |
-| D15 | Pricing (revisited) | Keep €29 solo, ROI story in onboarding not on pricing page | Growth Strategist | 2026-03-30 |
+| D1 | Positioning | Kill "CRM" — sell "devis, factures, relances" | External review | 2026-03-30 |
+| D2 | MVP scope | 4 features only: client file, quote, invoice, reminder | External review | 2026-03-30 |
+| D3 | Primary persona | Marc — solo smartphone-native artisan | External review | 2026-03-30 |
+| D4 | Stack | Single managed Postgres, NOT per-customer VPS | External review | 2026-03-30 |
+| D5 | Pricing | €29/€49/€79 tiered (kept from previous) | Previous debate | 2026-03-30 |
+| D6 | Trial | 30 days (kept from previous) | Previous debate | 2026-03-30 |
+| D7 | Architecture | Nuxt 3 + OVH managed Postgres | Updated | 2026-03-30 |
+| D8 | E-invoicing | v2 feature (Chorus Pro compatible) | External review | 2026-03-30 |
+| D9 | Not MVP | No Kanban, no multi-user, no offline, no API keys | External review | 2026-03-30 |
+| D10 | Buyer trigger | "Admin pain" not "CRM need" | External review | 2026-03-30 |
 
-## 🔄 Unresolved — Needs Louis Decision
+## 🔄 Still Unresolved
 
-| ID | Topic | Options | blockers |
-|----|-------|---------|----------|
-| U1 | Contact import MVP | Add vCard + phone import to MVP scope | Was marked "Soon" in feature matrix |
-| U2 | PWA vs Native | Capacitor native shell recommended over PWA | "PWA acceptable" needs revisiting |
-| U3 | GTM channel | Trade fairs vs digital-first (Google/Facebook) | €1k vs €360 CAC difference |
-| U4 | Home view — Dashboard | Client Timeline vs Stats Dashboard as home | Debate 16 — two product identities |
+| ID | Topic | blockers |
+|----|-------|----------|
+| U1 | Real discovery | Need to watch 10 artisans do admin tasks before building |
+| U2 | E-invoicing platform | Which Chorus Pro alternative for MVP? |
+| U3 | Landing page angle | ROI vs simplicity framing |
 
-## 📋 Current TODO (from debates)
+## 📋 Current TODO
 
-- [ ] **D9/D13 UPDATE:** Revise `04-technical-architecture.md` — replace all Supabase references with OVH Cloud SQL (managed Postgres, not bare VPS)
-- [ ] **D13:** Add OVH Cloud SQL to infrastructure costs — verify free tier limits, plan scaling path (Starter 1vCPU/2GB → Business 2vCPU/4GB)
-- [ ] **D14 UPDATE:** Revise `03-feature-matrix.md` — Client Timeline is home view, Kanban moves to secondary "Jobs" tab
-- [ ] **D15 UPDATE:** Add ROI framing to onboarding email sequence and in-app usage reports; update landing page secondary copy with ROI proof points
-- [ ] **D15 UPDATE:** Revise pricing page — keep €29 solo, €49 Pro, €89 Business; add ROI proof points below fold
-- [ ] **U1:** Move contact import (vCard, phone) from "Soon" to MVP scope in `03-feature-matrix.md`
-- [ ] **U2:** Reconsider PWA vs Capacitor — update mobile strategy
-- [ ] **U3:** Kill trade fair budget, reallocate to Google Ads + Facebook Groups
-- [ ] **U4:** Debate 16 — decide between Client Timeline home vs. Dashboard home
-- [ ] **Debate 10:** Add import buttons to MVP — update feature matrix
-- [ ] **Debate 11:** Capacitor investigation — add to devops/frontend roadmap
-- [ ] **Debate 12:** Rebalance GTM — update marketing roadmap with digital-first priority
+### Before Building (Do First)
+- [ ] Go watch 10 artisans create quotes and chase payments (NOT more docs)
+- [ ] Pick one: Tolteck competitor or Tolteck complement?
+- [ ] Define e-invoicing approach (Chorus Pro API vs private provider)
+- [ ] Buy domain (not alize, something memorable)
 
-## 🔜 Next Sprint Decisions
+### MVP Build (After Discovery)
+- [ ] Client file feature
+- [ ] Quote/devis feature (create, send via WhatsApp)
+- [ ] Invoice/facture feature (French-legal, sequential numbering)
+- [ ] Reminder/relance feature
 
-- Referral program design (€20 credit vs cash)
-- Stripe + CB integration spec
-- vCard parser approach (npm package vs custom)
-- Debate 16: Landing page ROI-first ("gagnez 2h/semaine") vs simplicity-first ("simple comme WhatsApp")
-- Auth method: magic link vs. phone OTP at signup (phone-first adds friction but enables SMS reminders)
+### NOT Building Until Post-Launch
+- [ ] Multi-user
+- [ ] Kanban pipeline
+- [ ] Per-customer VPS
+- [ ] Offline mode
+- [ ] API keys/webhooks
+- [ ] E-invoicing (v2 only)
+
+## 🚫 What We Deleted
+
+The following were overengineered or wrong:
+- Per-customer VPS architecture (too expensive, too complex)
+- Kanban as primary view (imposes PM thinking on people who don't manage projects)
+- Full multi-tenant architecture (not needed at launch)
+- OAuth/MFA for launch
+- Inventory management
+- Fancy analytics
 
 ---
 
-*Last updated: 2026-03-30T10:15:00Z*
+*Last updated: 2026-03-30*
