@@ -2732,4 +2732,60 @@ Ask: "How much time per week on devis/factures?" "What happens when you forget t
 
 ---
 
-*Last updated: 2026-03-30T16:17*
+*Last updated: 2026-03-30T16:31*
+
+---
+
+## Pulse 2026-03-30T16:31 — Three New Debates
+
+---
+
+## Debate 70: "Situation Financière" Snapshot Mispositions the Free Tier
+
+**Challenge:** D63 resolved that the "situation financière" snapshot is the Free tier's primary value output. Product Strategist challenges this.
+
+### Product Strategist — Document Archive > Financial Snapshot
+
+**Core argument:** A financial dashboard positions the product as "mini accounting software" — exactly where Pennylane and Indy live. Marc is a plumber, not a CFO. He doesn't come home thinking about outstanding devis aging buckets. The real Free tier value is the professional document archive — every devis and facture he's ever sent, organized by client, searchable, beautiful to look at. The document itself is the product, not a financial summary of it.
+
+**Assumption challenged:** "The Free tier's primary pull is a weekly financial snapshot." Marc's actual job is doing physical work. The snapshot may never get opened.
+
+**Proposed resolution:** Replace "situation financière" as primary Free tier pull with "professional document archive." Financial snapshot moves to €29 tier or removed.
+
+**Verdict on D63:** REOPENED — D63 needs revision. Document archive replaces financial snapshot as primary Free tier value output.
+
+---
+
+## Debate 71: Sprint 0 Is 5 Days, Not 3-4 — Dependency Chain Problem
+
+**Challenge:** D64 resolved Sprint 0 = Fastify + Postgres in 3-4 days. Technical Architect challenges the parallelization assumption.
+
+### Technical Architect — Sequential Dependency Chain Case
+
+**Core argument:** TVA, sequential numbering, mentions légales, and client-type schema share a single critical path through the line item schema. These are not independent workstreams — they are a dependency chain: client.type → mentions légales template → line item schema → TVA calculator. Additionally, sequential numbering for devis is legally unnecessary (only factures require gapless numbering). If we're building devis-only in Sprint 1, the numbering engine is Sprint 2 scope, not Sprint 0.
+
+**Assumption challenged:** "TVA, mentions légales, sequential numbering, and client-type can run in parallel over 3-4 days." They can't — they're sequential by dependency.
+
+**Proposed resolution:** Sprint 0 = 5 days. Day 1: client.type + mentions légales templates. Day 2: line item schema + TVA calculator. Day 3: Devis document model. Days 4-5: REST API scaffold. Sequential numbering removed from Sprint 0 scope entirely.
+
+**Verdict on D64:** REOPENED — Sprint 0 = 5 days, not 3-4. Sequential numbering for factures moved to Sprint 2.
+
+---
+
+## Debate 72: Expert-Comptable Referrals Should Not Be Phase 2
+
+**Challenge:** D55 deferred expert-comptable outreach to Phase 2 (6-18 month build). Growth Strategist challenges the assumption that this requires cold outreach.
+
+### Growth Strategist — Warm Network Access Case
+
+**Core argument:** The 6-18 month build time applies to cold outreach. Louis already has an expert-comptable. One warm conversation = immediate access to a professional network that routinely recommends software to clients. Expert-comptables already have established processes for software evaluation and recommendation — this is a professional service they provide, not a personal favor. More critically: the admin handler persona (the operational user who actually converts) discovers tools through her accountant, not through WhatsApp artisan groups. If we're not reaching her in Phase 1, we're not reaching our conversion target.
+
+**Assumption challenged:** "Expert-comptable outreach requires 6-18 months of relationship building." Louis has an existing accountant. The timeline is for cold outreach, not warm.
+
+**Proposed resolution:** Move expert-comptable outreach from Phase 2 to Phase 1. Louis asks his own accountant this week: (1) do you recommend software to clients? (2) would you demo? (3) can you intro 2-3 colleagues? U12 playbook actioned immediately.
+
+**Verdict on D55:** REOPENED — Expert-comptable outreach moved from Phase 2 to Phase 1. U12 to be actioned this week.
+
+---
+
+*Last updated: 2026-03-30T16:31*

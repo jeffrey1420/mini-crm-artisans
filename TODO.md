@@ -446,7 +446,7 @@ The following were overengineered or wrong:
 
 ---
 
-*Last updated: 2026-03-30T16:17*
+*Last updated: 2026-03-30T16:31*
 
 ## New from Pulse 2026-03-30T16:17 — Three Resolved
 
@@ -466,5 +466,27 @@ The following were overengineered or wrong:
 - [ ] **D54 UPDATED:** Sprint 0 definition of done — TVA calculator (Day 2), sequential numbering (Day 2), mentions légales renderer (Day 3). Compliance work is bounded and more tractable than previously estimated.
 - [ ] **U15 NEW:** Phase 1 revised protocol — workshop/job site observation via warm network introduction (not wholesaler). Pre-work questions via WhatsApp before visiting. 30-45 min silent observation. Red flags: performed demo, can't show real workflow, tries to sell you something.
 - [ ] **U15 NEW:** Alternative Phase 1 — Facebook groups / WhatsApp clusters (asynchronous observation of admin pain conversations). Zero-friction qualitative research without physical presence.
+
+## New from Pulse 2026-03-30T16:31 — Three Reopened
+
+### Reopened (D63, D64, D55):
+- **D63 (Free tier pull):** REOPENED — Product Strategist argues "situation financière" snapshot positions us as mini accounting software (Pennylane/Indy territory). The real Free tier value is the professional document archive (every devis/facture ever sent, organized by client). Snapshot moves to €29 tier or removed.
+- **D64 (Sprint 0 timeline):** REOPENED — Technical Architect argues Sprint 0 = 5 days, not 3-4. The workstreams (TVA, mentions légales, sequential numbering) share a dependency chain through the line item schema and cannot run in parallel. Additionally, sequential numbering for devis is legally unnecessary (only factures require gapless numbering).
+- **D55 (Expert-comptable GTM):** REOPENED — Growth Strategist argues expert-comptable outreach should be Phase 1, not Phase 2. Louis has an existing accountant — one warm conversation = immediate network access. The admin handler (the operational buyer) discovers tools through her accountant, not through WhatsApp artisan groups.
+
+### New action items from this pulse:
+- [ ] **D63 REVISED:** Primary Free tier pull = professional document archive (all sent devis/factures organized by client, searchable, beautiful), NOT financial snapshot
+- [ ] Financial snapshot (outstanding devis aging, revenue vs last month) moved to €29 tier or removed from Free tier entirely
+- [ ] **D63 NEW:** Design the "document archive" as the home screen of the Free tier — every devis/facture ever sent, tap to resend, tap to duplicate for new client
+- [ ] **D64 REVISED:** Sprint 0 = 5 days (not 3-4). Sequential numbering removed from Sprint 0 scope (devis doesn't need it; it's a Sprint 2 facture concern).
+- [ ] **D64 NEW:** Day 1: client.type enum + 4 mentions légales template files (plain text templates, not schema)
+- [ ] **D64 NEW:** Day 2: line item schema + TVA rate field (5.5/10/20%) + TVA arrondi commercial calculator
+- [ ] **D64 NEW:** Day 3: Devis document model (minimal — no facture yet, no numbering)
+- [ ] **D64 NEW:** Days 4-5: Fastify REST API scaffold + JWT auth + CRUD endpoints for React Native integration
+- [ ] **D55 REVISED:** Expert-comptable outreach moved from Phase 2 to Phase 1 — parallel track with digital channels
+- [ ] **D55 UPDATED:** U12 expert-comptable GTM playbook — document what to say, what materials to leave, how to position for admin handler audience — action this week
+- [ ] **D55 NEW:** Louis asks his own expert-comptable this week: (1) do you recommend software to clients? (2) would you demo? (3) can you intro 2-3 colleagues?
+- [ ] **D55 NEW:** Target: 3 expert-comptables referencing 50+ sole trader clients by Month 2
+- [ ] **D55 NEW:** Remove "6-18 month build" framing — warm outreach via existing accountant is not the same as cold outreach
 
 
