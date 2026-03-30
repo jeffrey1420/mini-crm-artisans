@@ -4485,3 +4485,71 @@ D93 is partially correct — Guided Creation Flow wins over Explore First. But t
 | D93 | Day 1 onboarding | Guided Creation Flow — evening-only framing (10-15 min), not 5-min daytime task. Day 1 split: daytime orientation + evening Guided Creation. Contact import secondary to manual entry. | 2026-03-30 |
 | D94 | GetApp/Capterra | NEW — Claim Week 1 (D85 confirmed). Publish Week 3-4 when screenshots, pricing, and 2-3 seed reviews are ready. | 2026-03-30 |
 
+
+---
+
+## Pulse 2026-03-30T19:15 — Growth Strategist Challenge
+
+## Debate 95: D76/D89 — The "First Accepted Devis" Conversion Trigger Assumes a Chain That Rarely Completes
+
+**Challenge:** D76 (Free tier conversion trigger, resolved: first accepted devis) and D89 (notification fires ONLY on first accepted devis event) established the conversion trigger as: Marc creates a devis → client accepts it → we push notification → he upgrades to €29. This chain has never been stress-tested against how French artisans actually operate.
+
+### Growth Strategist — The Three-Step Chain That Rarely Closes
+
+**Assumption challenged:** That "first accepted devis" reliably fires for French artisans using the app.
+
+**The chain has three required steps, each of which fails regularly:**
+
+**Step 1 failure: Marc doesn't send formal written devis to steady clients.**
+Marc has 6-7 steady clients. Dupont calls. Marc goes. Done. No formal written devis. No devis record. No acceptance event. Repeat clients may represent 60-80% of his actual work. The "first accepted devis" trigger fires for new-client situations only — a fraction of actual sales moments.
+
+**Step 2 failure: French BTP verbal agreement culture.**
+In French construction and artisan markets, verbal agreements are standard. Client says "ok go ahead" over the phone or in person. Work begins. No formal acceptance email, no signed document, no record in any system. The client accepted — but not in a way that produces a record. The acceptance never enters the app.
+
+**Step 3 failure: Even when a formal devis IS sent, Marc may never mark it accepted.**
+If the client accepts by phone ("c'est bon pour le devis"), Marc notes it mentally and moves on. Updating `devis.status = 'accepted'` requires Marc to remember to do it — and for what? The app never taught him that marking accepted matters. There's no UX forcing function that makes him do it.
+
+**The arithmetic problem:**
+- New client situations (where a new formal devis is sent): maybe 30-40% of Marc's actual sales events
+- Of those, formal written acceptance: maybe 50% (rest verbal)
+- Of those, Marc remembers to mark accepted: maybe 30%
+- Conversion trigger fires on: 30% × 50% × 30% = **~5% of actual new-client sales events**
+
+For repeat clients (60-70% of work): **zero fires**.
+
+**The repeat client problem is fatal:**
+If 60% of Marc's revenue comes from repeat clients who never receive a new formal devis, the conversion trigger fires on the remaining 40% of situations — and only 5% of those produce an accepted-devis event. The trigger fires on ~2% of actual business moments. Not zero, but insufficient to drive a conversion model.
+
+**D83 and D89 refinement made it worse:**
+D89 removed the configurable notification window. The notification now fires ONLY on first accepted devis. For the repeat-client artisan who never creates new formal devis for existing clients, this notification never fires at all.
+
+**The D76 resolution's own language reveals the flaw:**
+> "Votre devis pour [Client] a été accepté — passez à €29 pour suivre ce qui vous est dû."
+
+This message assumes Marc is tracking what clients owe him. But if he works primarily on verbal agreements and repeat client relationships, he's not sending devis to track — he's showing up and doing the work. The €29 tier message ("suivre ce qui vous est dû") assumes a pipeline of accepted, unpaid devis. For a repeat-client artisan, that pipeline doesn't exist.
+
+**Proposed resolution:**
+
+Replace "first accepted devis" with **"first sent devis"** as the conversion trigger.
+
+**New trigger:** When Marc sends his first devis (devis.status = 'sent', first time ever), push notification:
+> "Votre devis a été envoyé. Passez à €29 pour suivre vos clients, vos devis acceptés, et vos factures impayées."
+
+This fires on first devis sent — not on acceptance. It fires when Marc has experienced the core value (creating and sending a professional document). It does not require the client to do anything. It does not require Marc to remember to update status.
+
+**Why "first sent devis" is the correct trigger:**
+
+1. **It fires on first use, not on acceptance.** Marc's first action with the app is devis creation and sending. That's when he experiences the core value. The notification should fire at the moment of first demonstrated value, not on an external event he doesn't control.
+
+2. **It doesn't require client participation.** The entire acceptance chain (verbal → written → recorded) is eliminated. Marc sends. We know. Trigger fires.
+
+3. **It creates the right mental framing.** "I just sent my first devis" → "this works" → "should I pay for the version with more features?" That's the right conversion moment. "Your client accepted" → "you owe us money" is a debt collection moment, not a value moment.
+
+4. **It addresses the repeat-client gap.** Marc sends a devis to a new client. Fire. He upgrades to track more clients, send more devis, follow up professionally. The repeat-client gap (no new devis = no trigger) is partially mitigated by the trigger firing on first new-client interaction.
+
+**What this means for the €29 tier differentiation:**
+If the conversion trigger moves to "first sent devis," the €29 tier must differentiate on something other than "accepted devis tracking." It differentiates on: client limit (10 on Free vs unlimited on €29), advanced features (relances, multi-user?), priority support. The financial snapshot (D70: outstanding devis, pending factures) becomes the secondary conversion trigger — fires on first accepted devis as originally designed, but is not the primary mechanism.
+
+**Verdict on D76/D89:** REOPENED — The "first accepted devis" conversion trigger assumes a three-step chain that regularly fails in French artisan markets. Verbal agreements, repeat client relationships, and missing status updates all break the chain. Proposed replacement: "first sent devis" as primary conversion trigger. "First accepted devis" becomes a secondary notification within the €29 tier (financial snapshot), not the primary conversion trigger for Free → €29.
+
+*Last updated: 2026-03-30T19:15*

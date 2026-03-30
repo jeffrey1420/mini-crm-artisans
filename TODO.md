@@ -689,3 +689,15 @@ The following were overengineered or wrong:
 - [ ] **D94 NEW:** Week 3-4: publish profile once 2-3 seed reviews from beta/early users exist. Ask founding members to leave reviews as part of activation flow.
 - [ ] **D94 NEW:** Week 4-6: expert-comptable outreach (D87) generates organic review accumulation — ask satisfied accountants to leave reviews on GetApp/Capterra.
 
+
+## New from Pulse 2026-03-30T19:15 — D76/D89 Challenge: First Accepted Devis Trigger
+
+### REOPENED (D76/D89):
+- **D76/D89 (Conversion trigger):** Growth Strategist challenged "first accepted devis" as the conversion trigger. Three-step chain (create devis → formal acceptance → status update) fails regularly: (1) Marc doesn't send formal devis to repeat clients (60-70% of his work), (2) French BTP verbal agreements mean client "accepts" verbally without a record, (3) Marc may never mark status as accepted. Estimated trigger fires on ~5% of new-client situations, zero for repeat-client situations. Proposed replacement: "first sent devis" as primary conversion trigger. "First accepted devis" becomes a secondary €29 tier notification (financial snapshot trigger), not the primary Free → €29 conversion trigger.
+
+### New Action Items from this pulse:
+- [ ] **D76/D89 NEW:** Conversion trigger changed from "first accepted devis" to "first sent devis." Notification fires when Marc sends his first devis ever: "Votre devis a été envoyé. Passez à €29 pour suivre vos clients, vos devis acceptés, et vos factures impayées." No client acceptance required.
+- [ ] **D76/D89 NEW:** "First accepted devis" becomes the financial snapshot trigger for €29 tier (D70: "vous avez €X en devis acceptés en attente de paiement"), not the primary Free → €29 conversion trigger.
+- [ ] **D76/D89 NEW:** UX forcing function: 24h after sending a devis, prompt "Client accepted? Tap yes → we update the status." This maintains accepted-devis data for the €29 tier financial snapshot without making it the conversion trigger.
+- [ ] **D76/D89 NEW:** €29 tier differentiation: client limit (10 on Free vs unlimited on €29), relances, financial snapshot. First sent devis fires the conversion ask; accepted-devis data enriches the €29 tier experience.
+- [ ] **D76/D89 NEW:** Landing page + onboarding messaging update: "Créez et envoyez votre premier devis en 5 minutes" — the first sent devis moment is the core value moment, not the accepted-devis moment.
