@@ -286,3 +286,44 @@ Compromise:
 ---
 
 *Last updated: 2026-03-30*
+
+---
+
+## Debate 8: Trial Length — 14 Days vs 30 Days
+
+### The Disagreement
+
+- **Product Strategist (14 days):** Urgency creates decisions. High-intent users convert in 3-5 days. More trial = more dead accounts cluttering DB. French artisans are reactive — if the app doesn't solve their problem in session 1, another 2 weeks won't help.
+- **Growth Strategist (30 days):** You might never catch them during an active job cycle in 14 days. French artisans are cautious, they ask neighbors. The conversion moment is "first actual job created in the app" — can't rush that. Better churn signal: real rejections vs. "never got around to it."
+
+### Resolution
+
+**Decision: 30 days**
+
+The 30-day argument is stronger for this specific audience. French artisans work on irregular cycles — a plumber might have 2 urgent callouts then nothing for 10 days. 14 days might miss their entire active period. The conversion moment ("first job created in the app") can't be forced. 30 days gives better churn signal: real rejection vs. time pressure.
+
+---
+
+## Debate 9: Stack — Supabase vs OVH Self-Hosted Postgres
+
+### The Disagreement
+
+- **Technical Architect (original decision):** Use Supabase Frankfurt — fast to build, real-time built-in, migration path open.
+- **Technical Architect (challenging):** "We migrate later" never happens under pressure. Self-hosted Postgres on OVH is a sales differentiator — "Toutes les données sont sur notre serveur OVH, en France" answers every CNIL question completely. Cyber-insurance requirements are coming for French businesses. OVH already fits the stack.
+
+### Resolution
+
+**Decision: OVH Self-Hosted Postgres — Day One**
+
+The challenge is valid and strong. The "we'll migrate later" plan is exactly the kind of technical debt that kills 3-person teams. Self-hosted Postgres on the customer's own OVH VPS from day one:
+- Answers every compliance question completely
+- No DPA, no SCCs, no trust exercise with a third party
+- OVH already in the ecosystem (Louis's gateway is already there)
+- Fixed cost per VPS vs. Supabase's scaling unpredictable costs
+- Architecture never changes — no migration debt
+
+**Stack revised:** Nuxt 3 + Self-Hosted Postgres on customer OVH VPS (not Supabase).
+
+---
+
+*Last updated: 2026-03-30T09:43:00Z*
