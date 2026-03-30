@@ -48,6 +48,7 @@
 | D89 | Situation financière notification | RESOLVED — event-only notification (first accepted devis). Configurable digest window REMOVED. D76 conversion trigger = notification trigger. | Debate 89 (Product Strategist) | 2026-03-30 |
 | D90 | Sprint 0 timeline estimate | RESOLVED — 5.5-6.5 days with parallel backend + mobile tracks. API contract defined Day 1. | Debate 90 (Technical Architect) | 2026-03-30 |
 | D91 | Expert-comptable validation vs referral | RESOLVED — U12 split: validation (Week 1, Louis's own, no prerequisites) ≠ referral (Week 4-6, with testimonials). | Debate 91 (Growth Strategist) | 2026-03-30 |
+| D95 | Sprint 0 parallelization | CHALLENGED — 5.5-6.5 day estimate assumes organizational parallelism (two teams) applied to solo dev. Three independent risks: (1) solo dev sequential, not parallel (+1 day), (2) mentions légales = legal research, not template engineering (+0.5-1 day), (3) integration underbudgeted (+0.5 day). Realistic solo dev estimate: 7-8 days without scope cuts. | Debate 95 (Technical Architect) | 2026-03-30 |
 
 ## 🔄 Reopened This Pulse (Resolved in 15:17 Pulse)
 
