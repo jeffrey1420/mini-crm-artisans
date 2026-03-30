@@ -16,25 +16,25 @@
 | D8 | E-invoicing | v2 feature (Chorus Pro compatible) | External review | 2026-03-30 |
 | D9 | Not MVP | No Kanban, no multi-user, no offline, no API keys | External review | 2026-03-30 |
 | D10 | Buyer trigger | "Admin pain" not "CRM need" | External review | 2026-03-30 |
+| D11 | PWA vs Native | PWA first (launch), native within 6 months | Debate 11 revision | 2026-03-30 |
+| D12 | Landing page | Simplicity-first — "Vos devis et factures, sans vous prendre la tête" | Debate 19 (Product Strategist) | 2026-03-30 |
+| D13 | Home view | Job-first — Active Job Card as home anchor, not Dashboard or Timeline | Debate 20 (Technical Architect) | 2026-03-30 |
+| D14 | E-invoicing timing | v2 — NOT Day 1 (Debate 21 Growth Strategist) | Debate 21 | 2026-03-30 |
 
 ## 🔄 Still Unresolved
 
 | ID | Topic | blockers |
 |----|-------|----------|
 | U1 | Real discovery | Need to watch 10 artisans do admin tasks before building |
-| U2 | E-invoicing platform | Which Chorus Pro alternative for MVP? |
-| U3 | Landing page angle | ROI vs simplicity framing |
-| U4 | Home view | Dashboard-first vs Client Timeline-first |
-| U5 | E-invoicing timing | Day 1 vs v2 (Debate 17 — regulatory window argument) |
-| U6 | Landing page headline | "Vos clients vous payent en 48h" vs simplicity-first |
+| U7 | Domain | Buy domain — not alize, something memorable for devis/factures tool |
 
 ## 📋 Current TODO
 
 ### Before Building (Do First)
-- [ ] Go watch 10 artisans create quotes and chase payments (NOT more docs)
+- [ ] Go watch 10 artisans create quotes and chase payments (U1 — NOT more docs)
 - [ ] Pick one: Tolteck competitor or Tolteck complement?
-- [ ] Define e-invoicing approach (Chorus Pro API vs private provider)
-- [ ] Buy domain (not alize, something memorable)
+- [ ] Buy domain (U7) — something memorable for devis/factures tool
+- [ ] Build the Active Job Card data model (`jobs.status`, `jobs.scheduled_date`, `jobs.updated_at`)
 
 ### MVP Build (After Discovery)
 - [ ] Client file feature
@@ -42,19 +42,25 @@
 - [ ] Invoice/facture feature (French-legal, sequential numbering)
 - [ ] Reminder/relance feature
 
-### If E-Invoicing Day 1 (Decision pending — see U5)
-- [ ] Pick one private provider: Factea vs Tebilis (2-3 sprint integration)
-- [ ] Integrate provider inbox API for e-invoice receiving
-- [ ] Add "E-invoice ready" badge to landing page
+### Home View Build (D13 — Job-first)
+- [ ] Active Job Card as home screen anchor (most recent in_progress job)
+- [ ] Upcoming Jobs Strip (next 3 jobs by scheduled date)
+- [ ] Quick stats bar (de-emphasized counts for relances/factures impayées — tap to see full list, not alarm on home)
+- [ ] "Relances dues" and "Devis en attente" move to secondary "À suivre" tab (not home screen)
+- [ ] Client Timeline remains accessible from client profile (not home)
 
-### Landing Page (Decision pending — see U3, U6)
-- [ ] Test "Vos clients vous payent en 48h" headline (A/B vs hybrid)
-- [ ] Keep simplicity as subhead feature, not lead hook
-- [ ] Add peer social proof section (French tradespeople testimonials)
+### Landing Page Build (D12 — Simplicity-first)
+- [ ] Headline: "Vos devis et factures, sans vous prendre la tête."
+- [ ] Subheadline: "Pas de formation. Pas de tableau comparatif. Vous envoyez votre premier devis en 5 minutes, depuis votre téléphone."
+- [ ] Remove "Vos clients vous payent en 48h" from primary headline (keep as social proof below fold)
+- [ ] Keep WhatsApp mention in subhead or features section (not as primary hook)
+- [ ] Add peer social proof (French tradespeople testimonials) — secondary, not primary
+- [ ] NO ROI claims on landing page — simplicity + outcome framing only
 
-### Home View (Decision pending — see U4)
-- [ ] If Dashboard-first: implement 4-card layout (Relances dues, Devis en attente, À suivre, Jobs du jour)
-- [ ] Client Timeline moves to "Clients" tab (secondary, accessible from Dashboard)
+### E-Invoicing v2 (D14 — Not Day 1)
+- [ ] Remove "Day 1 e-invoicing" from any planning assumptions
+- [ ] When v2 time: evaluate Factea first (API quality + Peppol + solo artisan pricing)
+- [ ] E-invoicing inbox + "E-invoice ready" badge = v2 feature, not launch feature
 
 ## 🚫 What We Deleted
 
@@ -65,29 +71,25 @@ The following were overengineered or wrong:
 - OAuth/MFA for launch
 - Inventory management
 - Fancy analytics
+- Dashboard-first home view (wrong mental model for artisan)
+- Timeline-first home view (passive archive, not a launch point)
+- Day 1 e-invoicing (provider lock-in before product-market fit)
+- ROI-first landing page (invites comparison shopping)
 
 ---
 
-| U3 | Landing page | ROI vs simplicity framing | New: Product Strategist argues against "Simple comme WhatsApp" — ROI-first + control framing stronger |
-| U4 | Home view | Client Timeline vs Dashboard | New: Growth Strategist argues Dashboard-first creates daily habit, Timeline is passive |
-| U5 | PWA vs Native | Capacitor from day one | REVISED: PWA first (launch), native within 6 months — Debate 11 revision |
+## New from Pulse 2026-03-30T10:58
+
+### Resolved (D12, D13, D14):
+- **D12 (Landing):** Product Strategist won — simplicity-first beats ROI-first for acquisition. Headline: "Vos devis et factures, sans vous prendre la tête." U3 + U6 resolved.
+- **D13 (Home view):** Technical Architect won — neither Dashboard nor Timeline serves Marc's actual mental model. Home = Active Job Card. U4 resolved.
+- **D14 (E-invoicing):** Growth Strategist won — regulatory deadline is for senders, not buyers. Provider lock-in before PMF is wrong. U5 resolved. U2 (provider choice) deferred to v2.
+
+### Challenged assumptions this pulse:
+1. Landing page ROI framing (Position A) — challenged by Product Strategist
+2. Dashboard-first home view — challenged by Technical Architect (both sides wrong)
+3. Day 1 e-invoicing urgency — challenged by Growth Strategist (regulatory ≠ buy-side urgency)
 
 ---
 
-## New from Pulse 2026-03-30T10:19
-
-- **Debate 11 revision:** PWA first at launch, native app within 6 months post-launch (Capacitor hidden costs underestimated at 3-person MVP)
-- **Landing page (U3):** Product Strategist challenges "Simple comme WhatsApp" — attracts wrong customer, signals low value vs free; proposes "Gagnez 2h/semaine" + "ras-le-bol de courir" emotional hook
-- **Home view (U4):** Growth Strategist argues Dashboard-first ("À suivre", "Relances dues", "Devis en attente", "Ce mois-ci") creates daily habit vs Timeline's passive archive behavior
-
----
-
-## New from Pulse 2026-03-30T10:46
-
-- **Debate 17 addendum (E-invoicing):** Product Strategist argues 2-3 sprint estimate is fiction — Factur-X XML schema + PPF integration = 6-8 sprints minimum. Regulatory deadline (Sept 2026) is not a notional target. Argues Day 1 e-invoicing isn't scope creep — it's the feature. Still UNRESOLVED but adds important technical complexity to the timeline assumption.
-- **Debate 16 addendum B (Home view):** Technical Architect challenges Dashboard "indispensable" claim — indispensable ≠ wanted. "Relances dues" is an alarm about undone tasks, not a reason to open the app. Guilt-driven urgency creates avoidance, not habit. Moat = becoming a place Marc *wants* to be, not a task manager with invoices.
-- **Debate 16 addendum C (Landing page):** Growth Strategist defends WhatsApp comparison — for Marc, WhatsApp is the OS of his business life, not a "free consumer app." WhatsApp signal reduces cognitive friction at signup. Value is in the features, not the comparison. Recommend keeping WhatsApp in subhead.
-
----
-
-*Last updated: 2026-03-30T10:46*
+*Last updated: 2026-03-30T10:58*
