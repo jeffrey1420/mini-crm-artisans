@@ -658,3 +658,26 @@ The following were overengineered or wrong:
 - [ ] **D91 NEW:** U12a (validation — THIS WEEK): Louis books his own expert-comptable. Ask: "Can I show you the devis flow and get your honest reaction?" No testimonials, no beta users, no prerequisites. Just a flow demo and feedback request.
 - [ ] **D91 NEW:** U12b (referral — Week 4-6): cold outreach to 5 colleague expert-comptables. Prerequisites: 10-20 active beta users, 1-2 testimonials, production-validated mentions légales. Frame: "We have artisans in your area using this — would you like to see how it handles BTP client mentions?"
 - [ ] **D91 UPDATED:** D85/D87 partially superseded by D91. GetApp/Capterra = Week 1 (unchanged). Expert-comptable validation = Week 1 (Louis's own, no prerequisites). Expert-comptable referral = Week 4-6 (with prerequisites).
+
+## New from Pulse 2026-03-30T19:00 — Three Specialist Debates
+
+### Resolved (D92, D93, D94):
+- **D92 (App Store launch):** iOS-first, Android Month 2. Validate platform split in Week 1 via geo-targeted Facebook/Instagram poll in Caen + competitor review count analysis. If Android majority confirmed → launch Android simultaneously or first. Android Play Store moderation risk is real for B2B finance apps.
+- **D93 (Day 1 onboarding):** Guided Creation Flow. 5-minute sequence: (1) full-screen "create your first devis in 60 seconds" intro card, (2) create first client via phone contact import or name/phone fallback, (3) create and send first devis via WhatsApp/email native share. Time-to-first-document is the primary retention driver. Position B (Explore First) is higher-risk for this persona.
+- **D94 (GetApp/Capterra):** Claim Week 1 (D85 confirmed). Publish Week 3-4 once screenshots, accurate pricing (Free + €29), feature matrix, and 2-3 seed reviews are ready. Empty skeleton profile is worse than no profile. Expert-comptable referral channel (D87) generates organic review accumulation in Week 4-6.
+
+### Challenged assumptions this pulse:
+1. Platform split is 50/50 (Mobile Growth challenged: population-level data doesn't apply to this B2B persona; actual split needs validation)
+2. "Explore First" is the safer onboarding choice (Product Strategist challenged: empty state leads to abandonment; time-to-first-document is the retention driver)
+3. GetApp/Capterra should be live at launch (Growth challenged: empty profile is worse than no profile; D85 conflated claiming with publishing)
+
+### New Action Items from this pulse:
+- [ ] **D92 NEW:** Week 1 platform validation — geo-targeted Facebook/Instagram poll in Caen ("What phone do you use for your business?" iOS/Android), €20-50 ad spend targeting 200+ artisans. Also: check 3-5 competitor App Store review counts (iOS vs Android) to infer platform split.
+- [ ] **D92 NEW:** If geo-targeted poll shows 55%+ Android → reverse launch order or go simultaneous. Document the decision rule before Sprint 0 starts.
+- [ ] **D93 NEW:** Design Guided Creation Flow — 5-minute onboarding sequence: (1) full-screen "create your first devis in 60 seconds" intro card with "Commencer" CTA, (2) create first client via phone contact import with name/phone fallback, (3) auto-suggest first line item + pre-set TVA at 10%, (4) preview screen showing actual devis document, (5) native share (WhatsApp pre-selected) → "Votre devis a été envoyé" confirmation.
+- [ ] **D93 NEW:** Onboarding must work offline — optimistic UI, client creation queues for sync, share action works immediately even without connectivity.
+- [ ] **D94 NEW:** GetApp + Capterra — Week 1: claim and verify ownership, enter basic company data, set to draft/private. Do NOT publish yet.
+- [ ] **D94 NEW:** Week 2-3: add 3-5 real product screenshots (devis creation, facture, document archive), accurate pricing ("Free plan. Pro: €29/month"), French-language description written for artisan audience, feature checklist matching MVP.
+- [ ] **D94 NEW:** Week 3-4: publish profile once 2-3 seed reviews from beta/early users exist. Ask founding members to leave reviews as part of activation flow.
+- [ ] **D94 NEW:** Week 4-6: expert-comptable outreach (D87) generates organic review accumulation — ask satisfied accountants to leave reviews on GetApp/Capterra.
+

@@ -4142,3 +4142,141 @@ D85/D87 partially updated: GetApp/Capterra = Week 1 (unchanged). Expert-comptabl
 ---
 
 *Last updated: 2026-03-30T18:45*
+
+---
+
+## Pulse 2026-03-30T19:00 — Three Specialist Debates
+
+---
+
+## Debate 92: App Store Launch — Simultaneous or Staged?
+
+**Challenge:** Should Mini-CRM launch on both iOS and Android simultaneously, or stage the launches?
+
+### Mobile Growth Specialist — iOS-First, Then Android
+
+**Position: iOS-first, then Android in Month 2.**
+
+**Core argument:**
+
+**1. The "50/50 split" is population-level data applied to a specific B2B persona.** General French market is ~60/40 Android/iOS. But solo artisans using business software (auto-entrepreneurs sophisticated enough to pay for devis/factures software) tend toward iOS for ecosystem reliability and perceived stability for financial data. We don't know the actual split — that's the problem.
+
+**2. Android Play Store moderation risk is systematically underweighted.** Legitimate B2B finance/invoicing apps get extra scrutiny in 2025-2026. Review delays of 1-4 days assume a smooth path. Apps flagged as potential fintech spam face 2-3 weeks of moderation queue. For a solo dev at launch, this isn't acceptable risk.
+
+**3. Expo iOS builds are more reliable and faster.** EAS Build iOS targets are more mature than Android targets. This is a technical advantage that should be used.
+
+**4. Simultaneous QA with solo dev is the wrong risk to take.** Testing two platforms simultaneously means untested edge cases on Android devices (Samsung, Xiaomi, manufacturer-specific behaviors, Play Services variants). One bad Samsung invoice rendering bug in Month 1 destroys trust that a B2B app cannot afford to lose.
+
+**5. Early iOS reviews fund Android launch credibility.** "400 French artisans trust Mini-CRM on iOS" is a powerful Play Store listing when Android drops in Month 2.
+
+**Validation before launch:**
+- Facebook/Instagram geo-targeted poll in Caen: "What phone do you use for your business?" — €20-50 ad spend, reach 200+ artisans
+- Check competitor review counts on iOS vs Android App Store — higher count = platform majority
+- 10-15 artisan calls via LinkedIn or trade groups — 2 hours, qualitative grounding
+
+**If validation shows 55%+ Android → launch Android simultaneously or first.**
+**If 50/50 or iOS-leaning → iOS-first is clearly right.**
+
+**Recommendation:**
+- iOS launch in Month 1 (App Store review: 1-3 days)
+- Android launch in Month 2
+- Platform split validation in Week 1 (before Sprint 0 ends)
+- If validation shows Android majority → reverse the order or launch simultaneously
+
+**Verdict on D92:** NEW — iOS-first, then Android Month 2. Validate platform split in Week 1 via geo-targeted poll + competitor review count analysis. Android Play Store moderation risk is real for B2B finance apps.
+
+---
+
+## Debate 93: Day 1 Onboarding — Guided Creation or Explore First?
+
+**Challenge:** What should the first 5 minutes after account creation deliver?
+
+### Product Strategist — Guided Creation Flow Wins
+
+**Position: Guided Creation Flow (Position A).**
+
+**Core argument:**
+
+**1. Position B ("Explore First") leads to empty-state abandonment.** The entire Free tier value proposition (document archive) is zero until documents exist. A clean home screen with an empty Active Job Card doesn't demonstrate value — it demonstrates emptiness. The 45-55yo artisan opens the app, sees nothing, and either thinks "this thing is empty" or "I'll come back when I need it." Both lead to the same outcome: they don't come back.
+
+**2. "Explore First" mistakes comfort for value.** The app feeling calm and optional is a mood. Moods don't drive conversions. The accepted-devis event does. And you cannot reach an accepted-devis without a devis. Position B skips the first step entirely.
+
+**3. Time-to-first-document is the strongest retention indicator for this product type.** Pennylane, Indy, and Tolteck all push users toward first-document creation within the first session. Not by accident. The conversion data is clear: artisans who don't create something in the first 48 hours almost never convert.
+
+**4. The "intrusion" risk is overstated.** The 45-55yo artisan isn't reluctant to enter data because they're protecting privacy. They're reluctant because they don't yet trust the app is worth their time. The cure is speed — let them create something real and send it to a real contact. That's when the trust flips.
+
+**5. Offline-capable architecture enables Position A.** Optimistic UI means zero perceived latency when creating a client or devis offline. No loading spinners. The share action (WhatsApp/email) works immediately. This removes the technical friction that could make a guided flow feel sluggish.
+
+**Concrete recommendation — Guided Creation Sequence (5 minutes):**
+
+**Step 1 — "Create Your First Devis in 60 Seconds" (60 seconds)**
+- Full-screen intro card, not a modal
+- Shows: "On y va. Three steps, 5 minutes, and you'll have sent your first devis."
+- Single CTA: "Commencer"
+- Message is "this is fast," not "you must do this"
+
+**Step 2 — Create Your First Client (90 seconds)**
+- Pre-fill: "Importer un contact" (phone contacts, if permissions granted)
+- Fallback: name + phone only (minimal required fields, rest can come later)
+- Mobile keyboard auto-opens on the name field
+
+**Step 3 — Create and Send First Devis (3 minutes)**
+- Auto-suggest first line item based on common artisan job types
+- TVA pre-set to 10% (most common BTP rate)
+- Preview screen showing the actual devis document
+- Share via native sheet (WhatsApp pre-selected if available)
+- "Votre devis a été envoyé" confirmation screen
+
+**The aha moment:** "I just created and sent a professional devis in 5 minutes on my phone." Not "the app feels calm and optional."
+
+**Verdict on D93:** NEW — Guided Creation Flow. Position A. 5-minute sequence: (1) set expectations, (2) create client via contact import or name/phone, (3) create and send first devis via WhatsApp/email. Time-to-first-document is the primary retention driver. Explore First is the higher-risk choice for this persona.
+
+---
+
+## Debate 94: GetApp/Capterra — Claim Week 1, Publish Post-Launch
+
+**Challenge:** Should GetApp and Capterra profiles be live at launch or treated as post-launch hygiene?
+
+### Growth Strategist — Claim Week 1, Publish When Ready
+
+**Position: Claim in Week 1 (D85), publish when the profile is actually credible — Week 3-4, post-launch with screenshots and reviews.**
+
+**Core argument:**
+
+**1. D85 conflates "claiming" with "publishing."** Claiming = URL ownership, basic data entry, verification. Publishing = making a live profile visible to comparison site visitors. These are different actions with different consequences. D85 resolved to claim Week 1 — but that's just URL control. Publishing an unoptimized profile is a separate decision with real consequences.
+
+**2. An empty profile is worse than no profile.** The admin handler persona is risk-averse. They're narrowing down options quickly. A profile with no screenshots, placeholder pricing ("Contact for pricing"), and zero reviews tells them: this product is new/unproven or not confident in its offering. That's "skip," not "evaluate."
+
+**3. Competitors have 3-5 years of review accumulation.** Pennylane, Indy, and Freebe have screenshots of real interfaces, accurate pricing, and feature matrices. Launching alongside them with a skeleton profile means the comparison is over before it begins.
+
+**4. The SEO benefit is real but premature.** GetApp/Capterra profiles rank in Google for specific queries ("[competitor] alternative," "best invoicing software"). These queries convert when the profile looks credible. An empty profile does nothing for SEO — worse, it anchors the wrong first impression into search results.
+
+**5. The admin handler discovery argument is valid but conditional.** Admin handlers DO search comparison sites. But they discover tools that look ready to be evaluated. A profile with no screenshots doesn't invite evaluation.
+
+**The correct sequencing:**
+
+| Timing | Action | Profile State |
+|--------|--------|---------------|
+| Week 1 | Claim GetApp + Capterra, verify ownership | Draft/Private |
+| Weeks 2-3 | Add screenshots, pricing, description, feature matrix | Draft/Private |
+| Week 3-4 | Publish (once 2-3 seed reviews exist from beta/early users) | Live |
+| Week 4-6 | Expert-comptable asks satisfied clients to leave reviews | Live + Accumulating |
+
+**The seed review strategy:** Early beta users and founding member users should be asked to leave reviews on GetApp/Capterra. This is legitimate — they're real users who tested the product. It should happen as part of the Week 1-4 activation flow, not manufactured at launch.
+
+**Verdict on D94:** NEW — Claim Week 1 (D85 confirmed). Publish Week 3-4, once screenshots, accurate pricing, and 2-3 seed reviews are in hand. Empty profiles are worse than no profile. Admin handler persona validates comparison site discovery channel (D82 updated accordingly).
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D92 | App Store launch | NEW — iOS-first, Android Month 2. Validate platform split in Week 1 (geo-targeted poll + competitor review count). | 2026-03-30 |
+| D93 | Day 1 onboarding | NEW — Guided Creation Flow. 5-minute sequence: set expectations → create client via contact import → create and send first devis via WhatsApp/email. Time-to-first-document is primary retention driver. | 2026-03-30 |
+| D94 | GetApp/Capterra | NEW — Claim Week 1 (D85 confirmed). Publish Week 3-4 when screenshots, pricing, and 2-3 seed reviews are ready. Empty profile is worse than no profile. | 2026-03-30 |
+
+---
+
+*Last updated: 2026-03-30T19:00*
+
