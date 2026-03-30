@@ -893,3 +893,19 @@ The following were overengineered or wrong:
 - [ ] **D85 UPDATED:** GetApp/Capterra optimization DEFERRED to Month 3. Spend those hours on SEO content, prescriber outreach, and expert-comptable cold calls instead. Reclaim profile setup time for Month 3 after 10+ real French artisan reviews exist.
 
 *Last updated: 2026-03-30T22:07*
+
+## New from Pulse 2026-03-30T22:18 — Three New Debates
+
+### Reopened (D85, D99, D114):
+- **D85 (GetApp/Capterra):** REOPENED — Growth Strategist argues Week 1 claim is a competitive ranking land-grab, not SEO investment. GetApp's algorithm weights review count and recency. A competitor listing today with 4-6 reviews structurally outranks our empty profile for 12-18 months. Deferring to Month 3 cedes ranking position permanently. Week 1: claim + populate with screenshots/pricing/features (not reviews). Publish Week 3-4 when beta user reviews are ready.
+- **D99 (Pricing structure):** REOPENED — Product Strategist argues per-devis (€1.50/devis, cap €29) eliminates the "will I use this enough?" anxiety that flat €29 creates at conversion moment. Maps to D12 simplicity-first positioning. Seasonality handled in model itself. Annual billing discount (€260/year) becomes retention mechanic for engaged users, not acquisition tool.
+- **D114 (PDF Sprint 0 gate):** REOPENED — Technical Architect proposes fourth approach: expo-print in-memory rendering (zero-schema). PDF is ephemeral render of current state, not stored document retrieval. No blob storage, no template file, no Handlebars dependency. Data model dependency: zero. 4-hour implementation estimate.
+
+### New Action Items:
+- [ ] **D85 NEW:** Claim GetApp and Capterra profiles Week 1 (not deferred to Month 3). Populate with screenshots, feature list, and pricing immediately. Do NOT publish until 3+ beta reviews exist (Week 3-4). Competitive ranking moat, not SEO play.
+- [ ] **D85 NEW:** Seed GetApp/Capterra reviews from beta users in Week 2-3. Ask 5 beta users to leave reviews. First 3 reviews publish Week 3-4. Monitor competitor listing dates and review counts.
+- [ ] **D99 NEW:** Louis evaluates per-devis billing complexity: Stripe usage-based billing (€1.50/devis, capped €29) vs flat €29. If usage-based is technically feasible in Supabase billing: replace D5's flat €29 with per-devis model. If complex: flat €29 stands, annual billing (€260/year) as seasonality fix.
+- [ ] **D114 NEW:** Evaluate expo-print in-memory PDF approach as Sprint 0 gate item (4th option, zero-schema). Proof-of-concept in 4 hours. If print quality or sharing options inadequate on real devices: fallback to server-side Edge Function approach.
+- [ ] **D114 UPDATED:** PDF generation = 7th Sprint 0 gate item. expo-print in-memory preferred. Mentions légales embedded in HTML string (no template file needed in Sprint 0). Handlebars/Nunjucks (D74) deferred to Sprint 1 if needed.
+
+*Last updated: 2026-03-30T22:18*

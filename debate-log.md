@@ -5873,4 +5873,109 @@ The checklist-vs-planning-session distinction is correct. U16 completion alone d
 
 ---
 
-*Last updated: 2026-03-30T22:07*
+*Last updated: 2026-03-30T22:18*
+
+---
+
+## Pulse 2026-03-30T22:18 — Three Specialist Debates
+
+---
+
+## Debate 117: D85 — GetApp/Capterra Competitive Moat vs. Deferred Optimization
+
+**Challenge:** D85 last position was "defer to Month 3, claim Week 1." Growth Strategist challenges the deferral logic with a specific, previously-unmade argument.
+
+### Growth Strategist — Claim Week 1 for Competitive Ranking Moat
+
+**Assumption challenged:** "GetApp/Capterra optimization should be deferred to Month 3 because an empty profile is worse than no profile." This framing assumes the primary risk is profile quality. The real risk is **competitive search displacement** — and it compounds over time in a way that quality cannot reverse cheaply.
+
+**The argument (opposite of D85 last position):**
+GetApp's ranking algorithm heavily weights review count and recency. A competitor listing today with 4-6 reviews and a 4.1 rating will structurally outrank our empty profile for 12-18 months — not because they're better, but because the algorithm rewards established presence. Every week of deferral is a week a competitor can claim that ranking position and begin accumulating reviews.
+
+The mechanism is not SEO (D116 correctly killed that). It's **competitive search displacement**: once a competitor holds the top-3 positions for "best invoicing software for French artisans" with 5+ reviews, our profile with the same rating but zero reviews is buried. Delisting and re-ranking is not a simple fix — review count asymmetry is a structural barrier.
+
+**Testable hypothesis:** Compare GetApp ranking positions for "solo artisan invoicing" queries before and after a 6-review threshold for first-mover. First-mover + 4-6 reviews consistently ranks above late-mover + identical rating but zero reviews. If true: 8 weeks of waiting = 12-18 months of ranking disadvantage.
+
+**Counter to D85:** The "empty profile is worse" argument assumes the goal is profile quality. The goal is competitive ranking position. Claim Week 1, populate with screenshots + pricing + feature list (not reviews). Publish Week 3-4 when seed reviews from beta users are ready. Compete for review-count ranking before competitors do — this is a land-grab, not a quality contest.
+
+**Verdict on D85:** REOPENED — GetApp/Capterra should be claimed Week 1 (not deferred to Month 3). populate with screenshots/pricing/features immediately. Publish when seed reviews ready (Week 3-4). The competitive moat argument (review count + ranking position) is distinct from the SEO argument and wasn't made in prior debates.
+
+---
+
+## Debate 118: D99 — Per-Devis Pricing Eliminates Conversion Anxiety
+
+**Challenge:** D99 last position was "flat €29 recommended for v1, seasonality addressed via annual billing discount." Product Strategist challenges the flat-rate recommendation with a conversion-anxiety argument.
+
+### Product Strategist — Per-Devis Removes the "Will I Use This Enough?" Blocker
+
+**Assumption challenged:** "Seasonality can be addressed via annual billing discount." Annual billing requires an upfront commitment decision. The artisan hasn't converted yet. Asking him to commit to €260/year to solve a seasonality problem he hasn't experienced yet is a conversion-blocking layering of two separate decisions.
+
+**The argument (opposite of D99 last position):**
+Per-devis (€1.50/devis, capped at €29/month) kills the anxiety that flat €29 cannot touch:
+
+- **€29 flat** → "C'est quoi si je n'envoie que 3 devis ce mois-ci ?" → hesitation → no signup
+- **€1.50/devis, capped €29** → "Je paie que ce que j'utilise" → low-stakes trial → signup → habit → value
+
+This maps directly to D12's simplicity-first positioning. D12 wins because friction at any stage kills conversion — onboarding friction, feature friction, **and billing friction**. Flat €29 introduces billing-stage friction: the "am I wasting money?" calculation that activates at the moment of commitment. Per-devis eliminates that calculation entirely. You're not selling a subscription; you're selling a per-use tool.
+
+The cap (€29) means heavy users pay the same as flat. Light users — the hesitant majority — get a guilt-free entry point. Seasonality is handled in the model itself (low season = low spend, no commitment). Annual billing discount becomes a retention mechanism for converted users, not an acquisition tool.
+
+**Verdict on D99:** REOPENED — Per-devis pricing (€1.50/devis, cap €29/month) should replace flat €29 as the primary pricing model. Annual billing discount (€260/year) moves from acquisition tool to retention mechanic for engaged users.
+
+---
+
+## Debate 119: D114 — Fourth PDF Approach: Zero-Schema In-Memory expo-print
+
+**Challenge:** D114 lists PDF generation as requiring a seventh Sprint 0 gate. Three approaches were documented (server-side headless Chrome, client-side react-pdf, hybrid server-HTML-to-client-PDF). Technical Architect proposes a fourth approach that eliminates schema dependency entirely.
+
+### Technical Architect — expo-print as Zero-Schema PDF Shortcut
+
+**Assumption challenged:** "PDF generation approach constrains the data model." All three prior approaches assume PDFs are a data pipeline problem — something stored, referenced, retrieved. This assumption is itself the constraint.
+
+**The fourth approach — in-memory expo-print:**
+Use `expo-print` (or `react-native-html-to-pdf` via bridge) to render PDFs entirely in-memory from React Native state, with no document storage, no blob references, and no server round-trip:
+
+1. Build HTML string from in-memory devis state (line items, TVA, client data)
+2. Pass to `expo-print.printToFileAsync()` or equivalent
+3. Attach resulting file to WhatsApp share intent
+4. No document storage needed — the PDF is ephemeral, a render artifact
+
+**Why this is genuinely different from the three prior approaches:**
+- No blob storage → no document table → no storage cost
+- No PDF URL in API response → no URL lifecycle management
+- No server-side template engine dependency → D74's Handlebars/Nunjucks assumption becomes optional, not required
+- Data model dependency: **zero** — the HTML is constructed from in-memory React Native state passed as props
+
+**Time to working PDF:** expo-print is a 30-minute integration. The full flow (in-memory state → HTML template → PDF → share) is achievable in 4 hours. Mentions légales content is embedded in the HTML string — no template file, no server rendering, no Handlebars dependency.
+
+**The schema dependency problem solved differently:** Instead of choosing a PDF architecture that predetermines schema constraints, we sidestep the constraint entirely. The PDF is a render of current state, not a retrieval of stored state. Storage (for archival) is a v2 concern.
+
+**Verdict on D114:** CONFIRMED as Sprint 0 gate (7th gate) — but with a specific recommendation: **expo-print in-memory approach** as the preferred path, with server-side PDF (Edge function) as fallback only if print quality or sharing options prove inadequate in real device testing.
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D1 | Positioning | Kill "CRM" — devis, factures, relances | 2026-03-30 |
+| D2 | MVP scope | 4 features, SEQUENCED sprints | 2026-03-30 |
+| D5 | Pricing | Free + €29 two-tier | 2026-03-30 |
+| D6 | Trial | No time-limited trial. Free tier IS the trial | 2026-03-30 |
+| D12 | Landing page | Simplicity-first | 2026-03-30 |
+| D13 | Home view | Job-first — Active Job Card | 2026-03-30 |
+| D14 | E-invoicing timing | v2 — NOT Day 1 | 2026-03-30 |
+| D15 | Relances differentiator | DE-EMPHASIZED — secondary feature below fold | 2026-03-30 |
+| D85 | GetApp/Capterra | REOPENED — Week 1 claim for competitive ranking moat | 2026-03-30T22:18 |
+| D95 | Sprint 0 timeline | 5 days (target) / 6.5 days (floor) | 2026-03-30 |
+| D99 | Pricing structure | REOPENED — per-devis €1.50/devis, cap €29/month | 2026-03-30T22:18 |
+| D114 | PDF Sprint 0 gate | REOPENED — expo-print in-memory proposed as 4th approach | 2026-03-30T22:18 |
+| D100 | Architecture | Supabase EU-hosted (Frankfurt) | 2026-03-30 |
+
+| U1 | Discovery | Readiness protocol | 2026-03-30 |
+| U2 | E-invoicing platform | Factea first when v2 | 2026-03-30 |
+| U7 | Domain | Buy now, park it | 2026-03-30 |
+
+---
+
+*Last updated: 2026-03-30T22:18*
