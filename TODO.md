@@ -778,3 +778,31 @@ The following were overengineered or wrong:
 - [ ] **Expert-comptable device audit (Week 1):** If primary acquisition channel is expert-comptable referrals, platform priority should follow referrer device split — not just end-user device. Quick WhatsApp poll to 5-10 contacts.
 
 *Last updated: 2026-03-30T20:45*
+
+---
+
+## New from Pulse 2026-03-30T20:53
+
+### Resolved (D83/D93, D106, D107):
+- **D83/D93 (Evening onboarding contradiction):** RESOLVED — D83 (event-only notifications, no time-based triggers) and D93 (opt-in onboarding session) operate in different interaction contexts. Not contradictory when properly scoped. Notifications: imposed timing = bad. Onboarding: opt-in commitment = good.
+- **D93 (Guided Creation timing):** UPDATED — "Evening-only" reframed as "focused 10-15 minute window" (most artisans find this in evening, not mandated). Bookable slot during Day 1 orientation. Async fallback available.
+- **D106 (WhatsApp sharing):** RESOLVED — PDF attachment via native share sheet ships in Sprint 0. Placeholder attachment until Sprint 1b delivers proper PDF. WhatsApp Business API direct sending not viable in Sprint 0 (template approval takes weeks). Deep links = Sprint 1.
+- **D107 (Document archive + conversion):** RESOLVED — Archive stays PRIMARY Free tier value (D70 confirmed). Three changes: (1) financial snapshot teaser in Free tier (count only), (2) upgrade prompt reframed as growth acknowledgment ("votre activité grandit"), (3) €29 visible as complete package. "Free forever" trap prevented by curiosity, not desperation.
+
+### Challenged assumptions this pulse:
+1. D83's rejection of evening notifications contradicts D93's requirement for evening-focused onboarding (Product Strategist resolved: separate notification context from onboarding context)
+2. WhatsApp sharing requires PDF generation to be viable (Technical Architect resolved: native share sheet works with placeholder attachment, PDF = Sprint 1b)
+3. Document archive creates retention without creating conversion pressure (Growth Strategist resolved: archive satisfies but doesn't convert without three specific design changes)
+
+### New Action Items from this pulse:
+- [ ] **D83/D93 NEW:** Guided Creation Flow — offer as bookable 10-15 minute slot during Day 1 orientation. Options: morning / midday / evening. Artisan chooses. No forced evening. Async fallback if no slot selected.
+- [ ] **D83/D93 NEW:** Remove any notification that imposes a time-based schedule on artisans. Event-only triggers only (first accepted devis, limit-hit).
+- [ ] **D106 NEW:** Sprint 0 sharing deliverable — React Native `Share` API with WhatsApp pre-selected. Placeholder attachment (text or basic PDF) until Sprint 1b. No WhatsApp Business API in Sprint 0.
+- [ ] **D106 NEW:** Sprint 1b additions: server-side PDF generation (html-to-pdf via Edge Function), mentions légales per client type, WhatsApp preview card (OG tags on devis preview page).
+- [ ] **D106 NEW:** Sprint 1+: universal deep links for devis (`minicrm://devis/123`), read receipts for €29 tier.
+- [ ] **D107 NEW:** Free tier financial snapshot teaser — show count of pending/payed devis (no amounts). "Vous avez 3 devis en attente de réponse." The full amounts + aging = €29 tier only.
+- [ ] **D107 NEW:** Upgrade prompt reframe — "Votre activité grandit. Avec le plan Pro, chaque client a son tableau de bord complet — devis en attente, paiements reçus, relances automatiques." Not "vous avez atteint votre limite" — growth acknowledgment with clear value.
+- [ ] **D107 NEW:** €29 tier visibility — archive + financial snapshot + relances + unlimited + support = complete business tool. Show Marc what's missing from Free tier, don't just block him.
+- [ ] **D107 NEW:** "Free forever" trap prevention — the upgrade prompt fires when Marc can see what he's missing, not when he's desperate. Curiosity > desperation as conversion mechanism.
+
+*Last updated: 2026-03-30T20:53*

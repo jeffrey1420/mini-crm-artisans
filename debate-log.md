@@ -5172,3 +5172,120 @@ Pricing at launch:
 ---
 
 *Last updated: 2026-03-30T20:45*
+
+---
+
+## Pulse 2026-03-30T20:53 — Three Specialist Debates
+
+---
+
+## Debate 105: D83/D93 — The Evening-Onboarding Contradiction Is Resolved
+
+**Challenge:** D83 rejected fixed evening notification times because "8pm assumes a daily rhythm that doesn't universally exist." D93 resolved Guided Creation Flow is "evening-only, 10-15 minutes." These are internally inconsistent — D83 rejects what D93 requires.
+
+### Product Strategist — Separate Notification (D83) From Onboarding Commitment (D93)
+
+**Core argument:**
+
+The contradiction dissolves when you separate two interaction types with different consent contexts:
+
+- **Notifications:** D83 is correct. We should not *impose* anything on artisans. Event-only notifications (first accepted devis) — no time-based triggers, no configurable windows, no 8pm ritual.
+
+- **Onboarding commitment:** D93 is correct. A Guided Creation Flow requires 10-15 minutes of focused attention. For a solo artisan, this naturally falls in the evening after the workday. But the key is: the artisan *chooses* this slot during Day 1 orientation. We are not imposing. We are asking for a commitment.
+
+**The distinction that resolves the contradiction:**
+- "Your notification will fire at 8pm" = imposed schedule → D83 correctly rejected
+- "Can you commit to a 10-minute evening session this week?" = artisan's choice → D93 correctly requires
+
+**Five specific decisions that resolve this:**
+
+1. **Notifications stay event-only (D83/D89 stands):** First accepted devis fires notification. No time-based or configurable-window triggers. Ever.
+
+2. **Guided Creation offered as bookable slot:** During Day 1 orientation, ask the artisan to select a 10-15 minute window — morning, midday, or evening. Not forced evening. Their choice.
+
+3. **Async/self-paced fallback:** If no slot selected, the Guided Creation Flow is available whenever the artisan has 10 minutes. The evening is a common time; it's not mandated.
+
+4. **Timezone-aware defaults:** D88's timezone awareness applies — but as a helpful default, not a notification trigger.
+
+5. **Reframe D93:** "Evening-only" is an observation (most artisans find focused time in the evening), not a mandate. The requirement is a focused 10-15 minute window, not a specific time of day.
+
+**Verdict on D83/D93:** RESOLVED — The contradiction was real. The resolution is clean. D83 governs reactive notifications (imposed timing = bad). D93 governs proactive onboarding commitments (opt-in choice = good). These are separate decisions for separate interaction types. D83 and D93 are not in conflict when scoped correctly.
+
+---
+
+## Debate 106: WhatsApp Sharing — PDF Attachment vs Native Message
+
+**Challenge:** WhatsApp is the primary sharing channel (D42). But the specific architecture — PDF attachment via share sheet vs native WhatsApp message — is underspecified. PDF generation is Sprint 1b work. Can Sprint 0 share anything useful?
+
+### Technical Architect — PDF Attachment via Native Share Sheet Ships in Sprint 0
+
+**Core argument:**
+
+**PDF Attachment (Approach A) — viable in Sprint 0:**
+- Native iOS/Android share sheet works without WhatsApp Business API
+- User taps Share → selects WhatsApp → PDF attaches → sends
+- Matches actual artisan behavior today (they WhatsApp documents already)
+- PDF is self-contained — client can print/forward regardless of their setup
+
+**WhatsApp-Native Message (Approach B) — belongs in Sprint 1:**
+- Requires WhatsApp Business API for direct sending
+- Message templates require 1-2 weeks approval from WhatsApp
+- Deep links need universal link setup on both iOS and Android
+- Not viable in a 5-day Sprint 0
+
+**Technical specifics:**
+- WhatsApp Business API direct sending requires pre-approved transactional templates — not achievable in Sprint 0
+- Server-side PDF generation (Sprint 1b deliverable) can be a placeholder text attachment until proper PDF ships
+- `Share` API in React Native pre-selects WhatsApp if available
+
+**Sprint 0 sharing deliverable:** Native share sheet + placeholder attachment. Sprint 1b: server-side PDF generation with mentions légales. Sprint 1+: universal deep links + WhatsApp preview card + read receipts.
+
+**Verdict on WhatsApp sharing:** RESOLVED — Approach A (PDF attachment via native share sheet) ships in Sprint 0. Approach B (WhatsApp-native with deep links) is Sprint 1 work. WhatsApp Business API direct sending is not viable in Sprint 0 (template approval alone takes weeks).
+
+---
+
+## Debate 107: Document Archive — Retention Asset That Prevents Conversion
+
+**Challenge:** D70 resolved document archive = PRIMARY Free tier value. D96 resolved limit-hit = hard conversion gate. Together, they create the "free forever" trap: the archive is satisfying enough that Marc never needs to upgrade.
+
+### Growth Strategist — Three Design Changes Required
+
+**Core argument:**
+
+The archive satisfies. It doesn't convert. Three specific design changes required:
+
+**1. Financial snapshot teaser in Free tier:**
+- Free: "Vous avez 3 devis en attente de réponse" (count only, no amounts)
+- €29: "Vous avez €4,200 en devis acceptés en attente de paiement" (full pipeline)
+- The teaser creates curiosity; the full version is the upgrade pull
+
+**2. Upgrade prompt reframed as growth acknowledgment:**
+- Not "vous avez atteint votre limite" (wall)
+- "Votre activité grandit. Avec le plan Pro, chaque client a son tableau de bord complet."
+- Agency: the upgrade solves a problem he recognizes, not a quota he's managing around
+
+**3. €29 visible as the complete package:**
+- Archive alone = filing cabinet
+- Archive + financial snapshot + relances + unlimited + support = real business tool
+- Show Marc what he's missing, don't just block him
+
+**The specific failure mode prevented:**
+Marc hits 5/5, sees "passer à €29 or supprimer un ancien devis." He suppresses the 7th client, stays on Free, never converts. The archive keeps him satisfied. The "free forever" trap is prevented not by making Free worse, but by making €29 visibly better in a way that matters for his business growth.
+
+**Verdict on document archive conversion:** RESOLVED — Document archive remains PRIMARY Free tier value (D70 confirmed). Three changes required: (1) financial snapshot teaser in Free tier, (2) upgrade prompt reframed as growth, (3) €29 visible as complete package. The conversion trigger is curiosity, not desperation.
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D83/D93 | Evening onboarding contradiction | RESOLVED — D83 (notifications: event-only, no time-based) and D93 (onboarding: opt-in focused session) operate in different interaction contexts. Not contradictory when properly scoped. | 2026-03-30 |
+| D93 | Guided Creation timing | UPDATED — "Evening-only" reframed as "focused 10-15 minute window" (most artisans find this in evening, not mandated). Bookable slot during Day 1 orientation, not forced. Async fallback available. | 2026-03-30 |
+| D106 | WhatsApp sharing architecture | RESOLVED — Approach A (PDF attachment via native share sheet) ships Sprint 0. Approach B (WhatsApp-native deep links) is Sprint 1. WhatsApp Business API direct sending not viable in Sprint 0. | 2026-03-30 |
+| D107 | Document archive + conversion | RESOLVED — Archive stays PRIMARY Free tier value (D70). Three changes: (1) financial snapshot teaser in Free tier, (2) upgrade prompt reframed as growth, (3) €29 visible as complete package. "Free forever" trap prevented by curiosity, not desperation. | 2026-03-30 |
+
+---
+
+*Last updated: 2026-03-30T20:53*
+
