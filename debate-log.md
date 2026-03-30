@@ -5321,6 +5321,68 @@ Marc hits 5/5, sees "passer à €29 or supprimer un ancien devis." He suppresse
 
 ---
 
+## Debate 108 (Technical Architect — Final Verdict): Sprint 0 — 5 Days Achievable, But the Debate Framing Is Wrong
+
+**Position:** The Product Strategist is correct that the 5-day estimate requires confirmed pre-conditions — and that failure to confirm them is the most likely failure mode. But the 6.5-7 day counter-estimate is wrong in its reasoning. Let me challenge both sides.
+
+---
+
+### Challenged Assumption 1: The "6.5-7 days" estimate conflates two different problems
+
+The Product Strategist argues 6.5-7 days because:
+- U16 (mentions légales) is NOT DONE
+- Supabase signup is UNCONFIRMED
+
+These are real concerns. But they're pre-sprint preparation problems, not in-sprint duration problems. Louis could write the mentions légales templates tonight. He could sign up for Supabase in 10 minutes. The "7 days" estimate treats "pre-conditions not done" as equivalent to "the sprint inherently takes 7 days" — that's a category error. If Louis finishes U16 and signs up for Supabase before Sprint 0 begins, the in-sprint duration question is back to 5 days. The 6.5-7 day framing doesn't distinguish between "pre-conditions not done" and "the work is inherently 7 days of engineering." They are not the same thing.
+
+---
+
+### Challenged Assumption 2: "Solo dev = solo dev throughput risk" is real, but overstated here
+
+The Product Strategist argues Louis has no one to unblock him when he hits an edge case (TVA rounding, Supabase RLS policy blocking a migration). True. But the framing assumes these edge cases will fire and will be blocking. The Technical Architect's original +1 day buffer (which was dismissed in the debate) was actually justified not by coordination overhead (there's no team to coordinate) but by **hard problem risk** — the risk that one genuinely novel problem consumes a full day. That risk is legitimate for a solo dev and should not have been dismissed.
+
+However: the sprint scope is now tightly bounded. TVA arrondi commercial is a formula (`Math.round(v * 100) / 100`), not a lookup table. Mentions légales are static template files, not a schema. Sequential numbering is a counter increment. These are not novel problems. The risk of a full-day block on any of these is low — they're well-understood tasks with clear solutions. The hard problem risk was higher when the scope included "figure out TVA per-line calculation" and "design mentions légales schema." Those decisions are already made. What's left is implementation.
+
+---
+
+### Challenged Assumption 3: "10-minute Supabase signup" is misleading — but not for the reason given
+
+The Product Strategist says EU-hosted Supabase signup takes longer than 10 minutes because of "RLS policy design (1-2h), migration workflow, environment variables, local dev setup." This overstates the setup cost. RLS policies are a 1-hour task, not a 1-2 hour blocker. Migration workflow and environment variables are standard. But the instinct is right: "Supabase is ready" and "Supabase is API-ready" are different milestones. The 10-minute estimate covers account creation; API-readiness takes a few hours. This doesn't add a full day to Sprint 0 — it just means Supabase setup happens in parallel during the sprint, not as a pre-condition gate.
+
+---
+
+### My Verdict: 5 Days Is Achievable Under Specific Conditions
+
+**The 5-day estimate is conditionally correct, not aspirationally wrong.** The Product Strategist's challenge is valid as a risk warning, but the 6.5-7 day estimate doesn't accurately represent the trade-offs.
+
+**Conditions under which 5 days is achievable:**
+1. Louis writes the 4 mentions légales templates BEFORE Sprint 0 starts (2h, not in-sprint). U16 is a pre-sprint gate, not a sprint task.
+2. Louis signs up for EU-hosted Supabase BEFORE Sprint 0 starts (10 min account creation, 2-3h of API-readiness done in parallel with mentions légales prep — not blocking).
+3. Scope holds to the agreed Sprint 0 deliverables: TVA formula + sequential numbering + mentions légales renderer + client-type schema + REST API scaffold.
+4. Louis accepts the +0.5 day buffer for solo dev hard-problem risk — and if a genuine blocker hits, he cuts mentions légales (plain text placeholder) rather than cutting TVA rounding accuracy.
+
+**Conditions under which 6.5-7 days is the honest estimate:**
+1. Louis does NOT complete U16 before Sprint 0. Mentions légales templates must be researched during the sprint — adds 0.5-1 day.
+2. Louis has NOT signed up for Supabase and is learning it while building — adds 0.5-1 day.
+3. Scope creeps (additions, changes to client-type schema, reworking TVA logic) — adds days with no ceiling.
+
+**The real problem with the 5-day estimate:** It was presented as the committed timeline, not as a conditional target. "5 days" without "if U16 is done and Supabase is signed up" sets Louis up to cut corners when the sprint starts without those pre-conditions confirmed. That is the Product Strategist's legitimate concern — not the absolute duration, but the false confidence.
+
+**My resolution to D95:**
+- **Target: 5 days** (achievable with pre-conditions confirmed)
+- **Floor: 6.5 days** (if pre-conditions not confirmed, accept the longer timeline rather than cut corners on compliance)
+- **Non-negotiable scope: TVA arrondi commercial, sequential numbering, mentions légales renderer**
+- **Cut order if time pressure: mentions légales (plain text placeholder), then AsyncStorage (online-only v1)**
+- **Pre-sprint gates (must be confirmed before sprint planning begins):**
+  - U16: Louis shows the written 4 mentions légales templates (file or git commit)
+  - Supabase: Louis shows the Supabase project dashboard (screen recording or screenshot)
+
+---
+
+**Verdict on D95:** RESOLVED — Sprint 0 = **5 days** (target), **6.5 days** (floor without pre-conditions). The 5-day estimate is valid only if pre-sprint gates are confirmed. If gates are not confirmed, accept 6.5 days — do not cut corners on TVA rounding or mentions légales compliance. Louis: confirm U16 and Supabase signup status before sprint planning. These are not sprint tasks — they are sprint prerequisites.
+
+---
+
 ## Debate 109: U7 — Domain Deferral Is a Circular Dependency Trap
 
 **Challenge:** U7 (domain purchase) — Growth Strategist challenges the "wait for guerrilla test" deferral, arguing it's structurally indefinite and actively blocks pre-Sprint-0 outreach work.
@@ -5370,3 +5432,109 @@ Marc hits 5/5, sees "passer à €29 or supprimer un ancien devis." He suppresse
 ---
 
 *Last updated: 2026-03-30T21:13*
+
+---
+
+## Pulse 2026-03-30T21:27 — Debate 109: U7 Domain Purchase — RESOLVED
+
+**Role:** Growth Strategist
+
+### The Circular Dependency Problem
+
+U7 is deferred "until MVP validation." The rationale: don't commit to branding before validating direction via the guerrilla test. This sounds prudent. But examine the actual dependency chain:
+
+```
+U7 deferred → until MVP validated → until guerrilla test confirms direction → until prototype exists + session scheduled
+```
+
+**The prerequisite for the prerequisite does not exist.** The prototype is not built. The guerrilla sessions are not scheduled. The "defer until validated" position is not actually a deferral to a future event — it's indefinite postponement dressed up as a milestone.
+
+### Assumption Challenged
+
+**Assumption from Debate 34:** "Domain purchase should wait until the guerrilla test validates product direction."
+
+The flaw: This assumes the guerrilla test will meaningfully redirect the product away from "devis/factures." It won't. Here's why:
+
+1. **Marc's workflow is already characterized.** Four pulses of debate have locked in the persona, the features, and the positioning. The guerrilla test is usability validation, not discovery. It's "can Marc use the devis screen?" not "should we be building devis?"
+2. **The directional risk is low.** Even if the guerrilla test surfaces that artisans want job management more than invoicing, that doesn't invalidate the devis/factures tool — it expands the roadmap. The domain for a devis tool is not wrong if you add jobs in v2.
+3. **Domain purchase and brand decision are independent.** Buying `devisfoo.fr` doesn't commit you to a brand name. It reserves a web address. The brand (logo, tagline, color) is a separate creative decision that benefits from having the domain, not the other way around.
+
+### What the Domain Actually Blocks
+
+While we're waiting indefinitely for validation that requires a prototype we don't have:
+
+- **Expert-comptable outreach (D72, D85):** Cold outreach to expert-comptables requires professional credibility. A `gmail.com` address or `app.lschvn.foo` subdomain signals "hobby project." Expert-comptables are professional service gatekeepers — they will not recommend software that looks amateur.
+- **GetApp and Capterra (D72, D85):** Profiles must be claimed before launch. These platforms verify domain ownership. Without a verified domain, you cannot claim the profiles. Without profiles, comparison-site traffic is zero. This is not a nice-to-have — D72 explicitly marks this as Week 1 priority.
+- **Email deliverability:** Sending transactional emails (devis receipts, password resets) from a subdomain has lower deliverability rates than from a proper domain. Reputation is built on the root domain.
+
+### The False Risk of "Buying Now"
+
+The original argument: "What if we buy alize.fr and then pivot?" 
+
+Cost of domain: ~€10/year. Cost of reversal: update DNS. Cost of NOT buying: blocked outreach, no comparison-site profiles, no professional email credibility, domain squatted by a competitor.
+
+The asymmetry is extreme. The downside of buying and pivoting is ~€10 and an hour of DNS work. The downside of deferring is concrete launch blockers.
+
+### Verdict on U7
+
+**RESOLVED — Buy the domain now. Park it.**
+
+Action: Louis registers the preferred domain today. Point it to a Carrd landing page or a static "coming soon" page. The brand name decision is deferred — the domain is not. This costs ~€10 and resolves three concrete launch blockers simultaneously.
+
+**The brand decision (name, logo, tagline) remains open.** The domain purchase is infrastructure, not branding.
+
+**U7 status: RESOLVED.**
+
+---
+
+*Debate 109 resolved: Growth Strategist. U7 domain deferral challenged — circular dependency identified. Domain purchase unblocks expert-comptable outreach and GetApp/Capterra setup. Brand decision kept separate from domain registration.*
+
+---
+
+## Debate 110 Resolution: Two Archetypes, Two Conversion Paths
+
+### Product Strategist — Verbal-Agreement Archetype Case
+
+**Assumption I challenge:** That the verbal-agreement artisan is a problematic edge case requiring a workaround. The Technical Architect framed this as "the conversion trigger architecture assumes formal documents drive the business — and this fails for verbal-agreement artisans." I challenge the framing itself. The verbal-agreement artisan isn't broken — he's the primary persona wearing a different coat. The question isn't "how do we make him send formal devis so the conversion trigger fires." The question is: **what is he already doing that constitutes genuine product usage?**
+
+**The core reframe:** For verbal-agreement Marc, the job is the unit of work, not the devis. He shows up, does the work, gets paid. His administrative needs: track who's my client, what job did I do there, when did I get paid. That's a job log, not a devis tracker. Our product already has (or should have) the job table with status, scheduled date, client link. The verbal-agreement artisan IS the Active Job Card user from D13.
+
+**The conversion insight:** If he's actively logging jobs — even without sending a single formal devis — he's deriving value from the product. "Active usage" IS the conversion signal, not "document sent." The conversion trigger architecture conflated the artifact (devis/facture) with the underlying activity (running his business). The verbal-agreement artisan IS running his business in the product — just not producing formal documents.
+
+**The flawed premise:** The debate asks "what conversion trigger fires for the artisan who never sends formal written devis?" This implies he needs a NEW trigger. The better question: for the verbal-agreement artisan, what usage behavior demonstrates he's getting value and would pay to continue?
+
+**Two conversion paths:**
+
+**Path A — Formal-devis archetype:** This is the existing D96 path. He creates devis, sends them, gets paid. Limit-hit (5 active devis / 10 clients) OR first paid facture fires the conversion. Works fine.
+
+**Path B — Verbal-agreement archetype:** He's logging jobs, managing clients, running his business in the product. Conversion fires when: **45 consecutive days of active product usage** (job created or updated in that period) OR **7+ jobs logged** OR **5+ active clients managed**. The trigger fires when the product has become his business operating system — regardless of whether a formal devis was ever sent.
+
+**The 45-day threshold:** Why 45? It's long enough to cover 2-3 billing cycles (most artisans invoice monthly or at job completion). It's short enough that dormancy is clearly visible. It's the right proxy for "this product has replaced your notebook." The verbal-agreement artisan who logs every job for 45 days has internalized the product into his workflow — he will NOT want to go back to paper.
+
+**The human check-in remains critical:** The debate identified Louis's WhatsApp check-in at Day 14 as the actual conversion mechanism for French artisans. This is correct and should apply to BOTH archetypes. The difference: for the formal-devis artisan, the check-in coincides with the first paid facture trigger. For the verbal-agreement artisan, the check-in at Day 14 surfaces whether he's actually using the product — and if he is, the conversion conversation happens then, not at some future limit-hit.
+
+**What this means for the product:** Job tracking can't be a secondary feature. If the verbal-agreement archetype is the majority of the target market, then the Active Job Card (D13) IS the home view, not a nice-to-have. The product's value proposition for this archetype is: "Your job log, your client notes, your payment tracking — all in one place, no paper." The conversion trigger follows from active usage, not document production.
+
+**The market size correction:** If the verbal-agreement archetype represents 40-60% of solo French artisans (plausible given BTP culture), then tying conversion to formal devis production means we only capture a subset. The product needs to serve the archetype it claims as primary (Marc, solo artisan, job-focused) — not design for a secondary archetype (formal devis shop) and hope the primary one adapts.
+
+**VERDICT on Debate 110 / D96 / D104:**
+
+D96 is RETIRED in its current form. Replaced with dual-path conversion:
+
+- **Path A (Formal-Devis Artisan):** Limit-hit (5 active devis OR 10 clients) OR first paid facture → hard conversion gate. Unchanged from D96.
+
+- **Path B (Verbal-Agreement Artisan):** 45 consecutive days of active product usage (job created/updated) OR 7+ jobs logged OR 5+ active clients managed → conversion trigger. Soft prompt: "Vous utilisez [Product] depuis 6 semaines. Vos clients et vos travaux sont enregistrés ici. Pour €29/mois, vous gardez tout — sans limite."
+
+- **Day 14 check-in applies to both:** Louis WhatsApp check-in at Day 14 is the human conversion moment regardless of archetype. If the artisan is active and engaged, the check-in is the conversion conversation. The triggers above are backup for when the human check-in doesn't catch him.
+
+- **Action item:** Sprint 1 must include robust job logging (the Active Job Card from D13, with job creation and status updates). This is the entry point for verbal-agreement artisans — not devis creation. If job logging is hard or secondary, Path B never fires.
+
+- **Action item:** Add usage analytics to identify "active verbal-agreement users" — those with jobs logged but zero devis sent. This is the segment requiring Path B conversion treatment.
+
+- **Action item:** Validate verbal-agreement archetype prevalence in guerrilla test: what % of Marc's clients require formal written devis vs verbal approval? If >40% verbal, Path B becomes the primary conversion design consideration.
+
+**The assumption I challenged:** That the verbal-agreement artisan needs to produce formal documents to demonstrate product value. The correct framing: he's already demonstrating value by using the product to run his business. Our conversion design must recognize that.
+
+---
+
+*Verdict written: 2026-03-30T21:27*

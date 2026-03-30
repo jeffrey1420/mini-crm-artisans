@@ -54,6 +54,7 @@
 | D98 | Platform default | **REFLECTED — Direction confirmed, validation mechanism updated.** Android-first remains correct for French artisan demographic. "Week 1 poll validates" REMOVED (wrong instrument after U15 elimination). Replaced with install completion rate (≥50% in 48h) as Sprint 0 metric. D24 resolution gates Sprint 0 specificity. | Debates 98/103 (Growth Strategist) | 2026-03-30 |
 | D99 | Usage-based pricing | **RESOLVED (Implementation-Ready)** — €1.50/devis sent, capped at €29/month. Activates at conversion (limit-hit). Billing trigger aligned with conversion trigger. Flat-rate alternative (€29 unlimited) offered at conversion moment. | Debates 99/104 (Product Strategist) | 2026-03-30 |
 | U15 | Founding member offer | ELIMINATED — no lifetime deal, no founding/access tier, no "50 places" scarcity. Single €29/month. Replaced by "Support Prioritaire" (direct WhatsApp to Louis, roadmap vote, named credits). | Debate 101 (Growth Strategist) | 2026-03-30 |
+| U7 | Domain purchase | RESOLVED — buy domain now (park it), defer brand decision. Domain = infrastructure, not branding. Parking costs ~€10-15/year. Expert-comptable outreach and GetApp/Capterra profiles need a proper domain to establish credibility. Brand name decision stays open. | Debate 109 (Growth Strategist) | 2026-03-30 |
 
 ## 🔄 Reopened This Pulse (Resolved in 15:17 Pulse)
 
@@ -155,7 +156,7 @@ All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 - [x] **D58 RESOLVED:** Email relances in v1 (Sprint 2, 1-2 days). Expo Push relances in v1.1. (Debate 58)
 - [x] **D56 RESOLVED:** 40% WoM figure RETIRED. Measurement protocol: "Comment connaissez-vous?" at signup + referral codes. Month 3 target: 20% peer referral. (Debate 60)
 - [ ] Pick one: Tolteck competitor or Tolteck complement?
-- [ ] Buy domain (U7) — DEFERRED. Use `devis.lschvn.foo` subdomain or Carrd landing page until MVP validated post-guerrilla test. Domain purchase happens after product direction confirmed. (Debate 34)
+- [x] ~~Buy domain (U7)~~ **RESOLVED — Debate 109:** Buy domain now (park it), defer brand decision. Domain = infrastructure, not branding. A parked domain costs €10-15/year and blocks nothing. Expert-comptable outreach and GetApp/Capterra setup need a proper domain. Brand name decision stays open. (Debate 109)
 - [ ] Build the Active Job Card data model (`jobs.status`, `jobs.scheduled_date`, `jobs.updated_at`)
 - [x] RESOLVE D15: Relances = secondary feature below fold. "Fonctionnalités" section only. NOT in hero.
 - [x] RESOLVE D16: SUPERSEDED — 14-day trial concept retired. Free tier IS the trial (Debate 38/40).
@@ -825,7 +826,7 @@ The following were overengineered or wrong:
 - [ ] **D95 NEW:** CONFIRM U16 (4 mentions légales templates) is done before Sprint 0 starts. If not done: accept 6.5-7 days, not 5.
 - [ ] **D95 NEW:** CONFIRM Supabase signup is complete before Sprint 0 starts. If not done: add 2-4h to Day 1 for account creation + RLS policy design + migration workflow.
 - [ ] **D95 NEW:** If either pre-condition is incomplete, update Sprint 0 estimate to 6.5-7 days. Do not try to squeeze a realistic 6.5-7 day sprint into a 5-day window.
-- [ ] **U7 UPDATED:** Buy domain now (park it), defer brand decision. Domain = infrastructure, not branding. A parked domain costs €10-15/year and blocks nothing. Expert-comptable outreach and GetApp/Capterra setup need a proper domain to look credible.
+- [x] ~~**U7 UPDATED**~~ **U7 RESOLVED (Debate 109):** Buy domain now (park it), defer brand decision. Domain = infrastructure, not branding. A parked domain costs €10-15/year and blocks nothing. Expert-comptable outreach and GetApp/Capterra setup need a proper domain to look credible. Brand name decision stays open.
 - [ ] **D96/D104 NEW:** Define conversion trigger for repeat-client, verbal-agreement archetype — the artisan who never sends formal written devis because his clients don't require them. What makes this artisan convert from Free to €29?
 - [ ] **D96/D104 NEW:** If verbal-agreement archetype is a significant portion of target market, the product's addressable market may be smaller than the feature set implies. Validate in guerrilla test: what % of Marc's clients require formal written devis vs pay on verbal approval?
 
