@@ -2916,3 +2916,65 @@ Ask: "How much time per week on devis/factures?" "What happens when you forget t
 | U13 | WoM measurement | "Comment connaissez-vous?" at signup + referral codes. Month 3 target: 20%. | 2026-03-30 |
 | U15 | Guerrilla validation | Three-phase: observe → quantify pain → payment. Workshop via warm network, not wholesaler. | 2026-03-30 |
 
+
+---
+
+## Pulse 2026-03-30T16:57 — Pricing Anchor Challenge
+
+---
+
+## Debate XX: €29 Price Anchor — Wrong Input Variables
+
+**Challenge:** D5 (Free + €29 two-tier, resolved at this pulse) and D59 (Kill €19 founding offer, keep €29, early access locked for life) resolved the pricing structure without ever challenging the €29 number itself against Marc's actual economic reality. Product Strategist challenges the €29 anchor on three grounds: wrong input variables, missing trust signal, and a long-term pricing ceiling problem.
+
+### Product Strategist — €29 Anchor Is Built on Wrong Inputs
+
+**Challenge 1: The value math uses a €50-80/h consultant rate, not an artisan billing rate.**
+
+The anchor argument: "2h/week saved = 1 hour of labor = €29/month." The problem: €50-80/h is a skilled consultant rate, not a French artisan rate.
+
+Real French artisan billing rates (Caen region, 2024 data):
+- Plumber: €35-45/h
+- Electrician: €38-48/h
+- Carpenter: €30-42/h
+- General trades: €28-38/h
+
+The value anchor used €50/h as the low end of the range. At €35/h, €29 = **50 minutes of labor**, not one hour. The anchor is off by 30-40%.
+
+The psychological difference matters: "Less than one hour" vs "exactly one hour" are different frames. The former signals "this is almost too cheap" — which erodes perceived quality for a professional tool. The latter signals "fair exchange" — which is the intended frame.
+
+**Proposed fix:** Recalibrate the value anchor using €35/h as the baseline. If 2h/week saved = €70 of labor value, then €29/month is not "one hour" — it's less than half an hour of weekly labor. The ROI story gets weaker, not stronger, when you use realistic rates. This needs to be acknowledged and addressed in the landing page copy.
+
+**Challenge 2: The Free tier "proof lives in Free tier" assumption skips the price credibility step.**
+
+The D5 resolution assumes: prove value in Free → upgrade to €29. But this assumes price isn't itself a trust signal. For an unknown product in a trust-dependent market, the €29 price point creates a credibility problem before the Free tier even gets a chance to prove value.
+
+Marc sees €29/month on the landing page. He has never heard of this product. Tolteck (€19) has 40k users. Obat (€17) has established brand. Why should he pay €29 for an unknown?
+
+The argument "free proves value, then €29 converts" works for products where price is transparent (everyone knows what software costs). It doesn't work when you're unknown and unproven. A lower entry price (€19) reduces the trust barrier, gets Marc into the Free tier, and the upgrade conversation happens after he's experienced the product — not before he's even signed up.
+
+The "early access €29 locked for life" framing makes this worse: by pricing the unknown product at €29 before any social proof exists, Louis is betting that the value story is strong enough to overcome zero credibility. That's a high-risk bet.
+
+**Challenge 3: The "early access €29 locked for life" creates a long-term pricing ceiling.**
+
+D59 resolved: "Kill €19 founding offer. Early access €29 locked for life." This is framed as a conversion tactic (scarcity + lifetime lock = sign up now). The problem: it creates a permanent price ceiling.
+
+If the first 50 users lock €29 for life, Louis has 50 lifetime subscribers at €29 who will resist any future price increase. If at Month 6 the product has grown and €39 is justified by new features, Louis cannot raise prices for his most loyal early users without mass cancellation. SaaS pricing needs room to grow with the product.
+
+**The "founding member" framing creates a price ceiling that a growing SaaS needs flexibility to adjust.**
+
+Classic SaaS mistake: anchor early adopters to a price that was set when the product was incomplete, then discover that the price doesn't cover the cost of serving them after adding real features. €29 at launch with "locked for life" = no pricing agility for 12-18 months minimum.
+
+**Product Strategist POSITION:** The €29 number needs recalibration, not just the tier structure. Three specific proposals:
+
+1. **Recalibrate the value anchor using €35/h.** If 2h/week at €35/h = €70/week, the monthly subscription is €29 — that's 40% of one week's savings. The ROI story should be "less than half an hour of labor per week" not "one hour of labor." Honesty here is more credible than the inflated number.
+
+2. **Kill the "€29 locked for life" offer.** Replace with "Early access: first 3 months at €19, then €29." This lowers the trust barrier at acquisition (€19 vs €29 for an unknown), preserves the €29 anchor for the upgrade conversation, and doesn't create lifetime price lockers who block future pricing decisions.
+
+3. **Add social proof signals before the €29 price.** The landing page should show: expert-comptable endorsement, number of artisans onboarded, or a "trusted by X artisans in Normandy" counter. Price credibility comes after trust is established, not before.
+
+**Verdict on D5:** REOPENED — The €29 anchor was resolved on structure (Free + €29 two-tier) but never challenged on the number itself. Wrong input variables (€50-80/h vs €35/h artisan rate), missing trust signal before price, and lifetime lock creating a pricing ceiling are three independent grounds to revisit the €29 anchor. Recommend: €19 early access (3 months) → €29 standard, value anchor recalibrated to €35/h, social proof added to landing page before price appears.
+
+---
+
+*Last updated: 2026-03-30T16:57*
