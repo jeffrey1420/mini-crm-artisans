@@ -12,7 +12,7 @@
 | D4 | Stack | Single managed Postgres, NOT per-customer VPS | External review | 2026-03-30 |
 | D5 | Pricing | Free + €29 two-tier. No €19 SKU. Drop €49/€79. Value anchor: "2h/week = 1h labor = €29/month." | Debate 33 (Product Strategist) | 2026-03-30 |
 | D6 | Trial | No time-limited trial. Free tier IS the trial (10 clients, 5 active devis). Conversion happens at Free limit. Engagement: restated by D43 — channel secondary, Free tier design determines activation. 80% limit heads-up notification. No countdown emails. | Debates 38/43 (Product Strategist) | 2026-03-30 |
-| D7 | Architecture | Nuxt 3 + OVH managed Postgres | Updated | 2026-03-30 |
+| D7 | Architecture | Nuxt 3 + OVH managed Postgres — REFINED: API-first preferred but deferred to post-MVP unless blocking Sprint 0 | Growth+Architect | 2026-03-30 |
 | D8 | E-invoicing | v2 feature (Chorus Pro compatible) | External review | 2026-03-30 |
 | D9 | Not MVP | No Kanban, no multi-user, no offline, no API keys | External review | 2026-03-30 |
 | D10 | Buyer trigger | "Admin pain" not "CRM need" | External review | 2026-03-30 |
@@ -32,15 +32,20 @@
 | D53 | Landing page framing | Simplicity-first RETAINED. H1: "Sans vous prendre la tête." H2: 5-minute specific/demonstrable claim. Proof lives in Free tier. No "professional-grade" in hero. | Debate 53 (Product Strategist) | 2026-03-30 |
 | D54 | Sprint 0 approach | Compressed compliance sprint (3-4d): TVA per-line schema, gapless sequential numbering engine, mentions légales renderer, client-type schema. Sprint 1 = client+devis flow. | Debate 54 (Technical Architect) | 2026-03-30 |
 | D55 | Buyer-user split | Dual-persona GTM. Marc = economic buyer (primary). Admin handler = operational user (secondary). Expert-comptable = Phase 2. | Debate 55 (Growth Strategist) | 2026-03-30 |
+| D56 | WoM attribution | WoM = Month 3+ lagging indicator. Digital acquisition PRIMARY at launch. "Comment connaissez-vous?" at signup. Referral codes in v1. Month 3 target: 20% peer referral. | Pulse 14:57 (Product+Growth) | 2026-03-30 |
+| D57 | Architecture | API-first preferred (Fastify + static) but deferred to post-MVP unless Nuxt 3 actively blocks Sprint 0. | Pulse 14:57 (Architect+Growth) | 2026-03-30 |
+| D59 | Pricing credibility | €29 price point unvalidated. Guerrilla price validation + founding member €19 offer + 3% Day-30 target + SEPA direct debit proposed. | Pulse 14:57 (Growth Strategist) | 2026-03-30 |
 
 ## 🔄 Reopened This Pulse (Need Resolution)
 
 | ID | Topic | Issue | Source |
 |----|-------|-------|--------|
 | D56 | Word-of-mouth % | 40% attribution is unvalidated. WoM is a lagging indicator, not a leading GTM channel. Anchors D33/D52/D55 decisions without evidence. | Growth Strategist |
-| D57 | Architecture (D7) | Nuxt 3 was chosen for a web-first product that no longer exists. API-first + static site is alternative. | Technical Architect |
+| D56 | WoM attribution | REFINED — 40% unvalidated. WoM = Month 3+ lagging indicator, not launch channel. Digital acquisition is PRIMARY at launch. "Comment avez-vous connu?" at signup. Referral codes in v1. Month 3 target: 20% peer referral. | Growth Strategist + Product Strategist | 2026-03-30 |
+| D57 | Architecture | REFINED — API-first is cleaner for mobile+static product. But: shipping velocity matters more than architectural purity for first 10 users. Defer migration decision unless Nuxt 3 actively blocks Sprint 0. Post-MVP migration if ROI positive. | Technical Architect + Growth Strategist | 2026-03-30 |
+| D59 | Pricing credibility | NEW — €29 price point is unvalidated with real artisans. "One hour of labor" anchor is founder math, not customer math. Guerrilla price validation (5 artisans) + founding member €19/mo offer + 3% Day-30 conversion target + SEPA direct debit option proposed. | Growth Strategist | 2026-03-30 |
 
-## New from Pulse 2026-03-30T14:11 — All Resolved
+## New from Pulse 2026-03-30T14:57 — All Resolved
 
 ### Resolved (D53, D54, D55):
 - **D53 (Landing page):** Product Strategist won — simplicity-first RETAINED in H1. H2 becomes specific 5-minute claim: "Créez et envoyez votre premier devis en 5 minutes. Depuis votre téléphone." "Professional-grade" claims removed from hero — proof lives in Free tier. A/B test deferred to beta user testing.
@@ -85,7 +90,22 @@
 
 ---
 
-*Last updated: 2026-03-30T14:41*
+*Last updated: 2026-03-30T14:57*
+
+## New from Pulse 2026-03-30T14:57
+
+### Resolved (D56, D57, D59):
+- **D56 (WoM attribution):** REFINED — 40% WoM attribution retired as GTM input. WoM = Month 3+ lagging indicator, not launch channel. Digital acquisition PRIMARY at launch. "Comment avez-vous connu?" at signup (required, predefined options). Referral codes in v1. Month 3 target: 20% peer referral.
+- **D57 (Architecture):** REFINED — API-first (Fastify + static landing) is architecturally cleaner for mobile-first + static product. But: shipping velocity matters more than purity for first 10 users. Defer migration unless Nuxt 3 actively blocks Sprint 0. Post-MVP migration if ROI positive.
+- **D59 (Pricing credibility):** NEW — €29 price point is unvalidated with real artisans. "One hour of labor" anchor is founder math. Guerrilla price validation (5 artisans) + founding member €19/mo offer + 3% Day-30 conversion target + SEPA direct debit proposed.
+
+### New Action Items from this pulse:
+- [x] **D56 RESOLVED:** WoM = Month 3+ lagging indicator. Digital acquisition PRIMARY at launch. "Comment connaissez-vous?" at signup. Referral codes in v1.
+- [ ] **D57 UPDATED:** API-first preferred but deferred — don't let architecture debate delay Sprint 0. Migrate post-MVP if Nuxt 3 not blocking.
+- [ ] **D59 NEW:** Guerrilla price validation — ask 5 artisans "most you'd pay per month?" before launch. If median <€20, revisit D5.
+- [ ] **D59 NEW:** Founding member offer — €19/mo locked-in for life for first 50 paying users. Tests price sensitivity + creates social proof + urgency.
+- [ ] **D59 NEW:** Set 3% Day-30 conversion target. If Month 2 with <1% conversion rate, price is likely the barrier.
+- [ ] **D59 NEW:** Add SEPA direct debit as payment option — French artisans skeptical of credit card subscriptions.
 ## New from Pulse 2026-03-30T14:41
 
 ### Resolved (D58):

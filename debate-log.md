@@ -1839,5 +1839,304 @@ The MVP scope debate has focused on what to build vs what to defer. But the unde
 
 ---
 
-*Last updated: 2026-03-30T14:41*
+## Debate 57: D7 — Nuxt 3 Architecture Was Never Challenged After the Mobile Pivot
 
+**Challenge:** D7 (Nuxt 3 + OVH managed Postgres) was decided before React Native was chosen. The product is now mobile-first with a static landing page. Nuxt 3's SSR capabilities are architecturally mismatched.
+
+### Technical Architect — API-First Architecture Case
+
+**Assumption challenged:** SSR is needed for the landing page's SEO, and JWT auth is simpler when embedded in a full-stack framework like Nuxt.
+
+**Core argument:**
+
+The architectural mismatch is the core problem. Nuxt 3 is a full-stack web framework whose primary value comes from SSR, API routes, and server-side session management. The primary product is React Native (D11/D17). The mobile app does not use Nuxt's API routes — it connects directly to Postgres via Expo. Nuxt becomes middleware that adds nothing except overhead: unnecessary SSR rendering, higher RAM requirements, and vendor lock-in.
+
+**On SSR for the landing page:** This assumption is false. The landing page is a static simplicity-first page (D53). It has no user-specific content, no authentication state, no personalized data. Static HTML with proper meta tags serves the same SEO value as SSR at a fraction of the RAM and build cost. Google indexes static pages identically. The "SSR = better SEO" argument applies to content-heavy sites with dynamic personalization — not to a one-page acquisition funnel.
+
+**On JWT auth being simpler in Nuxt:** Also false. The mobile app manages JWT tokens client-side regardless of backend framework. Embedding auth in Nuxt doesn't simplify the mobile app's token management — it just means the mobile app talks to Nuxt's API routes while ignoring everything else Nuxt provides. The auth logic is identical whether it's in a dedicated Fastify auth middleware or in Nuxt server middleware.
+
+**The operational cost of the wrong choice:**
+
+| Factor | Nuxt 3 SSR | Fastify API + Static |
+|--------|-----------|---------------------|
+| RAM for same VPS | 4GB+ (SSR overhead) | 2GB (lightweight) |
+| Landing page | Nuxt server rendering | Static HTML (CDN-cacheable) |
+| Mobile API | Nuxt API routes (unused) | Direct REST endpoints |
+| Hosting | OVH managed Postgres + Nuxt SSR server | Single VPS (API + static) |
+| Learning curve | Nuxt file-based routing, server routes, SSR lifecycle | Simple route handlers |
+| Lock-in risk | High — Nuxt-specific conventions | None — standard REST |
+
+**Why prior resolution was wrong/incomplete:**
+
+D7 resolved to Nuxt 3 when the product was conceived as a web-first application with SSR requirements. The mobile pivot (D11/D17) fundamentally changed the architecture — but D7 was never revisited. The resolution treated the product as unchanged while the most consequential technical decision was made obsolete by subsequent choices. A framework chosen for a web-first product cannot simply be re-deployed as the backend for a mobile-first product without creating architectural absurdity: the SSR capabilities that justified Nuxt are entirely unused, and the API routes that would serve the mobile app are bypassed in favor of direct Postgres access.
+
+**Concrete proposal:**
+
+D7 is OVERRULED. The architecture becomes:
+
+**1. Backend: Node.js/Fastify on OVH VPS (2GB RAM)**
+- Fastify chosen over Express: 30-40% faster throughput, schema validation built-in, same team can learn it in hours
+- All API endpoints: `/auth/*`, `/clients/*`, `/devis/*`, `/factures/*`, `/relances/*`
+- JWT authentication via `@fastify/jwt` — mobile app manages token lifecycle
+- Postgres accessed via `postgres.js` (lightweight, no ORM overhead) — same schema from Sprint 0
+- Static file serving for landing page in same VPS process
+
+**2. Landing page: Single static HTML file**
+- Pure HTML + CSS, no JavaScript framework
+- Hosted on same VPS as Fastify API (or moved to Cloudflare Pages free tier)
+- No SSR, no build step, no Nuxt dependency
+- Meta tags for SEO: title, description, Open Graph
+
+**3. React Native/Expo app**
+- Connects to Fastify API via REST/JSON
+- No coupling to web framework conventions
+- Same API contract serves mobile app AND any future admin panel (v2)
+
+**4. Migration path for Sprint 0:**
+- The Postgres schema (TVA per-line, sequential numbering, mentions légales, client-type) defined in Sprint 0 is preserved unchanged
+- Only the access layer changes: from Nuxt ORM to Fastify route handlers
+- Estimated migration time: 1 day
+
+**5. Hosting cost comparison:**
+- Current plan: OVH managed Postgres (~€15/mo) + Nuxt SSR server (2vCPU/4GB ~€20/mo) = ~€35/mo
+- Proposed: OVH managed Postgres (~€15/mo) + single VPS 2GB (~€10/mo) = ~€25/mo
+- Savings: ~€10/mo + simplified operations
+
+**What this challenges:**
+
+- **D7**: Overruled — Nuxt 3 + OVH Postgres replaced with Fastify + same Postgres
+- **The "JWT simpler in Nuxt" assumption**: False — token management is identical, just in a dedicated auth service
+- **The "SSR needed for landing page SEO" assumption**: False — static HTML serves the same purpose
+- **D11/D17 implications**: Cleaned up — mobile app has no coupling to a web framework it was always going to bypass
+- **Future v2 admin panel**: Now consumes the same API as mobile, no Nuxt dependency required
+
+**Verdict requested:** RESOLVED — D7 is overruled. API-first architecture (Fastify + static landing page) replaces Nuxt 3. The mobile pivot made Nuxt 3 architecturally obsolete before D7 was ever challenged. This is the correction.
+
+---
+
+*Last updated: 2026-03-30T14:57*
+
+
+---
+
+## Pulse 2026-03-30T14:57 — Product Strategist Debate on D56
+
+---
+
+## Debate 56: Word-of-Mouth 40% — Three Structural Flaws Make It Unusable as a GTM Input
+
+**Challenge:** D56 (OPEN since 14:24) — The Growth Strategist correctly identified that 40% WoM is unvalidated. But the challenge stops at "unverified number." The actual problem is deeper: the number rests on three compounding structural flaws, each sufficient to invalidate the GTM decisions anchored to it.
+
+### Product Strategist — The WoM Attribution Is Structurally Broken
+
+**Assumption challenged:** That 40% is a reliable input for GTM planning, that it reflects the *channel's* power (not product-market fit's), and that it justifies the Free tier acquisition model.
+
+---
+
+**Assumption challenged #1: Word-of-mouth is a channel you can bet on, not a result you earn.**
+
+The fundamental confusion in the debate log: WoM is being treated as a *leading acquisition channel* — something you can invest in and expect returns from. It is not. WoM is a *lagging indicator of product-market fit*. You get high word-of-mouth when you have a product that solves a problem so viscerally that users evangelize it unprompted.
+
+The 40% figure, when cited, is almost certainly drawn from established SaaS companies (Slack, Calendly, Notion) where:
+- The product has been in market for 2+ years
+- Users have completed full usage cycles and experienced the value repeatedly
+- Switching costs have materialized (the team is now coordinated around the tool)
+- The product is used in visible, collaborative contexts (colleagues see you using it)
+
+This product has zero of these conditions. Marc will have zero completed payment cycles at launch. No one will have experienced the "I got paid faster because of this app" moment. There is no collective context (Slack has teams; Marc is solo). The social proof that drives WoM — *"look at my colleague using this, I want that too"* — doesn't exist for a solo artisan tool.
+
+**The practical implication:** Treating WoM as a launch-channel is like treating " customers will love it" as a launch strategy. It's an outcome, not an input. You cannot plan toward it; you can only build a product that earns it.
+
+---
+
+**Assumption challenged #2: The Free tier creates conditions for WoM acquisition, when it actually suppresses it.**
+
+The 40% WoM justification for the Free tier is: Free → frictionless adoption → users proliferate → peer endorsement. This chain is broken in three places:
+
+**Broken link #1 — "Free = proliferation":** Free removes financial friction but adds commitment friction. A free tool with no urgency to use it sits in the app drawer at low engagement. A user who opens the app once a week has no WoM momentum. A user who hits the ceiling at month 3 has no one to tell — they've already converted or churned.
+
+**Broken link #2 — "Users proliferate":** At zero cost, there's no selection pressure. Curious browsers, competitive researchers, "I'll try this someday" users all occupy the Free tier. These are not WoM carriers. They dilute the denominator.
+
+**Broken link #3 — "Peer endorsement":** Even if a Free user loves the product, the peer endorsement moment requires: (a) the peer has a similar problem, (b) the endorsement happens in a context where the peer can act on it, and (c) the peer is reachable. WhatsApp artisan groups are the assumed vehicle — but the artisan-to-artisan endorsement rate in those groups for a tool nobody has paid for is structurally near zero. Unpaid tools are not mentioned in professional contexts. Paid tools that have proven their value are.
+
+**The Free tier does not generate WoM. Paid tiers with demonstrated value generate WoM.** The Free tier is a conversion funnel, not an acquisition engine.
+
+---
+
+**Assumption challenged #3: Peer referral is measurable, when it is structurally unmeasurable.**
+
+Even if WoM were a real channel, the debate log acknowledges no measurement mechanism. The three proposed options — UTM-tagged referral tracking, "comment avez-vous connu l'app?" onboarding question, or explicit referral invite codes — all have fatal flaws for this specific use case:
+
+**UTM-tagged referral tracking:** Works for explicit shares (user clicks "share" and gets a link). Does not work for "I told my buddy about it at the job site" — which is the primary WoM modality. You can only measure what you instrument. You cannot instrument a conversation.
+
+**"Comment avez-vous connu l'app?" onboarding question:** Self-reported attribution is systematically biased toward socially desirable answers ("a friend recommended it" sounds better than "I searched on Google"). Additionally, for a product where discovery happens through peer conversation, the respondent often genuinely cannot distinguish between "saw a WhatsApp post" and "heard from a colleague" — the lines blur.
+
+**Explicit referral invite codes:** Requires active referrer behavior. Under 2% of free SaaS users generate referral codes. With 500 Free tier users, that's 10 referral events per month. Not a channel.
+
+The honest conclusion: WoM cannot be measured at the precision implied by "40%." Any number assigned to it is a guess, and should be treated as such.
+
+---
+
+**Why prior resolution was wrong/incomplete:**
+
+The Growth Strategist's D56 challenge (14:24 pulse) correctly identified that the number is unvalidated. But it still treated WoM as a real channel that just needs measurement. The Product Strategist goes further: WoM is not a channel in the relevant sense. It is an outcome. You cannot build a GTM strategy around earning an outcome — you build it around activities that produce the conditions for that outcome.
+
+The resolution proposed (UTM codes, onboarding question, invite codes) treats measurement as the fix. Measurement tells you what happened; it doesn't create the channel. If there are only 10 referral events per month because Free users have no urgency to evangelize a tool they didn't pay for, measuring that number doesn't change the underlying behavior.
+
+---
+
+**Concrete proposal:**
+
+**Step 1 — Restate the assumption:** "40% of users arrive via word-of-mouth" is retired. Replaced with: "Word-of-mouth is a long-term outcome we are building toward, not a launch-channel we are investing in."
+
+**Step 2 — Redesign GTM attribution:** Replace the "40% WoM" input in the GTM model with:
+- **Organic search / SEO** (measurable, compound, primary at launch)
+- **Comparison site presence** (GetApp, Capterra, alternatives — addressable for admin handler persona)
+- **Direct referral from paid users only** (measurable via invite codes for €29 users; zero expectation for Free tier)
+- **Digital artisan community presence** (Facebook groups, trade forums — brand awareness, not tracked conversion)
+
+**Step 3 — Add a referral mechanism for €29 users only:** When a user converts to paid, prompt them once: "Vos collègues artisans pourraient-ils bénéficier de cet outil?" Offer a referral code. Track paid-user referrals as the *actual* WoM proxy. This is the only version of WoM that is both measurable and meaningful — paid users who recommend the tool because they paid for it and love it.
+
+**Step 4 — Remove "WoM is primary GTM" from the GTM document.** Replace with honest framing: "WoM is the goal for 12-18 months post-launch, once paying users have completed the full payment cycle and experienced the value. At launch, we are investing in channels we can measure while building a product worth recommending."
+
+**Step 5 — Define WoM readiness criteria for when to invest in it:** WoM as a channel becomes viable when: (a) paid user 30-day retention > 70%, (b) at least 30% of paying users have completed 3+ payment cycles, (c) spontaneous peer mentions appear in artisan WhatsApp groups. Until then, it is an outcome being tracked, not a channel being invested in.
+
+---
+
+**What this challenges:**
+
+- **D33 (Free + €29 pricing):** Justified partly by "WoM is primary GTM at 40%." If WoM is an outcome not a channel, the Free tier justification stands on its own (removes commitment anxiety, enables trial). The 40% anchor is retired.
+- **D52 (GTM priority order):** "Digital → Specialist retailers → Prescriber → Wholesaler" was affirmed in D52. The D56 challenge doesn't overturn the priority order — it removes the "but WoM is 40%" justification, leaving the channel logic intact but the confidence misplaced.
+- **D55 (dual-persona GTM):** The dual-persona framing (Marc = buyer, admin handler = user) remains valid. But "WhatsApp groups" as the primary discovery channel for Marc is downgraded from "proven primary channel" to "hypothesis requiring validation." The admin handler / comparison site path becomes comparatively stronger.
+- **Free tier design (D6/D43/D46):** If Free tier doesn't generate WoM, the "generous limits → trust-building → organic advocacy" chain is broken. The Free tier still stands as a trial mechanism, but the advocacy aspiration is deferred.
+
+---
+
+**Verdict requested:** REFINED — "40% WoM" is retired as a GTM input. WoM is restated as a 12-18 month outcome, not a launch-channel. GTM model redesigned to reflect channels we can measure and invest in (SEO, comparison sites, specialist retailers). Paid-user referral tracking added as the only measurable WoM proxy. D33, D52, D55 partially challenged (WoM justification removed; channel priorities retained on their own merits).
+
+*Last updated: 2026-03-30T14:57*
+
+---
+
+## Pulse 2026-03-30T14:57 — Growth Strategist Cross-Cutting Challenge
+
+---
+
+## Debate 56: WoM Attribution — The 40% Is Not the Biggest Risk
+
+**Challenge:** The debate has framed D56 as "40% number is unvalidated." That's the wrong risk. The real risk is that the entire GTM has no active acquisition engine at launch — and WoM is being used to justify passive launch planning.
+
+### Growth Strategist — WoM Is a Result, Not a Strategy
+
+**Assumption challenged:** That the 40% WoM figure represents an acquisition channel we can rely on, and that the GTM priority order (digital secondary, prescriber Phase 2, expert-comptable Phase 2) is acceptable because word-of-mouth will carry the weight.
+
+**Core argument:**
+
+The debate has focused on whether the 40% number is empirically verified. It isn't. But the more dangerous assumption is that *any* word-of-mouth at launch is a foregone conclusion. The reasoning in D33, D52, and D55 treats 40% as a baseline that will materialize once the product exists. This inverts causality.
+
+**Word-of-mouth is a lagging indicator of product-market fit.** You earn high WoM by shipping a product that delights users so much they proactively recommend it to peers unprompted. This requires: (a) users who've completed the full lifecycle (client → devis → facture → payment → relapse follow-up), (b) enough time for the product to solve a real problem they've felt for months, (c) a moment of delight significant enough to trigger sharing. At launch, we have zero of these conditions. The 40% we might eventually earn is not available to us on Day 1.
+
+**The GTM currently has no active acquisition engine at launch.** Review the priority order: digital channels (secondary), specialist retailers (needs audit), prescriber networks (Phase 2), expert-comptable (Phase 2). What actively drives the first 10 users? "Build it and they will come via WoM." That's not a GTM strategy — that's hope with a percentage attached.
+
+**"WoM at 40%" for a new product is mathematically impossible anyway.** For WoM to account for 40% of acquisitions, you need a large enough user base that peers are constantly encountering each other. A new product with 20 Free users cannot generate 40% WoM attribution — there aren't enough users to generate the peer network effect. The 40% figure describes a mature product with strong retention. Applying it to launch planning is category error at the strategic level.
+
+**The measurement problem is also an action problem.** D56 correctly identifies that without a measurement mechanism, 40% is unverifiable. But it's worse than that — without a referral tracking mechanism (UTM codes, invite codes, "comment avez-vous connu?" question), we won't even know if our first 10 users came from a real signal or from friends doing a favor for the founder. That's not data — that's noise.
+
+**Concrete proposal:**
+1. **Accept that WoM is a Month 3+ outcome, not a Month 1 channel.** First 10 users require active outreach: personal network, direct outreach to artisan communities, guerrilla presence at retailer locations
+2. **Implement "comment avez-vous connu?" at signup** — one question, required, with predefined options (peer, Google/search, social media, comparison site, other). This gives us directional data from Day 1 without complex UTM infrastructure
+3. **Add referral codes in v1** — simple "invite a colleague" with a unique code. Track invite → signup rate. This is the actual WoM measurement mechanism
+4. **Update D33/D52/D55 GTM priority order** — acknowledge that digital acquisition (SEO + comparison sites) is PRIMARY at launch, not secondary. WoM supplements later, not at launch
+5. **Define a WoM target for Month 3 specifically** — e.g., "20% of new users cite peer referral as discovery channel by Month 3." This makes WoM a goal to earn, not a assumption to carry
+
+**What this challenges:** D33 (Free + €29 justified partly via WoM primary GTM), D52 (WhatsApp groups as discovery pathway — valid but insufficient at launch), D55 (dual-persona GTM without acquisition engine for either persona at launch). D48 priority order needs revision: digital acquisition is primary, not secondary.
+
+**Verdict on D56:** REOPENED — 40% WoM attribution is unvalidated AND the GTM has no active acquisition engine at launch. Both problems must be fixed. Add measurement mechanism (U13), revise GTM priority order to make digital primary, and treat WoM as Month 3+ lagging indicator.
+
+---
+
+## Debate 57: Architecture Choice — A Distraction From the Real First-10-Users Problem
+
+**Challenge:** D57 (Nuxt 3 vs API-first) has been framed as an architectural correctness question. From a growth perspective, this is the wrong debate at the wrong time.
+
+### Growth Strategist — Architecture Doesn't Kill Products, Absence of Users Kills Products
+
+**Assumption challenged:** That the Nuxt 3 vs API-first architecture decision is a critical decision that could affect the product's trajectory. The more dangerous assumption is that choosing the wrong architecture will determine whether we get the first 10 paying users.
+
+**Core argument:**
+
+The Technical Architect is correct: Nuxt 3 is architecturally mismatched for a mobile-first product. SSR is unused. API routes are bypassed by Expo. The web surface is a static landing page. These are valid technical criticisms. But the growth question is different: **does this architecture choice determine whether we get 10 paying users?**
+
+**The answer is no — and here's why:**
+
+First 10 paying users come from: direct personal outreach, peer referrals from the founder's network, and early adopters found via guerrilla tactics. None of these channels are affected by whether the backend is Nuxt 3 or Express. A user who signs up because a friend recommended it doesn't ask "what framework does your backend use?" They ask "does it solve my problem and can I trust it?"
+
+The architecture decision affects: developer velocity (medium-term), hosting costs (long-term), and ability to add features (long-term). It does not affect whether the first 10 people can discover, sign up, and convert.
+
+**The dangerous distraction:** Every hour spent debating architecture is an hour not spent on customer discovery, guerrilla testing, or writing the first outreach list. D57 is a comfortable technical debate because it has a clear right answer (API-first is cleaner). It's also a debate that doesn't matter for the next 60 days. The first 10 users won't arrive via architectural superiority — they'll arrive via founder effort and peer trust.
+
+**The real architectural risk is different:** The real architecture risk is choosing a stack that slows down iteration speed once we have users giving us feedback. Nuxt 3's SSR model vs Express's stateless API is a 2-week velocity difference over 6 months, not a launch-critical decision. What IS launch-critical: does the architecture allow us to ship a devis flow in 5 days? Both Nuxt 3 and Express + Node allow that.
+
+**The growth verdict on D57:** Resolved by deferral. The Technical Architect's case is valid. But the growth priority is shipping a working product and finding 10 users — not achieving architectural purity. If Nuxt 3 is already partially built, the switching cost of migrating mid-MVP exceeds the benefit. If starting fresh, API-first is the cleaner choice. Either way, this is a Week 2 decision at earliest.
+
+**Concrete proposal:**
+1. **Defer D57 resolution to Sprint 0** — if Sprint 0 (compliance foundations) can be built in Nuxt 3 without slowing down the flow, do that. Migrate post-MVP if needed
+2. **Growth says: ship the minimum viable product first** — any architecture that enables a working devis flow in 5 days is the right architecture for launch
+3. **Add "iteration speed after first users" as the real architecture metric** — whatever stack lets the team ship based on user feedback fastest is the right choice, regardless of theoretical purity
+4. **Close D57 in the decision log** — flag as "resolved: API-first preferred, but current Nuxt 3 investment can continue through MVP. Migration post-MVP if ROI positive."
+
+**What this challenges:** D57 as framed (critical architectural decision). D7 (Nuxt 3 + OVH Postgres) — can remain standing through MVP if partial investment exists. The debate treats architecture as fate; it's actually mutable post-MVP at low cost relative to user acquisition effort.
+
+**Verdict on D57:** REFINED — architecture matters for long-term velocity, not for first 10 users. D57 is a legitimate technical concern but the wrong priority. Defer resolution to post-MVP unless Nuxt 3 is actively blocking Sprint 0 progress. The real Growth Strategist concern is: don't let this debate delay shipping.
+
+---
+
+## Debate 59: The Third Assumption — Pricing Credibility Has Never Been Validated With Real Artisans
+
+**Challenge:** D5 (€29/month Free + €29 tier) has been debated on positioning grounds (too expensive vs Tolteck, conflicts with simplicity) and conversion grounds (habit formation vs limit-hit). Nobody has asked the one question that could kill the product before 10 paying users: **would a real French artisan pay €29 for this?**
+
+### Growth Strategist — The Unvalidated Price Is the Biggest Pre-Launch Risk
+
+**Assumption challenged:** That €29/month is the correct price because: (a) it anchors on "one hour of labor" value math, (b) it's below enterprise SaaS but above commodity tools, (c) Free tier removes commitment risk. None of these justify the price — they justify the *positioning frame*.
+
+**Core argument:**
+
+**The "one hour of labor" anchor is the founder's math, not the customer's.** When a French artisan hears "€29/month," he doesn't calculate "that's one hour of labor." He calculates: "do I currently pay anything for this? No. Do I have a system that works? Yes (WhatsApp + Excel). What does switching cost me? Time to learn, time to migrate data, risk that it doesn't work when I need it." The €29 must clear a much higher bar than "one hour of labor" — it must clear "why would I switch from a system I've been running for 10 years?"
+
+**The competitive price comparison is backwards.** Tolteck at €19 and Obat at €17 are cited as price floor evidence. But these tools have 40k+ users and years of trust. A new product at €29 (50-70% premium) with zero users and zero reputation faces a completely different price objection. The question isn't "is €29 reasonable for this category?" It's "is €29 reasonable for an unknown product in this category?"
+
+**Free tier removes the commitment barrier but creates a different problem: no peer validation.** When everything is free, there's no social proof of value. A solo artisan seeing a free tool with no reviews, no prescriber endorsement, and no peer recommendations is looking at: "why should I trust this with my business for free, let alone €29?" The Free tier doesn't answer the trust question — it just removes the money barrier to discovering the answer.
+
+**The activation of Free → Paid requires answering a question nobody has asked:** "At what point does a French artisan say 'I should pay for this'?" The current model assumes it's when they hit a limit (D43/D46) or form a habit (D51). But neither model has been validated with a real person in a real conversation. We have no evidence that Free users who reach 5 clients or form a daily evening ritual will pay €29. We have theory.
+
+**The specific kill condition:** A product that gets 200 Free signups and 0 paying users by Month 2 is dead. The team will debate whether to lower price, add features, or improve onboarding. Meanwhile, runway burns. This scenario is plausible if: (a) the Free tier is good enough that users never feel pressure to upgrade, (b) the 10-client/5-devis limits are generous enough that serious artisans never hit them in 60 days, (c) no external forcing function (prescriber, expert-comptable, comparison site) creates urgency. All three conditions are consistent with current design.
+
+**What nobody has done:** Asked 5 real French artisans in a 10-minute conversation: "If this solved your devis problem completely, what's the most you'd pay per month?" That's not a complex study. It's a Tuesday morning at a Gedimat parking lot. The answer to that question is worth more than 40 hours of internal pricing debate.
+
+**Concrete proposal:**
+1. **Guerrilla price validation** — before launch, ask 5 artisans: "If this app solved your devis problem completely, what's the most you'd pay?" Document actual answers. If median answer is <€20, D5 needs revision
+2. **Add a "founding member" launch offer** — €19/month locked in for life for first 50 paying users. This tests price sensitivity while creating social proof and urgency. If this offer doesn't convert, the €29 price is wrong
+3. **Set a conversion metric for Month 1** — e.g., "3% of active Free users convert to paid by Day 30." If we hit Month 2 with <1% conversion, price is likely the barrier — not onboarding, not features
+4. **Add "payment method legitimacy" signal** — French artisans are skeptical of online subscriptions. A SEPA direct debit option (common in French SaaS) reduces the "this feels like a scam" friction that a credit card-only payment creates
+
+**What this challenges:** D5 (€29 anchored on value math — unvalidated with real users), D43/D46 (limit-hit conversion model — assumes price is accepted, only trigger is the limit), D6 (Free tier as trial — doesn't address the price credibility gap), the entire GTM assumption that a Free tier with a €29 upgrade is sufficient to convert without validating that €29 is a credible price point for an unknown product
+
+**Verdict on D59:** NEW — Pricing credibility is the unchallenged assumption most likely to kill the product before 10 paying users. Add guerrilla price validation to U1 readiness protocol. Add founding member offer to test price sensitivity at launch. Set conversion KPIs that trigger price reconsiderations if missed.
+
+---
+
+## Updated Decision Table Additions
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D56 | WoM attribution | REOPENED — 40% unvalidated AND GTM has no active acquisition engine at launch. Add measurement mechanism, make digital primary. | 2026-03-30 |
+| D57 | Architecture | REFINED — valid technical concern, wrong priority. Defer to post-MVP unless blocking Sprint 0. | 2026-03-30 |
+| D59 | Pricing credibility | NEW — €29 price point unvalidated with real artisans. Guerrilla price validation + founding member offer proposed. | 2026-03-30 |
+
+| U13 | WoM measurement | "Comment avez-vous connu?" at signup + referral codes. Track Month 3 target: 20% peer referral. | 2026-03-30 |
+| U14 | API-first architecture | Defer — unless Nuxt 3 actively blocks Sprint 0, continue and migrate post-MVP | 2026-03-30 |
+| U15 | Price validation | NEW — guerrilla price validation: ask 5 artisans "most you'd pay?" Add founding member €19/mo launch offer. Set 3% conversion target for Day 30. | 2026-03-30 |
+
+---
+
+*Last updated: 2026-03-30T14:57*
