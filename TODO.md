@@ -219,9 +219,13 @@ All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 - [ ] **D85 NEW:** GetApp and Capterra profiles claimed and optimized BEFORE launch — admin handlers search here first. Free to claim, takes an afternoon.
 - [ ] **D85 NEW:** Expert-comptable data-sync portal = Phase 2 (distinct from recommendation outreach). Phase 2 requires: real users + testimonials + accountant has seen it work.
 
-### Sprint 0 Build (D54 + D71 + D74 + D81 + D84 — 5-7 Days, Offline-Capable)
+### Sprint 0 Build (D54 + D71 + D74 + D81 + D84 — 5.5-7 Days, Offline-Capable)
 
-**D84 UPDATED:** Sprint 0 = 5-7 days (REVERTED from 8-10 days). D86 reversed D81 offline-first requirement. Offline-capable (optimistic UI + retry queues + AsyncStorage) + mentions légales + WhatsApp PDF + real device testing = 5-7 days realistic.
+**D84 UPDATED:** Sprint 0 = 5.5-6.5 days (D90, per Technical Architect). D86 reversed D81 offline-first requirement. Offline-capable (optimistic UI + retry queues + AsyncStorage) + mentions légales + WhatsApp PDF + real device testing = 5.5-6.5 days IF pre-conditions met.
+
+**D95 NEW (Challenge from Technical Architect):** D90's parallelization assumption is organizational (two teams) not individual (solo dev). Realistic solo dev estimate: 7-8 days unless specific pre-conditions are confirmed. Three independent risks: (1) parallelization is organizational fiction for solo dev — adds +1 day, (2) mentions légales = legal research not template engineering — adds +0.5-1 day, (3) integration underbudgeted — adds +0.5 day.
+- [ ] **D95 CONFIRM before committing to 5.5-6.5 days:** Confirm Louis has pre-researched mentions légales legal text for all 4 client types. If not pre-researched: add 0.5-1 day to Sprint 0 OR defer mentions légales to Sprint 1 with plain text placeholder.
+- [ ] **D95 SCOPE CUTS:** Three cuts make 5.5-6.5 days achievable without pre-conditions: (1) defer mentions légales to Sprint 1 (plain text placeholder), (2) defer AsyncStorage to Sprint 1 (online-only), (3) single client type in Sprint 0. Without cuts: accept 7-day timeline.
 - [ ] **D81 NEW:** Sprint 0 = offline-first. WatermelonDB/expo-sqlite for local-first storage (~2 days mobile). Fastify API: add `updated_at` timestamps + accept client-generated UUIDs (~2 hours). Sync: last-write-wins with conflict UI. No changes to API endpoint contracts.
 - [ ] **D74 RESOLVED:** Sprint 0 = 8-10 days. Day 1: `client.type` enum (4 values) + mentions légales template engine (Handlebars/Nunjucks, 4 client-type templates, devis-only). Sprint 2 adds 8 combinations.
 - [ ] **D74 RESOLVED:** API key Sprint 0 scope: `@fastify/jwt` config (0.5-1 day). Full auth (Keychain, refresh rotation, logout) = Sprint 1. (API key replaces JWT per D78)
@@ -229,7 +233,7 @@ All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 - [ ] **D54 RESOLVED:** TVA arrondi commercial calculator: `Math.round(v * 100) / 100`. No BOFiP lookup required.
 - [ ] **D71 RESOLVED:** Mentions légales = 4 templates (devis × client type). 8 combinations (devis + facture) = Sprint 2 scope.
 - [ ] **D83 NEW:** Push notification infra + nightly aggregation job added to Sprint 0 scope. Server computes financial snapshot nightly. Push at 8pm Paris. Free tier gets daily notification (limited depth). €29 tier gets full snapshot + in-app drill-down.
-- [ ] **D84 UPDATED:** 5-7 day Sprint 0 now achievable without scope cuts (D86 reversed offline-first overhead). Mentions légales retained. If timeline pressure: drop mentions légales (defer to Sprint 1), use plain text WhatsApp share instead of PDF.
+- [ ] **D84 UPDATED:** 5.5-6.5 day Sprint 0 achievable if pre-conditions met (D95). Mentions légales retained. If timeline pressure: drop mentions légales (defer to Sprint 1), use plain text WhatsApp share instead of PDF.
 
 ### Pricing (D5 + D59 + D75 + D77 — €29 Single Price Point)
 - [x] **D75 UPDATED (Debate 77):** "Membre fondateur" framing KILLED. Discount framing trains users to wait for promotions. Replaced with "Accès Fondateur" — relationship benefits without price anchoring.
@@ -632,7 +636,7 @@ The following were overengineered or wrong:
 
 ### New Action Items from this pulse:
 - [ ] **D81 NEW:** Sprint 0 = offline-capable. Implement optimistic UI (immediate local feedback, background server sync), retry queues with exponential backoff, AsyncStorage cache for last 10 clients/recent devis. No WatermelonDB until v1.2.
-- [ ] **D81 UPDATED:** Sprint 0 timeline reverts to 5-7 days (was 8-10 with offline-first). Those recovered 3-5 days go to devis flow and real device testing.
+- [ ] **D81 UPDATED:** Sprint 0 timeline reverts to 5-7 days (was 8-10 with offline-first). Those recovered 3-5 days go to devis flow and real device testing. NOTE: D90 further updated to 5.5-6.5 days — see D95 challenge re: solo dev parallelization.
 - [ ] **D85 UPDATED:** Expert-comptable outreach DEFERRED to Week 4-6. Prerequisites: 10-20 active beta users, 1-2 testimonials, production mentions légales, sample BTP devis. Week 1: claim GetApp/Capterra profiles only.
 - [ ] **D88 NEW:** Add notification preference to onboarding flow — "Quand voulez-vous recevoir vos rappels?" Morning / Midday / Evening. Default to user's stated preference.
 - [ ] **D88 NEW:** Replace daily 8pm financial digest push with event-driven triggers: (1) devis unanswered 3+ days → "Ce devis attend une réponse depuis 3 jours", (2) facture unpaid 15+ days → "Cette facture est impayée depuis 15 jours"
@@ -674,8 +678,11 @@ The following were overengineered or wrong:
 ### New Action Items from this pulse:
 - [ ] **D92 NEW:** Week 1 platform validation — geo-targeted Facebook/Instagram poll in Caen ("What phone do you use for your business?" iOS/Android), €20-50 ad spend targeting 200+ artisans. Also: check 3-5 competitor App Store review counts (iOS vs Android) to infer platform split.
 - [ ] **D92 NEW:** If geo-targeted poll shows 55%+ Android → reverse launch order or go simultaneous. Document the decision rule before Sprint 0 starts.
-- [ ] **D93 NEW:** Design Guided Creation Flow — 5-minute onboarding sequence: (1) full-screen "create your first devis in 60 seconds" intro card with "Commencer" CTA, (2) create first client via phone contact import with name/phone fallback, (3) auto-suggest first line item + pre-set TVA at 10%, (4) preview screen showing actual devis document, (5) native share (WhatsApp pre-selected) → "Votre devis a été envoyé" confirmation.
-- [ ] **D93 NEW:** Onboarding must work offline — optimistic UI, client creation queues for sync, share action works immediately even without connectivity.
+- [ ] **D93 UPDATED:** Guided Creation Flow is evening-only (10-15 min), not 5-min daytime task. Day 1 split: daytime = app install + home view orientation (job card, situation financière notification). Evening = Guided Creation Flow ("Vous avez 10 minutes? Créons votre premier devis ensemble."). The 5-minute daytime flow is unrealistic — artisan day has no focused 5-minute window.
+- [ ] **D93 NEW:** Contact import is secondary, not primary. Manual entry (name + phone) is the happy path. Phone contacts rarely contain solo artisan client data (kept in WhatsApp). Import UI must show "Entrez le nom et téléphone" immediately, not after a failed import.
+- [ ] **D93 UPDATED:** 5-minute claim on landing page is unverified. Verify in real conditions (mid-range Android, gloves, sunlight, one interruption) before using it. If flow takes 10-15 minutes, update the landing page claim.
+- [ ] **D93 NEW:** Flow must be interruption-safe — every step saves progress locally. If Marc gets a client call mid-flow, he returns to exactly where he left off.
+- [ ] **D93 NEW:** Resolve D83/D93 internal inconsistency — D83 rejected 8pm notification ("too presumptuous about daily rhythm"). D93 Guided Creation implicitly requires evening. Explicit distinction: evening notification (D83) = too presumptuous. Evening Guided Creation onboarding = appropriate framing for when a focused moment exists. The evening moment is a user choice, not a product assumption.
 - [ ] **D94 NEW:** GetApp + Capterra — Week 1: claim and verify ownership, enter basic company data, set to draft/private. Do NOT publish yet.
 - [ ] **D94 NEW:** Week 2-3: add 3-5 real product screenshots (devis creation, facture, document archive), accurate pricing ("Free plan. Pro: €29/month"), French-language description written for artisan audience, feature checklist matching MVP.
 - [ ] **D94 NEW:** Week 3-4: publish profile once 2-3 seed reviews from beta/early users exist. Ask founding members to leave reviews as part of activation flow.

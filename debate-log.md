@@ -4145,6 +4145,105 @@ D85/D87 partially updated: GetApp/Capterra = Week 1 (unchanged). Expert-comptabl
 
 ---
 
+## Debate 95: Sprint 0 — Solo Developer Parallelization Is Organizational Fiction
+
+**Challenge:** D90 resolved Sprint 0 = 5.5-6.5 days with "parallel backend and mobile tracks from Day 1." Technical Architect challenges this assumption directly — it describes organizational parallelism, not individual developer parallelism.
+
+### Technical Architect — The Parallelization Assumption Is Structurally Invalid
+
+**Assumption challenged from D90:** "Backend and mobile can run in parallel from Day 1" — the decisive factor unlocking 5.5-6.5 days.
+
+**The core problem — organizational parallelism ≠ individual parallelism:**
+
+The "parallel track" framing describes how two teams work simultaneously. In a two-person team, one person builds backend while another builds mobile. They divide the work. Neither is blocked.
+
+A solo developer cannot divide themselves. They can only sequence: backend OR mobile at any given moment.
+
+**The Day 1 contract assumption is the critical path:**
+
+For true parallelism to work, the API contract must be defined by end of Day 1 morning. That means:
+- OpenAPI spec or shared TypeScript types for: Client, Devis, DevisLineItem, TVA rates
+- Fastify scaffold with route stubs (even if handlers are empty)
+- React Native scaffold with API client pre-wired to those route stubs
+- Postgres schema committed and migrated
+
+Day 1 reality for a solo developer:
+- 4 hours: Define API contract + write shared TypeScript types
+- 4 hours: Fastify scaffold + Postgres schema + first route stubs
+- 4 hours: Expo scaffold + API client wired to contract
+- Total: 10-12 hours = all of Day 1
+
+End of Day 1, the contract IS defined. But the solo developer has spent the entire day on infrastructure and has zero feature work done. The parallelization doesn't begin until Day 2.
+
+**Day 2-3 breakdown:**
+
+Solo dev does backend Days 2-3:
+- Client CRUD endpoints: 4 hours
+- Devis CRUD + TVA calculator: 6 hours  
+- Mentions légales template engine: 4 hours (4 Handlebars templates with real French legal text — see below)
+- Testing + bug fixes: 2 hours
+- Total: ~16 hours = 2 full days
+
+Solo dev does mobile Days 4-5:
+- Devis creation UI: 8 hours
+- AsyncStorage + retry queue: 4 hours
+- WhatsApp share integration: 3 hours
+- Testing + bug fixes: 3 hours
+- Total: ~18 hours = 2+ days
+
+Day 6: Integration + real device testing + bug fixes.
+
+**Actual calendar: 6 days minimum, assuming zero blockers and perfect execution.**
+
+**The mentions légales hidden cost:**
+
+D90's scope says "4 mentions légales templates (devis × client type)." This was treated as a template engineering task. It isn't — it's a legal research task.
+
+French mentions légales for each client type require:
+- Particulier: RCS, SIRET, numéro de TVA — consumer protection notice
+- Professionnel français: Above + forme juridique, capital social, siège social, TVA intracom
+- Professionnel UE: Above + numéro de TVA intracom + CGI 242 bis reference  
+- Professionnel hors-UE: Above + specific跨境tax language, reverse charge statement
+
+Each template requires actual French legal research or consultation. This is not engineering time. It is external dependency time. And it cannot be parallelized with any other Sprint 0 work — you need the correct legal text before the template engine can be written.
+
+If legal research takes 2 hours: manageable. If it takes a day (waiting for a response, or finding the correct regulatory reference): Sprint 0 is 7 days.
+
+**Three independent challenges to the 5.5-6.5 day estimate:**
+
+| Challenge | Issue | Days at stake |
+|---|---|---|
+| Parallelization is organizational fiction | Solo dev = sequential, not parallel. Day 1 contract phase consumes full day. | +1 day |
+| Mentions légales = legal research, not template engineering | Real French legal text requires external consultation or research. Not a copy-paste task. | +0.5-1 day |
+| Integration + real device testing is underbudgeted | Both tracks meeting on Day 3-4 assumes zero integration surprises. Unlikely. | +0.5 day |
+
+**Net: 5.5-6.5 days assumes no legal research time, perfect Day 1 API contract, and flawless integration. All three assumptions are independently fragile.**
+
+**Specific conditions under which 5.5-6.5 days IS achievable:**
+
+If and only if:
+1. Louis already knows the exact legal text for all 4 mentions légales templates (pre-researched, ready to paste)
+2. The API contract is genuinely definable in a half-day (he's done this before, schema is obvious)
+3. The "shared types" are literally just copy-pasted into both backend and mobile with no discussion
+4. Real device testing is deferred to Sprint 1 (i.e., the app isn't actually tested on a real phone during Sprint 0)
+5. WhatsApp PDF sharing works on first attempt (no html-to-pdf debugging)
+
+**Proposed scope cuts that make 5.5-6.5 days realistic:**
+
+1. **Mentions légales deferred to Sprint 1** — plain text placeholder in Sprint 0 WhatsApp share. Legal templates are not blocking the devis flow's technical verification.
+2. **Defer AsyncStorage + retry queue to Sprint 1** — online-only for Sprint 0. Tests whether the backend API works, not whether offline mode works.
+3. **Single client type in Sprint 0** — particuler only. Client-type routing added in Sprint 1.
+
+These three cuts reduce Sprint 0 to: define API contract (Day 1 morning) + backend CRUD + mobile devis creation UI + WhatsApp share (Days 2-4) + integration (Day 5). 5 days, achievable.
+
+**VERDICT on Sprint 0 timeline:**
+
+The 5.5-6.5 day estimate is achievable under specific pre-conditions (pre-researched legal text, pre-known schema, no real device testing). Without those pre-conditions, realistic estimate is 7-8 days.
+
+**Recommendation:** Either confirm the pre-conditions are met (Louis has already researched the mentions légales text) or accept the 7-day timeline with the scope cuts above. Do not commit to 5.5-6.5 days based on organizational parallelism logic applied to a solo developer.
+
+---
+
 ## Pulse 2026-03-30T19:00 — Three Specialist Debates
 
 ---
@@ -4274,9 +4373,115 @@ D85/D87 partially updated: GetApp/Capterra = Week 1 (unchanged). Expert-comptabl
 |----|-------|-----------|------|
 | D92 | App Store launch | NEW — iOS-first, Android Month 2. Validate platform split in Week 1 (geo-targeted poll + competitor review count). | 2026-03-30 |
 | D93 | Day 1 onboarding | NEW — Guided Creation Flow. 5-minute sequence: set expectations → create client via contact import → create and send first devis via WhatsApp/email. Time-to-first-document is primary retention driver. | 2026-03-30 |
+| D93a | Guided Creation Flow timing | REOPENED — 5-minute focused attention during working hours is unrealistic. D93 implicitly requires evening/off-hours but D83 rejected 8pm as "too presumptuous." Internal inconsistency. | 2026-03-30 |
+| D93b | Contact import assumption | REOPENED — "Importer un contact" assumes phone contacts contain client data. Solo artisans store client info in WhatsApp, not phone contacts. Import flow may return zero data. | 2026-03-30 |
 | D94 | GetApp/Capterra | NEW — Claim Week 1 (D85 confirmed). Publish Week 3-4 when screenshots, pricing, and 2-3 seed reviews are ready. Empty profile is worse than no profile. | 2026-03-30 |
 
 ---
 
 *Last updated: 2026-03-30T19:00*
+
+---
+
+## Pulse 2026-03-30T19:15 — Product Strategist Debate
+
+## Debate 95: D93 — The 5-Minute Guided Creation Flow Assumes a Focused Attention Moment That Doesn't Exist
+
+**Challenge:** D93 resolved the Guided Creation Flow wins — a 5-minute sequence: create client via contact import → create and send first devis via WhatsApp/email. The core assumption embedded in this resolution has never been stress-tested: **5 minutes of focused attention is available to a solo French artisan during working hours.**
+
+### Product Strategist — D93 Assumption Is Built on a Fabricated Day
+
+**Core assumption challenged from D93:** "Marc can complete the first-devis flow in 5 minutes on his phone, even with no prior app familiarity, even in a job site context."
+
+**The fabricated day:**
+D93's 5-minute sequence was designed around a day that doesn't exist for a solo French artisan:
+- Day runs 7am–7pm with tight margins between jobs
+- Lunch is eaten in the van between appointments — not a restful pause, a transition
+- "5 minutes" to set up a new software tool means stopping mid-workflow, finding a quiet moment, focusing entirely on the app
+- The job site context (noise, gloves, sunlight on screen, client interruption) makes focused phone use genuinely difficult
+
+**The internal inconsistency no one caught:**
+
+D83 rejected 8pm as a notification time with explicit reasoning: "too presumptuous about daily rhythm." French artisan evenings vary — family dinner timing, seasonal variation, regional customs. A fixed 8pm notification assumes a rhythm that doesn't universally exist.
+
+But D93's Guided Creation Flow **implicitly requires an evening or off-hours moment** to complete the 5-minute setup. The flow can't work on a job site in 5 minutes. It can't work between appointments. It requires a genuine moment of focus that only exists outside working hours.
+
+D83 rejected notification timing based on variability in daily rhythm. D93 assumes a 5-minute focused window exists in that same daily rhythm. These are internally inconsistent.
+
+**The real French artisan day:**
+- 7:00–8:00: Travel to first job site, setup
+- 8:00–12:00: Work (often no phone access mid-task)
+- 12:00–12:30: Lunch in van — sandwich, coordinate next job, check messages
+- 12:30–17:30: Work
+- 17:30–19:00: Travel, coordinate tomorrow, admin fragments
+- 19:00–20:30: Family dinner, wind down
+- 20:30–22:00: This is the window — if it exists. But D83 said this is too presumptuous to assume.
+
+The 5-minute Guided Creation Flow requires a quiet, focused, uninterrupted moment. The only one that reliably exists is in the evening — exactly the window D83 rejected as unreliable.
+
+**Assumption challenged #2: "Importer un contact" requires phone contacts with client data**
+
+D93 Step 2 is: "Importer un contact" (phone contacts, if permissions granted), fallback to name + phone only.
+
+The assumption: phone contacts contain client data. The reality: solo artisans keep client contact info in **WhatsApp**, not the phone contacts app. Phone contacts contain family, suppliers, and random numbers — not Madame Martin's mobile that he reaches via WhatsApp every time.
+
+**The import flow failure mode is invisible:**
+- User grants contacts permission
+- App imports: 0 contacts (or 3 irrelevant ones)
+- Fallback to manual entry activates silently
+- User now manually enters name + phone — the same friction the import was supposed to eliminate
+- The 90-second "create client" step becomes a 3-minute manual entry with no warning
+
+The import isn't just unnecessary — it creates a permission request that, when it returns nothing, creates confusion about why the app asked.
+
+**The conversion consequence of the 5-minute failure:**
+
+If Marc attempts the Guided Creation Flow during a break and fails (interrupted, too slow, contact import returns nothing), he has now experienced the app as **friction** — exactly the opposite of "Sans vous prendre la tête." He closes the app. He doesn't come back. The aha moment was supposed to be "I just sent a professional devis in 5 minutes." Instead he got "this is complicated and I don't have time for this."
+
+**The alternative: Evening-Only Guided Onboarding**
+
+The correct framing: the Guided Creation Flow is an **evening ritual**, not a daytime onboarding task. This resolves the internal inconsistency with D83:
+
+- Daytime: App functions as a clean viewer — Marc can see his existing data, understand the home view, receive the situation financière notification
+- Evening (first session): Guided Creation Flow activates — 10-15 minutes, full attention, first devis created and sent
+- The evening framing is honest: "Vous avez 10 minutes? Créons votre premier devis ensemble." — not "5 minutes between jobs"
+
+This is what D83 was trying to protect: the evening ritual isn't a notification trigger (that's what D83 rejected). It's a framing for when the Guided Creation Flow is appropriate.
+
+**Three specific problems D93 must solve:**
+
+1. **The flow must work when interrupted.** Every step saves progress locally. If Marc gets a call mid-flow, he returns to exactly where he left off — not a blank screen.
+
+2. **Contact import must have a meaningful fallback immediately visible.** "Vous n'avez pas de contacts? Entrez juste le nom et le téléphone." — not silent fallback to manual entry after a failed import.
+
+3. **The 5-minute claim must be verified in context.** Can the flow complete in 5 minutes on an Android mid-range phone, with gloves, in bright sunlight, with one interruption? If not, the landing page "5 minutes" claim is a lie.
+
+**Proposed resolution:**
+
+D93 is partially correct — Guided Creation Flow wins over Explore First. But the implementation must change:
+
+1. **Guided Creation Flow is evening-only framing** — "Vous avez 10 minutes? On crée votre premier devis ensemble." — not a daytime between-jobs task
+2. **Day 1 experience is split:** Daytime = app install + home view orientation (job card, situation financière notification). Evening = Guided Creation Flow
+3. **Contact import is secondary, not primary** — Manual entry is the happy path. Import is a shortcut for the 20% whose contacts app is actually populated
+4. **5-minute claim removed from landing page unless verified** — If the flow can't complete in 5 minutes on a job site, the claim is false advertising
+
+**Verdict on D93:** REFINED — Guided Creation Flow wins, but is repositioned as an evening ritual (10-15 minutes), not a 5-minute daytime task. Day 1 split into daytime orientation + evening onboarding. Contact import secondary to manual entry. 5-minute claim deferred until flow is verified in real conditions.
+
+**What this challenges:**
+- D93 timing: 5 minutes assumed, not verified — evening 10-15 minutes is more realistic
+- D83 internal consistency: evening onboarding is not the same as evening notification — the distinction must be explicit
+- D93 contact import: primary path should be manual entry, not phone contacts
+- Landing page: "5 minutes" claim needs verification before it appears
+
+---
+
+*Last updated: 2026-03-30T19:15*
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D92 | App Store launch | NEW — iOS-first, Android Month 2. Validate platform split in Week 1 (geo-targeted poll + competitor review count). | 2026-03-30 |
+| D93 | Day 1 onboarding | Guided Creation Flow — evening-only framing (10-15 min), not 5-min daytime task. Day 1 split: daytime orientation + evening Guided Creation. Contact import secondary to manual entry. | 2026-03-30 |
+| D94 | GetApp/Capterra | NEW — Claim Week 1 (D85 confirmed). Publish Week 3-4 when screenshots, pricing, and 2-3 seed reviews are ready. | 2026-03-30 |
 
