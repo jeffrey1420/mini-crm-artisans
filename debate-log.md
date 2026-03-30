@@ -3418,7 +3418,45 @@ RESOLVED — D70 REFINED. The "Better Free Tier" trap is named:
 **The alternative:** "Essai gratuit 14 jours, puis €29/mois. Prix définitif. Sans engagement." — makes €29 the stated price, not a promotional one.
 
 **VERDICT on D75:**
-OPEN — "Membre fondateur" framing challenged but not resolved. D75 still stands pending rebuttal. New action items generated.
+RESOLVED — D75 was partially wrong. "Membre fondateur" framing is rejected in its current form. The 4-benefit relationship package was correctly identified as valuable — but the discount framing that carried those benefits is the problem. Resolved as follows:
+
+**Why D75 was wrong:**
+
+1. **"Creates relationship without training users to wait for discounts" — FALSE.** The relationship benefits (named in app, direct founder access, roadmap vote) are real. But the vessel is a price signal: "Pay less now, as a favor." Every user who joins as "Membre fondateur" has been told — explicitly — that the normal price is higher. That is discount framing. Relationship language does not neutralize it; it dresses it up.
+
+2. **"First 50 slots creates natural scarcity" — FALSE at zero traction.** Natural scarcity requires demonstrated demand. At launch, no users, no reviews, no proof. "50 founding spots" is an arbitrary number that sounds like a marketing mechanic, not a real constraint. It creates suspicion, not urgency.
+
+3. **The latecomer problem is structural, not solvable.** Month 3 Marc sees "50 founding members" and faces two equally bad choices: resentment ("I missed the club") or waiting for cohort 2 ("I'll join the next founding round"). Neither converts. Both poison the €39 standard price before it's even announced.
+
+4. **Price escalation (€29 founding → €39 standard → €49 professional) is dead on arrival.** French artisan networks are dense and fast. The €29 "real price" leaks in week 3 via WhatsApp groups. The €39 tier becomes the new expected price, and €49 is DOA.
+
+**The correct principle:** Relationship benefits without price signaling. Scarcity without artificial slots. Trust without anchors that train users to wait.
+
+**RESOLVED — Four changes to D75:**
+
+1. **Kill "Membre fondateur" framing.** Replace with "Accès Fondateur" — a relationship program, not a price program. The benefit is access to Louis directly, not a locked discount.
+
+2. **Kill the price escalation.** Single €29/month for everyone. Forever. No founding/standard/professional tiers. This removes the discount signal entirely and makes €29 the honest, only price.
+
+3. **Replace "First 50 slots" urgency with direct access urgency.** Louis can personally onboard only so many users. "Accès Fondateur" means: direct WhatsApp line to Louis, 30-min onboarding call, your name in the app credits. The scarcity is Louis's time, not a slot count. When Louis's calendar fills, founding access closes.
+
+4. **Keep the 4 benefits, reframe them as relationship benefits:**
+   - Named in app credits → "Reconnaissance des premiers supporters"
+   - Locked price → REMOVED (replaced with relationship value)
+   - Direct founder access → "Accès WhatsApp direct à Louis — réponses sous 24h"
+   - Roadmap vote → "Vote sur les 3 priorités du prochain mois"
+
+**New language for landing page:**
+> "Essai gratuit — sans limitation de temps. Vous décidez quand passer à €29/mois. Aucun engagement."
+
+NOT:
+> "Membre fondateur — €29/mois, puis €39/mois."
+
+The first tells users: the price is €29. The second tells users: the price is actually lower if you act now.
+
+**D5 UPDATED:** Price escalation path (€29 founding → €39 standard → €49 professional) is KILLED. Single €29/month price point. No founding/standard/professional tiers.
+
+**D75 UPDATED:** "Membre fondateur" framing is KILLED. Replaced with "Accès Fondateur" — relationship benefits without discount framing. Scarcity signal = Louis's limited personal onboarding capacity, not arbitrary slot count.
 
 ---
 
@@ -3437,7 +3475,40 @@ OPEN — "Membre fondateur" framing challenged but not resolved. D75 still stand
 **When JWT makes sense:** Multi-user sessions, distributed microservices, token sharing across devices. None of these apply.
 
 **VERDICT on D74:**
-OPEN — API key auth challenge not yet resolved. Sprint 0 scope implications pending. New action items generated.
+RESOLVED — **API key wins. JWT deferred to v2.**
+
+The challenge is correct on all counts. But the framing in the debate missed the most important point, which I want to correct explicitly:
+
+**The critical assumption I want to challenge from the debate log:**
+
+The debate treated this as "JWT complexity vs API key simplicity for the same use case." That's wrong. JWT was never the right primitive here, even before the API key alternative was proposed. JWT solves problems this product doesn't have:
+
+- JWT solves **stateless verification across distributed services** — we have one Postgres instance
+- JWT solves **multi-session management across devices** — Marc has one phone
+- JWT solves **token rotation and refresh without re-login** — Marc's session lives on his phone until he logs out
+- JWT solves **delegated auth (OAuth, third-party token sharing)** — no third parties at launch
+
+None of these are real problems for a solo artisan on a single device. The JWT "benefits" in this context are solving zero of Marc's actual problems.
+
+**On the "2 hours vs 0.5-1 day" estimate:** Accurate. The JWT scaffold (contracts + stubs + @fastify/jwt config) at 0.5-1 day is realistic for production-grade implementation (proper TTL, refresh endpoint, logout logic). The API key approach (single UUID, one verify endpoint, Expo SecureStore stub) at ~2 hours is also realistic. The delta is real and meaningful in a 5-day Sprint 0.
+
+**On Expo SecureStore reliability:** Production-grade. iOS Keychain and Android Keystore backed. Battle-tested in production Expo apps. Not a research-and-deploy risk — it's a known quantity.
+
+**On v2 multi-user concerns:** This is the only plausible objection. If v2 requires admin handler access (D55's secondary persona), you'd want proper user auth. But:
+1. v2 multi-user auth would require a redesign anyway — API key per device ≠ multi-user session management
+2. The right answer for v2 multi-user is: build user accounts, not "keep JWT from v1"
+3. Starting with API keys doesn't paint you into a corner — you add proper auth when you need it
+4. Keeping JWT "for future multi-user" is exactly the over-engineering this product has been fighting against at every turn
+
+**On logout:** The debate mentioned "logout logic" as a JWT benefit. For a single-device solo user, logout = delete the token from SecureStore. No server-side blocklist needed. No TTL management needed. The "logout problem" doesn't exist here.
+
+**Specific technical recommendation:**
+- Sprint 0 schema: `artisans.api_key UUID DEFAULT gen_random_uuid()` — one row per artisan, one key per device
+- Sprint 0 auth deliverable: `POST /api/auth/verify` — takes the UUID from Authorization header, returns 200 or 401
+- React Native side: store API key in Expo SecureStore, attach as `Authorization: Bearer <uuid>` on all requests
+- JWT: re-evaluate in Sprint 2 or v2 only if multi-user becomes a confirmed requirement
+
+**D74 UPDATED:** JWT Sprint 0 scope is REPLACED. API key auth is Sprint 0 auth scope: schema column + verify endpoint + SecureStore stub, ~2 hours. Full JWT (if ever needed) is a v2 decision, not a v1 investment.
 
 ---
 
@@ -3455,9 +3526,55 @@ OPEN — API key auth challenge not yet resolved. Sprint 0 scope implications pe
 
 **The correct order:** (1) Validation — "Can I show you the flow and get your honest reaction?" (2) Referrals — only after product has real users, testimonials, and the accountant has seen it work.
 
-**VERDICT on D55/D72:**
-OPEN — D55/D72 reframed: expert-comptable stays Phase 1 but reclassified as validation asset, not GTM channel. Referral phase deferred to Phase 2. New action items generated.
+---
+
+### VERDICT on Debate 79: RESOLVED — Expert-Comptable Is Phase 1 Validation Asset
+
+**Assumption challenged from D55/D72:** "Warm access" was treated as shorthand for "immediate referral opportunity." This conflates two distinct objectives — validation and sales — that require different questions, different timing, and different success criteria.
+
+**The core distinction:**
+
+| Objective | Phase | Question | Success metric |
+|-----------|-------|----------|----------------|
+| Validation | Phase 1 (now) | "Can I show you and get your honest reaction?" | Credible feedback, persona confirmed |
+| Referrals | Phase 2 (post-launch) | "Would you mention this to clients?" | Introductions to qualified prospects |
+
+**Why the previous framing was wrong:**
+D55/D72 treated Louis's accountant as a *channel* — a distribution mechanism for sending clients his way. But an accountant is a *relationship*, and relationships require trust to be spent carefully. Asking for referrals before the product has real users stakes the accountant's professional reputation on an unproven tool. If the product fails or underwhelms, Louis doesn't just lose the referral — he damages the relationship AND the credibility he was building.
+
+**Why validation must precede referrals:**
+1. The accountant needs to see the product work before they can recommend it credibly. A recommendation from a professional who hasn't used it is a favor, not an endorsement.
+2. Louis doesn't yet know if the product solves a real problem. The accountant's clients are their shared frame of reference — but Louis hasn't confirmed his product maps to those clients' pain points.
+3. Referrals without validation create a credibility debt. Best case: 2-3 clients sent by an enthusiastic accountant, product not ready, Louis scrambles to fix bugs while credibility erodes. Worst case: accountant says no (or worse, yes out of loyalty, then silently abandons the product), and Louis has burned social capital for nothing.
+
+**What Louis asks his accountant this week:**
+
+The meeting agenda should be:
+1. **Show the flow, not the pitch.** "Can I show you how a devis gets created on my phone and tell me if this matches what you see with your clients?"
+2. **Get honest feedback.** "Does this solve a real administrative pain point you observe with sole traders and artisans?"
+3. **Build toward future referrals.** "What would make you comfortable recommending a tool like this to a client?"
+4. **NOT:** "Can you send me 2-3 clients?" or "Would you mention this to other accountants?"
+
+**Why this is Phase 1:** Louis has a warm relationship with his accountant. That warmth is valuable — not as a sales channel, but as a credibility validator. The accountant's reaction tells Louis: (a) is this product solving a real problem?, (b) is the UX credible enough for professional use?, (c) would this be worth recommending to clients?
+
+**When referrals become appropriate (Phase 2):**
+- Product has real users on the Free tier
+- Louis has at least one testimonial or case study
+- The accountant has seen the product work (not just heard about it)
+- The accountant has asked *Louis* for more information (sign of genuine interest, not favor)
+
+**Challenge to D55/D72 that this verdict accepts:** "Warm access" was correct. The mistake was treating warm access as a sales conversation when it should have been a validation conversation. The accountant relationship is valuable — but its value in Phase 1 is feedback, not referrals.
+
+**Does this affect U12?** Yes — split into two playbooks:
+- **U12a (validation script):** Action this week. Questions for Louis's accountant.
+- **U12b (referral script):** Action Phase 2. Questions to ask once product is validated and accountant has seen it work.
+
+**RESOLVED:**
+- Expert-comptable stays Phase 1 — confirmed
+- But Phase 1 = validation asset, not GTM channel — corrected
+- Referrals deferred to Phase 2 — confirmed
+- U12 split into U12a (validation) + U12b (referral) — action required
 
 ---
 
-*Last updated: 2026-03-30T17:29*
+*Last updated: 2026-03-30T17:46*

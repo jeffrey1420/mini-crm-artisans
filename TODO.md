@@ -211,12 +211,14 @@ All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 - [ ] **D54 RESOLVED:** TVA arrondi commercial calculator: `Math.round(v * 100) / 100`. No BOFiP lookup required.
 - [ ] **D71 RESOLVED:** Mentions légales = 4 templates (devis × client type). 8 combinations (devis + facture) = Sprint 2 scope.
 
-### Pricing (D5 + D59 + D75 — €29 Anchor)
-- [ ] **D75 RESOLVED:** Value anchor updated to "Moins d'une heure de main d'œuvre par mois." (less than one hour of labor per month)
-- [ ] **D75 RESOLVED:** Trust signals required BEFORE €29 appears on landing page: (1) at least one specific beta testimonial, (2) concrete social proof number, (3) founding member framing with explicit benefits
-- [ ] **D75 RESOLVED:** "Membre fondateur" framing (not "early access"). 4 benefits: locked price + named in app + direct founder access + roadmap vote. First 50 slots, then €39 standard.
-- [ ] **D75 RESOLVED:** €19 intro → €29 proposal REJECTED. Price escalation: €29 founding → €39 standard → €49 professional.
-- [ ] **D59 RESOLVED:** SEPA direct debit — evaluate Stripe SEPA integration (French artisans skeptical of credit card subscriptions).
+### Pricing (D5 + D59 + D75 + D77 — €29 Single Price Point)
+- [x] **D75 UPDATED (Debate 77):** "Membre fondateur" framing KILLED. Discount framing trains users to wait for promotions. Replaced with "Accès Fondateur" — relationship benefits without price anchoring.
+- [x] **D75 UPDATED (Debate 77):** Price escalation (€29 founding → €39 standard → €49 professional) KILLED. Single €29/month for everyone, forever. No tiers.
+- [x] **D75 UPDATED (Debate 77):** "First 50 slots" urgency KILLED. Scarcity signal = Louis's limited personal onboarding capacity (direct WhatsApp access, 30-min call), not arbitrary slot count.
+- [x] **D75 UPDATED (Debate 77):** 4 benefits retained, reframed as relationship benefits (not price benefits): (1) named in app credits, (2) direct WhatsApp to Louis, (3) roadmap vote, (4) monthly priority vote. No locked price benefit.
+- [x] **D75 RESOLVED:** Value anchor: "Moins d'une heure de main d'œuvre par mois." Trust signals required BEFORE €29 appears on landing page: (1) at least one specific beta testimonial, (2) concrete social proof number, (3) founding member framing with explicit benefits.
+- [x] **D59 RESOLVED:** SEPA direct debit — evaluate Stripe SEPA integration (French artisans skeptical of credit card subscriptions).
+- [ ] **Landing page pricing copy:** Replace "Membre fondateur — €29 puis €39" with "Accès Fondateur — rejoignez les premiers supporters." Single €29 price on landing page. No discount framing.
 
 ### Free Tier + Conversion (D43 + D46 + D63 + D70 + D76)
 - [ ] **D76 RESOLVED:** "Better Free Tier" trap named — every Free tier improvement without a conversion trigger makes the product harder to monetize. Document this risk.
@@ -569,15 +571,15 @@ The following were overengineered or wrong:
 
 ### Resolved (D74, D75, D76):
 - **D74 (Sprint 0 timeline):** Technical Architect defended 5-day estimate with scope clarifications. JWT Sprint 0 scope = contract + stubs (0.5-1 day). Full auth = Sprint 1. Mentions légales = 4 templates (devis only; 8 = Sprint 2). `devis.status TEXT DEFAULT 'draft'` added in Sprint 0 (30 min). No timeline extension. D71 REFINED.
-- **D75 (Pricing anchor):** Product Strategist defended €29 anchor. Value anchor updated to "moins d'une heure de main d'œuvre." Trust signals required before €29 appears. "Membre fondateur" framing (not "early access") with 4 explicit benefits. €19 intro → €29 rejected. Price escalation: €29 founding → €39 standard → €49 professional. D5/D59 REFINED.
+- **D75 (Pricing anchor):** RESOLVED by Debate 77 — "Membre fondateur" framing KILLED (discount signal wearing relationship language). Price escalation (€29 founding → €39 standard → €49 professional) KILLED. Single €29/month for everyone. "Accès Fondateur" replaces "Membre fondateur" — relationship benefits (direct WhatsApp to Louis, named in app, roadmap vote) without price anchoring. Scarcity = Louis's limited personal onboarding capacity, not "first 50 slots." D5/D59/D75 UPDATED.
 - **D76 (Free tier conversion):** Growth Strategist named "Better Free Tier" trap. Conversion trigger = first accepted devis (not 80% limit notification). Free tier = document archive (acquisition). €29 tier = financial snapshot + automatic relances (conversion). 80% notification deprecated. D43/D46/D51/D63/D70 REFINED.
 
 ### New Action Items from this pulse:
 - [ ] **D74 NEW:** Sprint 0 Day 1 — `client.type` enum (4 values) + mentions légales template engine (Handlebars/Nunjucks, 4 client-type templates). Devis × client type only. Sprint 2 adds 4 more for factures.
 - [ ] **D74 NEW:** Sprint 0 JWT = contract + stubs + `@fastify/jwt` config (0.5-1 day). Full auth (Keychain, refresh queue, logout) = Sprint 1 deliverable.
 - [ ] **D74 NEW:** Sprint 0 schema: `devis.status TEXT DEFAULT 'draft'` — 30 min. State machine (valid transitions, expiration cron) = Sprint 1.
-- [ ] **D75 NEW:** Trust signals required BEFORE €29 appears on landing page: (1) specific beta testimonial, (2) concrete social proof number ("500+ devis envoyés"), (3) "Membre fondateur" framing with 4 explicit benefits.
-- [ ] **D75 NEW:** Price escalation path documented: €29 founding (50 users) → €39 standard → €49 professional tier. No retroactive price changes for founding members.
+- [ ] **D75 NEW:** Trust signals required BEFORE €29 appears on landing page: (1) specific beta testimonial, (2) concrete social proof number ("500+ devis envoyés"), (3) "Accès Fondateur" framing with 4 relationship benefits (NOT price benefits).
+- [ ] **D75 UPDATED (D77):** Price escalation KILLED. Single €29/month. No founding/standard/professional tiers. "Accès Fondateur" is a relationship program, not a discount program.
 - [ ] **D76 NEW:** Accepted-devis conversion notification: "Votre devis pour [Client] a été accepté. Passez à €29 pour suivre ce qui vous est dû." — fires on first `devis.status = accepted`, not on 80% limit proximity.
 - [ ] **D76 NEW:** €29 tier delivers: (1) financial snapshot ("vous avez €X en devis acceptés en attente de paiement"), (2) automatic email relances at 14/30/60 days on accepted devis. Not a dashboard — a pipeline nerve center.
 - [ ] **D76 NEW:** 80% "vous êtes presque à votre limite" notification DEPRECATED — replace in product spec with accepted-devis milestone trigger.
@@ -588,19 +590,12 @@ The following were overengineered or wrong:
 
 ### Open (D77, D78, D79):
 - **D77 (Membre fondateur):** OPEN — Product Strategist argues "Membre fondateur" framing creates price anxiety by signaling €29 is promotional, not the real price. Alternative proposed: "Essai gratuit 14 jours, puis €29/mois. Prix définitif. Sans engagement."
-- **D78 (JWT vs API key):** OPEN — Technical Architect argues API key auth (~2 hours) replaces JWT scaffold (0.5-1 day) in Sprint 0. Reclaims 2-6 hours for compliance work.
+- **D78 (JWT vs API key):** RESOLVED — API key auth wins. See resolved items below.
 - **D79 (Expert-comptable reframed):** OPEN — Growth Strategist argues Louis's accountant = validation asset, not sales channel. Phase 1 = validation ("can I show you and get your reaction?"). Phase 2 = referrals (only after product has real users + testimonials).
 
 ### New Action Items from this pulse:
-- [ ] **D77 NEW:** A/B test: "Membre fondateur" (locked €29) vs "Essai gratuit → €29/mois, prix définitif" — run with first 20 signups
-- [ ] **D77 NEW:** Remove founding member language from onboarding if D75 stands — don't let it leak into in-app messaging for late adopters
-- [ ] **D77 NEW:** If scarcity is needed: use actual seats remaining ("17 places restantes ce mois") tied to real capacity, not arbitrary cohort numbers
-- [ ] **D78 NEW:** Replace JWT with API key auth in Sprint 0 scope — `artisan.api_key UUID DEFAULT gen_random_uuid()` in schema
-- [ ] **D78 NEW:** Sprint 0 auth deliverable: `/api/auth/verify` endpoint + Expo SecureStore stub, ~2 hours
-- [ ] **D78 NEW:** Re-evaluate JWT for Sprint 2 — only if multi-user or admin handler sharing becomes a requirement
-- [ ] **D79 NEW:** U12 split into two documents: (a) validation script (action this week), (b) referral script (action Phase 2)
-- [ ] **D79 NEW:** Phase 2 referral triggers: (1) product has real users, (2) Louis has testimonials, (3) accountant has seen working product
-- [ ] **D79 NEW:** Louis's meeting this week: validation-first framing — "Can I show you the flow and get your reaction?" not "Would you send me clients?"
-- [ ] **D79 NEW:** D55/D72 refined: expert-comptable = Phase 1 validation asset, not Phase 1 GTM channel
-
-*Last updated: 2026-03-30T17:29*
+- [x] **D77 RESOLVED:** Kill "Membre fondateur" A/B test — framing is rejected. Single €29 price, relationship program only.
+- [x] **D77 RESOLVED:** Founding member language REMOVED from onboarding — replaced with "Accès Fondateur" (relationship framing, no price signal).
+- [x] **D77 RESOLVED:** Scarcity signal = Louis's limited personal onboarding capacity (direct WhatsApp access), not arbitrary slot count or seats remaining.
+- [x] **D78 RESOLVED:** Replace JWT with API key auth in Sprint 0 — `artisan.api_key UUID DEFAULT gen_random_uuid()` in schema. Sprint 0 auth deliverable: `POST /api/auth/verify` + Expo SecureStore stub, ~2 hours. JWT re-evaluate for v2 only if multi-user confirmed. (Debate 78)
+- [x] **D79 RESOLVED:** Expert-comptable = Phase 1 validation asset, not GTM channel. U12 split: U12a (validation script — action this week) + U12b (referral script — action Phase 2). Louis's meeting: show flow → get reaction → ask what would make them comfortable recommending. NOT: ask for referrals. Phase 2 triggers: real users + testimonials + accountant has seen it work. (Debate 79)
