@@ -5979,3 +5979,96 @@ Use `expo-print` (or `react-native-html-to-pdf` via bridge) to render PDFs entir
 ---
 
 *Last updated: 2026-03-30T22:18*
+
+---
+
+## Pulse 2026-03-30T22:30 — Three Resolved (D120, D121, D122)
+
+---
+
+## Debate 120: D99 — Per-Devis Pricing Conflicts With Conversion Trigger Architecture
+
+**Challenge:** Both D118 (per-devis) and D99 last position (flat €29) accepted D96's "first paid facture" conversion trigger as given. Neither examined whether per-devis fundamentally conflicts with how D96 converts users. Product Strategist challenges this unexamined assumption.
+
+### Product Strategist — Per-Devis Introduces Metering Friction at the Peak Conversion Moment
+
+**Assumption challenged:** "Per-devis pricing is compatible with D96's conversion trigger." This shared assumption treats billing and conversion as independent variables. They are not — per-devis injects a billing micro-decision into the exact emotional moment when D96 is designed to convert.
+
+**Core arguments:**
+
+1. **Metering friction at peak conversion.** D96's trigger is "first paid facture" — an emotionally charged event. The artisan used the product, got paid, is maximally invested. Per-devis injects: "your first paid facture is in — that's €1.50." He's calculating: "do I want to pay €1.50 for THIS specific transaction?" The answer may be no if the job margin was thin. Flat €29 converts this to a single binary: continue or don't. One decision, clean.
+
+2. **Retroactive billing shock for Path B artisans.** Path B (verbal-agreement artisan) converts after 45 days of active usage. Under per-devis, he's been accumulating €X in charges he thought were free under the Free tier. At the 45-day trigger, he's presented with all past charges AND a billing model transition. That's a retroactive trust violation. Flat €29 is prospective-only from conversion date.
+
+3. **Annual billing solves seasonality without per-devis complexity.** French artisans already make annual decisions on equipment leases, insurance, and subscriptions. €260/year prepaid = low-season months covered. Same maximum cost as per-devis cap, clean conversion moment, no metering friction.
+
+**Verdict on D99:** RESOLVED — Flat €29/month + €260/year annual billing at launch. Per-devis (€1.50/devis, cap €29) deferred to v1.2 — after conversion architecture validated, seasonality patterns confirmed with real data, and billing integration mature enough for per-transaction charging.
+
+---
+
+## Debate 121: D114 — Ephemeral PDF Is Legally Insufficient for French Accounting Requirements
+
+**Challenge:** D119 proposed expo-print in-memory as a zero-schema shortcut and explicitly labeled storage "a v2 concern." Technical Architect challenges this — French invoice retention law (Code de Commerce L123-22) requires 10-year document storage in tamper-evident form. WhatsApp is not an accounting archive. Treating storage as v2 concern doesn't eliminate the legal exposure — it just defers it.
+
+### Technical Architect — Label Sprint 0 PDF as Prototype, Plan Sprint 1b Storage Migration
+
+**Assumption challenged:** "Storage is a v2 concern." This framing treats the legal exposure as optional. It is not. An artisan using the app who believes their invoices are properly stored — when they live only in WhatsApp threads — has a compliance problem that surfaces at their next expert-comptable meeting or tax audit, not in v2.
+
+**Core arguments:**
+
+1. **Article L123-22 requires 10-year retention in original form.** WhatsApp provides no integrity guarantees, no audit trail, no tamper-evident storage, no access controls. A PDF deletable by sender or recipient at any moment is not compliant. The penalty surfaces during audit — not during Sprint 0 planning.
+
+2. **Phase 2 migration debt is already visible.** D72 (expert-comptable data-sync portal) requires document storage — PDF URLs, blob references, `documents` table, `created_at`, integrity hashes. expo-print provides none of this. Sprint 1b must rebuild everything: blob storage, document table, API contract changes, `factures` record migration. Sprint 0 expo-print investment produces a PDF that Phase 2 discards entirely.
+
+3. **The resolution is honest labeling, not architectural denial.** Sprint 0 expo-print is a prototype document — WhatsApp share only, no legal value, explicitly labeled in code comments and Sprint 0 handoff doc. Sprint 1b adds proper document storage (Supabase blob + `documents` table + PDF URL in API response). These are sequential investments, not alternative paths.
+
+**Verdict on D114:** RESOLVED — expo-print in-memory APPROVED for Sprint 0 (prototype PDF, WhatsApp share only). Sprint 1b adds document storage migration (2-3 days). Legal labeling required in Sprint 0 handoff doc.
+
+---
+
+## Debate 122: D85 — GetApp/Capterra Serves Zero Functions in the Actual Buyer Journey
+
+**Challenge:** D116 argued "defer to Month 3." D117 argued "claim Week 1 for competitive moat." Both assumed the admin handler discovers software on GetApp/Capterra. Growth Strategist challenges this shared premise — D55 explicitly defines the admin handler as an operational validator, not a prospective discoverer. The channel doesn't match the buyer journey.
+
+### Growth Strategist — The Admin Handler Validates, She Doesn't Discover
+
+**Assumption challenged:** "The admin handler will eventually consult GetApp/Capterra as part of her buyer journey." This premise underlies both D116 and D117 but was never examined. D55 invalidates it entirely.
+
+**The actual buyer journey (D55):**
+1. Marc discovers via WhatsApp peer referral — "j'utilise ça, c'est génial"
+2. Marc tries the Free tier — motivated, acute-need, signs up same day
+3. Admin handler encounters product when Marc asks for help with setup — or notices him using it
+4. Her role: operational validation ("can this handle our specific client types?") — answered by opening the app and creating a test devis, not by reading a comparison listing
+5. GetApp consulted only if Marc is comparing two specific options — which he won't do after a confident peer recommendation
+
+**The result:** GetApp/Capterra ranking position is irrelevant to this buyer journey. Marc doesn't reach the comparison stage. The peer referral closes the deal before GetApp becomes relevant. The 8-10 hours required to claim and optimize the profile would be better spent on expert-comptable outreach (D72 Phase 1 prep) or artisan validation at Point P.
+
+**Verdict on D85:** RESOLVED — GetApp/Capterra removed from TODO until Month 3 evidence contradicts the D55 buyer journey model. Week 1 hours reallocated to expert-comptable cold call script + D91 validation with Louis's own accountant.
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D1 | Positioning | Kill "CRM" — devis, factures, relances | 2026-03-30 |
+| D2 | MVP scope | 4 features, SEQUENCED sprints | 2026-03-30 |
+| D5 | Pricing | Free + €29 two-tier | 2026-03-30 |
+| D6 | Trial | No time-limited trial. Free tier IS the trial | 2026-03-30 |
+| D12 | Landing page | Simplicity-first | 2026-03-30 |
+| D13 | Home view | Job-first — Active Job Card | 2026-03-30 |
+| D14 | E-invoicing timing | v2 — NOT Day 1 | 2026-03-30 |
+| D15 | Relances differentiator | DE-EMPHASIZED — secondary feature below fold | 2026-03-30 |
+| D85 | GetApp/Capterra | **RESOLVED — REMOVED from TODO.** Channel doesn't match D55 buyer journey (admin handler validates, doesn't discover). Revisit Month 3 only if artisan survey contradicts peer-referral model. | 2026-03-30T22:30 |
+| D95 | Sprint 0 timeline | 5 days (target) / 6.5 days (floor) | 2026-03-30 |
+| D99 | Pricing structure | **RESOLVED — Flat €29/month + €260/year annual.** Per-devis deferred to v1.2. Annual billing solves seasonality without per-devis conversion-moment friction. | 2026-03-30T22:30 |
+| D114 | PDF Sprint 0 gate | **RESOLVED — expo-print Sprint 0 prototype, Sprint 1b storage migration.** Legal labeling required. Phase 2 compliance prerequisite acknowledged. | 2026-03-30T22:30 |
+| D100 | Architecture | Supabase EU-hosted (Frankfurt) | 2026-03-30 |
+
+| U1 | Discovery | Readiness protocol | 2026-03-30 |
+| U2 | E-invoicing platform | Factea first when v2 | 2026-03-30 |
+| U7 | Domain | Buy now, park it | 2026-03-30 |
+
+---
+
+*Last updated: 2026-03-30T22:30*

@@ -44,7 +44,7 @@
 | D82 | Digital peer communities | Retention/engagement spaces, NOT acquisition channels. WhatsApp groups + Facebook = brand recall + peer support. SEO = primary digital discovery. Prescriber = highest-trust acquisition. | debate-DigitalChannels.md | 2026-03-30 |
 | D83 | Situation financière delivery | REFINED by D89 — configurable notification window KILLED. Event-only notification on first accepted devis. Recurring digest for dormant Free users (14+ days no accepted devis) as "stay in touch" mechanism below conversion trigger line. Sprint 0 adds: push infra + accepted-devis trigger. | Debates 83/88/89 (Product Strategist) | 2026-03-30 |
 | D84 | Sprint 0 realistic timeline | REFINED by D90 — 5.5-6.5 days (updated from 8-10). D86 (offline-capable) + D74 (API key auth) eliminate sequential dependency. Parallel backend + mobile tracks from Day 1. | Debates 84/90 (Technical Architect) | 2026-03-30 |
-| D85 | GetApp/Capterra optimization | REOPENED — pre-launch optimization is misallocated effort. Defer to Month 3 after real reviews exist. D91 U12 split stands. | Debate 116 (Growth Strategist) | 2026-03-30 |
+| D85 | GetApp/Capterra | **RESOLVED — REMOVED from TODO.** Channel does not match D55 buyer journey (admin handler validates, does not discover). Week 1 hours reallocated to expert-comptable outreach. Revisit Month 3 only if artisan survey contradicts peer-referral model. | Debate 122 (Growth Strategist) | 2026-03-30T22:30 |
 | D89 | Situation financière notification | RESOLVED — event-only notification (first accepted devis). Configurable digest window REMOVED. D76 conversion trigger = notification trigger. | Debate 89 (Product Strategist) | 2026-03-30 |
 | D90 | Sprint 0 timeline estimate | RESOLVED — 5.5-6.5 days with parallel backend + mobile tracks. API contract defined Day 1. | Debate 90 (Technical Architect) | 2026-03-30 |
 | D91 | Expert-comptable validation vs referral | RESOLVED — U12 split: validation (Week 1, Louis's own, no prerequisites) ≠ referral (Week 4-6, with testimonials). | Debate 91 (Growth Strategist) | 2026-03-30 |
@@ -52,12 +52,38 @@
 | D96 | Conversion trigger | **SUPERSEDED by Debate 110 — Dual-path conversion:** Path A (Formal-Devis Artisan): Limit-hit (5 active devis OR 10 clients) OR first paid facture = hard gate. Path B (Verbal-Agreement Artisan): 45 consecutive days of active product usage (job created/updated) OR 7+ jobs logged OR 5+ active clients managed = conversion trigger. Day 14 human WhatsApp check-in applies to both archetypes as primary conversion moment. | Debate 110 (Product Strategist) | 2026-03-30 |
 | D97 | Sprint 0 prep | Louis writes 4 mentions légales templates this week (2h) — gate for 5-day Sprint 0. | Debate 97 (Technical Architect) | 2026-03-30 |
 | D98 | Platform default | **REFLECTED — Direction confirmed, validation mechanism updated.** Android-first remains correct for French artisan demographic. "Week 1 poll validates" REMOVED (wrong instrument after U15 elimination). Replaced with install completion rate (≥50% in 48h) as Sprint 0 metric. D24 resolution gates Sprint 0 specificity. | Debates 98/103 (Growth Strategist) | 2026-03-30 |
-| D99 | Usage-based pricing | REOPENED — value anchoring destroys itself, revenue zero-sum in low season, cognitive overload at conversion moment. Flat €29 recommended for v1. Seasonality addressed via annual billing discount (€260/year). | Debate 114 (Product Strategist) | 2026-03-30 |
-| D114 | PDF generation Sprint 0 gate | REOPENED — must be 7th Sprint 0 gate item. Three approaches constrain data model, API contract, mentions légales strategy differently. D74 Handlebars assumption may be wrong if client-rendered. | Debate 115 (Technical Architect) | 2026-03-30 |
+| D99 | Pricing structure | **RESOLVED — Flat €29/month + €260/year annual.** Per-devis deferred to v1.2. Annual billing solves seasonality without per-devis conversion-moment friction. Per-devis conflicts with D96 conversion trigger architecture. | Debate 120 (Product Strategist) | 2026-03-30T22:30 |
+| D114 | PDF Sprint 0 gate | **RESOLVED — expo-print Sprint 0 prototype, Sprint 1b storage migration.** Legal labeling required in Sprint 0 handoff doc. Phase 2 compliance prerequisite acknowledged. | Debate 121 (Technical Architect) | 2026-03-30T22:30 |
 | U15 | Founding member offer | ELIMINATED — no lifetime deal, no founding/access tier, no "50 places" scarcity. Single €29/month. Replaced by "Support Prioritaire" (direct WhatsApp to Louis, roadmap vote, named credits). | Debate 101 (Growth Strategist) | 2026-03-30 |
 | U7 | Domain purchase | RESOLVED — buy domain now (park it), defer brand decision. Domain = infrastructure, not branding. Parking costs ~€10-15/year. Expert-comptable outreach and GetApp/Capterra profiles need a proper domain to establish credibility. Brand name decision stays open. | Debate 109 (Growth Strategist) | 2026-03-30 |
 
 ## 🔄 Reopened This Pulse (Resolved in 15:17 Pulse)
+
+---
+
+## New from Pulse 2026-03-30T22:30 — Three Resolved (D120, D121, D122)
+
+### Resolved
+
+- **D120 (D99 — Pricing):** RESOLVED — Flat €29/month + €260/year annual billing at launch. Per-devis deferred to v1.2. Annual billing solves seasonality without per-devis conversion-moment friction (metering at peak conversion moment = churn trigger). Per-devis revisited in v1.2 after real seasonality data and billing maturity.
+- **D121 (D114 — PDF Sprint 0 gate):** RESOLVED — expo-print Sprint 0 prototype APPROVED. Sprint 1b adds proper document storage (Supabase blob + documents table + PDF URL). Legal labeling required in Sprint 0 handoff doc. Phase 2 compliance prerequisite acknowledged.
+- **D122 (D85 — GetApp/Capterra):** RESOLVED — REMOVED from TODO. Channel doesn't match D55 buyer journey. Admin handler validates Marc's choice (not independently discovers on comparison sites). Week 1 hours reallocated to expert-comptable cold call script + D91 validation.
+
+### Challenged Assumptions This Pulse
+
+1. "Per-devis pricing is compatible with D96's conversion trigger" — challenged by Product Strategist: metering friction at peak conversion moment + retroactive billing shock for Path B artisans
+2. "Storage is a v2 concern" for expo-print PDFs — challenged by Technical Architect: French invoice retention law (L123-22) requires 10-year tamper-evident storage; WhatsApp is not an accounting archive
+3. "GetApp/Capterra is relevant to the admin handler's buyer journey" — challenged by Growth Strategist: D55 defines admin handler as operational validator, not prospective discoverer; peer referral closes deal before comparison sites become relevant
+
+### New Action Items
+
+- [x] **D120 RESOLVED:** Flat €29/month + €260/year annual at launch. Per-devis deferred to v1.2.
+- [x] **D122 RESOLVED:** GetApp/Capterra removed from TODO. Week 1 hours → expert-comptable outreach script + D91 validation.
+- [ ] **D121 NEW:** Sprint 1b document storage migration — Supabase blob + documents table + PDF URL in API response. 2-3 days. Legal compliance gate for Phase 2.
+- [ ] **D121 NEW:** Sprint 0 handoff doc note — "WhatsApp share PDF is a prototype, not an accounting record."
+- [ ] **D122 NEW:** Validate D55 admin handler buyer journey at Point P this Saturday — "When you needed new software, how did you find out about it?" If >40% say peer referral, peer model stands.
+- [ ] **D120 Path B billing:** Any billing model for Path B artisans must be prospective-only from conversion date. No retroactive charges for Free tier usage.
+
 
 All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 
@@ -224,7 +250,7 @@ All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 - [ ] **D82 UPDATED:** Prescriber networks = highest-trust ACQUISITION channel — but through institutional digital comms (email, professional portals), not peer communities. Architect/property manager → artisan discovery happens in professional contexts, not WhatsApp groups.
 - [ ] Wholesaler presence (Gedimat/Point P counter displays) = secondary brand-awareness only, not primary acquisition
 - [ ] **D85 NEW:** Expert-comptable outreach = Week 1 (not Phase 2). Cold outreach to 5 expert-comptables in Caen area who service small BTP/construction clients. Ask: add to recommended software list for new artisan clients. Positioning: "Your artisan clients struggle with mentions légales and TVA compliance — this handles it correctly."
-- [ ] **D85 NEW:** GetApp and Capterra profiles claimed and optimized BEFORE launch — admin handlers search here first. Free to claim, takes an afternoon.
+- [ ] **D85 UPDATED:** ~~GetApp and Capterra profiles claimed and optimized before launch — admin handlers search here first~~ **REMOVED.** Channel does not match D55 buyer journey. Admin handler validates Marc's choice, does not independently discover on comparison sites. Replaced by expert-comptable outreach (see below). (Debate 122)
 - [ ] **D85 NEW:** Expert-comptable data-sync portal = Phase 2 (distinct from recommendation outreach). Phase 2 requires: real users + testimonials + accountant has seen it work.
 
 ### Sprint 0 Build (D54 + D71 + D74 + D81 + D84 + D100 — 5 Days, Supabase Backend)
@@ -242,6 +268,8 @@ All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 - [ ] **D100 POST-LAUNCH:** At 50 paying customers: evaluate self-hosted Supabase migration. Track: Supabase bill, OVH VPS load, ops time spent. If Supabase bill >€100/month AND OVH VPS has headroom → migrate.
 - [ ] **D100 DATA PORTABILITY:** Ensure PDF export works well before any infrastructure migration conversation. French artisan data trust = "can I get my data out" not "where does it live."
 - [ ] **D81 NEW:** Sprint 0 = offline-capable (optimistic UI + retry queues). WatermelonDB/expo-sqlite deferred to v1.2. Supabase handles auth, storage, realtime.
+- [ ] **D121 NEW — Sprint 1b gate:** Replace expo-print ephemeral PDFs with Supabase Storage blob + `documents` table + PDF URL in API response. Legal compliance prerequisite for Phase 2 (expert-comptable data-sync, D72). Budget 2-3 days. Not optional.
+- [ ] **D121 NEW — Legal labeling:** Sprint 0 PDF is a prototype document with no legal value. Add inline code comment and Sprint 0 handoff doc note: "WhatsApp share only — not an accounting record." Artisans must not believe their invoices are legally stored.
 - [ ] **D74 RESOLVED:** Sprint 0 scope: client.type enum (4 values) + mentions légales template engine (Handlebars/Nunjucks, 4 client-type templates, devis-only). Sprint 2 adds 8 combinations.
 - [ ] **D74 RESOLVED:** Auth: Supabase auth (email/password). API key replaces JWT per D78.
 - [ ] **D74 RESOLVED:** `devis.status TEXT DEFAULT 'draft'` added in Sprint 0 schema (30 min). State machine = Sprint 1.
@@ -259,8 +287,7 @@ All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 - [x] **D59 RESOLVED:** SEPA direct debit — evaluate Stripe SEPA integration (French artisans skeptical of credit card subscriptions).
 - [x] **U15 (Debate 101) RESOLVED:** Founding member offer ELIMINATED. No lifetime deal. No founding/access tier. No "50 places" scarcity. Replace "Accès Fondateur" with "Support Prioritaire" — relationship benefits (direct WhatsApp to Louis, roadmap vote, named credits), not price discount. Single €29/month everywhere.
 - [ ] **Landing page pricing copy:** Single €29/month. No founding tier. Language: "Essayez gratuitement. Quand vous êtes prêt, c'est €29/mois. Louis répond sur WhatsApp en moins de 24h."
-- [ ] **D99 (Usage-based pricing) — OPEN:** Louis to evaluate implementation complexity of per-devis billing trigger vs D96's "first paid facture" conversion trigger. If complex: flat-rate €29 at launch, usage-based v1.1.
-- [ ] **D99 Direction:** €1.50/devis sent, capped at €29/month — superior for artisan seasonality. Not committed until implementation complexity confirmed.
+- [x] **D99 RESOLVED:** Flat €29/month + €260/year annual billing at launch. Per-devis (€1.50/devis, cap €29) deferred to v1.2. Annual billing solves seasonality without per-devis conversion-moment friction. Revisit per-devis in v1.2 after: (1) real user data on seasonality patterns, (2) conversion architecture validated with flat €29, (3) billing integration mature enough for per-transaction charging.
 
 ### Free Tier + Conversion (D43 + D46 + D63 + D70 + D76 + D83)
 - [ ] **D76 RESOLVED:** "Better Free Tier" trap named — every Free tier improvement without a conversion trigger makes the product harder to monetize. Document this risk.
