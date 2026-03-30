@@ -2140,3 +2140,85 @@ The architecture decision affects: developer velocity (medium-term), hosting cos
 ---
 
 *Last updated: 2026-03-30T14:57*
+
+---
+
+## Pulse 2026-03-30T15:17 — Three New Debates
+
+---
+
+## Debate 60: WoM Attribution — The 40% Figure Is Fabricated
+
+**Challenge:** D56 (REOPENED at 14:57) — Product Strategist challenges the conflation of two distinct claims: (A) "40% of users come from WoM" (attribution claim — unvalidated), and (B) "WoM is a lagging indicator, not a leading channel" (strategic claim — correct). The Growth Strategist defending (B) doesn't rescue (A) from being evidence-free.
+
+### Product Strategist — 40% Is Made Up, and That's the Real Problem
+
+**Assumption challenged:** The 40% figure has been treated as settled since D33, anchoring D33 (pricing), D52/D55 (GTM priority), and the Free tier acquisition model. It was never sourced, never validated.
+
+**Core argument:**
+
+**The 40% figure is manufactured precision.** Since D33, "40% word-of-mouth" has functioned as a loaded fact. It justified Free tier acquisition model. It anchored GTM sequencing. It appeared in pricing rationale. But it was never sourced from user interviews, analytics, cohort analysis, or survey data. It's a round number that felt plausible, so it became settled. The Growth Strategist calling it a "lagging indicator" is a deflection — the urgent issue is that we built a pricing model and GTM strategy on a number we invented.
+
+**The Tolteck precedent supports validating WoM, not assuming it.** Tolteck's prescriber/wholesaler network strategy was deliberately engineered — they identified dense artisan peer networks and activated them systematically. That's a leading channel strategy built on structure, not an accident of product quality. For Mini-CRM: the question isn't whether 40% of current users arrived via WoM — it's whether we can systematically seed the same dense networks and measure it from day one.
+
+**New product launch conditions break the lagging-indicator argument.** At zero users, there's no one to spread word. Either WoM is an earned/built channel we actively construct through trade associations, wholesaler partnerships, and prescriber relationships — or we accept slow organic growth while waiting for a user base to materialize.
+
+**VERDICT on D56:** Split the two debates. RESOLVED — WoM as lagging indicator: confirmed. WoM attribution at 40%: RETIRED, replaced with measurement protocol. D33 and D52/D55 updated: replace "40% WoM" with "WoM hypothesized significant based on artisan network density and competitive precedent, validated post-launch."
+
+---
+
+## Debate 61: D7 — Nuxt 3 Architecture Is Overengineered for This Product
+
+**Challenge:** D7 ("Nuxt 3 + OVH managed Postgres") was resolved pre-pivot. Technical Architect challenges whether Nuxt 3's core capabilities (SSR, API routes, session management) are used at all given the mobile-first + static landing page product.
+
+### Technical Architect — API-First Is the Right Fit
+
+**Assumption challenged:** D7 assumed Nuxt 3 was the right backend. But after the mobile-first pivot: React Native (Expo) talks to an API, not Nuxt server routes. The landing page is static. SSR, API routes, and server-side session management all go unused.
+
+**Core argument:**
+
+**Nuxt 3 is solving a problem we don't have.** A static landing page needs no SSR. The React Native app is an API consumer. Every dollar on Nuxt's server runtime, every CPU cycle on server-side rendering logic — all overhead. We're not building a web app. We're building a mobile app with a marketing page.
+
+**The "future web app" argument is speculative debt.** Yes, if Louis someday adds a full web app with auth, Nuxt has primitives for that. But that's an assumption about a future that may never materialize, costing real complexity now. A well-designed REST API serves both the mobile app and a future web app equally well. Nuxt's "built-in" auth still needs implementation effort.
+
+**Cost and simplicity matter at early stage.** A lightweight Node/Express or Fastify API on a 2GB VPS handles the load comfortably. OVH managed Postgres stays. Less infrastructure = less ops = more time building product.
+
+**VERDICT on D7:** REFINED — API-first (Node/Fastify + static landing page + JWT auth) is the cleaner architecture for a mobile-first product. OVH managed Postgres retained. Migration to API-first deferred to post-MVP unless Nuxt 3 actively blocks Sprint 0 (it won't).
+
+---
+
+## Debate 62: D59 — Founding Member €19 Offer Is a Price Anchor Trap
+
+**Challenge:** D59 (REOPENED at 14:57) — Growth Strategist challenged €29 as unvalidated and proposed €19 founding member offer. Technical Architect challenges the €19 founding offer specifically.
+
+### Technical Architect — €19 Founding Offer Permanently Poisons the €29 Anchor
+
+**Assumption challenged:** The €19 founding member offer tests price sensitivity while creating social proof and urgency. Technical Architect argues it does the opposite — it permanently anchors the product at a discount.
+
+**Core argument:**
+
+**The founding member offer is a trap.** Every pricing textbook and every battle-tested founder (HubSpot, Dropbox, Slack at launch) will tell you: your first paying customers set the anchor for everyone who follows. If Louis signs up 20 founding members at €19/mo, those 20 people will never accept €29/mo. And they'll talk. French artisans network intensely (chambres de métiers, WhatsApp groups). The €19 "real price" leaks out and poisons the well. The €29 price becomes the discount, not the standard.
+
+**"One hour of labor = €29" is founder math, not customer math.** Louis assumes artisans bill €50-80/h. But the target market — micro-entrepreneurs, small artisans — typically bill €25-40/h. At €30/h, €29 equals 58 minutes of labor. That's not trivial — it's roughly equivalent to an hour of their time. The anchor doesn't land the same way for a micro-artisan billing €30/h as it does for a consultant billing €80/h.
+
+**The real problem isn't price — it's proof.** At €29/mo, the ROI case is overwhelming if the value is real. Devis automation saving 2h/week = 8h/month. At €40/h (conservative artisan rate), that's €320/mo value. €29 = 9% of the value delivered. The price isn't the risk. The lie risk is the risk. If Louis can't prove time savings materialize, no price works. If he CAN prove it, €29 is so far undervalue it's almost suspicious.
+
+**VERDICT on D59:** Kill the €19 founding member offer. Replace with: "Early access — first 50 users lock €29/month for life." This preserves the €29 anchor, creates urgency, and locks early adopters at the standard price. Add guerrilla price validation: show 5 artisans a working demo, ask them to estimate time spent on devis per week, then ask what they'd pay to halve it. Let THEM anchor the price.
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D56 | WoM attribution | RESOLVED — 40% figure RETIRED. WoM as lagging indicator: confirmed. Replace with measurement protocol. D33/D52/D55 updated. | 2026-03-30 |
+| D57 | Architecture | REFINED — API-first (Node/Fastify + static + JWT) is cleaner for mobile-first. Nuxt 3 deferred unless blocking Sprint 0. | 2026-03-30 |
+| D59 | Pricing | REFINED — Kill €19 founding member offer. Replace with "early access, €29 locked for life." Guerrilla price validation with artisan rate anchors. | 2026-03-30 |
+
+| U13 | WoM measurement | "Comment avez-vous connu?" at signup + referral codes. Month 3 target: 20% peer referral. | 2026-03-30 |
+| U14 | API-first architecture | Defer migration to post-MVP unless Nuxt 3 blocks Sprint 0 | 2026-03-30 |
+| U15 | Price validation | Guerrilla price validation: show demo, let artisans anchor price. Kill €19 founding offer. Replace with early access €29 locked for life. | 2026-03-30 |
+
+---
+
+*Last updated: 2026-03-30T15:17*

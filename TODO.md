@@ -34,23 +34,18 @@
 | D55 | Buyer-user split | Dual-persona GTM. Marc = economic buyer (primary). Admin handler = operational user (secondary). Expert-comptable = Phase 2. | Debate 55 (Growth Strategist) | 2026-03-30 |
 | D56 | WoM attribution | WoM = Month 3+ lagging indicator. Digital acquisition PRIMARY at launch. "Comment connaissez-vous?" at signup. Referral codes in v1. Month 3 target: 20% peer referral. | Pulse 14:57 (Product+Growth) | 2026-03-30 |
 | D57 | Architecture | API-first preferred (Fastify + static) but deferred to post-MVP unless Nuxt 3 actively blocks Sprint 0. | Pulse 14:57 (Architect+Growth) | 2026-03-30 |
-| D59 | Pricing credibility | €29 price point unvalidated. Guerrilla price validation + founding member €19 offer + 3% Day-30 target + SEPA direct debit proposed. | Pulse 14:57 (Growth Strategist) | 2026-03-30 |
+| D59 | Pricing credibility | Kill €19 founding member offer. Replace with early access €29 locked for life. Guerrilla price validation with micro-artisan rate anchors. | Debate 62 (Technical Architect) | 2026-03-30 |
 
-## 🔄 Reopened This Pulse (Need Resolution)
+## 🔄 Reopened This Pulse (Resolved in 15:17 Pulse)
 
-| ID | Topic | Issue | Source |
-|----|-------|-------|--------|
-| D56 | Word-of-mouth % | 40% attribution is unvalidated. WoM is a lagging indicator, not a leading GTM channel. Anchors D33/D52/D55 decisions without evidence. | Growth Strategist |
-| D56 | WoM attribution | REFINED — 40% unvalidated. WoM = Month 3+ lagging indicator, not launch channel. Digital acquisition is PRIMARY at launch. "Comment avez-vous connu?" at signup. Referral codes in v1. Month 3 target: 20% peer referral. | Growth Strategist + Product Strategist | 2026-03-30 |
-| D57 | Architecture | REFINED — API-first is cleaner for mobile+static product. But: shipping velocity matters more than architectural purity for first 10 users. Defer migration decision unless Nuxt 3 actively blocks Sprint 0. Post-MVP migration if ROI positive. | Technical Architect + Growth Strategist | 2026-03-30 |
-| D59 | Pricing credibility | NEW — €29 price point is unvalidated with real artisans. "One hour of labor" anchor is founder math, not customer math. Guerrilla price validation (5 artisans) + founding member €19/mo offer + 3% Day-30 conversion target + SEPA direct debit option proposed. | Growth Strategist | 2026-03-30 |
+All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 
-## New from Pulse 2026-03-30T14:57 — All Resolved
+## New from Pulse 2026-03-30T15:17 — Three Resolved
 
-### Resolved (D53, D54, D55):
-- **D53 (Landing page):** Product Strategist won — simplicity-first RETAINED in H1. H2 becomes specific 5-minute claim: "Créez et envoyez votre premier devis en 5 minutes. Depuis votre téléphone." "Professional-grade" claims removed from hero — proof lives in Free tier. A/B test deferred to beta user testing.
-- **D54 (Sprint 0):** Technical Architect won — compressed compliance sprint (3-4d) beats both flow-first and extended-schema approaches. TVA per-line schema, sequential numbering engine, mentions légales renderer, client-type schema. Sprint 1 = client+devis flow. Sprint 2 = facture+relances.
-- **D55 (Buyer-user split):** Growth Strategist won — dual-persona GTM. Marc = economic buyer (primary). Admin handler = operational user (secondary). Expert-comptable referrals = Phase 2 (not early-stage).
+### Resolved (D60, D61, D62):
+- **D60 (WoM attribution):** Product Strategist won — 40% figure RETIRED (unvalidated). WoM as lagging indicator: confirmed. D33/D52/D55 updated to "WoM hypothesized significant based on artisan network density, validated post-launch." Measurement protocol: "Comment connaissez-vous?" at signup + referral codes. Month 3 target: 20% peer referral.
+- **D61 (Architecture):** Technical Architect won — API-first (Node/Fastify + static landing page + JWT auth) is cleaner for mobile-first product. OVH managed Postgres retained. Nuxt 3 deferred to post-MVP unless actively blocking Sprint 0.
+- **D62 (Pricing):** Technical Architect won — kill €19 founding member offer (permanently anchors product at discount). Replace with "early access, first 50 users lock €29/month for life." Guerrilla price validation: use micro-artisan rates (€25-40/h), not consultant rates (€50-80/h). Show demo, let artisans anchor their own price.
 
 ### Challenged assumptions this pulse:
 1. "Sans vous prendre la tête" talks down to 45-55yo professionals (Product Strategist challenged: it signals product empathy, not condescension — "we know your time is valuable")
@@ -102,10 +97,10 @@
 ### New Action Items from this pulse:
 - [x] **D56 RESOLVED:** WoM = Month 3+ lagging indicator. Digital acquisition PRIMARY at launch. "Comment connaissez-vous?" at signup. Referral codes in v1.
 - [ ] **D57 UPDATED:** API-first preferred but deferred — don't let architecture debate delay Sprint 0. Migrate post-MVP if Nuxt 3 not blocking.
-- [ ] **D59 NEW:** Guerrilla price validation — ask 5 artisans "most you'd pay per month?" before launch. If median <€20, revisit D5.
-- [ ] **D59 NEW:** Founding member offer — €19/mo locked-in for life for first 50 paying users. Tests price sensitivity + creates social proof + urgency.
-- [ ] **D59 NEW:** Set 3% Day-30 conversion target. If Month 2 with <1% conversion rate, price is likely the barrier.
-- [ ] **D59 NEW:** Add SEPA direct debit as payment option — French artisans skeptical of credit card subscriptions.
+- [x] **D59 RESOLVED:** Kill €19 founding member offer. Replace with "early access, first 50 users lock €29/month for life."
+- [ ] **D59 UPDATED:** Guerrilla price validation — show demo, ask artisans their time spent on devis/week, let THEM anchor the price. Use micro-artisan rates (€25-40/h) not consultant rates (€50-80/h).
+- [x] **D59 RESOLVED:** 3% Day-30 conversion target stands as KPI. If Month 2 with <1% conversion, price is likely the barrier.
+- [ ] **D59 UPDATED:** SEPA direct debit still worth adding — French artisans skeptical of credit card subscriptions. Evaluate Stripe SEPA integration.
 ## New from Pulse 2026-03-30T14:41
 
 ### Resolved (D58):
@@ -131,9 +126,9 @@
 - [ ] U1 readiness check: (1) Figma/clickable devis-creation prototype, (2) guerrilla test scheduled (5 artisans at Point P/Gedimat), (3) pain confirmed by competitive analysis, (4) feature set frozen
 - [ ] If prototype not ready in 1 week: proceed to build anyway, validate post-launch (Debate 31)
 - [ ] Sprint 0: Compressed compliance sprint (3-4 days). TVA per-line schema (5.5/10/20%), sequential numbering engine (gapless, server-enforced), mentions légales renderer (template-based, client-type-aware), client-type schema. THEN Sprint 1 = client+devis flow. Sprint 2 = facture+relances. (Debate 54)
-- [ ] **D57 NEW:** Resolve D7 (Nuxt 3 vs API-first). If API-first: adopt Node/Express + static landing page. If Nuxt 3: document why SSR/API routes are needed given React Native is primary product.
-- [ ] **D58 NEW:** Resolve whether relances is v1 or v1.1. If v1.1: remove from Sprint 2 scope, defer to post-launch. If v1: confirm Expo Push notification budget (1-2 weeks) is accounted for in Sprint 2.
-- [ ] **D56 NEW:** Define WoM measurement mechanism before launch — UTM-tagged referral tracking, "comment avez-vous connu l'app?" onboarding question, or explicit referral invite codes. Without measurement, 40% target is unverifiable.
+- [x] **D57 RESOLVED:** API-first (Node/Fastify + static landing + JWT) preferred. Nuxt 3 deferred unless blocking Sprint 0. OVH managed Postgres retained. (Debate 61)
+- [x] **D58 RESOLVED:** Email relances in v1 (Sprint 2, 1-2 days). Expo Push relances in v1.1. (Debate 58)
+- [x] **D56 RESOLVED:** 40% WoM figure RETIRED. Measurement protocol: "Comment connaissez-vous?" at signup + referral codes. Month 3 target: 20% peer referral. (Debate 60)
 - [ ] Pick one: Tolteck competitor or Tolteck complement?
 - [ ] Buy domain (U7) — DEFERRED. Use `devis.lschvn.foo` subdomain or Carrd landing page until MVP validated post-guerrilla test. Domain purchase happens after product direction confirmed. (Debate 34)
 - [ ] Build the Active Job Card data model (`jobs.status`, `jobs.scheduled_date`, `jobs.updated_at`)
