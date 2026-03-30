@@ -1193,4 +1193,931 @@
 
 #### Task: CACHE_CDN_001
 - **title**: Configure CDN caching for static assets
-- **description**: Configure Cloudflare or OVH CDN for static files. Set cache rules: /uploads/images/* cache 1 year, /assets/* cache 1 week. Implement cache
+- **description**: Configure Cloudflare or OVH CDN for static files. Set cache rules: /uploads/images/* cache 1 year, /assets/* cache 1 week. Implement cachepurge on file delete. Use asset pipeline fingerprints for cache busting.
+- **inputs**: Static asset paths
+- **outputs**: CDN configured caching
+- **dependencies**: [FILE_PHOTO_001]
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: devops
+- **validation**: Assets cached by CDN, cache purged on delete, fingerprints work
+
+#### Task: CACHE_QUERY_001
+- **title**: Implement database query optimization
+- **description**: Analyze slow queries using pg_stat_statements. Add missing indexes based on query patterns. Optimize N+1 query problems using JOINs or batch loading. Implement query result pagination. Optimize count queries with estimated counts for large tables.
+- **inputs**: Slow query logs
+- **outputs**: Optimized queries
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Slow queries identified, indexes added, N+1 problems resolved
+
+#### Task: CACHE_QUERY_002
+- **title**: Implement database connection pooling
+- **description**: Set up PgBouncer or pg_pool for connection pooling. Configure pool size based on VPS resources (10-50 connections). Implement transaction-mode pooling. Monitor connection pool utilization. Handle pool exhaustion gracefully.
+- **inputs**: Database connection settings
+- **outputs**: Connection pool configured
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: devops
+- **validation**: Pool configured, connections reused, exhaustion handled
+
+#### Task: CACHE_APP_001
+- **title**: Implement application-level caching for dashboard data
+- **description**: Cache dashboard aggregations: total contacts, jobs this week, pending invoices, pipeline value. Use Redis with 5-minute TTL. Invalidate on relevant data changes. Return cached data immediately when available.
+- **inputs**: Dashboard data requests
+- **outputs**: Cached dashboard metrics
+- **dependencies**: [CACHE_REDIS_001]
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: Dashboard loads fast from cache, invalidation works
+
+#### Task: CACHE_LIST_001
+- **title**: Implement list endpoint cursor-based pagination
+- **description**: Implement cursor-based pagination for all list endpoints. Use keyset pagination (WHERE id < cursor). Return cursor in response: { data, next_cursor, has_more }. Default page size: 20, max: 100. Ensure consistent ordering with indexes.
+- **inputs**: Pagination parameters
+- **outputs**: Paginated results with cursor
+- **dependencies**: [API_REST_002]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Pagination works consistently, performance maintained at scale
+
+#### Task: CACHE_RESPONSE_001
+- **title**: Implement HTTP response compression
+- **description**: Enable gzip and Brotli compression for API responses. Configure compression level based on content type (json: high, images: none). Add Vary: Accept-Encoding header. Monitor compression ratio. Target 70%+ compression for JSON.
+- **inputs**: API responses
+- **outputs**: Compressed responses
+- **dependencies**: []
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: Responses compressed, ratio monitored, correct headers set
+
+#### Task: CACHE_PRELOAD_001
+- **title**: Implement cache warming for frequent queries
+- **description**: Implement cache warming for hot data after deployment or cache restart. Preload: popular contact lists, user dashboards, common filter combinations. Schedule warming as background job. Warm incrementally to avoid load spike.
+- **inputs**: Cache warming job
+- **outputs**: Preloaded cache
+- **dependencies**: [CACHE_REDIS_001]
+- **priority**: low
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Cache warmed on schedule, hot data available immediately
+
+---
+
+### Category: Logging & Observability
+
+#### Task: LOG_STRUCTURE_001
+- **title**: Implement structured JSON logging
+- **description**: Replace plain text logs with structured JSON logs. Include fields: timestamp, level (debug/info/warn/error), service, request_id, user_id, workspace_id, message, metadata. Use pino or winston with JSON transport. Ensure all logs machine-readable.
+- **inputs**: Log events
+- **outputs**: JSON log entries
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: Logs are JSON, all required fields present, parseable
+
+#### Task: LOG_REQUEST_001
+- **title**: Implement request logging middleware
+- **description**: Create middleware logging all HTTP requests. Log: method, path, status_code, response_time_ms, request_id, user_id, workspace_id, user_agent, ip_address. Log request body for POST/PATCH/PUT (sanitize sensitive fields). Use request_id for correlation.
+- **inputs**: HTTP request/response
+- **outputs**: Request log entries
+- **dependencies**: [LOG_STRUCTURE_001]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: All requests logged, correlation works, sensitive data sanitized
+
+#### Task: LOG_SLOW_001
+- **title**: Implement slow query and slow request detection
+- **description**: Log warning for requests >500ms, error for >2000ms. Log database queries >100ms. Include stack trace for slow requests. Create metric for p95/p99 response times. Alert on anomalies.
+- **inputs**: Request timing data
+- **outputs**: Slow request logs and alerts
+- **dependencies**: [LOG_REQUEST_001]
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: Slow requests identified, alerts triggered, patterns detected
+
+#### Task: LOG_AUDIT_001
+- **title**: Implement audit logging for sensitive operations
+- **description**: Create audit log entries for: login/logout, password changes, data exports, deletions, permission changes, billing operations. Include: user_id, workspace_id, action, resource_type, resource_id, old_value, new_value, ip_address, timestamp.
+- **inputs**: Sensitive operations
+- **outputs**: Audit log entries
+- **dependencies**: [LOG_STRUCTURE_001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: All sensitive ops logged, audit trail complete, logs immutable
+
+#### Task: LOG_ERROR_001
+- **title**: Implement global error handler and error logging
+- **description**: Create global error handler catching all unhandled exceptions. Log error with: message, stack trace, request context, user context. Sanitize sensitive data (passwords, tokens). Implement error boundary for async errors. Return safe error messages to client.
+- **inputs**: Error events
+- **outputs**: Error logs and user-safe responses
+- **dependencies**: [LOG_STRUCTURE_001]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: All errors caught and logged, no sensitive data leaked, safe messages returned
+
+#### Task: OBS_METRICS_001
+- **title**: Implement Prometheus metrics endpoint
+- **description**: Expose /metrics endpoint with Prometheus format. Track: request_count, request_duration_seconds, request_size_bytes, response_size_bytes, active_connections, db_pool_connections, cache_hit_ratio, error_rate. Add custom business metrics: active_subscriptions, invoices_paid_today, contacts_added_today.
+- **inputs**: Metrics data
+- **outputs**: Prometheus metrics endpoint
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Metrics endpoint returns valid Prometheus format, all metrics exposed
+
+#### Task: OBS_METRICS_002
+- **title**: Implement business metrics tracking
+- **description**: Track business KPIs: new_subscriptions_per_day, churn_rate, mrr (monthly recurring revenue), contacts_added, jobs_completed, invoices_generated, payment_success_rate. Store daily aggregates. Create metric for conversion funnel: trial → paid.
+- **inputs**: Business events
+- **outputs**: Business metrics data
+- **dependencies**: [OBS_METRICS_001]
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: KPIs tracked accurately, daily aggregates stored, funnel metrics work
+
+#### Task: OBS_ALERT_001
+- **title**: Implement alerting for critical conditions
+- **description**: Configure alerts for: error_rate > 5%, p95 latency > 2000ms, payment failures > 10%, subscription cancellations spike, disk usage > 80%, memory usage > 85%. Use PagerDuty or similar for critical alerts. Log warning for near-threshold conditions.
+- **inputs**: Metric thresholds
+- **outputs**: Alerts triggered
+- **dependencies**: [OBS_METRICS_001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: devops
+- **validation**: Alerts fire on threshold breach, critical issues page, warnings logged
+
+#### Task: OBS_DASHBOARD_001
+- **title**: Implement Grafana dashboards
+- **description**: Create Grafana dashboard for system health: request rate, error rate, latency percentiles, DB connections, cache hit ratio, memory/CPU. Create business dashboard: MRR, subscriptions, invoices, contacts. Include workspace-level drill-down. Set up dashboard provisioning.
+- **inputs**: Metrics data sources
+- **outputs**: Grafana dashboards
+- **dependencies**: [OBS_METRICS_001, OBS_METRICS_002]
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: devops
+- **validation**: Dashboards display correctly, data refreshes, alerts visible
+
+#### Task: OBS_TRACING_001
+- **title**: Implement distributed tracing
+- **description**: Add OpenTelemetry tracing for request tracing. Generate trace_id propagated through all services. Trace DB queries, external API calls, cache operations. Export traces to Jaeger or similar. Include span attributes: user_id, workspace_id, operation.
+- **inputs**: Request context
+- **outputs**: Distributed traces
+- **dependencies**: []
+- **priority**: medium
+- **estimated_complexity**: high
+- **agent_type**: backend
+- **validation**: Traces correlated across services, spans detailed, latency contributions visible
+
+#### Task: OBS_HEALTH_001
+- **title**: Implement health check endpoints
+- **description**: Create /health endpoint returning service status. Include: database connectivity, Redis connectivity, disk space, memory. Create /health/ready for readiness probes and /health/live for liveness probes. Return 503 if unhealthy.
+- **inputs**: Health check requests
+- **outputs**: Health status JSON
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: Health endpoint responds, unhealthy conditions detected, probes work correctly
+
+#### Task: OBS_SLO_001
+- **title**: Implement SLO monitoring
+- **description**: Define SLIs: availability (target 99.5%), latency (p95 < 500ms), error rate (< 1%). Create SLO dashboard showing current vs target. Alert when SLO at risk. Track SLO budget burn rate. Document SLO definitions.
+- **inputs**: Service level data
+- **outputs**: SLO dashboard and alerts
+- **dependencies**: [OBS_METRICS_001, OBS_ALERT_001]
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: SLIs tracked, SLO dashboard accurate, alerts on SLO breach risk
+
+---
+
+### Category: Error Handling
+
+#### Task: ERR_GLOBAL_001
+- **title**: Implement global error handler middleware
+- **description**: Create global error handling middleware catching all errors. Categorize errors: ValidationError, NotFoundError, AuthenticationError, AuthorizationError, BusinessError, InternalError. Format consistent error response: { error: { code, message, details } }. Log with full context.
+- **inputs**: Error object
+- **outputs**: Safe error response
+- **dependencies**: [LOG_ERROR_001]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: All errors caught, proper HTTP status codes, safe messages to clients
+
+#### Task: ERR_CUSTOM_001
+- **title**: Create custom error classes
+- **description**: Define custom error classes extending base error: AppError, ValidationError (400), NotFoundError (404), ConflictError (409), UnauthorizedError (401), ForbiddenError (403), RateLimitError (429), InternalError (500). Each with code, message, statusCode, details properties.
+- **inputs**: None
+- **outputs**: Error class hierarchy
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: Errors properly classified, correct status codes, consistent behavior
+
+#### Task: ERR_VALIDATION_001
+- **title**: Implement request validation errors
+- **description**: Create validation error handling with field-level details. Return 400 with array of field errors: { field, message, value }. Include constraint violated. Aggregate multiple validation errors. Return in consistent format.
+- **inputs**: Validation results
+- **outputs**: Field-level validation errors
+- **dependencies**: [ERR_CUSTOM_001, API_REST_012]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: Field errors detailed, multiple errors aggregated, constraint info included
+
+#### Task: ERR_NOT_FOUND_001
+- **title**: Implement NotFound error handling
+- **description**: Handle 404 for all resource types. Return consistent format: { error: { code: 'NOT_FOUND', message: 'Resource not found', resource_type, resource_id } }. Handle missing relations gracefully. Include suggestion for typos in IDs.
+- **inputs**: Request for missing resource
+- **outputs**: 404 response
+- **dependencies**: [ERR_CUSTOM_001]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: 404 returned for missing resources, proper format, suggestions included
+
+#### Task: ERR_ASYNC_001
+- **title**: Implement async error wrapper
+- **description**: Create asyncHandler wrapper for route handlers. Catch promise rejections and pass to error middleware. Prevent unhandled promise rejection crashes. Use at least once wrapper on all async route handlers.
+- **inputs**: Async route handlers
+- **outputs**: Errors caught and passed to middleware
+- **dependencies**: [ERR_GLOBAL_001]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: Async errors handled, no unhandled rejections, crashes prevented
+
+#### Task: ERR_DATABASE_001
+- **title**: Implement database error handling
+- **description**: Handle PostgreSQL errors: connection failures, constraint violations, deadlock, timeout. Map to appropriate HTTP errors: unique violation → 409, foreign key violation → 400, serialization failure → retry. Log database errors with query context.
+- **inputs**: Database errors
+- **outputs**: Appropriate HTTP response
+- **dependencies**: [ERR_CUSTOM_001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: DB errors handled gracefully, proper HTTP codes, deadlocks retried
+
+#### Task: ERR_RETRY_001
+- **title**: Implement retry logic for transient failures
+- **description**: Implement retry with exponential backoff for transient operations. Retry on: network errors, 503 Service Unavailable, 429 Rate Limited. Max 3 retries with 100ms, 1s, 5s delays. Use jitter to prevent thundering herd. Log retry attempts.
+- **inputs**: Failed operations
+- **outputs**: Retried operations with backoff
+- **dependencies**: [ERR_GLOBAL_001]
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Transients retried, backoff works, max retries enforced, jitter present
+
+#### Task: ERR_CIRCUIT_001
+- **title**: Implement circuit breaker pattern
+- **description**: Implement circuit breaker for external services (Stripe, email provider). States: closed (normal), open (failing), half-open (testing). Open after 5 failures in 10 seconds. Half-open after 30 seconds. Reset after success. Return cached response when open.
+- **inputs**: External service calls
+- **outputs**: Circuit breaker controlled calls
+- **dependencies**: [ERR_RETRY_001]
+- **priority**: medium
+- **estimated_complexity**: high
+- **agent_type**: backend
+- **validation**: Circuit opens on failures, closes after recovery, cached responses returned
+
+#### Task: ERR_USER_001
+- **title**: Implement user-friendly error messages
+- **description**: Create mapping from technical errors to user-friendly messages. For example: '23505' (unique violation) → 'A record with this value already exists'. Keep messages in FR and EN. Never expose internal details, stack traces, or table names to users.
+- **inputs**: Technical errors
+- **outputs**: User-safe messages
+- **dependencies**: [ERR_DATABASE_001]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: Messages user-friendly, no internal details leaked, localized
+
+#### Task: ERR_RECOVERY_001
+- **title**: Implement panic recovery and graceful shutdown
+- **description**: Set up panic recovery for unhandled exceptions. Graceful shutdown on SIGTERM/SIGINT: finish in-flight requests, close DB connections, flush logs. Set memory limit and restart on heap exhaustion. Implement health check draining.
+- **inputs**: Shutdown signals
+- **outputs**: Graceful shutdown
+- **dependencies**: [LOG_STRUCTURE_001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Graceful shutdown completes, requests finished, connections closed cleanly
+
+---
+
+### Category: Rate Limiting & Security
+
+#### Task: SEC_RATE_001
+- **title**: Implement API rate limiting
+- **description**: Implement rate limiting per user/IP: 100 requests/minute for authenticated, 20 requests/minute for unauthenticated. Use sliding window algorithm with Redis. Return X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset headers. Return 429 with Retry-After when exceeded.
+- **inputs**: Request
+- **outputs**: Rate limit headers and 429 responses
+- **dependencies**: [CACHE_REDIS_001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Limits enforced, headers correct, 429 returned when exceeded
+
+#### Task: SEC_RATE_002
+- **title**: Implement endpoint-specific rate limits
+- **description**: Apply stricter limits on sensitive endpoints: /auth/login: 5/min, /auth/password-reset: 3/min, /payments: 10/min, /uploads: 20/min. Implement per-user and per-IP limits independently. Log excessive attempts.
+- **inputs**: Endpoint requests
+- **outputs**: Endpoint-specific limits
+- **dependencies**: [SEC_RATE_001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Sensitive endpoints more restricted, combined limits work
+
+#### Task: SEC_CORS_001
+- **title**: Implement CORS configuration
+- **description**: Configure CORS for PWA access. Allow frontend origin from environment config. Allow credentials. Set max-age 1 hour. Handle preflight requests. Whitelist only necessary methods and headers.
+- **inputs**: CORS configuration
+- **outputs**: CORS headers on responses
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: Preflight handled, correct origins allowed, credentials work
+
+#### Task: SEC_CSP_001
+- **title**: Implement Content Security Policy
+- **description**: Set CSP headers to prevent XSS. Configure default-src 'self'. Allow scripts from self, styles from self and inline, images from self and CDN, fonts from self and Google. Report violations to /csp-violations endpoint. Use nonce for inline scripts.
+- **inputs**: CSP configuration
+- **outputs**: CSP headers on responses
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: CSP headers set, XSS prevented, violations reported
+
+#### Task: SEC_HTTPS_001
+- **title**: Enforce HTTPS and HSTS
+- **description**: Redirect HTTP to HTTPS. Set HSTS header: max-age=31536000; includeSubDomains; preload. Set Strict-Transport-Security for all responses. Include upgrade-insecure-requests directive. Configure at nginx level.
+- **inputs**: HTTP requests
+- **outputs**: HTTPS enforced
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: devops
+- **validation**: HTTP redirects to HTTPS, HSTS header set, preload configured
+
+#### Task: SEC_HEADERS_001
+- **title**: Implement security headers
+- **description**: Set security headers: X-Content-Type-Options: nosniff, X-Frame-Options: DENY, X-XSS-Protection: 1; mode=block, Referrer-Policy: strict-origin-when-cross-origin, Permissions-Policy: geolocation=(), microphone=(), camera=(). Review and update quarterly.
+- **inputs**: Response headers
+- **outputs**: Security headers on all responses
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: All security headers present, clickjacking prevented, MIME sniffing prevented
+
+#### Task: SEC_SQL_001
+- **title**: Prevent SQL injection attacks
+- **description**: Use parameterized queries exclusively (no string concatenation for user input). Validate all input types. Escape special characters in dynamic query parts. Use ORM/query builder for all DB access. Regular code review for injection vulnerabilities.
+- **inputs**: User input in queries
+- **outputs**: Safe queries
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: Parameterized queries used, no injection possible, ORM used throughout
+
+#### Task: SEC_XSS_001
+- **title**: Prevent XSS attacks
+- **description**: Sanitize user-generated content before storage and display. Use DOMPurify for HTML content. Escape output in templates. Implement CSP to mitigate. Validate input lengths. Implement CSRF tokens for state-changing operations.
+- **inputs**: User-generated content
+- **outputs**: Sanitized content
+- **dependencies**: [SEC_CSP_001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: fullstack
+- **validation**: XSS payloads sanitized, CSP prevents stored XSS, output escaped
+
+#### Task: SEC_CSRF_001
+- **title**: Implement CSRF protection
+- **description**: Generate CSRF tokens for authenticated sessions. Validate tokens on state-changing requests (POST, PUT, PATCH, DELETE). Use SameSite=Strict/Lax cookies. Accept tokens in X-CSRF-Token header or body. Reject requests without valid token.
+- **inputs**: CSRF token
+- **outputs**: Token validation
+- **dependencies**: [AUTH_JWT_001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: CSRF tokens generated, validation works, invalid tokens rejected
+
+#### Task: SEC_INPUT_001
+- **title**: Implement input sanitization and validation
+- **description**: Sanitize all user input: trim whitespace, remove control characters, validate types. Use Zod/Yup for schema validation. Validate string lengths. Validate email format, phone format, URL format. Reject input with null bytes or encoded characters.
+- **inputs**: User input
+- **outputs**: Sanitized, validated input
+- **dependencies**: [API_REST_012]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: Malformed input rejected, sanitization works, types enforced
+
+#### Task: SEC_SENSITIVE_001
+- **title**: Implement sensitive data protection
+- **description**: Encrypt sensitive fields at rest: passwords, API keys, bank details. Use AES-256-GCM encryption. Key management with environment variables or secrets manager. Never log sensitive data. Mask fields in responses.
+- **inputs**: Sensitive data
+- **outputs**: Encrypted storage, masked responses
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: backend
+- **validation**: Sensitive data encrypted, not logged, masked in responses
+
+#### Task: SEC_INJECT_002
+- **title**: Implement NoSQL injection prevention
+- **description**: If using MongoDB or similar, prevent NoSQL injection. Validate query structure. Escape special characters in user input. Use type-safe query builders. Never interpolate user input into query operators.
+- **inputs**: User input in queries
+- **outputs**: Safe queries
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: NoSQL injection attempts fail, queries type-safe
+
+#### Task: SEC_DEP_001
+- **title**: Implement dependency vulnerability scanning
+- **description**: Set up npm audit and Snyk/Dependabot for dependency scanning. Run on every build. Fail build on high/critical vulnerabilities. Update dependencies monthly. Maintain allowed-list for problematic packages.
+- **inputs**: package.json, lock files
+- **outputs**: Vulnerability report
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: devops
+- **validation**: Vulnerabilities detected, build fails on critical, updates regular
+
+#### Task: SEC_SECRET_001
+- **title**: Implement secrets management
+- **description**: Store secrets (API keys, database passwords) in environment variables or secrets manager. Never commit secrets to git. Use .env.example for local development. Rotate secrets quarterly. Implement secret scanning in pre-commit hooks.
+- **inputs**: Secret values
+- **outputs**: Secrets managed securely
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: devops
+- **validation**: No secrets in git, secrets rotated, .env.example exists
+
+#### Task: SEC_IP_001
+- **title**: Implement IP allowlisting for workspace
+- **description**: Allow admins to whitelist IP addresses for workspace access. Check IP against whitelist on each request. Support CIDR notation. Provide option to block all non-whitelisted IPs. Default: allow all.
+- **inputs**: IP address
+- **outputs**: IP validation result
+- **dependencies**: [AUTH_WORKSPACE_001]
+- **priority**: low
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Whitelist enforced, CIDR works, blocked IPs rejected
+
+#### Task: SEC_AUDIT_001
+- **title**: Implement security audit logging
+- **description**: Log security-relevant events: login attempts, auth failures, permission denials, data exports, admin actions. Include: timestamp, user_id, ip, action, result, context. Store logs securely with immutability. Retain for 1 year.
+- **inputs**: Security events
+- **outputs**: Security audit log
+- **dependencies**: [LOG_AUDIT_001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: All security events logged, logs tamper-evident, queryable
+
+#### Task: SEC_PEN_001
+- **title**: Implement penetration testing
+- **description**: Perform annual penetration testing with third-party service. Test OWASP Top 10 vulnerabilities. Fix critical findings within 48 hours, high within 7 days. Document remediation. Retest after fixes.
+- **inputs**: None
+- **outputs**: Penetration test report
+- **dependencies**: [SEC_SQL_001, SEC_XSS_001, SEC_CSRF_001]
+- **priority**: medium
+- **estimated_complexity**: high
+- **agent_type**: security
+- **validation**: Pen test completed, criticals fixed, report documented
+
+---
+
+### Category: API Versioning
+
+#### Task: VER_SCHEME_001
+- **title**: Define API versioning strategy
+- **description**: Use URL path versioning: /api/v1/{resource}. Announce deprecation 6 months before sunset. Maintain old versions for 12 months after new version. Document version lifecycle. Communicate breaking changes clearly.
+- **inputs**: None
+- **outputs**: Versioning policy
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: Policy documented, versioning consistent
+
+#### Task: VER_MIGRATE_001
+- **title**: Implement v1 to v2 migration path
+- **description**: Document breaking changes between v1 and v2. Provide migration guide with code examples. Implement v1 endpoints in v2 as deprecated. Create v2-only features. Offer migration assistance to API consumers.
+- **inputs**: Version change documentation
+- **outputs**: Migration guide
+- **dependencies**: [VER_SCHEME_001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Migration guide complete, breaking changes documented
+
+#### Task: VER_DEPRECATE_001
+- **title**: Implement deprecation headers
+- **description**: Add Sunset header to deprecated endpoints: Sunset: Tue, 01 Oct 2025 00:00:00 GMT. Add Deprecation header: true. Add Link header with successor. Log deprecation warnings for clients using old versions.
+- **inputs**: Deprecated endpoint responses
+- **outputs**: Deprecation headers
+- **dependencies**: [VER_SCHEME_001]
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: Sunset header present, Deprecation header present, Link to successor
+
+#### Task: VER_GUARD_001
+- **title**: Implement version routing middleware
+- **description**: Create routing middleware parsing API version from URL path. Route to appropriate handler based on version. Default to latest stable version. Return 400 for unsupported versions with message pointing to latest.
+- **inputs**: Request path
+- **outputs**: Routed to versioned handler
+- **dependencies**: [VER_SCHEME_001]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: Version parsed correctly, routed to correct handler, unsupported version rejected
+
+#### Task: VER_CONTRACT_001
+- **title**: Implement API contract testing
+- **description**: Use Pact or similar for contract testing. Define contracts for provider (this API) and consumers (frontend, mobile). Run contract tests in CI. Ensure v1 and v2 contracts maintained separately. Fail builds on contract violations.
+- **inputs**: API contracts
+- **outputs**: Contract tests passing
+- **dependencies**: [VER_SCHEME_001]
+- **priority**: medium
+- **estimated_complexity**: high
+- **agent_type**: backend
+- **validation**: Contracts defined, tests run in CI, violations fail build
+
+#### Task: VER_DOC_001
+- **title**: Maintain API changelog
+- **description**: Maintain CHANGELOG.md documenting all API changes per version. Include: date, change type (added/changed/deprecated/removed), description, migration steps. Group by version. Publish changelog at /changelog endpoint.
+- **inputs**: API changes
+- **outputs**: Changelog document
+- **dependencies**: [VER_SCHEME_001]
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: Changelog current, all changes documented, accessible
+
+#### Task: VER_CONSISTENT_001
+- **title**: Implement consistent response format across versions
+- **description**: Ensure v1 and v2 use same response envelope structure: { data, meta, error }. Keep field naming consistent: snake_case vs camelCase documented per version. Maintain backward compatibility within major version.
+- **inputs**: API responses
+- **outputs**: Consistent format
+- **dependencies**: [API_REST_013]
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: Format consistent across versions, naming documented
+
+---
+
+### Category: DevOps & Infrastructure
+
+#### Task: DEVOPS_DOCKER_001
+- **title**: Create Docker container configuration
+- **description**: Create Dockerfile for Node.js backend. Use multi-stage build: builder stage with dependencies, runtime stage minimal. Set non-root user. Configure health check. Build and push to container registry. Support ARM64 and AMD64.
+- **inputs**: Dockerfile
+- **outputs**: Container image
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: devops
+- **validation**: Image builds, runs, healthcheck works, ARM64 supported
+
+#### Task: DEVOPS_DOCKER_002
+- **title**: Implement docker-compose for local development
+- **description**: Create docker-compose.yml with: backend service, PostgreSQL, Redis, nginx. Configure volume mounts for code hot-reload. Set up network between services. Add mailhog for email testing. Document startup commands.
+- **inputs**: docker-compose.yml
+- **outputs**: Local development environment
+- **dependencies**: [DEVOPS_DOCKER_001]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: devops
+- **validation**: All services start, hot reload works, services communicate
+
+#### Task: DEVOPS_K8S_001
+- **title**: Create Kubernetes deployment manifests
+- **description**: Create K8s manifests: Deployment, Service, Ingress, ConfigMap, Secret. Configure resource limits and requests. Set up horizontal pod autoscaling. Configure liveness and readiness probes. Use rolling update strategy.
+- **inputs**: K8s manifests
+- **outputs**: Deployment to K8s
+- **dependencies**: [DEVOPS_DOCKER_001]
+- **priority**: medium
+- **estimated_complexity**: high
+- **agent_type**: devops
+- **validation**: Manifests apply, pods run, scaling works, healthchecks pass
+
+#### Task: DEVOPS_CI_001
+- **title**: Set up CI/CD pipeline
+- **description**: Configure GitHub Actions or similar for CI/CD. Pipeline stages: lint, test, build, security scan, deploy to staging, deploy to production. Use environment promotions. Require passing tests. Implement rollback capability.
+- **inputs**: GitHub Actions workflow
+- **outputs**: CI/CD pipeline
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: devops
+- **validation**: Pipeline runs on PR/push, all stages pass, deploys work
+
+#### Task: DEVOPS_DB_001
+- **title**: Set up PostgreSQL on OVH VPS
+- **description**: Install and configure PostgreSQL 15+ on OVH VPS. Configure: max_connections, shared_buffers, effective_cache_size, work_mem. Set up automated backups daily to OVH Object Storage. Test backup restoration quarterly. Enable point-in-time recovery.
+- **inputs**: OVH VPS access
+- **outputs**: PostgreSQL configured
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: devops
+- **validation**: PostgreSQL running, backups working, PITR configured
+
+#### Task: DEVOPS_DB_002
+- **title**: Implement database migrations strategy
+- **description**: Use database migrations (Drizzle/Knex/Prisma). Version migration files. Run migrations on deployment. Never modify existing migrations. Create rollback strategy for each migration. Test migrations on staging first.
+- **inputs**: Migration files
+- **outputs**: Migrations applied
+- **dependencies**: [DEVOPS_CI_001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Migrations run on deploy, rollback works, staging tested first
+
+#### Task: DEVOPS_MONITOR_001
+- **title**: Set up infrastructure monitoring
+- **description**: Deploy Prometheus, Grafana, node_exporter on VPS. Monitor: CPU, memory, disk, network, container stats. Set up dashboards. Configure alerting for resource exhaustion. Monitor nginx and PostgreSQL.
+- **inputs**: Monitoring tools
+- **outputs**: Monitoring configured
+- **dependencies**: [OBS_METRICS_001]
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: devops
+- **validation**: Metrics collected, dashboards visible, alerts fire
+
+#### Task: DEVOPS_LOG_001
+- **title**: Set up centralized logging
+- **description**: Deploy Loki or Elasticsearch for log aggregation. Configure Promtail/Filebeat to ship logs. Create Grafana dashboards for logs. Set up log retention (30 days for app, 90 for auth). Implement log search.
+- **inputs**: Log aggregation tools
+- **outputs**: Centralized logs
+- **dependencies**: [LOG_STRUCTURE_001]
+- **priority**: medium
+- **estimated_complexity**: high
+- **agent_type**: devops
+- **validation**: Logs aggregated, searchable, retention working
+
+#### Task: DEVOPS_BACKUP_001
+- **title**: Implement backup and disaster recovery
+- **description**: Define RTO (< 1 hour) and RPO (< 24 hours). Implement daily automated backups: database, uploaded files, application state. Store backups in OVH Object Storage with encryption. Test restore quarterly.Test backup restoration quarterly. Document recovery procedures.
+- **inputs**: Backup configuration
+- **outputs**: Backup system working
+- **dependencies**: [DEVOPS_DB_001]
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: devops
+- **validation**: Backups run daily, stored encrypted, restore tested
+
+#### Task: DEVOPS_nginx_001
+- **title**: Configure nginx as reverse proxy
+- **description**: Configure nginx as reverse proxy and load balancer. Set up SSL termination. Configure upstream for backend. Set up rate limiting at nginx level. Enable Gzip compression. Configure logging. Set up Let's Encrypt certificates.
+- **inputs**: nginx config
+- **outputs**: nginx configured
+- **dependencies**: [SEC_HTTPS_001]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: devops
+- **validation**: nginx running, SSL working, proxy to backend works
+
+#### Task: DEVOPS_ENV_001
+- **title**: Implement environment configuration management
+- **description**: Create environment-specific configs: development, staging, production. Use .env files loaded at startup. Validate required environment variables. Document all config options. Never commit secrets to git.
+- **inputs**: Environment variables
+- **outputs**: Config loaded
+- **dependencies**: [SEC_SECRET_001]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: devops
+- **validation**: Config loads per environment, secrets not in git, validation works
+
+#### Task: DEVOPS_DOMAIN_001
+- **title**: Configure DNS and domain management
+- **description**: Configure DNS for api.domain.com pointing to VPS. Set up A record and CNAME. Configure DNS TTL appropriately. Set up DKIM, SPF, DMARC for email deliverability. Use OVH DNS for zone management.
+- **inputs**: Domain name
+- **outputs**: DNS configured
+- **dependencies**: [NOTIF_EMAIL_001]
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: devops
+- **validation**: DNS resolves correctly, email authentication works
+
+#### Task: DEVOPS_OVH_001
+- **title**: Optimize OVH VPS for Mini-CRM workload
+- **description**: Configure VPS based on workload: 4GB+ RAM, 2+ vCPU, 50GB+ SSD. Set up SWAP if needed. Configure kernel parameters for network performance. Set up OVH firewall rules. Monitor VPS performance.
+- **inputs**: OVH VPS
+- **outputs**: Optimized VPS
+- **dependencies**: []
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: devops
+- **validation**: VPS optimized, performance adequate, firewall configured
+
+#### Task: DEVOPS_SCALE_001
+- **title**: Implement horizontal scaling strategy
+- **description**: Design scaling strategy for growth: 100 users, 1000 users, 10000 users. Document scaling triggers. Configure auto-scaling rules. Set up load balancer health checks. Plan database scaling (read replicas).
+- **inputs**: Scaling requirements
+- **outputs**: Scaling strategy
+- **dependencies**: [DEVOPS_K8S_001, DEVOPS_nginx_001]
+- **priority**: low
+- **estimated_complexity**: high
+- **agent_type**: devops
+- **validation**: Strategy documented, scaling triggers defined
+
+#### Task: DEVOPS_SECRET_001
+- **title**: Implement secrets rotation
+- **description**: Implement automatic secrets rotation for: database password, JWT keys, API keys. Rotate every 90 days. Use secrets manager (HashiCorp Vault or AWS Secrets Manager). Update secrets without downtime. Log rotation events.
+- **inputs**: Secrets configuration
+- **outputs**: Automated rotation
+- **dependencies**: [SEC_SECRET_001]
+- **priority**: medium
+- **estimated_complexity**: high
+- **agent_type**: devops
+- **validation**: Rotation works, no downtime, keys updated
+
+---
+
+### Category: Testing
+
+#### Task: TEST_UNIT_001
+- **title**: Implement unit test suite for business logic
+- **description**: Create unit tests for all business logic functions. Use Jest or Vitest. Mock external dependencies (DB, Redis). Aim for 80%+ code coverage. Test edge cases and error conditions. Run in CI on every PR.
+- **inputs**: Business logic code
+- **outputs**: Unit tests passing
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Tests pass, coverage > 80%, CI runs tests
+
+#### Task: TEST_INTEGRATION_001
+- **title**: Implement integration tests for API endpoints
+- **description**: Create integration tests for all API endpoints. Use supertest or similar. Test with real database (test instance). Test authentication flows. Test error cases. Test pagination and filtering. Run in CI.
+- **inputs**: API endpoints
+- **outputs**: Integration tests passing
+- **dependencies**: [TEST_UNIT_001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Tests pass, real DB tested, CI runs tests
+
+#### Task: TEST_E2E_001
+- **title**: Implement end-to-end tests for critical flows
+- **description**: Create E2E tests for critical user flows: registration, login, create contact, create job, generate invoice, payment flow. Use Playwright. Run against staging environment. Include in CI pipeline.
+- **inputs**: Critical user flows
+- **outputs**: E2E tests passing
+- **dependencies**: [TEST_INTEGRATION_001]
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: fullstack
+- **validation**: E2E tests pass, critical flows covered
+
+#### Task: TEST_PERF_001
+- **title**: Implement performance testing
+- **description**: Create performance tests with k6 or Artillery. Test: list endpoints with 1000 contacts, search with complex filters, invoice generation. Set performance benchmarks: p95 < 500ms. Run load tests simulating growth. Identify bottlenecks.
+- **inputs**: Performance test scripts
+- **outputs**: Performance benchmarks
+- **dependencies**: [TEST_INTEGRATION_001]
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Benchmarks set, load tests run, bottlenecks identified
+
+#### Task: TEST_SEC_001
+- **title**: Implement security testing
+- **description**: Integrate security tests in CI: OWASP ZAP for vulnerability scanning, SQL injection tests, XSS tests. Test authentication bypass attempts. Test authorization enforcement. Fail build on critical findings.
+- **inputs**: Security test tools
+- **outputs**: Security tests passing
+- **dependencies**: [TEST_INTEGRATION_001]
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: security
+- **validation**: Security tests run, criticals fail build
+
+#### Task: TEST_CONTRACT_001
+- **title**: Implement contract testing for API
+- **description**: Use Pact for consumer-driven contract testing. Define contracts between API provider and frontend consumer. Publish contracts to Pact Broker. Verify contracts on both sides. Include in CI pipeline.
+- **inputs**: API contracts
+- **outputs**: Contract tests passing
+- **dependencies**: [VER_CONTRACT_001]
+- **priority**: medium
+- **estimated_complexity**: high
+- **agent_type**: fullstack
+- **validation**: Contracts defined, tests pass, CI integrated
+
+#### Task: TEST_REGRESSION_001
+- **title**: Implement regression test suite
+- **description**: Create regression suite for known bugs. Ensure fixes don't regress. Run regression suite before releases. Track regression test coverage. Add regression tests for new bugs.
+- **inputs**: Known bugs
+- **outputs**: Regression suite
+- **dependencies**: [TEST_UNIT_001, TEST_INTEGRATION_001]
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Regression suite exists, bugs don't regress
+
+#### Task: TEST_FUZZ_001
+- **title**: Implement fuzz testing
+- **description**: Use fuzzing tools to test API endpoints with random inputs. Test for crashes, memory leaks, unexpected behavior. Focus on input validation. Run continuously in CI. Track discovered issues.
+- **inputs**: Fuzzing tools
+- **outputs**: Fuzz test results
+- **dependencies**: [TEST_INTEGRATION_001]
+- **priority**: low
+- **estimated_complexity**: medium
+- **agent_type**: security
+- **validation**: Fuzzing runs, crashes identified
+
+---
+
+### Category: Documentation
+
+#### Task: DOC_API_001
+- **title**: Write comprehensive API documentation
+- **description**: Document all API endpoints with: description, authentication, request parameters, request body schema, response schema, error codes, examples. Use OpenAPI spec as source of truth. Publish via Swagger UI or Redoc. Update on every release.
+- **inputs**: OpenAPI spec
+- **outputs**: API documentation
+- **dependencies**: [API_REST_011]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: All endpoints documented, examples work, up to date
+
+#### Task: DOC_SETUP_001
+- **title**: Write developer setup documentation
+- **description**: Document local development setup: prerequisites, clone repo, install dependencies, configure environment, start services, run migrations, run development server. Include troubleshooting common issues.
+- **inputs**: Development environment
+- **outputs**: Setup documentation
+- **outputs**: Setup documentation
+- **dependencies**: [DEVOPS_DOCKER_002]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: devops
+- **validation**: New developers can setup in < 30 minutes
+
+#### Task: DOC_ARCH_001
+- **title**: Document system architecture
+- **description**: Create architecture diagram showing: frontend, backend, database, Redis, nginx, services. Document data flow. Document deployment topology. Document external integrations. Keep architecture doc in sync with implementation.
+- **inputs**: Architecture decisions
+- **outputs**: Architecture documentation
+- **dependencies**: []
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: Architecture clear, diagrams accurate, updated on changes
+
+#### Task: DOC_SEC_001
+- **title**: Write security documentation
+- **description**: Document security practices: authentication flow, authorization model, data encryption, secrets management, vulnerability reporting. Document GDPR compliance measures. Include security checklist for deployments.
+- **inputs**: Security implementation
+- **outputs**: Security documentation
+- **dependencies**: [SEC_SQL_001, SEC_XSS_001]
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: security
+- **validation**: Security practices documented, GDPR compliance clear
+
+#### Task: DOC_RUNBOOK_001
+- **title**: Write operational runbooks
+- **description**: Create runbooks for: deployment, rollback, database backup restore, scaling, incident response. Each runbook: purpose, prerequisites, steps, verification, rollback. Store in docs/runbooks. Review quarterly.
+- **inputs**: Operations tasks
+- **outputs**: Runbooks
+- **dependencies**: [DEVOPS_CI_001, DEVOPS_BACKUP_001]
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: devops
+- **validation**: Runbooks complete, tested, accessible
+
+#### Task: DOC_CHANGELOG_001
+- **title**: Maintain changelog
+- **description**: Maintain CHANGELOG.md with semantic versioning. Document all changes: Added, Changed, Deprecated, Removed, Fixed, Security. Group by version. Include migration notes for breaking changes. Follow Keep a Changelog format.
+- **inputs**: Code changes
+- **outputs**: Changelog
+- **dependencies**: []
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: Changelog accurate, follows format, all changes documented

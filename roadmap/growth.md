@@ -1369,4 +1369,1438 @@
 - **agent_type**: growth
 - **validation**: Hybrid model compared to trial-only
 
-#### Task: FTU
+#### Task: FTU004
+- **title**: Implement time-limited feature unlocks
+- **description**: Give free users temporary access to Pro features: "Try Pro features free for 7 days." No credit card required. After trial, revert to free tier. Track trial-to-paid conversion from these unlocks.
+- **inputs**: Feature unlock logic, tracking, reversion mechanics
+- **outputs**: Feature unlock system live
+- **dependencies**: FTU-001
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: product
+- **validation**: Feature unlocks drive paid conversions
+
+#### Task: FTU-005
+- **title**: Create free tier upgrade prompts at natural limits
+- **description**: When free-tier users hit limits (3rd client, 10th job), show upgrade prompt. Make the limit feel constraining. Show exactly what they'd gain with upgrade. Time it exactly at limit, not before.
+- **inputs**: Limit tracking, upgrade prompts, timing logic
+- **outputs**: Limit-triggered upgrade prompts live
+- **dependencies**: FTU-003
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: product
+- **validation**: Limit prompts drive upgrades
+
+#### Task: FTU-006
+- **title**: Design free tier that creates network effects
+- **description**: Make free tier more valuable when team members use it. Free users can invite 1 team member for free. More team invites = more signups. Track virality from team invites.
+- **inputs**: Team invite logic, free tier rules
+- **outputs**: Network-effect free tier live
+- **dependencies**: FTU-003
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: product
+- **validation**: Team invites drive network growth
+
+#### Task: FTU-007
+- **title**: Implement free-to-paid transition friction reduction
+- **description**: When free user upgrades, minimize steps: pre-fill from free account, show their existing data, make payment the only friction. Remove any re-onboarding. Measure drop-off at each step.
+- **inputs**: Checkout flow, upgrade path, data migration
+- **outputs**: Frictionless upgrade flow live
+- **dependencies**: FTU-005
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: product
+- **validation**: Upgrade completion rate >85%
+
+#### Task: FTU-008
+- **title**: Create free tier abandonment recovery sequence
+- **description**: For free users who haven't logged in for 14+ days, send re-engagement sequence: "Your free Mini-CRM is waiting — here's what's new." Include feature highlights and easy re-entry.
+- **inputs**: Dormant user data, re-engagement email content
+- **outputs**: Re-engagement sequence live
+- **dependencies**: FTU-001
+- **priority**: low
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: Re-engagement rate measurable
+
+#### Task: FTU-009
+- **title**: Test "forever free" vs "free trial" value proposition
+- **description**: Create two landing pages: one offering "Forever free plan" and one offering "30 days free trial." Split traffic 50/50. Measure which drives more signups and higher-quality customers.
+- **inputs**: Landing page variants, traffic split
+- **outputs**: Test results, winning value prop
+- **dependencies**: FTU-001, FTU-002
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Clear winner identified
+
+#### Task: FTU-010
+- **title**: Build free tier usage analytics
+- **description**: Track free tier user behavior: activation rate, feature usage, upgrade rate, and upgrade timing. Identify what separates free users who upgrade from those who don't.
+- **inputs**: Free user data, analytics setup
+- **outputs**: Free tier analytics dashboard
+- **dependencies**: FTU-001
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Dashboard live, upgrade predictors identified
+
+---
+
+### Category: Monthly/Annual Pricing Strategy
+
+#### Task: MAP-001
+- **title**: Calculate monthly vs annual revenue impact model
+- **description**: Model revenue impact of annual vs monthly mix: cash flow, churn rate difference, discount cost, administrative savings. Recommend optimal annual/monthly mix target.
+- **inputs**: Revenue data, churn by plan type, discount costs
+- **outputs**: Annual/monthly revenue model
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Model complete, annual mix target set
+
+#### Task: MAP-002
+- **title**: Test annual plan discount levels
+- **description**: Test 20% vs 30% vs 40% annual discount. Measure impact on annual plan adoption rate and overall revenue per customer. Find optimal discount level.
+- **inputs**: Discount variants, A/B test
+- **outputs**: Optimal discount level identified
+- **dependencies**: MAP-001
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Discount level optimized
+
+#### Task: MAP-003
+- **title**: Implement "best value" badge on annual plans
+- **description**: Add visual "Best Value" badge on annual pricing. Show monthly equivalent price prominently. Make annual savings crystal clear: "Save €XXX/year vs monthly."
+- **inputs**: Badge design, pricing display
+- **outputs**: Badge implemented
+- **dependencies**: MAP-002
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: product
+- **validation**: Badge impact on annual selection measurable
+
+#### Task: MAP-004
+- **title**: Create annual plan upgrade incentives
+- **description**: Offer exclusive annual-only benefits: free setup assistance, priority support, early access to new features. Make annual feel premium beyond just discount.
+- **inputs**: Annual-only benefits, pricing page
+- **outputs**: Annual premium benefits live
+- **dependencies**: MAP-002
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: Annual upgrade rate increases
+
+#### Task: MAP-005
+- **title**: Test month-to-month exit messaging
+- **description**: When monthly user cancels, capture reason: "too expensive" vs "not using it" vs "competitor." Use data to address specific exit reasons. Implement targeted retention for "too expensive."
+- **inputs**: Cancellation flow, reason capture
+- **outputs**: Exit reason analysis, retention tactics
+- **dependencies**: MAP-001
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Exit reasons tracked, retention improved for price-sensitive
+
+#### Task: MAP-006
+- **title**: Implement mid-year annual plan upgrade option
+- **description**: Allow monthly subscribers to switch to annual mid-year: "Switch to annual and get credit for months already paid." Reduce friction for annual commitment.
+- **inputs**: Proration logic, upgrade flow
+- **outputs**: Mid-year annual switch live
+- **dependencies**: MAP-003
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: product
+- **validation**: Annual upgrade rate increases
+
+#### Task: MAP-007
+- **title**: Build seasonal annual plan promotions
+- **description**: Time annual plan promotions around renovation season (Sept-Oct, Jan-Feb). Create urgency: "Annual plan at 40% off — only until end of month." Test if seasonal promotions outperform year-round offers.
+- **inputs**: Seasonal calendar, promotion mechanics
+- **outputs**: Seasonal promotions deployed
+- **dependencies**: MAP-002
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: Seasonal promotions outperform baseline
+
+#### Task: MAP-008
+- **title**: Create lifetime deal for annual prepayers
+- **description**: Offer "lifetime" pricing for customers who prepay 2+ years upfront. Test willingness to pay for 2-year commitment. Track conversion and retention.
+- **inputs**: Lifetime pricing model, checkout integration
+- **outputs**: Lifetime offer tested
+- **dependencies**: MAP-001
+- **priority**: low
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Lifetime offer conversion and LTV measured
+
+#### Task: MAP-009
+- **title**: Implement price lock guarantee for annual subscribers
+- **description**: Announce: "Lock in your annual rate — we'll never increase your price while you remain a subscriber." Test impact on annual conversion and churn.
+- **inputs**: Price lock messaging, guarantee terms
+- **outputs**: Price lock implemented
+- **dependencies**: MAP-003
+- **priority**: low
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: Price lock drives annual conversions
+
+#### Task: MAP-010
+- **title**: Analyze annual plan renewal patterns
+- **description**: Track annual plan renewals: what % renew, what % downgrade, what % churn. Identify renewal risk factors. Build renewal prediction model.
+- **inputs**: Renewal data, churn data
+- **outputs**: Renewal prediction model
+- **dependencies**: MAP-001
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Renewal model deployed, renewal rate predictable
+
+---
+
+### Category: Win-Back Campaigns (churned customers)
+
+#### Task: WIN-001
+- **title**: Segment churned customers by churn reason
+- **description**: Classify all churned customers by reason: (1) price, (2) not using it, (3) switched to competitor, (4) went out of business, (5) other. Build segment-specific win-back strategies for segments 1-3.
+- **inputs**: Churn reason data, exit surveys
+- **outputs**: Churn segmentation with win-back strategies
+- **dependencies**: CHR-007
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Segments defined, strategies assigned
+
+#### Task: WIN-002
+- **title**: Create win-back email sequence (3-touch)
+- **description**: Design 3-email win-back sequence: (1) "We miss you — here's what you've been missing", (2) "Special offer: 50% off for 3 months", (3) "Last chance — your account data expires in 7 days." Each email drives to landing page.
+- **inputs**: Churned customer list, email creative, offer variants
+- **outputs**: Win-back email sequence live
+- **dependencies**: WIN-001
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Win-back rate >5%, revenue positive from campaign
+
+#### Task: WIN-003
+- **title**: Implement personalized win-back offers by segment
+- **description**: For price-sensitive churns: heavy discount. For not-using-it churns: re-engagement tips + extended trial. For competitor churns: competitor comparison + migration assistance. Track which works best.
+- **inputs**: Segment data, offer variants
+- **outputs**: Personalized offers deployed
+- **dependencies**: WIN-001
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Personalized offers outperform generic
+
+#### Task: WIN-004
+- **title**: Create win-back landing page
+- **description**: Build dedicated landing page for win-back campaign: show what's new since they left, include testimonials, highlight special offer. Track page performance and conversion.
+- **inputs**: Landing page design, what's-new content
+- **outputs**: Win-back landing page live
+- **dependencies**: WIN-002
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Landing page conversion rate >3%
+
+#### Task: WIN-005
+- **title**: Implement SMS win-back campaign
+- **description**: For churned customers who opted into SMS, send win-back SMS sequence: "Jean, we noticed you left Mini-CRM — we've made X improvements. Here's 50% off your return." Track SMS-to-conversion.
+- **inputs**: SMS provider, churned SMS list, message variants
+- **outputs**: SMS win-back active
+- **dependencies**: WIN-001
+- **priority**: low
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: SMS win-back measurable
+
+#### Task: WIN-006
+- **title**: Test "return customer" discount vs "new customer" pricing
+- **description**: Test whether offering churned customers "welcome back" pricing (same as new customer trial) outperforms standard win-back discounts. Track LTV of returning customers.
+- **inputs**: Offer variants, returning customer tracking
+- **outputs**: Test results, winning offer
+- **dependencies**: WIN-003
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Returning customer LTV comparable to new customer
+
+#### Task: WIN-007
+- **title**: Build reactivation timeline after churn
+- **description**: Define optimal timing: send first win-back email at 7 days post-churn, second at 14 days, third at 30 days. Test if 60-day sequence outperforms 30-day.
+- **inputs**: Win-back timing data
+- **outputs**: Reactivation timeline optimized
+- **dependencies**: WIN-002
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Timing optimized for conversion
+
+#### Task: WIN-008
+- **title**: Create "we've improved" update campaigns
+- **description**: When significant features are released, send "we've improved" email to all churned customers. Show specific improvements relevant to their churn reason. Make case for return.
+- **inputs**: Feature release notes, churn reason data
+- **outputs**: Improvement update campaigns
+- **dependencies**: WIN-001
+- **priority**: low
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: Feature-driven win-back measurable
+
+#### Task: WIN-009
+- **title**: Implement referral-to-win-back hybrid
+- **description**: For churned customers, offer: "Come back and bring a friend — both get 1 month free." Combines win-back with referral acquisition. Track hybrid conversion.
+- **inputs**: Hybrid offer mechanics, tracking
+- **outputs**: Hybrid campaign active
+- **dependencies**: WIN-003
+- **priority**: low
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Hybrid outperforms single-offer
+
+#### Task: WIN-010
+- **title**: Build win-back performance analytics
+- **description**: Create dashboard tracking: win-back email performance (open, click, conversion), offer performance by segment, returning customer LTV vs new customer LTV, cost per reactivation.
+- **inputs**: Win-back data, analytics
+- **outputs**: Win-back dashboard live
+- **dependencies**: WIN-001
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Dashboard tracks all KPIs
+
+---
+
+### Category: NPS & VOC (Voice of Customer) Program
+
+#### Task: VOC-001
+- **title**: Implement NPS survey integration
+- **description**: Integrate NPS tool (Wootric, Delighted, or similar) at key touchpoints: 7 days post-signup, 30 days post-signup, 90 days post-signup, and at cancellation. Track scores over time.
+- **inputs**: NPS tool, survey triggers
+- **outputs**: NPS tracking live
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: NPS data flowing, baseline established
+
+#### Task: VOC-002
+- **title**: Create monthly NPS reporting cadence
+- **description**: Establish monthly review: NPS score by cohort, by tier, by profession. Identify trends. Set target: NPS >40 (Good) within 12 months. Create action items from insights.
+- **inputs**: NPS data, reporting tool
+- **outputs**: Monthly NPS report
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Reports generated monthly
+
+#### Task: VOC-003
+- **title**: Close the loop with detractors
+- **description**: When NPS response is scored 6 or below, trigger immediate alert to CS team. CS reaches out within 48 hours to understand issue and resolve. Track resolution rate and NPS score change.
+- **inputs**: NPS tool, CS workflow, alert system
+- **outputs**: Detractor outreach active
+- **dependencies**: VOC-001
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Detractors contacted within 48h, NPS lift from outreach measurable
+
+#### Task: VOC-004
+- **title**: Analyze NPS comments by theme
+- **description**: Implement text analysis of NPS comments. Cluster into themes: pricing, features, UX, support, onboarding. Quantify volume per theme. Identify top pain points.
+- **inputs**: NPS text data, text analysis tool
+- **outputs**: Theme analysis report
+- **dependencies**: VOC-001
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Top pain points identified, product roadmap influenced
+
+#### Task: VOC-005
+- **title**: Create closed-loop feedback system
+- **description**: For every NPS response, document action taken. If feature requested: add to backlog. If support issue: improve support. If pricing: adjust pricing tests. Create feedback loop.
+- **inputs**: Feedback tracking, product backlog
+- **outputs**: Closed-loop process documented
+- **dependencies**: VOC-003, VOC-004
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: All feedback acted upon
+
+#### Task: VOC-006
+- **title**: Publish NPS results to customers
+- **description**: Share NPS results and resulting actions with customers via email/blog: "You told us X was broken — here's what we fixed." Builds trust and shows responsiveness.
+- **inputs**: NPS data, action items, communication
+- **outputs**: Transparency communication sent
+- **dependencies**: VOC-005
+- **priority**: low
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: Communication published, customer response measured
+
+#### Task: VOC-007
+- **title**: Create in-app feedback widget
+- **description**: Add persistent "Feedback" button in app. Click opens short survey (3 questions max). Capture real-time feedback without interrupting workflow. Analyze weekly.
+- **inputs**: Feedback tool, survey questions
+- **outputs**: In-app feedback widget live
+- **dependencies**: VOC-001
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: product
+- **validation**: Feedback captured weekly, themes identified
+
+#### Task: VOC-008
+- **title**: Build customer advisory board (5-7 members)
+- **description**: Recruit 5-7 highly engaged customers (one per region/profession) to quarterly advisory board. Get early feedback on roadmap, pricing changes, and features. Build strong advocates.
+- **inputs**: Customer nominations, board structure
+- **outputs**: Advisory board formed
+- **dependencies**: VOC-002
+- **priority**: medium
+- **estimated_complexity**: high
+- **agent_type**: growth
+- **validation**: Board meets quarterly, feedback implemented
+
+#### Task: VOC-009
+- **title**: Implement social listening for brand mentions
+- **description**: Monitor Twitter, Facebook, LinkedIn, Google reviews, and app stores for brand mentions. Track sentiment. Respond to all mentions. Build review response process.
+- **inputs**: Social listening tool, response process
+- **outputs**: Social monitoring active
+- **dependencies**: []
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: All mentions responded to within 24h
+
+#### Task: VOC-010
+- **title**: Create customer interview program
+- **description**: Conduct 5 customer interviews per month: mix of happy customers, unhappy customers, and churned customers. Use for qualitative insights. Document learnings. Share with team.
+- **inputs**: Interview guide, customer list
+- **outputs**: Monthly interview summaries
+- **dependencies**: VOC-002
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: 5+ interviews per month, insights shared
+
+---
+
+### Category: Community Building (French artisans Facebook/WhatsApp groups)
+
+#### Task: CMB-001
+- **title**: Identify and map French artisan Facebook groups
+- **description**: Research all relevant Facebook groups: plumbers (300+ members), electricians, carpenters, general artisans. Identify group sizes, activity levels, and rules. Prioritize for outreach.
+- **inputs**: Facebook search, group analysis
+- **outputs**: Group map with priority ranking
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: 20+ relevant groups identified
+
+#### Task: CMB-002
+- **title**: Develop community participation guidelines
+- **description**: Create guidelines for organic community participation: how to introduce Mini-CRM without spamming, how to answer questions helpfully, how to avoid self-promotion pitfalls. Train community team.
+- **inputs**: Community best practices, team training
+- **outputs**: Community guidelines document
+- **dependencies**: CMB-001
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: Guidelines created, team trained
+
+#### Task: CMB-003
+- **title**: Launch organic presence in top 5 Facebook groups
+- **description**: Join top 5 Facebook groups. Participate genuinely: answer questions, share relevant tips, mention Mini-CRM only when relevant. Build reputation before promotion. Track referral traffic from each group.
+- **inputs**: Group access, participation plan
+- **outputs**: Active presence in 5 groups
+- **dependencies**: CMB-002
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Referral traffic from groups measurable
+
+#### Task: CMB-004
+- **title**: Create Mini-CRM branded Facebook group
+- **description**: Create and launch "Artisans Mini-CRM Users" Facebook group. Seed with existing customers. Post weekly tips, success stories, and feature highlights. Grow to 500+ members.
+- **inputs**: Group creation, content calendar, seed member list
+- **outputs**: Branded group live with 500+ members
+- **dependencies**: CMB-002
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Group created, 500+ members, weekly engagement
+
+#### Task: CMB-005
+- **title**: Build WhatsApp community groups by trade
+- **description**: Create WhatsApp groups for plumbers, electricians, carpenters. Use as peer support channels. Moderate actively. Share tips and best practices. Track engagement.
+- **inputs**: WhatsApp Business, group management
+- **outputs**: 3 WhatsApp groups active
+- **dependencies**: CMB-002
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Groups active, daily messages, retention high
+
+#### Task: CMB-006
+- **title**: Develop French artisan content marketing strategy
+- **description**: Create content calendar for community: weekly tips, monthly success stories, seasonal advice (winterization, summer prep). Distribute via Facebook, WhatsApp, email. Track engagement.
+- **inputs**: Content calendar, French artisan industry knowledge
+- **outputs**: 6-month content calendar
+- **dependencies**: CMB-003, CMB-004
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Content published consistently, engagement tracked
+
+#### Task: CMB-007
+- **title**: Create "Artisan of the Month" recognition program
+- **description**: Feature outstanding Mini-CRM users in community: "Artisan of the Month" spotlight. Include interview, photo, tips shared. Make it aspirational. Distribute in all community channels.
+- **inputs**: Nomination process, spotlight format
+- **outputs**: Monthly artisan spotlight
+- **dependencies**: CMB-004
+- **priority**: low
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: Spotlight published monthly, engagement measured
+
+#### Task: CMB-008
+- **title**: Partner with French trade influencers
+- **description**: Identify 5-10 French artisan influencers (YouTube, Instagram). Offer free access in exchange for honest review. Track influencer-driven signups.
+- **inputs**: Influencer research, outreach
+- **outputs**: 3 influencer partnerships
+- **dependencies**: CMB-001
+- **priority**: medium
+- **estimated_complexity**: high
+- **agent_type**: marketing
+- **validation**: Influencer content published, signups tracked
+
+#### Task: CMB-009
+- **title**: Build community FAQ and best practices hub
+- **description**: Create a Notion or simple page collecting: common questions answered, Mini-CRM tips, artisan workflow best practices. Make it community-editable. Link from all community channels.
+- **inputs**: Content, platform selection
+- **outputs**: Community hub live
+- **dependencies**: CMB-006
+- **priority**: low
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: Hub live, contributions tracked
+
+#### Task: CMB-010
+- **title**: Host monthly community Q&A sessions
+- **description**: Host monthly live Q&A on Facebook/YouTube: "Ask the Mini-CRM team anything." Rotate between French artisan topics and product questions. Record and share highlights.
+- **inputs**: Streaming setup, promotion
+- **outputs**: Monthly Q&A sessions
+- **dependencies**: CMB-004
+- **priority**: low
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Sessions hosted, attendance tracked
+
+#### Task: CMB-011
+- **title**: Create shareable French artisan memes/media
+- **description**: Develop shareable content: funny artisan memes, relatable situations ("When the client changes their mind for the 5th time"). Artisan humor that shares naturally. Track viral reach.
+- **inputs**: Content creation, meme templates
+- **outputs**: Regular meme posts
+- **dependencies**: CMB-006
+- **priority**: low
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: Content shared organically, reach measured
+
+#### Task: CMB-012
+- **title**: Build community referral from Facebook groups
+- **description**: Within Facebook groups, create referral mechanics: share your referral link, count successful referrals, monthly leaderboard. Make it a competition. Track referral conversions.
+- **inputs**: Referral tracking, group mechanics
+- **outputs**: Group referral program
+- **dependencies**: VIR-001, CMB-003
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Referral program drives signups from groups
+
+#### Task: CMB-013
+- **title**: Create regional artisan meetups
+- **description**: Organize 4 regional meetups per year in France: Paris, Lyon, Marseille, Bordeaux. Combine Mini-CRM training with peer networking. Track attendance and conversion.
+- **inputs**: Venue, logistics, promotion
+- **outputs**: 4 meetups per year
+- **dependencies**: CMB-004
+- **priority**: low
+- **estimated_complexity**: high
+- **agent_type**: marketing
+- **validation**: Meetups hosted, attendance, conversion measured
+
+---
+
+### Category: Cohort Analysis Setup
+
+#### Task: COH-001
+- **title**: Define cohort segmentation framework
+- **description**: Establish how to segment users: by signup month, by profession, by traffic source, by plan tier, by activation speed, by geography. Build cohort definitions in analytics.
+- **inputs**: User data, segmentation options
+- **outputs**: Cohort framework documented
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Cohort definitions approved and implemented
+
+#### Task: COH-002
+- **title**: Implement cohort retention analysis
+- **description**: Build weekly/monthly retention curves for each cohort. Track: what % of users are still active at week 1, month 1, month 3, month 6, month 12. Compare across cohorts.
+- **inputs**: Retention data, cohort tool
+- **outputs**: Retention curves by cohort
+- **dependencies**: COH-001
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Retention data updated weekly
+
+#### Task: COH-003
+- **title**: Create revenue cohort analysis
+- **description**: Track revenue per cohort over time: MRR at month 0, 1, 3, 6, 12. Calculate ARPU by cohort. Identify which cohorts generate highest revenue.
+- **inputs**: Revenue data, cohort definitions
+- **outputs**: Revenue cohort report
+- **dependencies**: COH-001
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Revenue cohorts tracked monthly
+
+#### Task: COH-004
+- **title**: Build activation cohort tracking
+- **description**: Track activation rate (first job created) by cohort. Identify which signup cohorts activate fastest. Correlate activation speed with long-term retention and revenue.
+- **inputs**: Activation data, cohort definitions
+- **outputs**: Activation cohort report
+- **dependencies**: COH-001, ACT-001
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Activation cohorts tracked, correlation with LTV measured
+
+#### Task: COH-005
+- **title**: Analyze feature adoption by cohort
+- **description**: Track feature adoption rates across cohorts: which features are adopted faster by newer cohorts? Which features predict retention? Identify feature adoption patterns.
+- **inputs**: Feature usage data, cohort definitions
+- **outputs**: Feature adoption analysis
+- **dependencies**: COH-001
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Feature adoption trends identified
+
+#### Task: COH-006
+- **title**: Create churn cohort analysis
+- **description**: Analyze churn timing by cohort: when do users churn most often (week 1, month 1, month 3)? Which cohorts have lowest churn? What behaviors predict churn by cohort?
+- **inputs**: Churn data, cohort definitions
+- **outputs**: Churn cohort analysis
+- **dependencies**: COH-001, CHR-001
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Churn timing patterns identified
+
+#### Task: COH-007
+- **title**: Build upgrade cohort tracking
+- **description**: Track upgrade rates by cohort: what % upgrade within 30, 60, 90 days? Which cohorts upgrade fastest? What predicts upgrade?
+- **inputs**: Upgrade data, cohort definitions
+- **outputs**: Upgrade cohort report
+- **dependencies**: COH-001, UPG-001
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Upgrade cohorts tracked
+
+#### Task: COH-008
+- **title**: Create traffic source cohort analysis
+- **description**: Analyze cohorts by traffic source: organic search, paid ads, referral, social. Which sources produce highest-quality customers (best retention, revenue, upgrades)?
+- **inputs**: Traffic source data, cohort definitions
+- **outputs**: Traffic source cohort report
+- **dependencies**: COH-001
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Best traffic sources identified
+
+#### Task: COH-009
+- **title**: Implement automated weekly cohort report
+- **description**: Set up automated weekly email report: retention curves, key metrics by cohort, week-over-week changes, notable trends. Deliver to growth team every Monday.
+- **inputs**: Cohort data, reporting tool, email
+- **outputs**: Automated weekly report
+- **dependencies**: COH-001, COH-002
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Report delivered weekly
+
+#### Task: COH-010
+- **title**: Build LTV cohort model
+- **description**: Calculate true LTV by cohort: project future revenue based on observed retention and upgrade rates. Compare LTV by traffic source, profession, and plan tier.
+- **inputs**: Cohort data, LTV model
+- **outputs**: LTV cohort projections
+- **dependencies**: COH-003, LTV-001
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: growth
+- **validation**: LTV projections updated quarterly
+
+---
+
+### Category: A/B Testing Framework
+
+#### Task: ABT-001
+- **title**: Define A/B testing infrastructure and tools
+- **description**: Select and implement A/B testing tool (Optimizely, VWO, or custom). Define test hierarchy: feature flags, frontend changes, email changes. Set up statistical significance calculator.
+- **inputs**: Testing tools, technical requirements
+- **outputs**: Testing infrastructure operational
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: growth
+- **validation**: Testing tool deployed, team trained
+
+#### Task: ABT-002
+- **title**: Create test prioritization framework
+- **description**: Develop ICE framework (Impact, Confidence, Ease) for prioritizing tests. Create test idea backlog with ICE scores. Review and reprioritize monthly.
+- **inputs**: Test ideas, ICE scoring
+- **outputs**: Test backlog with priorities
+- **dependencies**: ABT-001
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Backlog prioritized, monthly reviews happening
+
+#### Task: ABT-003
+- **title**: Document testing best practices and processes
+- **description**: Create testing playbook: how to write hypotheses, minimum sample size calculation, minimum test duration, how to interpret results, when to call a test.
+- **inputs**: Testing experience, statistical methods
+- **outputs**: Testing playbook
+- **dependencies**: ABT-001
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Playbook documented, team trained
+
+#### Task: ABT-004
+- **title**: Implement test result tracking system
+- **description**: Build centralized test results tracker: test name, hypothesis, winner, lift, confidence, revenue impact. Review monthly. Learn from wins and losses.
+- **inputs**: Test results, tracking tool
+- **outputs**: Test results dashboard
+- **dependencies**: ABT-003
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: All tests tracked, learnings documented
+
+#### Task: ABT-005
+- **title**: Run pricing page headline tests (10+ variants)
+- **description**: Test 10+ headline variants on pricing page. Measure conversion rate per variant. Identify winning headline. Document why it won.
+- **inputs**: Headline variants, testing tool
+- **outputs**: Headline test results
+- **dependencies**: ABT-002, ABT-003
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Winning headline implemented, >10% lift
+
+#### Task: ABT-006
+- **title**: Test CTA button variations (color, copy, placement)
+- **description**: Test CTA button: red vs green vs blue, "Start Free Trial" vs "Get Started Free" vs "Try Now", above fold vs below feature list. Measure click-through and conversion.
+- **inputs**: Button variants, testing tool
+- **outputs**: CTA test results
+- **dependencies**: ABT-002, ABT-003
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Winning CTA deployed
+
+#### Task: ABT-007
+- **title**: Test onboarding flow variations
+- **description**: Test onboarding flow variants: step-by-step wizard vs blank canvas, with sample data vs without, with video tutorial vs text only. Measure time-to-activation.
+- **inputs**: Onboarding variants, testing tool
+- **outputs**: Onboarding test results
+- **dependencies**: ABT-002, ACT-002
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Winning onboarding deployed
+
+#### Task: ABT-008
+- **title**: Implement multi-page funnel tests
+- **description**: Test complete funnel variations: 3-step checkout vs 1-page checkout, with progress bar vs without, with trust signals throughout vs at end. Measure end-to-end conversion.
+- **inputs**: Funnel variants, tracking
+- **outputs**: Funnel test results
+- **dependencies**: ABT-002, TRC-014
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: growth
+- **validation**: Winning funnel deployed
+
+#### Task: ABT-009
+- **title**: Create email subject line test library
+- **description**: Test 20+ email subject line variations. Document open rates by type: question vs statement, emoji vs no emoji, short vs long. Build best-practice library.
+- **inputs**: Subject line variants, email data
+- **outputs**: Subject line playbook
+- **dependencies**: ABT-002
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: Subject line best practices documented
+
+#### Task: ABT-010
+- **title**: Test social proof placement and format
+- **description**: Test social proof variants: testimonials vs logos, single testimonial vs multiple, before CTA vs after CTA. Measure conversion impact.
+- **inputs**: Social proof variants, testing tool
+- **outputs**: Social proof test results
+- **dependencies**: ABT-002
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Optimal social proof placement identified
+
+#### Task: ABT-011
+- **title**: Run quarterly testing retrospective
+- **description**: Every quarter, review all tests run: wins, losses, nulls. Extract learnings. Update testing roadmap. Celebrate test-driven wins.
+- **inputs**: Test results, retrospective framework
+- **outputs**: Quarterly retrospective
+- **dependencies**: ABT-004
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Retrospectives happening quarterly
+
+---
+
+### Category: Growth Experiments Backlog
+
+#### Task: GEB-001
+- **title**: Build centralized experiment backlog
+- **description**: Create backlog of all experiment ideas: sourced from team, support tickets, NPS comments, competitor analysis. Prioritize with ICE scores. Maintain in Notion or similar.
+- **inputs**: Experiment ideas, prioritization
+- **outputs**: Live backlog with 50+ ideas
+- **dependencies**: ABT-002
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Backlog active, ideas added weekly
+
+#### Task: GEB-002
+- **title**: Document experiment results and learnings
+- **description**: After each experiment, document: hypothesis, results, learnings, next actions. Build institutional knowledge. Review learnings when designing new tests.
+- **inputs**: Experiment documentation template
+- **outputs**: Experiment wiki
+- **dependencies**: GEB-001
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: All experiments documented
+
+#### Task: GEB-003
+- **title**: Run weekly experiment planning session
+- **description**: Weekly 30-min session: review top backlog items, assign owners, confirm test details, schedule for next sprint. Keep experiment velocity high.
+- **inputs**: Backlog, meeting cadence
+- **outputs**: Weekly planning notes
+- **dependencies**: GEB-001
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Weekly sessions happening
+
+#### Task: GEB-004
+- **title**: Track experiment velocity and throughput
+- **description**: Track: how many experiments launched per week/month, average test duration, % of ideas that get tested. Set velocity targets.
+- **inputs**: Experiment data, velocity metrics
+- **outputs**: Velocity dashboard
+- **dependencies**: GEB-001
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Velocity tracked, >4 experiments/week
+
+#### Task: GEB-005
+- **title**: Create experiment templates
+- **description**: Standardize experiment templates: hypothesis format, success metrics, minimum sample size calculator, result interpretation guide. Reduce friction for new tests.
+- **inputs**: Template design, testing best practices
+- **outputs**: Experiment templates ready
+- **dependencies**: GEB-001, ABT-003
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Templates used for all new tests
+
+#### Task: GEB-006
+- **title**: Identify 20 quick-win experiments
+- **description**: From backlog, identify 20 experiments that are low-effort, high-potential: copy changes, button colors, form fields, email timing. Run these first to build momentum.
+- **inputs**: Backlog analysis
+- **outputs**: 20 quick-win experiments identified
+- **dependencies**: GEB-001
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Quick wins prioritized and running
+
+#### Task: GEB-007
+- **title**: Map experiments to growth funnel stages
+- **description**: Tag all experiments by funnel stage: awareness, acquisition, activation, retention, referral, revenue. Ensure balanced experiment portfolio across all stages.
+- **inputs**: Funnel mapping, backlog tags
+- **outputs**: Balanced experiment portfolio
+- **dependencies**: GEB-001
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: All funnel stages represented
+
+#### Task: GEB-008
+- **title**: Build experiment-to-roadmap handoff process
+- **description**: When an experiment wins, define process to handoff to product/engineering roadmap. Document requirements, success criteria, and timeline.
+- **inputs**: Handoff template, roadmap process
+- **outputs**: Handoff process documented
+- **dependencies**: GEB-002
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Wins properly handoffered
+
+#### Task: GEB-009
+- **title**: Source experiment ideas from customer feedback
+- **description**: Monthly review of support tickets, NPS comments, and interviews. Extract experiment ideas directly from customer language. Prioritize ideas that address real customer pain.
+- **inputs**: Feedback sources, idea extraction
+- **outputs**: Customer-sourced experiments
+- **dependencies**: VOC-004
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Ideas extracted monthly
+
+#### Task: GEB-010
+- **title**: Create experiment ROI calculation
+- **description**: For major experiments, calculate ROI: estimated revenue impact × probability of success − experiment cost. Prioritize high-ROI experiments.
+- **inputs**: Experiment data, revenue estimates
+- **outputs**: ROI calculations
+- **dependencies**: GEB-001
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: ROI factored into prioritization
+
+---
+
+### Category: Competitor Response Playbook
+
+#### Task: CRP-001
+- **title**: Map French artisan CRM competitive landscape
+- **description**: Identify all competitors: HubSpot, Zoho, Salesforce, Pennypaw, Fieldmate, and any new entrants. Document pricing, features, positioning, market share estimates.
+- **inputs**: Competitor research, market data
+- **outputs**: Competitor landscape map
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Landscape documented and updated quarterly
+
+#### Task: CRP-002
+- **title**: Monitor competitor product changes weekly
+- **description**: Set up weekly competitor monitoring: new feature releases, pricing changes, marketing campaigns. Track in a shared doc. Alert team to significant changes.
+- **inputs**: Monitoring tools, alert system
+- **outputs**: Weekly competitor digest
+- **dependencies**: CRP-001
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Weekly monitoring active
+
+#### Task: CRP-003
+- **title**: Create competitor feature comparison matrix
+- **description**: Build detailed feature matrix: Mini-CRM vs each competitor. Update quarterly. Identify gaps to address in roadmap. Identify advantages to emphasize in marketing.
+- **inputs**: Feature data, competitor analysis
+- **outputs**: Feature comparison matrix
+- **dependencies**: CRP-001
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Matrix maintained quarterly
+
+#### Task: CRP-004
+- **title**: Document competitive positioning statements
+- **description**: Create battle cards: how to position against each major competitor. Include competitor's weaknesses, Mini-CRM's advantages, objection handling. Train sales and CS.
+- **inputs**: Competitive analysis, positioning
+- **outputs**: Battle cards ready
+- **dependencies**: CRP-001, CRP-003
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Battle cards complete, team trained
+
+#### Task: CRP-005
+- **title**: Define competitor pricing response thresholds
+- **description**: If competitor cuts price by X%, define our response: no action, promotional counter, or value-add response. Set thresholds in advance to respond quickly.
+- **inputs**: Pricing strategy, competitive data
+- **outputs**: Pricing response playbook
+- **dependencies**: CRP-001
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Playbook defined, approved
+
+#### Task: CRP-006
+- **title**: Build competitor feature response process
+- **description**: When competitor releases popular feature, define process: evaluate in 2 weeks, decide build/buy/partner, communicate Mini-CRM advantage. Don't react to everything — choose strategic responses.
+- **inputs**: Response process, roadmap integration
+- **outputs**: Feature response process
+- **dependencies**: CRP-002
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Process defined, responses tracked
+
+#### Task: CRP-007
+- **title**: Create win/loss analysis against competitors
+- **description**: Track all deal wins and losses where competitor was mentioned. Document why we won or lost. Share learnings with team. Update battle cards.
+- **inputs**: Sales data, win/loss tracking
+- **outputs**: Win/loss analysis quarterly
+- **dependencies**: CRP-004
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Quarterly analysis complete
+
+#### Task: CRP-008
+- **title**: Monitor competitor customer reviews
+- **description**: Track competitor reviews on G2, Capterra, Google Play, App Store. Identify common complaints. Use to improve Mini-CRM and inform marketing.
+- **inputs**: Review monitoring, analysis
+- **outputs**: Competitor review analysis
+- **dependencies**: CRP-002
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Reviews monitored monthly
+
+#### Task: CRP-009
+- **title**: Create competitor messaging response matrix
+- **description**: When competitor runs marketing campaign, prepare response: whether to respond, what to say, which channels. Define thresholds for when competitor claims require rebuttal.
+- **inputs**: Marketing monitoring, response guidelines
+- **outputs**: Messaging response matrix
+- **dependencies**: CRP-002
+- **priority**: low
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: Response matrix ready
+
+#### Task: CRP-010
+- **title**: Develop differentiation narrative per persona
+- **description**: Create differentiation story per persona: why plumber should choose Mini-CRM over HubSpot, why electrician should choose us over Pennypaw. Tailor messaging to pain points.
+- **inputs**: Persona research, competitive data
+- **outputs**: Persona-specific differentiation
+- **dependencies**: CRP-003
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Differentiation stories ready for each persona
+
+---
+
+### Category: Seasonal Campaign Calendar (post-winter, renovation season)
+
+#### Task: SCC-001
+- **title**: Map French artisan seasonal calendar
+- **description**: Research French artisan seasons: post-winter (March-April) emergency repairs, pre-summer (May-June) installations, renovation season (Sept-Nov), year-end (December). Identify peak demand periods.
+- **inputs**: Industry research, artisan calendars
+- **outputs**: Seasonal calendar document
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: Calendar documented
+
+#### Task: SCC-002
+- **title**: Build annual campaign calendar
+- **description**: Create 12-month campaign calendar aligned with seasonal demand. Plan campaigns 2 months ahead. Include: email campaigns, social content, paid ads, PR.
+- **inputs**: Seasonal calendar, marketing inventory
+- **outputs**: 12-month campaign calendar
+- **dependencies**: SCC-001
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Calendar approved and distributed
+
+#### Task: SCC-003
+- **title**: Create post-winter campaign ("Spring Renovation")
+- **description**: Launch March-May campaign targeting post-winter renovation rush. Theme: "Get your business organized before the busy season." Email sequence, social content, paid ads. Track conversions.
+- **inputs**: Campaign assets, targeting
+- **outputs**: Spring campaign live
+- **dependencies**: SCC-002
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Campaign deployed, conversions tracked
+
+#### Task: SCC-004
+- **title**: Launch summer installation campaign
+- **description**: Launch May-July campaign for summer installation projects. Theme: "Manage more jobs, stress less." Target during home improvement season. A/B test messaging vs spring campaign.
+- **inputs**: Campaign assets, testing
+- **outputs**: Summer campaign live
+- **dependencies**: SCC-003
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Campaign deployed, performance compared to spring
+
+#### Task: SCC-005
+- **title**: Create back-to-business September campaign
+- **description**: Launch August-September "back to business" campaign. Artisans return from vacation ready to organize. Theme: "New season, new system." Time with annual planning season.
+- **inputs**: Campaign assets
+- **outputs**: September campaign live
+- **dependencies**: SCC-002
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Campaign deployed during September
+
+#### Task: SCC-006
+- **title**: Build year-end holiday campaign
+- **description**: Launch November-December campaign. Theme: "End the year organized." Offer annual plan discount. Target business planning and tax season. Track annual plan conversions.
+- **inputs**: Campaign assets, annual offer
+- **outputs**: Year-end campaign live
+- **dependencies**: SCC-002, MAP-007
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Year-end campaign deployed, annual conversions tracked
+
+#### Task: SCC-007
+- **title**: Create "slow season" engagement campaigns
+- **description**: For slower months (July-August, January), create engagement campaigns: tips for using slow season to organize, product tutorial series, community building. Focus on retention, not acquisition.
+- **inputs**: Seasonal analysis, content calendar
+- **outputs**: Slow-season campaigns
+- **dependencies**: SCC-002
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Retention impact during slow season measured
+
+#### Task: SCC-008
+- **title**: Implement seasonal upgrade promotions
+- **description**: Align upgrade promotions with seasonal demand: in busy season, emphasize efficiency gains; in slow season, emphasize system organization. Test seasonal upgrade messaging.
+- **inputs**: Seasonal calendar, upgrade messaging
+- **outputs**: Seasonal upgrade campaigns
+- **dependencies**: SCC-002, UPG-010
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: Seasonal messaging outperforms generic
+
+#### Task: SCC-009
+- **title**: Build trade-specific seasonal content
+- **description**: Create seasonal content per trade: "Plumber's spring checklist," "Electrician's summer prep guide," "Carpenter's fall project calendar." Distribute in trade communities. Track engagement.
+- **inputs**: Trade-specific content, distribution
+- **outputs**: Trade content published seasonally
+- **dependencies**: SCC-001, CMB-006
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Trade content engagement tracked
+
+#### Task: SCC-010
+- **title**: Analyze seasonal campaign performance
+- **description**: After each campaign, analyze performance by season: cost per acquisition, conversion rate, revenue. Compare seasons. Update next year's calendar based on learnings.
+- **inputs**: Campaign data, analysis
+- **outputs**: Seasonal performance analysis
+- **dependencies**: SCC-002
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: Analysis complete, calendar updated
+
+---
+
+### Category: Upsell Triggers (when to offer Pro/Business)
+
+#### Task: UPT-001
+- **title**: Define comprehensive upsell trigger catalog
+- **description**: Document all behavioral triggers that indicate upgrade readiness: job volume milestones, team size growth, feature usage patterns, frequent support, time-based milestones. Build trigger library.
+- **inputs**: Usage data, upgrade correlation analysis
+- **outputs**: Upsell trigger catalog
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Trigger catalog complete with 20+ triggers
+
+#### Task: UPT-002
+- **title**: Implement real-time upsell trigger detection
+- **description**: Build system to detect upsell triggers in real-time: when user hits trigger, flag for upsell action. Route to appropriate channel: in-app, email, or CS outreach.
+- **inputs**: Trigger catalog, detection logic, routing
+- **outputs**: Real-time trigger detection
+- **dependencies**: UPT-001
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: product
+- **validation**: Triggers detected and actioned
+
+#### Task: UPT-003
+- **title**: Create trigger-specific upgrade offers
+- **description**: For each major trigger, craft specific upgrade offer: "You have 5 team members — Pro includes unlimited team." Make offers feel like solutions, not sales.
+- **inputs**: Trigger catalog, offer variants
+- **outputs**: Trigger-specific offers
+- **dependencies**: UPT-001
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Offers deployed for each major trigger
+
+#### Task: UPT-004
+- **title**: Implement in-app upsell banners at trigger moments
+- **description**: When trigger detected in-app, show contextual upsell banner. Example: when adding 3rd team member, banner appears: "Pro includes up to 10 team members. Upgrade free for 30 days." Track clicks and conversions.
+- **inputs**: Banner system, trigger detection, offer variants
+- **outputs**: In-app upsell banners live
+- **dependencies**: UPT-002, UPT-003
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: product
+- **validation**: Banners display at correct moments, conversion measurable
+
+#### Task: UPT-005
+- **title**: Create trigger-based email sequences
+- **description**: For each major trigger, create targeted email: arrives within 24h of trigger detection. Email shows value of upgrade in context of the trigger. Include specific benefit and CTA.
+- **inputs**: Trigger data, email templates
+- **outputs**: Trigger-based email sequences
+- **dependencies**: UPT-003
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Emails deploying for triggers, open and click rates tracked
+
+#### Task: UPT-006
+- **title**: Build upsell moment tracking dashboard
+- **description**: Track all upsell moments: how many triggered, how many presented with offer, how many clicked, how many converted. Calculate offer-to-click and click-to-conversion rates.
+- **inputs**: Upsell data, dashboard tool
+- **outputs**: Upsell dashboard
+- **dependencies**: UPT-002
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Dashboard live, conversion funnel visible
+
+#### Task: UPT-007
+- **title**: Test trigger timing optimization
+- **description**: Test when to show upsell after trigger: immediately vs 24h vs 7 days. Some triggers may need "cooldown" period. Measure conversion rate by timing.
+- **inputs**: Test setup, trigger data
+- **outputs**: Optimal timing per trigger type
+- **dependencies**: UPT-004
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Timing optimized for each trigger
+
+#### Task: UPT-008
+- **title**: Create urgency-based upsell for high-intent users
+- **description**: For users showing very strong upgrade intent (visited pricing multiple times, used premium features), add urgency: "This pricing ends in 48 hours." Test urgency impact on conversion.
+- **inputs**: Intent signals, urgency messaging
+- **outputs**: Urgency upsell deployed
+- **dependencies**: UPT-003
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: Urgency increases conversion rate
+
+#### Task: UPT-009
+- **title**: Implement usage-based billing upgrade path
+- **description**: Allow users to start on Solo and automatically upgrade when they exceed usage limits (e.g., auto-charge for overage vs flat upgrade). Test which model customers prefer.
+- **inputs**: Usage tracking, billing integration
+- **outputs**: Usage-based upgrade tested
+- **dependencies**: UPT-001
+- **priority**: low
+- **estimated_complexity**: high
+- **agent_type**: product
+- **validation**: Usage billing tested, customer preference known
+
+#### Task: UPT-010
+- **title**: Build upsell success story library by trigger
+- **description**: Collect success stories tied to specific triggers: "I upgraded when I hit 50 jobs/month" story from a plumber. Use in upsell communications for same trigger.
+- **inputs**: Customer interviews, trigger mapping
+- **outputs**: Success story library per trigger
+- **dependencies**: UPT-003
+- **priority**: low
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: Stories available for major triggers
+
+#### Task: UPT-011
+- **title**: Create A/B test for upsell messaging variants
+- **description**: For each major trigger, test 3+ upsell message variants: benefit-focused vs problem-focused vs social-proof-focused. Identify winning message per trigger.
+- **inputs**: Message variants, A/B test setup
+- **outputs**: Winning messages per trigger
+- **dependencies**: UPT-003
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Optimized messaging deployed
+
+#### Task: UPT-012
+- **title**: Implement "upgrade preview" experience
+- **description**: When showing upsell, allow users to "preview" Pro features for 7 days before committing. Track if preview increases upgrade conversion vs immediate offer.
+- **inputs**: Preview logic, tracking
+- **outputs**: Preview experience tested
+- **dependencies**: UPG-007
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: product
+- **validation**: Preview increases conversion rate
+
+#### Task: UPT-013
+- **title**: Build CS-triggered upsell workflow
+- **description**: Train CS team to identify upsell opportunities during support calls. When CS sees trigger, they can offer upgrade with special discount. Track CS-attributed upgrades.
+- **inputs**: CS training, trigger list, discount approval
+- **outputs**: CS upsell workflow
+- **dependencies**: UPT-001
+- **priority**: low
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: CS upsell attribution tracked
+
+#### Task: UPT-014
+- **title**: Analyze upgrade path friction points
+- **description**: Identify where upgrade path breaks: confusing plan differences, slow checkout, unclear billing. Remove friction. Track if friction removal increases upgrade rate.
+- **inputs**: Upgrade funnel analysis, user feedback
+- **outputs**: Friction points removed
+- **dependencies**: UPT-006
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: product
+- **validation**: Upgrade funnel conversion improved
+
+#### Task: UPT-015
+- **title**: Create annual upgrade promotion at usage peaks
+- **description**: At seasonal peaks (spring, fall), when users are busiest, offer annual plan upgrade with bonus: "Upgrade to annual and get 4 months free." Time with natural upgrade readiness.
+- **inputs**: Seasonal calendar, annual offer
+- **outputs**: Seasonal upgrade promotion
+- **dependencies**: SCC-008
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: Seasonal upgrade promotion drives annual conversions
+
+---
+
+### Additional High-Priority Growth Tasks
+
+#### Task: GRW-001
+- **title**: Build growth model and forecast
+- **description**: Create comprehensive growth model: MRR forecast, customer count by cohort, upgrade revenue, churn projections. Update monthly. Use for planning and fundraising.
+- **inputs**: Historical data, growth assumptions
+- **outputs**: Growth model and 12-month forecast
+- **dependencies**: LTV-001, COH-003
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: growth
+- **validation**: Model live, updated monthly
+
+#### Task: GRW-002
+- **title**: Implement OKR tracking for growth
+- **description**: Define OKRs for growth team: conversion rate target, activation target, churn target, LTV target. Track weekly. Review monthly.
+- **inputs**: OKR framework, current metrics
+- **outputs**: OKR dashboard
+- **dependencies**: GRW-001
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: OKRs tracked weekly, reviewed monthly
+
+#### Task: GRW-003
+- **title**: Create growth team communication rhythm
+- **description**: Establish weekly growth team sync: test reviews, metric updates, blocker identification. Monthly leadership review. Quarterly strategy session.
+- **inputs**: Meeting cadence, agenda
+- **outputs**: Communication rhythm established
+- **dependencies**: GRW-002
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Meetings happening on schedule
+
+#### Task: GRW-004
+- **title**: Build competitive moat analysis
+- **description**: Identify and quantify Mini-CRM's competitive moat: community, network effects, data, brand, integration ecosystem. Prioritize moat-building investments.
+- **inputs**: Competitive analysis, market data
+- **outputs**: Moat analysis and strategy
+- **dependencies**: CRP-001, CMB-001
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: growth
+- **validation**: Moat strategy documented
+
+#### Task: GRW-005
+- **title**: Create customer data platform foundation
+- **description**: Build unified customer data platform: combine signup data, usage data, support data, billing data. Create single customer view. Enable personalized marketing and product decisions.
+- **inputs**: Data sources, CDP tool selection
+- **outputs**: CDP operational
+- **dependencies**: COH-001
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: growth
+- **validation**: Single customer view available
+
+#### Task: GRW-006
+- **title**: Implement marketing attribution model
+- **description**: Define attribution model: first touch, last touch, linear, or time-decay. Implement in analytics. Understand which channels drive qualified signups and conversions.
+- **inputs**: Marketing data, attribution tool
+- **outputs**: Attribution model live
+- **dependencies**: GRW-005
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Attribution data available for decisions
+
+#### Task: GRW-007
+- **title**: Build customer segmentation for personalized marketing
+- **description**: Create detailed customer segments: by profession, by company size, by usage level, by lifecycle stage, by revenue tier. Enable personalized campaigns per segment.
+- **inputs**: Customer data, segment definitions
+- **outputs**: Segment library
+- **dependencies**: GRW-005
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Segments available for marketing
+
+#### Task: GRW-008
+- **title**: Create self-hosted customer success metrics
+- **description**: Since Mini-CRM is self-hosted, track: installation health, version updates applied, data backup frequency. Correlate with churn to identify at-risk self-hosted customers.
+- **inputs**: Self-hosted telemetry, churn data
+- **outputs**: Self-hosted health scores
+- **dependencies**: CHR-001
+- **priority**: medium
+- **estimated_complexity**: high
+- **agent_type**: growth
+- **validation**: Self-hosted health correlated with retention
+
+#### Task: GRW-009
+- **title**: Build growth team hiring plan
+- **description**: Assess growth team capacity: what skills missing, what headcount needed to execute roadmap. Create 6-month hiring plan with clear priorities.
+- **inputs**: Team assessment, roadmap
+- **outputs**: Hiring plan
+- **dependencies**: GRW-002
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Hiring plan approved
+
+#### Task: GRW-010
+- **title**: Create growth knowledge sharing system
+- **description**: Document all growth learnings: test results, campaign performance, customer insights. Make searchable. Onboard new team members quickly.
+- **inputs**: Documentation system
+- **outputs**: Knowledge base live
+- **dependencies**: GEB-002
+- **priority**: low
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Knowledge base active and used
+
+---
+
+*Document Version: 1.0*
+*Last Updated: 2026-03-30*
+*Owner: Growth Team*
+*Review Cadence: Monthly*

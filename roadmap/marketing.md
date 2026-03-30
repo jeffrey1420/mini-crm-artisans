@@ -1450,4 +1450,602 @@
 - **dependencies**: []
 - **priority**: high
 - **estimated_complexity**: medium
-- **agent
+- **agentCRM users. Target: 10 video, 10 written testimonials
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: 20 testimonials collected with permissions
+
+#### Task: social_proof_review_site_setup
+- **title**: Set up profile on French review platforms
+- **description**: Create profiles on French review sites: Trustpilot France, Google Reviews, Facebook Reviews. Encourage satisfied customers to leave reviews. Respond to all reviews
+- **inputs**: Business profiles, review platform requirements
+- **outputs**: Active review profiles with 20+ reviews
+- **dependencies**: social_proof_testimonial_collection_initial
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: 4.5+ star rating across platforms
+
+#### Task: social_proof_trust_badges
+- **title**: Design and display trust badges
+- **description**: Create trust badges: "French Company", "Secure Data Hosting", "Satisfied Artisans", "GDPR Compliant". Display on landing page, pricing page, checkout
+- **inputs**: Trust claims, brand guidelines
+- **outputs**: Trust badges designed and implemented
+- **dependencies**: brand_logo_design_primary
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: Trust badges visible on site
+
+#### Task: social_proof_user_count_claims
+- **title**: Display user count and usage statistics
+- **description**: Create badge showing: number of artisans using Mini-CRM, number of invoices created, number of clients managed. Update periodically. Display prominently
+- **inputs**: Product usage data, badge design
+- **outputs**: Usage statistics badge on site
+- **dependencies**: site_main_landing_page_build
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: Statistics displayed accurately
+
+#### Task: social_proof_logo_wall
+- **title**: Create customer logo wall
+- **description**: With permission, display logos of artisan businesses using Mini-CRM. Create recognizable customer logo wall for homepage. Target 10 logos
+- **inputs**: Customer logos, permission forms
+- **outputs**: Logo wall implemented
+- **dependencies**: social_proof_testimonial_collection_initial
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: 10+ customer logos displayed
+
+#### Task: social_proof_media_mentions
+- **title**: Display media mention badges
+- **description**: Create badge showing "As Seen In" with logos of publications that have covered Mini-CRM. Display on homepage and press page
+- **inputs**: Media coverage, publication logos
+- **outputs**: Media badges displayed
+- **dependencies**: pr_personalized_outreach
+- **priority**: low
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: Media badges displayed if coverage received
+
+### Category: Customer Testimonials & Case Studies
+
+#### Task: case_study_template_design
+- **title**: Design case study template
+- **description**: Create professional case study template: challenge, solution, implementation, results structure. Include space for metrics, quotes, screenshots. Brand consistently
+- **inputs**: Case study outline, brand guidelines
+- **outputs**: Case study template in multiple formats
+- **dependencies**: brand_design_assets
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Template ready for use by content team
+
+#### Task: case_study_plumber_caen
+- **title**: Create case study: Plomberie Dupont, Caen
+- **description**: Write detailed case study featuring a plumber in Caen. Document challenges (manual invoicing, lost client info), implementation of Mini-CRM, results (time saved, invoices increased). Include metrics and quotes
+- **inputs**: Customer interview, usage data, photos
+- **outputs**: Published case study with permission
+- **dependencies**: case_study_template_design, social_proof_testimonial_collection_initial
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Case study published, customer approved
+
+#### Task: case_study_electrician_rouen
+- **title**: Create case study: Electricien Martin, Rouen
+- **description**: Write detailed case study featuring an electrician in Rouen. Focus on scheduling challenges solved, client communication improvements, quote-to-job conversion increase
+- **inputs**: Customer interview, usage data
+- **outputs**: Published case study with permission
+- **dependencies**: case_study_template_design, social_proof_testimonial_collection_initial
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Case study published
+
+#### Task: case_study_carpenter_honfleur
+- **title**: Create case study: Menuiserie Leroy, Honfleur
+- **description**: Write detailed case study featuring a carpenter in Honfleur. Document project management challenges, customer relationship improvements, and business growth metrics
+- **inputs**: Customer interview, project photos
+- **outputs**: Published case study with permission
+- **dependencies**: case_study_template_design, social_proof_testimonial_collection_initial
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Case study published
+
+#### Task: case_study_time_savings_metric
+- **title**: Create aggregated time savings case study
+- **description**: Analyze usage data across customers to document average time savings: hours per week saved, invoices processed faster, etc. Create aggregate case study with anonymized data
+- **inputs**: Product usage analytics
+- **outputs**: Time savings infographic and case study
+- **dependencies**: case_study_template_design
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Time savings data verified, published
+
+#### Task: case_study_small_team_invoicing
+- **title**: Create case study: Small team handling 50+ clients
+- **description**: Write case study featuring a small team (2-3 people) successfully using Mini-CRM to manage 50+ clients. Document team collaboration features, shared inbox, role-based access
+- **inputs**: Customer interview, team usage data
+- **outputs**: Published case study
+- **dependencies**: case_study_template_design
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Case study published with team metrics
+
+#### Task: case_study_video_testimonial_setup
+- **title**: Set up video testimonial production
+- **description**: Set up process for recording video testimonials: Zoom recording setup, lighting guidelines, consent forms, editing workflow. Create reusable setup kit
+- **inputs**: Video recording tools, consent template
+- **outputs**: Video testimonial workflow ready
+- **dependencies**: social_proof_testimonial_collection_initial
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Video testimonials being produced
+
+#### Task: case_study_promotion
+- **title**: Promote case studies across channels
+- **description**: Promote each case study via: email to customers, social media posts, LinkedIn article, blog mention, paid ads targeting similar profiles. Track traffic and conversions
+- **inputs**: Case study content, promotion channels
+- **outputs**: Case studies reaching target audience
+- **dependencies**: case_study_plumber_caen, case_study_electrician_rouen
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Traffic to case studies, leads generated
+
+### Category: Competitive Battle Cards
+
+#### Task: battle_card_competitor_research
+- **title**: Research top 5 CRM competitors
+- **description**: Deep dive into 5 competitors: HubSpot, Salesforce, Pipedrive, Zoho CRM, and a French-specific competitor. Document pricing, features, positioning, strengths, weaknesses
+- **inputs**: Competitor websites, G2 reviews, user interviews
+- **outputs**: Competitor profiles with detailed analysis
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: marketing
+- **validation**: 5 competitor profiles complete
+
+#### Task: battle_card_hubspot_analysis
+- **title**: Create HubSpot battle card
+- **description**: Create detailed battle card comparing Mini-CRM to HubSpot. Focus on: pricing (HubSpot expensive for artisans), complexity (Mini-CRM simpler), French market support, local hosting option
+- **inputs**: HubSpot pricing, features, customer complaints
+- **outputs**: HubSpot battle card
+- **dependencies**: battle_card_competitor_research
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Battle card ready for sales team
+
+#### Task: battle_card_salesforce_analysis
+- **title**: Create Salesforce battle card
+- **description**: Create detailed battle card comparing Mini-CRM to Salesforce. Focus on: pricing (Salesforce too expensive), complexity (Mini-CRM designed for non-tech users), implementation time
+- **inputs**: Salesforce pricing, features, complexity complaints
+- **outputs**: Salesforce battle card
+- **dependencies**: battle_card_competitor_research
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Battle card ready for sales team
+
+#### Task: battle_card_pipedrive_analysis
+- **title**: Create Pipedrive battle card
+- **description**: Create detailed battle card comparing Mini-CRM to Pipedrive. Focus on: invoicing features (Mini-CRM has built-in), French market support, pricing transparency, local data hosting
+- **inputs**: Pipedrive features, pricing, reviews
+- **outputs**: Pipedrive battle card
+- **dependencies**: battle_card_competitor_research
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Battle card ready for sales team
+
+#### Task: battle_card_zoho_analysis
+- **title**: Create Zoho CRM battle card
+- **description**: Create detailed battle card comparing Mini-CRM to Zoho CRM. Focus on: user interface (Mini-CRM cleaner), French language support, local support, industry-specific features for artisans
+- **inputs**: Zoho CRM features, pricing, reviews
+- **outputs**: Zoho battle card
+- **dependencies**: battle_card_competitor_research
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Battle card ready for sales team
+
+#### Task: battle_card_french_competitor_analysis
+- **title**: Create French CRM competitor battle card
+- **description**: Create detailed battle card comparing Mini-CRM to French-specific CRM solution (e.g., Holded, Indy). Focus on: self-hosted option, artisan-specific features, local support, pricing
+- **inputs**: French competitor analysis
+- **outputs**: French competitor battle card
+- **dependencies**: battle_card_competitor_research
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Battle card ready for sales team
+
+#### Task: battle_card_win_themes
+- **title**: Document competitive win themes
+- **description**: Synthesize battle card analysis into common win themes: "Mini-CRM wins on pricing under 100EUR/month", "Mini-CRM wins on simplicity", "Mini-CRM wins on French support". Create talking points
+- **inputs**: All battle cards
+- **outputs**: Win themes document for sales
+- **dependencies**: battle_card_hubspot_analysis, battle_card_salesforce_analysis
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: Sales team using win themes
+
+#### Task: battle_card_objection_handling
+- **title**: Create objection handling guide
+- **description**: Create objection handling matrix: common objections ("too expensive", "already have Excel", "not needed") with responses, proof points, and resources. Train sales team
+- **inputs**: Sales call recordings, common questions
+- **outputs**: Objection handling guide
+- **dependencies**: battle_card_win_themes
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Sales team trained on objections
+
+### Category: Sales Collateral
+
+#### Task: collateral_pitch_deck_design
+- **title**: Design investor/partnership pitch deck
+- **description**: Create pitch deck for investors and potential partners: problem, solution, product, market size, business model, team, traction, ask. 12-15 slides max
+- **inputs**: Company metrics, investor requirements
+- **outputs**: Pitch deck in PDF and PPTX
+- **dependencies**: brand_design_assets, brand_messaging_framework
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: content
+- **validation**: Pitch deck ready for presentations
+
+#### Task: collateral_one_pager_product
+- **title**: Create product one-pager
+- **description**: Create single-page product overview: key features, benefits, pricing tiers, target customer, and CTA. For sales use at trade shows and meetings. Print-ready PDF
+- **inputs**: Product features, pricing, brand guidelines
+- **outputs**: Product one-pager PDF
+- **dependencies**: brand_design_assets
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: One-pager used by sales team
+
+#### Task: collateral_one_pager_pricing
+- **title**: Create pricing one-pager
+- **description**: Create single-page pricing summary: tier comparison, FAQ, testimonials, and CTA. Highlight annual discount. For sales and pre-sales
+- **inputs**: Pricing tiers, feature matrix
+- **outputs**: Pricing one-pager PDF
+- **dependencies**: collateral_one_pager_product
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Pricing one-pager ready
+
+#### Task: collateral_product_demo_video
+- **title**: Create 3-minute product demo video
+- **description**: Record professional product demo video: walk through key features, show real use case, include customer testimonial snippet. Host on YouTube/Vimeo
+- **inputs**: Demo script, screen recording setup
+- **outputs**: Demo video published
+- **dependencies**: site_features_page_build
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Video created, used in sales
+
+#### Task: collateral_customer_successDeck
+- **title**: Create customer success deck
+- **description**: Create presentation of customer success stories: testimonials, metrics, before/after comparisons. For sales to show social proof
+- **inputs**: Case studies, testimonials, metrics
+- **outputs**: Success deck PDF
+- **dependencies**: case_study_plumber_caen, case_study_electrician_rouen
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Success deck used in sales
+
+#### Task: collateral_comparison_sheet
+- **title**: Create feature comparison sheet
+- **description**: Create detailed comparison table: Mini-CRM vs 3 competitors across 20+ features. Highlight where Mini-CRM wins. PDF format for sales use
+- **inputs**: Battle cards, feature matrix
+- **outputs**: Comparison sheet PDF
+- **dependencies**: battle_card_competitor_research
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Comparison sheet used in sales
+
+#### Task: collateralROI_calculator
+- **title**: Build ROI calculator for prospects
+- **description**: Create interactive ROI calculator: time saved on invoicing, reduction in lost clients, efficiency gains. Show payback period and annual savings. For sales conversations
+- **inputs**: Customer usage data, industry benchmarks
+- **outputs**: ROI calculator (web-based or PDF)
+- **dependencies**: []
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Calculator used in sales calls
+
+#### Task: collateral_sales_playbook
+- **title**: Create sales playbook
+- **description**: Create comprehensive sales playbook: prospecting scripts, discovery questions, demo guidelines, proposal process, objection handling, close techniques, post-sale handoff
+- **inputs**: Sales process documentation
+- **outputs**: Sales playbook document
+- **dependencies**: collateral_pitch_deck_design, battle_card_objection_handling
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: marketing
+- **validation**: Sales team using playbook
+
+#### Task: collateral_email_templates_sales
+- **title**: Create sales email templates
+- **description**: Create library of sales email templates: cold outreach, follow-up, discovery, demo scheduling, proposal follow-up, close, referral request. Include subject line variations
+- **inputs**: Sales process, email best practices
+- **outputs**: Email template library
+- **dependencies**: collateral_sales_playbook
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Sales team using templates
+
+#### Task: collateral_proposal_template
+- **title**: Create proposal template
+- **description**: Create proposal template for custom deals: executive summary, solution description, pricing, timeline, terms, case study snippet, signature block
+- **inputs**: Proposal structure, legal terms
+- **outputs**: Proposal template
+- **dependencies**: collateral_sales_playbook
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Proposal template in use
+
+### Category: Analytics & Attribution
+
+#### Task: analytics_dashboard_setup
+- **title**: Set up marketing analytics dashboard
+- **description**: Create comprehensive marketing dashboard using Google Data Studio or similar: traffic sources, conversions, revenue, CAC, LTV, funnel performance. Connect all data sources
+- **inputs**: GA4, Google Ads, Meta Ads, billing data
+- **outputs**: Live marketing dashboard
+- **dependencies**: site_analytics_setup, paid_google_ads_account_setup
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: marketing
+- **validation**: Dashboard live, updates daily
+
+#### Task: analytics_conversion_tracking_full
+- **title**: Implement full conversion tracking
+- **description**: Track all micro and macro conversions: page views, CTA clicks, form submits, trial starts, onboarding steps, upgrades, churn. Map to customer journey stages
+- **inputs**: Customer journey map, analytics setup
+- **outputs**: All conversions tracked in GA4 and ad platforms
+- **dependencies**: site_analytics_setup
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: All conversions firing correctly
+
+#### Task: analytics_attribution_model
+- **title**: Define attribution model
+- **description**: Choose attribution model: first-touch, last-touch, linear, time-decay, or data-driven. Document which interactions contribute to conversions. Set up in analytics
+- **inputs**: Customer journey data, conversion data
+- **outputs**: Attribution model implemented
+- **dependencies**: analytics_conversion_tracking_full
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Attribution data available for optimization
+
+#### Task: analytics_cac_calculation
+- **title**: Calculate and track customer acquisition cost
+- **description**: Calculate CAC by channel: paid search, paid social, organic, referral, direct. Track monthly trends. Set up automated CAC report
+- **inputs**: Marketing spend data, customer data
+- **outputs**: CAC by channel updated monthly
+- **dependencies**: analytics_dashboard_setup
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: CAC metrics tracked, report automated
+
+#### Task: analytics_ltv_calculation
+- **title**: Calculate customer lifetime value
+- **description**: Calculate LTV by customer segment: solo artisan vs team, by trade type, by pricing tier. Include churn rate. Set up LTV report
+- **inputs**: Customer billing data, usage data
+- **outputs**: LTV by segment calculated
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: LTV metrics available for business decisions
+
+#### Task: analytics_roi_reporting
+- **title**: Create marketing ROI reporting
+- **description**: Build monthly ROI report: revenue attributed to marketing, marketing spend, net ROI. Compare channels. Identify best and worst performing
+- **inputs**: Revenue data, marketing spend
+- **outputs**: Monthly ROI report
+- **dependencies**: analytics_cac_calculation, analytics_ltv_calculation
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: ROI report shared monthly
+
+#### Task: analytics_cohort_analysis
+- **title**: Set up cohort analysis
+- **description**: Create cohort analysis: customer retention by signup month, revenue by cohort, feature usage by cohort. Track cohort health over time
+- **inputs**: Customer signup data, usage data
+- **outputs**: Cohort dashboard
+- **dependencies**: analytics_dashboard_setup
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Cohort data visible in dashboard
+
+#### Task: analytics_content_performance
+- **title**: Track content performance metrics
+- **description**: Track blog and content performance: page views, time on page, shares, leads generated per piece. Identify top content. Create content ROI report
+- **inputs**: GA4 data, content inventory
+- **outputs**: Content performance dashboard
+- **dependencies**: site_blog_setup, content_blog_content_calendar
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Content metrics tracked, top content identified
+
+#### Task: analytics_weekly_review_process
+- **title**: Establish weekly analytics review process
+- **description**: Create SOP for weekly marketing review: metrics to check, questions to answer, actions to take. Automate data pulls where possible. Schedule recurring meeting
+- **inputs**: Analytics dashboard
+- **outputs**: Weekly review SOP
+- **dependencies**: analytics_dashboard_setup
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: Weekly reviews happening consistently
+
+#### Task: analytics_ab_testing_framework
+- **title**: Create A/B testing framework
+- **description**: Define A/B testing process: hypothesis creation, test design, statistical significance requirements, implementation, analysis, documentation. Set up testing tool
+- **inputs**: Testing tools, statistical methods
+- **outputs**: A/B testing framework and first tests
+- **dependencies**: site_analytics_setup
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Tests running with proper methodology
+
+### Category: Brand Guidelines Document
+
+#### Task: brand_guidelines_document
+- **title**: Compile comprehensive brand guidelines document
+- **description**: Compile all brand elements into single brand guidelines document: logo usage, color palette, typography, voice and tone, photography style, iconography, and examples of correct/incorrect usage
+- **inputs**: All brand deliverables from previous tasks
+- **outputs**: Complete brand guidelines PDF
+- **dependencies**: brand_color_palette_definition, brand_typography_selection, brand_voice_guidelines, brand_logo_design_primary
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Brand guidelines complete and distributed
+
+#### Task: brand_logo_usage_rules
+- **title**: Document logo usage rules
+- **description**: Create detailed logo usage guide: minimum sizes, clear space requirements, approved backgrounds, incorrect uses, file formats, and version variations (color, black, white)
+- **inputs**: Logo files, brand principles
+- **outputs**: Logo usage section of brand guidelines
+- **dependencies**: brand_logo_design_primary
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: Logo rules documented
+
+#### Task: brand_color_application_guide
+- **title**: Create color application guide
+- **description**: Document proper color usage: primary color usage, secondary color usage, accent colors, neutral colors, background color rules, text color contrast requirements
+- **inputs**: Color palette
+- **outputs**: Color application section of brand guidelines
+- **dependencies**: brand_color_palette_definition
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: Color rules documented
+
+#### Task: brand_typography_rules
+- **title**: Document typography rules
+- **description**: Create detailed typography guide: font families, font weights, type scales, line heights, letter spacing, paragraph rules, and do's and don'ts
+- **inputs**: Selected fonts, brand principles
+- **outputs**: Typography section of brand guidelines
+- **dependencies**: brand_typography_selection
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Typography rules documented
+
+#### Task: brand_photography_guidelines
+- **title**: Document photography guidelines
+- **description**: Create photography guidelines: preferred subjects (real artisans in real work environments), style (natural light, candid, professional), composition rules, and approved image sources
+- **inputs**: Photography style guide
+- **outputs**: Photography section of brand guidelines
+- **dependencies**: brand_photography_style_guide
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Photography rules documented
+
+#### Task: brand_digital_usage_examples
+- **title**: Create digital usage examples
+- **description**: Document correct brand usage in digital contexts: website, email, social media, ads. Include examples of correct and incorrect usage
+- **inputs**: Brand guidelines
+- **outputs**: Digital usage section with examples
+- **dependencies**: brand_logo_usage_rules, brand_color_application_guide, brand_typography_rules
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Digital examples complete
+
+#### Task: brand_print_usage_examples
+- **title**: Create print usage examples
+- **description**: Document correct brand usage in print contexts: business cards, brochures, trade show materials, merchandise. Include production specifications
+- **inputs**: Brand guidelines
+- **outputs**: Print usage section with specifications
+- **dependencies**: brand_logo_usage_rules, brand_color_application_guide
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Print examples complete
+
+#### Task: brand_do_dont_examples
+- **title**: Create do's and don'ts visual guide
+- **description**: Create visual guide showing correct and incorrect brand usage: logo placements, color combinations, typography mistakes, spacing errors. Make it memorable
+- **inputs**: Brand elements
+- **outputs**: Do's and don'ts visual guide
+- **dependencies**: brand_logo_usage_rules, brand_color_application_guide, brand_typography_rules
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Do's and don'ts guide complete
+
+#### Task: brand_asset_distribution
+- **title**: Set up brand asset distribution system
+- **description**: Create shared brand asset library (Google Drive or similar): logo files in all formats, color codes, font files, template files. Set up access controls and version control
+- **inputs**: All brand assets
+- **outputs**: Brand asset library operational
+- **dependencies**: brand_logo_design_primary, brand_color_palette_definition, brand_typography_selection
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Team accessing and using correct assets
+
+#### Task: brand_training_material
+- **title**: Create brand training material
+- **description**: Create training presentation for new team members: brand overview, key principles, how to use brand assets, where to find resources. Include quiz to verify understanding
+- **inputs**: Brand guidelines
+- **outputs**: Brand training presentation
+- **dependencies**: brand_guidelines_document
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: New team members trained
+
+#### Task: brand_compliance_review
+- **title**: Conduct brand compliance review
+- **description**: Review all existing marketing materials for brand compliance. Identify and fix any deviations. Create checklist for future material review
+- **inputs**: All marketing materials
+- **outputs**: Compliance report, remediation plan
+- **dependencies**: brand_guidelines_document
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: All materials compliant
+
+#### Task: brand_guidelines_distribution
+- **title**: Distribute brand guidelines to all stakeholders
+- **description**: Share brand guidelines with all team members, contractors, agencies, and partners who create on behalf of Mini-CRM. Track acknowledgment
+- **inputs**: Brand guidelines PDF, stakeholder list
+- **outputs**: All stakeholders received and acknowledged guidelines
+- **dependencies**: brand_guidelines_document
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: All stakeholders have guidelines, usage consistent

@@ -1295,4 +1295,1418 @@
 - **dependencies**: video_workflow_script_template
 - **priority**: medium
 - **estimated_complexity**: low
+- **agent_type**: video- **validation**: Thumbnails A/B tested; best performers identified and replicated
+
+#### Task: video_workflow_caption_process
+- **title**: Create video caption workflow
+- **description**: Set up caption creation: auto-generate via editing software, manually review and correct. Add captions to all videos (accessibility). French captions required; English optional.
+- **inputs**: Caption generation tool, French language review process, caption style guide
+- **outputs**: All videos have accurate French captions; turnaround under 1 hour
+- **dependencies**: video_workflow_editing_software
+- **priority**: high
+- **estimated_complexity**: low
 - **agent_type**: video
+- **validation**: Captions on 100% of videos; accuracy verified manually
+
+#### Task: video_workflow_file_naming
+- **title**: Establish file naming and organization system
+- **title**: Establish file naming and organization system
+- **description**: Create file naming convention: platform_date_topic_version.Example: IG_2024-01-15_invoice_tips_v1.mp4. Set up folder structure: Raw, Edited, Exported, Archive. Train team.
+- **inputs**: Naming convention, folder structure template, team training
+- **outputs**: Consistent file organization; 100% adherence to naming convention
+- **dependencies**: video_workflow_editing_software
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: video
+- **validation**: Files easily findable; no duplicate or lost files
+
+#### Task: video_workflow_upload_process
+- **title**: Create video upload process per platform
+- **description**: Document upload steps for each platform: title requirements, description templates, thumbnail specs, hashtag requirements, CTA placement. Checklist for each upload.
+- **inputs**: Platform requirements, upload checklists, description templates
+- **outputs**: Upload checklists per platform; uploads take under 10 minutes
+- **dependencies**: video_workflow_caption_process
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: video
+- **validation**: Upload process documented; consistent across all videos
+
+#### Task: video_workflow_batch_recording
+- **title**: Implement batch recording sessions
+- **description**: Record multiple videos in one session. Block 2-hour recording session weekly. Batch record: 10 TikToks, 5 Reels, 3 YouTube Shorts. Same setup, varied content.
+- **inputs**: Recording schedule, content list for batch, recording space
+- **outputs**: Weekly batch sessions produce 2+ weeks of video content
+- **dependencies**: video_workflow_equipment_setup
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: video
+- **validation**: Batch recording produces content efficiently; consistent quality
+
+#### Task: video_workflow_stock_footage
+- **title**: Build stock footage library
+- **description**: Subscribe to free stock footage (Pexels, Pixabay). Download relevant clips: job sites, tools, office work, teamwork. Organize by category. Use in videos as B-roll.
+- **inputs**: Stock footage sources, download tool, organization system
+- **outputs**: 100+ stock clips organized; used regularly in videos
+- **dependencies**: video_workflow_file_naming
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: video
+- **validation**: Stock footage library accessible; clips used in production
+
+#### Task: video_workflow_voiceover_setup
+- **title**: Set up voiceover recording capability
+- **description**: Configure microphone for voiceover: USB condenser mic or phone lavalier. Record in closet or treated space. Create voiceover scripts. Add to video workflow.
+- **inputs**: Microphone, recording space, voiceover script template
+- **outputs**: Voiceover capability ready; 10 test recordings completed
+- **dependencies**: video_workflow_equipment_setup
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: video
+- **validation**: Voiceover audio quality professional; integrated into workflow
+
+#### Task: video_workflow_music_library
+- **title**: Create music library for videos
+- **description**: Build royalty-free music library: upbeat, chill, dramatic, funny categories. Source from Artlist, Epidemic Sound (or free alternatives). Organize by mood/tempo. Use consistently.
+- **inputs**: Music subscription or free sources, organization system, mood categories
+- **outputs**: 50+ tracks organized by mood; used consistently in videos
+- **dependencies**: video_workflow_editing_software
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: video
+- **validation**: Music fits brand; audio copyright issues = 0
+
+#### Task: video_workflow_quality_control
+- **title**: Implement video quality control checklist
+- **description**: Create QC checklist: video quality (1080p+), audio clarity (no background noise), captions accurate, thumbnail meets specs, description complete, hashtags relevant.
+- **inputs**: QC checklist, quality standards, review process
+- **outputs**: 100% of videos pass QC before publishing
+- **dependencies**: video_workflow_upload_process
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: video
+- **validation**: No videos published with quality issues; checklist completed
+
+#### Task: video_workflow_version_control
+- **title**: Set up video version control
+- **description**: Track video versions: v1 draft, v2 revision, v3 final. Never overwrite originals. Keep edit history. Ability to revert to previous version if needed.
+- **inputs**: Version control system, file naming convention, backup process
+- **outputs**: Version history maintained; no work lost; easy rollback
+- **dependencies**: video_workflow_file_naming
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: video
+- **validation**: Version control system used; previous versions accessible
+
+#### Task: video_workflow_platform_optimization
+- **title**: Optimize videos per platform requirements
+- **description**: Create platform-specific versions: Instagram (1:1 or 4:5), TikTok (9:16), YouTube (16:9). Same content, optimized format. Use automated cropping tool where possible.
+- **inputs**: Platform specs, cropping tool, export presets
+- **outputs**: Each video adapted for all target platforms
+- **dependencies**: video_workflow_upload_process
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: video
+- **validation**: All platforms have optimized version; engagement consistent
+
+#### Task: video_workflow_analytics_integration
+- **title**: Connect video analytics to workflow
+- **description**: Track video performance across platforms: views, retention, engagement, shares. Use platform native analytics + spreadsheet tracker. Review weekly. Adjust content based on data.
+- **inputs**: Analytics tools, tracking spreadsheet, weekly review process
+- **outputs**: Video performance data tracked; insights inform future content
+- **dependencies**: video_workflow_upload_process
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: video
+- **validation**: Analytics reviewed weekly; data-driven decisions made
+
+---
+
+### Category: Caption & Copy Templates
+
+#### Task: caption_templates_instagram
+- **title**: Create Instagram caption templates
+- **description**: Create 10 reusable Instagram caption templates: Hook + Value + CTA format. Templates for: Tutorial, Quote, Question, Announcement, Testimonial, Behind-the-scenes, Tip, Product feature, Engagement, Resource share.
+- **inputs**: Caption format examples, brand voice guide, CTA library
+- **outputs**: 10 caption templates documented; used consistently across posts
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Templates used for all posts; engagement measurable per template
+
+#### Task: caption_templates_tiktok
+- **title**: Create TikTok caption templates
+- **description**: Create 5 TikTok caption templates optimized for short-form: punchy hooks, trending phrase usage, hashtag-optimized first lines. Keep under 150 characters.
+- **inputs**: Top-performing TikTok caption analysis, character limit guide
+- **outputs**: 5 caption templates; 30 TikToks using templates
+- **dependencies**: caption_templates_instagram
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Captions drive engagement; trending phrases tested
+
+#### Task: caption_templates_facebook
+- **title**: Create Facebook post caption templates
+- **description**: Create 8 Facebook caption templates: link post, image post, video post, poll post, question post, event post, user mention post, milestone post. Include formatting tips.
+- **inputs**: Facebook post examples, formatting guide, platform best practices
+- **outputs**: 8 templates ready; Facebook posts consistently formatted
+- **dependencies**: caption_templates_instagram
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Templates used; engagement tracked per type
+
+#### Task: caption_templates_linkedin
+- **title**: Create LinkedIn post templates
+- **description**: Create 8 LinkedIn templates: professional insight, company update, industry news, question post, success story, how-to, opinion piece, milestone celebration. Professional tone.
+- **inputs**: LinkedIn best practices, professional voice guide, industry examples
+- **outputs**: 8 LinkedIn templates; posts generate B2B engagement
+- **dependencies**: caption_templates_facebook
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Templates professional; engagement from target audience
+
+#### Task: caption_templates_youtube_shorts
+- **title**: Create YouTube Shorts description templates
+- **description**: Create YouTube Shorts description template: hook line, value proposition, keywords, timestamps, link to full video/blog. Optimize for YouTube search.
+- **inputs**: YouTube SEO guide, description examples, keyword list
+- **outputs**: Description template ready; 30 Shorts with optimized descriptions
+- **dependencies**: caption_templates_tiktok
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Shorts discoverable via YouTube search; CTR improved
+
+#### Task: caption_templates_story_text
+- **title**: Create Instagram Story text overlay templates
+- **description**: Design 15 Story text overlay templates in Canva: bold statements, step-by-step, countdown, poll question, quote, stat highlight. Consistent brand typography.
+- **inputs**: Story design templates, brand fonts, text overlay styles
+- **outputs**: 15 templates ready; Stories consistently designed
+- **dependencies**: caption_templates_instagram
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Story templates used; visual consistency achieved
+
+#### Task: caption_hook_library
+- **title**: Build caption hook library
+- **description**: Collect 50+ caption hooks that grab attention: questions, bold statements, numbers, controversial takes, relatable situations. Categorize by content type. Use as starting point.
+- **inputs**: Hook research, category definitions, hook performance data
+- **outputs**: Hook library with 50+ hooks; each hook categorized
+- **dependencies**: caption_templates_instagram
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Hook library used; hooks tested for engagement
+
+#### Task: caption_cta_library
+- **title**: Create CTA library for all platforms
+- **description**: Build library of 30 CTAs: follow, comment, share, save, click link, DM, sign up, download, watch more, subscribe. Categorize by platform and goal. Rotate CTAs to avoid repetition.
+- **inputs**: CTA performance data, platform guidelines, CTA variety research
+- **outputs**: 30 CTAs organized; used strategically across platforms
+- **dependencies**: caption_templates_instagram
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: CTAs tracked; best performers identified
+
+#### Task: caption_hashtag_template
+- **title**: Create hashtag set templates per content type
+- **description**: Create 10 hashtag sets for different content types: tutorial, behind-the-scenes, testimonial, product feature, engagement, seasonal, trade-specific, etc. Each set: 15–30 hashtags.
+- **inputs**: Hashtag research, performance data, content type categories
+- **outputs**: 10 hashtag sets ready; used per content type
+- **dependencies**: caption_templates_instagram
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Hashtag sets tested; performance tracked per set
+
+#### Task: caption_brand_voice_guide
+- **title**: Write brand voice guide for captions
+- **description**: Document brand voice for captions: practical, no BS, artisan-friendly. Include: tone examples, words to use, words to avoid, French colloquialisms, professional boundaries.
+- **inputs**: Brand guidelines, voice examples, artisan audience research
+- **outputs**: Brand voice guide complete; all creators trained
+- **dependencies**: caption_templates_instagram
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Voice consistent across all captions; guide followed
+
+#### Task: caption_length_guidelines
+- **title**: Define caption length per platform
+- **description**: Document ideal caption lengths: Instagram main: 150–300 chars, Instagram comment: 50–100 chars, TikTok: 100–150 chars, Facebook: 50–150 chars, LinkedIn: 150–300 chars. Train creators.
+- **inputs**: Platform algorithm data, engagement research, A/B test results
+- **outputs**: Length guidelines documented; applied to all content
+- **dependencies**: caption_brand_voice_guide
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Caption lengths optimized per platform; engagement improves
+
+#### Task: caption_emoji_usage_guide
+- **title**: Create emoji usage guide
+- **description**: Define emoji usage per platform: how many, which ones, placement. For Mini-CRM brand: use sparingly, 🔧⚡🛠️ for trades, ✅✔️ for checkmarks. Create approved emoji list.
+- **inputs**: Emoji research, brand guidelines, platform norms
+- **outputs**: Emoji guide created; usage consistent and on-brand
+- **dependencies**: caption_brand_voice_guide
+- **priority**: low
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Emoji usage on-brand; not over/under used
+
+#### Task: caption_localization_french
+- **title**: Ensure French language localization in all captions
+- **description**: Use proper French (not English with French accent). Include French expressions, proper grammar, appropriate formality per platform. Avoid direct English translations.
+- **inputs**: French language guide, native French speaker review, regional variations
+- **outputs**: All captions in proper French; localization consistent
+- **dependencies**: caption_brand_voice_guide
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: French native speakers confirm quality; no English bleed-through
+
+#### Task: caption_response_templates
+- **title**: Create comment/DM response templates
+- **description**: Build response templates for common comments and DMs: questions about product, pricing inquiries, technical support, positive feedback, negative feedback. Professional, helpful tone.
+- **inputs**: Common questions list, response tone guide, escalation procedures
+- **outputs**: 20+ response templates; response time under 1 hour
+- **dependencies**: caption_brand_voice_guide
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Responses consistent; quality maintained; no brand voice violations
+
+#### Task: caption_seasonal_variations
+- **title**: Create seasonal caption variations
+- **description**: Adapt caption tone and content for seasons: summer (lighter, vacation-themed), winter (year-end planning), spring (fresh starts), autumn (preparation). Keep core message, adjust framing.
+- **inputs**: Seasonal content plan, tone variations, cultural calendar
+- **outputs**: Seasonal templates ready for each quarter; content timely
+- **dependencies**: caption_templates_instagram
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Seasonal content relevant; audience responds positively
+
+---
+
+### Category: Hashtag Strategy (French Artisan Hashtags)
+
+#### Task: hashtag_research_primary_keywords
+- **title**: Research primary French artisan hashtags
+- **description**: Research top hashtags in French for artisan trades: #artisan, #plombier, #électricien, #menuisier, #btp, #construction, #travaux, #devis. Note follower counts and competition level.
+- **inputs**: Hashtag research tools, French trade publications, competitor analysis
+- **outputs**: List of 50+ primary hashtags with metrics
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Primary hashtag list complete; used in all relevant posts
+
+#### Task: hashtag_research_niche_keywords
+- **title**: Research niche French hashtags for CRM/business
+- **description**: Research niche hashtags: #gestionentreprise, #crm, #logiciel, #petiteentreprise, #artisanpme, #gestionclient, #suivicientreprise. Less competition, targeted audience.
+- **inputs**: Hashtag research tools, CRM industry terms, French business vocabulary
+- **outputs**: List of 30+ niche hashtags with metrics
+- **dependencies**: hashtag_research_primary_keywords
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Niche hashtags identified; used for targeted reach
+
+#### Task: hashtag_research_trending_french
+- **title**: Monitor trending French hashtags weekly
+- **description**: Weekly research of trending French hashtags relevant to artisans or business. Tools: Instagram explore, TikTok discover, Twitter trending. Adapt trending hashtags into content strategy.
+- **inputs**: Trending tools, weekly monitoring schedule, relevance assessment
+- **outputs**: Weekly trending report; 10+ trending hashtags adapted monthly
+- **dependencies**: hashtag_research_primary_keywords
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Trending hashtags integrated within 48 hours; reach increased
+
+#### Task: hashtag_sets_by_trade
+- **title**: Create hashtag sets for each artisan trade
+- **description**: Create specific hashtag sets for plumbing, electrical, carpentry. Each set: 5 primary + 5 niche + 5 trade-specific + 5 general. Example: #plombier, #plomberie, #dépannage, #installation, #sanitaire.
+- **inputs**: Trade-specific terminology, primary and niche hashtag lists
+- **outputs**: 3 trade-specific hashtag sets (20+ hashtags each)
+- **dependencies**: hashtag_research_primary_keywords, hashtag_research_niche_keywords
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Trade-specific hashtags used; engagement from targeted audience
+
+#### Task: hashtag_sets_by_content_type
+- **title**: Create hashtag sets by content type
+- **description**: Create hashtag sets by content type: tutorial hashtags, testimonial hashtags, behind-the-scenes hashtags, product feature hashtags, engagement hashtags. Different sets for different goals.
+- **inputs**: Content type analysis, hashtag performance by type
+- **outputs**: 5 content-type hashtag sets (15–20 hashtags each)
+- **dependencies**: hashtag_research_primary_keywords
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Content-type sets used appropriately; engagement tracked
+
+#### Task: hashtag_sets_seasonal
+- **title**: Create seasonal hashtag sets
+- **description**: Create seasonal hashtag sets: spring cleaning, summer schedule, autumn planning, winter tips. Update quarterly. Include seasonal French terms and event-specific hashtags.
+- **inputs**: Seasonal calendar, French seasonal vocabulary, event hashtags
+- **outputs**: 4 seasonal hashtag sets ready for quarterly use
+- **dependencies**: hashtag_research_primary_keywords
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Seasonal sets used when appropriate; timely content
+
+#### Task: hashtag_limit_guidelines
+- **title**: Define hashtag limits per platform
+- **description**: Document hashtag limits: Instagram: 30 max (use 15–25), TikTok: 3–5, Facebook: 3–5, LinkedIn: 3–5, YouTube: 3–5. Quality over quantity. Use most relevant first.
+- **inputs**: Platform guidelines, engagement research, best practices
+- **outputs**: Hashtag limit guidelines documented; applied consistently
+- **dependencies**: hashtag_research_primary_keywords
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: No platform limits exceeded; optimal number used per platform
+
+#### Task: hashtag_performance_tracking
+- **title**: Track hashtag performance monthly
+- **description**: Track performance of each hashtag used: reach, impressions, engagement. Identify top 10 performing hashtags. Double down on winners. Drop underperformers.
+- **inputs**: Platform analytics, hashtag tracking tool, performance spreadsheet
+- **outputs**: Monthly hashtag performance report; strategy adjusted based on data
+- **dependencies**: hashtag_sets_by_trade
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Top hashtags identified; strategy data-driven
+
+#### Task: hashtag_location_tagging
+- **title**: Implement location tagging strategy
+- **description**: Add location tags to relevant posts: city, region, France-wide. Test location-tagged vs non-location posts. Use for local targeting in French regions.
+- **inputs**: Location tag list, testing framework, regional targeting plan
+- **outputs**: Location strategy tested; engagement from local audience tracked
+- **dependencies**: hashtag_research_primary_keywords
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Location tags used where relevant; local engagement measurable
+
+#### Task: hashtag_brand_hashtag_creation
+- **title**: Create and promote brand hashtag
+- **description**: Create brand hashtag: #MiniCRMAuteurs or similar. Promote across all platforms. Encourage user-generated content with brand hashtag. Track brand hashtag usage.
+- **inputs**: Brand name, hashtag availability check, promotion plan
+- **outputs**: Brand hashtag created; used consistently; UGC tracked
+- **dependencies**: hashtag_research_primary_keywords
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Brand hashtag used across platforms; UGC with hashtag grows
+
+#### Task: hashtagCompetitor_analysis
+- **title**: Analyze competitor hashtag strategies
+- **description**: Identify 5 competitor artisan CRM/social accounts. Analyze their hashtag usage: which ones, how many, performance. Learn from their strategy. Find gaps to exploit.
+- **inputs**: Competitor accounts, hashtag analysis tools, comparison framework
+- **outputs**: Competitor analysis report; opportunities identified
+- **dependencies**: hashtag_research_primary_keywords
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Competitor insights applied; differentiation strategy clear
+
+#### Task: hashtag_mixing_strategy
+- **title**: Develop hashtag mixing strategy
+- **description**: Create formula for hashtag mix: 40% large hashtags + 40% medium + 20% niche. Balance reach and targeting. Rotate hashtags to avoid shadowban. Document mix formula.
+- **inputs**: Hashtag size categories, engagement data, mix formula research
+- **outputs**: Mixing formula documented; applied to all posts
+- **dependencies**: hashtag_performance_tracking
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Mix formula followed; reach and targeting balanced
+
+---
+
+### Category: Engagement & Community Management
+
+#### Task: engagement_response_time_target
+- **title**: Set and achieve response time targets
+- **description**: Target response times: Instagram DMs: 2 hours, Comments: 4 hours, Facebook: 2 hours, LinkedIn: 4 hours, WhatsApp: 1 hour. Use auto-responders for after hours. Track weekly.
+- **inputs**: Response time data, auto-responder setup, tracking system
+- **outputs**: Response times consistently met; customer satisfaction improves
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Response times measured weekly; targets achieved 90%+ of time
+
+#### Task: engagement_comment_strategy
+- **title**: Develop comment engagement strategy
+- **description**: Respond to all comments on own posts within 4 hours. Ask follow-up questions to drive conversation. Use first-name personalization. Like and heart comments from engaged followers.
+- **inputs**: Comment response templates, engagement guidelines, monitoring setup
+- **outputs**: 100% comment response rate; conversation depth increased
+- **dependencies**: engagement_response_time_target
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Comments answered quickly; conversation threads develop
+
+#### Task: engagement_dm_handling
+- **title**: Create DM handling workflow
+- **description**: Set up DM system: triage (sales, support, general), respond appropriately, escalate when needed. Use saved replies for common questions. Track DM metrics.
+- **inputs**: DM categories, saved replies, escalation contacts, tracking
+- **outputs**: DM response time under 2 hours; categorization accurate
+- **dependencies**: engagement_response_time_target
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: DMs handled efficiently; no messages lost; satisfaction high
+
+#### Task: engagement_community_guidelines
+- **title**: Create social media community guidelines
+- **description**: Write clear community guidelines: respect others, no spam, French language preferred, relevance required. Publish on all platforms. Enforce consistently. Update quarterly.
+- **inputs**: Guidelines template, brand values, enforcement policy
+- **outputs**: Guidelines published on all platforms; team trained on enforcement
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Guidelines accessible; enforcement consistent; no confusion
+
+#### Task: engagement_moderation_setup
+- **title**: Set up comment moderation
+- **description**: Enable comment moderation on all platforms. Hide/block offensive comments. Review spam reports. Keep community positive. Document moderation decisions.
+- **inputs**: Moderation settings, spam filter setup, decision documentation
+- **outputs**: Moderation active; spam-free comments; positive community
+- **dependencies**: engagement_community_guidelines
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: No spam visible; offensive comments removed; community safe
+
+#### Task: engagement_engagement_rate_tracking
+- **title**: Track engagement rate metrics weekly
+- **description**: Calculate engagement rate weekly: (total interactions / total reach) x 100. Track by platform, content type, and post format. Compare to industry benchmarks.
+- **inputs**: Platform analytics, engagement calculations, benchmark data
+- **outputs**: Weekly engagement rate reports; trends identified
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Engagement tracked weekly; declines addressed immediately
+
+#### Task: engagement_mention_monitoring
+- **title**: Set up brand mention monitoring
+- **description**: Monitor all brand mentions across platforms: tagged posts, unprompted mentions, competitor comparisons. Use notifications and third-party tools. Respond to all mentions.
+- **inputs**: Mention monitoring tools, notification setup, response guidelines
+- **outputs**: All mentions found and responded to within 24 hours
+- **dependencies**: engagement_response_time_target
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Mentions tracked; no mentions missed; relationships built
+
+#### Task: engagement_user_nurturing_sequence
+- **title**: Create user nurturing sequence
+- **description**: Design follow-up sequence for engaged users: comment → like → DM → offer value → soft sell. Track progression. Warm up cold leads through engagement.
+- **inputs**: Engagement data, nurturing flowchart, CRM integration
+- **outputs**: Nurturing sequence active; leads warmed through engagement
+- **dependencies**: engagement_comment_strategy
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Engaged users converted at measurable rate
+
+#### Task: engagement_loyal_follower_recognition
+- **title**: Recognize and reward loyal followers
+- **description**: Identify top 20 engaged followers per month. Give shoutouts, feature their content, offer early access to features. Build community loyalty. DM personal thanks.
+- **inputs**: Engagement data, recognition workflow, reward catalog
+- **outputs**: Monthly recognition program active; loyal followers retained
+- **dependencies**: engagement_engagement_rate_tracking
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Loyal followers feel valued; retention increases
+
+#### Task: engagement_poll_quiz_creation
+- **title**: Create regular polls and quizzes for engagement
+- **description**: Weekly polls on Instagram/Facebook: business opinions, tool preferences, trade challenges. Monthly quizzes: "Devinez le conseil" with correct answer revealed next day.
+- **inputs**: Poll/quiz templates, question bank, scheduling calendar
+- **outputs**: Weekly polls and monthly quizzes; engagement tracked
+- **dependencies**: engagement_engagement_rate_tracking
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Polls/quizzes drive engagement; participation increases
+
+#### Task: engagement_share_ask_strategy
+- **title**: Implement strategic share requests
+- **description**: Ask for shares strategically: after valuable tips, relatable content, or useful resources. "Partagez avec un artisan qui en a besoin." Track share rate per post.
+- **inputs**: Share request templates, timing guidelines, tracking system
+- **outputs**: Share requests used appropriately; share rate improves
+- **dependencies**: engagement_comment_strategy
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Shares tracked; content worth sharing identified
+
+#### Task: engagement_comment_analysis_monthly
+- **title**: Conduct monthly comment analysis
+- **description**: Monthly deep-dive into comments: topics discussed, questions asked, sentiment, suggestions. Use insights to inform content strategy. Share findings with team.
+- **inputs**: Comment data, analysis framework, reporting template
+- **outputs**: Monthly comment report; content strategy adjusted based on feedback
+- **dependencies**: engagement_mention_monitoring
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Comment insights applied; audience voice heard in strategy
+
+#### Task: engagement_competitor_monitoring
+- **title**: Monitor competitor engagement strategies
+- **description**: Weekly check competitor social accounts: what content gets engagement, how they respond to comments, community management style. Learn and adapt.
+- **inputs**: Competitor accounts list, monitoring schedule, comparison framework
+- **outputs**: Weekly competitor engagement report; best practices adopted
+- **dependencies**: engagement_engagement_rate_tracking
+- **priority**: low
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Competitor insights documented; strategy updated
+
+---
+
+### Category: Influencer/Artisan Ambassador Program
+
+#### Task: ambassador_program_outline
+- **title**: Define ambassador program structure
+- **description**: Create ambassador program: benefits (early access, recognition, affiliate links), expectations (post frequency, content quality, exclusivity), tiers (Bronze, Silver, Gold). Legal terms clear.
+- **inputs**: Program benefits, expectations, tier definitions, legal review
+- **outputs**: Ambassador program document ready; legal terms approved
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Program document complete; ambassadors understand terms
+
+#### Task: ambassador_outreach_list
+- **title**: Build artisan influencer outreach list
+- **description**: Research and list 50 potential artisan influencers across trades: plumbers, electricians, carpenters with 1K–50K followers on Instagram/TikTok. Note: engagement rate, content quality, audience fit.
+- **inputs**: Influencer research tools, trade associations, French artisan influencers
+- **outputs**: List of 50 influencers with contact info and metrics
+- **dependencies**: ambassador_program_outline
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Influencer list complete; outreach prioritized by fit
+
+#### Task: ambassador_outreach_sequence
+- **title**: Execute ambassador outreach sequence
+- **description**: Contact top 20 influencers via DM or email. Personalized pitch explaining program benefits. Follow up 3 times if no response. Track open rates and responses.
+- **inputs**: Outreach template, influencer list, follow-up sequence, tracking system
+- **outputs**: 20 outreach attempts; 5+ ambassadors onboarded
+- **dependencies**: ambassador_outreach_list
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Outreach tracked; response rate measured; ambassadors onboarded
+
+#### Task: ambassador_onboarding_process
+- **title**: Create ambassador onboarding process
+- **description**: Develop onboarding: welcome package (brand guidelines, content ideas, product access), onboarding call, first content assignment, payment/details setup. Smooth start.
+- **inputs**: Onboarding checklist, welcome materials, brand assets, access setup
+- **outputs**: Onboarding process documented; 5 ambassadors successfully onboarded
+- **dependencies**: ambassador_outreach_sequence
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Onboarding smooth; ambassadors produce first content within 2 weeks
+
+#### Task: ambassador_content_guidelines
+- **title**: Create ambassador content guidelines
+- **description**: Provide ambassadors with: content do's and don'ts, brand voice guide, product talking points, content approval workflow, posting frequency expectations, hashtag usage.
+- **inputs**: Brand guidelines, content examples, approval process
+- **outputs**: Content guidelines document; ambassadors trained
+- **dependencies**: ambassador_onboarding_process
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Guidelines clear; content from ambassadors on-brand
+
+#### Task: ambassador_content_approval_workflow
+- **title**: Set up content approval workflow
+- **description**: Create process for reviewing ambassador content before posting: ambassadors submit drafts, team reviews within 48 hours, feedback provided, content approved. Keep process smooth.
+- **inputs**: Submission process, review checklist, turnaround time target
+- **outputs**: Approval workflow active; 100% content reviewed before posting
+- **dependencies**: ambassador_content_guidelines
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: No unapproved content posted; turnaround under 48 hours
+
+#### Task: ambassador_compensation_structure
+- **title**: Define ambassador compensation structure
+- **description**: Set compensation: free product access, affiliate commission (10–20% recurring), one-time fee per post (€50–€500 based on follower count), brand ambassador badge. Track payments.
+- **inputs**: Compensation research, budget, affiliate system
+- **outputs**: Compensation structure clear; ambassadors paid on time
+- **dependencies**: ambassador_program_outline
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Compensation fair; ambassadors satisfied; budget managed
+
+#### Task: ambassador_content_tracking
+- **title**: Track ambassador content performance
+- **description**: Monitor ambassador posts: reach, engagement, follower growth, conversions. Share monthly performance report with ambassadors. Use data to improve program.
+- **inputs**: Analytics tools, ambassador tracking spreadsheet, reporting template
+- **outputs**: Monthly performance reports; ambassador ROI calculated
+- **dependencies**: ambassador_content_approval_workflow
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Performance tracked; ambassadors informed; ROI measured
+
+#### Task: ambassador_benefit_tiers
+- **title**: Implement ambassador tier upgrades
+- **description**: Create path for ambassadors to level up: Bronze (1 post/month), Silver (2 posts + story), Gold (3 posts + weekly story + feedback). Upgrade benefits and recognition. Review quarterly.
+- **inputs**: Tier definitions, upgrade criteria, recognition rewards
+- **outputs**: Tier system active; ambassadors motivated to upgrade
+- **dependencies**: ambassador_compensation_structure
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Tier upgrades happen; ambassadors progressing
+
+#### Task: ambassador_exclusivity_terms
+- **title**: Define ambassador exclusivity terms
+- **description**: Clarify exclusivity: non-competing CRM/tools allowed, competitor products prohibited during partnership term, competitor reviews forbidden. Legal clarity essential.
+- **inputs**: Legal review, competitor analysis, exclusivity terms
+- **outputs**: Exclusivity terms documented and signed; no conflicts
+- **dependencies**: ambassador_program_outline
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Exclusivity terms clear; no competitor conflicts arise
+
+#### Task: ambassador_long_term_relationships
+- **title**: Build long-term ambassador relationships
+-- **title**: Build long-term ambassador relationships
+- **description**: Move beyond transactional relationships. Personal outreach, birthday messages, early product access, input in product decisions. Make ambassadors feel like team, not just promoters.
+- **inputs**: Relationship tracking, personal outreach calendar, product roadmap
+- **outputs**: Long-term ambassadors retained; churn near zero
+- **dependencies**: ambassador_onboarding_process
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Ambassadors retained 12+ months; advocacy strong
+
+#### Task: ambassador_event_invitations
+- **title**: Invite ambassadors to industry events
+- **description**: Invite top ambassadors to industry events (trade shows, workshops). Provide VIP access or speaking opportunities. Build deeper relationship. Get event content from ambassadors.
+- **inputs**: Event calendar, invitation process, ambassador event role
+- **outputs**: Ambassadors invited to 2+ events per year; event content shared
+- **dependencies**: ambassador_benefit_tiers
+- **priority**: low
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Event attendance high; ambassadors feel valued
+
+#### Task: ambassador_testimonial_collection
+- **title**: Collect ambassador testimonials and reviews
+- **description**: Request written and video testimonials from ambassadors. Offer incentives. Use testimonials on website, social media, pitch decks. Collect ongoing.
+- **inputs**: Testimonial request template, video guidelines, incentive structure
+- **outputs**: 20+ testimonials collected (video and written); used across channels
+- **dependencies**: ambassador_onboarding_process
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Testimonials collected regularly; used in marketing
+
+#### Task: ambassador_program_review_quarterly
+- **title**: Conduct quarterly ambassador program review
+- **description**: Quarterly review: program ROI, ambassador satisfaction, content quality, churn analysis. Adjust program based on feedback. Share improvements with ambassadors.
+- **inputs**: Performance data, ambassador feedback surveys, program metrics
+- **outputs**: Quarterly review complete; program improvements implemented
+- **dependencies**: ambassador_content_tracking
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Reviews happen quarterly; program continuously improved
+
+---
+
+### Category: User-Generated Content (UGC) Strategy
+
+#### Task: ugc_strategy_document
+- **title**: Create UGC strategy document
+- **description**: Document UGC strategy: why we want it, what types we accept, how we use it, permissions required, credit process, incentives. Guide all UGC collection efforts.
+- **inputs**: UGC examples, legal requirements, brand guidelines
+- **outputs**: UGC strategy document approved; team aligned
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Strategy document complete; used consistently
+
+#### Task: ugc_content_themes
+- **title**: Define UGC content themes
+- **description**: Define specific UGC content types we want: testimonials, workflow demos, success stories, behind-the-scenes, trade tips. Create prompts for each theme. Share with community.
+- **inputs**: Theme brainstorm, audience research, content calendar alignment
+- **outputs**: 5 UGC themes defined with prompts; shared with community
+- **dependencies**: ugc_strategy_document
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Themes clear; prompts shared; submissions received
+
+#### Task: ugc_permission_template
+- **title**: Create UGC permission and usage template
+- **description**: Create legal permission form for UGC usage: grants permission to use content across platforms, confirms original creator, waives compensation (or defines compensation). French language.
+- **inputs**: Legal review, UGC usage terms, French legal requirements
+- **outputs**: Permission template ready; all UGC used with signed permission
+- **dependencies**: ugc_strategy_document
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: All UGC has permission; no legal issues
+
+#### Task: ugc_submission_cta
+- **title**: Create ongoing UGC submission CTA
+- **description**: Add "Tag us" or "Use hashtag" to all relevant posts. Create recurring posts asking for UGC: "Partagez votre expérience!" Include clear instructions for submission.
+- **inputs**: CTA templates, hashtag, submission instructions
+- **outputs**: UGC CTAs in rotation; submissions increase over time
+- **dependencies**: ugc_content_themes
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: UGC submissions tracked; volume increases
+
+#### Task: ugc_review_process
+- **title**: Set up UGC review process
+- **description**: Review all UGC submissions: quality check, brand fit, permission verification, editing if needed. Approve/reject within 48 hours. Maintain UGC folder organized by date.
+- **inputs**: UGC folder, review checklist, approval workflow
+- **outputs**: UGC reviewed within 48 hours; organized library maintained
+- **dependencies**: ugc_permission_template
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: UGC reviewed quickly; no approved UGC has issues
+
+#### Task: ugc_incentive_program
+- **title**: Create UGC incentive program
+- **description**: Incentivize UGC: feature on page, shoutout, discount code, small gift. Track incentive costs. Don't create expectation of payment; keep incentives meaningful but affordable.
+- **inputs**: Incentive ideas, budget, distribution process
+- **outputs**: Incentive program active; UGC volume increases 50%+
+- **dependencies**: ugc_submission_cta
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Incentives drive submissions; cost per UGC reasonable
+
+#### Task: ugc_feature_schedule
+- **title**: Schedule UGC features weekly
+- **description**: Feature one piece of UGC per week on main page. Rotate: this week testimonial, next week workflow demo. Share credit with creator. Engage with original post.
+- **inputs**: UGC library, feature calendar, credit templates
+- **outputs**: Weekly UGC features; engagement tracked; creators recognized
+- **dependencies**: ugc_review_process
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Weekly features happen; creators credited; engagement high
+
+#### Task: ugc_creative_guidelines
+- **title**: Provide UGC creative guidelines to users
+- **description**: Share tips with community: good lighting, clear audio, stable camera, show your screen/demo clearly. Help users create better content. Quality improves submissions.
+- **inputs**: Creative tips list, visual examples, tutorial content
+- **outputs**: Guidelines shared; UGC quality improves over time
+- **dependencies**: ugc_submission_cta
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Guidelines accessible; UGC quality improves
+
+#### Task: ugc_permission_follow_up
+- **title**: Follow up for UGC permissions
+- **title**: Follow up for UGC permissions
+- **description**: When UGC is submitted without permission, follow up within 24 hours. Send permission template. Explain benefits of being featured. Make it easy to say yes.
+- **inputs**: Permission template, follow-up message, tracking spreadsheet
+- **outputs**: Permission rate above 90%; no UGC used without permission
+- **dependencies**: ugc_permission_template
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Permission follow-up consistent; permission rate high
+
+#### Task: ugc_user_interview_process
+- **title**: Conduct user interviews for detailed UGC
+- **description**: Select engaged users for deeper interviews: 15-minute call about their experience. Record (with permission), transcribe, turn into case study or testimonial video.
+- **inputs**: Interview script, recording consent, transcription tool
+- **outputs**: 12 user interviews per year; content from each interview
+- **dependencies**: ugc_submission_cta
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Interviews scheduled; content created from each
+
+#### Task: ugc_content_transformation
+- **title**: Transform UGC into polished content
+- **description**: Take raw UGC submissions and transform into polished content: add graphics, music, captions, brand overlays. Make it look professional while keeping authentic feel.
+- **inputs**: Editing tools, brand overlays, UGC library
+- **outputs**: Transformed UGC posts; better quality than raw submissions
+- **dependencies**: ugc_review_process
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: video
+- **validation**: Transformed content performs well; authentic feel maintained
+
+#### Task: ugc_attribution_consistency
+- **title**: Ensure consistent UGC attribution
+- **description**: Always credit UGC creators: tag them, mention them, link to their profile. Use consistent attribution language. Never claim others' content as own.
+- **inputs**: Attribution templates, tagging process, credit language guide
+- **outputs**: 100% attribution rate; creators always credited
+- **dependencies**: ugc_feature_schedule
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Attribution consistent; no creator uncredited
+
+#### Task: ugc_metrics_tracking
+- **title**: Track UGC performance metrics
+- **description**: Track UGC post performance vs brand content: engagement, reach, conversions. Identify which UGC types perform best. Use data to guide future UGC requests.
+- **inputs**: Analytics tools, UGC tracking spreadsheet, performance benchmarks
+- **outputs**: UGC performance data; strategy adjusted based on results
+- **dependencies**: ugc_feature_schedule
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: UGC metrics tracked; best performers inform future content
+
+---
+
+### Category: Social Listening (What Artisans Are Saying Online)
+
+#### Task: listening_keywords_list
+- **title**: Define social listening keywords
+- **description**: Create list of keywords to monitor: brand name, competitor names, industry terms (CRM, gestion client, devis, factures), trade terms (plombier, électricien), pain points. 50+ keywords total.
+- **inputs**: Keyword brainstorm, competitor list, industry terms
+- **outputs**: Keyword list complete; organized by category
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Keyword list used in all listening tools
+
+#### Task: listening_tool_setup
+- **title**: Set up social listening tool
+- **description**: Configure social listening tool: Google Alerts (free), Mention (paid), or Brandwatch (enterprise). Set up keyword tracking, competitor monitoring, alerts for brand mentions.
+- **inputs**: Listening tool selection, tool setup, keyword input
+- **outputs**: Listening tool active; alerts flowing daily
+- **dependencies**: listening_keywords_list
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Alerts received daily; no significant mentions missed
+
+#### Task: listening_platform_coverage
+- **title**: Define listening coverage per platform
+- **description**: Specify what to listen for on each platform: Instagram (comments, mentions, stories), TikTok (mentions, comments), Facebook (groups, pages), LinkedIn (posts, comments), Twitter (mentions, hashtags).
+- **inputs**: Platform list, listening scope definition, monitoring setup
+- **outputs**: All platforms monitored; coverage documented
+- **dependencies**: listening_tool_setup
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Platform coverage complete; no blind spots
+
+#### Task: listening_sentiment_analysis
+- **title**: Conduct sentiment analysis on mentions
+- **description**: Classify brand mentions by sentiment: positive, neutral, negative. Track sentiment over time. Identify sudden negative sentiment spikes. Respond to negatives within 24 hours.
+- **inputs**: Mention data, sentiment classification guide, response workflow
+- **outputs**: Monthly sentiment report; negative mentions addressed quickly
+- **dependencies**: listening_platform_coverage
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Sentiment tracked; negative issues resolved quickly
+
+#### Task: listening_competitor_mentions
+- **title**: Monitor competitor mentions and sentiment
+- **description**: Track what people say about competitors. Identify: their pain points, complaints, praises. Use insights to differentiate Mini-CRM positioning.
+- **inputs**: Competitor list, listening tool, competitor analysis framework
+- **outputs**: Competitor mention report; insights documented monthly
+- **dependencies**: listening_tool_setup
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Competitor insights gathered; strategy informed
+
+#### Task: listening_industry_trends
+- **title**: Identify industry trends via listening
+- **description**: Monitor for emerging trends in artisan business management: new tools, regulation changes, market shifts. Catch trends early. Adapt content strategy accordingly.
+- **inputs**: Trend monitoring setup, industry sources, keyword alerts
+- **outputs**: Trend report monthly; content strategy adjusted
+- **dependencies**: listening_keywords_list
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Trends identified early; content timely
+
+#### Task: listening Pain Point Discovery
+- **title**: Discover artisan pain points via social listening
+- **description**: Analyze what artisans complain about online: invoicing problems, client management, time management. Find recurring themes. Use insights to create targeted content.
+- **inputs**: Pain point keywords, mention analysis, theme identification
+- **outputs**: Pain point report; content calendar updated with solutions
+- **dependencies**: listening_sentiment_analysis
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Pain points documented; content addresses real problems
+
+#### Task: listening_review_weekly
+- **title**: Conduct weekly social listening review
+- **description**: Weekly 30-minute review of all social listening data: important mentions, sentiment changes, trending topics, competitive intel. Document action items.
+- **inputs**: Listening dashboard, review template, action item tracker
+- **outputs**: Weekly review complete; action items assigned and tracked
+- **dependencies**: listening_tool_setup
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Reviews happen weekly; insights actioned
+
+#### Task: listening_influencer_identification
+- **title**: Identify influential voices in artisan space
+- **description**: Through listening, identify artisans and experts who have strong voice in the space. Note their opinions, influence level, potential for partnership.
+- **inputs**: Influence criteria, mention data, outreach prioritization
+- **outputs**: List of 20 influential voices; engagement strategy for each
+- **dependencies**: listening_platform_coverage
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Influential voices identified; relationships built
+
+#### Task: listening_alert_escalation
+- **title**: Set up alert escalation process
+- **description**: Define what triggers immediate escalation: viral negative post, PR crisis, legal issues, major partnership mention. Set up real-time alerts. Define response team and process.
+- **inputs**: Escalation criteria, alert setup, response team contacts
+- **outputs**: Escalation process documented; critical issues routed immediately
+- **dependencies**: listening_tool_setup
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Escalation works; critical issues handled immediately
+
+#### Task: listening_report_monthly
+- **title**: Create monthly social listening report
+- **description**: Compile monthly listening report: mention volume, sentiment trends, top pain points, competitive landscape, content opportunities. Share with team and leadership.
+- **inputs**: Monthly data, reporting template, distribution list
+- **outputs**: Monthly report; insights shared; actions tracked
+- **dependencies**: listening_review_weekly
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Reports generated monthly; insights drive decisions
+
+#### Task: listening_content_inspiration
+- **title**: Use listening data for content inspiration
+- **description**: Feed listening insights into content calendar: answer pain points, address complaints, jump on trends, engage with influencers. Close the loop from listening to content.
+- **inputs**: Listening insights, content calendar, ideation workflow
+- **outputs**: Content inspired by listening; engagement from relevance
+- **dependencies**: listening_pain_point_discovery
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Listening-informed content performs better
+
+---
+
+### Category: Content Templates (Canva, Figma)
+
+#### Task: template_canva_brand_setup
+- **title**: Set up Canva brand kit
+- **description**: Configure Canva brand kit: upload logo, define colors (hex codes), add fonts. Share brand kit with all team members. Ensure consistent use.
+- **inputs**: Logo file, brand colors, font files, team email list
+- **outputs**: Canva brand kit live; all creators have access
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Brand kit used by all; visual consistency
+
+#### Task: template_instagram_post_set
+- **title**: Create Instagram post template set (10 templates)
+- **description**: Create 10 Instagram post templates in Canva: quote, tip, list, before/after, testimonial, product feature, announcement, question, behind-the-scenes, seasonal. Consistent brand style.
+- **inputs**: Canva account, brand kit, post type definitions
+- **outputs**: 10 templates ready; used for all Instagram posts
+- **dependencies**: template_canva_brand_setup
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Templates used consistently; brand look cohesive
+
+#### Task: template_instagram_story_set
+- **title**: Create Instagram Story template set (15 templates)
+- **description**: Create 15 Story templates: poll, quiz, countdown, reveal, announcement, tip, quote, question, tutorial, behind-the-scenes, milestone, testimonial, FAQ, engagement, seasonal.
+- **inputs**: Canva, brand kit, Story format specs
+- **outputs**: 15 Story templates; Stories consistently designed
+- **dependencies**: template_canva_brand_setup
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Templates used; Stories visually consistent
+
+#### Task: template_instagram_carousel_set
+- **title**: Create Instagram carousel template set (5 templates)
+- **description**: Create 5 carousel templates: checklist, step-by-step, tips list, quote collection, before/after. Each with consistent intro and outro slides. Easy to customize.
+- **inputs**: Canva, brand kit, carousel format guide
+- **outputs**: 5 carousel templates; all carousels use templates
+- **dependencies**: template_instagram_post_set
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Carousels use templates; quality consistent
+
+#### Task: template_tiktok_thumbnail_set
+- **title**: Create TikTok thumbnail template set (5 templates)
+- **description**: Create 5 TikTok thumbnail templates: bold text, reaction, before/after, stat highlight, tip. High contrast, readable at small size. Consistent brand elements.
+- **inputs**: Canva, brand kit, TikTok thumbnail specs
+- **outputs**: 5 thumbnail templates; click-through rate tracked
+- **dependencies**: template_canva_brand_setup
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Thumbnails consistent; CTR measurable
+
+#### Task: template_facebook_cover_set
+- **title**: Create Facebook cover/template set (5 templates)
+- **description**: Create 5 Facebook post templates matching brand. Format: single image, link preview, video thumbnail. Include cover photo template.
+- **inputs**: Canva, brand kit, Facebook specs
+- **outputs**: 5 post templates + cover template; Facebook page consistent
+- **dependencies**: template_canva_brand_setup
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Facebook visuals consistent; templates used
+
+#### Task: template_linkedin_post_set
+- **title**: Create LinkedIn post template set (5 templates)
+- **description**: Create 5 LinkedIn post templates: insight, announcement, question, stat, quote. Professional style, brand consistent. Optimized for LinkedIn engagement.
+- **inputs**: Canva, brand kit, LinkedIn best practices
+- **outputs**: 5 LinkedIn templates; professional appearance
+- **dependencies**: template_canva_brand_setup
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: LinkedIn posts consistent; engagement professional
+
+#### Task: template_youtube_thumbnail_set
+- **title**: Create YouTube thumbnail template set (5 templates)
+- **description**: Create 5 YouTube thumbnail templates: bold text overlay, reaction, stat, tutorial, product feature. High contrast, brand colors, face-friendly (when applicable).
+- **inputs**: Canva, brand kit, YouTube thumbnail specs
+- **outputs**: 5 thumbnail templates; click-through rate improves
+- **dependencies**: template_canva_brand_setup
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Thumbnails consistent; CTR tracked
+
+#### Task: template_infographic_set
+- **title**: Create infographic template set (3 templates)
+- **description**: Create 3 infographic templates: feature comparison, how-it-works, statistics roundup. Brand consistent, shareable, downloadable (when relevant).
+- **inputs**: Canva, brand kit, infographic best practices
+- **outputs**: 3 infographic templates; used for educational content
+- **dependencies**: template_canva_brand_setup
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Infographics created; engagement tracked
+
+#### Task: template_document_resource_set
+- **title**: Create document/resource template set
+- **description**: Create templates for downloadable resources: checklist, guide cover, worksheet, workbook. Brand consistent. Include lead capture design elements.
+- **inputs**: Canva, brand kit, document specs
+- **outputs**: 5 document templates; lead magnets created
+- **dependencies**: template_canva_brand_setup
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Resources look professional; lead capture effective
+
+#### Task: template_presentation_set
+- **title**: Create presentation template set
+- **description**: Create 3 presentation templates: pitch deck, webinar deck, educational deck. Brand consistent. Include intro, content, conclusion slide layouts.
+- **inputs**: Canva or Figma, brand kit, presentation specs
+- **outputs**: 3 presentation templates; used for all presentations
+- **dependencies**: template_canva_brand_setup
+- **priority**: low
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Presentations consistent; brand polished
+
+#### Task: template_figma_component_library
+- **title**: Set up Figma component library
+- **description**: Create Figma component library for more complex design needs: social post components, web elements, ad components. Brand consistent. Share with team.
+- **inputs**: Figma account, brand assets, component structure
+- **outputs**: Figma library live; team trained on use
+- **dependencies**: template_canva_brand_setup
+- **priority**: low
+- **estimated_complexity**: high
+- **agent_type**: content
+- **validation**: Figma library used for complex designs
+
+#### Task: template_asset_organization
+- **title**: Organize template library for easy access
+- **description**: Organize all templates in shared folder: by platform, by type, by date. Name consistently. Create quick-start guide for template use. Train team.
+- **inputs**: Cloud storage (Google Drive, Dropbox), folder structure
+- **outputs**: Organized template library; all templates findable within 30 seconds
+- **dependencies**: template_canva_brand_setup
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Templates organized; no time wasted searching
+
+#### Task: template_update_quarterly
+- **title**: Update templates quarterly
+- **description**: Quarterly review of all templates: update any outdated elements, improve based on performance data, add new templates as needed. Keep fresh.
+- **inputs**: Performance data, template usage stats, design improvements
+- **outputs**: Templates updated quarterly; performance improved
+- **dependencies**: template_asset_organization
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Quarterly updates happen; templates improved
+
+---
+
+### Category: Analytics & Reporting (Per Platform)
+
+#### Task: analytics_dashboard_setup
+- **title**: Set up unified analytics dashboard
+- **description**: Create unified dashboard (Google Data Studio, Notion, or spreadsheet) pulling data from all platforms: Instagram, TikTok, YouTube, Facebook, LinkedIn. Include key metrics in one view.
+- **inputs**: Platform analytics access, dashboard tool, metric definitions
+- **outputs**: Live dashboard; updated weekly; all platforms visible
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: social
+- **validation**: Dashboard functional; all data flowing; accessible to team
+
+#### Task: analytics_kpi_definition
+- **title**: Define KPIs per platform
+- **description**: Define specific KPIs for each platform: Instagram (followers, reach, engagement rate, saves, shares), TikTok (views, engagement rate, followers), YouTube (views, watch time, subscribers), etc. Set targets.
+- **inputs**: Business goals, industry benchmarks, platform-specific metrics
+- **outputs**: KPI definitions complete; targets set per platform
+- **dependencies**: analytics_dashboard_setup
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: KPIs clear; targets set; progress measurable
+
+#### Task: analytics_weekly_reporting
+- **title**: Create weekly analytics report
+- **description**: Generate weekly report: key metrics per platform, week-over-week comparison, top performing content, bottom performing content, action items. Share with team.
+- **inputs**: Analytics data, reporting template, distribution list
+- **outputs**: Weekly reports generated; action items tracked
+- **dependencies**: analytics_kpi_definition
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Reports generated weekly; insights actioned
+
+#### Task: analytics_instagram_deep_dive
+- **title**: Conduct Instagram analytics deep dive
+- **description**: Monthly deep dive into Instagram: Reels vs feed vs Stories performance, hashtag effectiveness, best posting times, follower growth trends, audience demographics.
+- **inputs**: Instagram Insights, analytics template, historical data
+- **outputs**: Instagram monthly report; strategy recommendations
+- **dependencies**: analytics_weekly_reporting
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Insights inform Instagram strategy; improvements documented
+
+#### Task: analytics_tiktok_deep_dive
+- **title**: Conduct TikTok analytics deep dive
+- **description**: Monthly deep dive: video views, completion rate, trending sound performance, follower growth, duet/stitch engagement, audience retention by video.
+- **inputs**: TikTok Analytics, analytics template, content inventory
+- **outputs**: TikTok monthly report; content optimized
+- **dependencies**: analytics_weekly_reporting
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: TikTok strategy data-driven; videos improved
+
+#### Task: analytics_youtube_shorts_deep_dive
+- **title**: Conduct YouTube Shorts analytics deep dive
+- **description**: Monthly deep dive: views, click-through rate, retention, subscriber growth from Shorts, search discoverability, comparison to long-form content.
+- **inputs**: YouTube Analytics, analytics template, comparison data
+- **outputs**: YouTube Shorts monthly report; optimization applied
+- **dependencies**: analytics_weekly_reporting
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: YouTube Shorts performance tracked; strategy optimized
+
+#### Task: analytics_facebook_deep_dive
+- **title**: Conduct Facebook analytics deep dive
+- **description**: Monthly deep dive: page engagement, post reach, follower growth, group activity, video views, link clicks, page vs group performance comparison.
+- **inputs**: Facebook Insights, analytics template, page vs group data
+- **outputs**: Facebook monthly report; strategy adjusted
+- **dependencies**: analytics_weekly_reporting
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Facebook insights applied; performance improves
+
+#### Task: analytics_linkedin_deep_dive
+- **title**: Conduct LinkedIn analytics deep dive
+- **description**: Monthly deep dive: follower growth, post engagement, article views, connection requests, content type performance, B2B lead generation metrics.
+- **inputs**: LinkedIn Analytics, analytics template, lead tracking
+- **outputs**: LinkedIn monthly report; B2B strategy refined
+- **dependencies**: analytics_weekly_reporting
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: LinkedIn strategy refined; B2B results improving
+
+#### Task: analytics_whatsapp_tracking
+- **title**: Track WhatsApp Business metrics
+- **description**: Track WhatsApp metrics: message open rate, response time, broadcast open rate, community engagement, lead qualification rate. Use WhatsApp Business dashboard.
+- **inputs**: WhatsApp Business dashboard, tracking spreadsheet
+- **outputs**: WhatsApp metrics tracked; community growth measured
+- **dependencies**: analytics_dashboard_setup
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: WhatsApp metrics visible; improvements made
+
+#### Task: analytics_content_performance_scoring
+- **title**: Create content performance scoring system
+- **description**: Develop scoring system: rate content by engagement, reach, saves, shares, comments, conversions. Calculate content score. Identify patterns in high-performing content.
+- **inputs**: Performance data, scoring rubric, pattern analysis
+- **outputs**: Scoring system implemented; top content patterns identified
+- **dependencies**: analytics_weekly_reporting
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Content scored consistently; patterns inform creation
+
+#### Task: analytics_cross_platform_comparison
+- **title**: Compare performance across platforms
+- **description**: Quarterly comparison: which platforms drive most engagement, leads, conversions. Calculate ROI per platform. Adjust resource allocation accordingly.
+- **inputs**: Cross-platform data, attribution data, resource allocation
+- **outputs**: Platform comparison report; budget/time reallocated
+- **dependencies**: analytics_dashboard_setup
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Best platforms identified; resources optimized
+
+#### Task: analytics_monthly_executive_report
+- **title**: Create monthly executive summary report
+- **description**: Create monthly executive report: high-level metrics, wins, challenges, recommendations. Present to leadership. Include: follower growth, engagement, leads generated, content highlights.
+- **inputs**: Monthly data, executive template, presentation skills
+- **outputs**: Monthly executive report; leadership informed
+- **dependencies**: analytics_weekly_reporting
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Reports created monthly; leadership engagement
+
+#### Task: analytics_roi_calculation
+- **title**: Calculate social media ROI
+- **description**: Calculate return on investment: cost of resources vs leads generated, conversions, revenue attributed to social. Even with zero budget, time has cost.
+- **inputs**: Cost data, conversion data, revenue attribution
+- **outputs**: ROI calculated; social value justified
+- **dependencies**: analytics_cross_platform_comparison
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: social
+- **validation**: ROI positive or negative; strategy adjusted accordingly
+
+#### Task: analytics_ab_test_tracking
+- **title**: Track A/B test results
+- **description**: Track all A/B tests: thumbnail vs thumbnail, caption vs caption, posting time vs posting time. Document what won. Build test library for future reference.
+- **inputs**: A/B test data, winning criteria, documentation template
+- **outputs**: Test library with 20+ tests; learnings applied
+- **dependencies**: analytics_content_performance_scoring
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Tests tracked; learnings applied to future content
+
+#### Task: analytics_competitor_benchmarking
+- **title**: Benchmark against competitor performance
+- **description**: Track competitor metrics where available: follower counts, engagement rates, posting frequency. Benchmark Mini-CRM performance vs competitors. Identify gaps to close.
+- **inputs**: Competitor data, benchmarking framework, gap analysis
+- **outputs**: Competitor benchmark report; gap closing strategy
+- **dependencies**: analytics_cross_platform_comparison
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Competitors tracked; gaps identified; strategy adjusted
+
+#### Task: analytics_goal_tracking
+- **title**: Track progress against social media goals
+- **description**: Quarterly review of progress against stated social media goals. Are we on track? What's falling behind? What needs to change? Document decisions.
+- **inputs**: Goals document, progress data, quarterly timeline
+- **outputs**: Quarterly goal review; strategy adjusted if needed
+- **dependencies**: analytics_kpi_definition
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Goals reviewed quarterly; progress on track
+
+---
+
+### Category: Cross-Platform Content Repurposing
+
+#### Task: repurposing_content_atoms
+- **title**: Break content into content atoms
+- **description**: Take each piece of content and identify "atoms": single ideas, tips, quotes, stats. Each atom can become its own piece of content on another platform. Create atom library.
+- **inputs**: Content inventory, atomization process, storage system
+- **outputs**: Atom library with 100+ atoms; each can become standalone content
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Atoms extracted from all content; library organized
+
+#### Task: repurposing_workflow_documentation
+- **title**: Document repurposing workflow
+- **description**: Document how content flows: YouTube Long → YouTube Shorts + LinkedIn article + Instagram Reels + Twitter thread + TikTok. Create templates for each transformation.
+- **inputs**: Content mapping, transformation templates, workflow tools
+- **outputs**: Workflow documented; team trained; efficiency measured
+- **dependencies**: repurposing_content_atoms
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Workflow followed; content repurposed consistently
+
+#### Task: repurposing_youtube_to_shorts
+- **title**: Create YouTube-to-Shorts repurposing process
+- **description**: Take YouTube long-form videos: identify best 30-second segments, add new hook for Shorts, repurpose to YouTube Shorts, Instagram Reels, TikTok. Track performance.
+- **inputs**: YouTube video library, repurposing templates, hook formula
+- **outputs**: 30 videos repurposed into 90+ Shorts; performance tracked
+- **dependencies**: repurposing_workflow_documentation
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: video
+- **validation**: YouTube content repurposed to Shorts; views multiplied
+
+#### Task: repurposing_linkedin_to_instagram
+- **title**: Create LinkedIn-to-Instagram repurposing process
+- **description**: Turn LinkedIn articles into Instagram carousels: extract key points, create visual slides, adapt professional tone to engaging Instagram style. Add French hashtags.
+- **inputs**: LinkedIn article content, carousel template, Instagram adaptation guide
+- **outputs**: 24 articles repurposed into Instagram carousels
+- **dependencies**: repurposing_workflow_documentation
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: LinkedIn content reaches Instagram audience
+
+#### Task: repurposing_tiktok_to_youtube
+- **title**: Create TikTok-to-YouTube repurposing process
+- **description**: Combine TikTok videos into YouTube compilation: "Top 10 TikToks of the week" or compile best TikToks on a topic into longer YouTube video. Add intro/outro.
+- **inputs**: TikTok video library, compilation template, YouTube strategy
+- **outputs**: TikTok content compiled into 12 YouTube videos
+- **dependencies**: repurposing_workflow_documentation
+- **priority**: low
+- **estimated_complexity**: medium
+- **agent_type**: video
+- **validation**: TikTok content

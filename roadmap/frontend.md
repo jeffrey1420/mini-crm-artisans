@@ -682,4 +682,713 @@ Build a mobile-first PWA frontend for a Mini-CRM targeting French solo artisans 
 
 #### Task: FE-204
 - **title**: Implement mobile swipe gestures for navigation
-- **
+- **description**: Use VueUse `useSwipe` composable to implement swipe-back gesture on iOS (swipe from left edge to go back). Also implement swipe between tabs. Ensure gestures don't conflict with scroll content.
+- **inputs**: VueUse composables
+- **outputs**: Swipe gesture navigation
+- **dependencies**: [FE-007, FE-202]
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: frontend
+- **validation**: Swipe-back navigates to previous page, doesn't conflict with list scrolling
+
+#### Task: FE-205
+- **title**: Create sidebar navigation for desktop (md+ breakpoint)
+- **description**: Transform bottom nav into left sidebar on desktop (min-width: 768px). Sidebar shows full labels and larger icons. Collapsible to icon-only mode. Top section for logo/business name, bottom for settings.
+- **inputs**: Design tokens, CSS media queries
+- **outputs**: Responsive sidebar for desktop
+- **dependencies**: [FE-201]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: frontend
+- **validation**: Sidebar visible on desktop, collapses to icons, bottom nav hidden
+
+#### Task: FE-206
+- **title**: Create page transition animations
+- **description**: Implement smooth page transitions using Vue Transition component. Configure different transitions for forward/back navigation (slide left/right). Configure fade transition for modal-like pages.
+- **inputs**: Vue Transition, CSS animations
+- **outputs**: Page transitions
+- **dependencies**: [FE-012]
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: frontend
+- **validation**: Pages slide smoothly, no flash of unstyled content
+
+#### Task: FE-207
+- **title**: Implement scroll behavior and sticky headers
+- **description**: Configure Vue Router scroll behavior to remember scroll position per route. Make page headers sticky on scroll with shadow appearing when scrolled. Use Intersection Observer for header shadow.
+- **inputs**: Vue Router config
+- **outputs**: Scroll behavior with sticky headers
+- **dependencies**: [FE-203]
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: frontend
+- **validation**: Scroll position restored on back navigation, header shows shadow when scrolled
+
+#### Task: FE-208
+- **title**: Create FAB (Floating Action Button) component
+- **description**: Create `FloatingActionButton` positioned bottom-right (above bottom nav on mobile). Primary action per context: "+" on contacts list, "+" on jobs list, "+" on invoices. Animate in on mount. Support expanded state with sub-actions.
+- **inputs**: Design tokens
+- **outputs**: FAB component
+- **dependencies**: [FE-201]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: frontend
+- **validation**: FAB visible above bottom nav, animates on mount, primary action works
+
+#### Task: FE-209
+- **title**: Implement tab bar badge/notification indicators
+- **description**: Add badge indicators to bottom nav tabs showing counts (e.g., unread notifications on dashboard). Use `<BaseBadge>` with small dot or count. Support dynamic count updates via Pinia store.
+- **inputs**: BaseBadge, Pinia stores
+- **outputs**: Badge indicators on nav tabs
+- **dependencies**: [FE-107, FE-201, FE-004]
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: frontend
+- **validation**: Badges appear with correct counts, update when data changes
+
+#### Task: FE-210
+- **title**: Create pull-to-refresh functionality
+- **description**: Implement pull-to-refresh on list screens (contacts, jobs, invoices) using Touch events and VueUse `useSwipe`. Show spinner at top while refreshing. Haptic feedback on mobile (if supported).
+- **inputs**: VueUse, Touch events
+- **outputs**: Pull-to-refresh on list screens
+- **dependencies**: [FE-007]
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: frontend
+- **validation**: Pull gesture triggers refresh, spinner shows, content reloads
+
+#### Task: FE-211
+- **title**: Create breadcrumb navigation for nested pages
+- **description**: Implement breadcrumb trail for nested routes (e.g., Dashboard > Contacts > John Doe > Edit). Render as clickable links above page content. Hide on top-level pages.
+- **inputs**: Vue Router, design tokens
+- **outputs**: Breadcrumb component
+- **dependencies**: [FE-203]
+- **priority**: low
+- **estimated_complexity**: low
+- **agent_type**: frontend
+- **validation**: Breadcrumbs show correct hierarchy, links navigate correctly
+
+#### Task: FE-212
+- **title**: Implement keyboard navigation (Tab, Enter, Escape)
+- **description**: Ensure full keyboard navigability throughout the app. Tab order should follow visual order. Enter activates buttons/links. Escape closes modals/dropdowns. Visible focus rings on all interactive elements.
+- **inputs**: a11y requirements
+- **outputs**: Full keyboard navigation support
+- **dependencies**: [FE-108, FE-111]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: frontend
+- **validation**: All interactions achievable via keyboard, focus visible at all times
+
+#### Task: FE-213
+- **title**: Create mobile keyboard-aware layout adjustments
+- **description**: Detect mobile keyboard open via `visualViewport` API. Adjust layout to keep focused input visible above keyboard. Scroll content into view automatically.
+- **inputs**: VisualViewport API
+- **outputs**: Keyboard-aware layout
+- **dependencies**: [FE-102]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: frontend
+- **validation**: Input stays visible when keyboard opens on mobile
+
+#### Task: FE-214
+- **title**: Implement skeleton loading for all data-fetching screens
+- **description**: Wrap all list screens and detail screens with skeleton loaders while data fetches. Use skeleton components from FE-112. Show skeletons for minimum 300ms to prevent flash.
+- **inputs**: Skeleton components, data fetching composables
+- **outputs**: Skeleton loaders on all data screens
+- **dependencies**: [FE-112, FE-015]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: frontend
+- **validation**: Skeletons display while loading, real content replaces after load
+
+#### Task: FE-215
+- **title**: Create layout for form pages
+- **description**: Create a dedicated form layout `FormLayout.vue` with consistent spacing for all create/edit forms. Center content on desktop, full-width on mobile. Include cancel/submit button footer area.
+- **inputs**: Design tokens
+- **outputs**: Reusable form layout
+- **dependencies**: [FE-018]
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: frontend
+- **validation**: Forms use consistent layout, buttons at bottom, proper spacing
+
+#### Task: FE-216
+- **title**: Implement responsive grid for desktop data tables
+- **description**: Transform list views from stacked mobile cards to table grid on desktop (lg+). Columns: name, status, date, amount. Sortable columns. Sticky header row.
+- **inputs**: Design tokens, Vue table library or custom
+- **outputs**: Responsive data table
+- **dependencies**: [FE-205]
+- **priority**: medium
+- **estimated_complexity**: high
+- **agent_type**: frontend
+- **validation**: Tables display on desktop, cards on mobile, same data source
+
+#### Task: FE-217
+- **title**: Create print-specific stylesheet
+- **description**: Create `print.css` with styles for printing invoices and job details. Hide navigation, simplify layout, black text on white background. Optimize for A4 paper.
+- **inputs**: Print media queries
+- **outputs**: Print stylesheet
+- **dependencies**: [FE-018]
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: frontend
+- **validation**: Print preview shows clean layout, no nav elements
+
+---
+
+### Category: Authentication UI (login, register, password reset)
+
+#### Task: FE-301
+- **title**: Create login page with email/password form
+- **description**: Build `/login` page with email and password fields, login button, "Mot de passe oublié?" (forgot password) link, and "Créer un compte" (create account) link. Form validation: email required/format, password required (min 8 chars). Show loading state on submit. Redirect to /dashboard on success.
+- **inputs**: Design system components, auth store
+- **outputs**: Login page
+- **dependencies**: [FE-101, FE-102, FE-004]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: frontend
+- **validation**: Form validates, submits to API, redirects on success, shows errors
+
+#### Task: FE-302
+- **title**: Create registration page
+- **description**: Build `/register` page with full name, email, password, and confirm password fields. Show password strength indicator. Terms of service checkbox (required). "Déjà un compte?" (already have account) link. Redirect to onboarding on success.
+- **inputs**: Design system components, auth store
+- **outputs**: Registration page
+- **dependencies**: [FE-101, FE-102, FE-004]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: frontend
+- **validation**: Form validates, passwords match, submits, redirects to onboarding
+
+#### Task: FE-303
+- **title**: Create password reset request page
+- **description**: Build `/forgot-password` page with email field only. Show success message after submission ("Email envoyé"). Include "Retour à la connexion" (back to login) link.
+- **inputs**: Design system components
+- **outputs**: Password reset request page
+- **dependencies**: [FE-101, FE-102]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: frontend
+- **validation**: Email validates, success message shows after submit
+
+#### Task: FE-304
+- **title**: Create password reset new password page
+- **description**: Build `/reset-password` page (accessed via email link) with new password and confirm password fields. Extract token from URL query params. Show success and redirect to login after reset.
+- **inputs**: Design system components, auth store
+- **outputs**: Password reset new password page
+- **dependencies**: [FE-101, FE-102]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: frontend
+- **validation**: Token extracted from URL, form submits, redirects to login
+
+#### Task: FE-305
+- **title**: Implement auth store with login/logout/register actions
+- **description**: Create Pinia `useAuthStore` with user state, login(), logout(), register(), forgotPassword(), resetPassword() actions. Persist auth token to localStorage. Include currentUser getter. Handle token expiration.
+- **inputs**: Pinia, auth API composable
+- **outputs**: Auth store with full auth logic
+- **dependencies**: [FE-004, FE-015]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: frontend
+- **validation**: Auth state persists across page reloads, logout clears state
+
+#### Task: FE-306
+- **title**: Create route middleware for auth protection
+- **description**: Create `middleware/auth.ts` that redirects unauthenticated users to /login. Create `middleware/guest.ts` that redirects authenticated users away from /login. Apply to appropriate routes in nuxt.config.
+- **inputs**: Nuxt route middleware
+- **outputs**: Auth guard middleware
+- **dependencies**: [FE-013, FE-305]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: frontend
+- **validation**: Unauthenticated user redirected to login, authenticated user can't visit login
+
+#### Task: FE-307
+- **title**: Implement "Remember me" functionality
+- **description**: Add "Se souvenir de moi" checkbox to login form. When checked, use persistent localStorage token. When unchecked, use session-only token that clears on browser close.
+- **inputs**: Auth store, localStorage
+- **outputs**: Remember me functionality
+- **dependencies**: [FE-305]
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: frontend
+- **validation**: Checkbox checked = token persists across browser close, unchecked = clears
+
+#### Task: FE-308
+- **title**: Create auth layout with centered card
+- **description**: Build `layouts/auth.vue` with centered white card on brand-colored background. Include logo at top of card. Remove bottom nav. Minimal header with "Retour" link.
+- **inputs**: Design tokens
+- **outputs**: Auth layout
+- **dependencies**: [FE-013]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: frontend
+- **validation**: Login/register pages centered, branded, mobile-friendly
+
+#### Task: FE-309
+- **title**: Implement session timeout warning
+- **description**: When auth token near expiration (5 min before), show toast warning "Session expirera dans X minutes". Offer "Rester connecté" button to extend session. Auto-logout when expired.
+- **inputs**: Auth store, token expiry logic
+- **outputs**: Session timeout warning
+- **dependencies**: [FE-305, FE-109]
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: frontend
+- **validation**: Warning appears before expiry, extend button works, auto-logout at expiry
+
+#### Task: FE-310
+- **title**: Create social login buttons (Google, Apple)
+- **description**: Add "Se connecter avec Google" and "Se connecter avec Apple" buttons to login page. Implement OAuth flow. Show buttons below primary form divider "ou".
+- **inputs**: OAuth config, design tokens
+- **outputs**: Social login buttons
+- **dependencies**: [FE-301]
+- **priority**: low
+- **estimated_complexity**: high
+- **agent_type**: fullstack
+- **validation**: Social buttons render, OAuth flow initiates, user created on callback
+
+#### Task: FE-311
+- **title**: Implement logout confirmation dialog
+- **description**: When user taps logout, show confirmation dialog "Êtes-vous sûr de vouloir vous déconnecter?" with "Se déconnecter" (danger) and "Annuler" buttons.
+- **inputs**: ConfirmDialog, auth store
+- **outputs**: Logout confirmation
+- **dependencies**: [FE-121, FE-305]
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: frontend
+- **validation**: Confirmation shows before logout, cancel returns to app
+
+---
+
+### Category: Dashboard Screen
+
+#### Task: FE-401
+- **title**: Create Dashboard page with KPI cards
+- **description**: Build `/dashboard` page displaying 4 StatCards: "Travaux en cours" (jobs in progress), "Devis en attente" (pending quotes), "Factures à envoyer" (invoices to send), "Revenus du mois" (monthly revenue). Each card shows value, trend, and comparison to last month.
+- **inputs**: StatCard component, dashboard store
+- **outputs**: Dashboard with KPI cards
+- **dependencies**: [FE-122, FE-004]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: frontend
+- **validation**: Dashboard loads with 4 stat cards, values animate on load
+
+#### Task: FE-402
+- **title**: Create recent activity feed on Dashboard
+- **description**: Build "Activité récente" section showing last 10 activities (new contact added, job status changed, invoice sent). Each item shows icon, description, timestamp. Click navigates to relevant item.
+- **inputs**: Activity types, timeline design
+- **outputs**: Recent activity feed
+- **dependencies**: [FE-130]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: frontend
+- **validation**: Activity feed shows recent items, timestamps relative (il y a 2h)
+
+#### Task: FE-403
+- **title**: Create Quick Actions section on Dashboard
+- **description**: Build "Actions rapides" section with 4 buttons: "Nouveau contact" (new contact), "Nouveau devis" (new quote), "Nouvelle facture" (new invoice), "Voir les travaux" (view jobs). Grid layout, icons + labels.
+- **inputs**: Design tokens, navigation
+- **outputs**: Quick actions section
+- **dependencies**: [FE-101, FE-130]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: frontend
+- **validation**: Quick actions navigate to correct pages, icons display
+
+#### Task: FE-404
+- **title**: Create "Upcoming jobs" widget
+- **description**: Build "Travaux à venir" widget showing next 3 scheduled jobs with date, client name, job type, and status badge. "Voir tout" (see all) link to jobs list filtered by upcoming.
+- **inputs**: Jobs store, card component
+- **outputs**: Upcoming jobs widget
+- **dependencies**: [FE-106, FE-107]
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: frontend
+- **validation**: Shows next 3 jobs with correct dates, link filters jobs list
+
+#### Task: FE-405
+- **title**: Create Dashboard for pricing tier gating
+- **description**: Show upgrade prompt on Dashboard when user is on Basic tier trying to access Pro features (e.g., more than 10 contacts). Use `<UpgradePrompt>` component with tier comparison.
+- **inputs**: App config, user tier
+- **outputs**: Tier-gated dashboard
+- **dependencies**: [FE-010, FE-004]
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: frontend
+- **validation**: Upgrade prompt appears when hitting tier limits
+
+#### Task: FE-406
+- **title**: Create Dashboard refresh on pull-to-refresh
+- **description**: Add pull-to-refresh (FE-210) to Dashboard. Trigger dashboard data re-fetch. Show loading spinner at top while refreshing.
+- **inputs**: Pull-to-refresh implementation
+- **outputs**: Dashboard refresh on pull
+- **dependencies**: [FE-210]
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: frontend
+- **validation**: Pull-to-refresh works on Dashboard, data updates
+
+#### Task: FE-407
+- **title**: Implement Dashboard period selector
+- **description**: Add period selector (Ce mois / Ce trimestre / Cette année) to Dashboard. KPIs and charts update based on selected period. Persist selection to localStorage.
+- **inputs**: Period selector, date filtering
+- **outputs**: Period selector on Dashboard
+- **dependencies**: [FE-104]
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: frontend
+- **validation**: Selector changes period, KPIs update, selection persists
+
+#### Task: FE-408
+- **title**: Create revenue chart on Dashboard
+- **description**: Build SVG or canvas-based line chart showing revenue over selected period. Use chart library (Chart.js or similar). Show monthly data points, tooltips on hover/tap. Responsive sizing.
+- **inputs**: Chart library, revenue data
+- **outputs**: Revenue chart
+- **dependencies**: [FE-407]
+- **priority**: medium
+- **estimated_complexity**: high
+- **agent_type**: frontend
+- **validation**: Chart renders with data, tooltips work, responsive
+
+#### Task: FE-409
+- **title**: Create Dashboard skeleton loading state
+- **description**: Show skeleton loaders (FE-112) on Dashboard while data fetches. Skeletons for stat cards (4), activity feed (3 items), quick actions (4 items), upcoming jobs (3 items).
+- **inputs**: Skeleton components
+- **outputs**: Dashboard skeleton loaders
+- **dependencies**: [FE-112]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: frontend
+- **validation**: Skeletons display while loading, real content replaces
+
+#### Task: FE-410
+- **title**: Create empty Dashboard state for new users
+- **description**: When user has no data yet, show welcoming empty state with illustration, "Bienvenue sur [AppName]!" message, and prominent "Créer votre premier client" button.
+- **inputs**: EmptyState component
+- **outputs**: New user Dashboard empty state
+- **dependencies**: [FE-120]
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: frontend
+- **validation**: Empty state shows for new users, CTA navigates to create contact
+
+#### Task: FE-411
+- **title**: Implement offline Dashboard display
+- **description**: Cache Dashboard data in localStorage via service worker. When offline, show last cached data with "Hors ligne" banner. Show timestamp of last update.
+- **inputs**: Offline composable, localStorage cache
+- **outputs**: Offline Dashboard
+- **dependencies**: [FE-701]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: frontend
+- **validation**: Offline shows cached data, banner indicates offline status
+
+---
+
+### Category: Contacts Screen (list, detail, add/edit)
+
+#### Task: FE-501
+- **title**: Create Contacts list page with search
+- **description**: Build `/contacts` page with search bar at top (FE-116), sorted alphabetically by name. Show contact cards with avatar, name, phone, last job date. Pull-to-refresh enabled. Infinite scroll for pagination.
+- **inputs**: Contacts store, list components
+- **outputs**: Contacts list page
+- **dependencies**: [FE-004, FE-116, FE-131]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: frontend
+- **validation**: Contacts list renders, search filters, infinite scroll works
+
+#### Task: FE-502
+- **title**: Create Contact detail page
+- **description**: Build `/contacts/:id` page showing full contact info: avatar, name, phone (clickable), email (clickable), address, notes. Show "Travaux" section listing all jobs for this contact. Show "Factures" section with recent invoices. Action buttons: Edit, Delete.
+- **inputs**: Contact data, jobs store, invoices store
+- **outputs**: Contact detail page
+- **dependencies**: [FE-131, FE-132]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: frontend
+- **validation**: Contact detail shows all info, related jobs/invoices listed, actions work
+
+#### Task: FE-503
+- **title**: Create Add/Edit Contact form page
+- **description**: Build `/contacts/new` and `/contacts/:id/edit` pages with form fields: Prénom*, Nom*, Téléphone*, Email, Adresse (address fields: rue, code postal, ville), Notes (textarea). Use FormLayout. Validate on submit.
+- **inputs**: Form components, form layout
+- **outputs**: Add/Edit contact form
+- **dependencies**: [FE-102, FE-103, FE-215]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: frontend
+- **validation**: Form validates required fields, saves to API, redirects to detail
+
+#### Task: FE-504
+- **title**: Create Contact search with filters
+- **description**: Add filter panel to contacts list: filter by city (autocomplete), filter by last job date range, sort options (name A-Z, recently added, recently updated). Filters persist during session.
+- **inputs**: Select components, date picker
+- **outputs**: Contact filtering
+- **dependencies**: [FE-104, FE-129]
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: frontend
+- **validation**: Filters narrow results, multiple filters combine, sort changes order
+
+#### Task: FE-505
+- **title**: Create Contacts list empty state
+- **description**: When no contacts exist, show EmptyState with illustration, "Aucun client pour le moment" message, and "Ajouter un client" button linking to /contacts/new.
+- **inputs**: EmptyState component
+- **outputs**: Contacts empty state
+- **dependencies**: [FE-120]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: frontend
+- **validation**: Empty state displays when no contacts, button navigates to create
+
+#### Task: FE-506
+- **title**: Implement contact deletion with confirmation
+- **description**: Add delete action to contact detail page. Show ConfirmDialog (FE-121) before deletion. On confirm, delete contact and redirect to /contacts with success toast.
+- **inputs**: ConfirmDialog, contacts store
+- **outputs**: Contact deletion flow
+- **dependencies**: [FE-121, FE-109]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: frontend
+- **validation**: Delete shows confirmation, success toast on delete, redirects to list
+
+#### Task: FE-507
+- **title**: Create Contact import from phone contacts
+- **description**: Implement "Importer des contacts" button that uses Capacitor Contacts API to access phone contacts. Show matching UI, let user select which to import. Duplicate detection by phone number.
+- **inputs**: Capacitor Contacts plugin
+- **outputs**: Contact import feature
+- **dependencies**: [FE-801]
+- **priority**: low
+- **estimated_complexity**: high
+- **agent_type**: mobile
+- **validation**: Phone contacts accessed, selection imports, duplicates detected
+
+#### Task: FE-508
+- **title**: Create contact duplicate detection
+- **description**: When adding contact, check for duplicates by phone or email. If found, show suggestion "Ce contact existe déjà: [Name]" with option to view existing or create anyway.
+- **inputs**: Contacts API, duplicate detection logic
+- **outputs**: Duplicate detection
+- **dependencies**: [FE-503]
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: frontend
+- **validation**: Duplicate detected and shown before save, option to merge or create new
+
+#### Task: FE-509
+- **title**: Create Contact notes with timestamps
+- **description**: Add notes section to contact detail showing all notes with timestamps. Each note shows text, author (if multi-user), timestamp. "Ajouter une note" button opens textarea form.
+- **inputs**: Contact detail page, notes data
+- **outputs**: Contact notes section
+- **dependencies**: [FE-502]
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: frontend
+- **validation**: Notes display chronologically, new note saves with timestamp
+
+#### Task: FE-510
+- **title**: Create contact quick actions (call, SMS, email)
+- **description**: On contact detail, add floating action row with 3 buttons: Appeler (phone icon), SMS (message icon), Email (mail icon). Each triggers native app with pre-filled recipient.
+- **inputs**: Capacitor plugins, contact data
+- **outputs**: Quick action buttons
+- **dependencies**: [FE-502, FE-801]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: mobile
+- **validation**: Call button opens dialer, SMS opens messages, Email opens mail client
+
+#### Task: FE-511
+- **title**: Create contact avatar upload
+- **description**: Add avatar upload to contact form. Support camera and photo library (Capacitor Camera). Crop/rotate before save. Store as base64 or upload to storage. Show initials fallback if no avatar.
+- **inputs**: Capacitor Camera, image upload
+- **outputs**: Avatar upload
+- **dependencies**: [FE-503, FE-801]
+- **priority**: medium
+- **estimated_complexity**: high
+- **agent_type**: mobile
+- **validation**: Camera opens, photo selects, crop works, avatar saves
+
+#### Task: FE-512
+- **title**: Create Contact address with map integration
+- **description**: Store full address fields for contact. Show "Voir sur la carte" link that opens native maps app with address. On desktop, show embedded map preview.
+- **inputs**: Address fields, Capacitor Maps
+- **outputs**: Map integration
+- **dependencies**: [FE-502, FE-801]
+- **priority**: low
+- **estimated_complexity**: medium
+- **agent_type**: mobile
+- **validation**: Address stored, maps link opens correct location
+
+---
+
+### Category: Jobs Pipeline/Kanban Screen (4 columns: Devis/Accepté/En cours/Terminé)
+
+#### Task: FE-601
+- **title**: Create Jobs Pipeline Kanban board
+- **description**: Build `/jobs` page as Kanban board with 4 columns: "Devis" (quote, blue), "Accepté" (accepted, yellow), "En cours" (in progress, orange), "Terminé" (completed, green). Each column header shows count. Jobs displayed as draggable cards.
+- **inputs**: Kanban board library (vue-draggable or similar)
+- **outputs**: Kanban board
+- **dependencies**: [FE-106, FE-107]
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: frontend
+- **validation**: 4 columns display, jobs draggable between columns
+
+#### Task: FE-602
+- **title**: Create Job card for Kanban
+- **description**: Build `<JobCard>` component for Kanban display. Shows: client name, job title, date, amount (formatted EUR), status badge. Compact card size (150px height). Draggable handle. Click opens job detail.
+- **inputs**: Design tokens, draggable library
+- **outputs**: Job card
+- **dependencies**: [FE-018]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: frontend
+- **validation**: Job card displays info, draggable, clickable
+
+#### Task: FE-603
+- **title**: Implement Kanban column scroll
+- **description**: Make each Kanban column independently scrollable vertically. Horizontal scroll for entire board on mobile if needed. Column headers sticky at top while scrolling.
+- **inputs**: CSS overflow, scroll handling
+- **outputs**: Column scrolling
+- **dependencies**: [FE-601]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: frontend
+- **validation**: Columns scroll independently, headers sticky
+
+#### Task: FE-604
+- **title**: Implement job drag-and-drop between columns
+- **description**: Enable dragging job cards between Kanban columns. On drop, update job status in store and API. Optimistic UI update with rollback on error. Show toast "Statut mis à jour".
+- **inputs**: Draggable library, jobs store
+- **outputs**: Drag-drop status update
+- **dependencies**: [FE-601, FE-602]
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: frontend
+- **validation**: Jobs drag between columns, status updates, toast confirms, rollback on error
+
+#### Task: FE-605
+- **title**: Create "Add Job" modal from Kanban
+- **description**: When clicking "+" button in any Kanban column, open BottomSheet with job creation form. Pre-select the column as initial status. Fields: client (searchable select), title, description, estimated amount.
+- **inputs**: BottomSheet, job form
+- **outputs**: Add job modal
+- **dependencies**: [FE-113, FE-104]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: frontend
+- **validation**: Modal opens, form submits, job appears in correct column
+
+#### Task: FE-606
+- **title**: Create Job search and filter panel
+- **description**: Add filter bar above Kanban: search by client/job name, filter by date range, filter by amount range, filter by client. Filters apply to all columns. "Effacer les filtres" button resets.
+- **inputs**: Search/filter components
+- **outputs**: Job filtering
+- **dependencies**: [FE-116, FE-104]
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: frontend
+- **validation**: Filters narrow visible jobs, clear resets, filters persist during session
+
+#### Task: FE-607
+- **title**: Create column quick-add for jobs
+- **description**: Add "+" button in each column header. Click opens job creation with that column pre-selected. Same as FE-605 but accessible per-column.
+- **inputs**: Column headers, job creation
+- **outputs**: Per-column quick add
+- **dependencies**: [FE-605]
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: frontend
+- **validation**: + button in each column header, opens correct status pre-selected
+
+#### Task: FE-608
+- **title**: Create Kanban empty column state
+- **description**: When a column has no jobs, show subtle dashed border placeholder with "Aucun travail" text. Encourage dropping jobs from other columns.
+- **inputs**: Empty state styles
+- **outputs**: Empty column state
+- **dependencies**: [FE-601]
+- **priority**: low
+- **estimated_complexity**: low
+- **agent_type**: frontend
+- **validation**: Empty column shows dashed placeholder, visible but not prominent
+
+#### Task: FE-609
+- **title**: Implement Kanban column collapse/expand
+- **description**: Allow collapsing Kanban columns to just header (count only) to see overview. Collapsed columns show job count badge. Click header to expand. Persist collapse state.
+- **inputs**: Collapsible panel logic
+- **outputs**: Collapsible columns
+- **dependencies**: [FE-601]
+- **priority**: low
+- **estimated_complexity**: medium
+- **agent_type**: frontend
+- **validation**: Columns collapse to header only, expand on click, state persists
+
+#### Task: FE-610
+- **title**: Create Kanban view toggle (board/list)
+- **description**: Add toggle button to switch between Kanban board view and list view. List view shows all jobs in table with filters. Persist preference.
+- **inputs**: View toggle, list view
+- **outputs**: View toggle
+- **dependencies**: [FE-601, FE-216]
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: frontend
+- **validation**: Toggle switches between views, preference persists
+
+#### Task: FE-611
+- **title**: Create job count badges on tab bar
+- **description**: Show badge counts on the Jobs tab in bottom nav showing total "En cours" jobs count. Update in real-time when jobs move through pipeline.
+- **inputs**: Bottom nav, jobs store
+- **outputs**: Tab bar job count
+- **dependencies**: [FE-209, FE-004]
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: frontend
+- **validation**: Badge shows correct count, updates on job status change
+
+#### Task: FE-612
+- **title**: Implement offline Kanban board
+- **description**: Cache jobs data locally for offline access. Show offline banner. Allow drag operations offline (queue for sync). On reconnect, sync queue to server and update board.
+- **inputs**: Offline storage, sync queue
+- **outputs**: Offline Kanban
+- **dependencies**: [FE-701, FE-604]
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: frontend
+- **validation**: Kanban works offline, drag queues for sync, syncs on reconnect
+
+---
+
+### Category: Job Detail Screen
+
+#### Task: FE-701
+- **title**: Create Job detail page layout
+- **description**: Build `/jobs/:id` page with full job information. Header with client name, job title, status badge (editable), and action menu. Sections: Description, Détails (date, amount, client info), Ligne de travaux (line items), Notes, Documents, Related invoices.
+- **inputs**: Job data, layout structure
+- **outputs**: Job detail page
+- **dependencies**: [FE-106, FE-107]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: frontend
+- **validation**: Job detail shows all sections, information complete
+
+#### Task: FE-702
+- **title**: Create job status change component
+- **description**: Build inline status changer on job detail. Current status shown as badge. Click opens BottomSheet with 4 options (Devis, Accepté, En cours, Terminé). Confirm changes status with toast.
+- **inputs**: Status changer, BottomSheet
+- **outputs**: Status change UI
+- **dependencies**: [FE-113, FE-107]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: frontend
+- **validation**: Status changer opens, options selectable, status updates and shows toast
+
+#### Task: FE-703
+- **title**: Create job line items section
+- **description**: Build "Ligne de travaux" section listing all line items for the job. Each item: description, quantity, unit price, total. Support adding/editing/removing items. Calculate job total automatically.
+- **inputs**: Line item data, form components
+- **outputs**: Line items section
+- **dependencies**: [FE-102, FE-135]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: frontend
+- **validation**: Line items display, add/edit

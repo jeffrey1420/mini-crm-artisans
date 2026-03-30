@@ -2633,4 +2633,645 @@
 - **outputs**: macOS Chrome test report
 - **dependencies**: []
 - **priority**: medium
-- **estimated_complexity**:
+- **estimated_complexity**:low
+- **agent_type**: QA
+- **validation**: App works correctly on macOS Chrome
+
+#### Task: DEVICE-009
+- **title**: Test on Linux Firefox
+- **description**: Test application on Linux with Firefox browser.
+- **inputs**: Linux PC, Firefox
+- **outputs**: Linux Firefox test report
+- **dependencies**: []
+- **priority**: low
+- **estimated_complexity**: low
+- **agent_type**: QA
+- **validation**: App works correctly on Linux Firefox
+
+#### Task: DEVICE-010
+- **title**: Test responsive breakpoints
+- **description**: Test all responsive breakpoints (320px, 768px, 1024px, 1440px) with DevTools.
+- **inputs**: DevTools device mode
+- **outputs**: Responsive breakpoint test report
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: QA
+- **validation**: Layout correct at all breakpoints
+
+#### Task: DEVICE-011
+- **title**: Test landscape orientation
+- **description**: Test application in landscape orientation on mobile devices.
+- **inputs**: Mobile device, orientation API
+- **outputs**: Landscape orientation test report
+- **dependencies**: [DEVICE-010]
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: QA
+- **validation**: Layout adapts correctly to landscape
+
+#### Task: DEVICE-012
+- **title**: Test device pixel ratio handling
+- **description**: Verify high-DPI displays render correctly without blurriness.
+- **inputs**: High-DPI displays, Retina screens
+- **outputs**: High-DPI test report
+- **dependencies**: []
+- **priority**: low
+- **estimated_complexity**: low
+- **agent_type**: QA
+- **validation**: Icons and text sharp on Retina displays
+
+#### Task: DEVICE-013
+- **title**: Test virtual keyboard handling
+- **description**: Verify layout adjusts correctly when virtual keyboard opens on mobile.
+- **inputs**: Mobile device, virtual keyboard
+- **outputs**: Virtual keyboard test report
+- **dependencies**: []
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: QA
+- **validation**: Form inputs visible when keyboard open
+
+#### Task: DEVICE-014
+- **title**: Test Bluetooth accessory support
+- **description**: Test barcode scanner and card reader Bluetooth accessories.
+- **inputs**: Bluetooth accessories, Web Bluetooth API
+- **outputs**: Bluetooth accessory test report
+- **dependencies**: []
+- **priority**: low
+- **estimated_complexity**: high
+- **agent_type**: QA
+- **validation**: Bluetooth accessories work with app
+
+#### Task: DEVICE-015
+- **title**: Test printer integration
+- **description**: Test printing invoices and quotes to local printer from browser.
+- **inputs**: Printer, print dialog
+- **outputs**: Printer integration test report
+- **dependencies**: []
+- **priority**: low
+- **estimated_complexity**: medium
+- **agent_type**: QA
+- **validation**: Documents print correctly
+
+---
+
+### Category: Beta Testing Program
+
+#### Task: BETA-001
+- **title**: Define beta tester criteria
+- **description**: Define criteria for beta testers (French artisans, business type, tech savviness).
+- **inputs**: User personas, target market
+- **outputs**: Beta tester criteria document
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: QA
+- **validation**: Clear criteria documented
+
+#### Task: BETA-002
+- **title**: Recruit French artisan beta testers
+- **description**: Recruit 20+ French artisans for beta testing program via targeted outreach.
+- **inputs**: Contact list, recruitment message
+- **outputs**: Beta tester list with 20+ participants
+- **dependencies**: [BETA-001]
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: QA
+- **validation**: 20+ active beta testers signed up
+
+#### Task: BETA-003
+- **title**: Create beta testing survey
+- **description**: Create survey for beta testers to report bugs and provide feedback.
+- **inputs**: Survey tool, feedback categories
+- **outputs**: Beta feedback survey form
+- **dependencies**: [BETA-002]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: QA
+- **validation**: Survey created and accessible to testers
+
+#### Task: BETA-004
+- **title**: Set up beta testing environment
+- **description**: Deploy staging environment for beta testing with production-like data.
+- **inputs**: Staging server, anonymized data
+- **outputs**: Staging environment ready for beta
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Staging environment accessible to testers
+
+#### Task: BETA-005
+- **title**: Create beta tester onboarding guide
+- **description**: Write French-language onboarding guide for beta testers.
+- **inputs**: App features, French writing
+- **outputs**: Beta tester onboarding document in French
+- **dependencies**: [BETA-004]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: QA
+- **validation**: Onboarding guide written in clear French
+
+#### Task: BETA-006
+- **title**: Beta test client management feature
+- **description**: Beta testers exercise client management with real-world usage.
+- **inputs**: Beta environment, real client data
+- **outputs**: Beta feedback on client management
+- **dependencies**: [BETA-004, BETA-005]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: QA
+- **validation**: Feedback collected on client management
+
+#### Task: BETA-007
+- **title**: Beta test quote workflow
+- **description**: Beta testers create and send real quotes using the application.
+- **inputs**: Beta environment, quote workflow
+- **outputs**: Beta feedback on quote workflow
+- **dependencies**: [BETA-004, BETA-005]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: QA
+- **validation**: Feedback collected on quote workflow
+
+#### Task: BETA-008
+- **title**: Beta test invoice workflow
+- **description**: Beta testers create and manage invoices with Stripe payments.
+- **inputs**: Beta environment, Stripe test mode
+- **outputs**: Beta feedback on invoice workflow
+- **dependencies**: [BETA-004, BETA-005]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: QA
+- **validation**: Feedback collected on invoice workflow
+
+#### Task: BETA-009
+- **title**: Beta test mobile experience
+- **description**: Beta testers use app on mobile devices and report usability issues.
+- **inputs**: Mobile devices, beta environment
+- **outputs**: Beta feedback on mobile experience
+- **dependencies**: [BETA-004, BETA-005]
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: QA
+- **validation**: Mobile feedback collected from testers
+
+#### Task: BETA-010
+- **title**: Beta test offline mode
+- **description**: Beta testers use app without internet and test offline functionality.
+- **inputs**: Beta environment, offline testing scenarios
+- **outputs**: Beta feedback on offline mode
+- **dependencies**: [BETA-004, BETA-005]
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: QA
+- **validation**: Offline feedback collected from testers
+
+#### Task: BETA-011
+- **title**: Collect and triage beta bugs
+- **description**: Collect beta tester bug reports and triage by severity.
+- **inputs**: Bug reports, triage criteria
+- **outputs**: Triaged bug list with severity levels
+- **dependencies**: [BETA-003]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: QA
+- **validation**: All bugs triaged and logged in issue tracker
+
+#### Task: BETA-012
+- **title**: Analyze beta NPS scores
+- **description**: Collect Net Promoter Score from beta testers and analyze results.
+- **inputs**: NPS survey, beta testers
+- **outputs**: NPS analysis report
+- **dependencies**: [BETA-005]
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: QA
+- **validation**: NPS score calculated and documented
+
+#### Task: BETA-013
+- **title**: Document beta testing findings
+- **description**: Compile all beta feedback into actionable findings document.
+- **inputs**: Beta feedback, bug reports
+- **outputs**: Beta testing findings report
+- **dependencies**: [BETA-011, BETA-012]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: QA
+- **validation**: Findings documented and prioritized
+
+#### Task: BETA-014
+- **title**: Fix critical beta issues
+- **description**: Fix all critical severity issues reported by beta testers before launch.
+- **inputs**: Critical bug list
+- **outputs**: Fixed bugs merged to main
+- **dependencies**: [BETA-013]
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: frontend, backend
+- **validation**: All critical bugs fixed and verified
+
+#### Task: BETA-015
+- **title**: Plan beta to production transition
+- **description**: Plan data migration and transition from beta environment to production.
+- **inputs**: Beta data, production schema
+- **outputs**: Transition plan document
+- **dependencies**: [BETA-014]
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: backend
+- **validation**: Transition plan documented and reviewed
+
+---
+
+### Category: Test Data Fixtures & Factories
+
+#### Task: FIXT-001
+- **title**: Create user factory
+- **description**: Create factory for generating test user accounts with randomized data.
+- **inputs**: User model, faker.js
+- **outputs**: tests/factories/userFactory.ts
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: Factory creates valid user with all fields
+
+#### Task: FIXT-002
+- **title**: Create client factory
+- **description**: Create factory for generating test clients with French names and business data.
+- **inputs**: Client model, French faker data
+- **outputs**: tests/factories/clientFactory.ts
+- **dependencies**: [FIXT-001]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: Factory creates valid French client
+
+#### Task: FIXT-003
+- **title**: Create quote factory
+- **description**: Create factory for generating test quotes with line items and statuses.
+- **inputs**: Quote model, line item factory
+- **outputs**: tests/factories/quoteFactory.ts
+- **dependencies**: [FIXT-002]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Factory creates valid quote with line items
+
+#### Task: FIXT-004
+- **title**: Create invoice factory
+- **description**: Create factory for generating test invoices with payment status.
+- **inputs**: Invoice model, payment data
+- **outputs**: tests/factories/invoiceFactory.ts
+- **dependencies**: [FIXT-002]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Factory creates valid invoice in all states
+
+#### Task: FIXT-005
+- **title**: Create appointment factory
+- **description**: Create factory for generating test appointments with time slots.
+- **inputs**: Appointment model, time slot logic
+- **outputs**: tests/factories/appointmentFactory.ts
+- **dependencies**: [FIXT-002]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Factory creates valid appointment
+
+#### Task: FIXT-006
+- **title**: Create payment factory
+- **description**: Create factory for generating test payment records with Stripe data.
+- **inputs**: Payment model, Stripe mock
+- **outputs**: tests/factories/paymentFactory.ts
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Factory creates valid payment record
+
+#### Task: FIXT-007
+- **title**: Create notification factory
+- **description**: Create factory for generating test notification records.
+- **inputs**: Notification model
+- **outputs**: tests/factories/notificationFactory.ts
+- **dependencies**: [FIXT-001]
+- **priority**: low
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: Factory creates valid notification
+
+#### Task: FIXT-008
+- **title**: Create database seed script
+- **description**: Create database seed script with realistic French artisan data.
+- **inputs**: Database schema, seed data
+- **outputs**: seeds/artisanSeed.ts
+- **dependencies**: [FIXT-001, FIXT-002, FIXT-003, FIXT-004, FIXT-005]
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: backend
+- **validation**: Seed creates realistic test environment
+
+#### Task: FIXT-009
+- **title**: Create API test fixtures
+- **description**: Create reusable API fixtures for request/response mocking in tests.
+- **inputs**: API routes, request examples
+- **outputs**: tests/fixtures/api/*.json
+- **dependencies**: []
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Fixtures used consistently in API tests
+
+#### Task: FIXT-010
+- **title**: Create Stripe webhook fixtures
+- **description**: Create mock Stripe webhook event payloads for testing.
+- **inputs**: Stripe webhook documentation
+- **outputs**: tests/fixtures/stripe/*.json
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Stripe fixtures match real webhook format
+
+#### Task: FIXT-011
+- **title**: Create French locale test data
+- **description**: Create test data with French-specific values (accents, formats, business numbers).
+- **inputs**: French locale requirements
+- **outputs**: tests/fixtures/fr/*.json
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: QA
+- **validation**: French test data covers all accent variations
+
+#### Task: FIXT-012
+- **title**: Create edge case fixtures
+- **description**: Create fixtures for edge cases: empty data, very large amounts, special characters.
+- **inputs**: Edge case requirements
+- **outputs**: tests/fixtures/edge-cases/*.json
+- **dependencies**: []
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: QA
+- **validation**: Edge cases covered in test fixtures
+
+#### Task: FIXT-013
+- **title**: Create PWA test fixtures
+- **description**: Create test fixtures for PWA testing including manifests and service worker scripts.
+- **inputs**: PWA requirements
+- **outputs**: tests/fixtures/pwa/*.json
+- **dependencies**: []
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: frontend
+- **validation**: PWA fixtures enable offline testing
+
+#### Task: FIXT-014
+- **title**: Set up test data cleanup
+- **description**: Configure database cleanup between tests to ensure test isolation.
+- **inputs**: Test framework, database
+- **outputs**: Test cleanup utilities
+- **dependencies**: [FIXT-001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Tests run in isolation without data pollution
+
+#### Task: FIXT-015
+- **title**: Create screenshot fixtures
+- **description**: Create baseline screenshots for visual regression testing.
+- **inputs**: Critical UI pages
+- **outputs**: tests/fixtures/screenshots/baseline/*.png
+- **dependencies**: [E2E-001]
+- **priority**: low
+- **estimated_complexity**: medium
+- **agent_type**: QA
+- **validation**: Baseline screenshots captured for comparison
+
+---
+
+### Category: CI/CD Test Pipeline
+
+#### Task: PIPELINE-001
+- **title**: Configure GitHub Actions workflow
+- **description**: Set up GitHub Actions workflow for CI/CD with test stages.
+- **inputs**: GitHub Actions, workflow templates
+- **outputs**: .github/workflows/test.yml
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Workflow runs on push and PR
+
+#### Task: PIPELINE-002
+- **title**: Add linting to pipeline
+- **description**: Add ESLint and Prettier checks to CI pipeline.
+- **inputs**: ESLint config, Prettier config
+- **outputs**: Lint stage in CI pipeline
+- **dependencies**: [PIPELINE-001]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: frontend
+- **validation**: Lint errors fail pipeline
+
+#### Task: PIPELINE-003
+- **title**: Add type checking to pipeline
+- **description**: Add TypeScript type checking to CI pipeline.
+- **inputs**: TypeScript config
+- **outputs**: Type check stage in CI pipeline
+- **dependencies**: [PIPELINE-001]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: frontend
+- **validation**: Type errors fail pipeline
+
+#### Task: PIPELINE-004
+- **title**: Add unit tests to pipeline
+- **description**: Run unit tests (Vitest and Jest) in CI pipeline.
+- **inputs**: Unit test configuration
+- **outputs**: Unit test stage in CI pipeline
+- **dependencies**: [UNIT-FRONT-001, UNIT-BACK-001]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: frontend
+- **validation**: Unit tests run and report coverage
+
+#### Task: PIPELINE-005
+- **title**: Add integration tests to pipeline
+- **description**: Run integration tests with test database in CI pipeline.
+- **inputs**: Integration test config, Docker
+- **outputs**: Integration test stage in CI pipeline
+- **dependencies**: [INT-API-001, INT-API-002]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Integration tests run against test database
+
+#### Task: PIPELINE-006
+- **title**: Add E2E tests to pipeline
+- **description**: Run Playwright E2E tests in CI pipeline with browser testing.
+- **inputs**: Playwright config, browsers
+- **outputs**: E2E test stage in CI pipeline
+- **dependencies**: [E2E-001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: QA
+- **validation**: E2E tests run in headless browser
+
+#### Task: PIPELINE-007
+- **title**: Add security scanning to pipeline
+- **description**: Add OWASP ZAP and dependency scanning to CI pipeline.
+- **inputs**: Security scanning tools
+- **outputs**: Security stage in CI pipeline
+- **dependencies**: [SEC-001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: QA
+- **validation**: Security scans run and report vulnerabilities
+
+#### Task: PIPELINE-008
+- **title**: Add Lighthouse CI to pipeline
+- **description**: Add Lighthouse performance auditing to CI pipeline.
+- **inputs**: Lighthouse CI config
+- **outputs**: Lighthouse stage in CI pipeline
+- **dependencies**: [PERF-001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: QA
+- **validation**: Lighthouse runs and reports scores
+
+#### Task: PIPELINE-009
+- **title**: Add accessibility testing to pipeline
+- **description**: Add axe-core accessibility testing to CI pipeline.
+- **inputs**: Axe-core configuration
+- **outputs**: Accessibility stage in CI pipeline
+- **dependencies**: [A11Y-001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: QA
+- **validation**: Axe tests run on all critical pages
+
+#### Task: PIPELINE-010
+- **title**: Configure test parallelization
+- **description**: Configure test execution parallelization to speed up CI.
+- **inputs**: Test runner config, CI resources
+- **outputs**: Parallel test execution
+- **dependencies**: [PIPELINE-004, PIPELINE-005, PIPELINE-006]
+- **priority**: medium
+- **estimated_complexity**: high
+- **agent_type**: backend
+- **validation**: Tests run faster with parallelization
+
+#### Task: PIPELINE-011
+- **title**: Set up test reporting
+- **description**: Configure test reporting with coverage reports and test results visualization.
+- **inputs**: Test reporters, coverage tools
+- **outputs**: Test reports in CI artifacts
+- **dependencies**: [PIPELINE-004]
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Coverage and test reports generated
+
+#### Task: PIPELINE-012
+- **title**: Add contract testing to pipeline
+- **description**: Run API contract tests (Dredd) in CI pipeline.
+- **inputs**: Dredd config, OpenAPI spec
+- **outputs**: Contract test stage in CI pipeline
+- **dependencies**: [CONTRACT-001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Contract tests run against live API
+
+#### Task: PIPELINE-013
+- **title**: Configure branch protection
+- **description**: Configure GitHub branch protection requiring passing CI for merge.
+- **inputs**: GitHub settings
+- **outputs**: Branch protection rules
+- **dependencies**: [PIPELINE-001]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: PRs require passing CI to merge
+
+#### Task: PIPELINE-014
+- **title**: Set up deployment gates
+- **description**: Configure deployment gates requiring test passes before staging deployment.
+- **inputs**: Deployment configuration
+- **outputs**: Deployment gates in pipeline
+- **dependencies**: [PIPELINE-013]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Deployments require passing all gates
+
+#### Task: PIPELINE-015
+- **title**: Add load testing to pipeline
+- **description**: Run k6 load tests in CI pipeline on staging environment.
+- **inputs**: k6 scripts, staging environment
+- **outputs**: Load test stage in CI pipeline
+- **dependencies**: [PERF-009]
+- **priority**: medium
+- **estimated_complexity**: high
+- **agent_type**: QA
+- **validation**: Load tests run and report metrics
+
+#### Task: PIPELINE-016
+- **title**: Configure cache for dependencies
+- **description**: Configure dependency caching to speed up CI pipeline runs.
+- **inputs**: GitHub Actions cache config
+- **outputs**: Cached dependency installation
+- **dependencies**: [PIPELINE-001]
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: Dependencies cached between runs
+
+#### Task: PIPELINE-017
+- **title**: Add Slack notifications to pipeline
+- **description**: Configure Slack notifications for CI pipeline success and failure.
+- **inputs**: Slack webhook, GitHub Actions
+- **outputs**: Slack notifications on pipeline events
+- **dependencies**: [PIPELINE-001]
+- **priority**: low
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: Slack receives pipeline notifications
+
+#### Task: PIPELINE-018
+- **title**: Document CI/CD pipeline
+- **description**: Document CI/CD pipeline stages, gates, and how to troubleshoot failures.
+- **inputs**: Pipeline configuration
+- **outputs**: CI/CD documentation
+- **dependencies**: [PIPELINE-001]
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: Pipeline documented for team reference
+
+#### Task: PIPELINE-019
+- **title**: Set up canary deployment testing
+- **description**: Configure canary deployment with percentage-based traffic splitting.
+- **inputs**: Deployment config, traffic routing
+- **outputs**: Canary deployment pipeline
+- **dependencies**: [PIPELINE-014]
+- **priority**: medium
+- **estimated_complexity**: high
+- **agent_type**: backend
+- **validation**: Canary deployment functional
+
+#### Task: PIPELINE-020
+- **title**: Monitor pipeline health
+- **description**: Set up monitoring of CI/CD pipeline health and flaky test detection.
+- **inputs**: CI metrics, flaky test detection
+- **outputs**: Pipeline health dashboard
+- **dependencies**: [PIPELINE-001]
+- **priority**: low
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Pipeline health visible and tracked
