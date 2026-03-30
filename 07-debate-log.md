@@ -326,4 +326,119 @@ The challenge is valid and strong. The "we'll migrate later" plan is exactly the
 
 ---
 
-*Last updated: 2026-03-30T09:43:00Z*
+*Last updated: 2026-03-30T09:45:00Z*
+
+---
+
+## Debate 10: Onboarding — Contact Import as MVP vs "Soon"
+
+### The Disagreement
+
+- **Product Strategist (challenging):** "Contact import from WhatsApp Business and phone should be Day 1 MVP, not 'Soon.' The feature matrix is wrong."
+- **Feature Matrix (existing decision):** "Import from phone contacts" ranked as "Soon" (within 3 months, not MVP)
+
+### The Argument
+
+Challenger's position:
+- "No contacts = nothing" — if the product is useless on day one, users open the app, see empty, and leave forever
+- WhatsApp Business exports to vCard/CSV — this is a file parser, not a hard engineering problem
+- Marc lives in WhatsApp — his client list IS his WhatsApp contacts. Telling him to type them manually is double work for zero benefit
+- Jean-Pierre's secretary won't migrate a decade of client contacts manually — the friction doesn't disappear, it just moves
+- "Soon" in product roadmaps means "when we get around to it, maybe" — that's how you ship an empty CRM
+
+Feature Matrix rationale (prioritisation):
+- Simplicity of MVP scope
+- Avoid scope creep at launch
+- Engineering bandwidth for core CRM features first
+
+### Resolution
+
+**UNRESOLVED — Flagged for sprint planning**
+
+The challenge is strong. The argument that "no contacts = nothing" directly undermines the product vision's core premise. However, the Product Strategist's recommendation — two import buttons on a single screen — is technically achievable in sprint 1 if scoped narrowly.
+
+**Open question for Louis:** Should contact import from WhatsApp Business / phone contacts be added to MVP scope as two buttons (import from vCard, import from phone)? The risk is not engineering complexity — it's scope creep. The reward is day-one stickiness for every new user.
+
+**Key insight:** "Simple MVP" does not mean "impose friction as a feature." Manual data entry is friction, not simplicity.
+
+---
+
+## Debate 11: PWA vs Native App — Challenging "PWA Acceptable for Launch"
+
+### The Disagreement
+
+- **Technical Architect (challenging):** "PWA is the wrong choice for this audience. Capacitor-based hybrid or native is necessary."
+- **Debate 1 Resolution:** "Mobile-first, PWA acceptable for launch"
+
+### The Argument
+
+Challenger's position:
+- Android PWAs have unreliable push notifications — Xiaomi, Samsung, Oppo all kill background processes aggressively
+- On iOS, PWAs cannot send push notifications at all without native apps — this eliminates 30%+ of iPhone users
+- The core value prop is reminders that FIRE — if notifications don't fire reliably, the product fails its core promise
+- Jean-Pierre (55, tech-resistant) won't "Add to Home Screen" — he wants a real App Store icon
+- Capacitor wraps existing web code in native shells — same codebase, same team, same cost, real app with reliable FCM push notifications
+- Feature matrix already says "Mobile app (iOS + Android)" — that's native, not PWA
+
+Debate 1 compromise (PWA acceptable):
+- Faster to ship
+- No app store review delays
+- Lower maintenance burden
+- "Good enough for MVP"
+
+### Resolution
+
+**UNRESOLVED — Technical Architect makes a strong case**
+
+The push notification reliability argument is compelling. If reminders are the core product value and Android OEM battery management kills PWA background processes, the product fails its most critical feature. The "acceptable for launch" compromise from Debate 1 deserves formal reconsideration.
+
+**Key tension:** App Store review (7-14 days) and dual-platform maintenance vs. notification reliability and "real app" feel for resistant users like Jean-Pierre.
+
+**Compromise path:** Capacitor (web codebase + native shell) is the practical middle ground. iOS App Store + Google Play from day one. This is not significantly more expensive than PWA if scoped correctly.
+
+**Key insight:** "Acceptable" is not the same as "right." PWA may have been a reasonable speculation in Debate 1 — it should be challenged again now with the reminder reliability requirement explicit.
+
+---
+
+## Debate 12: GTM Strategy — Trade Fairs vs Digital-First Acquisition
+
+### The Disagreement
+
+- **Growth Strategist (challenging):** "The GTM strategy is too slow and too analog. Trade fair + supplier partnerships is an incumbent's strategy."
+- **Go-to-Market document (existing):** "Trade fairs > online ads for this audience" listed as a key insight; 40% weight on word of mouth, 15% on paid ads
+
+### The Argument
+
+Challenger's position:
+- Trade fairs: €2,000-5,000/booth, 200-500 visitors, 0.5% conversion = €1,000-2,500 CAC
+- Google Ads for "CRM artisan" keywords: CPC €0.80-1.50, 3% conversion = €360 CAC — 3x cheaper
+- "Trade fairs > online ads" is lazy conventional wisdom, not data
+- Supplier partnerships (Point.P, BigMat) require sales cycles of 6-18 months — a startup can't afford this
+- Facebook Groups ("Artisans du bâtiment") — 500k+ members, zero CAC, targeted 90-second screen recordings
+- YouTube Shorts/Reels — artisan TikTok/YouTube is exploding; one viral video = 200+ signups
+- Incumbent GTM (Sage, Delta Blue) relies on sales teams — a startup has none
+
+Go-to-Market document rationale:
+- Artisans trust physical relationships over online ads
+- Word of mouth is highest-converting channel for tradespeople
+- Personal networks are the fastest path to first 50 beta users
+- Content marketing builds long-term SEO equity
+
+### Resolution
+
+**UNRESOLVED — Key strategic decision for Louis**
+
+The CAC math is compelling and the trade fair argument deserves scrutiny. However, the "personal network first" approach is sound for the initial beta cohort, not for scalable growth.
+
+**Recommended rebalancing:**
+- Phase 1 (Month 0-3, beta): Personal network + Facebook Groups (zero CAC, fast)
+- Phase 2 (Month 3-12, growth): Google Ads (scaling paid channel once product-market fit confirmed) + YouTube content (viral potential) + referral program
+- Defer supplier partnerships to Month 9+ when you have case studies and a sales story
+
+**Kill the trade fair budget** (or cap at €2,000) — reallocate to Google Ads and content production.
+
+**Key insight:** "Trade fairs > online ads" is an INCUMBENT'S strategy. Startups should be where incumbents aren't — and that means digital-first, content-first, paid-search-first.
+
+---
+
+*Pulse update: 3 new debates added, 2026-03-30T09:45:00Z*
