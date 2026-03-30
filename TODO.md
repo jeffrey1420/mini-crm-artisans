@@ -941,19 +941,13 @@ The following were overengineered or wrong:
 
 ## New from Pulse 2026-03-30T22:43 — Three New Challenges
 
-### Reopened (D12, D72/D91, D100)
+### Reopened (D12, D72/D91, D100) — RESOLVED in 22:56 pulse below
 
-- **D12 (Landing page):** Product Strategist challenged — "Sans vous prendre la tête" attracts avoidance-motivated buyers, not acute-pain buyers. Proposed alternative: competence frame ("Arrêtez de courir après vos paiements") + trial delivers proof in 5 minutes.
-- **D72/D91 (Expert-comptable timing):** Growth Strategist challenged — French expert-comptables have professional liability exposure (TVA accuracy, mentions légales completeness, sequential numbering integrity). Compliance review cycle = 3-6 months minimum. Expert-comptable = Phase 2 channel, not Month 1-2. Prescriber networks elevated as primary Month 1-3 GTM.
-- **D100 (Supabase exit):** Technical Architect challenged — revenue-based triggers ("50 users" or "€5k/mo") are either premature or too late. Proposed: composite usage-based exit trigger (10k docs + 100 MAU + €150/mo Supabase bill), target stack (OVH/Hetzner + Coolify + managed Postgres), thin abstraction layer from Day 1.
+- **D12 (Landing page):** Product Strategist challenged — "Sans vous prendre la tête" attracts avoidance-motivated buyers, not acute-pain buyers. Proposed alternative: competence frame ("Arrêtez de courir après vos paiements") + trial delivers proof in 5 minutes. → **RESOLVED: Simplicity-first RETAINED**
+- **D72/D91 (Expert-comptable timing):** Growth Strategist challenged — French expert-comptables have professional liability exposure. Compliance review cycle = 3-6 months minimum. Expert-comptable = Phase 2 channel, not Month 1-2. → **RESOLVED: Phase 2, prescriber networks primary**
+- **D100 (Supabase exit):** Technical Architect challenged — revenue-based triggers are either premature or too late. Proposed: composite usage-based exit trigger. → **RESOLVED: Usage-based composite trigger adopted**
 
-### New Action Items:
-- [ ] **D12 REOPENED:** A/B test landing page — simplicity frame ("Sans vous prendre la tête") vs competence frame ("Arrêtez de courir après vos paiements"). Run with beta users before launch. Measure: time-on-page, signup rate, Day-7 retention.
-- [ ] **D72/D91 UPDATED:** Expert-comptable outreach moved to Phase 2 (Month 4+). Do not budget Week 1 hours for it. Prescriber networks (architects, property managers) become primary Month 1-3 GTM. Update GTM strategy doc accordingly.
-- [ ] **D100 UPDATED:** Add explicit Supabase exit trigger to D100: 3 consecutive months where (total_docs > 10,000 AND MAU > 100 AND Supabase_bill > €150/mo). Define target stack: OVH or Hetzner VPS + Coolify + managed Postgres (€40-60/mo at 100 MAU vs €300-600 Supabase). Add thin abstraction layer in schema design from Day 1.
-- [ ] **D124 NEW:** Document Supabase exit plan in architecture notes: trigger metrics, target stack specs, migration estimated effort (2-3 days data migration, 1 day schema transfer).
-
-*Last updated: 2026-03-30T22:56*
+*Last updated: 2026-03-30T23:08*
 
 ## New from Pulse 2026-03-30T22:56 — Three Resolved
 
@@ -978,3 +972,25 @@ The following were overengineered or wrong:
 - [ ] **D124 NEW:** Document Supabase exit plan: trigger metrics, target stack specs, migration effort estimate.
 
 *Last updated: 2026-03-30T22:56*
+
+## New from Pulse 2026-03-30T23:08 — Three New Challenges (D93, D81/C, D56)
+
+### Reopened (D93, D81/C, D56)
+
+- **D93 (Guided Creation Flow):** Product Strategist challenged — mandatory/scheduled onboarding call selects FOR hand-holders (high-cost, low-LTV users) and AGAINST autonomous professionals (ideal customers). "15 minute call" signals product assumes you can't figure it out. Sprint 0 building infra for call 70% of best-fit users skip.
+- **D81/C (Offline scope):** Technical Architect challenged — "offline-capable" (optimistic UI + retry queue) fails where job logging needed: basements, rural sites, concrete buildings. Phone death, tunnel gaps, client crashes = unrecoverable data loss without local persistence.
+- **D56 (SEO as primary digital):** Growth Strategist challenged — French BTP artisans don't Google for software. Hundreds/month nationally, not thousands. SEO attracts comparison-shoppers. Marc discovers via WhatsApp peer networks, not content. SEO = 6-12 month payoff; community seeding = WoM in weeks.
+
+### New Action Items:
+- [ ] **D93 NEW:** Replace mandatory Guided Creation Flow with 90-second in-app setup wizard (sensible defaults) + on-demand "comment ça marche" video. Opt-in, not required. Frame "open office hours" as drop-in, not personalized setup.
+- [ ] **D93 NEW:** Instrument Guided Creation Flow if kept: track conversion rate of users who complete onboarding call vs those who skip. Use data to kill or keep.
+- [ ] **D81 NEW:** Re-evaluate WatermelonDB/expo-sqlite for Sprint 0. If job logging ships Sprint 1 and artisans work in poor-connectivity environments, local SQLite persistence is foundational layer — not retry queue. Add 1-2 days to Sprint 0 estimate if adopted.
+- [ ] **D81 NEW:** If offline SQLite adopted: add `sync_status` field (pending/synced/conflict) on all mutable tables as minimum viable conflict-detection for v1.
+- [ ] **D56 NEW:** Deprioritize SEO from primary GTM to Month 6+ long-tail. Reallocate Sprint 0/1 digital hours to community seeding: identify 5-10 French BTP Facebook groups and WhatsApp clusters, join genuinely (no spam), instrument referral tracking ("comment connaissez-vous?" at signup + WhatsApp share codes).
+
+### Challenged Assumptions:
+1. "Guided Creation Flow increases Day-7 retention" — challenged: selects for hand-holders, repels autonomous pros
+2. "Offline-capable sufficient for job-site job logging" — challenged: retry queue fails when phones die, connectivity gaps hours-long
+3. "SEO is primary digital discovery channel" — challenged: artisans discover via peer networks, not Google search
+
+*Last updated: 2026-03-30T23:08*

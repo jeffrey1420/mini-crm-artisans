@@ -6388,3 +6388,103 @@ If the team pursues Week 1 expert-comptable outreach as a referral channel, the 
 ---
 
 *Last updated: 2026-03-30T22:43*
+
+---
+
+## New from Pulse 2026-03-30T23:08 — Three New Challenges
+
+---
+
+## Debate 126: D93 — Guided Creation Flow Is Anti-Pattern for Autonomous Artisans
+
+**Challenge:** D93 (Guided Creation Flow) — Product Strategist challenges the assumption that mandatory/scheduled onboarding increases retention and identifies high-quality leads.
+
+### Product Strategist — Autonomous Professionals Don't Book Onboarding Calls
+
+**Assumption challenged:** That a mandatory or strongly encouraged Guided Creation Flow (bookable 10-15 minute slot) increases Day-7 retention and filters for serious prospects.
+
+**Core argument:**
+
+The Guided Creation Flow assumes hand-holding converts. It doesn't — it converts *for* hand-holders.
+
+Marc, the 45-55yo French BTP artisan, bought this product to escape a process. He's currently using WhatsApp voice notes, paper notebooks, and Excel spreadsheets held together by anxiety. He doesn't want to be onboarded. He wants to open the app, add a client, and send a devis. The Guided Creation Flow — a bookable 10-15 minute slot — is a friction point disguised as a value-add.
+
+Here's the selection bias: who books the onboarding call? Not the autonomous professional who's been running his business for 20 years. He sees "15 minute call" and thinks "I don't have time for this bullshit." He leaves. The person who books? The newly self-employed, the数字化新手, the one who's uncertain — the artisan who will also need the most support every time something goes wrong. You've optimized for acquiring your highest-cost, lowest-LTV user.
+
+Meanwhile, the autonomous pro — the ideal customer — interprets "we'll walk you through it" as "this product assumes I can't figure it out." That's a trust signal in the wrong direction. He's been buying tools his whole career. He reads the features, he tries it, he decides. The Guided Creation Flow tells him he's not the target.
+
+Sprint 0 is building infrastructure for a call that 70% of free-to-paid conversions will skip entirely. You're investing engineering time in a friction point that your best customers navigate around, and your worst customers embrace instead.
+
+**VERDICT on D93:** REOPENED — Replace mandatory Guided Creation Flow with: (1) a 90-second in-app setup wizard with sensible defaults, (2) an on-demand "comment ça marche" video. Let Marc choose. Day-7 retention improves by removing barriers, not adding guided lanes. D83's notification rules still apply (no imposed timing).
+
+---
+
+## Debate 127: D81/C — Offline-Capable Is Not Offline-First for Job Sites
+
+**Challenge:** D81 (offline scope) and Sprint 1 job logging — Technical Architect challenges the assumption that optimistic UI + retry queue is sufficient for the job-site working context.
+
+### Technical Architect — "Offline-Capable" Fails Where Job Logging Is Needed Most
+
+**Assumption challenged:** That "offline-capable" (optimistic UI + retry queue + AsyncStorage) is sufficient for French artisans working in basements, rural sites, and concrete buildings where 4G does not reach.
+
+**Core argument:**
+
+"Offline-capable" means: when the artisan loses signal, entries go into a retry queue. When connectivity returns, the queue processes. That is not offline-first. That is offline-*tolerant* at best.
+
+Consider the failure mode. A façadier arrives at a rural renovation site. No signal. He logs 4 hours of labor against three tasks, adds notes, attaches a photo of the wall. He leaves the site. Three hours later, connectivity returns. The retry queue fires — except his phone died at hour 2 (common on site). Or he was in a train tunnel. Or the Supabase client crashed during sync (unhandled, unrecoverable without manual intervention). What happens to that data? It's gone. Or worse — it's ambiguous. Did it sync? Did it not? There's no deterministic answer without a full conflict-resolution layer, which D81 explicitly deferred.
+
+The architects conflated "optimistic UI" (UI responds instantly) with "offline persistence" (data survives the offline period). These are orthogonal. You can have optimistic UI with local persistence (WatermelonDB). You can have optimistic UI without it (current design). The retry queue adds complexity without solving the core issue: what happens when the retry never happens?
+
+If job logging is Sprint 1 non-negotiable, and job logging happens on job sites where 4G is the exception, then "offline-capable" is a feature that fails precisely where the user most depends on it.
+
+**VERDICT on D81/C:** REOPENED — WatermelonDB/expo-sqlite deferred to v1.2 is wrong if job logging ships in Sprint 1. Local SQLite persistence should be in Sprint 0 — not as nice-to-have, but as the foundational layer that makes job logging work. The retry queue should be a sync reliability mechanism, not the primary offline data survival strategy. Either job logging works offline in Sprint 1, or it shouldn't be in Sprint 1.
+
+---
+
+## Debate 128: D56 — SEO Is the Wrong Primary Digital Channel for French Artisans
+
+**Challenge:** D56 (digital GTM) — Growth Strategist challenges the assumption that SEO is the primary digital acquisition channel for reaching French BTP artisans.
+
+### Growth Strategist — French Artisans Don't Google for Software
+
+**Assumption challenged:** That SEO is the primary digital discovery channel, and that investing in content SEO will drive qualified artisan acquisition at launch.
+
+**Core argument:**
+
+The SEO-first strategy is built on a category error: it assumes Marc goes to Google to solve administrative problems. He doesn't. He's a 50-year-old solo plumber in Brittany. His phone has WhatsApp, Facebook, and maybe LinkedIn. He does not open Chrome and search "logiciel devis facture comparatif." He asks his mate Jean-Pierre in the WhatsApp group "Artisans BTP 44" what invoicing app he uses.
+
+Search volume data confirms this is niche behavior. A few hundred searches per month nationally means the entire addressable market of Google-searching artisans is measured in hundreds — not thousands. You cannot build a scalable SaaS on that. Meanwhile, there are hundreds of thousands of artisans in France active in trade communities on Facebook, WhatsApp, and regional professional groups. That is where the category discoverer exists.
+
+More damaging: SEO attracts the wrong buyer. The person who finds you through a "meilleur logiciel devis facture 2026" article is already in comparison-shopping mode. They're evaluating three options. That's SaaS buyer behavior. Marc doesn't do that. Marc buys because his buddy Jean-Pierre said "hey this thing is easy, I use it." Trust is transferred peer-to-peer, not page-to-page.
+
+Building an SEO content machine takes 6-12 months to yield meaningful traffic. Sprint 0 starts now. Burning runway on organic search in year one is slow suicide. Community seeding — Facebook groups, trade forums, WhatsApp clusters — can generate word-of-mouth within weeks, not months.
+
+**VERDICT on D56:** REOPENED — SEO should be deprioritized from primary to secondary/long-tail. Primary digital energy should go to community seeding: identify 5-10 high-traffic French BTP Facebook groups and WhatsApp clusters, seed with genuine value (not ads), instrument referral loops. SEO becomes a Month 6+ play once there's a product worth googling and a community already talking about it.
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D12 | Landing page | Simplicity-first RETAINED | 2026-03-30T22:56 |
+| D72 | Expert-comptable timing | Phase 2 (Month 4+) | 2026-03-30T22:56 |
+| D91 | Expert-comptable validation vs referral | Validation ≠ referral | 2026-03-30T22:56 |
+| D93 | Guided Creation Flow | **REOPENED — mandatory call → 90s wizard + on-demand video** | 2026-03-30T23:08 |
+| D81 | Offline scope | **REOPENED — local SQLite in Sprint 0 if job logging is Sprint 1** | 2026-03-30T23:08 |
+| D56 | SEO as primary digital | **REOPENED — deprioritize, community seeding first** | 2026-03-30T23:08 |
+| D100 | Supabase exit trigger | Composite usage-based exit | 2026-03-30T22:56 |
+
+---
+
+## New Action Items
+
+- [ ] **D93 NEW:** Replace mandatory Guided Creation Flow (bookable 10-15 min slot) with a 90-second in-app setup wizard with sensible defaults + on-demand "comment ça marche" video. Make it opt-in, not required. Day 1 orientation still offers the slot as an option, but doesn't require it.
+- [ ] **D93 NEW:** If onboarding call is offered, it should be framed as "open office hours" not "personalized setup." Reduces commitment threshold, same informational value.
+- [ ] **D81 NEW:** Re-evaluate WatermelonDB/expo-sqlite for Sprint 0 inclusion. If job logging ships in Sprint 1 and job sites have poor connectivity, local SQLite persistence is the foundational layer — not a retry queue. Add 1-2 days to Sprint 0 estimate if this is adopted.
+- [ ] **D81 NEW:** If offline SQLite is adopted in Sprint 0: schema design should include `sync_status` field (pending/synced/conflict) on all mutable tables. This is the minimum viable conflict detection layer for v1.
+- [ ] **D56 NEW:** Deprioritize SEO from primary GTM to Month 6+ long-tail play. Reallocate Sprint 0/1 digital hours to community seeding: (1) identify 5-10 French BTP Facebook groups, (2) join genuinely (don't spam), (3) instrument referral tracking ("comment connaissez-vous?" + WhatsApp share codes). Report weekly on referral source mix.
+
+---
+
+*Last updated: 2026-03-30T23:08*
