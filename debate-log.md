@@ -3578,3 +3578,248 @@ The meeting agenda should be:
 ---
 
 *Last updated: 2026-03-30T17:46*
+
+---
+
+## Pulse 1801 — DigitalChannels Specialist Debate
+
+### Debate 50: Digital Peer Communities — Acquisition Channel or Retention Space?
+
+**Challenge:** D49 assumes WhatsApp groups and Facebook communities are "where Marc discovers things." Growth Strategist challenges this — peer communities are social habitats, not tool discovery channels.
+
+### Growth Strategist — Digital Communities Are Retention/Engagement, Not Acquisition
+
+**Position:** Digital peer communities (WhatsApp groups, Facebook artisan communities) are retention/engagement spaces at launch — not acquisition channels.
+
+**Core argument (5 points):**
+
+1. **Commercial content in peer support spaces is filtered aggressively.** French artisan WhatsApp groups have established norms. Self-promotion without context reads as noise. The group reflex is silence or gentle redirect. D42 evidence: "WhatsApp groups are competitive spaces — French artisan groups are peer support networks, not recommendation engines."
+
+2. **Authentic peer endorsement requires existing users — chicken-and-egg.** The only working WhatsApp-as-acquisition is organic: Marc tells Jean-Pierre at the wholesaler, "Cette app m'a fait gagner 2h." Jean-Pierre asks for the link. This happens at the Point P counter, not in the WhatsApp group.
+
+3. **Facebook groups add algorithmic suppression.** New accounts posting product recommendations get suppressed or flagged. Organic reach to target audience is near zero without existing group credibility.
+
+4. **SEO is discovery; WhatsApp groups and Facebook are not.** GTM conflates three distinct "digital" things: SEO (genuine discovery), WhatsApp peer groups (social habitat), Facebook communities (social habitat with algorithmic suppression). Only SEO belongs in acquisition.
+
+5. **Prescriber discovery is digital but institutional, not peer-community.** Architects and property managers discover via email/professional portals — not WhatsApp groups. D49 correctly identifies prescriber as high-trust channel but misidentifies where discovery happens.
+
+**Challenged Assumption:**
+- **Assumption: D49** — "Digital channels (WhatsApp groups, Facebook artisan communities, SEO) — where Marc actually discovers things"
+- **Challenge:** Marc discovers tools through trusted intermediaries in professional contexts, not peer WhatsApp groups. WhatsApp and Facebook communities belong in retention/engagement, not acquisition.
+
+**Verdict: RESOLVED**
+
+Digital peer communities = retention/engagement, NOT acquisition channels at launch.
+
+GTM reclassification:
+- SEO → Acquisition (primary digital discovery)
+- WhatsApp groups → Retention/Engagement (brand recall, peer support for existing users)
+- Facebook communities → Retention/Engagement (community building, not discovery)
+- Prescriber networks → Acquisition (highest-trust discovery via institutional digital comms)
+- Specialist retailers → Acquisition (physical trial/awareness)
+
+Specific GTM recommendation: Stop treating WhatsApp group posts as acquisition input. Invest in SEO, prescriber enablement via institutional digital comms, and existing-user word-of-mouth enabled naturally at wholesaler/job site. WhatsApp groups = amplification layer for bouche-à-oreille, not acquisition channel itself.
+
+---
+
+*Last updated: 2026-03-30T18:01*
+
+---
+
+## Pulse 2026-03-30T18:00 — OfflineFirst Specialist Debate
+
+---
+
+## Debate D78 Follow-on: Offline-First — Required at Launch or v2?
+
+**Context:** D78 resolved JWT → API key auth for Sprint 0. D9 excluded "offline" from MVP as too complex. D17 resolved PWA-first → React Native via Expo. Nobody has addressed the interaction between these decisions: does the React Native stack change the offline calculus?
+
+### Technical Architect — Offline-First Required at Launch (VERDICT)
+
+**Assumption challenged (D9):** "No offline" was decided before D17 (React Native from Day 1) was resolved. The "offline = complex" argument applied to a web-stack architecture where offline required service workers, IndexedDB, and sophisticated sync logic. With React Native + Expo, offline-first is the default pattern, not an engineering Everest.
+
+**Assumption challenged (D78/D9 interaction):** API-key auth is MORE compatible with offline than JWT — no token refresh race conditions, no expiry during dead zones. D78's switch to API keys accidentally makes offline easier, not harder.
+
+**Core argument:**
+1. **Product fails at moments it matters most.** Marc's worst admin day is standing in front of a client with no signal, needing to pull up or create a devis. If the app shows "no connection" — the product has failed its core job.
+2. **"v2 offline" loses first 100 users.** Early adopters are most forgiving AND most vocal. One failure on a job site → 1-star review + "that app doesn't work on job sites" in WhatsApp groups.
+3. **Stack change invalidates D9's complexity reasoning.** WatermelonDB + Expo-sqLite = offline storage in hours, not sprints. Fastify API requires zero changes. Sync is last-write-wins for solo users.
+4. **Offline-first is mobile table stakes, not v2 polish.** Any mobile app managing user-generated CRUD data should use offline-first architecture by default.
+5. **Sprint 0 impact is manageable.** ~2 days mobile work (WatermelonDB + sync + conflict UI). ~2 hours backend work (updated_at + client UUIDs). Acceptable for a 5-day sprint.
+
+**Technical specifics:**
+- Local storage: WatermelonDB or expo-sqlite (2-4 hours setup)
+- Sync: Last-write-wins with conflict detection UI (show both, Marc picks)
+- Backend: Zero endpoint changes. Add `updated_at` timestamp + accept client-generated UUIDs
+- API key: SecureStorage on device, never expires, no refresh needed
+- Offline indicator: Subtle "pending sync" badge. No scary errors. Silent background sync.
+
+**Verdict:** RESOLVED — Offline capability REQUIRED at launch. D9 is REOPENED for the offline component.
+
+**Decision:**
+- Sprint 0 mobile app uses WatermelonDB/expo-sqlite for local-first storage
+- Fastify API adds `updated_at` timestamps and accepts client UUIDs
+- Sync: last-write-wins with manual override for serious conflicts
+- D9 updated: "No offline" REMOVED. Replaced with: "Offline-first with background sync."
+
+**Sprint 0 impact:** +2 days mobile work. Zero new backend infrastructure.
+
+---
+
+## Pulse 2026-03-30T18:00 — AccessLogique Specialist Debate
+
+---
+
+## Debate: "Accès Fondateur" — Right Framing or Wrong Signal?
+
+**Challenge:** D77's conclusion that replacing "Membre fondateur" with "Accès Fondateur" resolves the discount-framing problem. D77 correctly identified that "Membre fondateur" was a discount signal wearing relationship language. But the fix — "Accès Fondateur" — introduces a new problem: the word "Fondateur" (founder) itself creates elite-tier signaling that directly conflicts with "simple like WhatsApp" positioning.
+
+### AccessLogique — Position: "Accès Fondateur" Is the Wrong Fix
+
+**Core argument, 5 points:**
+
+**1. "Accès Fondateur" still signals a tier, just without the discount.**
+The word "Fondateur" (founder) means there are founders and non-founders. That is a tiered membership model. It tells Marc: "Some users have this special status. You might be one of them. Others aren't." This is the opposite of how WhatsApp works — there's no "WhatsApp Founder Access." There's one product, one app, same for everyone.
+
+**2. "Accès Fondateur" creates the latecomer problem D77 was trying to solve.**
+Marc joins in Month 3. He sees "Accès Fondateur" mentioned in the app, in reviews, in WhatsApp artisan groups. He asks: "What founding access did I miss?" The answer is Louis's time-limited personal onboarding. But from Marc's perspective, he's a second-class user. He didn't get the personal onboarding. He didn't get the 30-minute call. He's on the outside of a club he didn't know existed.
+
+**3. The scarcity signal (Louis's calendar) is a feature of onboarding, not a product tier.**
+Louis's limited personal capacity for hand-holding onboarding is real and credible. But it should be described as an onboarding philosophy, not a named access tier. "Onboarding personal avec Louis (places limitées)" is a launch mechanic. "Accès Fondateur" is a permanent product category.
+
+**4. The simplicity-first positioning cannot support any named tier at launch.**
+D12 landed on "Sans vous prendre la tête" as the core brand signal. D53 reinforced it. The subheadline promises "5 minutes, depuis votre téléphone." There's no room in that positioning for "and by the way, some users get special founder access." Every element that introduces complexity, hierarchy, or social differentiation into the product story undermines the simplicity signal.
+
+**5. The 4 relationship benefits should be delivered as onboarding experience, not as a tier badge.**
+Real relationship benefits don't require a named tier to deliver them. The first 50 users get Louis's personal attention because it makes sense for a solo founder at launch — not because they need to be labeled "fondateurs."
+
+### Challenged Assumptions
+
+- **Assumption: D77 — "Accès Fondateur replaces 'Membre fondateur' without introducing new problems."**
+  Challenge: D77 solved the discount-framing problem by removing the price signal ("pay less now"). But it kept the tiered-membership signal ("you are special class of user"). These are two different problems. The second problem — tiered membership signaling — was not addressed by the D77 resolution.
+
+- **Assumption: D77 — "Scarcity via Louis's calendar works as 'Accès Fondateur' urgency."**
+  Challenge: Louis's personal scarcity is a credible, honest constraint — but it should describe a launch onboarding experience, not a permanent product tier. "First 50 users get a 30-minute onboarding call with Louis" is a launch offer. "Accès Fondateur" is a permanent membership tier.
+
+- **Assumption: D75 (original) — "A named relationship tier (Membre fondateur or Accès Fondateur) creates community without training users to wait for discounts."**
+  Challenge: Both "Membre fondateur" and "Accès Fondateur" create a named tier that generates latecomer resentment. The problem isn't the word "membre" or "accès" — it's that any named tier implies there are people inside and people outside the tier.
+
+### Verdict
+
+**RESOLVED — "Accès Fondateur" is rejected. The tier is eliminated.**
+
+**Specific decisions:**
+1. **Kill "Accès Fondateur" as a product tier.** Not renamed — eliminated as a named category.
+2. **Deliver the relationship benefits through onboarding, not labels:**
+   - Direct WhatsApp access to Louis → "Support par WhatsApp — écrivez à Louis directement" (available to all early users)
+   - Named in app credits → "Crédits" section, list of early supporters (no "Accès Fondateur" label)
+   - Roadmap vote → "Les 50 premiers utilisateurs votent sur les priorités du mois" (temporary launch mechanic, not a tier)
+   - Onboarding call → "Louis appelle chaque nouvel utilisateur pendant la première semaine" (founder's personal commitment, not a tier benefit)
+3. **Scarcity signal:** "Les 50 premiers utilisateurs inscrits reçoivent un appel de découverte avec Louis." — temporary launch offer, clear, honest, time-bound.
+4. **Single price forever:** €29/month. No founding/standard/professional tiers. No access tiers. One product.
+5. **Messaging:** "Essayez gratuitement. Quand vous êtes prêt, c'est €29/mois. Louis répond sur WhatsApp en moins de 24h." — same relationship value, no tier label, no latecomer problem.
+
+**D77 UPDATED:** "Accès Fondateur" is eliminated as a product tier. Relationship benefits delivered as onboarding experience and support channels, not as a named membership category. Scarcity = temporary launch offer (first 50 users get Louis's onboarding call), not a permanent tier. D75 fully superseded — no named founding tier of any kind.
+
+---
+
+*Last updated: 2026-03-30T18:00*
+
+---
+
+## Pulse 2026-03-30T17:59 — Three Specialist Debates
+
+---
+
+## Debate 80: "Accès Fondateur" — Right Framing or Wrong Signal?
+
+**Challenge:** D77's conclusion that replacing "Membre fondateur" with "Accès Fondateur" resolves the discount-framing problem. The fix introduces a new problem: the word "Fondateur" creates elite-tier signaling that conflicts with "simple like WhatsApp" positioning.
+
+### Product Strategist — "Accès Fondateur" Is Wrong Fix
+
+**Assumption challenged from D77:** D77 correctly identified that "Membre fondateur" was a discount signal wearing relationship language. But "Accès Fondateur" still signals a tier — founders vs non-founders. That is a tiered membership model. The word "Fondateur" means there are founders and non-founders. This is the opposite of how WhatsApp works.
+
+**Core arguments:**
+1. "Accès Fondateur" still creates latecomer problem — Month 3 Marc sees the tier and asks what he missed
+2. Scarcity via Louis's calendar should describe a launch onboarding experience, not a product tier
+3. Simplicity-first positioning cannot support any named tier — every element introducing hierarchy undermines "Sans vous prendre la tête"
+4. The 4 relationship benefits should be delivered as onboarding experience, not tier badges
+5. Named tier implies people inside and outside the tier — solution is eliminate the visible tier
+
+**VERDICT on D77:**
+
+**RESOLVED — "Accès Fondateur" is ELIMINATED. No named tier of any kind.**
+
+- Kill "Accès Fondateur" as a product tier — eliminated, not renamed
+- Relationship benefits delivered through onboarding, not labels: "Support par WhatsApp — écrivez à Louis directement" (all early users), credits section listing early supporters, roadmap vote as launch mechanic
+- Scarcity signal: "Les 50 premiers utilisateurs inscrits reçoivent un appel de découverte avec Louis." — temporary launch offer, not a tier
+- Single price forever: €29/month. No founding/standard/professional tiers. No access tiers. One product.
+- Messaging: "Essayez gratuitement. Quand vous êtes prêt, c'est €29/mois. Louis répond sur WhatsApp en moins de 24h." — same relationship value, no tier label
+
+**D77 UPDATED:** "Accès Fondateur" eliminated. No named founding tier. Relationship benefits through onboarding experience. D75 fully superseded.
+
+---
+
+## Debate 81: Offline-First — Required at Launch or v2?
+
+**Challenge:** D9's "no offline" decision was made before D17 (React Native) was chosen. React Native + Expo changes the calculus — offline is now a client-side storage problem, not a complex infrastructure problem.
+
+### Technical Architect — Offline Capability Required at Launch
+
+**Assumption challenged from D9:** "No offline" was appropriate for a web-stack architecture. For a React Native mobile app used by artisans on job sites — basements, rural areas — connectivity dependency is a product-killing failure mode.
+
+**Core arguments:**
+1. Product fails at exactly the moments it matters most — job site, no signal, standing in front of client needing a devis
+2. "v2 offline" is how you lose first 100 users — 1-star review, WhatsApp group warning
+3. D9 was decided before D17 (React Native) — the "offline = complex" argument no longer applies
+4. Sprint 0 scope impact is minimal — API endpoints unchanged, local storage adds ~2 days mobile work
+5. Offline-first is industry standard for mobile CRUD apps — burden of proof should be on "no offline"
+
+**VERDICT on D9:**
+
+**RESOLVED — Offline capability REQUIRED at launch. D9 REOPENED for offline component.**
+
+**Specific decision:** Sprint 0 architecture is offline-first. React Native mobile uses WatermelonDB/expo-sqlite for local-first storage. Fastify API adds `updated_at` timestamps and accepts client-generated UUIDs. Sync is last-write-wins with simple conflict UI. No changes to API endpoint contracts.
+
+- **Mobile:** WatermelonDB integration (~half day) + sync layer (1 day) + conflict UI (half day) = ~2 days mobile work
+- **Backend:** `updated_at` on all entities + accept client UUIDs = ~2 hours
+- **Net Sprint 0 impact:** +2 days, acceptable given 5-day sprint
+
+**D9 UPDATED:** "No offline" REMOVED. Replace with: "Offline-first with background sync. Conflict resolution via last-write-wins with manual override."
+
+---
+
+## Debate 82: Digital Peer Communities — Acquisition or Retention?
+
+**Challenge:** D49 assumes "digital channels (WhatsApp groups, Facebook artisan communities, SEO)" are where Marc discovers tools. Peer communities are habitats, not discovery channels. The GTM conflates communication habitat with tool discovery pathway.
+
+### Growth Strategist — Peer Communities Are Retention, Not Acquisition
+
+**Assumption challenged from D49:** WhatsApp groups and Facebook communities are tool discovery channels. These are peer support ecosystems — their currency is job leads, technical troubleshooting, pricing norms. Commercial tool recommendations without a triggering question are filtered aggressively.
+
+**Core arguments:**
+1. Commercial content in peer support spaces is filtered — "on reste entre nous ici" reflex
+2. Authentic peer endorsement requires existing user base — chicken-and-egg at launch
+3. Facebook groups add algorithmic suppression of non-core member posts
+4. SEO is a discovery channel — WhatsApp groups and Facebook are not
+5. Prescriber discovery happens in professional contexts (email, portals), not peer communities
+
+**VERDICT on D49:**
+
+**RESOLVED — Digital peer communities are retention/engagement spaces, NOT acquisition channels.**
+
+**GTM reclassification:**
+
+| Channel | Classification | Role |
+|---------|--------------|------|
+| SEO | Acquisition | Primary digital discovery |
+| WhatsApp groups | Retention/Engagement | Brand recall, peer support for existing users |
+| Facebook communities | Retention/Engagement | Community building, not discovery |
+| Prescriber networks | Acquisition | Highest-trust discovery channel (institutional digital) |
+| Specialist retailers | Acquisition | Physical trial/awareness |
+
+**Specific recommendation:** Stop treating WhatsApp group posts as acquisition. Invest in SEO (problem-solution queries) and prescriber enablement (email/professional portals). WhatsApp groups = engagement/retention for existing users. Word-of-mouth happens at the wholesaler counter or job site — not in peer groups.
+
+---
+
+*Last updated: 2026-03-30T17:59*

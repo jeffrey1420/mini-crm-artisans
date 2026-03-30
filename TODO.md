@@ -14,7 +14,7 @@
 | D6 | Trial | No time-limited trial. Free tier IS the trial (10 clients, 5 active devis). Conversion happens at Free limit. Engagement: restated by D43 — channel secondary, Free tier design determines activation. 80% limit heads-up notification. No countdown emails. | Debates 38/43 (Product Strategist) | 2026-03-30 |
 | D7 | Architecture | Nuxt 3 + OVH managed Postgres — REFINED: API-first preferred but deferred to post-MVP unless blocking Sprint 0 | Growth+Architect | 2026-03-30 |
 | D8 | E-invoicing | v2 feature (Chorus Pro compatible) | External review | 2026-03-30 |
-| D9 | Not MVP | No Kanban, no multi-user, no offline, no API keys | External review | 2026-03-30 |
+| D9 | Not MVP | No Kanban, no multi-user, offline-first with background sync (D81), no API keys | External review | 2026-03-30 |
 | D10 | Buyer trigger | "Admin pain" not "CRM need" | External review | 2026-03-30 |
 | D11 | Mobile | React Native from Day 1 via Expo. Push notifications: Expo Push at launch (budget 1-2 weeks). | Debates 27/44/47 (Technical Architect) | 2026-03-30 |
 | D12 | Landing page | Simplicity-first — H1: "Vos devis et factures, sans vous prendre la tête." H2: "Créez et envoyez votre premier devis en 5 minutes. Depuis votre téléphone." Proof lives in Free tier. | Debates 19/53 (Product Strategist) | 2026-03-30 |
@@ -72,6 +72,7 @@ All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 
 ### Resolved (D49, D50, D51):
 - **D49 (GTM Priority):** Growth Strategist won — D48 priority order stands. Digital channels (WhatsApp/Facebook/SEO) → Specialist retailers → Prescriber networks → Wholesaler. Prescribers cannot lead GTM because they recommend artisans to clients, not tools to artisans. U11 audit still worth doing.
+- **D49 UPDATED (Debate 82):** Digital peer communities (WhatsApp groups, Facebook) reclassified as RETENTION/ENGAGEMENT, NOT acquisition. SEO = primary digital acquisition. WhatsApp groups + Facebook = brand recall and peer support for existing users, not discovery.
 - **D50 (Push at Launch):** Technical Architect won — email-only relances at v1 launch is acceptable. Expo Push in v1.1. Engineering bandwidth goes to devis flow, not relances. GetApp/Capterra fear overstates comparison-site impact for artisan discovery.
 - **D51 (Free tier conversion):** Product Strategist won — habit formation is seductive but unmeasurable as primary conversion mechanism. Habits form around pain, not convenience. Design for forcing functions + limit-hit as primary. Habit tracking becomes secondary retention KPI (daily engagement rate).
 
@@ -90,7 +91,7 @@ All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 
 ---
 
-*Last updated: 2026-03-30T14:57*
+*Last updated: 2026-03-30T17:59*
 
 ## New from Pulse 2026-03-30T14:57
 
@@ -134,6 +135,8 @@ All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 - [ ] **D63 RESOLVED:** Design the "situation financière" snapshot for Free tier home — automatically-produced weekly output showing: outstanding devis (with days-open), pending factures (aging buckets: 15/30/45/60+ days), revenue this month vs last month, dormant clients (30+ days inactive). This is the Free tier's primary value output. Push-ready content. Notification channel debates are secondary until this exists. (Debate 63)
 - [ ] If prototype not ready in 1 week: proceed to build anyway, validate post-launch (Debate 31)
 - [ ] Sprint 0: Fastify + Postgres only (NOT Nuxt 3). Compliance foundations first (3-4 days): TVA per-line schema, sequential numbering engine, mentions légales renderer, client-type schema. Sprint 1 = client+devis flow. Sprint 2 = facture+email relances. (Debates 54/64)
+- [ ] **D81 NEW:** Sprint 0 is offline-first. Mobile: WatermelonDB/expo-sqlite for local-first storage (~2 days mobile work). Backend: add `updated_at` timestamps + accept client-generated UUIDs on all entities (~2 hours). Sync: last-write-wins with conflict UI. No changes to API endpoint contracts.
+- [ ] **D81 UPDATED:** Sprint 0 timeline updated to 7 days (was 5 days, +2 days for offline-first). Offline-first is required at launch — D9's "no offline" decision was made before React Native stack was chosen and no longer applies.
 - [x] **D57 RESOLVED:** API-first (Node/Fastify + static landing + JWT) preferred. Nuxt 3 deferred unless blocking Sprint 0. OVH managed Postgres retained. (Debate 61)
 - [x] **D58 RESOLVED:** Email relances in v1 (Sprint 2, 1-2 days). Expo Push relances in v1.1. (Debate 58)
 - [x] **D56 RESOLVED:** 40% WoM figure RETIRED. Measurement protocol: "Comment connaissez-vous?" at signup + referral codes. Month 3 target: 20% peer referral. (Debate 60)
@@ -199,9 +202,10 @@ All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 
 ### GTM Strategy (D48 — Wholesaler NOT Primary)
 - [ ] **D48 NEW:** Audit solo artisan (45-55, French market) purchasing channels — identify top 5 digital touchpoints and top 3 specialist retailer types BEFORE committing to wholesaler investment
-- [ ] **D48 NEW:** Primary GTM = digital channels: WhatsApp artisan groups, Facebook artisan communities, SEO for "devis/facture artisan" terms
+- [ ] **D82 UPDATED:** Primary GTM = SEO (problem-solution queries for devis/facture artisan) — THIS is where Marc actively searches for solutions
+- [ ] **D82 UPDATED:** WhatsApp groups + Facebook = RETENTION/ENGAGEMENT, not acquisition. Role: brand recall, peer support for existing users, boca-à-oreille amplification layer. Stop treating as acquisition input.
 - [ ] **D48 NEW:** Secondary GTM = specialist retailers who serve solo artisans (not generalist wholesaler chains)
-- [ ] **D48 NEW:** Tertiary GTM = prescriber networks (architects, property managers) — pull-through demand at job site level
+- [ ] **D82 UPDATED:** Prescriber networks = highest-trust ACQUISITION channel — but through institutional digital comms (email, professional portals), not peer communities. Architect/property manager → artisan discovery happens in professional contexts, not WhatsApp groups.
 - [ ] Wholesaler presence (Gedimat/Point P counter displays) = secondary brand-awareness only, not primary acquisition
 
 ### Sprint 0 Build (D54 + D71 + D74 — 5 Days, Compliance Foundations)
@@ -218,7 +222,9 @@ All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 - [x] **D75 UPDATED (Debate 77):** 4 benefits retained, reframed as relationship benefits (not price benefits): (1) named in app credits, (2) direct WhatsApp to Louis, (3) roadmap vote, (4) monthly priority vote. No locked price benefit.
 - [x] **D75 RESOLVED:** Value anchor: "Moins d'une heure de main d'œuvre par mois." Trust signals required BEFORE €29 appears on landing page: (1) at least one specific beta testimonial, (2) concrete social proof number, (3) founding member framing with explicit benefits.
 - [x] **D59 RESOLVED:** SEPA direct debit — evaluate Stripe SEPA integration (French artisans skeptical of credit card subscriptions).
-- [ ] **Landing page pricing copy:** Replace "Membre fondateur — €29 puis €39" with "Accès Fondateur — rejoignez les premiers supporters." Single €29 price on landing page. No discount framing.
+- [ ] **Landing page pricing copy:** Replace "Membre fondateur — €29 puis €39" with "Accès Fondateur" ELIMINATED (Debate 80). Single €29/month, no tier. Language: "Essayez gratuitement. Quand vous êtes prêt, c'est €29/mois. Louis répond sur WhatsApp en moins de 24h."
+- [ ] **D80 NEW:** Kill "Accès Fondateur" tier entirely — no named founding/access tier. Relationship benefits delivered through onboarding experience, not tier labels. All early users get: direct WhatsApp support (écrivez à Louis), credits section listing early supporters, roadmap vote as launch mechanic. No tier badge anywhere in the product.
+- [ ] **D80 NEW:** Scarcity signal = temporary launch offer: "Les 50 premiers utilisateurs inscrits reçoivent un appel de découverte avec Louis." — time-limited onboarding, not a permanent product tier.
 
 ### Free Tier + Conversion (D43 + D46 + D63 + D70 + D76)
 - [ ] **D76 RESOLVED:** "Better Free Tier" trap named — every Free tier improvement without a conversion trigger makes the product harder to monetize. Document this risk.
