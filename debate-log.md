@@ -708,3 +708,158 @@ For French artisans aged 45-55, solo operators, the real objection is not "€29
 | U9 | Free tier activation | REOPENED — 3-email engagement sequence proposed (Debate 38) | 2026-03-30 |
 
 *Last updated: 2026-03-30T12:16*
+
+---
+
+## Pulse 2026-03-30T12:28 — Three New Debates
+
+---
+
+## Debate 40: Email Engagement Sequence — Wrong Channel for This Persona
+
+**Challenge:** D6 (Free tier as trial) — Growth Strategist's proposed resolution (3-email Days 1-7 engagement sequence) assumes email works as an activation channel for French artisans. Product Strategist challenges this fundamental assumption.
+
+### Product Strategist — Email is the Wrong Channel
+
+**Assumption challenged:** That email is the appropriate engagement channel for Days 1-7 activation for French artisan users (45-55 year old tradespeople, smartphone-native, managing admin at 9pm).
+
+**Core argument:**
+
+The Growth Strategist proposes a 3-email sequence as a "value-first" alternative to urgency. But this proposal reveals a deeper assumption that's never been questioned: **that email works for this persona**.
+
+It doesn't. Here's why:
+
+**Marc's communication reality:**
+- Primary channel: WhatsApp. Always on. Between job sites, not at a desk.
+- Email check: Maybe 9pm, on his phone, when he's exhausted and just wants to finish admin.
+- Push notifications: He probably ignores most, but at least they interrupt his actual work day.
+
+**The email problem:**
+An email sent at 9am Monday titled "Ajoutez votre premier client" lands in an inbox he won't see until 9pm — if at all. By then, the context is gone. The job site morning is a distant memory. He's now in "finish admin" mode, not "discover product value" mode.
+
+**The WhatsApp opportunity:**
+This is who these artisans ARE. They live in WhatsApp groups with other tradespeople, with clients, with prescripteurs. A WhatsApp message or a push notification tied to a specific moment (first devis of the day? end of job site?) would have 10x the engagement rate of an email.
+
+**The real flaw in D6 and the proposed resolution:**
+Both assume activation is the problem. But for a solo artisan like Marc, the activation moment isn't "add a client" — it's "this saved me 30 minutes at 9pm." The Free tier AS trial works fine IF you can trigger that moment. Emails three days apart don't trigger that moment. Contextual nudges when he's actually doing admin might.
+
+**The challenge to the Growth Strategist:** On what evidence is email the right channel for Day-1 through Day-7 engagement for French tradespeople? Or is this just defaulting to SaaS playbook because it's comfortable?
+
+---
+
+**Verdict on D6:**
+
+D6 is directionally correct — Free tier as trial removes countdown anxiety and respects the artisan's autonomy. But it's incomplete.
+
+**The fix is not email sequences. It's channel and timing:**
+
+1. **Push notifications** instead of email for Days 1-3. "Vous avez 5 minutes? Créez votre premier devis en 2 minutes."
+2. **WhatsApp integration** (optional opt-in during onboarding) for those who prefer it. This is their world.
+3. **Contextual prompts** triggered by time-of-day (evening reminder) or action (added first client → "Pro-tip: génère un PDF prêt à envoyer")
+4. Keep the Free tier limits generous but add a **single "you're almost at your limit" notification** at 80% — not a countdown, just a heads-up that creates natural urgency without pressure.
+
+The Growth Strategist's heart is in the right place (engagement matters) but the channel is wrong. Don't send emails to people who live on WhatsApp.
+
+---
+
+## Debate 41: Push Notifications Are Not The Product — Email Is Fine for v1
+
+**Challenge:** D17 (React Native via Expo) — Both the original decision and the "circuit breaker" resolution (FCM/APNS fallback) assume push notifications are a core feature warranting complex infrastructure. Technical Architect challenges this fundamental premise.
+
+### Technical Architect — Notifications Are Not The Product
+
+**Assumption challenged:** Push notifications are a "core feature" warranting complex infrastructure decisions (FCM/APNS circuit breakers, monitoring plans, migration triggers).
+
+**Core argument:**
+
+You're building a Mini-CRM for 45-55 year old French artisans. The product is: client management + devis + factures + relances. That's document lifecycle management. Notifications are a **delivery mechanism**, not the product.
+
+The entire debate is framed backwards. It assumes push notifications must work perfectly from Day 1 because they're "core." But ask yourself: what did French artisans do before this app? They sent emails. They made phone calls. They put sticky notes on desks. Email worked fine for decades.
+
+For this audience, email-based relances are:
+- Already familiar (they've been doing this)
+- Works on any device without installation
+- Doesn't require handling APNS certificates, FCM credentials, Expo token management
+- Has delivery receipts. You know the artisan sent it. You know if it bounced.
+
+The circuit breaker plan (FCM/APNS fallback + 3-month uptime monitoring + bare RN migration trigger) is a **v1 distraction**. You're engineering for notification reliability when you should be engineering for document reliability. Can you generate a professional PDF devis? Can you track which factures are overdue? That's the product.
+
+Push notifications are v2 polish. Get the document management right first. Add push when you have actual users complaining about email not being enough.
+
+**Verdict on D17:**
+
+1. Use Expo-RN. It's fine for v1.
+2. **Do not build FCM/APNS direct pipeline at launch.** Email notifications only.
+3. The "circuit breaker" resolution adds complexity before you have users to justify it.
+4. Set a reminder: if you hit 50 paying users who complain about email notifications, then invest in push.
+
+The lock-in risk is real but the consequence is wrong. The real lock-in risk is building your document engine on a platform that makes PDF generation and email delivery complicated. That's where your debugging energy should go at v1, not notification infrastructure.
+
+**Start with email. Ship the product. Add push when it matters.**
+
+---
+
+## Debate 42: WhatsApp CTA is Attribution Theater
+
+**Challenge:** U8 (WhatsApp as acquisition channel) — Product Strategist's proposal assumes a CTA appended to WhatsApp devis messages can be meaningfully tracked and attributed. Growth Strategist challenges the attribution assumption and the B2B segmentation.
+
+### Growth Strategist — The Attribution Theater Problem
+
+**Assumption challenged:** The assumption that a CTA appended to a WhatsApp devis message can be meaningfully tracked and attributed as an acquisition mechanism — even with UTM parameters.
+
+**Core argument:**
+
+The Product Strategist's case rests on a 50k monthly impression number and "trust-transfer moment." But both pillars are weaker than presented.
+
+**On impressions:** 50k × artisan-client messages sounds impressive. But the conversion funnel from "sees CTA in WhatsApp devis" → "clicks link" → "lands on simplicity-first landing page" → "signs up for B2B SaaS tool" has a compounding drop-off problem. Homeowners who receive devis aren't looking for CRM software. They don't have a professional problem that this tool solves. You're paying in attention for an audience that has zero purchase intent. The 50k number is vanity metrics theater.
+
+**On the B2B segmentation:** Property managers and business owners receiving artisans' devis is a real segment. But the question is: are they receiving *via WhatsApp*? In France, B2B invoicing tends toward email, formal portals, or even physical paper for property management. WhatsApp for professional devis exchange is more common for small artisans dealing directly with individual clients — which circles back to the homeowner problem.
+
+**On UTM tracking as the solution:** Even if a B2B recipient clicks the CTA, they land on a landing page designed for artisans (simplicity-first, professional invoicing focus). The messaging mismatch will tank conversion. And if you UTM-track it, you'll measure clicks, not signups. You'll optimistically report "Channel working" while actual funnel conversion hemorrhages invisibly.
+
+**The real opportunity being missed:** The context states "WhatsApp groups of artisans are active." This is the actual WhatsApp acquisition vector — artisan-to-artisan networks, not artisan-to-client broadcasts. If 10k artisans are in 5 active WhatsApp groups each, that's 50k artisan-to-artisan touchpoints per month that could carry peer endorsement. Word-of-mouth is already 40% of acquisition. WhatsApp groups are the *amplification layer* for bouche-à-oreille, not a CTA delivery mechanism.
+
+**Verdict on U8:**
+
+**Kill the explicit CTA in WhatsApp devis messages.** It's a low-conversion attribution theater play that risks diluting brand perception (marketing in professional invoices feels cheap to French artisans).
+
+**Redirect U8 to:** Develop a "Send to colleague" or "Share with fellow artisan" lightweight mechanism within the product itself, designed for WhatsApp group contexts. Track referrals from existing users sharing with peers in WhatsApp groups — this captures the authentic word-of-mouth amplification with attribution, rather than trying to turn client-facing devis into a marketing channel.
+
+Secondary test: UTM-track a *minimal* CTA (no explicit sales copy) in B2B-facing devis only (identify property manager recipients via domain or context), with messaging that speaks to their workflow ("Recevez vos devis proprement →"). Keep it whisper-quiet. Measure separately. If it converts, it converts. If not, kill it fast.
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D1 | Positioning | Kill "CRM" — devis, factures, relances | 2026-03-30 |
+| D2 | MVP scope | 4 features, SEQUENCED sprints. Sprint 0 = minimum devis flow (3-5d, minimal schema). Sprint 1 = client+devis. Sprint 2 = facture+relances. | 2026-03-30 |
+| D3 | Primary persona | Marc — solo smartphone-native | 2026-03-30 |
+| D4 | Stack | Single managed Postgres | 2026-03-30 |
+| D5 | Pricing | Free + €29 two-tier. Drop €49/€79. | 2026-03-30 |
+| D6 | Trial | No time-limited trial. Free tier IS the trial. REOPENED: engagement channel (email vs push) needs resolution. | 2026-03-30 |
+| D7 | Architecture | Nuxt 3 + OVH managed Postgres | 2026-03-30 |
+| D8 | E-invoicing | v2 feature | 2026-03-30 |
+| D9 | Not MVP | No Kanban, no multi-user, no offline, no API keys | 2026-03-30 |
+| D10 | Buyer trigger | "Admin pain" not "CRM need" | 2026-03-30 |
+| D11 | Mobile | React Native from Day 1 via Expo | 2026-03-30 |
+| D12 | Landing page | Simplicity-first — "Vos devis et factures, sans vous prendre la tête" | 2026-03-30 |
+| D13 | Home view | Job-first — Active Job Card as home anchor | 2026-03-30 |
+| D14 | E-invoicing timing | v2 — NOT Day 1 | 2026-03-30 |
+| D15 | Relances differentiator | DE-EMPHASIZED — secondary feature below fold | 2026-03-30 |
+| D16 | Trial length | No countdown trial — Free tier IS the trial | 2026-03-30 |
+| D17 | Mobile strategy | React Native from Day 1 via Expo. Email-only notifications at launch. Push notifications deferred to v2 unless 50+ paying users complain. | 2026-03-30 |
+| D40 | Engagement channel | REOPENED — push notifications + WhatsApp opt-in beats email for Days 1-7 engagement | 2026-03-30 |
+| D41 | Notification infra | FCM/APNS circuit breaker NOT needed at v1. Email-only at launch. | 2026-03-30 |
+| D42 | WhatsApp CTA | REOPENED — explicit CTA in WhatsApp devis messages killed. Referral within product for WhatsApp groups instead. | 2026-03-30 |
+
+| U1 | Discovery | REPLACED — readiness protocol | 2026-03-30 |
+| U2 | E-invoicing platform | Factea first when v2 | 2026-03-30 |
+| U7 | Domain | DEFERRED — subdomain/Carrd until MVP validated | 2026-03-30 |
+| U8 | WhatsApp acquisition | REOPENED — explicit CTA killed. Referral mechanism + whisper-quiet B2B test only. | 2026-03-30 |
+| U9 | Free tier activation | REOPENED — push/WhatsApp engagement beats email for this persona | 2026-03-30 |
+
+---
+
+*Last updated: 2026-03-30T12:28*

@@ -11,7 +11,7 @@
 | D3 | Primary persona | Marc — solo smartphone-native artisan | External review | 2026-03-30 |
 | D4 | Stack | Single managed Postgres, NOT per-customer VPS | External review | 2026-03-30 |
 | D5 | Pricing | Free + €29 two-tier. No €19 SKU. Drop €49/€79. Value anchor: "2h/week = 1h labor = €29/month." | Debate 33 (Product Strategist) | 2026-03-30 |
-| D6 | Trial | No time-limited trial. Free tier IS the trial (10 clients, 5 active devis). Conversion happens at Free limit. No countdown emails. Day-7 human check-in only. | Debate 36 (Product Strategist) | 2026-03-30 |
+| D6 | Trial | No time-limited trial. Free tier IS the trial (10 clients, 5 active devis). Conversion happens at Free limit. Engagement: push notifications + optional WhatsApp opt-in (NOT email). 80% limit heads-up notification. No countdown emails. | Debates 38/40 (Product Strategist) | 2026-03-30 |
 | D7 | Architecture | Nuxt 3 + OVH managed Postgres | Updated | 2026-03-30 |
 | D8 | E-invoicing | v2 feature (Chorus Pro compatible) | External review | 2026-03-30 |
 | D9 | Not MVP | No Kanban, no multi-user, no offline, no API keys | External review | 2026-03-30 |
@@ -22,7 +22,7 @@
 | D14 | E-invoicing timing | v2 — NOT Day 1 (Debate 21 Growth Strategist) | Debate 21 |
 | D15 | Relances differentiator | Secondary feature only — below fold, "Fonctionnalités" section. Frame as "Suivi de paiement" not "Relances automatiques." Not in hero. | Debate 25 (Product Strategist) |
 | D16 | Trial length | 14 days (updated from 30). No credit card at signup. Email drip: day 7, 3, 1. | Debate 26 (Growth Strategist) |
-| D17 | Mobile strategy | React Native from Day 1 via Expo (updated from PWA-first). Single codebase, APNS/FCM push, App Store from launch. | Debate 27 (Technical Architect) | 2026-03-30 |
+| D17 | Mobile strategy | React Native from Day 1 via Expo. Email-only notifications at launch. Push notifications deferred to v2 unless 50+ paying users complain. | Debates 27/41 (Technical Architect) | 2026-03-30 |
 
 ## 🔄 Reopened This Pulse (Need Resolution)
 
@@ -46,11 +46,14 @@
 - [ ] Buy domain (U7) — DEFERRED. Use `devis.lschvn.foo` subdomain or Carrd landing page until MVP validated post-guerrilla test. Domain purchase happens after product direction confirmed. (Debate 34)
 - [ ] Build the Active Job Card data model (`jobs.status`, `jobs.scheduled_date`, `jobs.updated_at`)
 - [x] RESOLVE D15: Relances = secondary feature below fold. "Fonctionnalités" section only. NOT in hero.
-- [x] RESOLVE D16: Trial = 14 days. No credit card at signup. Email drip day 7, 3, 1.
-- [x] RESOLVE D17: React Native from Day 1 via Expo. PWA-first retired.
+- [x] RESOLVE D16: SUPERSEDED — 14-day trial concept retired. Free tier IS the trial (Debate 38/40).
+- [x] RESOLVE D17: React Native from Day 1 via Expo. Email-only at launch. Push deferred to v2 unless 50+ paying users complain (Debate 41).
 - [x] RESOLVE D2: Sequenced sprint structure (Sprint 0 = schema, Sprint 1 = client+devis, Sprint 2 = facture+relances). Phase 0.5 retired.
 - [x] RESOLVE D5: Free + €29 two-tier. Drop €49/€79. Value anchor: "2h/week = 1h labor = €29/month." No €19 SKU at launch.
-- [ ] A/B test pricing page value anchor: "€1/jour" vs "une heure de main d'œuvre" framing with beta users before launch (Debate 33)
+- [ ] A/B test pricing page value anchor: "€1/jour" vs "une heure de main d'oeuvre" framing with beta users before launch (Debate 33)
+- [ ] Engagement channel for Free tier onboarding: push notifications + optional WhatsApp opt-in (NOT email). Replace Growth Strategist's 3-email Days 1-7 sequence. (Debates 38/40)
+- [ ] Optional WhatsApp opt-in during Free tier onboarding — artisans who prefer it over push. This is their native channel. (Debate 40)
+- [ ] 80% limit heads-up notification when Free tier user approaches client or devis limit (not countdown, just awareness). (Debate 40)
 
 ### MVP Build (After Discovery)
 - [ ] Client file feature
@@ -81,7 +84,7 @@
 
 ### Mobile Build (D17 — React Native from Day 1)
 - [ ] Use Expo for React Native setup (`npx create-expo-app`)
-- [ ] Push notifications via Expo Notifications (APNS on iOS, FCM on Android) — not web push
+- [ ] Push notifications via Expo Notifications (APNS on iOS, FCM on Android) — NOT at launch. Email-only at v1. Push added in v2 if 50+ paying users complain. (Debate 41)
 - [ ] App Store + Play Store presence from Day 1 launch
 - [ ] Target both iOS and Android simultaneously from start — do not "do one platform then the other"
 - [ ] Keep MVP scope tight: client list, job/reminder management, basic invoicing — no feature creep
@@ -173,7 +176,7 @@ The following were overengineered or wrong:
 - [ ] Implement direct FCM/APNS notification pipeline as backup to Expo Notifications — circuit breaker pattern (Debate 39)
 - [ ] Add "no ExpoKit" policy to development standards to prevent managed workflow drift
 - [ ] Monitor Expo Notification service uptime for first 3 months — if >1 outage, trigger bare RN migration
-- [ ] Test WhatsApp CTA in devis messages: UTM-tracked link "Envoyez vos devis comme Marc → [LINK]" for B2B client recipients (property managers, business owners who receive from artisans) — not primary GTM, secondary test only
+- [ ] WhatsApp CTA in devis messages: KILLED. Explicit CTA in WhatsApp devis messages removed (attribution theater, wrong audience). Replace with in-product "Share with fellow artisan" referral mechanism for WhatsApp groups. B2B-only whisper-quiet test (no explicit sales copy) if any. (Debate 42)
 
 ### Challenged assumptions this pulse:
 1. Free tier removes time pressure → better activation (Growth Strategist challenged: removes urgency that forces the aha moment)
@@ -198,3 +201,29 @@ The following were overengineered or wrong:
 - Get clickable devis-creation prototype in front of 5 real artisans within 10 days — or explicitly decide to skip and validate post-launch
 - Sprint 0 = schema design (all 4 types + TVA + sequential numbering + mentions légales logic) — this is the critical path before feature development
 - A/B test pricing page: "€1/jour" vs "une heure de main d'œuvre" framing with beta users before public launch
+
+---
+
+## New from Pulse 2026-03-30T12:28
+
+### Resolved (D40, D41, D42):
+- **D40 (Engagement channel):** Product Strategist won — email is the wrong channel for French artisan activation. Marc lives on WhatsApp, not email. A 9am email lands in an inbox he won't see until 9pm when he's exhausted. Push notifications + optional WhatsApp opt-in replace the 3-email Days 1-7 sequence. D6 updated: push + WhatsApp opt-in for engagement, not email.
+- **D41 (Notification infra):** Technical Architect won — push notifications are NOT the product. The product is document management (devis, factures, relances). Email-based relances worked for decades; they're fine for v1. Do NOT build FCM/APNS circuit breaker at launch. Add push only if 50+ paying users complain. D17 updated: email-only at launch, push deferred to v2.
+- **D42 (WhatsApp CTA):** Growth Strategist won — explicit CTA in WhatsApp devis messages is attribution theater. Homeowners receiving WhatsApp devis have zero purchase intent for B2B SaaS. Kill the explicit CTA. Replace with in-product "Share with fellow artisan" referral mechanism for WhatsApp group contexts. B2B-only whisper-quiet test (no explicit sales copy) if any. U8 updated.
+
+### Challenged assumptions this pulse:
+1. Email as the right engagement channel for Days 1-7 activation (Product Strategist challenged: WhatsApp-native artisans don't check email until 9pm)
+2. Push notifications as core feature warranting complex infrastructure (Technical Architect challenged: document management is the product, not notifications)
+3. WhatsApp devis CTA as measurable acquisition channel (Growth Strategist challenged: attribution theater, wrong audience)
+
+### New action items from this pulse:
+- [ ] Replace 3-email Days 1-7 sequence with push notifications + optional WhatsApp opt-in for Free tier engagement
+- [ ] Optional WhatsApp opt-in during onboarding for artisans who prefer it
+- [ ] 80% limit heads-up notification (not countdown) when Free tier approaches limits
+- [ ] Kill explicit WhatsApp devis CTA. Build in-product "Share with fellow artisan" referral for WhatsApp groups
+- [ ] B2B-only WhatsApp test (property managers, business owners): whisper-quiet CTA only, no explicit sales copy
+- [ ] Do NOT build FCM/APNS direct pipeline at launch. Email-only. Push only if 50+ paying users complain.
+
+---
+
+*Last updated: 2026-03-30T12:28*
