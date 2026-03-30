@@ -863,3 +863,113 @@ Secondary test: UTM-track a *minimal* CTA (no explicit sales copy) in B2B-facing
 ---
 
 *Last updated: 2026-03-30T12:28*
+
+---
+
+## Pulse 2026-03-30T12:42 — Three New Debates
+
+---
+
+## Debate 43: D40 — Channel Is Secondary, Free Tier Design Is Primary
+
+**Challenge:** D40 engagement channel — Product Strategist challenges the framework that "engagement channel" (push vs WhatsApp vs email) is the variable determining Free tier activation success.
+
+### Product Strategist — The Wrong Debate
+
+**Assumption challenged:** That ANY engagement mechanism will move the needle on activation if the right message hits the right channel at the right time.
+
+**Core argument:**
+
+Marc's actual mental model: WhatsApp is his CRM (it works), Excel tracks his devis (it works). He signed up for Free tier because it was free — not because he had acute pain. The 10-client/5-devis limits don't create urgency. They create breathing room. A 45-year-old electrician with 8 clients and 4 open devis thinks "That'll do" — hits the ceiling in 6 months, by which point he'll have decided whether the product is worth paying for.
+
+Day 1 "Add your first client" → "I already know all my clients." Day 3 "Send your first devis" → "My Word template works fine." Day 7 "See how it works" → "My WhatsApp works too." None of these micro-actions solve a felt pain Marc has right now.
+
+**VERDICT on D40:** RESTATED — D40 resolution is not about channel. It's about: "What changes in Free tier design so artisans feel the product's value BEFORE needing to be prompted?"
+
+Three resolution paths:
+1. **Restructure Free tier limits** — lower them (e.g., 5 clients / 3 devis) to create a sooner, more salient ceiling
+2. **Redesign Day 1 experience** — make the first value moment so immediate that it rewrites the "this works fine" belief
+3. **Accept long-tail activation** — design for month-2 or month-3 value revelation; stop trying to force urgency on a persona with no acute friction
+
+---
+
+## Debate 44: D41 — Email-Only Relances Is the Worst of Three Worlds
+
+**Challenge:** D41 email-only verdict — Technical Architect challenges that email relances are "fine for v1" given Obat advertises real-time push notifications and Expo push reliability evidence.
+
+### Technical Architect — Email-Only Should Be Reversed
+
+**Assumption challenged:** That email-based relances are acceptable at v1 because "French artisans have been doing it this way for decades."
+
+**New evidence:**
+
+1. **Obat advertises "notifications et rappels en temps reel"** — real-time push notifications are a marketed feature of a major competitor. We would ship feature-inferior product before earning any loyalty.
+2. **The 2024 Expo outage was about EAS Build, not push notifications** — reliability concerns cited in D41 were about the build pipeline, not notification delivery. Expo Notifications uses standard FCM/APNS infrastructure.
+3. **Email relances actively signal "worse product"** — An artisan who has used Obat receives email relances as a downgrade. Not neutral — a negative quality signal.
+
+**VERDICT on D41:** REVERSED — D41 email-only decision is wrong. Options:
+- **Preferred:** Add Expo Push Notifications at launch (if EAS Build exists, a few hours of work)
+- **Alternative:** Cut relances feature from v1 entirely — don't ship degraded version that signals inferiority vs. Obat
+- **Never:** Email-only relances at launch
+
+---
+
+## Debate 45: D42 — In-Product Referral Is Not a Real Acquisition Channel
+
+**Challenge:** D42 verdict — Growth Strategist challenges "in-product share with fellow artisan" as a meaningful acquisition mechanism.
+
+### Growth Strategist — Four Fatal Flaws
+
+**Assumption challenged:** That "Share with fellow artisan" within the product will generate meaningful acquisition through WhatsApp peer networks.
+
+**Four fatal flaws:**
+
+1. **Trigger timing undefined** — Unlike the WhatsApp CTA (fires at natural moment: "share your devis"), the referral prompt requires engineering a moment that doesn't naturally exist.
+2. **Copy is weak** — "Partage cette app avec un autre artisan !" = "Do free marketing labor for us." Without incentive, referral rates under 2%. With 500 Free tier users = 10 new users. Not a growth channel.
+3. **No incentive structure** — B2B referral requires referrer benefit AND referee benefit. The verdict proposes neither.
+4. **WhatsApp groups are competitive spaces** — French artisan groups are peer support networks, not recommendation engines. Sending a SaaS referral implies the recipient's system is inferior.
+
+**The real acquisition GTM:**
+- **Wholesaler presence** — Gedimat, Point P (1,900+ branches), Samse: artisans visit weekly. Co-brand flyers, counter displays.
+- **Prescriber networks** — Architectes and property managers recommend contractors. One prescriber → 50+ artisans.
+- **SEO for "devis facture artisan"** — Compound growth, not one-shot referral events.
+
+**VERDICT on D42:** CLOSED — kill explicit WhatsApp CTA in devis, kill in-product peer referral as primary acquisition. Redirect to wholesaler pilot + prescriber networks + SEO. U10 opened for wholesaler GTM.
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D1 | Positioning | Kill "CRM" — devis, factures, relances | 2026-03-30 |
+| D2 | MVP scope | 4 features, SEQUENCED sprints. Sprint 0 = minimum devis flow (3-5d, minimal schema). Sprint 1 = client+devis. Sprint 2 = facture+relances. | 2026-03-30 |
+| D3 | Primary persona | Marc — solo smartphone-native | 2026-03-30 |
+| D4 | Stack | Single managed Postgres | 2026-03-30 |
+| D5 | Pricing | Free + €29 two-tier. Drop €49/€79. | 2026-03-30 |
+| D6 | Trial | No time-limited trial. Free tier IS the trial. Engagement strategy restated by D43. | 2026-03-30 |
+| D7 | Architecture | Nuxt 3 + OVH managed Postgres | 2026-03-30 |
+| D8 | E-invoicing | v2 feature | 2026-03-30 |
+| D9 | Not MVP | No Kanban, no multi-user, no offline, no API keys | 2026-03-30 |
+| D10 | Buyer trigger | "Admin pain" not "CRM need" | 2026-03-30 |
+| D11 | Mobile | React Native from Day 1 via Expo | 2026-03-30 |
+| D12 | Landing page | Simplicity-first — "Vos devis et factures, sans vous prendre la tête" | 2026-03-30 |
+| D13 | Home view | Job-first — Active Job Card as home anchor | 2026-03-30 |
+| D14 | E-invoicing timing | v2 — NOT Day 1 | 2026-03-30 |
+| D15 | Relances differentiator | DE-EMPHASIZED — secondary feature below fold | 2026-03-30 |
+| D16 | Trial length | No countdown trial — Free tier IS the trial | 2026-03-30 |
+| D17 | Mobile strategy | React Native from Day 1 via Expo | 2026-03-30 |
+| D40 | Engagement channel | RESTATED — channel is secondary. Real question: Free tier design that creates value perception before prompting. Three paths: (1) lower limits, (2) Day 1 redesign, (3) accept long-tail activation. | 2026-03-30 |
+| D41 | Notification infra | REVERSED — email-only is wrong. Preferred: Expo Push Notifications at launch (if EAS Build exists). Alternative: cut relances from v1. Never: email-only. | 2026-03-30 |
+| D42 | WhatsApp referral | CLOSED — kill CTA in devis, kill in-product peer referral as acquisition channel. Redirect to wholesaler presence + prescriber networks + SEO. | 2026-03-30 |
+
+| U1 | Discovery | REPLACED — readiness protocol | 2026-03-30 |
+| U2 | E-invoicing platform | Factea first when v2 | 2026-03-30 |
+| U7 | Domain | DEFERRED — subdomain/Carrd until MVP validated | 2026-03-30 |
+| U8 | WhatsApp acquisition | CLOSED — no WhatsApp CTA in devis. WhatsApp sharing = document sharing only. | 2026-03-30 |
+| U9 | Free tier activation | RESTATED — see D43 resolution | 2026-03-30 |
+| U10 | GTM: Wholesaler presence | NEW — Gedimat/Point P/Samse pilot, co-brand flyers, counter displays | 2026-03-30 |
+
+---
+
+*Last updated: 2026-03-30T12:42*

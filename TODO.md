@@ -11,7 +11,7 @@
 | D3 | Primary persona | Marc — solo smartphone-native artisan | External review | 2026-03-30 |
 | D4 | Stack | Single managed Postgres, NOT per-customer VPS | External review | 2026-03-30 |
 | D5 | Pricing | Free + €29 two-tier. No €19 SKU. Drop €49/€79. Value anchor: "2h/week = 1h labor = €29/month." | Debate 33 (Product Strategist) | 2026-03-30 |
-| D6 | Trial | No time-limited trial. Free tier IS the trial (10 clients, 5 active devis). Conversion happens at Free limit. Engagement: push notifications + optional WhatsApp opt-in (NOT email). 80% limit heads-up notification. No countdown emails. | Debates 38/40 (Product Strategist) | 2026-03-30 |
+| D6 | Trial | No time-limited trial. Free tier IS the trial (10 clients, 5 active devis). Conversion happens at Free limit. Engagement: restated by D43 — channel secondary, Free tier design determines activation. 80% limit heads-up notification. No countdown emails. | Debates 38/43 (Product Strategist) | 2026-03-30 |
 | D7 | Architecture | Nuxt 3 + OVH managed Postgres | Updated | 2026-03-30 |
 | D8 | E-invoicing | v2 feature (Chorus Pro compatible) | External review | 2026-03-30 |
 | D9 | Not MVP | No Kanban, no multi-user, no offline, no API keys | External review | 2026-03-30 |
@@ -22,7 +22,10 @@
 | D14 | E-invoicing timing | v2 — NOT Day 1 (Debate 21 Growth Strategist) | Debate 21 |
 | D15 | Relances differentiator | Secondary feature only — below fold, "Fonctionnalités" section. Frame as "Suivi de paiement" not "Relances automatiques." Not in hero. | Debate 25 (Product Strategist) |
 | D16 | Trial length | 14 days (updated from 30). No credit card at signup. Email drip: day 7, 3, 1. | Debate 26 (Growth Strategist) |
-| D17 | Mobile strategy | React Native from Day 1 via Expo. Email-only notifications at launch. Push notifications deferred to v2 unless 50+ paying users complain. | Debates 27/41 (Technical Architect) | 2026-03-30 |
+| D17 | Mobile strategy | React Native from Day 1 via Expo. Push notifications: preferred Expo Push at launch (if EAS Build exists), alternative cut relances from v1. Never email-only. | Debates 27/44 (Technical Architect) | 2026-03-30 |
+| D40 | Engagement channel | RESTATED — channel secondary to Free tier design. Three paths: (A) lower limits, (B) Day 1 redesign, (C) accept long-tail activation. | Debate 43 (Product Strategist) | 2026-03-30 |
+| D41 | Notification infra | REVERSED — email-only relances wrong. Obat markets push. Preferred: Expo Push at launch. Alternative: cut relances from v1. | Debate 44 (Technical Architect) | 2026-03-30 |
+| D42 | WhatsApp referral | CLOSED — kill CTA in devis, kill in-product peer referral as primary acquisition. Redirect to wholesaler presence + prescriber networks + SEO. | Debate 45 (Growth Strategist) | 2026-03-30 |
 
 ## 🔄 Reopened This Pulse (Need Resolution)
 
@@ -220,10 +223,17 @@ The following were overengineered or wrong:
 - [ ] Replace 3-email Days 1-7 sequence with push notifications + optional WhatsApp opt-in for Free tier engagement
 - [ ] Optional WhatsApp opt-in during onboarding for artisans who prefer it
 - [ ] 80% limit heads-up notification (not countdown) when Free tier approaches limits
-- [ ] Kill explicit WhatsApp devis CTA. Build in-product "Share with fellow artisan" referral for WhatsApp groups
-- [ ] B2B-only WhatsApp test (property managers, business owners): whisper-quiet CTA only, no explicit sales copy
-- [ ] Do NOT build FCM/APNS direct pipeline at launch. Email-only. Push only if 50+ paying users complain.
+- [ ] **D43 RESTATED:** Engagement channel is SECONDARY to Free tier design. Resolve first: what changes in Free tier design so artisans feel value BEFORE prompting? Three paths: (A) Lower limits (5 clients/3 devis), (B) Redesign Day 1 experience for immediate value, (C) Accept long-tail activation (month 2-3)
+- [ ] **D44 REVERSED:** Do NOT ship email-only relances at launch. Obat markets real-time push notifications — email relances signal product inferiority. Choose: (A) Expo Push Notifications at launch (few hours if EAS Build exists), or (B) Cut relances from v1 entirely. Never email-only.
+- [ ] Kill the "50+ users complain" push threshold — by the time 50 users have paid AND complained, reputation for inferior UX is already established
+- [ ] 80% limit heads-up notification when Free tier approaches limits (not countdown, just awareness)
+- [ ] **D42 CLOSED:** Kill explicit WhatsApp devis CTA — attribution theater, wrong audience
+- [ ] **D45 CLOSED:** Kill in-product peer referral ("Share with fellow artisan") as primary acquisition — no incentive structure, wrong social dynamic, <2% expected activation
+- [ ] WhatsApp sharing: keep as document sharing only (send devis PDF via WhatsApp — no CTA)
+- [ ] **U10 NEW:** Pursue wholesaler/merchant GTM — Gedimat, Point P (1,900+ branches), Samse. Co-brand flyers, counter displays. Artisans visit weekly.
+- [ ] **U10 NEW:** Pursue prescriber network outreach — architectes and property managers who recommend artisans. One prescriber → 50+ artisans.
+- [ ] **U10 NEW:** SEO for "devis facture artisan" terms — compound growth, not one-shot referral
 
 ---
 
-*Last updated: 2026-03-30T12:28*
+*Last updated: 2026-03-30T12:42*
