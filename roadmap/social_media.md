@@ -633,3 +633,666 @@
 - **validation**: Group quality maintained; members report positive experience
 
 #### Task: facebook_group_member_onboarding
+- **title**: Create Facebook Group member onboarding sequence
+- **description**: Design welcome message sequence for new members: Day 0 welcome, Day 2 introduce yourself thread, Day 5 first value post, Day 7 first prompt participation. Automated via Group rules or manual.
+- **inputs**: Welcome message templates, introduction thread prompt, value content calendar
+- **outputs**: Onboarding sequence active; new member activation rate above 60%
+- **dependencies**: facebook_group_create_artisans, facebook_group_mod_guidelines
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: New members posting within 7 days; welcome sequence completes
+
+#### Task: facebook_group_weekly_pinned_thread
+- **title**: Create weekly pinned discussion threads
+- **description**: Pin new discussion thread each Monday: "Semaine X : Quel outil utilisez-vous aujourd'hui?" Rotate topics: tools, challenges, wins, questions. Update pinned weekly.
+- **inputs**: Thread topic calendar (13 weeks), pinned post templates
+- **outputs**: 13 weekly pinned threads; each generates 20+ comments
+- **dependencies**: facebook_group_create_artisans
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Weekly threads consistently active; engagement maintained
+
+#### Task: facebook_page_post_template
+- **title**: Create Facebook Page post templates
+- **description**: Design 5 reusable post templates for Facebook Page: Quote post, Tip post, Question post, Video post, Article share. Consistent visual style with brand colors.
+- **inputs**: Template designs (Canva), post type definitions, brand style guide
+- **outputs**: 5 templates ready to use; 30 posts using templates
+- **dependencies**: facebook_page_setup
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Templates produce consistent brand appearance; engagement measurable
+
+#### Task: facebook_page_posting_schedule
+- **title**: Set Facebook Page posting schedule
+- **description**: Publish 1 post daily on Facebook Page. Schedule all posts in Facebook Business Suite. Maintain 7-day-per-week consistency. Pause on holidays only if planned.
+- **inputs**: Post content library, Facebook Business Suite access, scheduling calendar
+- **outputs**: 365 posts scheduled/published; 95%+ schedule adherence
+- **dependencies**: facebook_page_post_template
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Daily posting maintained; no gaps longer than 24 hours
+
+#### Task: facebook_live_product_demo
+- **title**: Host Facebook Live product demonstration
+- **description**: Go Live on Facebook Page monthly to demo Mini-CRM features. Show real workflows, answer questions in real-time. Promote Live 48h before. Save to video.
+- **inputs**: Demo script, feature list, Live promotion plan, Q&A document
+- **outputs**: 6 product demo Lives; each has 50+ peak viewers
+- **dependencies**: facebook_page_setup
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: video
+- **validation**: Demo Lives drive measurable sign-ups; questions answered in real-time
+
+#### Task: facebook_share_user_testimonials
+- **title**: Share user testimonials on Facebook Page
+- **description**: Weekly, share one user testimonial on the Page. Format: screenshot of testimonial + story context + link. Encourage testimonial authors to share the post.
+- **inputs**: Testimonial collection system, testimonial templates, permission confirmations
+- **outputs**: 52 testimonial posts (weekly); testimonial post engagement tracked
+- **dependencies**: facebook_page_posting_schedule
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Testimonial posts generate above-average engagement; shares tracked
+
+#### Task: facebook_poll_engagement
+- **title**: Create Facebook Page polls for engagement
+- **description**: Post weekly polls on Facebook Page. Topics: business challenges, tool preferences, industry opinions. Use Page poll feature. Engage with poll comments.
+- **inputs**: Poll question bank, poll topic calendar, engagement response guidelines
+- **outputs**: 52 polls (weekly); each poll has 100+ responses
+- **dependencies**: facebook_page_posting_schedule
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Poll participation increases over time; results shared with audience
+
+#### Task: facebook_event_creation
+- **title**: Create Facebook Events for webinars/lives
+- **description**: Create Facebook Event for each major Live/Q&A session. Include: cover image, description, date/time, RSVP button. Invite followers. Send event reminders 24h and 1h before.
+- **inputs**: Event calendar, cover image templates, event descriptions
+- **outputs**: 12 Facebook Events created; each has 50+ RSVPs
+- **dependencies**: facebook_page_setup
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Events drive attendance; reminder messages increase show-up rate
+
+#### Task: facebook_page_review_request
+- **title**: Request Facebook Page reviews from users
+- **description**: Identify satisfied users and request they leave a review on the Facebook Page. Send personalized message. Respond to all existing reviews (positive and negative).
+- **inputs**: User satisfaction list, review request message template, review response guidelines
+- **outputs**: Page rating improves to 4.5+; 50+ reviews collected
+- **dependencies**: facebook_page_setup
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Page rating visible and above 4.5; all reviews responded to
+
+#### Task: facebook_cover_photo_seasonal
+- **title**: Update Facebook cover photo seasonally
+- **description**: Change Facebook Page cover photo quarterly (Spring, Summer, Autumn, Winter). Create seasonal designs promoting current campaign or value prop. Maintain brand consistency.
+- **inputs**: Seasonal design concepts, campaign calendar, cover photo dimensions
+- **outputs**: 4 cover photo updates per year; each aligned with seasonal campaign
+- **dependencies**: facebook_page_setup
+- **priority**: low
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Cover photos display correctly; seasonal campaign alignment visible
+
+#### Task: facebook_messenger_auto_response
+- **title**: Set up Facebook Messenger auto-response
+- **description**: Configure Messenger bot for page to respond to common questions when team is unavailable. Include: business hours, quick answers, option to connect with human.
+- **inputs**: Common question list, auto-response templates, Messenger bot setup
+- **outputs**: Auto-response active 24/7; response time improved to under 1 hour
+- **dependencies**: facebook_page_setup
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Auto-responses sent within 1 minute; user satisfaction with bot responses
+
+#### Task: facebook_insights_weekly_review
+- **title**: Conduct weekly Facebook Page insights review
+- **description**: Every Monday, review Facebook Page insights: reach, engagement, follower growth, top posts. Document findings. Identify content that performed well and double down.
+- **inputs**: Facebook Insights dashboard, weekly review template, documentation spreadsheet
+- **outputs**: 52 weekly insight reports; content strategy adjustments documented
+- **dependencies**: facebook_page_setup
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Insights reviewed consistently; action items identified from data
+
+---
+
+### Category: LinkedIn (Professional Presence, B2B Angle)
+
+#### Task: linkedin_company_page_setup
+- **title**: Set up LinkedIn Company Page
+- **description**: Create LinkedIn Company Page for Mini-CRM. Use brand name and logo. Complete all sections: about, industry, size, specialties. Add company description in French and English.
+- **inputs**: Company information, logo file, brand description, website URL
+- **outputs**: Live LinkedIn Company Page with complete profile
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Company page is searchable; all sections complete
+
+#### Task: linkedin_profile_optimization
+- **title**: Optimize personal LinkedIn profiles for visibility
+- **description**: Optimize 3–5 team members' LinkedIn profiles to mention Mini-CRM. Update headlines, about sections, and experience. Use keywords: CRM, artisans, PME, gestion client.
+- **inputs**: Team member profiles, keyword list, optimized text templates
+- **outputs**: 5 profiles optimized; profile views increase measurable
+- **dependencies**: linkedin_company_page_setup
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Profile views increase 50%+ after optimization
+
+#### Task: linkedin_content_pillars_define
+- **title**: Define LinkedIn content pillars
+- **description**: Define 4 content pillars for LinkedIn: 1) Business tips for artisans, 2) Industry news/regulation changes, 3) Mini-CRM product updates, 4) Behind-the-scenes/team. Plan 3-month content calendar per pillar.
+- **inputs**: Content pillar definitions, content calendar tool, topic research
+- **outputs**: 4 content pillars documented; 12-week content calendar created
+- **dependencies**: linkedin_company_page_setup
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Content calendar covers 12 weeks; each pillar represented weekly
+
+#### Task: linkedin_long_form_article_strategy
+- **title**: Develop LinkedIn article publication strategy
+- **description**: Publish 2 long-form LinkedIn articles per month on topics relevant to French artisans: tax changes, business management tips, industry trends. Target 800–1500 words. Optimize for LinkedIn SEO.
+- **inputs**: Article topic list, writing templates, SEO keyword research
+- **outputs**: 24 articles published per year; each article has 1000+ views
+- **dependencies**: linkedin_content_pillars_define
+- **priority**: medium
+- **estimated_complexity**: high
+- **agent_type**: content
+- **validation**: Articles ranked in LinkedIn search; engagement metrics tracked
+
+#### Task: linkedin_post_template_design
+- **title**: Create LinkedIn post templates
+- **description**: Design 5 post templates for LinkedIn: Statistic post, List post, Story post, Question post, Announcement post. Use brand colors. Create templates in Canva.
+- **inputs**: Template designs, brand colors, post type definitions
+- **outputs**: 5 templates created; 60 posts using templates
+- **dependencies**: linkedin_company_page_setup
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Templates consistent with brand; posts generate measurable engagement
+
+#### Task: linkedin_weekly_posting_schedule
+- **title**: Establish LinkedIn posting schedule
+- **description**: Post on LinkedIn Company Page 5 times per week (Monday–Friday). Include: 2 articles, 3 short posts, 1 engagement post (question/poll). Schedule all content.
+- **inputs**: Content calendar, scheduling tool (Buffer/Hootsuite), post library
+- **outputs**: Consistent 5x/week posting; 95%+ schedule adherence
+- **dependencies**: linkedin_post_template_design, linkedin_content_pillars_define
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Posting schedule maintained; engagement rate consistent
+
+#### Task: linkedin_connection_outreach
+- **title**: Execute LinkedIn connection outreach
+- **description**: Identify and connect with 100 target prospects per month on LinkedIn. Target: artisans with own business, small business owners, trade association members. Personalize connection request.
+- **inputs**: Target prospect list, LinkedIn Sales Navigator (if available), outreach templates
+- **outputs**: 300 connections per quarter; connection acceptance rate above 40%
+- **dependencies**: linkedin_company_page_setup
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Connection requests accepted; some convert to messages
+
+#### Task: linkedin_comment_engagement_strategy
+- **title**: Implement LinkedIn comment engagement strategy
+- **description**: Spend 30 minutes daily engaging on LinkedIn: comment on 10 posts from target prospects/partners. Add value with insightful comments. Respond to all comments on own posts within 2 hours.
+- **inputs**: Target prospect posts list, comment guidelines, response templates
+- **outputs**: Daily engagement maintained; 300+ meaningful comments per month
+- **dependencies**: linkedin_company_page_setup
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Comment engagement drives profile visits; response time under 2 hours
+
+#### Task: linkedin_employee_advocacy
+- **title**: Launch LinkedIn employee advocacy program
+- **description**: Encourage 3–5 team members to share Mini-CRM content on personal LinkedIn. Provide share-ready content weekly. Set up company-wide content sharing system.
+- **inputs**: Employee list, share-ready content library, sharing guidelines
+- **outputs**: 5 employees actively sharing; 50+ employee shares per quarter
+- **dependencies**: linkedin_company_page_setup
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Employee shares tracked; total reach multiplies with advocacy
+
+#### Task: linkedin_lead_magnet_promotion
+- **title**: Promote lead magnets on LinkedIn
+- **description**: Regularly promote downloadable resources (guides, checklists) on LinkedIn. Use carousel posts and document ads. Drive traffic to landing page. Track conversions per post.
+- **inputs**: Lead magnet list, landing page URLs, conversion tracking
+- **outputs**: Lead magnet posts generate 100+ leads per month
+- **dependencies**: linkedin_post_template_design
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Lead conversion tracked per post; cost per lead calculated
+
+#### Task: linkedin_testimonial_sharing
+- **title**: Share client testimonials on LinkedIn
+- **description**: Monthly, share one client testimonial as LinkedIn post. Format: quote + client name/logo + brief context. Ask client to share the post on their profile.
+- **inputs**: Testimonial collection system, testimonial post templates
+- **outputs**: 12 testimonial posts per year; client reshares tracked
+- **dependencies**: linkedin_weekly_posting_schedule
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Testimonial posts generate above-average engagement
+
+#### Task: linkedin_video_content_series
+- **title**: Create LinkedIn video content series
+- **description**: Produce monthly LinkedIn video: "Le conseil du mois" or "Décryptage." Topics: tax changes, business trends, tool tips. Under 3 minutes. Native LinkedIn video format.
+- **inputs**: Video topic list, recording equipment, video editing tool
+- **outputs**: 12 videos per year; each has 500+ views
+- **dependencies**: linkedin_content_pillars_define
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: video
+- **validation**: Video engagement tracked; views grow over time
+
+#### Task: linkedin_poll_engagement
+- **title**: Use LinkedIn polls for engagement
+- **title**: Use LinkedIn polls for engagement
+- **description**: Post weekly LinkedIn polls. Topics: business challenges, industry opinions, tool preferences. Run polls for 5–7 days. Share poll results as follow-up post.
+- **inputs**: Poll question bank, engagement calendar, results post template
+- **outputs**: 52 polls per year; each poll has 100+ votes; results shared
+- **dependencies**: linkedin_weekly_posting_schedule
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Poll participation increases; results drive engagement
+
+#### Task: linkedin_seo_keyword_optimization
+- **title**: Optimize LinkedIn content for SEO
+- **description**: Research keywords French artisans search on LinkedIn. Incorporate keywords in posts, articles, and company page. Optimize company page for LinkedIn search.
+- **inputs**: Keyword research data, SEO optimization checklist, content audit
+- **outputs**: Company page and content optimized for 20+ keywords
+- **dependencies**: linkedin_content_pillars_define
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Profile appears in LinkedIn search for target keywords
+
+#### Task: linkedin_showcase_page_creation
+- **title**: Create LinkedIn Showcase Pages for product lines
+- **description**: Create Showcase Pages for specific Mini-CRM features or use cases (e.g., "Mini-CRM pour Plombiers"). Target specific artisan segments. Publish unique content for each Showcase Page.
+- **inputs**: Showcase Page concepts, segment-specific content plan
+- **outputs**: 3 Showcase Pages live; each with own content strategy
+- **dependencies**: linkedin_company_page_setup
+- **priority**: low
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Showcase Pages followed by relevant audience segments
+
+#### Task: linkedin_analytics_monthly_review
+- **title**: Conduct monthly LinkedIn analytics review
+- **description**: Monthly review of LinkedIn Company Page analytics: follower growth, engagement rate, top content, reach. Compare month-over-month. Adjust content strategy based on findings.
+- **inputs**: LinkedIn Analytics dashboard, review template, documentation tool
+- **outputs**: 12 monthly reports; strategy adjustments documented
+- **dependencies**: linkedin_company_page_setup
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Reports consistently generated; insights drive strategy changes
+
+---
+
+### Category: WhatsApp (Community Building, Broadcast Lists)
+
+#### Task: whatsapp_business_account_setup
+- **title**: Set up WhatsApp Business account
+- **description**: Download WhatsApp Business app. Create business profile with: company name, description, address, email, website. Set business hours. Enable catalog feature.
+- **inputs**: Business information, logo file, contact details, business hours
+- **outputs**: WhatsApp Business profile complete; catalog set up
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Business profile displays correctly; catalog products visible
+
+#### Task: whatsapp_quick_reply_setup
+- **title**: Configure WhatsApp Business quick replies
+- **description**: Set up 15+ quick replies for common questions: pricing, features, demo request, support. Use shortcuts like "#info" "#tarif" "#demo." Save frequently asked questions as quick replies.
+- **inputs**: FAQ list, quick reply templates, shortcut codes
+- **outputs**: 15 quick replies configured; usage tracked
+- **dependencies**: whatsapp_business_account_setup
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Quick replies used daily; response time improved
+
+#### Task: whatsapp_label_system_creation
+- **title**: Create WhatsApp label system for leads
+- **description**: Create labels for lead management: Nouveau lead, En attente, Qualifié, Client, Non qualifié, Follow-up. Apply labels to all contacts. Use labels to prioritize outreach.
+- **inputs**: Label definitions, contact list, labeling workflow
+- **outputs**: 6 labels created and actively used; contact organization improved
+- **dependencies**: whatsapp_business_account_setup
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: All contacts labeled; labels used for filtering and follow-up
+
+#### Task: whatsapp_broadcast_list_strategy
+- **title**: Develop WhatsApp broadcast list strategy
+- **description**: Create 5 broadcast lists: Clients, Leads, Artisans interested, Beta testers, Newsletter. Build each list to 100+ contacts over time. Get explicit opt-in for each list.
+- **inputs**: Broadcast list names, opt-in strategy, contact segmentation
+- **outputs**: 5 broadcast lists, each with 100+ contacts; consistent open rates
+- **dependencies**: whatsapp_label_system_creation
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Broadcast lists grow monthly; open rates above 60%
+
+#### Task: whatsapp_community_group_setup
+- **title**: Set up WhatsApp Community for artisans
+- **description**: Create WhatsApp Community: "Communauté Mini-CRM Artisans." Add value through: weekly tips, polls, Q&A threads, resource sharing. Set community guidelines. Limit to 1024 members.
+- **inputs**: Community name, description, guidelines, welcome message
+- **outputs**: Active WhatsApp Community; 500+ members in 3 months
+- **dependencies**: whatsapp_broadcast_list_strategy
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Community active with daily messages; no spam; high retention
+
+#### Task: whatsapp_community_guidelines
+- **title**: Create and enforce WhatsApp Community guidelines
+- **description**: Write clear community guidelines: French only, no spam, respect members, share relevant content only. Pin guidelines in Community. Remove members who violate repeatedly.
+- **inputs**: Community guidelines document, enforcement policy, moderator checklist
+- **outputs**: Guidelines pinned; 0 spam incidents; positive community culture
+- **dependencies**: whatsapp_community_group_setup
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Community quality maintained; members report positive experience
+
+#### Task: whatsapp_weekly_broadcast_content
+- **title**: Create weekly WhatsApp broadcast content
+- **description**: Design weekly broadcast message series: Monday motivation, Wednesday tip, Friday win. Keep messages under 500 characters. Include CTA in every message. Track open rates.
+- **inputs**: Broadcast content calendar, message templates, CTA library
+- **outputs**: Weekly broadcasts to all lists; 60%+ open rate
+- **dependencies**: whatsapp_broadcast_list_strategy
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Broadcasts sent consistently; open rates tracked and improved
+
+#### Task: whatsapp_broadcast_personalization
+- **title**: Implement broadcast personalization
+- **description**: Use contact name in broadcasts ("Bonjour [Name]!"). Segment broadcasts by label (clients vs leads get different content). Test personalized vs generic broadcast performance.
+- **inputs**: Contact names, segmentation logic, A/B testing framework
+- **outputs**: Personalized broadcasts deployed; open rate improvement measurable
+- **dependencies**: whatsapp_weekly_broadcast_content
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Personalization increases open rates by 20%+
+
+#### Task: whatsapp_cta_button_strategy
+- **title**: Use WhatsApp CTA buttons in broadcasts
+- **description**: Add CTA buttons to broadcasts: "Voir plus," "Réserver démo," "Télécharger guide." Use WhatsApp Business API for clickable CTAs when available. Track button clicks.
+- **inputs**: CTA button designs, tracking setup, broadcast templates with CTAs
+- **outputs**: Broadcasts with CTAs generate measurable click-throughs
+- **dependencies**: whatsapp_broadcast_list_strategy
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: CTA buttons clicked; conversion tracked per broadcast
+
+#### Task: whatsapp_community_polls_weekly
+- **title**: Run weekly WhatsApp Community polls
+- **description**: Post weekly polls in Community: "Quel est votre plus grand défi cette semaine?" Use poll feature. Share results in following week's first message.
+- **inputs**: Poll question bank, poll schedule, results sharing template
+- **outputs**: Weekly polls for 12 weeks; participation rate tracked
+- **dependencies**: whatsapp_community_group_setup
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Poll participation maintained; results inform content strategy
+
+#### Task: whatsapp_image_status_updates
+- **title**: Use WhatsApp Status for daily updates
+- **description**: Post daily WhatsApp Status updates: tips, quotes, behind-the-scenes, short videos. Use all Status features: image, video, text. Track Status views. Keep fresh daily.
+- **inputs**: Status content calendar, brand visuals, Status design templates
+- **outputs**: Daily Status updates for 30 days; view counts tracked
+- **dependencies**: whatsapp_business_account_setup
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Status views grow over time; engagement measurable
+
+#### Task: whatsapp_response_time_tracking
+- **title**: Track and improve WhatsApp response time
+- **description**: Monitor average response time to WhatsApp messages. Target: respond within 2 hours during business hours. Use away messages for after-hours. Track weekly improvements.
+- **inputs**: Response time data, away message templates, business hours setting
+- **outputs**: Response time under 2 hours during business hours; tracked weekly
+- **dependencies**: whatsapp_quick_reply_setup
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Response time consistently under 2 hours; customer satisfaction improves
+
+#### Task: whatsapp_message_template_approval
+- **title**: Get WhatsApp message templates approved
+- **description**: Create message templates for common broadcasts (promotional, transactional, reminder). Submit to WhatsApp for pre-approval. Use approved templates for broadcasts.
+- **inputs**: Template content, WhatsApp Business API access, submission process
+- **outputs**: 10 templates approved by WhatsApp; templates used in broadcasts
+- **dependencies**: whatsapp_business_account_setup
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Templates approved and active; broadcast deliverability improved
+
+#### Task: whatsapp_inbound_lead_qualification
+- **title**: Implement lead qualification via WhatsApp
+- **description**: Create lead qualification flow via WhatsApp messages. Questions: Trade? Number of clients? Current tools? Use labels to categorize. Route to appropriate follow-up.
+- **inputs**: Qualification questions, response handling workflow, label system
+- **outputs**: Lead qualification flow active; qualified leads routed correctly
+- **dependencies**: whatsapp_label_system_creation
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: social
+- **validation**: Leads qualified via chat; conversion rate from WhatsApp measurable
+
+---
+
+### Category: Content Calendar (Monthly/Quarterly Planning)
+
+#### Task: content_calendar_tool_setup
+- **title**: Set up content calendar tool
+- **description**: Choose and configure content calendar tool (Notion, Airtable, Trello, or Google Sheets). Create calendar with all platforms: Instagram, TikTok, YouTube Shorts, Facebook, LinkedIn, WhatsApp. Set up recurring content slots.
+- **inputs**: Calendar tool selection, platform list, content frequency plan
+- **outputs**: Live content calendar with all platforms and content slots visible
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Calendar is accessible to team; all content slots filled for 4 weeks
+
+#### Task: content_calendar_monthly_planning_session
+- **title**: Conduct monthly content planning session
+- **description**: Monthly 2-hour planning session: review last month's performance, plan next month's content themes, assign creation tasks, schedule publication times. Document decisions.
+- **inputs**: Last month analytics, upcoming events/trends, team availability
+- **outputs**: 4-week content calendar fully planned; tasks assigned; deadlines set
+- **dependencies**: content_calendar_tool_setup
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Monthly sessions happen consistently; calendars filled 4+ weeks ahead
+
+#### Task: content_themes_monthly_division
+- **title**: Define monthly content themes
+- **description**: Assign one main theme per month to unify content. Examples: January = "Réso; February = "Clients"; March = "Outils." All platform content ties back to monthly theme.
+- **inputs**: Annual theme calendar, content pillar list, monthly relevance analysis
+- **outputs**: 12 monthly themes defined; each week ties to monthly theme
+- **dependencies**: content_calendar_monthly_planning_session
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Monthly themes published and communicated; content cohesive
+
+#### Task: content_calendar_platform_mapping
+- **title**: Map content to each platform weekly
+- **description**: Each week, map specific content to each platform. Identify: what content is native to platform, what is repurposed, what is cross-posted. Assign formats per platform.
+- **inputs**: Content ideas list, platform format guide, repurposing workflow
+- **outputs**: Weekly platform assignment complete; no duplicate content wasted
+- **dependencies**: content_themes_monthly_division
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: All platforms have content assigned weekly; repurposing tracked
+
+#### Task: content_calendar_batch_creation_blocks
+- **title**: Schedule batch content creation blocks
+- **description**: Block 4 hours weekly for batch content creation. Batch: create all Instagram posts for week, all TikToks, all LinkedIn posts. Create content when focused, schedule when ready.
+- **inputs**: Creation tool access, content templates, batch creation checklist
+- **outputs**: Weekly batch creation sessions held; content ready 1 week ahead
+- **dependencies**: content_calendar_platform_mapping
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Content always 1+ week ahead of schedule; no last-minute creation
+
+#### Task: content_calendar_platform_best_times
+- **title**: Document best posting times per platform
+- **description**: Research and document best posting times for each platform in French time zone (CET). Instagram: 7am, 12pm, 5pm. TikTok: 6pm, 8pm. LinkedIn: 8am, 12pm. Facebook: 1pm, 3pm. Schedule accordingly.
+- **inputs**: Platform analytics, audience behavior data, French time zone awareness
+- **outputs**: Best posting times documented; calendar reflects optimal times
+- **dependencies**: content_calendar_tool_setup
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Scheduling optimized; engagement increases at optimal times
+
+#### Task: content_calendar_holiday_integration
+- **title**: Integrate holidays and events into calendar
+- **description**: Add all French holidays, artisan trade events, and industry events to content calendar. Plan special content for: Bastille Day, Christmas, New Year, Trade shows.
+- **inputs**: French holiday calendar, artisan trade event list, industry dates
+- **outputs**: Holiday content planned 2 months in advance; no missed opportunities
+- **dependencies**: content_calendar_monthly_planning_session
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: All holidays have content plan; engagement increases during events
+
+#### Task: content_calendar_review_weekly
+- **title**: Conduct weekly content calendar review
+- **description**: Every Monday, review upcoming week's content: confirm all posts scheduled, review content quality, adjust for any trending topics or breaking news. Document any changes.
+- **inputs**: Content calendar, scheduling tool, trending topic monitoring
+- **outputs**: Weekly reviews completed; content adjustments made quickly
+- **dependencies**: content_calendar_tool_setup
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: social
+- **validation**: Reviews happen weekly; content always reflects current plan
+
+#### Task: content_calendar_capacity_planning
+- **title**: Plan content creation capacity
+- **description**: Calculate content creation capacity: how many posts, videos, stories can be created per week with current resources. Plan content volume accordingly. Adjust if over/under capacity.
+- **inputs**: Team capacity assessment, content type time estimates, backlog review
+- **outputs**: Realistic content plan based on capacity; no burnout or gaps
+- **dependencies**: content_calendar_batch_creation_blocks
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Capacity matches output; no missed content due to capacity issues
+
+#### Task: content_calendar_trend_integration
+- **title**: Integrate trending topics into planned content
+- **description**: Weekly, review trending topics on each platform. Decide: which trends to adapt, which to ignore. Quickly integrate trending content into calendar without disrupting planned content.
+- **inputs**: Trending topic monitoring, trend relevance assessment, calendar flexibility
+- **outputs**: Trending topics integrated within 48 hours of discovery
+- **dependencies**: content_calendar_review_weekly
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Trending content published quickly; engagement from trend adaptation
+
+#### Task: content_calendar_backup_content
+- **title**: Maintain backup content buffer
+- **description**: Always keep 1 week of backup content ready. Emergency buffer: 5 posts per platform. If sick or busy, backup content auto-publishes. Keep buffer stocked.
+- **inputs**: Backup content templates, scheduling system, buffer tracking
+- **outputs**: 1-week backup maintained for all platforms; no missed posts
+- **dependencies**: content_calendar_batch_creation_blocks
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Buffer never depleted; schedule never breaks due to lack of content
+
+#### Task: quarterly_content_audit
+- **title**: Conduct quarterly content audit
+- **description**: Quarterly review of all content: identify top 20% performing content, worst 20%, gaps in content types, platform performance comparison. Use findings to inform next quarter's strategy.
+- **inputs**: Analytics data for quarter, content inventory, performance benchmarks
+- **outputs**: Quarterly audit report; strategy recommendations for next quarter
+- **dependencies**: content_calendar_monthly_planning_session
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: content
+- **validation**: Audit completed quarterly; recommendations implemented
+
+#### Task: annual_content_strategy_planning
+- **title**: Plan annual content strategy
+- **description**: Yearly planning session: define annual goals, content themes per quarter, major campaigns, product launches. Create annual content roadmap. Review and adjust quarterly.
+- **inputs**: Business goals, product roadmap, team capacity, budget
+- **outputs**: 12-month content roadmap; quarterly milestones defined
+- **dependencies**: quarterly_content_audit
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: content
+- **validation**: Annual roadmap created; quarterly milestones achievable
+
+---
+
+### Category: Video Production Workflow
+
+#### Task: video_workflow_equipment_setup
+- **title**: Set up video production equipment
+- **description**: Configure video recording setup: smartphone on tripod, ring light, external microphone. Test: image quality, audio clarity, lighting. Document setup for consistent results.
+- **inputs**: Equipment list, recording space, lighting setup
+- **outputs**: Video setup documented; consistent quality achieved
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: video
+- **validation**: Video quality consistent; audio clear; setup replicable
+
+#### Task: video_workflow_editing_software
+- **title**: Configure video editing software
+- **description**: Set up video editing workflow: CapCut for mobile, DaVinci Resolve for desktop. Create branded templates, text styles, transitions. Export presets for each platform.
+- **inputs**: Editing software, brand assets, export specifications per platform
+- **outputs**: Editing workflow established; templates ready for quick editing
+- **dependencies**: video_workflow_equipment_setup
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: video
+- **validation**: Editing time under 30 minutes per Short; templates consistent
+
+#### Task: video_workflow_script_template
+- **title**: Create video script template
+- **description**: Design video script template: Hook (3s), Intro (5s), Main content (variable), CTA (5s). Include timing, key points, visual notes. Train all content creators on template.
+- **inputs**: Script template design, timing guidelines, examples
+- **outputs**: Script template ready; all creators trained; scripts used consistently
+- **dependencies**: video_workflow_editing_software
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: content
+- **validation**: Scripts used for all videos; timing consistent
+
+#### Task: video_workflow_thumbnail_process
+- **title**: Establish thumbnail creation process
+- **description**: Create thumbnail workflow: 3 thumbnail options per video, A/B test best performer. Use Canva templates. Thumbnails should be: high contrast, readable at small size, brand consistent.
+- **inputs**: Thumbnail templates, A/B testing framework, thumbnail design guide
+- **outputs**: Thumbnails created for all videos; performance tracked
+- **dependencies**: video_workflow_script_template
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: video

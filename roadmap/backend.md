@@ -579,4 +579,618 @@
 
 #### Task: BIZ_INVOICE_002
 - **title**: Implement French invoice number generation
-- **description**: Generate invoice numbers following French legal format: {YEAR}{SEQUENCE}
+- **description**: Generate invoice numbers following French legal format: {YEAR}{SEQUENCE}{SEQUENCE}. Example: 2024-0001, 2024-0002. Reset sequence each year. Validate uniqueness per workspace. Allow prefix customization per workspace (default: company name abbreviation). Store invoice sequence per workspace per year.
+- **inputs**: Workspace ID, year
+- **outputs**: Next invoice number in sequence
+- **dependencies**: [BIZ_INVOICE_001]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: Invoice numbers sequential, unique per workspace/year, correct format
+
+#### Task: BIZ_INVOICE_003
+- **title**: Implement French TVA (VAT) calculation engine
+- **description**: Calculate TVA at 20% standard rate (support 10%, 5.5%, 2.1% for French exemptions). Calculate per line item and total. Support mixed TVA rates on same invoice. Validate TVA rate eligibility based on contact country and invoice type. Store TVA breakdown: total_ht, tva_20, tva_10, tva_5_5, total_ttc.
+- **inputs**: Line items with TVA rates, contact country
+- **outputs**: TVA breakdown per rate and totals
+- **dependencies**: [BIZ_INVOICE_001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: TVA calculations correct, different rates handled, French format compliant
+
+#### Task: BIZ_INVOICE_004
+- **title**: Implement invoice PDF generation with French legal format
+- **description**: Generate PDF invoices following French legal requirements. Include: company details, client details, invoice number, dates, line items with TVA, totals, payment terms, bank details (RIB, IBAN, BIC), mention "TVA non applicable - art. 293 B du CGI" if applicable. Use PDFKit or puppeteer. Generate in A4 format.
+- **inputs**: Invoice data
+- **outputs**: PDF binary data
+- **dependencies**: [BIZ_INVOICE_001, BIZ_INVOICE_002, BIZ_INVOICE_003]
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: backend
+- **validation**: PDF generated, French format correct, all required fields present
+
+#### Task: BIZ_INVOICE_005
+- **title**: Implement invoice reminder and overdue logic
+- **description**: Create background job checking invoices daily. Send reminder email 3 days before due date. Send overdue email 1 day after due date. Escalate overdue email after 7 days and 14 days. Update invoice status to overdue. Calculate days overdue.
+- **inputs**: Invoice due dates
+- **outputs**: Reminder emails sent, status updated
+- **dependencies**: [BIZ_INVOICE_001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Reminders sent at correct times, overdue status updated, escalation works
+
+#### Task: BIZ_INVOICE_006
+- **title**: Implement invoice payment recording
+- **description**: Create markAsPaid(invoiceId, paymentDate, paymentMethod, paymentReference) function. Update invoice status to paid, set paid_at. Support partial payments with payment schedule. Record payment history. Trigger related job status update if configured.
+- **inputs**: Invoice ID, payment details
+- **outputs**: Invoice marked as paid, payment recorded
+- **dependencies**: [BIZ_INVOICE_001, BIZ_JOB_002]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Payment recorded accurately, partial payments tracked, status updated correctly
+
+#### Task: BIZ_INVOICE_007
+- **title**: Implement credit note functionality
+- **description**: Create credit notes for invoice cancellations or adjustments. Generate credit note number following format: AV{year}{sequence}. Link credit note to original invoice. Update original invoice status. Calculate credit note totals with TVA. Generate credit note PDF.
+- **inputs**: Original invoice ID, credit note reason
+- **outputs**: Credit note created, linked to invoice
+- **dependencies**: [BIZ_INVOICE_001, BIZ_INVOICE_004]
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Credit note created, linked to original, PDF generated, sequence maintained
+
+#### Task: BIZ_INVOICE_008
+- **title**: Implement recurring invoice templates
+- **description**: Create invoice templates that auto-generate invoices on schedule. Support weekly, monthly, quarterly, yearly recurrence. Define template with line items, contact, payment terms. Track next occurrence date. Auto-generate invoice when due. Send notification before generation.
+- **inputs**: Template data, recurrence schedule
+- **outputs**: Recurring invoices generated on schedule
+- **dependencies**: [BIZ_INVOICE_001]
+- **priority**: low
+- **estimated_complexity**: high
+- **agent_type**: backend
+- **validation**: Recurring invoices generate on schedule, templates work, notifications sent
+
+#### Task: BIZ_PIPELINE_001
+- **title**: Design and create pipeline database schema
+- **description**: Create pipeline_stages table with id, workspace_id, name, position (integer), color, created_at. Create deals table with id, workspace_id, stage_id, contact_id, name, amount, currency (EUR), expected_close_date, notes, created_at, updated_at, won_at, lost_at. Add indexes on stage_id, contact_id, amount.
+- **inputs**: Database connection
+- **outputs**: pipeline_stages and deals tables
+- **dependencies**: [AUTH_WORKSPACE_001, BIZ_CONTACT_001]
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: Tables created, foreign keys enforced, position ordering works
+
+#### Task: BIZ_PIPELINE_002
+- **title**: Implement Kanban board data endpoints
+- **description**: Create GET /api/v1/pipeline/board returning stages with deals grouped. Each stage includes deal count, total amount. Deals include contact name, next action date. Support deal filtering by stage. Order deals by position within stage. Return pipeline metrics: total value, weighted value, conversion rate.
+- **inputs**: Workspace ID
+- **outputs**: Kanban board data with stages and deals
+- **dependencies**: [BIZ_PIPELINE_001]
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Board returns correct structure, deals grouped by stage, metrics calculated
+
+#### Task: BIZ_PIPELINE_003
+- **title**: Implement deal stage transition with probability
+- **description**: Create moveDeal(dealId, targetStageId, probability) function. Log transition with timestamp, from/to stage, user. Default probability per stage (lead 10%, qualified 30%, proposal 60%, negotiation 80%, won 100%). Allow probability override. Calculate weighted pipeline value.
+- **inputs**: Deal ID, target stage ID
+- **outputs**: Deal moved, probability updated, transition logged
+- **dependencies**: [BIZ_PIPELINE_001, BIZ_PIPELINE_002]
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: Deal moves between stages, probability updates, weighted value calculated
+
+#### Task: BIZ_PIPELINE_004
+- **title**: Implement pipeline analytics and forecasting
+- **description**: Calculate pipeline metrics: total pipeline value, average deal size, average cycle time (stage to won), conversion rate per stage, win rate. Generate forecast based on historical data and current pipeline. Identify stalled deals (no activity >14 days). Report on deals at risk.
+- **inputs**: Pipeline data, historical win data
+- **outputs**: Analytics dashboard data, at-risk deals
+- **dependencies**: [BIZ_PIPELINE_001, BIZ_PIPELINE_003]
+- **priority**: medium
+- **estimated_complexity**: high
+- **agent_type**: backend
+- **validation**: Metrics accurate, forecasts reasonable, stalled deals identified
+
+#### Task: BIZ_PIPELINE_005
+- **title**: Implement pipeline duplicate detection
+- **description**: Detect potential duplicate deals for same contact. On deal creation/update, check for existing open deals from same contact. Flag as potential duplicate. Allow user to merge or keep separate. Prevent automatic merging without confirmation.
+- **inputs**: Deal data, contact ID
+- **outputs**: Duplicate suggestions or deal created
+- **dependencies**: [BIZ_PIPELINE_001]
+- **priority**: low
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Duplicates detected, suggestions shown, merge works correctly
+
+#### Task: BIZ_WORKFLOW_001
+- **title**: Implement automated workflow rules engine
+- **description**: Create workflow_rules table with workspace_id, name, trigger_event, conditions[], actions[]. Support triggers: contact_created, job_status_changed, invoice_overdue, deal_stage_changed. Conditions: field equals, greater than, contains, is empty. Actions: send_email, add_tag, update_field, create_task, send_webhook.
+- **inputs**: Workflow rule definitions
+- **outputs**: Automated actions triggered on events
+- **dependencies**: [BIZ_CONTACT_001, BIZ_JOB_002, BIZ_INVOICE_005]
+- **priority**: medium
+- **estimated_complexity**: high
+- **agent_type**: backend
+- **validation**: Rules fire on correct triggers, conditions evaluated, actions executed
+
+#### Task: BIZ_WORKFLOW_002
+- **title**: Implement subscription tier feature gating
+- **description**: Create subscription_features table mapping features to tiers. Features: max_contacts (50/500/unlimited), max_jobs_per_month, max_invoices, max_users, api_access, custom_fields, advanced_analytics, priority_support. Check feature access before allowing actions. Return upgrade prompt when limit reached.
+- **inputs**: User subscription tier, requested feature
+- **outputs**: Feature enabled/disabled, upgrade prompt if needed
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Features gated correctly per tier, limits enforced, upgrade prompts shown
+
+---
+
+### Category: File Handling (vCard import, photo uploads)
+
+#### Task: FILE_VCARD_001
+- **title**: Implement vCard 3.0/4.0 parser
+- **description**: Create vCard parser supporting vCard 3.0 and 4.0 formats. Parse standard fields: FN, N, EMAIL, TEL, ORG, ADR, NOTE. Handle multi-value fields, property parameters (TYPE=WORK, HOME). Support PHOTO (embedded base64 or URL reference). Return structured contact object.
+- **inputs**: vCard string data
+- **outputs**: Parsed contact object
+- **dependencies**: [BIZ_CONTACT_001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: vCard 3.0 and 4.0 parsed correctly, all standard fields extracted, multi-value fields handled
+
+#### Task: FILE_VCARD_002
+- **title**: Implement batch vCard import
+- **description**: Create POST /api/v1/contacts/import/vcard endpoint accepting multipart file upload. Support .vcf files containing multiple cards. Parse all contacts, validate each, report parsing errors without failing entire import. Return import summary: total, imported, skipped, errors. Process in background for files >50 contacts.
+- **inputs**: vCard file upload
+- **outputs**: Import result with summary
+- **dependencies**: [FILE_VCARD_001, BIZ_CONTACT_001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Multi-card files import all contacts, errors reported per card, large files processed async
+
+#### Task: FILE_VCARD_003
+- **title**: Implement vCard export functionality
+- **description**: Create GET /api/v1/contacts/{id}/vcard endpoint. Generate vCard 3.0 format with all contact fields. Support export all contacts as single .vcf file (multiple cards). Include PHOTO if contact has avatar. Set correct content-type and content-disposition headers.
+- **inputs**: Contact ID(s)
+- **outputs**: vCard file download
+- **dependencies**: [BIZ_CONTACT_001]
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: vCard downloads correctly, opens in contacts app, all fields present
+
+#### Task: FILE_PHOTO_001
+- **title**: Implement photo upload storage service
+- **description**: Create file storage abstraction supporting local filesystem and S3-compatible storage. Store files with workspace_id/year/month/uuid.filename path. Generate unique filenames preserving extension. Return file metadata: id, url, size, mime_type, dimensions (for images), created_at.
+- **inputs**: File binary data, metadata
+- **outputs**: Stored file metadata with URL
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Files stored correctly, retrievable via URL, metadata accurate
+
+#### Task: FILE_PHOTO_002
+- **title**: Implement image thumbnail generation
+- **description**: Create thumbnail generation on upload. Generate sizes: 150x150 (avatar), 400x300 (listing), 800x600 (detail). Use sharp or similar library. Store thumbnails alongside original. Return thumbnail URLs in response. Support JPEG, PNG, WebP.
+- **inputs**: Image file
+- **outputs**: Original and thumbnail URLs
+- **dependencies**: [FILE_PHOTO_001]
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Thumbnails generated at all sizes, correct dimensions, format preserved
+
+#### Task: FILE_PHOTO_003
+- **title**: Implement EXIF metadata extraction for job photos
+- **description**: Extract EXIF data from uploaded job photos. Extract: GPS coordinates, timestamp, camera model. Store coordinates as separate lat/lng fields for mapping. Display location on job map view if coordinates present. Handle photos without EXIF gracefully.
+- **inputs**: Image file
+- **outputs**: EXIF metadata object with coordinates
+- **dependencies**: [FILE_PHOTO_001]
+- **priority**: low
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: EXIF extracted when present, GPS coordinates stored, photos without EXIF handled
+
+#### Task: FILE_DOCUMENT_001
+- **title**: Implement document upload for invoices
+- **description**: Create document upload for invoice attachments. Support PDF, images, common office formats (doc, docx, xls, xlsx). Max file size: 25MB. Store in same path structure as photos. Link to invoice via invoice_attachments table. Allow multiple attachments per invoice.
+- **inputs**: Document file, invoice ID
+- **outputs**: Attachment metadata linked to invoice
+- **dependencies**: [BIZ_INVOICE_001, FILE_PHOTO_001]
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: Documents upload, linked to invoice, downloadable, size limits enforced
+
+#### Task: FILE_STORAGE_001
+- **title**: Implement file deletion and cleanup
+- **description**: Create soft delete for files (is_deleted flag, deleted_at). Hard delete after 30 days. Clean up orphaned files not linked to any resource. Implement permanent delete endpoint for admin. Update storage usage metrics.
+- **inputs**: File ID or cleanup job
+- **outputs**: Files deleted, storage freed
+- **dependencies**: [FILE_PHOTO_001]
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: Soft delete works, hard delete after 30 days, orphans cleaned, storage calculated
+
+#### Task: FILE_CDN_001
+- **title**: Implement CDN integration for file delivery
+- **description**: Configure CDN (Cloudflare, OVH CDN) for static assets. Set cache headers: images 1 year, PDFs 1 week. Implement cache invalidation on file delete. Use signed URLs for private files. Configure origin shield for storage.
+- **inputs**: File URL, cache rules
+- **outputs**: CDN-configured delivery
+- **dependencies**: [FILE_PHOTO_001]
+- **priority**: low
+- **estimated_complexity**: high
+- **agent_type**: devops
+- **validation**: Files served from CDN, cache headers correct, invalidation works
+
+---
+
+### Category: Notifications & Reminders
+
+#### Task: NOTIF_EMAIL_001
+- **title**: Implement transactional email service
+- **description**: Create email service abstraction supporting SendGrid, Mailgun, OVH Email. Create email templates for: welcome, password_reset, magic_link, invoice_sent, invoice_paid, job_reminder, subscription_upcoming_expiry. Support template variables. Track delivery status via webhooks.
+- **inputs**: Email type, recipient, template variables
+- **outputs**: Email sent, delivery status tracked
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Emails sent successfully, templates render correctly, delivery tracked
+
+#### Task: NOTIF_EMAIL_002
+- **title**: Implement email template localization (FR/EN)
+- **description**: Create i18n email templates for French and English. Detect user language preference. Send emails in user's language. Support date/time formatting per locale. Include proper French salutations and formalities.
+- **inputs**: User locale, email content
+- **outputs**: Localized email
+- **dependencies**: [NOTIF_EMAIL_001]
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: fullstack
+- **validation**: French users receive FR emails, English users receive EN, dates formatted correctly
+
+#### Task: NOTIF_SMS_001
+- **title**: Implement SMS notification service
+- **description**: Create SMS service integration with OVH SMS or SendGrid. Support SMS for: job reminders (24h before), urgent alerts, invoice payment confirmations. Character limit handling (160 GSM). Queue messages for delivery. Track delivery status.
+- **inputs**: Phone number, message content
+- **outputs**: SMS sent, delivery status
+- **dependencies**: [NOTIF_EMAIL_001]
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: SMS sent, delivery confirmed, character limits handled, French numbers validated
+
+#### Task: NOTIF_PUSH_001
+- **title**: Implement Web Push notifications
+- **description**: Create Web Push notification service using web-push library. Implement VAPID key pair generation and storage. Store push subscriptions in DB. Send push notifications for: new job assigned, invoice received, payment reminder. Support notification payload with title, body, icon, action buttons.
+- **inputs**: Push subscription, notification payload
+- **outputs**: Push notification delivered
+- **dependencies**: []
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: fullstack
+- **validation**: Push notifications delivered, subscription management works, click tracking works
+
+#### Task: NOTIF_REMINDER_001
+- **title**: Implement job reminder scheduling system
+- **description**: Create reminder scheduling for jobs. Allow reminders at: 1 week before, 1 day before, 2 hours before. Store reminder schedule in reminders table. Create background job processing reminders. Send email + SMS + push based on user preferences. Handle missed reminders (job deleted, rescheduled).
+- **inputs**: Job ID, reminder times, user preferences
+- **outputs**: Reminders scheduled and sent
+- **dependencies**: [BIZ_JOB_001, NOTIF_EMAIL_001, NOTIF_SMS_001, NOTIF_PUSH_001]
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: backend
+- **validation**: Reminders sent at correct times, preferences respected, missed reminders handled
+
+#### Task: NOTIF_REMINDER_002
+- **title**: Implement invoice payment reminder automation
+- **description**: Create invoice reminder schedule. Remind 7 days before due, on due date, 3 days overdue, 7 days overdue, 14 days overdue. Each reminder more urgent in tone. Track reminder history per invoice. Allow user to customize reminder schedule.
+- **inputs**: Invoice data, user preferences
+- **outputs**: Reminder emails sent on schedule
+- **dependencies**: [BIZ_INVOICE_005, NOTIF_EMAIL_001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Reminders sent on schedule, escalation works, history tracked
+
+#### Task: NOTIF_NOTIFICATION_001
+- **title**: Implement in-app notification system
+- **description**: Create in-app notifications stored in DB. Create notifications table with user_id, type, title, body, data (JSON), read_at, created_at. Create markAsRead, markAllAsRead endpoints. Real-time delivery via WebSocket when user online. Notification center in frontend.
+- **inputs**: User ID, notification data
+- **outputs**: In-app notification created
+- **dependencies**: []
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: fullstack
+- **validation**: Notifications stored, real-time delivery works, mark as read works
+
+#### Task: NOTIF_SCHEDULER_001
+- **title**: Implement background job scheduler for notifications
+- **description**: Create notification queue using Bull or similar. Implement scheduler worker processing queued jobs. Support delayed jobs for scheduled notifications. Implement retry with exponential backoff. Monitor queue health and failed jobs.
+- **inputs**: Queued notification jobs
+- **outputs**: Notifications processed and delivered
+- **dependencies**: [NOTIF_REMINDER_001, NOTIF_REMINDER_002]
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: backend
+- **validation**: Jobs processed on schedule, retries work, failures logged and retried
+
+#### Task: NOTIF_DIGEST_001
+- **title**: Implement daily/weekly notification digest
+- **description**: Create notification digest feature. Aggregate daily: new contacts, completed jobs, pending invoices. Aggregate weekly: pipeline changes, reminders, activity summary. Send digest email at user-configured time. Allow digest frequency settings: none, daily, weekly.
+- **inputs**: User ID, digest preferences
+- **outputs**: Digest email sent
+- **dependencies**: [NOTIF_EMAIL_001]
+- **priority**: low
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Digests aggregate correctly, sent at configured time, preferences respected
+
+---
+
+### Category: Payment Integration (Stripe + CB)
+
+#### Task: PAY_STRIPE_001
+- **title**: Implement Stripe customer creation and management
+- **description**: Create Stripe customer on user registration or first payment. Store Stripe customer ID in users table. Update customer email/name on sync. Support customer portal link generation. Handle Stripe customer webhook updates.
+- **inputs**: User data
+- **outputs**: Stripe customer ID, stored in DB
+- **dependencies**: [AUTH_DB_SCHEMA_001]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: Customer created in Stripe, linked to user, portal link works
+
+#### Task: PAY_STRIPE_002
+- **title**: Implement Stripe subscription management
+- **description**: Create subscription management for three tiers: Essential (€29), Pro (€49), Premium (€79). Create Stripe products and prices. Implement subscribe, change_plan, cancel_subscription, reactivate endpoints. Handle subscription lifecycle events. Store subscription status locally.
+- **inputs**: User ID, plan selection
+- **outputs**: Active subscription, status synced
+- **dependencies**: [PAY_STRIPE_001]
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: backend
+- **validation**: Subscriptions created in Stripe, plan changes work, cancellations processed
+
+#### Task: PAY_STRIPE_003
+- **title**: Implement Stripe Checkout session for payments
+- **description**: Create Stripe Checkout integration for subscription payments and invoice payments. Generate checkout session with price ID or custom amount. Support embedded checkout or redirect mode. Handle success and cancel URLs. Store session ID for verification.
+- **inputs**: Price ID or amount, success URL, cancel URL
+- **outputs**: Checkout session URL
+- **dependencies**: [PAY_STRIPE_002]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Checkout works, payments processed, success/failure handled
+
+#### Task: PAY_STRIPE_004
+- **title**: Implement French CB (Carte Bancaire) payment processing
+- **description**: Configure Stripe for French CB payments. Enable Cartes Bancaires as payment method. Handle 3DSecure authentication for CB. Support French cards with CB logo. Test with Stripe test cards simulating French cards.
+- **inputs**: Payment intent data
+- **outputs**: Payment processed via CB
+- **dependencies**: [PAY_STRIPE_003]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: CB payments work, 3DS handled, French test cards work
+
+#### Task: PAY_STRIPE_005
+- **title**: Implement Stripe webhook handling
+- **description**: Create webhook endpoint POST /api/v1/webhooks/stripe. Verify webhook signatures. Handle events: customer.subscription.created, customer.subscription.updated, customer.subscription.deleted, invoice.paid, invoice.payment_failed, checkout.session.completed. Update local subscription/payment state.
+- **inputs**: Stripe webhook event
+- **outputs**: Local state updated, events logged
+- **dependencies**: [PAY_STRIPE_002, PAY_STRIPE_003]
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: backend
+- **validation**: Webhooks verified, all events handled, local state consistent with Stripe
+
+#### Task: PAY_STRIPE_006
+- **title**: Implement payment failure handling and retry logic
+- **description**: Create retry schedule for failed payments: retry after 1 day, 3 days, 7 days. Send email notification on each retry. After 3 failures, downgrade to free tier. Allow manual retry from user dashboard. Track payment failure history.
+- **inputs**: Failed payment event
+- **outputs**: Retries scheduled, user notified
+- **dependencies**: [PAY_STRIPE_005, NOTIF_EMAIL_001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Retries happen on schedule, emails sent, downgrade after 3 failures
+
+#### Task: PAY_STRIPE_007
+- **title**: Implement invoice payment via Stripe
+- **description**: Create createPaymentIntent(invoiceId) function. Generate Stripe payment intent for invoice amount. Create checkout session or embed payment form. On success, mark invoice as paid. Handle partial payments. Sync payment status with Stripe.
+- **inputs**: Invoice ID
+- **outputs**: Payment intent, checkout session
+- **dependencies**: [BIZ_INVOICE_006, PAY_STRIPE_003]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Invoice payments work, partial payments handled, invoice marked paid on success
+
+#### Task: PAY_STRIPE_008
+- **title**: Implement Stripe Customer Portal integration
+- **description**: Integrate Stripe Customer Portal for self-service billing management. Generate portal session with return URL. Allow users to update payment method, view invoices, cancel subscription, download invoices. Enforce workspace ownership verification.
+- **inputs**: User ID, return URL
+- **outputs**: Portal session URL
+- **dependencies**: [PAY_STRIPE_001]
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: Portal accessible, payment method update works, invoices viewable
+
+#### Task: PAY_BILLING_001
+- **title**: Implement usage-based billing tracking
+- **description**: Track usage metrics for tier limits: contact count, jobs this month, storage used, API calls. Store usage snapshots daily. Alert user at 80% and 100% of tier limits. Block creation when hard limit reached with upgrade prompt.
+- **inputs**: Usage metrics per workspace
+- **outputs**: Usage report, limit enforcement
+- **dependencies**: [BIZ_WORKFLOW_002]
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Usage tracked accurately, alerts at thresholds, hard limits block creation
+
+#### Task: PAY_BILLING_002
+- **title**: Implement subscription upgrade/downgrade logic
+- **description**: Create subscription change handlers. Upgrade: prorate remaining days, apply immediately. Downgrade: apply at end of billing period. Track feature access changes. Handle downgrade when features in use (warn user). Generate proration invoice/credit.
+- **inputs**: User ID, target plan
+- **outputs**: Plan changed, proration calculated
+- **dependencies**: [PAY_STRIPE_002, PAY_STRIPE_007]
+- **priority**: medium
+- **estimated_complexity**: high
+- **agent_type**: backend
+- **validation**: Upgrades immediate, downgrades delayed, proration correct, features update
+
+#### Task: PAY_REFUND_001
+- **title**: Implement refund processing
+- **description**: Create refund endpoints for admins. Support full and partial refunds. Create refund reason tracking. Process refunds via Stripe API. Update invoice status for partial refunds. Generate refund confirmation email. Require manager approval for refunds >€50.
+- **inputs**: Payment intent ID, amount, reason
+- **outputs**: Refund processed, confirmation sent
+- **dependencies**: [PAY_STRIPE_007, NOTIF_EMAIL_001]
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Refunds process correctly, partial refunds update invoice, approvals work
+
+#### Task: PAY_TAX_001
+- **title**: Implement French tax compliance for subscriptions
+- **description**: Handle French VAT on digital services. Determine tax rate based on customer country (FR: 20%). Generate tax records for Stripe. Configure Stripe Tax for automatic VAT handling. Handle B2B VAT exemption validation (with valid VAT number).
+- **inputs**: Customer country, VAT number, subscription amount
+- **outputs**: Tax calculated and applied
+- **dependencies**: [PAY_STRIPE_002]
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: backend
+- **validation**: VAT correct for FR customers, VAT exemption validated, tax records accurate
+
+---
+
+### Category: Webhook System
+
+#### Task: WH_EVENT_001
+- **title**: Define webhook event catalog
+- **description**: Define complete webhook event catalog: contact.created, contact.updated, contact.deleted, job.created, job.updated, job.status_changed, job.completed, invoice.created, invoice.sent, invoice.paid, invoice.overdue, invoice.cancelled, subscription.created, subscription.updated, subscription.cancelled, payment.succeeded, payment.failed. Include event schema for each.
+- **inputs**: None
+- **outputs**: Event catalog documentation
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: All events documented, schemas defined, events categorized
+
+#### Task: WH_SUB_001
+- **title**: Implement webhook subscription management
+- **description**: Create webhook_subscriptions table with id, workspace_id, url, events[], secret, is_active, created_at. CRUD endpoints for subscription management. Validate URL format (HTTPS required for production). Rate limit per workspace: max 10 subscriptions.
+- **inputs**: Subscription data
+- **outputs**: Subscription created, active
+- **dependencies**: [WH_EVENT_001]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: backend
+- **validation**: Subscriptions created, URL validated, HTTPS enforced, rate limited
+
+#### Task: WH_SUB_002
+- **title**: Implement webhook delivery with retry logic
+- **description**: Create webhook delivery queue. On event, queue delivery to all matching subscriptions. HTTP POST with JSON body: { event, timestamp, workspace_id, data }. Sign payload with HMAC-SHA256 using subscription secret. Retry failed deliveries: 3 attempts with 1min, 5min, 30min delays. Store delivery attempts and response.
+- **inputs**: Event data, subscription URL
+- **outputs**: Webhook delivered with signature
+- **dependencies**: [WH_SUB_001]
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: backend
+- **validation**: Webhooks delivered with correct payload, signatures verified, retries work
+
+#### Task: WH_SUB_003
+- **title**: Implement webhook delivery logs and monitoring
+- **description**: Create webhook_deliveries table logging all delivery attempts. Store: subscription_id, event, payload, response_status, response_body, attempt_number, delivered_at, created_at. Create admin endpoint to view delivery logs per workspace. Implement health check for webhook URLs.
+- **inputs**: Delivery logs
+- **outputs**: Logged deliveries, admin view
+- **dependencies**: [WH_SUB_002]
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: All deliveries logged, logs queryable, health checks work
+
+#### Task: WH_SUB_004
+- **title**: Implement webhook signature verification for inbound webhooks
+- **description**: If receiving webhooks from external services, implement signature verification. Support common patterns: GitHub, Stripe, Zapier. Verify HMAC signature or JWT. Reject invalid signatures with 401. Log verification failures.
+- **inputs**: Inbound webhook request
+- **outputs**: Verified request or rejection
+- **dependencies**: []
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Valid signatures accepted, invalid rejected, failures logged
+
+#### Task: WH_FILTER_001
+- **title**: Implement webhook event filtering
+- **description**: Allow subscription filters based on event data. Support filter expressions: contact.tags contains 'vip', invoice.amount > 1000. Only deliver webhooks matching filters. Store filter expressions in subscription record. Parse and evaluate filter expressions.
+- **inputs**: Event data, filter expressions
+- **outputs**: Filtered webhook deliveries
+- **dependencies**: [WH_SUB_001]
+- **priority**: low
+- **estimated_complexity**: high
+- **agent_type**: backend
+- **validation**: Filters work correctly, only matching events delivered
+
+#### Task: WH_BATCH_001
+- **title**: Implement webhook batch delivery
+- **description**: For high-frequency events, implement batch delivery. Accumulate events for 5 minutes or 100 events. Deliver as single POST with events array. Include batch metadata: batch_id, event_count, first_event, last_event. Sign batch payload same as individual.
+- **inputs**: Accumulated events
+- **outputs**: Batch webhook delivered
+- **dependencies**: [WH_SUB_002]
+- **priority**: low
+- **estimated_complexity**: high
+- **agent_type**: backend
+- **validation**: Events batched correctly, batch delivered, receiver can process array
+
+---
+
+### Category: Caching & Performance
+
+#### Task: CACHE_REDIS_001
+- **title**: Implement Redis caching layer
+- **description**: Set up Redis for caching. Cache frequently accessed data: user sessions, subscription data, contact counts, dashboard metrics. Define TTLs per cache type. Implement cache-aside pattern: check cache, on miss fetch from DB, store in cache. Handle cache failures gracefully.
+- **inputs**: Cache key, data
+- **outputs**: Cached data retrieved/stored
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Redis connected, cache operations work, TTLs respected, misses handled
+
+#### Task: CACHE_REDIS_002
+- **title**: Implement query result caching
+- **description**: Create cache keys for list endpoints: contacts:list:{workspace_id}:{hash(params)}. Cache dashboard metrics with 5-minute TTL. Cache contact detail with 10-minute TTL. Invalidate cache on relevant CRUD operations. Use cache tags for bulk invalidation.
+- **inputs**: Query parameters
+- **outputs**: Cached query results
+- **dependencies**: [CACHE_REDIS_001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Query results cached, cache hit improves response time, invalidation works
+
+#### Task: CACHE_REDIS_003
+- **title**: Implement session storage in Redis
+- **description**: Store user sessions in Redis. Session data: user_id, workspace_id, permissions, last_activity. Session TTL: 24 hours sliding. Implement session validation middleware. Handle Redis connection failures with fallback to DB.
+- **inputs**: Session ID
+- **outputs**: Session data
+- **dependencies**: [CACHE_REDIS_001, AUTH_SESSION_001]
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: backend
+- **validation**: Sessions stored in Redis, session validation fast, fallback works
+
+#### Task: CACHE_CDN_001
+- **title**: Configure CDN caching for static assets
+- **description**: Configure Cloudflare or OVH CDN for static files. Set cache rules: /uploads/images/* cache 1 year, /assets/* cache 1 week. Implement cache

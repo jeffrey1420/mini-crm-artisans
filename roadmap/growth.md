@@ -659,3 +659,714 @@
 #### Task: CHR-010
 - **title**: Build voluntary vs involuntary churn classification
 - **description**: Classify all churn as voluntary (user主动取消) or involuntary (payment failure, email bounce). Track separately. Focus retention efforts on voluntary churn.
+- **inputs**: Churn classification data, payment failure data, cancellation data
+- **outputs**: Churn classification dashboard, involuntary churn rate tracked
+- **dependencies**: CHR-001
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Classification accurate, involuntary churn tracked separately
+
+#### Task: CHR-011
+- **title**: Implement 30-day check-in survey for new customers
+- **description**: Send a short survey 30 days after signup asking: "How's it going? Any features not meeting expectations?" Use responses to identify customers at risk of early churn. Route high-risk responses to CS for outreach.
+- **inputs**: Survey tool, survey questions, routing logic
+- **outputs**: 30-day survey live, response analysis
+- **dependencies**: CHR-001
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: Survey deployed, at-risk customers identified and contacted
+
+#### Task: CHR-012
+- **title**: Build annual subscriber VIP retention program
+- **description**: Create a special program for annual subscribers: dedicated support line, early access to features, quarterly check-in call, anniversary discount offer at renewal. Goal: reduce annual churn to <15%.
+- **inputs**: VIP program design, support escalation path, renewal data
+- **outputs**: VIP program launched, annual retention rate tracked
+- **dependencies**: CHR-001
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: VIP program active, annual churn rate for VIPs <15%
+
+#### Task: CHR-013
+- **title**: Create usage decline triggers with automated outreach
+- **description**: If a customer's weekly active usage drops >50% compared to their first 4 weeks, automatically trigger: (1) in-app notification, (2) email with re-engagement tips, (3) flag for CS team if drop persists 2+ weeks.
+- **inputs**: Usage tracking, trigger logic, automated outreach tools
+- **outputs**: Usage decline alerts live
+- **dependencies**: CHR-001, CHR-002
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Alerts firing, at-risk users re-engaging at higher rate
+
+#### Task: CHR-014
+- **title**: Analyze seasonal churn patterns
+- **description**: Study churn by month/season to identify patterns specific to artisan trades (e.g., January downturn after holiday spending, summer slowdowns). Build seasonal churn forecasts. Pre-emptively launch seasonal campaigns.
+- **inputs**: Historical churn data, seasonal calendar, artisan industry data
+- **outputs**: Seasonal churn report with predictions
+- **dependencies**: CHR-007
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Seasonal patterns identified, proactive campaigns launched
+
+#### Task: CHR-015
+- **title**: Implement customer advisory calls for high-value accounts
+- **description**: For top 50 customers by MRR, schedule quarterly advisory calls. Goal: relationship building, early warning of issues, product feedback. Track retention rate of called accounts vs control.
+- **inputs**: Customer list, call script, CS calendar
+- **outputs**: Advisory call program active
+- **dependencies**: CHR-006
+- **priority**: low
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Quarterly calls happening, retention lift measurable
+
+---
+
+### Category: Upgrade Path (Solo → Pro → Business)
+
+#### Task: UPG-001
+- **title**: Define clear feature gates between tiers
+- **description**: Audit current feature distribution across Solo/Pro/Business tiers. Ensure each tier has distinct, compelling value. Feature gates should feel natural, not arbitrary. Document rationale for each gate.
+- **inputs**: Current feature matrix, user feedback, pricing strategy
+- **outputs**: Revised feature matrix with clear differentiation
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: product
+- **validation**: Feature matrix approved, communicated clearly
+
+#### Task: UPG-002
+- **title**: Implement in-app upgrade prompts at feature gates
+- **description**: When a Solo user attempts a Pro feature, show a contextual upgrade prompt highlighting the benefit they want. Don't block the feature entirely — show a teaser and offer upgrade. Include social proof ("Join 200+ artisans on Pro").
+- **inputs**: Feature usage data, upgrade prompt copy, paywall logic
+- **outputs**: Upgrade prompts at all feature gates
+- **dependencies**: UPG-001, TRC-003
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: product
+- **validation**: Upgrade prompts live, upgrade conversion rate measurable
+
+#### Task: UPG-003
+- **title**: Create upgrade email sequence for upgrade-ready users
+- **description**: Identify users who are hitting Solo limits (e.g., 10 clients, 5 jobs/month). Send a personalized email: "You're approaching your [limit] — here's what Pro unlocks." Include specific usage data. Test frequency and timing.
+- **inputs**: Usage data, email tool, personalized content
+- **outputs**: Upgrade email sequence live
+- **dependencies**: UPG-001
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Emails sent at limit approach, upgrade rate measured
+
+#### Task: UPG-004
+- **title**: Build upgrade tracking dashboard
+- **description**: Create internal dashboard showing upgrade funnels: which features are triggering upgrades, average time from feature encounter to upgrade, upgrade rate by tier and profession. Track weekly.
+- **inputs**: Upgrade event data, dashboard tool
+- **outputs**: Upgrade dashboard live
+- **dependencies**: UPG-002
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Dashboard in use, upgrade patterns identified
+
+#### Task: UPG-005
+- **title**: Test annual upgrade pricing with loyalty discount
+- **description**: Offer existing Solo users upgrading to Pro: "Upgrade now and lock in 40% annual discount — never pay more." Test if annual commitment increases upgrade rate and reduces downgrade rate.
+- **inputs**: Upgrade pricing structure, annual discount mechanics
+- **outputs**: Annual upgrade offer live, upgrade and retention rates measured
+- **dependencies**: UPG-003
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Annual upgrade uptake >40% of upgrades, downgrade rate reduced
+
+#### Task: UPG-006
+- **title**: Implement milestone-triggered upgrade offers
+- **description**: When a user hits significant milestones on Solo (50th job, 20th client), celebrate and offer: "You've outgrown Solo — Pro grows with you." Make the upgrade feel like a natural progression, not a sales push.
+- **inputs**: Milestone tracking, celebration UI, upgrade offer
+- **outputs**: Milestone upgrade offers live
+- **dependencies**: UPG-003
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: product
+- **validation**: Milestone offers trigger at correct thresholds, upgrade rate measurable
+
+#### Task: UPG-007
+- **title**: Create Pro feature preview for Solo users
+- **description**: Allow Solo users to "preview" Pro features for 7 days. Show a "Pro" badge on features they can't access fully. Tease functionality. After preview, show upgrade CTA. Track preview-to-upgrade conversion.
+- **inputs**: Feature preview logic, preview tracking, upgrade CTA
+- **outputs**: Pro preview feature live
+- **dependencies**: UPG-002
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: product
+- **validation**: Previews used, preview-to-upgrade rate >15%
+
+#### Task: UPG-008
+- **title**: Build team-size upgrade triggers
+- **description**: When Solo user attempts to invite a second team member, prompt: "Pro includes up to 5 team members. Upgrade to keep growing your team." Track team-invite upgrades.
+- **inputs**: Team invite flow, upgrade logic, trigger rules
+- **outputs**: Team upgrade prompts live
+- **dependencies**: UPG-002
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: product
+- **validation**: Team upgrade prompts working, team upgrades measurable
+
+#### Task: UPG-009
+- **title**: Develop upgrade success stories by profession
+- **description**: Collect and publish upgrade success stories: "How this Lyon plumber doubled his jobs with Pro." Create profession-specific case studies. Include specific metrics. Distribute via email, in-app, and social.
+- **inputs**: Customer interviews, case study template, distribution channels
+- **outputs**: 6 case studies published (2 per profession)
+- **dependencies**: UPG-003
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Case studies published, measurable traffic and upgrade influence
+
+#### Task: UPG-010
+- **title**: Test trade-specific upgrade messaging
+- **description**: A/B test upgrade messaging tailored by trade: plumbers get "Never miss an emergency call again" vs generic "Upgrade to Pro." Measure which messages drive higher upgrade rates per profession.
+- **inputs**: A/B testing framework, trade-specific copy
+- **outputs**: Winning messages per profession identified
+- **dependencies**: UPG-003
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Trade-specific messages outperform generic, messages deployed
+
+#### Task: UPG-011
+- **title**: Implement downgrade protection program
+- **description**: For customers considering downgrade, trigger retention flow: "Downgrade means losing X, Y, Z. Can we offer you a 20% discount to stay on Pro for 3 more months?" Track what prevents downgrade.
+- **inputs**: Downgrade flow, retention offer logic
+- **outputs**: Downgrade protection active
+- **dependencies**: UPG-002, CHR-005
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Downgrade prevention rate measurable, net revenue impact positive
+
+#### Task: UPG-012
+- **title**: Create upgrade ROI calculator
+- **description**: Build an in-product ROI calculator: "Based on your 20 jobs/month, Pro's scheduling features save you 3 hours/week = €X saved/month." Make upgrade feel financially rational. Allow input of specific numbers.
+- **inputs**: Calculator logic, product integrations, ROI assumptions
+- **outputs**: ROI calculator live in product
+- **dependencies**: UPG-002
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: product
+- **validation**: Calculator used by >20% of upgrade-interested users, upgrade lift measurable
+
+#### Task: UPG-013
+- **title**: Build "Pro Benefits" education campaign
+- **description**: Create a multi-touch campaign to educate Solo users on Pro benefits: weekly email tips featuring one Pro feature, in-app feature spotlights, YouTube tutorials. Goal: desire-building before upgrade ask.
+- **inputs**: Email tool, content calendar, feature highlights
+- **outputs**: Pro education campaign live
+- **dependencies**: UPG-001
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Campaign running, Pro feature trial rate increased
+
+#### Task: UPG-014
+- **title**: Implement time-limited upgrade offer for dormant upgrades
+- **description**: For users who showed upgrade intent (visited pricing) but didn't upgrade within 7 days, send limited-time offer: "Your upgrade discount expires in 48 hours." Test urgency impact on conversion.
+- **inputs**: Upgrade intent tracking, countdown timer, urgency offer
+- **outputs**: Limited-time upgrade offer deployed
+- **dependencies**: UPG-003
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Urgency offers convert at higher rate vs no-deadline offers
+
+#### Task: UPG-015
+- **title**: Create referral-accelerated upgrade path
+- **description**: Allow users to "earn" a free Pro month for each new customer they refer who converts. Accumulate credits over time. Make earning feel achievable. Track referral-funded upgrades.
+- **inputs**: Referral tracking, credit system, upgrade integration
+- **outputs**: Referral upgrade credits live
+- **dependencies**: UPG-002
+- **priority**: medium
+- **estimated_complexity**: high
+- **agent_type**: growth
+- **validation**: Credits used by >10% of Solo users, referral conversion measurable
+
+---
+
+### Category: Customer LTV Maximization
+
+#### Task: LTV-001
+- **title**: Calculate current LTV by tier and cohort
+- **description**: Build LTV model: average revenue per user (ARPU) × average customer lifespan × gross margin. Calculate for each tier (Solo/Pro/Business), each cohort (signup month), and each segment (profession). Establish baseline LTV.
+- **inputs**: Revenue data, churn data, cohort definitions
+- **outputs**: LTV model with segment breakdowns
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: LTV model complete, baseline metrics established
+
+#### Task: LTV-002
+- **title**: Identify LTV extension opportunities per customer lifecycle stage
+- **description**: Map customer lifecycle: Onboarding → Active → Engaged → At-Risk → Churned. For each stage, identify 2-3 tactics to extend LTV: upsells for active, re-engagement for at-risk, referrals for engaged.
+- **inputs**: Customer lifecycle data, LTV model
+- **outputs**: Lifecycle stage tactic map
+- **dependencies**: LTV-001
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Tactic map complete, tactics being executed
+
+#### Task: LTV-003
+- **title**: Implement usage-based expansion revenue triggers
+- **description**: Track usage patterns that correlate with upgrade readiness: high job volume, multiple team members, multiple locations. When users demonstrate "enterprise-level" usage on lower tier, proactively offer upgrade with white-glove migration.
+- **inputs**: Usage tracking, expansion signals, sales outreach
+- **outputs**: Expansion revenue triggers live
+- **dependencies**: LTV-001, UPG-008
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Expansion opportunities identified, migration revenue tracked
+
+#### Task: LTV-004
+- **title**: Build annual vs monthly LTV comparison model
+- **description**: Calculate true LTV difference between annual and monthly subscribers. Include discount cost, churn difference, and admin cost. Use to optimize annual pricing and incentives.
+- **inputs**: Payment data, churn data by plan type
+- **outputs**: Annual vs monthly LTV analysis
+- **dependencies**: LTV-001
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: LTV difference quantified, annual pricing optimized
+
+#### Task: LTV-005
+- **title**: Create premium add-on feature roadmap
+- **description**: Identify 3-5 premium add-ons that can be sold above base tier: advanced reporting, API access, custom integrations, white-labeling. Price each add-on. Create desire through education. Track addon adoption.
+- **inputs**: Feature wishlist data, development costs, pricing model
+- **outputs**: Add-on pricing and roadmap
+- **dependencies**: LTV-001
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: product
+- **validation**: Add-ons available, addon ARPU contribution measurable
+
+#### Task: LTV-006
+- **title**: Implement customer appreciation lifecycle emails
+- **description**: Send relationship-building emails: 1-week post-signup ("Welcome to the family"), 3-month ("How's it going?"), 6-month ("Thank you for being part of our community"), annual ("Happy Anniversary — here's a gift"). Non-promotional, pure relationship.
+- **inputs**: Email tool, customer milestones, gift/offer ideas
+- **outputs**: Lifecycle appreciation emails live
+- **dependencies**: LTV-002
+- **priority**: low
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: Emails deployed, retention lift from appreciation measurable
+
+#### Task: LTV-007
+- **title**: Build cross-sell opportunity identification model
+- **description**: Identify cross-sell opportunities: Solo users with high mobile usage → mobile app upsell. Users not using invoicing → invoicing tutorial + feature push. Users with no team → team collaboration push. Personalize outreach.
+- **inputs**: Feature usage data, cross-sell mapping
+- **outputs**: Cross-sell trigger system live
+- **dependencies**: LTV-002
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Cross-sell triggers firing, cross-sell revenue tracked
+
+#### Task: LTV-008
+- **title**: Create LTV-focused customer success playbook
+- **description**: Document CS playbook: how to identify expansion opportunities, how to conduct renewal conversations, how to address at-risk customers. Train entire CS team on LTV maximization.
+- **inputs**: CS team input, best practices, training materials
+- **outputs**: CS playbook, team trained
+- **dependencies**: LTV-002, CHR-006
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Playbook complete, CS team certified, LTV impact measurable
+
+#### Task: LTV-009
+- **title**: Implement net revenue retention (NRR) tracking
+- **description**: Track NRR monthly: (Revenue at start of month + Expansion - Contraction - Churn) / Revenue at start of month. Target NRR >110%. Create dashboard showing NRR trend and drivers.
+- **inputs**: Revenue data, expansion/contraction data
+- **outputs**: NRR dashboard live
+- **dependencies**: LTV-001
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: NRR >110%, drivers of NRR understood
+
+#### Task: LTV-010
+- **title**: Create loyalty reward program for long-term customers
+- **description**: After 12 months, offer loyalty rewards: priority support, free feature previews, annual discount renewal. Track impact on 12-month retention and LTV.
+- **inputs**: Loyalty program design, eligibility rules
+- **outputs**: Loyalty program launched
+- **dependencies**: LTV-006
+- **priority**: low
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Loyalty program active, 12-month retention improved
+
+---
+
+### Category: Viral/Referral Loop Design
+
+#### Task: VIR-001
+- **title**: Design referral program mechanics
+- **description**: Define referral program: referrer gets 1 month free per successful referral, referee gets 50% off first month. Set eligibility (must be paying customer). Create referral link, share cards, and tracking system.
+- **inputs**: Referral program templates, discount structures, legal requirements
+- **outputs**: Referral program mechanics documented
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Referral program live, referral rate >10% of customers
+
+#### Task: VIR-002
+- **title**: Implement in-product referral sharing
+- **description**: Add "Invite a colleague" button in dashboard header. One-click share to email, WhatsApp, Facebook. Create pre-written message: "I've been using Mini-CRM — it's transformed how I manage my jobs. Here's your exclusive trial link." Track shares.
+- **inputs**: Sharing tools, pre-written copy, tracking
+- **outputs**: In-product referral sharing live
+- **dependencies**: VIR-001
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: product
+- **validation**: Share button used by >20% of customers, referral conversions tracked
+
+#### Task: VIR-003
+- **title**: Create referral achievement milestones
+- **description**: Gamify referrals: 1 referral = badge + 1 month free, 3 referrals = badge + 3 months free, 5 referrals = "Top Referrer" status + lifetime discount. Celebrate publicly (with permission) on social media.
+- **inputs**: Referral tracking, badge system, celebration mechanics
+- **outputs**: Referral milestones live
+- **dependencies**: VIR-001
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: product
+- **validation**: Milestone achievements tracked, referral velocity increased
+
+#### Task: VIR-004
+- **title**: Build automated referral reward fulfillment
+- **description**: Automate referral credit application: when referee converts, automatically apply credit to referrer's account. Send confirmation email. Avoid manual fulfillment — automate entirely.
+- **inputs**: Referral tracking, billing integration, email automation
+- **outputs**: Automated reward fulfillment live
+- **dependencies**: VIR-001
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: product
+- **validation**: Credits applied automatically, fulfillment errors <1%
+
+#### Task: VIR-005
+- **title**: Create artisan community referral stories
+- **description**: Interview top referrers. Publish case studies: "How Jean-Luc referred 8 colleagues and saved €300/year." Distribute in artisan Facebook groups and WhatsApp communities. Make referral feel community-building.
+- **inputs**: Referrer interviews, case study template
+- **outputs**: 5 referral case studies published
+- **dependencies**: VIR-003
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: Case studies published, referral rate from case study views measurable
+
+#### Task: VIR-006
+- **title**: Implement "Join your colleague" onboarding
+- **description**: When referee signs up via referral link, show: "Your colleague [Name] uses Mini-CRM — here's what they love about it." Provide peer validation. Pre-populate some setup from peer's configuration (with permission).
+- **inputs**: Referral data, peer data sharing, onboarding customization
+- **outputs**: Peer-referral onboarding live
+- **dependencies**: VIR-001, VIR-002
+- **priority**: medium
+- **estimated_complexity**: high
+- **agent_type**: product
+- **validation**: Referral trial-to-paid rate improved vs non-referral trials
+
+#### Task: VIR-007
+- **title**: Create trade-specific referral collateral
+- **description**: Build referral materials per trade: plumber-specific email templates, electrician social cards, carpenter WhatsApp messages. Make it easy for referrers to share in their professional networks.
+- **inputs**: Trade-specific copy, design assets, sharing platforms
+- **outputs**: Trade-specific referral materials ready
+- **dependencies**: VIR-002
+- **priority**: low
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: Materials available in-app, usage tracked by trade
+
+#### Task: VIR-008
+- **title**: Run referral program promotion campaign
+- **description**: Launch a targeted campaign to promote referral program: email to all customers, in-app banners, social media posts. Time it around renovation season when artisans are networking. Track referral spike.
+- **inputs**: Customer email list, in-app banner placement, social calendar
+- **outputs**: Referral campaign launched
+- **dependencies**: VIR-001
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: Campaign launched, referral rate spike measurable
+
+#### Task: VIR-009
+- **title**: Build referral analytics dashboard
+- **description**: Create dashboard showing: referrals by referrer, referral conversion rate, revenue attributed to referrals, top referrers leaderboard. Update weekly. Share with team.
+- **inputs**: Referral data, dashboard tool
+- **outputs**: Referral dashboard live
+- **dependencies**: VIR-001
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Dashboard in use, referral program ROI calculable
+
+#### Task: VIR-010
+- **title**: Test referral incentive variations
+- **description**: A/B test referral incentives: 1 month free vs 2 months free vs 50% off vs Amazon gift card. Identify which incentive drives highest referral volume and quality (quality = referral retention).
+- **inputs**: A/B testing framework, incentive variants
+- **outputs**: Winning incentive identified
+- **dependencies**: VIR-001
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Test complete, best incentive deployed
+
+#### Task: VIR-011
+- **title**: Create "referral partnership" program with trade associations
+- **description**: Partner with French trade associations (Companies, CAPEB, etc.). Offer association members exclusive discount. Association promotes to members. Track member signups.
+- **inputs**: Association contacts, partnership terms, tracking links
+- **outputs**: 3 partnership agreements signed
+- **dependencies**: VIR-001
+- **priority**: medium
+- **estimated_complexity**: high
+- **agent_type**: marketing
+- **validation**: Partnerships active, association-driven signups tracked
+
+#### Task: VIR-012
+- **title**: Implement shareable achievement cards
+- **description**: When a user hits a milestone (100th job, 1 year anniversary), generate a shareable card: "I've managed 100 jobs with Mini-CRM!" with app branding. One-click share to WhatsApp, Facebook, Instagram Stories.
+- **inputs**: Card generation tool, milestone triggers, sharing integration
+- **outputs**: Achievement cards live
+- **dependencies**: ACT-009
+- **priority**: low
+- **estimated_complexity**: medium
+- **agent_type**: product
+- **validation**: Cards shared >1000 times, organic reach measurable
+
+#### Task: VIR-013
+- **title**: Build testimonial collection systematization
+- **description**: After successful job completion, prompt user: "Share how Mini-CRM helped you?" Collect video testimonials and written reviews. Make collection effortless. Offer small reward for testimonial.
+- **inputs**: Testimonial prompt logic, collection workflow, review platforms
+- **outputs**: Systematic testimonial collection active
+- **dependencies**: VIR-002
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: marketing
+- **validation**: Testimonials collected monthly, reviews on key platforms growing
+
+#### Task: VIR-014
+- **title**: Create viral loop from shared job cards
+- **description**: When a job is completed, generate a shareable "job complete" card for the artisan to send to client. Card includes subtle Mini-CRM branding. Client sees card, potentially becomes user. Track card shares and conversions.
+- **inputs**: Card template, share mechanism, branding
+- **outputs**: Job completion cards live
+- **dependencies**: []
+- **priority**: low
+- **estimated_complexity**: low
+- **agent_type**: product
+- **validation**: Cards shared, client signups tracked
+
+---
+
+### Category: Pricing Psychology & Packaging
+
+#### Task: PRC-001
+- **title**: Conduct full pricing psychology audit
+- **description**: Review current pricing from psychological perspective: price points vs competitor, tier naming (Solo/Pro/Business), anchoring, decoy effects, bundling. Identify friction points and opportunities. Benchmark against SaaS best practices.
+- **inputs**: Current pricing page, competitor pricing, pricing psychology framework
+- **outputs**: Pricing audit report with recommendations
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Audit complete, recommendations prioritized
+
+#### Task: PRC-002
+- **title**: Test tier naming alternatives
+- **description**: A/B test tier names: "Solo/Pro/Business" vs "Starter/Professional/Team" vs "Essentials/Premium/Enterprise." Measure impact on plan selection and conversion.
+- **inputs**: Name variants, A/B testing framework, traffic levels
+- **outputs**: Winning tier names implemented
+- **dependencies**: PRC-001
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Test complete, conversion impact measured
+
+#### Task: PRC-003
+- **title**: Implement price anchoring with Business tier
+- **description**: Make Business tier the first/most prominent tier (even if most expensive). Research shows highest price shown first makes others feel more affordable. Test "Business first" vs "Solo first" layout.
+- **inputs**: Pricing page layout variants, A/B test setup
+- **outputs**: Anchoring test results, winning layout deployed
+- **dependencies**: PRC-001
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Test complete, anchoring impact quantified
+
+#### Task: PRC-004
+- **title**: Create decoy tier strategy
+- **description**: Introduce a "Team" tier positioned between Pro and Business with pricing designed to make Business seem like better value. Test if decoy increases Business tier selection.
+- **inputs**: Decoy tier pricing, feature matrix for decoy
+- **outputs**: Decoy tier live, Business upgrade rate tracked
+- **dependencies**: PRC-001
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Decoy increases Business selection by >20%
+
+#### Task: PRC-005
+- **title**: Test monthly vs annual toggle default
+- **description**: Test which default pricing view drives higher annual plan adoption: show annual by default with monthly as option vs monthly by default with annual as option. Measure annual selection rate.
+- **inputs**: Pricing page variants, toggle logic
+- **outputs**: Test results, optimal default identified
+- **dependencies**: PRC-001
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Annual plan uptake optimized
+
+#### Task: PRC-006
+- **title**: Optimize per-seat vs per-user pricing psychology
+- **description**: Test per-seat pricing vs flat-tier pricing. For trades with 1-3 person teams, per-seat may feel fairer. Test both approaches for conversion and perceived value.
+- **inputs**: Pricing variants, user research
+- **outputs**: Pricing model test results
+- **dependencies**: PRC-001
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Winning pricing model deployed
+
+#### Task: PRC-007
+- **title**: Implement value-based pricing messaging
+- **description**: Shift pricing page messaging from features to outcomes: "From €29/month — Never miss a client call again." "From €49/month — Double your jobs without doubling your stress." Test outcome-based vs feature-based messaging.
+- **inputs**: Outcome-oriented copy, A/B testing framework
+- **outputs**: Outcome messaging live, conversion lift measured
+- **dependencies**: PRC-001
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: marketing
+- **validation**: Outcome messaging outperforms feature messaging
+
+#### Task: PRC-008
+- **title**: Create "getting started" vs "growing" packaging test
+- **description**: Test packaging by life stage: "Getting Started (1-5 clients)" and "Growing (5+ clients)" instead of Solo/Pro. Match packaging to customer journey stage. Measure conversion and upgrade rates.
+- **inputs**: Life-stage packaging concepts, A/B test setup
+- **outputs**: Test results, winning packaging deployed
+- **dependencies**: PRC-001
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Life-stage packaging converts better
+
+#### Task: PRC-009
+- **title**: Test bundling vs add-on pricing for extras
+- **description**: Test whether features like SMS reminders, advanced reporting, and API access should be bundled into tiers or sold as add-ons. Measure revenue per user and conversion impact.
+- **inputs**: Bundle variants, add-on pricing model
+- **outputs**: Test results, optimal bundling strategy
+- **dependencies**: PRC-001
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Bundle strategy maximizes ARPU
+
+#### Task: PRC-010
+- **title**: Implement price increase communication strategy
+- **description**: When planning price increases, develop communication framework: early notice (60 days), value delivery emphasis ("we've added X, Y, Z"), legacy pricing lock option for loyal customers. Test messaging to minimize churn from increase.
+- **inputs**: Price increase plan, customer segments, communication calendar
+- **outputs**: Price increase playbook
+- **dependencies**: PRC-001
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Playbook complete, price increase executed with <5% churn
+
+#### Task: PRC-011
+- **title**: Create Freemium vs Premium trial comparison study
+- **description**: Research artisan preferences: do they prefer limited free tier (always free, capped features) or time-limited trial (full access, 30 days)? Test both models for acquisition and conversion.
+- **inputs**: Test setup, traffic split, conversion tracking
+- **outputs**: Model comparison with clear winner
+- **dependencies**: PRC-001
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: growth
+- **validation**: Optimal model identified and implemented
+
+#### Task: PRC-012
+- **title**: Implement reciprocal pricing offer
+- **description**: Offer existing customers a reciprocal deal: "Refer 1 customer and get your next month free." Combine referral and retention. Test different reciprocal offers for conversion.
+- **inputs**: Reciprocal offer variants, tracking
+- **outputs**: Reciprocal offers tested
+- **dependencies**: PRC-001, VIR-010
+- **priority**: low
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Reciprocal offers drive both referrals and retention
+
+#### Task: PRC-013
+- **title**: Test "first month at 1€" vs "30 days free" messaging
+- **description**: Test whether "first month for €1" converts better than "30 days free before you pay." Include all terms clearly. Measure conversion and early churn.
+- **inputs**: Offer variants, checkout integration, terms display
+- **outputs**: Winning offer message implemented
+- **dependencies**: PRC-001
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Offer conversion measured, early churn tracked
+
+#### Task: PRC-014
+- **title**: Create price-tier comparison table optimization
+- **description**: Optimize the feature comparison table: use checkmarks/X marks effectively, highlight recommended tier, use hover tooltips for feature explanations, include "most popular" badge. A/B test table layouts.
+- **inputs**: Table design variants, A/B test setup
+- **outputs**: Optimized comparison table
+- **dependencies**: PRC-001
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: product
+- **validation**: Table optimization improves plan selection rate
+
+#### Task: PRC-015
+- **title**: Implement regional pricing for France regions
+- **description**: Test pricing for different French regions (Paris vs provinces). Consider purchasing power differences. May justify regional pricing for lower-income areas. Track by billing address.
+- **inputs**: Regional pricing model, implementation
+- **outputs**: Regional pricing tested
+- **dependencies**: PRC-001
+- **priority**: low
+- **estimated_complexity**: medium
+- **agent_type**: growth
+- **validation**: Regional pricing impact on conversion and volume measured
+
+---
+
+### Category: Freemium vs Free Trial Optimization
+
+#### Task: FTU-001
+- **title**: Define freemium vs free trial success metrics
+- **description**: Establish KPIs for both models: free trial (conversion rate, time to convert, trial length optimization) and freemium (activation rate, upgrade rate, free-tier retention). Set baseline targets.
+- **inputs**: Industry benchmarks, current data
+- **outputs**: Success metrics framework
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Metrics framework approved
+
+#### Task: FTU-002
+- **title**: Analyze competitor models in French artisan market
+- **description**: Survey what competitors offer: free tier, free trial, or paid-only. Map competitor positioning. Identify white space in the market.
+- **inputs**: Competitor analysis, market research
+- **outputs**: Competitor model comparison
+- **dependencies**: FTU-001
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: growth
+- **validation**: Competitor landscape mapped
+
+#### Task: FTU-003
+- **title**: Test hybrid model: freemium + trial
+- **description**: Test offering permanent free tier (limited to 3 clients, 10 jobs/month) PLUS 30-day full-access trial when they hit limits. Measure if hybrid drives more acquisitions than trial-only.
+- **inputs**: Hybrid model specs, test setup
+- **outputs**: Hybrid model test results
+- **dependencies**: FTU-001, FTU-002
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: growth
+- **validation**: Hybrid model compared to trial-only
+
+#### Task: FTU
