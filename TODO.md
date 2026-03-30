@@ -10,7 +10,7 @@
 | D2 | MVP scope | 4 features only: client file, quote, invoice, reminder | External review | 2026-03-30 |
 | D3 | Primary persona | Marc — solo smartphone-native artisan | External review | 2026-03-30 |
 | D4 | Stack | Single managed Postgres, NOT per-customer VPS | External review | 2026-03-30 |
-| D5 | Pricing | €29/€49/€79 tiered (kept from previous) | Previous debate | 2026-03-30 |
+| D5 | Pricing | Free + €29 two-tier. No €19 SKU. Drop €49/€79. Value anchor: "2h/week = 1h labor = €29/month." | Debate 33 (Product Strategist) | 2026-03-30 |
 | D6 | Trial | 30 days (kept from previous) | Previous debate | 2026-03-30 |
 | D7 | Architecture | Nuxt 3 + OVH managed Postgres | Updated | 2026-03-30 |
 | D8 | E-invoicing | v2 feature (Chorus Pro compatible) | External review | 2026-03-30 |
@@ -31,9 +31,9 @@
 | D15 | Relances differentiator | DE-EMPHASIZED — secondary feature below fold | RESOLVED — Debate 25 |
 | D16 | Trial length | 14 days, no credit card at signup | RESOLVED — Debate 26 |
 | D17 | Mobile strategy | React Native from Day 1 via Expo | RESOLVED — Debate 27 |
-| U1 | Real discovery | REOPENED — replace 10-person discovery with 3-day guerrilla usability test + explicit readiness criteria (Debate 28) |
-| D2 | MVP scope | REOPENED — Phase 0.5 (devis-only) proposed to validate core flow before full 4-feature build (Debate 29) |
-| D5 | Pricing | REOPENED — €29/€49/€79 conflicts with simplicity positioning; €19/€29 two-tier proposed (Debate 30) |
+| U1 | Real discovery | RESOLVED — U1 retired. Replaced by readiness protocol: (1) Figma prototype exists, (2) guerrilla test scheduled, (3) pain confirmed by competitive analysis, (4) feature set frozen. Prototype is blocker, not watching artisans. (Debate 31) |
+| D2 | MVP scope | RESOLVED — Sequenced sprints: Sprint 0 = schema (TVA, sequential numbering, mentions légales), Sprint 1 = client file + devis, Sprint 2 = factures + relances (Debate 32) |
+| D5 | Pricing | RESOLVED — Free + €29 two-tier. Drop €49/€79. No €19 SKU at launch (Debate 33) |
 
 ## 🔄 Still Unresolved
 
@@ -45,16 +45,18 @@
 ## 📋 Current TODO
 
 ### Before Building (Do First)
-- [ ] Replace "watch 10 artisans" with 3-day guerrilla usability test (5 artisans at wholesaler, one task: create a devis on prototype) — U1 reopened (Debate 28)
-- [ ] Define explicit "ready to build" criteria to replace U1 as gating condition
+- [ ] U1 readiness check: (1) Figma/clickable devis-creation prototype, (2) guerrilla test scheduled (5 artisans at Point P/Gedimat), (3) pain confirmed by competitive analysis, (4) feature set frozen
+- [ ] If prototype not ready in 1 week: proceed to build anyway, validate post-launch (Debate 31)
+- [ ] Sprint 0: Design shared schema — client, devis, facture, relance types + TVA multi-taux calculator + sequential number generator + mentions légales renderer (Debate 32)
 - [ ] Pick one: Tolteck competitor or Tolteck complement?
 - [ ] Buy domain (U7) — something memorable for devis/factures tool
 - [ ] Build the Active Job Card data model (`jobs.status`, `jobs.scheduled_date`, `jobs.updated_at`)
 - [x] RESOLVE D15: Relances = secondary feature below fold. "Fonctionnalités" section only. NOT in hero.
 - [x] RESOLVE D16: Trial = 14 days. No credit card at signup. Email drip day 7, 3, 1.
 - [x] RESOLVE D17: React Native from Day 1 via Expo. PWA-first retired.
-- [ ] DECIDE D2: 4-feature MVP vs Phase 0.5 (devis-only MVP) — Technical Architect argues Phase 0.5 is faster to validate (Debate 29)
-- [ ] DECIDE D5: €29/€49/€79 tiered vs €19/€29 two-tier — Product Strategist argues current structure conflicts with simplicity positioning (Debate 30)
+- [x] RESOLVE D2: Sequenced sprint structure (Sprint 0 = schema, Sprint 1 = client+devis, Sprint 2 = facture+relances). Phase 0.5 retired.
+- [x] RESOLVE D5: Free + €29 two-tier. Drop €49/€79. Value anchor: "2h/week = 1h labor = €29/month." No €19 SKU at launch.
+- [ ] A/B test pricing page value anchor: "€1/jour" vs "une heure de main d'œuvre" framing with beta users before launch (Debate 33)
 
 ### MVP Build (After Discovery)
 - [ ] Client file feature
@@ -160,4 +162,23 @@ The following were overengineered or wrong:
 
 ---
 
-*Last updated: 2026-03-30T11:38*
+*Last updated: 2026-03-30T11:50*
+
+---
+
+## New from Pulse 2026-03-30T11:50
+
+### Resolved (U1, D2, D5):
+- **U1 (Discovery):** Growth Strategist won — U1 retired. Replaced by readiness protocol: (1) Figma prototype exists, (2) guerrilla usability test scheduled (5 artisans at wholesaler, single devis task), (3) pain confirmed via competitive analysis, (4) feature set frozen. If prototype not ready in 1 week: ship anyway and validate post-launch.
+- **D2 (MVP scope):** Technical Architect refined — 4-feature MVP stands but with sequenced sprints: Sprint 0 = shared schema (TVA, sequential numbering, mentions légales), Sprint 1 = client file + devis, Sprint 2 = factures + relances. Phase 0.5 retired (teaches wrong lessons, risks schema drift).
+- **D5 (Pricing):** Product Strategist won — Free + €29 two-tier. No €19 SKU at launch. Drop €49/€79 entirely. Value anchor: "2 heures par semaine sur vos devis et factures. C'est une heure de main d'œuvre. Votre abonnement? €29/mois."
+
+### Challenged assumptions this pulse:
+1. U1 discovery as prerequisite before building — challenged by Growth Strategist (guerrilla test + readiness criteria replace 10-artisan watch)
+2. 4-feature MVP as parallel sprint — challenged by Technical Architect (it's a schema sequencing problem, not a parallel work problem)
+3. €19/€29 two-tier as optimal — challenged by Product Strategist (Free + €29 two-tier beats €19/€29 on acquisition funnel; trust/usability > price as conversion barrier)
+
+### New action items from this pulse:
+- Get clickable devis-creation prototype in front of 5 real artisans within 10 days — or explicitly decide to skip and validate post-launch
+- Sprint 0 = schema design (all 4 types + TVA + sequential numbering + mentions légales logic) — this is the critical path before feature development
+- A/B test pricing page: "€1/jour" vs "une heure de main d'œuvre" framing with beta users before public launch
