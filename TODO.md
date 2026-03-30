@@ -42,9 +42,12 @@
 | D72 | Expert-comptable Phase 1 | UPDATED — Expert-comptable outreach = Week 1 (recommendation channel, not data-sync). Data-sync portal = Phase 2. GetApp/Capterra profiles claimed before launch. | Debate 85 (Growth Strategist) | 2026-03-30 |
 | D81 | Offline-first | REVERSED — Sprint 0 = offline-capable (optimistic UI + retry queues + AsyncStorage). WatermelonDB/expo-sqlite + background sync + conflict UI deferred to v1.2. Sprint 0 recovers 3-5 days. | Debate 86 (Technical Architect) | 2026-03-30 |
 | D82 | Digital peer communities | Retention/engagement spaces, NOT acquisition channels. WhatsApp groups + Facebook = brand recall + peer support. SEO = primary digital discovery. Prescriber = highest-trust acquisition. | debate-DigitalChannels.md | 2026-03-30 |
-| D83 | Situation financière delivery | REFINED — Configurable notification window (morning/midday/evening, user chooses) + event-driven triggers (devis unanswered 3+ days, facture unpaid 15+ days) + timezone awareness + 10pm night guardrail. Server-computed nightly aggregation retained. Sprint 0 adds: push infra + notification preference capture + nightly job. | Debate 83/88 (Product Strategist) | 2026-03-30 |
-| D84 | Sprint 0 realistic timeline | 8-10 days for full scope. 5-day option: drop mentions légales, plain text WhatsApp share. Real device testing required — not skippable. | Debate 84 (Technical Architect) | 2026-03-30 |
-| D85 | Expert-comptable outreach | PARTIALLY REVERSED — Week 1: GetApp/Capterra profiles only. Outreach moves to Week 4-6 with prerequisites (10-20 active beta users, testimonials, production mentions légales validated). Data-sync portal = Phase 2. | Debate 85/87 (Growth Strategist) | 2026-03-30 |
+| D83 | Situation financière delivery | REFINED by D89 — configurable notification window KILLED. Event-only notification on first accepted devis. Recurring digest for dormant Free users (14+ days no accepted devis) as "stay in touch" mechanism below conversion trigger line. Sprint 0 adds: push infra + accepted-devis trigger. | Debates 83/88/89 (Product Strategist) | 2026-03-30 |
+| D84 | Sprint 0 realistic timeline | REFINED by D90 — 5.5-6.5 days (updated from 8-10). D86 (offline-capable) + D74 (API key auth) eliminate sequential dependency. Parallel backend + mobile tracks from Day 1. | Debates 84/90 (Technical Architect) | 2026-03-30 |
+| D85 | Expert-comptable outreach | REFINED by D91 — U12 split: U12a (validation, Week 1, Louis's own, no prerequisites). U12b (referral, Week 4-6, with prerequisites). GetApp/Capterra = Week 1 (unchanged). | Debates 85/87/91 (Growth Strategist) | 2026-03-30 |
+| D89 | Situation financière notification | RESOLVED — event-only notification (first accepted devis). Configurable digest window REMOVED. D76 conversion trigger = notification trigger. | Debate 89 (Product Strategist) | 2026-03-30 |
+| D90 | Sprint 0 timeline estimate | RESOLVED — 5.5-6.5 days with parallel backend + mobile tracks. API contract defined Day 1. | Debate 90 (Technical Architect) | 2026-03-30 |
+| D91 | Expert-comptable validation vs referral | RESOLVED — U12 split: validation (Week 1, Louis's own, no prerequisites) ≠ referral (Week 4-6, with testimonials). | Debate 91 (Growth Strategist) | 2026-03-30 |
 
 ## 🔄 Reopened This Pulse (Resolved in 15:17 Pulse)
 
@@ -634,3 +637,24 @@ The following were overengineered or wrong:
 - [ ] **D88 NEW:** Add notification preference to onboarding flow — "Quand voulez-vous recevoir vos rappels?" Morning / Midday / Evening. Default to user's stated preference.
 - [ ] **D88 NEW:** Replace daily 8pm financial digest push with event-driven triggers: (1) devis unanswered 3+ days → "Ce devis attend une réponse depuis 3 jours", (2) facture unpaid 15+ days → "Cette facture est impayée depuis 15 jours"
 - [ ] **D88 NEW:** Timezone guardrail — push notification send time adjusts for user's declared timezone (not "Paris time" for all of France)
+
+## New from Pulse 2026-03-30T18:45 — Three Specialist Debates Resolved
+
+### Resolved (D89, D90, D91):
+- **D89 (Situation financière notification):** RESOLVED — configurable digest window KILLED. Notification fires ONLY on first accepted devis event. "Votre devis pour [Client] a été accepté — votre situation financière est désormais complète." This IS the D76 conversion trigger. Recurring digest for dormant Free users kept as separate "stay in touch" mechanism, not primary notification. (Debate 89)
+- **D90 (Sprint 0 timeline):** RESOLVED — Sprint 0 = 5.5-6.5 days (updated from 8-10). D86 (offline-capable) + D74 (API key auth) eliminate the sequential dependency that drove the 8-10 day estimate. Backend and mobile run in parallel from Day 1 once API contract is defined. (Debate 90)
+- **D91 (Expert-comptable validation vs referral):** RESOLVED — U12 split confirmed. U12a (validation, Week 1): Louis books his own expert-comptable this week, shows devis flow, gets feedback. No prerequisites. U12b (referral, Week 4-6): cold outreach to 5 colleague expert-comptables with testimonials and production-validated mentions légales. (Debate 91)
+
+### Challenged assumptions this pulse:
+1. D88's configurable notification window is meaningful for €29 tier conversion (Product Strategist challenged: digest creates noise, event creates signal — D76's "first accepted devis" is the only notification that matters)
+2. 8-10 day Sprint 0 estimate remains correct after D86/D74 scope reductions (Technical Architect challenged: parallelization unlocks 5.5-6.5 days)
+3. D85/D87's "10-20 beta users before expert-comptable outreach" applies to validation conversations (Growth Strategist challenged: validation ≠ referral, prerequisites apply to referral only)
+
+### New Action Items from this pulse:
+- [ ] **D89 NEW:** Remove configurable notification window from onboarding. The €29 conversion notification fires ONLY on first accepted devis. Message: "Votre devis pour [Client] a été accepté. Passez à €29 pour suivre ce qui vous est dû." One notification, one moment, one ask.
+- [ ] **D89 NEW:** Free tier dormant user "stay in touch" push — if no accepted devis in 14 days, gentle "tout va bien?" check-in. Below the conversion trigger line. No upgrade pitch.
+- [ ] **D90 NEW:** Sprint 0 timeline = 5.5-6.5 days. Backend and mobile run in parallel from Day 1. API contract (OpenAPI spec or shared types) must be defined by end of Day 1 to unlock parallelization.
+- [ ] **D90 NEW:** Sprint 0 Day 1 morning: define Fastify API contract with mobile team. Then backend builds to contract, mobile builds to contract in parallel.
+- [ ] **D91 NEW:** U12a (validation — THIS WEEK): Louis books his own expert-comptable. Ask: "Can I show you the devis flow and get your honest reaction?" No testimonials, no beta users, no prerequisites. Just a flow demo and feedback request.
+- [ ] **D91 NEW:** U12b (referral — Week 4-6): cold outreach to 5 colleague expert-comptables. Prerequisites: 10-20 active beta users, 1-2 testimonials, production-validated mentions légales. Frame: "We have artisans in your area using this — would you like to see how it handles BTP client mentions?"
+- [ ] **D91 UPDATED:** D85/D87 partially superseded by D91. GetApp/Capterra = Week 1 (unchanged). Expert-comptable validation = Week 1 (Louis's own, no prerequisites). Expert-comptable referral = Week 4-6 (with prerequisites).

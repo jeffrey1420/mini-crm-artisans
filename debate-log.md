@@ -4030,4 +4030,115 @@ The financial snapshot still exists — as an in-app report Marc opens when he w
 
 ---
 
-*Last updated: 2026-03-30T18:27*
+*Last updated: 2026-03-30T18:45*
+
+---
+
+## Pulse 2026-03-30T18:45 — Three Specialist Debates
+
+---
+
+## Debate 89: D83/D88 — Kill the Digest, Keep Only the Event
+
+**Challenge:** D83/D88 resolved "situation financière = configurable notification window (morning/midday/evening) + event-driven triggers." Product Strategist challenges the configurable digest component.
+
+### Product Strategist — Digest Creates Noise, Event Creates Signal
+
+**Assumption challenged:** That a configurable notification window (daily/weekly digest) is a meaningful delivery mechanism for the €29 tier financial snapshot.
+
+**Core argument:**
+
+D76 resolved that the conversion trigger is **first accepted devis**. This is a specific, high-intent moment — Marc's client just said yes. That's when we ask for the upgrade. The D88 design still centers on a **recurring notification window** with configurable timing. This is a daily digest model wearing event-triggered clothing.
+
+Here's the problem: Marc is in equilibrium. He's managing his business fine on Free. The worst thing we can do is send a notification that says "tout va bien, rien de neuf" — which is what any digest does on a quiet week. No urgency. No action. Just noise.
+
+D63 is explicit: **financial snapshot is the €29 tier feature**, not a Free tier daily pull. This means the upgrade pitch only makes sense when there's financial data worth snapshotting — i.e., when a real transaction occurred.
+
+A devis accepted = financial data now exists = snapshot is meaningful = upgrade pitch is relevant.
+
+An 8pm Tuesday digest with no new business = no data, no snapshot, no pitch justification. Just another notification to ignore.
+
+**VERDICT on D83/D88:**
+
+**RESOLVED — Kill the configurable digest window. The "situation financière" notification fires ONLY on the first accepted devis event.**
+
+- Notification: "Votre devis pour [Client] a été accepté — votre situation financière est désormais complète."
+- This IS the conversion trigger. One notification, one moment, one ask.
+- Recurring digest for dormant Free users: kept as a separate "stay in touch" mechanism (below the conversion trigger line), not as the primary notification.
+- Free tier users who haven't accepted a devis in 14 days receive a gentle "tout va bien?" check-in. But the €29 conversion notification is event-only.
+- D83 updated: configurable window REMOVED. Event-driven only (first accepted devis). D76 conversion trigger is the notification trigger.
+
+---
+
+## Debate 90: D84 — Sprint 0 Is 5.5-6.5 Days, Not 8-10
+
+**Challenge:** D84 resolved Sprint 0 = 8-10 days for full scope. Technical Architect challenges this estimate as stale — derived before D86 (offline-capable, not offline-first) and D74 (API key auth, not JWT).
+
+### Technical Architect — Parallelization Unlocks 5.5-6.5 Days
+
+**Assumption challenged:** That the 8-10 day estimate remains correct after both scope reductions were applied.
+
+**Core argument:**
+
+The 8-10 day figure embedded two assumptions that were reversed:
+1. WatermelonDB/expo-sqlite with background sync — removed by D86
+2. JWT auth with refresh rotation — removed by D74
+
+Neither change was reflected in a revised estimate. Here's the updated work unit breakdown:
+
+**Backend track (Day 1 in parallel with mobile):**
+- Fastify scaffold + Postgres schema + API key middleware: **1 day**
+- Devis CRUD endpoints: **1.5 days**
+- Mentions légales (data-driven templates): **0.5 days** (concurrent with above)
+
+**Mobile track (Day 1 once API contract frozen):**
+- Devis creation flow: **2 days**
+- AsyncStorage + retry queue: **1 day**
+- Real device testing: **0.5 days** (concurrent with final mobile work)
+
+**Buffer: 0.5 days**
+
+**Total: 5.5-6.5 days**
+
+The decisive factor: backend and mobile can run in parallel if the API contract is defined by end of Day 1. The 8-10 day estimate embedded a sequential dependency that no longer exists.
+
+**VERDICT on D84:**
+
+**RESOLVED — Sprint 0 timeline = 5.5-6.5 days.** The 8-10 day estimate was for offline-first with JWT. With offline-capable (D86) + API key auth (D74), 5.5-6.5 days is the correct estimate. D84 updated accordingly. Buffer of 0.5 days is included.
+
+---
+
+## Debate 91: D85/D87 — Expert-Comptable Validation ≠ Referral
+
+**Challenge:** D85/D87 resolved expert-comptable outreach moves to Week 4-6 with prerequisites (10-20 beta users, testimonials). Growth Strategist challenges this as conflating validation and referral.
+
+### Growth Strategist — Validation This Week, Referral in Week 4-6
+
+**Assumption challenged:** That prerequisites (beta users, testimonials) are needed before any expert-comptable outreach.
+
+**Core argument:**
+
+D79 drew the correct distinction: validation and referral are two different conversations. D85/D87 applies referral prerequisites to a validation conversation.
+
+**Validation conversation (Week 1, no prerequisites):**
+"Can I show you a devis flow and get your honest reaction?"
+Louis asks his own expert-comptable — already a warm relationship. The ask: 20 minutes of feedback on whether the compliance flow makes sense. No testimonials needed. No beta users needed. The expert-comptable can assess whether the tool addresses a real pain within 20 minutes. That's information Louis cannot get from cold prospecting.
+
+**Referral conversation (Week 4-6, with prerequisites):**
+"Would you add this to your recommended software list?"
+This absolutely requires social proof. 10-20 beta users, testimonials, production-validated mentions légales. This goes to 5 colleague expert-comptables in Week 4-6.
+
+The D85/D87 resolution conflates these. "GetApp/Capterra profiles in Week 1" is correct — that's infrastructure, not outreach. But blocking expert-comptable conversations until Week 4-6 wastes a free validation opportunity that D79 specifically identified.
+
+**VERDICT on D85/D87:**
+
+**RESOLVED — Split U12 into two distinct phases:**
+
+- **U12a (validation, Week 1):** Louis books his own expert-comptable this week. Ask: "Can I show you the devis flow and get your honest reaction?" No prerequisites. No testimonials. Just a flow demo and feedback request.
+- **U12b (referral, Week 4-6):** Cold outreach to 5 colleague expert-comptables, with beta user testimonials and production-validated mentions légales as social proof.
+
+D85/D87 partially updated: GetApp/Capterra = Week 1 (unchanged). Expert-comptable validation = Week 1 (Louis's own, no prerequisites). Expert-comptable referral = Week 4-6 (with prerequisites).
+
+---
+
+*Last updated: 2026-03-30T18:45*
