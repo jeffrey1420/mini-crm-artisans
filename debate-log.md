@@ -5813,3 +5813,64 @@ The checklist-vs-planning-session distinction is correct. U16 completion alone d
 
 *Last updated: 2026-03-30T21:55*
 
+
+---
+
+## Pulse 2026-03-30T22:07 — Three New Debates
+
+---
+
+## Debate 114: D99 — Usage-Based Pricing Creates a Monetization Paradox
+
+**Challenge:** D99 (€1.50/devis sent, capped at €29/month) is still OPEN — Louis hasn't evaluated implementation complexity. Product Strategist challenges the core premise.
+
+### Product Strategist — Flat €29 Is the Only Viable Model
+
+**Assumption challenged:** The claim that usage-based pricing "matches artisan seasonality" better than flat pricing is unvalidated founder math. No evidence French artisans asked for this, no cohort data showing seasonal dips, no competitive benchmark proving it drives conversion.
+
+**Core arguments:**
+1. **Value anchoring destroys itself.** Usage-based signals "we're afraid to charge €29/month." Capped at €29 is identical in maximum cost to flat €29 — but arrives wrapped in doubt. Flat €29 says "this is worth €29." Capped €1.50/devis says "we're hedging." Confidence is priced in.
+2. **Revenue zero-sum for infrastructure you still run.** The capped model guarantees €0 in low-season months. Every SaaS infrastructure cost (Supabase, push, hosting, support) is still there. Flat pricing smooths cash flow for the business, not just the customer.
+3. **Cognitive overhead at the worst moment.** Conversion (D96) is triggered by the first paid facture — an emotional, high-stakes moment. Adding per-devis billing at that exact moment is a churn trigger disguised as a feature. Free → €29 is a single clean mental model. Free → €1.50/devis requires re-explanation at the lock-in moment.
+
+**Verdict on D99:** REOPENED — Product Strategist argues usage-based billing should be killed for v1. Flat €29/month is simpler, better for unit economics, and aligned with the single conversion path. Annual billing discount (pay €260/year, get 2 months free) addresses seasonality concern without metering complexity.
+
+---
+
+## Debate 115: PDF Generation — Missing Sprint 0 Gate Item
+
+**Challenge:** D113 listed six Sprint 0 gate items but omitted PDF generation. Technical Architect argues this is an architectural oversight with cascading consequences.
+
+### Technical Architect — PDF Generation Must Be the 7th Gate Item
+
+**Assumption challenged:** The assumption that PDF generation is a feature implementation detail that can be deferred to Sprint 1b. PDF generation is not a feature — it is a rendering architecture decision that constrains the data model, the API contract, and the mentions légales strategy simultaneously.
+
+**Core arguments:**
+1. **Three approaches, three different constraints.** Server-side (Supabase Edge + headless Chrome): needs blob storage + PDF endpoint + document reference storage. Client-side (react-pdf/expo-print): no blob storage but mentions légales must be shipped with the app — conflicts with D74's Handlebars/Nunjucks template engine. Hybrid (server HTML template → client PDF): partially satisfies D74 but couples Sprint 0 template engine to Sprint 1b rendering.
+2. **D74's Handlebars/Nunjucks template engine only makes sense in a server-rendering context.** If PDFs are client-side, maintaining a template engine in Sprint 0 serves no purpose — scope inflation based on a discarded architectural assumption.
+3. **Sprint 1a builds devis flow without knowing how documents are previewed, stored, or sent.** Every architectural decision made in Sprint 0 risks being invalidated by whatever PDF approach Sprint 1b chooses. Building blind into Sprint 1 is expensive to undo.
+
+**Verdict on D113 gate scope:** REOPENED — Technical Architect argues PDF generation approach must be added as the 7th Sprint 0 gate item. Without it, the mentions légales template engine decision (D74) and the API contract (D113 item 4) are built on unstated assumptions about document rendering.
+
+---
+
+## Debate 116: GetApp/Capterra — Wasted Launch Effort for This Audience
+
+**Challenge:** D85 says GetApp and Capterra profiles should be claimed and optimized BEFORE launch, arguing "admin handlers search here first." Growth Strategist challenges this assumption.
+
+### Growth Strategist — GetApp/Capterra Optimization Is Premature and Misallocated Effort
+
+**Assumption challenged:** The assumption that admin handlers (Marc's wife/admin assistant) search GetApp/Capterra BEFORE the artisan has decided to try the product. GetApp/Capterra are mid-to-low-funnel comparison tools — they serve buyers who have already identified a problem and are evaluating options. This gets the funnel backwards.
+
+**Core arguments:**
+1. **French artisans aged 45-55 do not browse software comparison sites.** They ask their mate at the yard. They Google "logiciel devis facture artisan pas cher" at 9pm. They ask their expert-comptable. Peer recommendation dominates over comparison-site browsing in SMB solopreneur buying.
+2. **The admin handler scenario is the wrong buyer model.** Marc's wife isn't independently discovering software on GetApp — she's validating a choice Marc has already made after hearing about it from a peer. She uses GetApp to validate, not to discover.
+3. **Conflating SMB solopreneur buying with B2B enterprise procurement.** Enterprise buyers use G2/GetApp because they have procurement committees and formal evaluation criteria. Marc has neither — he has a WhatsApp group and a preference for people he trusts.
+4. **A blank profile with no reviews is worse than no profile.** A listing claiming to serve French artisans with zero actual French artisan reviews signals a brand-new or irrelevant product — fails the credibility test at first impression discovery precisely when it matters most.
+5. **10 hours on GetApp pre-launch = empty profile. 10 hours on SEO content + prescriber outreach + expert-comptable cold calls = actual humans in the product.** The ROI calculation is not close.
+
+**Verdict on D85:** REOPENED — Growth Strategist argues GetApp/Capterra optimization should be deferred to Month 3 post-launch, after real user reviews exist. One authentic French artisan review on G2 is worth more than six months of profile polish on an empty listing.
+
+---
+
+*Last updated: 2026-03-30T22:07*

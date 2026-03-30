@@ -44,7 +44,7 @@
 | D82 | Digital peer communities | Retention/engagement spaces, NOT acquisition channels. WhatsApp groups + Facebook = brand recall + peer support. SEO = primary digital discovery. Prescriber = highest-trust acquisition. | debate-DigitalChannels.md | 2026-03-30 |
 | D83 | Situation financière delivery | REFINED by D89 — configurable notification window KILLED. Event-only notification on first accepted devis. Recurring digest for dormant Free users (14+ days no accepted devis) as "stay in touch" mechanism below conversion trigger line. Sprint 0 adds: push infra + accepted-devis trigger. | Debates 83/88/89 (Product Strategist) | 2026-03-30 |
 | D84 | Sprint 0 realistic timeline | REFINED by D90 — 5.5-6.5 days (updated from 8-10). D86 (offline-capable) + D74 (API key auth) eliminate sequential dependency. Parallel backend + mobile tracks from Day 1. | Debates 84/90 (Technical Architect) | 2026-03-30 |
-| D85 | Expert-comptable outreach | REFINED by D91 — U12 split: U12a (validation, Week 1, Louis's own, no prerequisites). U12b (referral, Week 4-6, with prerequisites). GetApp/Capterra = Week 1 (unchanged). | Debates 85/87/91 (Growth Strategist) | 2026-03-30 |
+| D85 | GetApp/Capterra optimization | REOPENED — pre-launch optimization is misallocated effort. Defer to Month 3 after real reviews exist. D91 U12 split stands. | Debate 116 (Growth Strategist) | 2026-03-30 |
 | D89 | Situation financière notification | RESOLVED — event-only notification (first accepted devis). Configurable digest window REMOVED. D76 conversion trigger = notification trigger. | Debate 89 (Product Strategist) | 2026-03-30 |
 | D90 | Sprint 0 timeline estimate | RESOLVED — 5.5-6.5 days with parallel backend + mobile tracks. API contract defined Day 1. | Debate 90 (Technical Architect) | 2026-03-30 |
 | D91 | Expert-comptable validation vs referral | RESOLVED — U12 split: validation (Week 1, Louis's own, no prerequisites) ≠ referral (Week 4-6, with testimonials). | Debate 91 (Growth Strategist) | 2026-03-30 |
@@ -52,7 +52,8 @@
 | D96 | Conversion trigger | **SUPERSEDED by Debate 110 — Dual-path conversion:** Path A (Formal-Devis Artisan): Limit-hit (5 active devis OR 10 clients) OR first paid facture = hard gate. Path B (Verbal-Agreement Artisan): 45 consecutive days of active product usage (job created/updated) OR 7+ jobs logged OR 5+ active clients managed = conversion trigger. Day 14 human WhatsApp check-in applies to both archetypes as primary conversion moment. | Debate 110 (Product Strategist) | 2026-03-30 |
 | D97 | Sprint 0 prep | Louis writes 4 mentions légales templates this week (2h) — gate for 5-day Sprint 0. | Debate 97 (Technical Architect) | 2026-03-30 |
 | D98 | Platform default | **REFLECTED — Direction confirmed, validation mechanism updated.** Android-first remains correct for French artisan demographic. "Week 1 poll validates" REMOVED (wrong instrument after U15 elimination). Replaced with install completion rate (≥50% in 48h) as Sprint 0 metric. D24 resolution gates Sprint 0 specificity. | Debates 98/103 (Growth Strategist) | 2026-03-30 |
-| D99 | Usage-based pricing | **RESOLVED (Implementation-Ready)** — €1.50/devis sent, capped at €29/month. Activates at conversion (limit-hit). Billing trigger aligned with conversion trigger. Flat-rate alternative (€29 unlimited) offered at conversion moment. | Debates 99/104 (Product Strategist) | 2026-03-30 |
+| D99 | Usage-based pricing | REOPENED — value anchoring destroys itself, revenue zero-sum in low season, cognitive overload at conversion moment. Flat €29 recommended for v1. Seasonality addressed via annual billing discount (€260/year). | Debate 114 (Product Strategist) | 2026-03-30 |
+| D114 | PDF generation Sprint 0 gate | REOPENED — must be 7th Sprint 0 gate item. Three approaches constrain data model, API contract, mentions légales strategy differently. D74 Handlebars assumption may be wrong if client-rendered. | Debate 115 (Technical Architect) | 2026-03-30 |
 | U15 | Founding member offer | ELIMINATED — no lifetime deal, no founding/access tier, no "50 places" scarcity. Single €29/month. Replaced by "Support Prioritaire" (direct WhatsApp to Louis, roadmap vote, named credits). | Debate 101 (Growth Strategist) | 2026-03-30 |
 | U7 | Domain purchase | RESOLVED — buy domain now (park it), defer brand decision. Domain = infrastructure, not branding. Parking costs ~€10-15/year. Expert-comptable outreach and GetApp/Capterra profiles need a proper domain to establish credibility. Brand name decision stays open. | Debate 109 (Growth Strategist) | 2026-03-30 |
 
@@ -876,3 +877,19 @@ The following were overengineered or wrong:
   6. PDF generation approach chosen (Supabase Edge Function recommended)
 
 *Last updated: 2026-03-30T21:55*
+
+---
+
+## New from Pulse 2026-03-30T22:07 — Three Reopened
+
+### Reopened (D99, D113 gate, D85):
+- **D99 (Usage-based pricing):** REOPENED — Product Strategist argues €1.50/devis, capped at €29 creates value anchoring problem, revenue zero-sum for infrastructure costs, and cognitive overload at conversion moment. Flat €29/month is argued as simpler, better for unit economics, and aligned with single conversion path. Annual billing discount (€260/year) proposed as alternative seasonality fix.
+- **D113 gate (PDF generation):** REOPENED — Technical Architect argues PDF generation approach must be the 7th Sprint 0 gate item. Three approaches (server-side, client-side, hybrid) have mutually exclusive constraints on data model, API contract, and mentions légales strategy. D74's Handlebars/Nunjucks template engine assumption may be wrong if PDFs are client-rendered.
+- **D85 (GetApp/Capterra):** REOPENED — Growth Strategist argues pre-launch optimization is misallocated effort. French artisans don't browse comparison sites pre-discovery. Admin handlers use GetApp to validate Marc's choice, not to find the product. Blank profile with no reviews signals irrelevance. Defer to Month 3 after real user reviews exist.
+
+### Action Items from this pulse:
+- [ ] **D99 NEW:** Louis evaluates implementation complexity of usage-based billing (€1.50/devis, capped €29) vs flat €29/month. If usage-based is technically complex or creates billing uncertainty: kill D99, go flat €29. If seasonality is validated customer pain: address with annual billing discount (€260/year) not metering.
+- [ ] **D113 gate UPDATED:** Add PDF generation approach as 7th Sprint 0 gate item. Three options to evaluate before sprint: (A) Supabase Edge Function + headless Chrome/Puppeteer (server-side), (B) react-pdf/expo-print (client-side), (C) server HTML template + expo-print (hybrid). Choice constrains mentions légales engine (D74), API contract (item 4), and blob storage strategy.
+- [ ] **D85 UPDATED:** GetApp/Capterra optimization DEFERRED to Month 3. Spend those hours on SEO content, prescriber outreach, and expert-comptable cold calls instead. Reclaim profile setup time for Month 3 after 10+ real French artisan reviews exist.
+
+*Last updated: 2026-03-30T22:07*
