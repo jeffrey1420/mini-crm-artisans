@@ -21,6 +21,14 @@
 | D13 | Home view | Job-first — Active Job Card as home anchor, not Dashboard or Timeline | Debate 20 (Technical Architect) | 2026-03-30 |
 | D14 | E-invoicing timing | v2 — NOT Day 1 (Debate 21 Growth Strategist) | Debate 21 | 2026-03-30 |
 
+## 🔄 Reopened This Pulse (Need Resolution)
+
+| ID | Topic | Issue | Source |
+|----|-------|-------|--------|
+| D15 | Relances differentiator | Product Strategist argues relances should be DE-EMPHASIZED on landing — not the hero hook | Debate 22 |
+| D16 | Trial length | Growth Strategist argues 30 days → 14 days (GTM doc already said 14) | Debate 23 |
+| D17 | Mobile strategy | Technical Architect argues PWA-first → React Native from Day 1 | Debate 24 |
+
 ## 🔄 Still Unresolved
 
 | ID | Topic | blockers |
@@ -35,6 +43,9 @@
 - [ ] Pick one: Tolteck competitor or Tolteck complement?
 - [ ] Buy domain (U7) — something memorable for devis/factures tool
 - [ ] Build the Active Job Card data model (`jobs.status`, `jobs.scheduled_date`, `jobs.updated_at`)
+- [ ] RESOLVE D15: Remove "relances" from landing page hero — simplicity-first stays, relances as secondary feature only
+- [ ] RESOLVE D16: Confirm trial = 14 days (no credit card at signup, email drip in final week)
+- [ ] RESOLVE D17: Decide between PWA-first (D11) vs React Native from Day 1
 
 ### MVP Build (After Discovery)
 - [ ] Client file feature
@@ -92,4 +103,18 @@ The following were overengineered or wrong:
 
 ---
 
-*Last updated: 2026-03-30T10:58*
+## New from Pulse 2026-03-30T11:11
+
+### Reopened (D15, D16, D17):
+- **D15 (Relances):** Product Strategist won the argument — relances-as-differentiator is fragile. French artisan culture prefers direct calls over automated WhatsApp. Attracts wrong users (cash-flow problems, poor client relationships). Reopen: de-emphasize relances on landing, frame as "schedule reminder for yourself" not "we text your client."
+- **D16 (Trial length):** Growth Strategist won — 30 days creates procrastination, not urgency. Shorter trials convert better (self-select for acute-need buyers). Reopen: 14 days, no credit card at signup, aggressive email drip in final week.
+- **D17 (Mobile strategy):** Technical Architect won — PWA-first fails on iOS (no web push, storage caps, install friction). React Native from Day 1 = single codebase, reliable notifications, App Store credibility.
+
+### Challenged assumptions this pulse:
+1. Relances as primary differentiator (Product Strategist challenged D1/D12 framing)
+2. 30-day trial (Growth Strategist challenged D6)
+3. PWA-first mobile strategy (Technical Architect challenged D11)
+
+---
+
+*Last updated: 2026-03-30T11:11*

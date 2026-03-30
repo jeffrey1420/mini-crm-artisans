@@ -96,6 +96,78 @@ Below: **Upcoming Jobs Strip** (next 3 jobs by scheduled date) + **Quick stats b
 
 ---
 
+## Pulse 2026-03-30T11:11 — Three New Debates
+
+---
+
+## Debate 22: Relances as Differentiator — Fragile Assumption
+
+**Challenge:** Product Vision claims "relances (follow-ups they don't have to chase manually)" is the key differentiator. Product Strategist challenges this assumption.
+
+### Product Strategist — Relances-Should-Be-De-Emphasized Case
+
+**Core argument:** "Relances automatiques" solves for the wrong pain. Artisans don't hate following up — they hate forgetting to, or feeling awkward doing it. Those are different problems requiring different solutions.
+
+**Why relances-as-differentiator is fragile:**
+1. **French artisan culture is direct.** They call, not text. An automated WhatsApp message from a business tool feels cold and risks the personal client relationship they've built over years.
+2. **"I don't have to chase" is the wrong promise.** Most artisans want to stay on top of it — the mental load is remembering *who* and *when*, not the act itself. Automated reminders don't solve remembering.
+3. **WhatsApp reminders feel impersonal to the client.** A French client receiving "Votre facture de 850€ est en attente depuis 30 jours" from a business tool may wonder if the artisan even cares enough to call personally.
+4. **Attracts the wrong users.** Hooking on relances automation attracts: cash-flow-challenged artisans, those with poor client relationships, people who want to outsource the awkward part. These are churn risks, not ideal customers.
+5. **Competitors don't lead with it.** Tolteck and Obat lead with job management and scheduling — if relances were a massive purchase driver, they'd have capitalized on it.
+
+**Proposed reframing:** "Votre administration ne vous ralentit plus" / "Restez professionnel du devis au paiement." Frame: from "we do the uncomfortable thing for you" to "you stay in control of your business, end to end."
+
+**Product Strategist POSITION:** Relances should be DE-EMPHASIZED on the landing page (kept as feature, not headline). Frame relances as "schedule a follow-up reminder for yourself" (not "we text your client"). Better differentiation: "Everything in one place: clients, jobs, invoices, follow-ups — no spreadsheet required."
+
+**Verdict on U3 (landing page hero):** REOPENED — Product Strategist challenges U3 resolution. Relances should not appear in the headline. "Simplicité" still wins, but relances should be removed from hero framing entirely.
+
+---
+
+## Debate 23: Trial Length — 30 Days Is Too Long
+
+**Challenge:** D6 (30-day trial) treated as resolved. Growth Strategist challenges: 30 days creates procrastination, not conversion.
+
+### Growth Strategist — 14-Day Trial Case
+
+**Core argument:** 30 days assumes organic user engagement and eventual conversion. This is fantasy for a French artisan persona (busy, not browsing, acute-need buyer).
+
+**Why 30 days hurts conversion:**
+1. **Days 1-7:** Good intentions. Days 8-14: vaguely remember signing up. Days 15-22: guilt, avoidance. Days 23-30: panic, convert out of guilt or let it expire. The trial expired but value was never demonstrated.
+2. **Urgency drives action.** Shorter trials force a decision. Every session matters. 30 days creates "I'll get to it eventually." 14 days creates real pressure.
+3. **Self-selection.** 30 days attracts curious browsers and competitive researchers. 14 days self-selects for people with an acute need NOW.
+4. **The GTM doc says 14 days, debate log says 30 days.** This conflict must be resolved.
+5. **Industry data:** Studies consistently show 14-21 day trials matching or beating 30-day trials on conversion rates.
+
+**On credit card at signup:** For MVP stage, no credit card at signup — friction kills conversion at awareness stage. Compensate with aggressive email drip (trial ending in 7 days, 3 days, 1 day). Credit card capture can be introduced at day 7-10 for engaged users.
+
+**Growth Strategist POSITION:** Trial should be **14 days**, no credit card at signup, email drip creating 3 touchpoints in the final week.
+
+**Verdict on D6:** REOPENED — 30-day trial should be changed to 14-day trial.
+
+---
+
+## Debate 24: PWA-First — Wrong Strategy for This Audience
+
+**Challenge:** D11 (PWA first, native within 6 months). Technical Architect challenges that PWA-first is the wrong mobile strategy for a French artisan CRM.
+
+### Technical Architect — React Native from Day 1 Case
+
+**Core argument:** PWAs work for apps where reach > engagement > conversion. A B2B CRM where reminders are the core product requires reliable push notifications, App Store credibility, and hardware access that PWAs can't guarantee — especially on iOS.
+
+**Why PWA-first fails for this audience:**
+1. **Marc is Android-heavy, but Android PWA install rate is under 15%.** "Add to Home Screen" is a hidden, alien action for this demographic.
+2. **iOS PWAs are hobbled.** Apple restricts background execution, caps storage at 50MB, and does not support web push reliably. ~40% of French users on iOS = broken reminder system for large portion of users.
+3. **Push notifications ARE the product.** This is a CRM. Relances and reminders are the core value. Web push on iOS simply doesn't work. If Marc misses a notification, the app has failed its core job.
+4. **Trust signal for financial tools.** App Store presence = credibility. A "website added to home screen" doesn't feel like a professional business tool for a 45-55 year old.
+5. **"6-month native" timeline is a lie.** Maintaining two separate codebases, retraining users twice, feature parity nightmares. The pivot rarely happens cleanly.
+6. **Hardware access.** Camera for receipts, file system for PDFs, background processing — PWAs have ceilings that native doesn't.
+
+**Technical Architect POSITION:** Mobile strategy should be **React Native from Day 1** — single codebase covers both platforms, push notifications work from Day 1, App Store presence from launch, no "6-month pivot" fantasy.
+
+**Verdict on D11:** REOPENED — PWA-first should be reconsidered. React Native from Day 1 is the stronger position for this specific audience and product.
+
+---
+
 ## Previous Debates (Summary)
 
 | ID | Topic | Resolution | Date |
@@ -119,4 +191,18 @@ Below: **Upcoming Jobs Strip** (next 3 jobs by scheduled date) + **Quick stats b
 
 ---
 
-*Last updated: 2026-03-30T10:58*
+| D12 | Landing page | Simplicity-first (Debate 19) | 2026-03-30 |
+| D13 | Home view | Job-first, not Dashboard or Timeline (Debate 20) | 2026-03-30 |
+| D14 | E-invoicing timing | v2 (Debate 21) | 2026-03-30 |
+| D15 | Relances differentiator | REOPENED — de-emphasize on landing page (Debate 22) | 2026-03-30 |
+| D16 | Trial length | REOPENED — 14 days, not 30 (Debate 23) | 2026-03-30 |
+| D17 | Mobile strategy | REOPENED — React Native vs PWA-first (Debate 24) | 2026-03-30 |
+
+| U1 | Real discovery | Still open — watch 10 artisans |  |
+| U2 | E-invoicing platform | Resolved: Factea first when v2 (Debate 21) | 2026-03-30 |
+| U7 | Domain | Still open — buy domain |  |
+| U3 | Landing hero | REOPENED — remove relances from hero (Debate 22) | 2026-03-30 |
+
+---
+
+*Last updated: 2026-03-30T11:11*
