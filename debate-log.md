@@ -500,4 +500,96 @@ For French artisans aged 45-55, solo operators, the real objection is not "€29
 
 ---
 
-*Last updated: 2026-03-30T11:50*
+*Last updated: 2026-03-30T12:01*
+
+---
+
+## Pulse 2026-03-30T12:01 — Three New Debates
+
+---
+
+## Debate 34: U7 — Domain Purchase Is Premature
+
+**Challenge:** U7 ("buy domain — not alize, something memorable for devis/factures tool") has never been debated. It sits in the TODO as an open action item without scrutiny.
+
+### Growth Strategist — Domain Purchase Should Be Deferred
+
+**Core argument:** Buying a domain before the guerrilla usability test is premature branding commitment. If the prototype reveals artisans want job management more than invoicing, or the product angle shifts, the domain becomes a liability — registered, paid for, but wrong.
+
+**Why buying now is premature:**
+1. **Branding before validation:** We don't know if "devis/factures" is the final angle. The guerrilla test might reveal artisans care more about job tracking than invoicing — in which case a devis-focused domain is the wrong anchor.
+2. **Domain lock-in:** Buy it, and you're committed to that name. If the product pivots, the domain actively miscommunicates.
+3. **Alternatives exist:** A subdomain on existing infrastructure (`devis.lschvn.foo`) or a Carrd one-pager serves the MVP landing page need without commitment. Louis already has Coolify infrastructure.
+4. **False progress:** "We have a domain" creates cognitive commitment that makes pivots harder.
+
+**VERDICT on U7:** DEFERRED — use temporary subdomain or Carrd landing page until MVP validated post-guerrilla test. Domain purchase happens after product direction is confirmed.
+
+---
+
+## Debate 35: Sprint 0 — Flow-First Beats Schema-First
+
+**Challenge:** Debate 32 resolved D2 with "Sprint 0 = pure schema design." Technical Architect (original proponent of Sprint 0 sequencing) now challenges this.
+
+### Technical Architect — Schema-First Produces Over-Engineered Types
+
+**Core argument:** Designing a schema in isolation from real usage is over-engineering. You don't know which fields artisans will actually populate until you watch them try. "Big bang schema design" produces types with fields nobody uses — and those fields create maintenance burden, UI clutter, and migration cost forever.
+
+**Why schema-first is wrong:**
+1. **Schema emerges from usage.** A client record might only need: name, phone, email. Do we need `client_type`? Only if the mentions légales renderer actually uses it — we don't know that until we build it and watch it in use.
+2. **TVA complexity is a rendering problem, not a schema problem.** The rates are known. The per-line calculation is known. But where in the flow do you capture it? You won't know until you watch someone create their first devis.
+3. **Time-to-real-feedback matters more than architectural purity.** A minimum devis flow built in 3 days with bare schema generates real feedback. Sprint 0's 5-day pure schema sprint generates... a schema document. Not user learning.
+4. **Schema-first risks unused complexity.** You spend 5 days on sequential number enforcement, TVA breakdown tables, mentions légales templates. Then week 2, an artisan says "I don't do TVA, I'm below the threshold" — and your entire TVA schema is unused.
+
+**The better model — Flow First, Schema Emerges:**
+- Sprint 0: Build minimum viable devis flow (add client → add line items → preview → send via WhatsApp). No TVA (flat rate ok). No sequential numbering enforcement. Simple mentions légales block. Get in front of real users in 5 days.
+- Sprint 1: Extract what worked. Formalize schema based on actual usage.
+
+**VERDICT on D2 Sprint 0:** Redefined — Sprint 0 = build minimum viable devis flow (3-5 days, minimal schema). Schema formalization happens at Sprint 1, based on Sprint 0 usage learning. Phase 0.5 retired — again.
+
+---
+
+## Debate 36: D6 — Free Tier IS the Trial (Resolving the TODO.md Conflict)
+
+**Challenge:** TODO.md says D6 = "30 days" but debate-log.md (Debate 26) resolved D6 = 14 days. The error reveals a deeper structural problem: Free + 14-day trial creates cognitive dissonance.
+
+### Product Strategist — Free Tier + 14-Day Trial Is a Broken Model
+
+**Core argument:** The 14-day trial was designed for a paid-only product. Now that D33 resolved Free + €29 two-tier, adding a 14-day trial on top creates redundant commitment friction and contradictory signals. The Free tier IS the trial — it removes time pressure while enabling full product experience up to limits.
+
+**Why Free + 14-Day Trial is broken:**
+1. **Two commitment devices conflict.** Free says "try without commitment, no time pressure." 14-day countdown says "decide now or lose access." Contradictory signals for a simplicity-first product.
+2. **The Free tier already solves the trial problem.** Up to 10 clients and 5 active devis is enough to experience core value. If they outgrow it in week 1, they convert. If they don't in 3 months, they weren't a serious buyer.
+3. **14-day countdown adds anxiety, not urgency.** Day-11 countdown email creates guilt — "I haven't had time to use this." Trial ends with anxiety, not confidence.
+4. **Conversion moment is hitting the limit, not a countdown.** Free → Paid happens when the artisan naturally needs more. Countdown → Paid happens under pressure — leading to churn at month 2.
+
+**VERDICT on D6:** **No time-limited trial. Free tier IS the trial.** Conversion happens when artisan hits Free limit. No countdown emails. Day-7 human check-in only ("How's it going? Need anything?").
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D1 | Positioning | Kill "CRM" — devis, factures, relances | 2026-03-30 |
+| D2 | MVP scope | 4 features, SEQUENCED sprints. Sprint 0 = minimum devis flow (3-5d, minimal schema). Sprint 1 = client+devis. Sprint 2 = facture+relances. | 2026-03-30 |
+| D3 | Primary persona | Marc — solo smartphone-native | 2026-03-30 |
+| D4 | Stack | Single managed Postgres | 2026-03-30 |
+| D5 | Pricing | Free + €29 two-tier. Drop €49/€79. | 2026-03-30 |
+| D6 | Trial | No time-limited trial. Free tier IS the trial. Conversion at Free limit. No countdown emails. Day-7 human check-in only. | 2026-03-30 |
+| D7 | Architecture | Nuxt 3 + OVH managed Postgres | 2026-03-30 |
+| D8 | E-invoicing | v2 feature | 2026-03-30 |
+| D9 | Not MVP | No Kanban, no multi-user, no offline, no API keys | 2026-03-30 |
+| D10 | Buyer trigger | "Admin pain" not "CRM need" | 2026-03-30 |
+| D11 | Mobile | React Native from Day 1 via Expo | 2026-03-30 |
+| D12 | Landing page | Simplicity-first — "Vos devis et factures, sans vous prendre la tête" | 2026-03-30 |
+| D13 | Home view | Job-first — Active Job Card as home anchor | 2026-03-30 |
+| D14 | E-invoicing timing | v2 — NOT Day 1 | 2026-03-30 |
+| D15 | Relances differentiator | DE-EMPHASIZED — secondary feature below fold | 2026-03-30 |
+| D16 | Trial length | No countdown trial — Free tier IS the trial | 2026-03-30 |
+| D17 | Mobile strategy | React Native from Day 1 | 2026-03-30 |
+
+| U1 | Discovery | REPLACED — readiness protocol: (1) prototype exists, (2) guerrilla test scheduled, (3) pain confirmed, (4) feature set frozen. Prototype is blocker, not watching artisans. | 2026-03-30 |
+| U2 | E-invoicing platform | Factea first when v2 | 2026-03-30 |
+| U7 | Domain | DEFERRED — use subdomain/Carrd until MVP validated | 2026-03-30 |
+
+*Last updated: 2026-03-30T12:01*

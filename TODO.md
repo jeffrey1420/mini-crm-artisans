@@ -11,7 +11,7 @@
 | D3 | Primary persona | Marc — solo smartphone-native artisan | External review | 2026-03-30 |
 | D4 | Stack | Single managed Postgres, NOT per-customer VPS | External review | 2026-03-30 |
 | D5 | Pricing | Free + €29 two-tier. No €19 SKU. Drop €49/€79. Value anchor: "2h/week = 1h labor = €29/month." | Debate 33 (Product Strategist) | 2026-03-30 |
-| D6 | Trial | 30 days (kept from previous) | Previous debate | 2026-03-30 |
+| D6 | Trial | No time-limited trial. Free tier IS the trial (10 clients, 5 active devis). Conversion happens at Free limit. No countdown emails. Day-7 human check-in only. | Debate 36 (Product Strategist) | 2026-03-30 |
 | D7 | Architecture | Nuxt 3 + OVH managed Postgres | Updated | 2026-03-30 |
 | D8 | E-invoicing | v2 feature (Chorus Pro compatible) | External review | 2026-03-30 |
 | D9 | Not MVP | No Kanban, no multi-user, no offline, no API keys | External review | 2026-03-30 |
@@ -28,28 +28,22 @@
 
 | ID | Topic | Issue | Source |
 |----|-------|-------|--------|
-| D15 | Relances differentiator | DE-EMPHASIZED — secondary feature below fold | RESOLVED — Debate 25 |
-| D16 | Trial length | 14 days, no credit card at signup | RESOLVED — Debate 26 |
-| D17 | Mobile strategy | React Native from Day 1 via Expo | RESOLVED — Debate 27 |
-| U1 | Real discovery | RESOLVED — U1 retired. Replaced by readiness protocol: (1) Figma prototype exists, (2) guerrilla test scheduled, (3) pain confirmed by competitive analysis, (4) feature set frozen. Prototype is blocker, not watching artisans. (Debate 31) |
-| D2 | MVP scope | RESOLVED — Sequenced sprints: Sprint 0 = schema (TVA, sequential numbering, mentions légales), Sprint 1 = client file + devis, Sprint 2 = factures + relances (Debate 32) |
-| D5 | Pricing | RESOLVED — Free + €29 two-tier. Drop €49/€79. No €19 SKU at launch (Debate 33) |
+| — | — | All items from 11:11 and 11:50 pulses are now RESOLVED (see table above) | |
 
 ## 🔄 Still Unresolved
 
 | ID | Topic | blockers |
 |----|-------|----------|
-| U1 | Real discovery | Need to watch 10 artisans do admin tasks before building |
-| U7 | Domain | Buy domain — not alize, something memorable for devis/factures tool |
+| — | — | All previously unresolved items are now resolved or deferred (see tables above) |
 
 ## 📋 Current TODO
 
 ### Before Building (Do First)
 - [ ] U1 readiness check: (1) Figma/clickable devis-creation prototype, (2) guerrilla test scheduled (5 artisans at Point P/Gedimat), (3) pain confirmed by competitive analysis, (4) feature set frozen
 - [ ] If prototype not ready in 1 week: proceed to build anyway, validate post-launch (Debate 31)
-- [ ] Sprint 0: Design shared schema — client, devis, facture, relance types + TVA multi-taux calculator + sequential number generator + mentions légales renderer (Debate 32)
+- [ ] Sprint 0: Build minimum devis flow (3-5 days, flow-first, minimal schema). Add client → add line items → preview → send via WhatsApp. No TVA complexity (flat rate ok). No sequential numbering enforcement. Simple mentions légales block. Schema formalization defers to Sprint 1 based on Sprint 0 usage learning. (Debate 35)
 - [ ] Pick one: Tolteck competitor or Tolteck complement?
-- [ ] Buy domain (U7) — something memorable for devis/factures tool
+- [ ] Buy domain (U7) — DEFERRED. Use `devis.lschvn.foo` subdomain or Carrd landing page until MVP validated post-guerrilla test. Domain purchase happens after product direction confirmed. (Debate 34)
 - [ ] Build the Active Job Card data model (`jobs.status`, `jobs.scheduled_date`, `jobs.updated_at`)
 - [x] RESOLVE D15: Relances = secondary feature below fold. "Fonctionnalités" section only. NOT in hero.
 - [x] RESOLVE D16: Trial = 14 days. No credit card at signup. Email drip day 7, 3, 1.
@@ -93,12 +87,13 @@
 - [ ] Keep MVP scope tight: client list, job/reminder management, basic invoicing — no feature creep
 - [ ] PWA is NOT the mobile strategy — web-only is retired for this product
 
-### Trial Flow (D16 — 14 days, no credit card)
-- [ ] Trial length = 14 days (not 30)
+### Trial Flow (D6 — No Time-Limited Trial. Free Tier IS the Trial.)
+- [ ] No time-limited trial — Free tier (10 clients, 5 active devis) IS the trial
 - [ ] No credit card at signup — friction kills conversion at awareness stage
-- [ ] Email drip sequence: Day 7 ("How's it going?"), Day 3 ("Last 3 days left"), Day 1 ("Trial ends tomorrow — ready to start?")
-- [ ] Credit card capture introduced at Day 7-10 for engaged users (in-app prompt, not email block)
-- [ ] Aha moments by day: Day 1 (clients organized), Day 5 (quote sent from phone), Day 10 (follow-up reminder received)
+- [ ] No countdown emails — remove Day 3 and Day 1 urgency emails entirely
+- [ ] Day-7 human check-in only: "How's it going? Need anything?" (human touch, not countdown)
+- [ ] Conversion trigger: artisan hits Free limit (10 clients or 5 active devis) — upgrade prompt at that moment, not before
+- [ ] Aha moments by usage milestone: first client added, first devis sent, first follow-up reminder received
 
 ## 🚫 What We Deleted
 
