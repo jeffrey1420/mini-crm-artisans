@@ -474,6 +474,33 @@ The operational burden argument is serious. A 3-person startup cannot do real De
 
 ---
 
+## Debate 13 (REVISED): OVH Self-Hosted Postgres — Operational Debt vs Migration Debt
+
+### The Disagreement
+
+- **Technical Architect (challenging):** "OVH VPS self-hosted Postgres isn't 'data sovereignty' — it's outsourcing your SRE team to no one."
+- **Debate 9 Resolution:** "Self-hosted Postgres on OVH from day one — answers every compliance question, no DPA needed."
+
+### Argument: Technical Architect Responds
+
+The challenger raises a legitimate concern, but commits a critical error: **conflating "self-hosted" with "self-operated."** These are not the same thing. OVH Cloud SQL is a managed Postgres service — automated backups, monitored replication, security-patched OS layers, point-in-time recovery — operated by OVH's infrastructure team under a 99.99% SLA. That's not "no SRE team." That's hiring OVH's SRE team as your infrastructure operator, which is precisely what you're paying for with the managed tier. The challenger's framing assumes bare VPS is the only interpretation of "OVH self-hosted." It isn't.
+
+The challenger's second assumption is that a 3-person team cannot absorb operational overhead. This underestimates what a well-scoped managed service actually covers. OVH Cloud SQL handles: automated pg_dump + point-in-time recovery (tested, documented, not a cron job you wrote at 2am), OS security patching without downtime, database parameter optimization and version upgrades, and storage scaling without manual LVM manipulation. The team still writes application code. They do not become DBAs. The operational burden comparison to bare VPS is not "slightly less" — it's categorically different. Bare VPS is DIY DevOps. OVH Cloud SQL is the managed service equivalent of Supabase, but on French infrastructure, under French jurisdiction, with the same "données en France" sales story.
+
+There is a deeper flaw in the challenger's logic: **Supabase was the original recommendation for exactly the operational simplicity being demanded now.** The reason Technical Architect originally chose Supabase (Debate 3) was: faster development, no server maintenance, real-time built-in, managed SLA. The only reason to walk that back was data sovereignty — "toutes les données sur OVH, en France" — which Supabase Frankfurt did not fully satisfy. OVH Cloud SQL satisfies the same sovereignty requirement without the operational debt. The compromise is not a retreat. It completes the original reasoning: keep the sovereignty win, eliminate the operational burden the challenger correctly identifies as unsustainable for a 3-person team.
+
+**The compromise: OVH Cloud SQL (managed Postgres), not bare OVH VPS.** Same OVH France infrastructure. Same CNIL compliance story. Same "données hébergées en France, chez OVH." Zero server maintenance. The Debate 9 decision was directionally right (OVH over Supabase) but implementation was underspecified. Bare VPS was the wrong form factor for the operational reality. OVH Cloud SQL is the right one.
+
+### Resolution
+
+**RESOLVED — OVH Cloud SQL managed Postgres (not bare VPS)**
+
+**Final decision:** Replace bare OVH VPS Postgres with OVH Cloud SQL managed Postgres. This resolves the challenger's operational burden argument while preserving the data sovereignty and CNIL compliance case that motivated Debate 9. The "self-hosted" language survives — data is still on OVH infrastructure in France. The "self-operated" burden does not.
+
+**Key insight:** "Self-hosted" and "self-operated" are different choices. OVH Cloud SQL is self-hosted (data on your infrastructure provider) without being self-operated (OVH handles the SRE). This is the correct model for a 3-person team.
+
+---
+
 ## Debate 14: Kanban vs Client Timeline — Core View
 
 ### The Disagreement
@@ -497,17 +524,23 @@ Debate 7 rationale:
 
 ### Resolution
 
-**UNRESOLVED — Kanban's value is being questioned at the foundation**
+**RESOLVED — Client Timeline as Home, Kanban as Secondary**
 
-The client timeline argument is more authentic to how artisans actually work. But Kanban advocates would argue that visual pipeline = understanding of business health at a glance.
+The challenger's argument is the strongest voice in this debate, and it wins for the MVP. The core assumption to challenge: **the Kanban advocates are designing for the user they wish they had (Sophie) rather than the users they actually have (Marc and Jean-Pierre).**
 
-**Compromise path:** Client Timeline as home screen (reverse-chronological feed per client — calls, messages, quotes, jobs, notes). Kanban moves to a secondary "Jobs" tab — optional, not forced. Sophie's team can use it. Jean-Pierre doesn't have to.
+Here's the critical flaw in defending Kanban as home: **Kanban answers "what stage is this deal?" but the actual pain point artisans describe is "where did I leave off with this client?"** These sound similar but aren't. A plumber doesn't think "I have 3 quotes in Devis stage." He thinks "I talked to Madame Dupont Tuesday, she's deciding, I need to follow up." That's a client memory question, not a pipeline question. Client Timeline answers both — it shows the full history in reverse chronological order, so you see exactly where you left off. Kanban only answers the pipeline question.
 
-**Key insight:** The pain point is "where did I leave off with this client?" not "what stage is this deal?" Timeline answers both. Kanban answers neither for solo artisans.
+The second assumption to challenge: **treating all artisans as a homogeneous group.** Marc (solo plumber, verbal quotes, starts jobs before pricing) and Sophie (electrician with 2 employees, needs team coordination) are not the same customer. Kanban serves Sophie's team coordination needs excellently — it's the right tool for a growing business with employees. But the MVP's first 50 users are almost certainly Marc-like solo artisans. Designing the home view for Sophie while Marc is the beachhead customer is a product-market fit error. The fix isn't to abandon Kanban — it's to make it secondary and optional.
+
+**Final decision:** Client Timeline is home (reverse-chronological feed per client: calls, messages, quotes, jobs, notes). Kanban lives in a secondary "Jobs" tab, visible but not forced. Solo artisans (Marc, Jean-Pierre) never see it if they don't want to. Growing teams (Sophie) can enable it for team coordination. Tap-to-move still works in the Jobs tab for those who want pipeline visibility.
+
+**Why this resolves Debate 14:** The challenger's core insight — "the pain point is 'where did I leave off with this client?'" — is the right north star for the home view. Kanban is preserved as a feature for the right audience (teams), just not the default experience. This honors Debate 7's intent (keep Kanban in the product) while correcting its error (making it the home view for an audience that doesn't think in pipeline stages).
+
+**Key insight:** Kanban is a team feature masquerading as a solo feature. It's essential for Sophie's business. It's friction for Marc's business. The MVP should optimize for Marc first, with a clear upgrade path for Sophie.
 
 ---
 
-## Debate 15: Pricing — Cost-Plus vs ROI Anchor
+## Debate 15: Pricing — Cost-Plus vs ROI Anchor (RESOLVED)
 
 ### The Disagreement
 
@@ -528,20 +561,107 @@ Debate 2 rationale:
 - Churn at €9 is 3x higher than €29
 - Target customer has €50k+ revenue
 
+### The Growth Strategist's Counter-Argument
+
+I challenge the challenger's core assumption: **that artisans make purchasing decisions using explicit ROI calculations.** They don't. Tradespeople buy tools the same way they buy gas — when they need it, when it solves an immediate problem, when the friction of NOT having it outweighs the friction of trying something new. The "€50/hour × 2 hours saved = €400/month recovered" math is a Silicon Valley SaaS fantasy projected onto people who haven't run a spreadsheet since high school. Marc the plumber doesn't track his hours. He knows he's busy. He knows he's losing quotes because he can't follow up. That's the pain, not an abstract ROI model.
+
+The challenger's second flaw is **ignoring competitive anchoring at higher price points.** At €89/month, Mini-CRM enters direct competition with Factomos (€49/month), Teamleader (€59/month starter), and dozens of established French SaaS tools with brand recognition, case studies, and sales teams. For an unknown product with zero social proof, €89 is a positioning disaster. You're not just charging more — you're positioning against established players without their credibility. €29, by contrast, is below the competitive threshold where price comparison even kicks in. It's a "let's see what this is" decision, not a "I'm investing in this tool" decision. That distinction is everything for initial adoption.
+
+Third, and most critically: **the "ROI anchor" pricing strategy requires the ROI claim to be believable at signup.** The challenger's math assumes the app consistently saves 2 hours per week from day one. But this is an unproven, brand-new product with no case studies, no testimonials, and no track record. If you price at €89/month and tell prospects "this will save you 2 hours a week," you're making a promise you can't yet keep. When month one delivers only 45 minutes of value (because onboarding is still rough, because the artisan hasn't changed their workflow yet, because habits die hard), that €89/month subscription gets cancelled immediately — with resentment. €29/month gets more grace. More forgiveness. More "let me give it another month." For a new product finding its feet, that grace period is worth more than the perceived prestige of a higher price.
+
+Finally, the challenger's own data is self-defeating. They cite the survey showing "10% would pay €29" — meaning 90% of prospects in that survey wouldn't pay €29. If only 10% say €29 is acceptable, what does that say about €89? The 90% who won't pay €29 won't suddenly reverse their psychology because you added a zero. The "daily rate thinking" cuts both ways: €89/month = €3/day = roughly 1/50th of a daily rate. That's still not "expensive." But it's also not "I'll take a chance on an unknown app."
+
 ### Resolution
 
-**UNRESOLVED — Strong challenge, significant pricing implications**
+**Decision: Keep €29/month solo tier, with ROI framing as an onboarding/nurture message, not a pricing anchor**
 
-The ROI anchoring argument is compelling. €29 may be leaving money on the table AND sending the wrong signal simultaneously.
+The €29 price stands for acquisition. The ROI story ("this pays for itself in under 2 hours of recovered time per month") should live in:
+1. The onboarding email sequence (after signup, when commitment is formed)
+2. The landing page's secondary proof section (below the fold, for skeptics)
+3. Monthly usage reports ("You created 12 quotes this month — that's roughly 3 hours of admin time saved")
 
-**Compromise path:** 
-- Solo: €49/month (compromise between €29 and €89 — maintains accessibility, improves perceived value)
-- Pro: €99/month
-- Business: €149/month
-- OR go full €89 solo based on the ROI math — test both with pricing experiments
+This approach:
+- Keeps entry friction low for first-time triers
+- Builds perceived value through demonstrated usage, not price tags
+- Avoids competitive anchoring against established tools
+- Gives the product room to deliver on its promise before demanding premium positioning
 
-**Key insight:** The real question isn't "what can we charge?" but "what value are we delivering?" €29 undersells both the product and the customer.
+**Revised pricing tiers:**
+- Solo: €29/month *(unchanged)*
+- Pro: €49/month *(unchanged — the sweet spot between accessibility and value)*
+- Business: €89/month *(up from €79 — this is the tier that benefits from ROI framing, because teams with 2-3 artisans ARE calculating team productivity)*
+
+**Key insight:** You don't need to price at €89 to tell the €89 story. The ROI narrative is a conversion and retention tool — use it after signup, not before. Price low to win the trial. Prove value to earn the upgrade.
 
 ---
 
-*Pulse update: 3 new debates (13, 14, 15), 2026-03-30T09:55:00Z*
+*Resolution: 2026-03-30T10:15:00Z | Resolved by: Growth Strategist specialist*
+
+---
+
+## Debate 16: Landing Page Angle — ROI ("Gagnez 2h/semaine") vs. Simplicity ("Simple comme WhatsApp")
+
+### The Disagreement
+
+- **Position A (ROI-first):** "The landing page should open with the value proposition: 'Gagnez 2 heures par semaine.' Artisans are busy — lead with what they get, not what it is. The ROI frame makes the price feel trivial."
+- **Position B (Simplicity-first):** "Artisans are skeptical of SaaS promises. 'Gagnez 2h/semaine' sounds like every other tech product that overpromises. Lead with simplicity: 'Simple comme WhatsApp, conçu pour les artisans.' Trust is built through familiarity, not math."
+
+### The Argument
+
+Position A (ROI-first) concerns:
+- The product solves a time scarcity problem — lead with the solution
+- €49/month is easier to justify when framed as "less than 2 hours of labor per month"
+- Competitors use ROI framing (Sage, Teamleader's French ads) — it's proven in this market
+- The 30-day trial means users need a reason to commit — ROI is that reason
+
+Position B (Simplicity-first) concerns:
+- French artisans are notoriously resistant to new tech tools — overpromising triggers skepticism
+- WhatsApp is the baseline UX expectation — comparing favorably to it is concrete, not vague
+- "2h/semaine" sounds like a sales pitch; "simple comme WhatsApp" sounds like a product that respects their intelligence
+- The product's real differentiator vs. WhatsApp is organization, not productivity metrics — that's a harder story to tell in a headline
+
+---
+
+*Pulse update: Debate 15 resolved, Debate 16 opened 2026-03-30T10:15:00Z*
+
+---
+
+## Debate 16: Home View — Client Timeline vs. Dashboard (Stats-First)
+
+### The Disagreement
+
+- **Client Timeline (following Debate 14 resolution):** Home = reverse-chronological feed per client (calls, messages, quotes, jobs, notes). The question answered: "Where did I leave off with this client?"
+- **Dashboard (challenger position):** Home = stats dashboard showing business health at a glance (quotes sent this month, acceptance rate, revenue pipeline, jobs completed).
+
+### The Argument
+
+Client Timeline position (following Debate 14):
+- Home should answer the artisan's primary question: "What happened last with client X?"
+- Timeline is familiar — it works like WhatsApp, email, SMS — all already in their workflow
+- Stats dashboards are a manager's tool, not an artisan's tool
+- The product's primary value is "never lose track of a client" — Timeline delivers that directly
+
+Dashboard position (challenger):
+- Once you have 10+ active clients, you need to know "which clients need attention?" not just "what happened last?"
+- Stats give the business a pulse — quotes sent vs. accepted, revenue this month vs. last month
+- A dashboard creates a "command center" feeling — the product becomes indispensable rather than just organized
+- Sophie's team (2+ employees) needs to see aggregate business health, not just individual client histories
+- A stats-first home could show: pending quotes aging >7 days, jobs scheduled this week, clients not contacted in 30+ days
+
+### Key Tension
+
+**The "organizer" vs. "optimizer" product identity.** Mini-CRM can either be:
+- **Organizer:** "Never lose track of a client" — Timeline home, simple, WhatsApp-like
+- **Optimizer:** "Understand and grow your business" — Dashboard home, stats-forward, business-intelligence-lite
+
+These aren't mutually exclusive forever, but the home view choice shapes the product's first impression and its core value proposition in the user's mind.
+
+### Two Positions
+
+**Position A — Client Timeline home:** Simple, familiar, answers the immediate "where did I leave off?" question. Lower cognitive load. Better for solo artisans (Marc, Jean-Pierre). Organizer identity.
+
+**Position B — Dashboard home:** Business health at a glance. Identifies clients needing attention. Better for growing businesses (Sophie) and users who want to optimize. Stats create stickiness through "I need to check this" daily habit. Optimizer identity.
+
+---
+
+*Debate 16 added: 2026-03-30T10:11:00Z*

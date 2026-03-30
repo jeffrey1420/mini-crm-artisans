@@ -1739,3 +1739,641 @@ Ensure full legal and regulatory compliance for a French SaaS CRM product servin
 
 *Legal & Compliance Roadmap — Mini-CRM for French Artisans*
 *Last updated: 2026-03-30*
+
+---
+
+### Category: Data Portability
+
+#### Task: PORT-001
+- **title**: Define data export formats (JSON, CSV, PDF)
+- **description**: Per GDPR Article 20, implement data portability in a structured, commonly used, machine-readable format. Provide at minimum: JSON (full data dump), CSV (contacts, invoices, appointments), PDF (reports). Define what constitutes "complete" customer data.
+- **inputs**: Customer data schema, GDPR Article 20 requirements
+- **outputs**: Data export format specifications, supported export types
+- **dependencies**: [GDPR-001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: devops
+- **validation**: Data exports in JSON/CSV/PDF formats working and validated
+
+#### Task: PORT-002
+- **title**: Implement customer-initiated data export
+- **description**: Create self-service data export feature in account settings: one-click export, email delivery option, file size limits (cap at 500MB per export), export queuing for large datasets, secure download link with expiration.
+- **inputs**: Export format specs, customer data stored in database
+- **outputs**: Self-service export feature in account settings
+- **dependencies**: [PORT-001, PP-005]
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: devops
+- **validation**: Customers can export their own data successfully
+
+#### Task: PORT-003
+- **title**: Implement automated recurring data export
+- **description**: For customers with long-term subscriptions, implement option to schedule monthly/quarterly automated exports sent to registered email. Include export of all new data since last export (incremental) and full export (complete).
+- **inputs**: Customer scheduling preferences, backup infrastructure
+- **outputs**: Scheduled export feature with email delivery
+- **dependencies**: [PORT-002]
+- **priority**: medium
+- **estimated_complexity**: high
+- **agent_type**: devops
+- **validation**: Scheduled exports delivered correctly
+
+#### Task: PORT-004
+- **title**: Test data portability with sample customer
+- **description**: Test the full data export workflow with a sample customer account: verify JSON completeness (all tables), CSV readability (open in Excel/Google Sheets), PDF formatting, export time for large dataset (>10,000 contacts). Document any issues found.
+- **inputs**: Test customer account with known data
+- **outputs**: Data portability test report
+- **dependencies**: [PORT-002]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: qa
+- **validation**: Test report delivered, all exports readable and complete
+
+#### Task: PORT-005
+- **title**: Document data portability procedures in Privacy Policy
+- **description**: Update Privacy Policy with clear explanation of data portability rights under GDPR Article 20: what data can be exported, formats available, frequency limits, delivery method, and timeframe (max 30 days per request per GDPR).
+- **inputs**: Export feature specs, legal review of Article 20 requirements
+- **outputs**: Updated Privacy Policy section on data portability
+- **dependencies**: [PORT-002, PP-001]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: legal
+- **validation**: Privacy Policy updated and legally reviewed
+
+---
+
+### Category: Right to Erasure (Droit à l'Oubli)
+
+#### Task: ERASE-001
+- **title**: Define data retention schedule by data type
+- **description**: Create a data retention schedule per GDPR principles: define how long each data type is retained (customer contacts: duration of contract + 3 years, invoices: 10 years per French tax law, logs: 1 year, session data: 6 months). Document legal basis for each retention period.
+- **inputs**: French legal requirements, GDPR principles, business needs
+- **outputs**: Data retention schedule document
+- **dependencies**: [GDPR-001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: legal
+- **validation**: Retention schedule documented and approved
+
+#### Task: ERASE-002
+- **title**: Implement automated data deletion after retention period
+- **description**: Implement automated purge jobs that delete customer data after retention period expires. For deleted accounts, implement 30-day grace period before permanent deletion. Ensure cascade deletes for related records (contacts, invoices, appointments).
+- **inputs**: Data retention schedule, database schema
+- **outputs**: Automated deletion jobs, deletion logs
+- **dependencies**: [ERASE-001, GDPR-010]
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: devops
+- **validation**: Automated deletions execute correctly on schedule
+
+#### Task: ERASE-003
+- **title**: Implement right to erasure (droit à l'oubli) request flow
+- **description**: Per GDPR Article 17, implement customer-facing request flow for complete account deletion: self-service deletion in settings, email request option, identity verification before processing, 30-day max response time, cascade deletion across all stored data including backups.
+- **inputs**: GDPR Article 17 requirements, customer identity verification process
+- **outputs**: Erasure request form/flow, deletion workflow
+- **dependencies**: [ERASE-001, GDPR-001]
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: devops
+- **validation**: Erasure requests handled within GDPR timeframe
+
+#### Task: ERASE-004
+- **title**: Handle third-party data erasure requests
+- **description**: For erasure requests from individuals whose data was shared by a customer (e.g., a craftsperson's client data): define process to notify customer of erasure request, handle requests within 30 days, document attempts to fulfill requests, handle cases where data cannot be erased (legal obligations).
+- **inputs**: Erasure request handling procedures, third-party notification templates
+- **outputs**: Third-party erasure request workflow
+- **dependencies**: [ERASE-003, GDPR-005]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: legal
+- **validation**: Third-party erasure requests tracked and resolved
+
+#### Task: ERASE-005
+- **title**: Remove deleted data from backups and archives
+- **description**: Implement process to remove erased customer data from backups: either encryption key destruction (so data is unreadable) or backup rotation with exclusion of deleted data. Document backup retention policy and ensure erasure requests are reflected in all backup systems within 90 days.
+- **inputs**: Backup systems, deletion logs, retention schedule
+- **outputs**: Backup purge process, documented backup rotation
+- **dependencies**: [ERASE-003, GDPR-010]
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: devops
+- **validation**: Deleted data not recoverable from backups
+
+#### Task: ERASE-006
+- **title**: Document right to erasure in Privacy Policy
+- **description**: Update Privacy Policy with clear section on right to erasure: what data is retained and for how long, how to request deletion, 30-day response timeframe, what happens to data during cancellation, exceptions where deletion is not possible (legal requirements).
+- **inputs**: Erasure workflows, retention schedule
+- **outputs**: Updated Privacy Policy section on erasure rights
+- **dependencies**: [ERASE-001, ERASE-003, PP-001]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: legal
+- **validation**: Privacy Policy updated and legally reviewed
+
+---
+
+### Category: Security Breach Response Plan
+
+#### Task: BR-001
+- **title**: Define security incident classification matrix
+- **description**: Create incident classification matrix: Critical (data breach affecting personal data, >100 users affected), High (unauthorized access, limited scope), Medium (system availability compromise), Low (minor security event). Define response times for each level: Critical = 1h, High = 4h, Medium = 24h, Low = 72h.
+- **inputs**: GDPR Article 33/34 requirements, OVH infrastructure documentation
+- **outputs**: Incident classification matrix document
+- **dependencies**: [GDPR-001]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: security
+- **validation**: Incident matrix approved and documented
+
+#### Task: BR-002
+- **title**: Establish incident response team and contacts
+- **description**: Define incident response team roles: Incident Commander (overall coordination), Technical Lead (system investigation), Communications Lead (CNIL notifications, customer comms), Legal Lead (compliance, regulatory). List current team members and their contact information. Establish on-call rotation.
+- **inputs**: Team roster, role definitions
+- **outputs**: Incident response contact list, RACI matrix
+- **dependencies**: [BR-001]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: security
+- **validation**: Response team documented and contacts current
+
+#### Task: BR-003
+- **title**: Document incident detection and escalation procedures
+- **description**: Document how security incidents are detected: OVH infrastructure alerts, application error monitoring, customer reports, team discovery. Define escalation path: detection → initial assessment → incident classification → response activation → notification.
+- **inputs**: Monitoring systems, OVH support contacts
+- **outputs**: Incident detection and escalation procedure document
+- **dependencies**: [BR-001, BR-002]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: security
+- **validation**: Procedures documented and team trained
+
+#### Task: BR-004
+- **title**: Implement GDPR Article 33 CNIL notification process
+- **description**: Per GDPR Article 33, implement process to notify CNIL within 72 hours of becoming aware of a personal data breach. Create CNIL notification template, designate notification sender (DPO or CEO), create internal checklist for breach assessment (severity, scope, data types, affected individuals).
+- **inputs**: CNIL breach notification requirements, GDPR Article 33
+- **outputs**: CNIL notification template and process
+- **dependencies**: [BR-001, GDPR-001]
+- **priority**: critical
+- **estimated_complexity**: medium
+- **agent_type**: legal
+- **validation**: CNIL notification process documented and tested
+
+#### Task: BR-005
+- **title**: Implement GDPR Article 34 customer notification process
+- **description**: Per GDPR Article 34, implement process for notifying affected customers when a breach is likely to result in high risk to their rights and freedoms. Create customer notification templates, define criteria for when notification is required, establish communication channels (email, in-app notification), prepare translated versions (French minimum).
+- **inputs**: GDPR Article 34, customer contact database
+- **outputs**: Customer notification templates and triggering criteria
+- **dependencies**: [BR-004]
+- **priority**: critical
+- **estimated_complexity**: medium
+- **agent_type**: legal
+- **validation**: Customer notification templates ready and legally reviewed
+
+#### Task: BR-006
+- **title**: Implement breach documentation and log retention
+- **description**: Per GDPR Article 33(5), document all security breaches: what happened, what data was affected, when it was discovered, what corrective measures were taken, outcomes. Store breach logs securely for minimum 3 years. Implement breach register.
+- **inputs**: Breach documentation requirements, secure storage
+- **outputs**: Breach register template, secure storage location
+- **dependencies**: [BR-004]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: security
+- **validation**: Breach register operational and accessible to authorized personnel
+
+#### Task: BR-007
+- **title**: Test breach response plan with tabletop exercise
+- **description**: Conduct tabletop exercise simulating a data breach scenario: incident detected, team notified, classification made, CNIL notification drafted, customer communication prepared. Document gaps found and remediations needed.
+- **inputs**: Incident response plan, team availability
+- **outputs**: Exercise report with gaps and recommendations
+- **dependencies**: [BR-001, BR-002, BR-003, BR-004, BR-005]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: security
+- **validation**: Exercise completed, gaps remediated
+
+---
+
+### Category: Penetration Testing
+
+#### Task: PENTEST-001
+- **title**: Define penetration testing scope and requirements
+- **description**: Define scope for penetration testing: all customer-facing application endpoints (web app, API, admin panel), authentication systems, data storage (OVH VPS), third-party integrations. Specify testing types: external network testing, web application testing (OWASP Top 10), social engineering testing (optional).
+- **inputs**: Application architecture, OVH infrastructure details, OWASP methodology
+- **outputs**: Penetration testing scope document
+- **dependencies**: [GDPR-001]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: security
+- **validation**: Scope document approved
+
+#### Task: PENTEST-002
+- **title**: Select and contract penetration testing provider
+- **description**: Research and select a qualified penetration testing provider: must have French/EU presence for GDPR jurisdiction, appropriate certifications (CREST, OSCP staff), experience with SaaS applications, sign appropriate NDA and data processing agreements. Obtain quotes for annual testing.
+- **inputs**: Vendor shortlist, certification requirements
+- **outputs**: Signed contract with penetration testing provider
+- **dependencies**: [PENTEST-001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: legal
+- **validation**: Contract signed, provider credentials verified
+
+#### Task: PENTEST-003
+- **title**: Conduct initial penetration test
+- **description**: Commission and oversee initial penetration test: provide tester access (read-only to staging environment), review findings, receive detailed report with CVSS scores, prioritize remediation of critical and high findings, remediate within 30 days for critical, 90 days for high.
+- **inputs**: Testing scope, staging environment access, testing provider
+- **outputs**: Penetration test report, remediation plan
+- **dependencies**: [PENTEST-002]
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: security
+- **validation**: Initial pentest completed, critical findings remediated
+
+#### Task: PENTEST-004
+- **title**: Remediate penetration test findings
+- **description**: Address all critical and high severity findings from penetration test: assign owner for each finding, track remediation progress, implement fixes in staging, verify fixes, deploy to production. Medium findings remediated within 6 months.
+- **inputs**: Penetration test report with findings
+- **outputs**: Remediation tracking document, re-test results
+- **dependencies**: [PENTEST-003]
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: devops
+- **validation**: Critical and high findings resolved, re-test passed
+
+#### Task: PENTEST-005
+- **title**: Schedule annual penetration testing
+- **description**: Establish recurring annual penetration testing schedule: contract should include annual retesting, triggered retesting after major architecture changes, provide pentest certificate/documentation for cyber insurance and due diligence. Track testing schedule.
+- **inputs**: Testing provider contract, annual schedule
+- **outputs**: Annual pentest schedule, calendar reminders
+- **dependencies**: [PENTEST-002]
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: security
+- **validation**: Annual testing scheduled and documented
+
+---
+
+### Category: Cyber Insurance
+
+#### Task: CYBER-001
+- **title**: Assess cyber insurance needs and coverage requirements
+- **description**: Assess required cyber insurance coverage for a French SaaS company: coverage for data breach notification costs, legal defense costs, business interruption losses, regulatory fines (where insurable), cyber extortion. Determine appropriate coverage limits (recommended minimum 1M euros for a small SaaS).
+- **inputs**: Business risk assessment, GDPR fine exposure analysis
+- **outputs**: Cyber insurance requirements document
+- **dependencies**: []
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: legal
+- **validation**: Coverage requirements documented
+
+#### Task: CYBER-002
+- **title**: Research and select cyber insurance provider
+- **description**: Research French cyber insurance providers (AXA, Generali, Hiscox, others): compare coverage, exclusions, premiums, incident response services included, policy wordings. Request quotes from at least 3 providers. Ensure policy covers GDPR-related costs.
+- **inputs**: Coverage requirements, provider shortlist
+- **outputs**: Comparison matrix, selected provider recommendation
+- **dependencies**: [CYBER-001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: legal
+- **validation**: At least 3 quotes received and reviewed
+
+#### Task: CYBER-003
+- **title**: Obtain and maintain cyber insurance policy
+- **description**: Finalize cyber insurance policy: review policy wording with lawyer, ensure correct coverage limits and deductibles, maintain proof of insurance, set up annual renewal reminders, document what is and is not covered, report any security incidents that may trigger coverage.
+- **inputs**: Selected provider, policy terms
+- **outputs**: Active cyber insurance policy, proof of insurance document
+- **dependencies**: [CYBER-002, BR-001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: legal
+- **validation**: Policy active, premium paid, certificate accessible
+
+#### Task: CYBER-004
+- **title**: Document insurance claim procedures
+- **description**: Document procedures for filing a cyber insurance claim: incident occurs → notify insurer within required timeframe → document all costs → submit claim with supporting documentation → track claim status. Include insurer contact details and claim form templates.
+- **inputs**: Insurance policy documents, claim requirements
+- **outputs**: Insurance claim procedure document
+- **dependencies**: [CYBER-003, BR-001]
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: legal
+- **validation**: Claim procedures documented and accessible to team
+
+---
+
+### Category: Third-Party Processor List (Registre des Sous-traitants)
+
+#### Task: PROC-001
+- **title**: Create initial sub-processor inventory
+- **description**: Create comprehensive inventory of all third-party processors (sous-traitants) who handle personal data: OVH (hosting), any analytics services (Plausible, Matomo), email delivery (Brevo/SendGrid), payment processor (Stripe), support tools. Document for each: company name, country, data handled, purpose.
+- **inputs**: Infrastructure diagram, third-party service contracts
+- **outputs**: Sub-processor inventory spreadsheet/database
+- **dependencies**: [GDPR-001]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: legal
+- **validation**: All processors identified and documented
+
+#### Task: PROC-002
+- **title**: Draft sub-processor agreements (Article 28 contracts)
+- **description**: For each sub-processor, ensure there is a Data Processing Agreement (DPA) per GDPR Article 28: contractually bind processor to only process data on documented instructions, maintain appropriate security measures, assist with data subject rights, delete/return data on contract termination.
+- **inputs**: GDPR Article 28 requirements, sub-processor contracts
+- **outputs**: Signed DPAs with all sub-processors
+- **dependencies**: [PROC-001, DPA-001]
+- **priority**: critical
+- **estimated_complexity**: high
+- **agent_type**: legal
+- **validation**: Signed DPAs with all sub-processors
+
+#### Task: PROC-003
+- **title**: Implement sub-processor change notification process
+- **description**: Per GDPR Article 28(2)(f), implement process to notify customers before engaging new sub-processors: 30-day advance notice via email, include new processor name, purpose, data types, customer objection process (right to terminate if they disagree). Track customer consent/objections.
+- **inputs**: GDPR Article 28(2)(f), customer communication templates
+- **outputs**: Sub-processor change notification workflow
+- **dependencies**: [PROC-001, DPA-001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: legal
+- **validation**: Notification process implemented and tested
+
+#### Task: PROC-004
+- **title**: Conduct annual sub-processor audit
+- **description**: Conduct annual review of all sub-processors: verify DPAs are still current, check processor security certifications (SOC 2, ISO 27001), review any processor privacy policy changes, assess if any processors should be replaced, update sub-processor list.
+- **inputs**: Sub-processor list, audit criteria
+- **outputs**: Annual sub-processor audit report
+- **dependencies**: [PROC-001, PROC-002]
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: security
+- **validation**: Audit completed, findings documented
+
+#### Task: PROC-005
+- **title**: Publish sub-processor list for customer transparency
+- **description**: Publish a customer-accessible sub-processor list in the Privacy Policy and/or a dedicated page: list all sub-processors, their purpose, country, and link to their privacy policies. Update within 30 days of any change.
+- **inputs**: Sub-processor inventory, Privacy Policy
+- **outputs**: Published sub-processor list
+- **dependencies**: [PROC-001, PP-001]
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: legal
+- **validation**: Sub-processor list published and accessible to customers
+
+---
+
+### Category: Standard Contractual Clauses (SCCs)
+
+#### Task: SCC-001
+- **title**: Determine applicability of SCCs for data transfers
+- **description**: Analyze whether Standard Contractual Clauses are needed for data transfers: identify all cross-border data flows (EU to non-EU countries), determine if any sub-processors or customers are outside EU/EEA. For transfers to third countries, SCCs may be required. Map all data flows.
+- **inputs**: Infrastructure diagram, sub-processor locations, customer locations
+- **outputs**: Data transfer mapping document
+- **dependencies**: [GDPR-001, PROC-001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: legal
+- **validation**: Data transfer map complete
+
+#### Task: SCC-002
+- **title**: Implement EU SCCs for applicable data transfers
+- **description**: For any data transfers outside EU/EEA requiring SCCs, implement the 2021 EU Standard Contractual Clauses (Module 2: Controller-Processor or Module 1: Controller-Controller as applicable). Execute SCCs with each affected party, maintain signed copies.
+- **inputs**: 2021 EU SCCs, data transfer mapping
+- **outputs**: Signed SCC documents with all applicable parties
+- **dependencies**: [SCC-001]
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: legal
+- **validation**: SCCs signed and stored securely
+
+#### Task: SCC-003
+- **title**: Conduct Transfer Impact Assessment (TIA) if needed
+- **description**: If transferring data to countries without EU adequacy (e.g., US), conduct Transfer Impact Assessment per ECJ Schrems II requirements: assess destination country surveillance laws, evaluate supplementary measures (encryption, pseudonymization), document TIA findings.
+- **inputs**: Destination country surveillance laws, SCC requirements
+- **outputs**: Transfer Impact Assessment document
+- **dependencies**: [SCC-001, GDPR-001]
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: legal
+- **validation**: TIA completed and documented
+
+#### Task: SCC-004
+- **title**: Monitor SCC adequacy decisions and update as needed
+- **description**: Monitor EU adequacy decisions and SCC updates from European Commission: subscribe to CNIL and European Commission updates, review SCC adequacy for all current transfers annually, update SCCs if new versions published or adequacy decisions change.
+- **inputs**: EC/European Commission updates, CNIL guidance
+- **outputs**: SCC monitoring process, annual review schedule
+- **dependencies**: [SCC-002]
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: legal
+- **validation**: SCC monitoring process established
+
+---
+
+### Category: Professional Verification (Vérification Professionnelle)
+
+#### Task: VERIF-001
+- **title**: Define professional verification requirements for artisans
+- **description**: Define what professional verification is needed when artisans sign up: required business registration documents (SIRET, RCS registration), trade certificate (certificat d'artisan), business insurance verification. Determine which fields are mandatory vs optional for signup.
+- **inputs**: French business registration requirements, artisan trade regulations
+- **outputs**: Professional verification requirements document
+- **dependencies**: [TOS-001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: legal
+- **validation**: Verification requirements documented
+
+#### Task: VERIF-002
+- **title**: Implement professional document upload system
+- **description**: Implement document upload during signup: upload SIRET/RCS extract, business certificates, insurance certificates. Store documents securely (encrypted), set document expiration tracking, require renewal before expiration. Limit file types (PDF, JPG, PNG) and size (max 10MB).
+- **inputs**: Verification requirements, secure file storage
+- **outputs**: Document upload feature, secure document storage
+- **dependencies**: [VERIF-001, GDPR-010]
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: devops
+- **validation**: Document upload working, documents stored securely
+
+#### Task: VERIF-003
+- **title**: Integrate INSEE/SIRENE verification for SIRET
+- **description**: Integrate with INSEE/SIRENE API to automatically verify SIRET numbers provided by artisans: cross-reference SIRET against official registry, verify business activity codes (NAF), confirm RCS registration status. Flag discrepancies for manual review.
+- **inputs**: INSEE API access, SIRENE data requirements
+- **outputs**: Automated SIRET verification integration
+- **dependencies**: [VERIF-001]
+- **priority**: medium
+- **estimated_complexity**: high
+- **agent_type**: devops
+- **validation**: SIRET verification working with INSEE API
+
+#### Task: VERIF-004
+- **title**: Implement manual verification workflow for flagged accounts
+- **description**: Create workflow for accounts flagged during automated verification: notify customer of discrepancy, request additional documentation, manual review by team member, approval/rejection decision with documented reason, appeals process for rejected accounts.
+- **inputs**: Flagged account data, manual review criteria
+- **outputs**: Manual verification workflow
+- **dependencies**: [VERIF-003]
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: ops
+- **validation**: Manual verification process documented and functional
+
+---
+
+### Category: Account Suspension
+
+#### Task: SUSP-001
+- **title**: Define account suspension triggers and tiers
+- **description**: Define reasons for account suspension: non-payment (payment failed, subscription expired), violation of Terms of Service (fraudulent use, prohibited content), security concern (compromised account, suspicious activity), regulatory requirement (court order, CNIL instruction). Define suspension levels: partial (read-only) vs full (no access).
+- **inputs**: Business policy, legal requirements
+- **outputs**: Account suspension policy document
+- **dependencies**: [TOS-001, GDPR-001]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: legal
+- **validation**: Suspension policy documented
+
+#### Task: SUSP-002
+- **title**: Implement automated suspension for non-payment
+- **description**: Implement automated payment failure workflow: retry payment 3 times over 7 days, send payment failure notifications, suspend account after final failure, apply read-only mode first (7 days), full suspension after 14 days. Document recovery path (update payment method immediately reinstate).
+- **inputs**: Payment system integration, billing cycle
+- **outputs**: Automated non-payment suspension workflow
+- **dependencies**: [SUB-002, SUSP-001]
+- **priority**: high
+- **estimated_complexity**: high
+- **agent_type**: devops
+- **validation**: Non-payment suspension working correctly
+
+#### Task: SUSP-003
+- **title**: Implement manual admin-initiated suspension
+- **description**: Implement admin capability to manually suspend accounts: require two-factor confirmation for admin suspension, capture suspension reason from dropdown, auto-notify customer via email with reason and remediation steps, create audit log entry, allow unsuspension by admin with reason.
+- **inputs**: Admin panel, suspension workflow
+- **outputs**: Admin suspension feature
+- **dependencies**: [SUSP-001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: devops
+- **validation**: Admin suspension functional with audit trail
+
+#### Task: SUSP-004
+- **title**: Implement data access during suspension
+- **description**: Define what data customers can access during suspension: partial suspension = read-only access to all data, full suspension = no login but data retained per retention policy. Communicate clearly what is accessible during each suspension type. Do not delete data during suspension period.
+- **inputs**: Suspension policy, data retention requirements
+- **outputs**: Suspension data access rules
+- **dependencies**: [SUSP-001, ERASE-001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: devops
+- **validation**: Data access during suspension correctly restricted
+
+#### Task: SUSP-005
+- **title**: Implement suspension appeal process
+- **description**: Implement customer appeal process for suspended accounts: customer can submit appeal via support email, team reviews appeal within 5 business days, reinstatement decision with documented reason, communicate decision to customer. Track appeal outcomes for pattern analysis.
+- **inputs**: Suspension policy, support workflow
+- **outputs**: Suspension appeal workflow and tracking
+- **dependencies**: [SUSP-001, SUSP-003]
+- **priority**: medium
+- **estimated_complexity**: low
+- **agent_type**: ops
+- **validation**: Appeal process documented and tracked
+
+---
+
+### Category: Dispute Resolution (Résolution des Litiges)
+
+#### Task: DISP-001
+- **title**: Define internal dispute resolution process
+- **description**: Define internal process for handling customer disputes: first-level support response (48h), escalation to senior support (96h), escalation to management (1 week), final company decision. Document timelines, escalation paths, and internal SLAs. Ensure French language support throughout.
+- **inputs**: Customer support structure, business escalation policy
+- **outputs**: Internal dispute resolution procedure document
+- **dependencies**: [TOS-001]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: ops
+- **validation**: Dispute procedure documented and support team trained
+
+#### Task: DISP-002
+- **title**: Implement mandatory mediation clause in CGV
+- **description**: Per French consumer law, include mandatory mediation clause in CGV: designate a mediator registered with CMAP (Centre de Médiation et d'Arbitrage de Paris) or similar, state mediator contact details in CGV, explain customer right to use mediation after failed internal resolution. Format per French legal requirements.
+- **inputs**: CMAP or similar mediator registration, French consumer law requirements
+- **outputs**: Mediation clause in CGV
+- **dependencies**: [TOS-001, TOS-002]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: legal
+- **validation**: Mediation clause legally reviewed and compliant
+
+#### Task: DISP-003
+- **title**: Register with consumer mediation service
+- **description**: Register with a consumer mediation service (CMAP, Médicys, or similar) as required by French consumer law for e-commerce. Complete registration, pay any fees, obtain registration confirmation, display mediator contact information in CGV.
+- **inputs**: Mediation service options, business registration
+- **outputs**: Mediation service registration confirmation
+- **dependencies**: [DISP-002]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: legal
+- **validation**: Mediation service registered, confirmation received
+
+#### Task: DISP-004
+- **title**: Implement dispute tracking and reporting
+- **description**: Implement tracking system for all customer disputes: log each dispute, track status (open/under review/resolved/closed), capture resolution, calculate resolution time, generate monthly report on dispute volume and trends. Use data to improve products and processes.
+- **inputs**: Support ticketing system or CRM
+- **outputs**: Dispute tracking dashboard, monthly reports
+- **dependencies**: [DISP-001]
+- **priority**: medium
+- **estimated_complexity**: medium
+- **agent_type**: ops
+- **validation**: Dispute tracking operational
+
+#### Task: DISP-005
+- **title**: Define jurisdiction and applicable law clause
+- **description**: In CGV, clearly state jurisdiction and applicable law: French law governs the contract, disputes are under French jurisdiction, courts of the registered company location have exclusive jurisdiction. For B2B disputes, define arbitration clause if preferred.
+- **inputs**: Company registration location, French jurisdiction rules
+- **outputs**: Jurisdiction clause in CGV
+- **dependencies**: [TOS-001, COMP-003]
+- **priority**: high
+- **estimated_complexity**: low
+- **agent_type**: legal
+- **validation**: Jurisdiction clause legally reviewed
+
+---
+
+### Category: IP Ownership
+
+#### Task: IP-001
+- **title**: Define intellectual property ownership in Terms of Service
+- **description**: In Terms of Service/CGV, clearly define IP ownership: company owns all software, code, algorithms, UI designs, and trademarks. Customer owns their data (contacts, invoices, business information). Company grants customer a limited, revocable license to use the software as long as subscription is active.
+- **inputs**: IP ownership principles, French IP law (CPI)
+- **outputs**: IP ownership clause in CGV
+- **dependencies**: [TOS-001]
+- **priority**: critical
+- **estimated_complexity**: low
+- **agent_type**: legal
+- **validation**: IP clause legally reviewed and compliant
+
+#### Task: IP-002
+- **title**: Implement data ownership and license grant in CGV
+- **description**: In CGV, explicitly state that customers retain full ownership of all data they input into the CRM: their customer contacts, business data, invoices, documents. Company has limited license to process this data solely for providing the service. Company cannot use customer data for its own purposes.
+- **inputs**: Customer data ownership principles, GDPR data controller/processor roles
+- **outputs**: Data ownership clause in CGV
+- **dependencies**: [IP-001, GDPR-001]
+- **priority**: critical
+- **estimated_complexity**: low
+- **agent_type**: legal
+- **validation**: Data ownership clause legally reviewed
+
+#### Task: IP-003
+- **title**: Define derivative works and improvements ownership
+- **description**: Define in CGV what happens to custom configurations, templates, workflows created by customers: customer owns their customizations but grants company license to use them for service provision. If company incorporates customer feedback into product, define whether any IP rights transfer.
+- **inputs**: French IP law, SaaS industry standards
+- **outputs**: Derivative works clause in CGV
+- **dependencies**: [IP-001]
+- **priority**: high
+- **estimated_complexity**: medium
+- **agent_type**: legal
+- **validation**: Derivative works clause legally reviewed
+
+#### Task: IP-004
+- **title**: Implement employee/contractor IP assignment agreements
+- **description**: Ensure all employees and contractors who develop the software sign IP assignment agreements: assign all IP rights in work product to the company, include provisions for open-source components, define who owns improvements made during employment/contracting.
+- **inputs**: French labor law, employment/contractor agreements
+- **outputs**: IP assignment agreements signed by all relevant personnel
+- **dependencies**: [COMP-001]
+- **priority**: critical
+- **estimated_complexity**: high
+- **agent_type**: legal
+- **validation**: IP agreements signed by all developers and contractors
