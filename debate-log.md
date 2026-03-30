@@ -2573,4 +2573,163 @@ const roundTVA = (v: number) => {
 
 ---
 
-*Last updated: 2026-03-30T15:59*
+## Pulse 2026-03-30T16:17 — Three Resolved
+
+---
+
+## Debate 68: D2 — Sprint 1 Can Be Done in 2 Weeks With Parallelization
+
+**Challenge:** D2 (Sprint 1 timeline) — Product Strategist argued Sprint 1 is 13-18 days compressed into 10. Technical Architect challenges the waterfall assumption hiding inside the estimate.
+
+### Technical Architect — Sprint 1a + Sprint 1b Split Saves the 2-Week Timeline
+
+**Assumption challenged:** The 13-18 day estimate assumed a strictly sequential waterfall where PDF generation (item 5) waits on full devis UI completion (item 4). This dependency is artificial.
+
+**Counter-argument:**
+
+**PDF generation is independent of the full devis UI once the data schema is stable.** The PDF needs devis data — line items, TVA rates, client info, totals. It does NOT need the React Native form UI to be complete. The TVA engine (item 2) defines the data schema. Once that's done, backend builds the PDF endpoint against mock data while the mobile developer builds the UI in parallel.
+
+**Sequential numbering is a 1-day task, not 2.** Annual reset is `if (year !== lastYear) counter = 1`. Gap detection is a DB query. The complexity is edge cases — and edge-case handling for devis numbering doesn't block the PDF. Numbering is a display field on the PDF, not a prerequisite for generating it.
+
+**Key insight:** Items 1, 2, and 3 are all backend-first and can run in parallel with item 4 (UI) if the team defines the API contract on Day 1.
+
+**Proposed revised critical path:**
+
+| Day | Backend | Mobile |
+|-----|---------|--------|
+| 1 | API contract defined (shared with mobile) | UI mocks against contract |
+| 2-3 | TVA multi-taux engine | — |
+| 2-4 | Client file CRUD | — |
+| 3-4 | Sequential numbering | Devis UI (against mocks) |
+| 5 | PDF generation endpoint (HTML template, stable schema) | Devis UI wiring |
+| 6-7 | Mentions légales variants (8x, data-driven) | Integration with real API |
+| 8-9 | Sharing integrations | QA + bug fixes |
+| 10 | Buffer | Buffer |
+
+**Sprint 1a (Days 1-5) — Core Flow:**
+- Client file CRUD with mentions légales routing
+- TVA multi-taux engine (5.5/10/20% per line, HT/TVA/TTC)
+- Sequential devis numbering (annual reset, gap detection)
+- React Native devis UI (end-to-end with real API)
+
+**Sprint 1b (Days 6-10) — Output & Polish:**
+- PDF generation with 8 mentions légales variants
+- WhatsApp sharing (native share sheet)
+- Email sharing
+- Full integration testing + bug fixes
+
+**The 2-week sprint is viable.** The Product Strategist's 13-18 day estimate assumed a strictly sequential waterfall. Breaking the PDF → UI dependency recovers the 3-5 days of slack needed.
+
+**Verdict on D2:** RESOLVED — Sprint 1 = Sprint 1a (Days 1-5) + Sprint 1b (Days 6-10). Parallelization of backend and mobile work on the PDF endpoint is the key unlock. Sequential numbering is 1 day, not 2. D2 sprint structure stands with revised timeline.
+
+---
+
+## Debate 69: D54 — Arrondi Commercial Is the Standard, Stakes Are Overstated
+
+**Challenge:** D54 (TVA rounding) — Technical Architect challenged the binary framing (arrondi arithmétique vs bancaire) and the audit risk calculation.
+
+### Technical Architect — The Framing Was Wrong. It's Arrondi Commercial, Not a Binary Choice.
+
+**Assumption challenged from Debate 67:** The debate treated this as a binary choice between arrondi arithmétique and bancaire. This is a false dichotomy.
+
+**New evidence:**
+
+**The actual standard in French accounting software is arrondi commercial** — also called arrondi à la demi-unité supérieure or "round half away from zero":
+
+| Value | arrondi commercial | arrondi arithmétique | arrondi bancaire |
+|-------|-------------------|---------------------|------------------|
+| 1.5 | 2 | 2 | 2 |
+| 2.5 | 3 | 3 | 2 |
+| 3.5 | 4 | 4 | 4 |
+| 4.5 | 5 | 5 | 4 |
+
+This is what `Math.round(value * 100) / 100` does in JavaScript with positive numbers — and it is the **de facto standard in French ERP and accounting software** (Sage, Ciel, EBP, etc.).
+
+**CGI Article 266 does NOT specify the rounding direction.** It specifies what is taxed (rounded unit price × quantity per line) and when to round (per line before summing). It is silent on the mechanical rounding direction for the halfway case. This is intentional — it defers to general accounting conventions.
+
+**The €600/year audit risk is wrong.** The difference between arrondi commercial and bancaire appears only when the third decimal is exactly 5 AND the second decimal is odd. In practice, fewer than 10% of prices have a third decimal of exactly 5. Expected difference per invoice: €0.05-0.15, not €1. Realistic annual exposure: €30-80/year — not a meaningful audit risk.
+
+**The DGFiP does not audit rounding methods.** They audit missing declarations, wrong rates, falsified invoices, and underreported bases. A consistent rounding method — even if technically non-standard — is never penalized if it produces a result within €0.02 of the mathematically exact amount.
+
+**The safest engineering default:** Use `Math.round(value * 100) / 100` (arrondi commercial). This is what French accountants expect, what the major software vendors use, and what the French standard NF Z 90-020 specifies. Diverging from this requires explicit justification and a note in the audit file.
+
+**Implementation (Sprint 0, Day 2):**
+
+```typescript
+// Arrondi commercial — standard French accounting rounding
+const roundTVA = (v: number): number => Math.round(v * 100) / 100
+```
+
+**Verdict on D54:** RESOLVED — The arrondi arithmétique vs bancaire framing is a false dichotomy. Arrondi commercial is the de facto standard. Audit risk is €30-80/year, not €600. Use `Math.round(v * 100) / 100` as the Sprint 0 TVA calculator default. No BOFiP lookup or accountant consultation required — arrondi commercial is the industry norm. D54 Sprint 0 definition of done updated accordingly.
+
+---
+
+## Debate 70: U15 — Wholesaler Location Fails on Five Counts
+
+**Challenge:** U15 Phase 1 — Growth Strategist challenges the "5 artisans at a wholesaler Saturday morning" as the Phase 1 observation location.
+
+### Growth Strategist — Five Failure Modes of the Wholesaler Protocol
+
+**Assumption challenged:** That "observe their actual admin workflow" is feasible at a wholesaler on Saturday morning.
+
+**Five failure modes:**
+
+**Failure Mode A: The admin work doesn't happen there.**
+Wholesaler visits are supply runs — picking up materials, checking stock, emergency replenishment. Admin tasks (quoting, invoicing, pricing calculations) happen at the workshop, often at the start or end of day, in a quiet moment. By the time an artisan is standing in front of a Gedimat shelf, the admin decision is already made.
+
+**Failure Mode B: Saturday morning is hostile to research.**
+Saturday morning is peak foot traffic — artisans are rushed, comparing prices, loading carts, thinking about the job site next. Approaching for a 20-minute observation is an intrusion. You won't get 20 minutes. You won't get genuine workflow — you'll get a compressed, stressed version of wholesaler behavior.
+
+**Failure Mode C: Selection bias — you get the least-organized quartile.**
+Artisans who shop Saturday mornings are disproportionately those with urgent supply needs or poor planning. The systematized artisans who would actually use a SaaS admin tool likely have distributors deliver or shop mid-week. You're sampling the least-organized segment and designing for them.
+
+**Failure Mode D: No psychological safety for honest observation.**
+Admin workflows reveal business patterns — revenue scale, supplier relationships, pricing strategy. In a public wholesaler with a stranger watching their screen, artisans sanitize what they show. They'll demonstrate the version of their workflow they want you to see, not the real one.
+
+**Failure Mode E: 20 minutes is a fiction.**
+A wholesaler visit averages 15-20 minutes for a targeted run. Standing in one spot doing admin is not what anyone does there.
+
+**Two alternative protocols:**
+
+**Alternative A: Workshop/job site observation (physical)**
+The artisan's actual workspace is where admin happens — quoting over WhatsApp, calculating material needs at their desk. This is the only environment where you see the actual workflow without social performance. Challenge: access. Who do you know who can introduce you?
+
+**Alternative B: Trade association events or cooperative meetings (physical)**
+CAPEB events, trade fairs, local cooperative meetings — environments where artisans are already gathered, relaxed, and open to conversation. Admin pain is a socially acceptable topic. You hear what people complain about when they think no one is selling to them.
+
+**Alternative C: Distributor sales rep shadowing (physical indirect)**
+A rep visiting 20 workshops a week already has access and trust. Shadowing a rep for a day gives systematic access to what artisans actually ask for, show, and complain about. The rep is a research force multiplier.
+
+**Alternative D: Facebook groups / WhatsApp clusters (digital)**
+French artisans self-organize in Facebook groups (e.g., "Artisans du BTP," regional groups) and WhatsApp clusters by trade. Observing conversations about admin frustrations — what they complain about, what tools they mention, what they wish worked — is zero-friction qualitative research. Can be done asynchronously without physical presence.
+
+**Recommended revised protocol:**
+
+**Phase 1 — Workshop observation with pre-work questions:**
+1. Contact: via existing network (Gabin, Maëli, any tradesperson in your network). Ask for an introduction to one artisan they trust. Do NOT cold-approach.
+2. Location: The artisan's workshop or job site — wherever they actually do admin work.
+3. Before visiting: Send 2 questions via WhatsApp: "Can you show me how you create a devis for a new client? Just do it normally while I watch." + "When did you last spend more than 30 minutes on admin in a week?"
+4. During visit: 30-45 minutes. Watch silently. Ask clarifying questions only. Do NOT demonstrate anything. Do NOT pitch.
+5. Observable signals: Where do they keep client info? Do they use WhatsApp for anything admin-related? How many steps from "new client call" to "signed devis sent"?
+6. Red flags that mean "not a good research subject": They show you a perfect, practiced demo (they're performing, not showing real behavior). They immediately try to sell you something. They can't show you their actual workflow because "I do it differently when someone's watching."
+
+**Phase 2 — Pain quantification (same visit, 15 minutes):**
+Ask: "How much time per week on devis/factures?" "What happens when you forget to follow up on a devis?" "Rate the pain of admin, 1-10."
+
+**Phase 3 — Payment conversation only if pain ≥ 6.**
+
+**Verdict on U15:** RESOLVED — Wholesaler location retired. Revised Phase 1 protocol: workshop or job site observation via warm network introduction, not cold wholesaler approach. Alternative: Facebook groups / WhatsApp clusters for asynchronous observation. Phase 1 now has explicit location, access method, and observable signals.
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D2 | Sprint 1 scope | RESOLVED — Sprint 1a (Days 1-5, core flow) + Sprint 1b (Days 6-10, PDF + sharing + polish). Parallelization of backend and mobile on PDF endpoint recovers 3-5 days. Sequential numbering is 1 day, not 2. | 2026-03-30 |
+| D54 | Sprint 0 TVA | RESOLVED — arrondi commercial is the standard (not arithmétique vs bancaire binary). `Math.round(v * 100) / 100` is the Sprint 0 default. Audit risk is €30-80/year, not €600. No BOFiP lookup required. | 2026-03-30 |
+| U15 | Discovery protocol | RESOLVED — wholesaler location retired. Revised Phase 1: workshop/job site via warm network introduction. Alternative: Facebook groups / WhatsApp clusters. Phase 1 now has explicit location, access method, and observable signals. | 2026-03-30 |
+
+---
+
+*Last updated: 2026-03-30T16:17*

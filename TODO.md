@@ -7,7 +7,7 @@
 | ID | Topic | Decision | Source | Date |
 |----|-------|----------|--------|------|
 | D1 | Positioning | Kill "CRM" — sell "devis, factures, relances" | External review | 2026-03-30 |
-| D2 | MVP scope | 4 features only: client file, quote, invoice, reminder. REOPENED: Sprint 1 timeline (2 weeks) challenged — 13-18 days estimated vs 10 available. Needs real work breakdown. | External review | 2026-03-30 |
+| D2 | Sprint 1 timeline | RESOLVED — Sprint 1a (Days 1-5: client file + devis flow) + Sprint 1b (Days 6-10: PDF + mentions légales + sharing + polish). Parallelization of backend and mobile on PDF endpoint recovers 3-5 days. Sequential numbering is 1 day, not 2. Viable 2-week sprint. | Debate 68 (Technical Architect) | 2026-03-30 |
 | D3 | Primary persona | Marc — solo smartphone-native artisan | External review | 2026-03-30 |
 | D4 | Stack | Single managed Postgres, NOT per-customer VPS | External review | 2026-03-30 |
 | D5 | Pricing | Free + €29 two-tier. No €19 SKU. Drop €49/€79. Value anchor: "2h/week = 1h labor = €29/month." | Debate 33 (Product Strategist) | 2026-03-30 |
@@ -30,7 +30,7 @@
 | D47 | Expo Push estimate | 1-2 weeks, not "few hours." Budget properly or defer to v1.1. | Debate 47 (Technical Architect) | 2026-03-30 |
 | D48 | Wholesaler GTM | Not primary GTM. Digital + specialist retailers first. Wholesaler secondary brand-awareness play only. Audit solo artisan purchasing channels first. | Debate 48 (Growth Strategist) | 2026-03-30 |
 | D53 | Landing page framing | Simplicity-first RETAINED. H1: "Sans vous prendre la tête." H2: 5-minute specific/demonstrable claim. Proof lives in Free tier. No "professional-grade" in hero. | Debate 53 (Product Strategist) | 2026-03-30 |
-| D54 | Sprint 0 approach | REOPENED (Debate 67) — TVA arrondi arithmétique vs bancaire never confirmed with BOFiP/accountant. Sprint 0 must include algorithm validation before calculator written. | Debate 54 (Technical Architect) | 2026-03-30 |
+| D54 | Sprint 0 TVA | RESOLVED — arrondi commercial is the standard (not arithmétique vs bancaire binary). `Math.round(v * 100) / 100` is the Sprint 0 default. Audit risk is €30-80/year, not €600. No BOFiP lookup required. Sprint 0 TVA calculator implement with arrondi commercial. | Debate 69 (Technical Architect) | 2026-03-30 |
 | D55 | Buyer-user split | Dual-persona GTM. Marc = economic buyer (primary). Admin handler = operational user (secondary). Expert-comptable = Phase 2. | Debate 55 (Growth Strategist) | 2026-03-30 |
 | D56 | WoM attribution | WoM = Month 3+ lagging indicator. Digital acquisition PRIMARY at launch. "Comment connaissez-vous?" at signup. Referral codes in v1. Month 3 target: 20% peer referral. | Pulse 14:57 (Product+Growth) | 2026-03-30 |
 | D57 | Architecture | API-first preferred (Fastify + static) but deferred to post-MVP unless Nuxt 3 actively blocks Sprint 0. | Pulse 14:57 (Architect+Growth) | 2026-03-30 |
@@ -123,7 +123,7 @@ All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 ## 📋 Current TODO
 
 ### Before Building (Do First)
-- [ ] U1 readiness check: (1) Figma/clickable devis-creation prototype, (2) guerrilla test scheduled (5 artisans at Point P/Gedimat), (3) pain confirmed by competitive analysis, (4) feature set frozen
+- [ ] U1 readiness check: (1) Figma/clickable devis-creation prototype, (2) guerrilla test scheduled (workshop/job site via warm network — NOT wholesaler), (3) pain confirmed by competitive analysis, (4) feature set frozen
 - [ ] **D64 RESOLVED:** Sprint 0 starts with Fastify + Postgres API (NOT Nuxt 3). Day 1 = Postgres schema (TVA per-line, sequential numbering, mentions légales, client-type) + Fastify scaffold. Day 2 = TVA service + sequential numbering engine + mentions légales renderer. Day 3 = full CRUD REST API ready for React Native integration. Nuxt 3 retired from backend — static landing page only. (Debate 64)
 - [ ] **D65 RESOLVED:** U15 three-phase guerrilla protocol — (1) 20-min observation of actual admin workflow, no demo, no pitch; (2) pain quantification (time spent/week, emotional weight 1-10, lost revenue from forgotten devis); (3) payment conversation ONLY if pain is confirmed. Remove "show demo, ask price" from U15. (Debate 65)
 - [ ] **D63 RESOLVED:** Design the "situation financière" snapshot for Free tier home — automatically-produced weekly output showing: outstanding devis (with days-open), pending factures (aging buckets: 15/30/45/60+ days), revenue this month vs last month, dormant clients (30+ days inactive). This is the Free tier's primary value output. Push-ready content. Notification channel debates are secondary until this exists. (Debate 63)
@@ -443,4 +443,28 @@ The following were overengineered or wrong:
 - [ ] **D63 NEW:** Free tier self-generating pull — design a dashboard/report (e.g., "situation financière" snapshot: outstanding devis, pending factures, aging report) that creates desire to return. Notification channel debates premature until this exists.
 - [ ] **D64 UPDATED:** Sprint 0 starts with Fastify + Postgres API (NOT Nuxt 3). Day 1: Postgres schema + TVA service + sequential numbering service + mentions légales renderer. Day 3: REST API consumed by React Native. Nuxt 3 never touches the backend.
 - [ ] **D65 UPDATED:** U15 three-phase guerrilla session — (1) 20-min observation of actual admin workflow, no demo; (2) pain quantification (time spent/week, emotional weight 1-10, lost revenue from forgotten devis); (3) payment conversation only if pain confirmed. Remove "show demo, ask price" from U15.
+
+---
+
+*Last updated: 2026-03-30T16:17*
+
+## New from Pulse 2026-03-30T16:17 — Three Resolved
+
+### Resolved (D2, D54, U15):
+- **D2 (Sprint 1 timeline):** RESOLVED — Sprint 1a (Days 1-5: client file + devis flow) + Sprint 1b (Days 6-10: PDF + mentions légales + sharing + polish). Parallelization of backend and mobile on PDF endpoint recovers 3-5 days. Sequential numbering is 1 day, not 2. Viable 2-week sprint.
+- **D54 (TVA rounding):** RESOLVED — arrondi commercial is the standard (not arithmétique vs bancaire binary). `Math.round(v * 100) / 100` is the Sprint 0 default. Audit risk is €30-80/year, not €600. No BOFiP lookup required.
+- **U15 (Discovery location):** RESOLVED — wholesaler location retired. Revised Phase 1: workshop/job site via warm network introduction. Alternative: Facebook groups / WhatsApp clusters. Phase 1 now has explicit location, access method, and observable signals.
+
+### Challenged assumptions this pulse:
+1. Sprint 1 is 13-18 days — Technical Architect challenged: sequential waterfall assumption hides parallelization. PDF can run parallel to UI if API contract defined Day 1.
+2. TVA rounding is a binary choice between arrondi arithmétique and bancaire — Technical Architect challenged: it's arrondi commercial (round half up), the de facto French accounting standard.
+3. "5 artisans at a wholesaler Saturday morning" is a viable Phase 1 location — Growth Strategist challenged: five failure modes (admin doesn't happen there, Saturday is hostile to research, selection bias, no psychological safety, 20 minutes is a fiction).
+
+### New action items from this pulse:
+- [ ] **D2 NEW:** Sprint 1a Days 1-5: client file + TVA engine + sequential numbering + devis UI (end-to-end). Sprint 1b Days 6-10: PDF generation + mentions légales variants + WhatsApp/email sharing + integration testing. Define API contract on Day 1 to enable parallelization.
+- [ ] **D54 NEW:** Sprint 0 TVA calculator — implement with arrondi commercial: `const roundTVA = (v: number): number => Math.round(v * 100) / 100`. No BOFiP lookup required.
+- [ ] **D54 UPDATED:** Sprint 0 definition of done — TVA calculator (Day 2), sequential numbering (Day 2), mentions légales renderer (Day 3). Compliance work is bounded and more tractable than previously estimated.
+- [ ] **U15 NEW:** Phase 1 revised protocol — workshop/job site observation via warm network introduction (not wholesaler). Pre-work questions via WhatsApp before visiting. 30-45 min silent observation. Red flags: performed demo, can't show real workflow, tries to sell you something.
+- [ ] **U15 NEW:** Alternative Phase 1 — Facebook groups / WhatsApp clusters (asynchronous observation of admin pain conversations). Zero-friction qualitative research without physical presence.
+
 
