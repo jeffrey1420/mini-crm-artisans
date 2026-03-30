@@ -36,11 +36,39 @@
 |----|-------|-------|--------|
 | — | — | All items from 11:11 and 11:50 pulses are now RESOLVED (see table above) | |
 
+## New from Pulse 2026-03-30T13:43
+
+### Reopened (D53, D54, D55):
+- **D53 (Landing page):** REOPENED — Product Strategist argues "Sans vous prendre la tête" signals basic tool at €29/month. Recommends professional-grade framing: "Votre entreprise, au complet." Simplicity as subhead feature, not headline hook.
+- **D54 (Sprint 0 approach):** REOPENED — Technical Architect argues "flow-first" creates legal risk for French invoicing. TVA multi-taux, sequential numbering gaps, mentions légales are legal requirements — not discoverable UX preferences. Recommends "Compliance Foundations" Sprint 0 (5-7 days) before any document flow.
+- **D55 (Buyer-user split):** REOPENED — Growth Strategist argues Marc is buyer but admin handler (spouse, conjoint collaborateur) is primary user/evaluator. GTM must target admin handler's discovery habits (comparison sites, expert-comptable referrals, office supply retailers).
+
+### Challenged assumptions this pulse:
+1. "Simplicity-first" is a valid differentiator at €29/month (Product Strategist challenged: Tolteck/Obat own "simple" at lower prices; "sans vous prendre la tête" talks down to 45-55 year old professional)
+2. French invoicing requirements can be discovered through usage (Technical Architect challenged: TVA multi-taux is law, sequential gaps are illegal — cannot retrofit compliance)
+3. Marc is both buyer and user of the tool (Growth Strategist challenged: admin handlers evaluate and use; artisan owners buy)
+
+### New action items from this pulse:
+- [ ] **D53 NEW:** Landing page headline test — "Votre entreprise, au complet" (completeness/professionalism) vs "Sans vous prendre la tête" (simplicity). A/B test with beta users.
+- [ ] **D53 NEW:** Document quality showcase — if professional-grade is the positioning, show actual devis document screenshots on landing page (not stock photos). This is the proof point.
+- [ ] **D54 NEW:** TVA multi-taux schema design in Sprint 0 — per-line rate selection (5.5/10/20%), per-line calculation, total TVA breakdown. This is known law, not discovery.
+- [ ] **D54 NEW:** Gapless sequential numbering engine in Sprint 0 — server-enforced, explicit cancel/void handling, annual reset with prefix.
+- [ ] **D54 NEW:** Mentions légales renderer in Sprint 0 — client-type-aware (particulier/professionnel/EU/hors EU). Client type captured at client creation.
+- [ ] **D54 UPDATED:** Sprint 0 timeline updated to 5-7 days (from 3-5). Compliance foundations add 2 days; prevents retrofitting cost that would exceed upfront investment.
+- [ ] **D55 NEW:** Expert-comptable referral program — identify 3-5 experts-comptables serving artisans in Caen region. Cold outreach: "we handle devis/factures for your artisan clients." Pilot with 1-2.
+- [ ] **D55 NEW:** Comparison site optimization — claim/optimize GMB listing and GetApp/Capterra profiles for "devis facture artisan" terms. Admin handlers search here.
+- [ ] **D55 NEW:** Messaging for admin handler pain — shift from emotional/forgetfulness framing to operational efficiency ("gagnez 2h/semaine sur l'administratif").
+- [ ] **U12 NEW:** Expert-comptable GTM — highest-leverage acquisition channel. One expert-comptable with 50 artisan clients = 50 potential conversions from one relationship.
+
+---
+
 ## 🔄 Still Unresolved
 
 | ID | Topic | blockers |
 |----|-------|----------|
-| — | — | All previously unresolved items are now resolved or deferred (see tables above) |
+| D53 | Landing page framing | Simplicity-first vs professional-grade — needs A/B test with beta users |
+| D54 | Sprint 0 approach | Compliance-first vs flow-first — needs resolution before sprint planning |
+| D55 | Buyer-user split | Expert-comptable referrals + admin handler targeting — needs validation of buyer-user split frequency |
 
 ---
 

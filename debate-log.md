@@ -1392,3 +1392,122 @@ Speed is also decisive. Prescriber networks require months of relationship build
 
 *Last updated: 2026-03-30T13:28*
 
+---
+
+## Pulse 2026-03-30T13:43 — Three New Debates
+
+---
+
+## Debate 53: D12 — "Simplicity-First" Is a Positioning Liability
+
+**Challenge:** D12 landed on "Sans vous prendre la tête" as the landing page headline. Product Strategist challenges this — at €29/month, we cannot afford to lead with "easy" when cheaper competitors own that claim.
+
+### Product Strategist — Professional-Grade Case
+
+**Assumption challenged:** That "simplicity" is a valid differentiator and the correct landing page hook for a €29/month devis/factures tool.
+
+**Core argument:**
+
+1. **Simplicity is a commodity claim.** Tolteck (€19) and Obat (€17) own "simple" at lower price points. At €29 we're announcing "we're like them but more expensive." You cannot win a race to the bottom when you're not at the bottom.
+
+2. **"Sans vous prendre la tête" signals "basic tool."** This phrase talks down to a 45-55 year old who has been running a professional business for 15-25 years. The pain is professional (unpaid invoices, unprofessional devis) — not technical. The positioning must speak to professional pain, not technical simplicity.
+
+3. **Ease of use is table stakes, not a differentiator.** The product must be easy. That's a requirement, not a marketing claim. Putting "simple" in the headline is like a restaurant saying "our food is edible." It doesn't inspire.
+
+4. **The real gap: professional-quality documents.** No one in this market claims "your devis should look like they came from a real business." That's the differentiation opportunity. At €29, Marc should feel like he's running a professional operation, not using a starter app.
+
+**Proposed resolution:** D12 headline reversed — "Vos devis. Vos factures. Votre entreprise, au complet." (Your devis. Your invoices. Your business, complete.) Subhead handles simplicity ("rien à configurer"). Simplicity retained as product experience and reassurance, not as the hook.
+
+---
+
+## Debate 54: Sprint 0 — "Flow-First" Is a Legal Risk for French Invoicing
+
+**Challenge:** Debate 35 resolved Sprint 0 = "flow-first, minimal schema, no TVA complexity, no sequential numbering enforcement." Technical Architect challenges this — for a legally-regulated French invoicing product, flow-first creates non-compliant documents that cannot be retrofitted.
+
+### Technical Architect — Compliance-First Schema Case
+
+**Assumption challenged:** That French invoicing requirements (TVA multi-taux, sequential numbering, mentions légales) can be "discovered" through usage and retrofitted in Sprint 1.
+
+**Core argument:**
+
+1. **TVA multi-taux cannot be deferred.** French artisans use 5.5%, 10%, and 20% rates depending on work type — per line item, by law. A flat-rate Sprint 0 schema cannot be retrofitted: all existing sent devis would need recalculation, and sent documents that converted to factures are now wrong.
+
+2. **Sequential numbering gaps are illegal, not just bad.** French fiscal law requires sequential, gapless invoice numbering. A Sprint 0 with naive auto-increment creates gaps that are fiscal irregularities. Retrofitting gapless enforcement onto an existing sequence that has had documents created and potentially deleted is extremely difficult.
+
+3. **Mentions légales are not optional — even for devis.** French commercial law requires specific mentions (SIRET, RCS, TVA intracom) on commercial documents. A "simple block" that doesn't vary by client type is not legally compliant.
+
+4. **The consumer app mental model is wrong.** "Unused fields = wasted overhead" is correct for consumer apps. For regulated documents, "wrong TVA rate = tax penalty" and "sequential gap = legal violation." The risk profile is completely different.
+
+**Proposed resolution:** Sprint 0 renamed "Compliance Foundations" — TVA multi-taux schema, gapless sequential numbering engine, mentions légales renderer: all Day 1 before any document is sent. Sprint 0 timeline extended to 5-7 days. The flow (add client → add lines → preview → send) still ships in Sprint 0 — but underneath, legal foundations are laid first.
+
+---
+
+## Debate 55: D3 — The Buyer-User Split — GTM Targets the Wrong Person
+
+**Challenge:** D3 defines primary persona as "Marc — solo smartphone-native artisan" and the entire GTM assumes Marc is both buyer and user. Growth Strategist challenges this — in many French artisanal businesses, the person who uses the tool (admin handler) is different from the person who makes the purchasing decision (the artisan owner).
+
+### Growth Strategist — Admin Handler Case
+
+**Assumption challenged:** That Marc is both the user and buyer of the tool, and that his discovery habits (WhatsApp groups, peer endorsement) drive the GTM.
+
+**Core argument:**
+
+1. **French artisanal businesses frequently have a buyer-user split.** Conjoint collaborateur (spouse helper) is a recognized legal status. Many artisanal businesses have a spouse or part-time office manager who handles admin — devis, factures, client communication. The artisan does the physical work; the office handles paperwork.
+
+2. **The admin handler has different discovery habits.** They search comparison sites (Google, GetApp, Capterra), attend trade shows, visit office supply retailers, and respond to cold email. They do the research the artisan won't do.
+
+3. **Tolteck's growth came via admin handlers.** Office supply retail partnerships, expert-comptable referrals, and comparison site presence — all channels that reach admin handlers, not artisans in WhatsApp groups.
+
+4. **Expert-comptable referrals are severely underutilized.** French experts-comptables serve artisans and often recommend tools. A single expert-comptable with 50 artisan clients = one sales motion with 50 potential conversions. This is how Pennylane grew significantly in France.
+
+**Proposed resolution:** D3 partially reversed — Marc remains primary buyer (signs checks, responds to endorsement). But GTM must account for admin handler as primary evaluator and user. Add expert-comptable referral channel as HIGH priority. Optimize for comparison site presence. Reframe messaging for admin handler pain (operational efficiency, time savings) rather than artisan emotional pain. Retain WhatsApp/artisan groups for buyer endorsement, not as primary acquisition channel.
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D1 | Positioning | Kill "CRM" — devis, factures, relances | 2026-03-30 |
+| D2 | MVP scope | 4 features, SEQUENCED sprints. Sprint 0 = compliance foundations + minimum devis flow (5-7d). Sprint 1 = client+devis. Sprint 2 = facture+relances. REOPENED: Sprint 0 extended (Debate 54) | 2026-03-30 |
+| D3 | Primary persona | Marc — primary buyer. Admin handler = primary user/evaluator. REOPENED: buyer-user split acknowledged in GTM (Debate 55) | 2026-03-30 |
+| D4 | Stack | Single managed Postgres | 2026-03-30 |
+| D5 | Pricing | Free + €29 two-tier. No €19 SKU. Drop €49/€79. | 2026-03-30 |
+| D6 | Trial | No time-limited trial. Free tier IS the trial. | 2026-03-30 |
+| D7 | Architecture | Nuxt 3 + OVH managed Postgres | 2026-03-30 |
+| D8 | E-invoicing | v2 feature | 2026-03-30 |
+| D9 | Not MVP | No Kanban, no multi-user, no offline, no API keys | 2026-03-30 |
+| D10 | Buyer trigger | "Admin pain" not "CRM need" | 2026-03-30 |
+| D11 | Mobile | React Native from Day 1 via Expo | 2026-03-30 |
+| D12 | Landing page | Simplicity-first — REOPENED: professional-grade vs simplicity-first debate (Debate 53) | 2026-03-30 |
+| D13 | Home view | Job-first — Active Job Card as home anchor | 2026-03-30 |
+| D14 | E-invoicing timing | v2 — NOT Day 1 | 2026-03-30 |
+| D15 | Relances differentiator | DE-EMPHASIZED — secondary feature below fold | 2026-03-30 |
+| D16 | Trial length | No countdown trial — Free tier IS the trial | 2026-03-30 |
+| D17 | Mobile strategy | React Native from Day 1 via Expo. Email-only relances at v1. Expo Push in v1.1. | 2026-03-30 |
+| D41 | Notification infra | Email-only relances at v1 launch. Expo Push in v1.1. | 2026-03-30 |
+| D43 | Free tier activation | Forcing function + limit-hit primary, habit tracking secondary. | 2026-03-30 |
+| D46 | Free tier limits | Do NOT lower limits from 10/5. Trust-building before limit enforcement. | 2026-03-30 |
+| D47 | Expo Push estimate | 1-2 weeks. Budget properly or defer to v1.1. | 2026-03-30 |
+| D48 | Wholesaler GTM | Not primary. Digital + specialist retailers. Wholesaler secondary. | 2026-03-30 |
+| D49 | GTM Priority | Digital → Specialist retailers → Prescriber → Wholesaler. | 2026-03-30 |
+| D50 | Push at launch | Email-only at v1. Expo Push in v1.1. | 2026-03-30 |
+| D51 | Free tier conversion | Forcing functions + limit-hit primary. Habit tracking secondary. | 2026-03-30 |
+| D52 | Prescriber GTM | Cannot lead. U11 audit valuable. | 2026-03-30 |
+| D53 | Landing page framing | REOPENED — professional-grade vs simplicity-first (Debate 53) | 2026-03-30 |
+| D54 | Sprint 0 approach | REOPENED — compliance-first vs flow-first (Debate 54) | 2026-03-30 |
+| D55 | Buyer-user split | REOPENED — admin handler as primary evaluator (Debate 55) | 2026-03-30 |
+
+| U1 | Discovery | REPLACED — readiness protocol | 2026-03-30 |
+| U2 | E-invoicing platform | Factea first when v2 | 2026-03-30 |
+| U7 | Domain | DEFERRED — subdomain/Carrd until MVP validated | 2026-03-30 |
+| U8 | WhatsApp acquisition | CLOSED — no WhatsApp CTA in devis | 2026-03-30 |
+| U9 | Free tier activation | Forcing function + limit-hit primary, habit tracking secondary | 2026-03-30 |
+| U10 | GTM: Wholesaler | REFINED — digital + specialist retailers first | 2026-03-30 |
+| U11 | Prescriber audit | Still valuable — if >30% of new jobs via prescriber, revisit GTM | 2026-03-30 |
+| U12 | Expert-comptable GTM | NEW — expert-comptable referral channel as HIGH priority acquisition channel (Debate 55) | 2026-03-30 |
+
+---
+
+*Last updated: 2026-03-30T13:43*
+
