@@ -972,4 +972,178 @@ Three resolution paths:
 
 ---
 
-*Last updated: 2026-03-30T12:42*
+---
+
+## Pulse 2026-03-30T12:58 — Three New Debates
+
+---
+
+## Debate 46: D43 — Lower Limits Destroys Trust Before Value Is Established
+
+**Challenge:** D43 (Free tier activation) — Product Strategist challenges the assumption that lowering limits (10→5 clients, 5→3 devis) creates a sooner ceiling that forces upgrade decisions.
+
+### Product Strategist — Lower Limits Creates Frustration, Not Urgency
+
+**Assumption challenged:** Lower limits = sooner, more salient ceiling → upgrade decision. This assumes the Free user thinks "time to upgrade" when hitting a limit. For the French artisan who signed up because it was *free* (not because of acute pain), the psychology is different.
+
+**Core argument:**
+
+There are two types of Free users:
+1. **Pain-motivated** — signed up because they needed it urgently → limit hits = "I need more capacity" → conversion
+2. **Curiosity-driven** — signed up because it was free, skeptical of software, exploring → limit hits = frustration → "c'est fait pour me piéger" → abandonment before conversion
+
+Marc skews toward #2. He's a solo artisan who heard "gratuit," he's skeptical of SaaS subscriptions (historically sold via CD/license in France), he's not losing sleep over client management. When he hits a limit on Day 3 — before he's felt the core value — he doesn't think "upgrade." He thinks the product is designed to trap him.
+
+**The math is broken:** Path A optimizes for conversion rate *among users who survive long enough to hit the limit*, while ignoring the users who churn at first friction. Lower limits may increase % of surviving users who convert, but also increases total pool of frustrated early churners who never give you a second chance.
+
+**French market trust problem:** Artisans have been sold software via one-time CD purchases (Sage, Ciel). SaaS feels like a money grab. Hitting a wall early validates their suspicion.
+
+**Path A doesn't create urgency — it creates resentment before loyalty is built.**
+
+**VERDICT on D43:**
+
+D43 resolution is REFINED — not Path A vs Path B, but a combined approach:
+
+1. **Keep generous limits** (10 clients / 5 devis) — let users live inside the product long enough to feel value
+2. **Redesign Day 1 onboarding** to deliver the "aha moment" in under 5 minutes — the limit should hit *after* the user understands what they'd be leaving on the table
+3. **Make upgrade moments emotionally salient** — trigger prompts at contextually meaningful moments ("vous avez un gros client — créer un 6e devis?"), not cold "you've reached your limit" banners
+4. **Soft limits before hard blocks** — let users exceed once with "vous êtes presque à limite" before the wall hits. Extends trust-building phase.
+5. **Path B is primary. Path A is secondary** — optimize Day 1 first; lower limits only after measuring where the aha moment occurs.
+
+---
+
+## Debate 47: D41 — "Few Hours" Estimate for Expo Push Is Wrong
+
+**Challenge:** D41 (Push notifications) — Technical Architect challenges the assumption that Expo Push Notifications is "a few hours of work if EAS Build exists."
+
+### Technical Architect — Expo Push Reality Check
+
+**Assumption challenged:** "Add Expo Push Notifications at launch (if EAS Build exists, a few hours of work)." This underestimates the actual complexity of production-ready push notifications.
+
+**Core argument:**
+
+The "few hours" estimate ignores several non-trivial components:
+
+**1. Token management ≠ one liner:**
+- You must `requestNotificationPermissionsAsync()` and handle the response
+- Tokens can CHANGE (iOS restores, app reinstalls, backup restores)
+- You need backend infrastructure to store `userId → pushToken` mappings
+- Need to handle token invalidation/deletion lifecycle
+- **Reality:** 1-2 days of backend work minimum
+
+**2. APNS certificate setup — this is not free:**
+- Even with Expo, you still need APNS client certificates OR APNS auth keys
+- That means: Apple Developer Account ($99/yr), App ID with Push capability, certificate generation, upload to Expo
+- Certificates expire yearly — need renewal reminder system
+- `eas credentials` helps but doesn't eliminate the Apple Developer portal dance
+- **Reality:** 2-4 hours of setup + annual maintenance overhead
+
+**3. No built-in fallback:**
+- Expo Push is a proxy. If Expo has an outage, your notifications don't fire
+- There's no "fallback to direct APNS" toggle
+- If reliability is critical, you need a custom fallback architecture anyway
+- **Reality:** You don't own the delivery path
+
+**4. "Few hours" assumes zero edge cases:**
+- Testing on physical devices (no simulator for push)
+- Background vs foreground notification behavior
+- Notification categories/actions on iOS
+- Deep linking from notification to specific screen
+- **Reality:** 1-2 weeks for production-ready, not hours
+
+**Real comparison:**
+| Approach | Initial Time | Operational Complexity |
+|----------|-------------|----------------------|
+| Expo Push | 1-2 weeks | Medium |
+| Cut from v1 | 0 | 0 |
+| Direct APNS/FCM | 3-4 weeks | High |
+
+**VERDICT on D41:**
+
+D41 resolution is REFINED — Expo Push is still the right call over building from scratch, but the estimate should be **1-2 weeks, not hours**.
+
+**Revised decision:**
+- **Keep** Expo Push as the chosen path — it reduces complexity vs. raw APNS/FCM
+- **Revise estimate:** 1-2 weeks of engineering time, not "few hours"
+- **If deadline can't accommodate:** defer notifications to v1.1, use email-only relances as temporary bridge (accepting the competitor disadvantage)
+- **If shipping in v1:** budget the full 1-2 weeks; do not promise notifications at launch if you can't commit that time
+
+---
+
+## Debate 48: U10 — Wholesaler Presence Reaches the Wrong Artisan
+
+**Challenge:** U10 (Wholesaler GTM) — Growth Strategist challenges the assumption that Gedimat/Point P (1,900+ branches) presence reaches Marc, the solo artisan persona.
+
+### Growth Strategist — Gedimat Reaches Account-Holder Contractors, Not Solo Artisans
+
+**Assumption challenged:** 1,900+ branch presence = reaching our target artisan at scale. Gedimat and Point P are account-holder merchants whose customer profile skews toward construction companies with formal procurement relationships — not the solo Marc persona.
+
+**Core argument:**
+
+**Who actually walks into Gedimat/Point P:**
+- Construction companies with formal procurement relationships
+- Larger contractors who buy in bulk on credit terms
+- Professional buyers who order via account managers
+
+**Marc is a different creature:**
+1. **He doesn't walk into Gedimat — he orders from his phone.** Need material → check supplier app/website → order → delivery. Physical branch visits are a fallback, not a habit.
+2. **He's not an account holder.** Account-based merchants require credit relationships, company structures, VAT compliance bureaucracy. Marc buys cash-and-carry or via specialist suppliers who don't gatekeep with account applications.
+3. **He's in the long tail.** Gedimat's foot traffic is dominated by the 20% of buyers who generate 80% of revenue — professional contractors. Marc is in the scattered long tail of walk-in cash purchases.
+4. **Counter displays and flyers are invisible noise.** If Marc even visits a branch, he's in and out. He doesn't linger at displays or pick up flyers. His attention is on his phone, on the job site, on peer referrals.
+
+**The real first move to reach Marc:**
+- **Digital-acquisition first** — trade-specific Facebook groups, WhatsApp artisan communities, SEO for problem-solution queries, YouTube tutorials
+- **Specialist retailer partnerships** — smaller distributors who serve the solo artisan segment and already have their trust
+- **Prescriber networks (architects/property managers) are actually the stronger complementary play** — they create pull-through demand from Marc at the job site level
+
+**VERDICT on U10:**
+
+U10 resolution is REFINED — wholesaler presence is NOT the primary GTM move.
+
+**Revised GTM priority order:**
+1. **Digital channels** (WhatsApp groups, Facebook artisan communities, SEO) — where Marc actually discovers things
+2. **Specialist retailer partnerships** — smaller distributors serving solo artisans, not generalist wholesaler chains
+3. **Prescriber networks** (architects, property managers) — B2B pull-through
+4. **Wholesaler presence** — only as secondary brand-awareness play, not primary acquisition
+
+**NEW TODO:** Audit what purchasing channels solo artisans (45-55, French market) actually use — identify top 5 digital touchpoints and top 3 specialist retailer types before committing to wholesaler GTM investment.
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D1 | Positioning | Kill "CRM" — devis, factures, relances | 2026-03-30 |
+| D2 | MVP scope | 4 features, SEQUENCED sprints. Sprint 0 = minimum devis flow (3-5d, flow-first). Sprint 1 = client+devis. Sprint 2 = facture+relances. | 2026-03-30 |
+| D3 | Primary persona | Marc — solo smartphone-native artisan | 2026-03-30 |
+| D4 | Stack | Single managed Postgres | 2026-03-30 |
+| D5 | Pricing | Free + €29 two-tier. No €19 SKU. Drop €49/€79. Value anchor: "2h/week = 1h labor = €29/month." | 2026-03-30 |
+| D6 | Trial | No time-limited trial. Free tier IS the trial. Engagement: REFINED — keep generous limits (10/5), Day 1 redesign for immediate aha moment, soft limits before hard blocks, emotionally salient upgrade triggers. | 2026-03-30 |
+| D7 | Architecture | Nuxt 3 + OVH managed Postgres | 2026-03-30 |
+| D8 | E-invoicing | v2 feature | 2026-03-30 |
+| D9 | Not MVP | No Kanban, no multi-user, no offline, no API keys | 2026-03-30 |
+| D10 | Buyer trigger | "Admin pain" not "CRM need" | 2026-03-30 |
+| D11 | Mobile | React Native from Day 1 via Expo | 2026-03-30 |
+| D12 | Landing page | Simplicity-first — "Vos devis et factures, sans vous prendre la tête" | 2026-03-30 |
+| D13 | Home view | Job-first — Active Job Card as home anchor | 2026-03-30 |
+| D14 | E-invoicing timing | v2 — NOT Day 1 | 2026-03-30 |
+| D15 | Relances differentiator | DE-EMPHASIZED — secondary feature below fold | 2026-03-30 |
+| D16 | Trial length | No countdown trial — Free tier IS the trial | 2026-03-30 |
+| D17 | Mobile strategy | React Native from Day 1 via Expo. Email-only relances at launch (push deferred to v2). | 2026-03-30 |
+| D41 | Notification infra | REFINED — Expo Push = 1-2 weeks (not "few hours"). If deadline can't accommodate, defer to v1.1. | 2026-03-30 |
+| D43 | Free tier activation | REFINED — Path B primary (Day 1 redesign), Path A secondary (lower limits only after measuring aha moment). Keep generous limits. Soft limits before hard blocks. Emotionally salient upgrade triggers. | 2026-03-30 |
+| D46 | Free tier limits | RESOLVED — do NOT lower limits from 10/5. Trust-building before limit enforcement. Limit should hit AFTER aha moment. | 2026-03-30 |
+| D47 | Expo Push estimate | RESOLVED — 1-2 weeks, not "few hours." Budget properly or defer. | 2026-03-30 |
+| D48 | Wholesaler GTM | REFINED — not primary GTM. Digital + specialist retailers first. Wholesaler secondary. | 2026-03-30 |
+
+| U1 | Discovery | REPLACED — readiness protocol | 2026-03-30 |
+| U2 | E-invoicing platform | Factea first when v2 | 2026-03-30 |
+| U7 | Domain | DEFERRED — subdomain/Carrd until MVP validated | 2026-03-30 |
+| U8 | WhatsApp acquisition | CLOSED — no WhatsApp CTA in devis | 2026-03-30 |
+| U9 | Free tier activation | REFINED — see D43/D46 | 2026-03-30 |
+| U10 | GTM: Wholesaler | REFINED — digital + specialist retailers first, wholesaler secondary. Audit solo artisan purchasing channels first. | 2026-03-30 |
+
+---
+
+*Last updated: 2026-03-30T12:58*

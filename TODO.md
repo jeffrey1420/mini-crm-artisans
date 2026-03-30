@@ -26,6 +26,9 @@
 | D40 | Engagement channel | RESTATED — channel secondary to Free tier design. Three paths: (A) lower limits, (B) Day 1 redesign, (C) accept long-tail activation. | Debate 43 (Product Strategist) | 2026-03-30 |
 | D41 | Notification infra | REVERSED — email-only relances wrong. Obat markets push. Preferred: Expo Push at launch. Alternative: cut relances from v1. | Debate 44 (Technical Architect) | 2026-03-30 |
 | D42 | WhatsApp referral | CLOSED — kill CTA in devis, kill in-product peer referral as primary acquisition. Redirect to wholesaler presence + prescriber networks + SEO. | Debate 45 (Growth Strategist) | 2026-03-30 |
+| D46 | Free tier limits | Do NOT lower limits from 10/5. Keep generous limits. Trust-building before limit enforcement. Limit should hit AFTER aha moment, not before. | Debate 46 (Product Strategist) | 2026-03-30 |
+| D47 | Expo Push estimate | 1-2 weeks, not "few hours." Budget properly or defer to v1.1. | Debate 47 (Technical Architect) | 2026-03-30 |
+| D48 | Wholesaler GTM | Not primary GTM. Digital + specialist retailers first. Wholesaler secondary brand-awareness play only. Audit solo artisan purchasing channels first. | Debate 48 (Growth Strategist) | 2026-03-30 |
 
 ## 🔄 Reopened This Pulse (Need Resolution)
 
@@ -87,7 +90,7 @@
 
 ### Mobile Build (D17 — React Native from Day 1)
 - [ ] Use Expo for React Native setup (`npx create-expo-app`)
-- [ ] Push notifications via Expo Notifications (APNS on iOS, FCM on Android) — NOT at launch. Email-only at v1. Push added in v2 if 50+ paying users complain. (Debate 41)
+- [ ] **D47 UPDATED:** Push notifications via Expo Notifications — budget 1-2 weeks (not "few hours"). If deadline can't accommodate: defer relances to v1.1, email-only as temporary bridge.
 - [ ] App Store + Play Store presence from Day 1 launch
 - [ ] Target both iOS and Android simultaneously from start — do not "do one platform then the other"
 - [ ] Keep MVP scope tight: client list, job/reminder management, basic invoicing — no feature creep
@@ -100,6 +103,17 @@
 - [ ] Day-7 human check-in only: "How's it going? Need anything?" (human touch, not countdown)
 - [ ] Conversion trigger: artisan hits Free limit (10 clients or 5 active devis) — upgrade prompt at that moment, not before
 - [ ] Aha moments by usage milestone: first client added, first devis sent, first follow-up reminder received
+- [ ] **D46 NEW:** Measure the aha moment — at what usage milestone does a Free user become likely to consider upgrading? Set the limit trigger just BEYOND that moment (not arbitrary 10/5 — those are starting points, not targets)
+- [ ] **D46 NEW:** Day 1 onboarding redesign — deliver first value in <5 minutes. First devis created in app, sent to WhatsApp. The limit should hit AFTER this moment, not before.
+- [ ] **D46 NEW:** Soft limits before hard blocks — "vous êtes presque à limite" warning before the wall. Let artisan exceed once as a trust-building gesture.
+- [ ] **D46 NEW:** Emotionally salient upgrade triggers — upgrade prompt at contextually meaningful moments (e.g., "un gros client? Créez un 6e devis") not cold "limit reached" banners.
+
+### GTM Strategy (D48 — Wholesaler NOT Primary)
+- [ ] **D48 NEW:** Audit solo artisan (45-55, French market) purchasing channels — identify top 5 digital touchpoints and top 3 specialist retailer types BEFORE committing to wholesaler investment
+- [ ] **D48 NEW:** Primary GTM = digital channels: WhatsApp artisan groups, Facebook artisan communities, SEO for "devis/facture artisan" terms
+- [ ] **D48 NEW:** Secondary GTM = specialist retailers who serve solo artisans (not generalist wholesaler chains)
+- [ ] **D48 NEW:** Tertiary GTM = prescriber networks (architects, property managers) — pull-through demand at job site level
+- [ ] Wholesaler presence (Gedimat/Point P counter displays) = secondary brand-awareness only, not primary acquisition
 
 ## 🚫 What We Deleted
 
@@ -236,4 +250,29 @@ The following were overengineered or wrong:
 
 ---
 
-*Last updated: 2026-03-30T12:42*
+---
+
+## New from Pulse 2026-03-30T12:58
+
+### Resolved (D46, D47, D48):
+- **D46 (Free tier limits):** Product Strategist won — do NOT lower limits from 10/5. Trust-building before limit enforcement. Lower limits create frustration ("c'est fait pour me piéger") before the aha moment is established. Keep generous limits, redesign Day 1 onboarding, use soft limits, make upgrade triggers emotionally salient.
+- **D47 (Expo Push estimate):** Technical Architect won — "few hours" estimate is wrong. Reality: 1-2 weeks for production-ready Expo Push (token management backend, APNS certificate setup, testing). Budget properly or defer to v1.1.
+- **D48 (Wholesaler GTM):** Growth Strategist won — Gedimat/Point P reach account-holder contractors, not solo Marc artisans. Solo artisans are mobile-first orderers, not branch visitors. Digital + specialist retailers first. Wholesaler secondary.
+
+### Challenged assumptions this pulse:
+1. Lower limits (5/3) create sooner conversion (Product Strategist challenged: creates frustration before aha moment, not urgency)
+2. Expo Push = "few hours" work (Technical Architect challenged: 1-2 weeks reality for production-ready implementation)
+3. 1,900+ wholesaler branches reach Marc (Growth Strategist challenged: wrong customer profile at generalist merchants)
+
+### New action items from this pulse:
+- [ ] **D46 NEW:** Define and measure the "aha moment" — at what usage milestone does a Free user become likely to upgrade? Set limit trigger just beyond that moment
+- [ ] **D46 NEW:** Day 1 onboarding redesign — deliver first value in <5 minutes (first devis created and sent to WhatsApp)
+- [ ] **D46 NEW:** Soft limits before hard blocks — "vous êtes presque à limite" warning, let artisan exceed once
+- [ ] **D46 NEW:** Emotionally salient upgrade triggers — prompt at contextually meaningful moments, not cold "limit reached" banners
+- [ ] **D47 UPDATED:** Expo Push = 1-2 weeks, not "few hours." If deadline can't accommodate: defer relances to v1.1 with email-only bridge
+- [ ] **D48 NEW:** Audit solo artisan (45-55, French market) purchasing channels — top 5 digital touchpoints + top 3 specialist retailer types — before wholesaler investment
+- [ ] **D48 UPDATED:** Primary GTM = digital channels (WhatsApp groups, Facebook communities, SEO). Secondary = specialist retailers. Tertiary = prescriber networks. Wholesaler = secondary brand-awareness only.
+
+---
+
+*Last updated: 2026-03-30T12:58*
