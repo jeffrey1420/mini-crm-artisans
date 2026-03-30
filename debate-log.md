@@ -2466,4 +2466,111 @@ With Nuxt 3: Days 1-2 spent learning Nuxt server route conventions, `useFetch` v
 
 ---
 
-*Last updated: 2026-03-30T15:33*
+## Pulse 2026-03-30T15:59 — Two Challenges (Growth Agent Failed: 401 Auth)
+
+---
+
+## Debate 66: Sprint 1 — 2 Weeks Is Structural Fantasy
+
+**Challenge:** Product Strategist challenges Sprint 1 timeline (D2/D54: 2 weeks = client file + devis flow). Never technically stress-tested.
+
+### Product Strategist — Sprint 1 Is 13-18 Days of Work Compressed Into 10
+
+**Assumption challenged:** Sprint 1 was resolved as "client file + devis flow, 2 weeks." This was never broken down into actual work units. It appeared as a framing choice, not a derived estimate.
+
+**Core argument:**
+
+Sprint 1 is not one feature — it's six subsystems that must integrate:
+
+1. **Client file** — schema, CRUD, contact management, client-type-driven mentions légales routing. 2 days.
+2. **TVA multi-taux engine** — Sprint 0 handed you the schema. Sprint 1 builds the math. Three rates (5.5/10/20%) per line item, per-line HT/TVA/TTC, regulatory TVA breakdown section on document. 2-3 days.
+3. **Sequential numbering for devis** — annual reset with prefix, gap detection, void/cancel awareness, server-enforced uniqueness. 1-2 days.
+4. **React Native devis UI** — line items (description, qty, unit, TVA rate, price HT/TTC), multi-TVA per devis, mobile-first for 45-55yo. First artifact Marc sends to a client. No polish-later option. 3-4 days.
+5. **PDF generation + mentions légales** — server-side PDF, dynamic mentions légales block (particulier/professionnel/étranger EU/hors EU × devis/facture), professional French document standards. 2-3 days.
+6. **WhatsApp/email sharing + integration testing** — WhatsApp Business API, clean PDF attachment, end-to-end test Android + iOS. 2 days.
+
+**Total estimated: 13-18 days. Available: 10 days.**
+
+**Sprint 0 compression creates Sprint 1 debt:** Sprint 0's 3-4 day compression leaves no slack — it creates risk. Wrong TVA formula, numbering bug, mentions légales edge case: Sprint 1 discovers all of it.
+
+**France-specific complexity not priced:**
+- TVA multi-taux per line is a regulatory document requirement, not a subtotal
+- Mentions légales is a template engineering problem with legal stakes if wrong (4 client types × 2 document types = 8 content variants)
+- PDF rendering across iOS/Android screen sizes at professional quality is non-trivial and cannot be deferred
+
+**Proposed resolution:** Either (A) split Sprint 1 into two: Sprint 1a (client file + devis creation UI, no PDF/share) + Sprint 1b (PDF + WhatsApp + TVA math), or (B) accept 3-week Sprint 1, update roadmap accordingly. Sprint 2 cannot start on time if Sprint 1 slips.
+
+**Verdict on D2 Sprint 1:** REOPENED — Sprint 1 timeline needs real work breakdown before it can be treated as a 2-week sprint.
+
+---
+
+## Debate 67: TVA Per-Line Rounding — Settled Without Confirming the Algorithm
+
+**Challenge:** Technical Architect challenges D54's treatment of TVA per-line calculation as "a formula, not a lookup table." The actual rounding rule was never confirmed.
+
+### Technical Architect — Arrondi Arithmétique vs Bancaire Is Unresolved
+
+**Assumption challenged:** D54 resolved Sprint 0 includes "TVA per-line schema — devis_lines.tva_rate enum (5.5/10/20), server-side calculator for montant_ht and montant_tva per line." This was treated as done. It is not.
+
+**Core argument:**
+
+French TVA rounding is not `Math.round()`. Article 266 of the Code Général des Impôts specifies: TVA per line is calculated on the rounded unit price × quantity, then rounded to 2 decimal places. Total TVA = sum of per-line rounded amounts.
+
+The critical unresolved question: **which rounding rule?**
+
+| Method | Rule | Example (1.5) |
+|--------|------|---------------|
+| Arrondi arithmétique (round half up) | 0.5 rounds away from zero | 1.5 → 2 |
+| Arrondi bancaire (round half to even) | 0.5 rounds to nearest even | 1.5 → 2 |
+
+For 5.5% on €2,850 × 3 lines = €470.25:
+- Arithmétique: **€471**
+- Bancaire: **€470**
+
+**€1 difference per invoice × 50/month × 12 months = €600/year.** For a 3-year audit window: **€1,800 in potential dispute** from an algorithmic assumption never validated.
+
+**Why the debate missed this:**
+1. "TVA per-line" was conflated with "TVA formula" — the rate × base is trivial, the rounding rule is the legally operative detail
+2. "A formula, not a lookup table" treated simplicity as confirmation it was solved — it confirmed structure, not legal correctness
+3. The debate log explicitly notes "the correct algorithm" was never confirmed with a real French accountant — and still hasn't been
+
+**Proposed resolution:**
+
+Sprint 0 must include one explicit deliverable before the TVA calculator is written: **confirm the rounding algorithm via BOFiP instruction (BOI-TVA-LIQ-20) or a French accountant.** Two candidate implementations depending on answer:
+
+```typescript
+// If arrondi arithmétique:
+const roundTVA = (v: number) => Math.round(v * 100) / 100
+
+// If arrondi bancaire:
+const roundTVA = (v: number) => {
+  const s = v * 100, f = Math.floor(s), frac = s - f
+  if (frac === 0.5) return (f % 2 === 0 ? f : f + 1) / 100
+  return Math.round(s) / 100
+}
+```
+
+**Verdict on D54 Sprint 0:** REOPENED — TVA rounding algorithm requires explicit validation step before calculator implementation. Add to Sprint 0 definition of done.
+
+---
+
+## Growth Agent Failed
+
+**Agent:** pulse-1559-growth (session: 323701be-738f-4f1e-b0d6-efaa6633a077)
+**Error:** 401 authentication failure — GLM model unavailable
+**Challenge that would have been debated:** "Digital first" GTM — is WhatsApp/Facebook where Marc DISCOVERS tools, or just where he socializes? Valid point: habitual communication habitat ≠ discovery pathway. Would have reopened D49 GTM priority order.
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D2 | Sprint 1 scope | REOPENED — 2-week timeline not technically derived. 13-18 days estimated vs 10 available. Needs real work breakdown. | 2026-03-30 |
+| D54 | Sprint 0 TVA | REOPENED — arrondi arithmétique vs bancaire never confirmed. BOFiP lookup or accountant consultation required before calculator written. | 2026-03-30 |
+
+| U15 | Discovery protocol | Three-phase guerrilla (observe → quantify pain → payment). Phase 1 assumes observable admin workflow — needs physical location assumption documented. | 2026-03-30 |
+
+---
+
+*Last updated: 2026-03-30T15:59*

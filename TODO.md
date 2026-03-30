@@ -7,7 +7,7 @@
 | ID | Topic | Decision | Source | Date |
 |----|-------|----------|--------|------|
 | D1 | Positioning | Kill "CRM" — sell "devis, factures, relances" | External review | 2026-03-30 |
-| D2 | MVP scope | 4 features only: client file, quote, invoice, reminder | External review | 2026-03-30 |
+| D2 | MVP scope | 4 features only: client file, quote, invoice, reminder. REOPENED: Sprint 1 timeline (2 weeks) challenged — 13-18 days estimated vs 10 available. Needs real work breakdown. | External review | 2026-03-30 |
 | D3 | Primary persona | Marc — solo smartphone-native artisan | External review | 2026-03-30 |
 | D4 | Stack | Single managed Postgres, NOT per-customer VPS | External review | 2026-03-30 |
 | D5 | Pricing | Free + €29 two-tier. No €19 SKU. Drop €49/€79. Value anchor: "2h/week = 1h labor = €29/month." | Debate 33 (Product Strategist) | 2026-03-30 |
@@ -30,7 +30,7 @@
 | D47 | Expo Push estimate | 1-2 weeks, not "few hours." Budget properly or defer to v1.1. | Debate 47 (Technical Architect) | 2026-03-30 |
 | D48 | Wholesaler GTM | Not primary GTM. Digital + specialist retailers first. Wholesaler secondary brand-awareness play only. Audit solo artisan purchasing channels first. | Debate 48 (Growth Strategist) | 2026-03-30 |
 | D53 | Landing page framing | Simplicity-first RETAINED. H1: "Sans vous prendre la tête." H2: 5-minute specific/demonstrable claim. Proof lives in Free tier. No "professional-grade" in hero. | Debate 53 (Product Strategist) | 2026-03-30 |
-| D54 | Sprint 0 approach | Compressed compliance sprint (3-4d): TVA per-line schema, gapless sequential numbering engine, mentions légales renderer, client-type schema. Sprint 1 = client+devis flow. | Debate 54 (Technical Architect) | 2026-03-30 |
+| D54 | Sprint 0 approach | REOPENED (Debate 67) — TVA arrondi arithmétique vs bancaire never confirmed with BOFiP/accountant. Sprint 0 must include algorithm validation before calculator written. | Debate 54 (Technical Architect) | 2026-03-30 |
 | D55 | Buyer-user split | Dual-persona GTM. Marc = economic buyer (primary). Admin handler = operational user (secondary). Expert-comptable = Phase 2. | Debate 55 (Growth Strategist) | 2026-03-30 |
 | D56 | WoM attribution | WoM = Month 3+ lagging indicator. Digital acquisition PRIMARY at launch. "Comment connaissez-vous?" at signup. Referral codes in v1. Month 3 target: 20% peer referral. | Pulse 14:57 (Product+Growth) | 2026-03-30 |
 | D57 | Architecture | API-first preferred (Fastify + static) but deferred to post-MVP unless Nuxt 3 actively blocks Sprint 0. | Pulse 14:57 (Architect+Growth) | 2026-03-30 |
@@ -385,7 +385,26 @@ The following were overengineered or wrong:
 
 ---
 
-*Last updated: 2026-03-30T15:46*
+*Last updated: 2026-03-30T15:59*
+
+## New from Pulse 2026-03-30T15:59
+
+### Reopened (D2, D54):
+- **D2 (Sprint 1 timeline):** REOPENED — Product Strategist argues 2-week Sprint 1 contains 13-18 days of work (client file, TVA math engine, sequential numbering, RN devis UI, PDF+mentions légales, WhatsApp sharing + integration testing). 10 days available. Sprint 0 compression creates Sprint 1 debt. Needs real work breakdown.
+- **D54 (TVA rounding):** REOPENED — Technical Architect argues arrondi arithmétique vs bancaire was never confirmed with BOFiP or French accountant. €1/invoice discrepancy × 50/month × 12 months = €600/year, × 3-year audit window = €1,800 in potential dispute. Sprint 0 must include explicit algorithm validation step before calculator is written.
+
+### Challenged assumptions this pulse:
+1. Sprint 1 = 2 weeks (Product Strategist challenged: 13-18 days estimated vs 10 available — structural timeline risk)
+2. TVA per-line = "a formula" (Technical Architect challenged: arrondi arithmétique vs bancaire algorithmically distinct with real compliance stakes)
+
+### New action items from this pulse:
+- [ ] **D2 NEW:** Break down Sprint 1 into real work units before committing to 2-week timeline. Two options: (A) Split into Sprint 1a (client file + devis creation UI) + Sprint 1b (PDF + WhatsApp + TVA math), or (B) Accept 3-week Sprint 1 and update roadmap. Sprint 2 cannot start on time if Sprint 1 slips.
+- [ ] **D54 NEW:** Sprint 0 definition of done must include: confirm TVA rounding algorithm via BOFiP instruction (BOI-TVA-LIQ-20) or consultation with French accountant. Two candidate implementations ready to plug in.
+- [ ] **D54 NEW:** Validate sequential numbering requirements for devis specifically — gapless numbering is legally required for factures, but is it required for devis? If not, Sprint 0 numbering engine scope can be reduced.
+
+### Note: Growth agent failed (401 auth — GLM model unavailable). Would have challenged D49 "Digital first" GTM — is WhatsApp/Facebook where Marc discovers tools or just socializes? Habitual communication habitat ≠ discovery pathway.
+
+---
 
 ## New from Pulse 2026-03-30T15:46
 
