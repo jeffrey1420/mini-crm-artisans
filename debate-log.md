@@ -5052,3 +5052,123 @@ Pricing at launch:
 | U15 | Founding member offer | **ELIMINATED.** No founding tier, no lifetime deal. "Support Prioritaire" (relationship benefits) replaces discount framing. | 2026-03-30 |
 | U16 | Mentions légales prep | Louis writes 4 templates this week (2h) — gate for 5-day Sprint 0. | 2026-03-30 |
 | D99 | Usage-based pricing | **Directionally resolved** — usage-based (€1.50/devis, cap €29) superior for artisan cash flow. Implementation complexity TBD — Louis to evaluate. If complex: flat-rate at launch, usage-based v1.1. | 2026-03-30 |
+
+---
+
+## Pulse 2026-03-30T20:40 — Three Specialist Debates
+
+---
+
+## Debate 102: D4/D100 Follow-Up — Supabase EU-Hosted vs Self-Hosted: RESOLVED
+
+**Specialist:** Technical Architect
+**Pulse file:** pulse-2040-architect.md
+
+### Technical Architect — EU-Hosted Supabase Wins
+
+**Core argument:** Self-hosted Supabase on OVH re-introduces the exact infra complexity that motivated switching away from Fastify+Postgres+Coolify in D100. EU-hosted takes 10 minutes to set up. Self-hosted adds 2-4h of infra work that directly competes with feature development.
+
+**Key arguments:**
+1. **Sprint 0 velocity:** EU-hosted = 10 minute setup. Self-hosted = 2-4h of infra work competing with features
+2. **Ops overhead:** Self-hosted Supabase reintroduces the same Docker/backup/monitoring burden as Coolify — the thing D100 correctly eliminated
+3. **GDPR compliance:** EU hosting satisfies GDPR. "French data sovereignty" is a feeling, not a legal requirement for this persona
+4. **Cost:** $25/month is ~2% of revenue at 50 customers. Not meaningful against ops overhead
+5. **Latency:** 20-40ms delta vs 5-15ms for OVH — imperceptible on real-world mobile networks (50-150ms)
+
+**Assumption challenged:** *"French artisans require French-hosted infrastructure."* — Untested. EU-hosted (Frankfurt) satisfies the actual compliance concern. "Data sovereignty" as a blocking objection is unvalidated for this persona.
+
+### Verdict on D4/D100 Follow-Up:
+
+**D4/D100 RESOLVED (Final):** EU-hosted Supabase (Frankfurt) confirmed for v1 Sprint 0. Self-hosted on OVH not recommended. Revisit at 50 paying customers or €5k/month revenue.
+
+**Action item:** Louis to sign up at supabase.com, EU region, Day 1. Do NOT set up self-hosted on OVH.
+
+---
+
+## Debate 103: D92 — Android-First: REFLECTED (Direction Stands, Validation Mechanism Changed)
+
+**Specialist:** Growth Strategist
+**Pulse file:** pulse-2040-growth.md
+
+### Growth Strategist — "Week 1 Poll Validates" Is the Wrong Instrument
+
+**Core argument:** U15 elimination (founding member offer) removed the early-access cohort that was supposed to make the Week 1 poll meaningful. Without that cohort, the poll can't serve its intended purpose. D92's direction (Android-first) is correct, but the validation mechanism needs replacement.
+
+**Key arguments:**
+1. **Validation mechanism broken:** U15 created an invested early cohort. Without it, "Week 1 poll" samples team network, not real users
+2. **"Poll validates" was always ambiguous:** Platform preference is already known from demographics (70%+ Android in French BTP). The strategic question is distribution leverage, not device split
+3. **Support Prioritaire doesn't solve install friction:** It's a retention benefit, not an acquisition trigger. The free tier creates a longer, less committed conversion funnel
+4. **Platform question is downstream from GTM channel:** If primary acquisition is expert-comptable referrals, platform priority should follow where referrers are — not just end-user device split
+
+**Assumption challenged:** *"Week 1 poll validates Android-first."* — The poll was measuring platform preference (already known) rather than platform priority (should follow go-to-market channel analysis). Replace with install completion rate as Sprint 0 validation metric (target: ≥50% of signups complete install within 48h).
+
+### Verdict on D92:
+
+**D92 REFLECTED — Direction stands, validation mechanism replaced:**
+- Android-first by demographic default (French BTP = 70%+ Android) — CONFIRMED
+- "Week 1 poll validates" — REMOVED (wrong instrument)
+- **Install completion rate** replaces poll as Sprint 0 validation metric (target: ≥50% of signups complete install within 48h)
+- "First paid facture" becomes soft milestone prompt (celebration + upgrade offer), not a hard conversion gate
+- D24 (PWA vs React Native) resolution is the gate for Sprint 0 specificity on Android-first
+
+---
+
+## Debate 104: D96/D68/D99 — Billing Trigger Conflict: RESOLVED
+
+**Specialist:** Product Strategist
+**Pulse file:** pulse-2040-strategist.md
+
+### Product Strategist — Option B: Limit-Hit Conversion, Usage-Based Billing From Day 1
+
+**Core argument:** D96's "first paid facture" conversion trigger was designed for flat-rate SaaS. Under usage-based billing, conflating conversion moment with client-payment event creates weeks of free usage before first billing — negating the model's core promise. Resolution: convert at free tier limit hit, activate usage-based billing immediately.
+
+**Key arguments:**
+1. **The conflict:** Under usage-based (€1.50/devis), artisan sends 4 devis over 32 days before first paid facture. First billing event = €6 retroactive charge. Awkward and confusing.
+2. **D96's insight preserved:** "First paid facture" = "this is real business" moment — retain as soft milestone prompt with upgrade offer, not a hard gate
+3. **Limit-hit conversion is clean:** 5 active devis OR 10 clients = hard upgrade gate. No ambiguity. artisan hits limit → sees pricing → pays.
+4. **Billing activates immediately:** €1.50/devis from first paying action. No gap. No retroactive charges.
+5. **Option A (retroactive proration) rejected:** Creates billing edge cases that are confusing for non-technical artisans
+
+**Pricing architecture after resolution:**
+- Free: 10 clients, 5 active devis. €0.
+- Pay-per-use: €1.50/devis beyond 5. Capped at €29.
+- Unlimited: €29/month. Devis unlimited.
+
+**Example: artisan sends 25 devis/month:**
+- Free: 5 devis
+- Paid: 20 × €1.50 = €30, capped at €29
+
+**Example: artisan sends 3 devis/month:**
+- Free: 3 devis (under limit)
+- Paid: €0
+
+### Verdict on D96/D68/D99:
+
+**D96 UPDATED:** Conversion trigger = first free tier limit hit (5 active devis OR 10 clients). First paid facture = soft milestone prompt (celebration + upgrade offer).
+
+**D99 RESOLVED (Implementation-Ready):** Usage-based billing (€1.50/devis, cap €29) at launch. Activates at conversion (limit-hit). Billing trigger and conversion trigger now aligned.
+
+**D68 RESOLVED:** Usage-based (€1.50/devis, cap €29) + flat-rate alternative (€29 unlimited) offered at conversion moment.
+
+**Action items:**
+- Billing UI at limit-hit: two options (A) Pay €1.50/devis, or (B) €29 unlimited. Default to A with note "most start with per-devis, can switch anytime."
+- First paid facture milestone: trigger upgrade notification when first paid facture fires (for Free or paying users) — not a hard gate, a celebration moment.
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D4 | Backend architecture | EU-hosted Supabase (Frankfurt). Self-hosted on OVH NOT recommended for v1. | 2026-03-30 |
+| D68 | Pricing model | **RESOLVED** — Usage-based (€1.50/devis, cap €29) + €29 flat-rate alternative at conversion. Seasonal cash flow benefit confirmed. | 2026-03-30 |
+| D92 | Platform default | **REFLECTED** — Android-first direction confirmed. "Week 1 poll validates" REMOVED. Install completion rate (≥50% in 48h) replaces poll as Sprint 0 metric. D24 resolution gates Sprint 0 specificity. | 2026-03-30 |
+| D95 | Sprint 0 timeline | 5 days. Pre-condition: mentions légales templates pre-written. | 2026-03-30 |
+| D96 | Conversion trigger | **UPDATED** — Limit-hit (5 active devis OR 10 clients) as hard gate. First paid facture = soft milestone prompt (celebration + upgrade offer), not hard gate. | 2026-03-30 |
+| D99 | Usage-based pricing | **RESOLVED (Implementation-Ready)** — €1.50/devis, cap €29. Activates at conversion (limit-hit). Billing trigger aligned with conversion trigger. | 2026-03-30 |
+| U15 | Founding member offer | ELIMINATED — No founding tier, no lifetime deal. "Support Prioritaire" (relationship benefits) replaces discount framing. | 2026-03-30 |
+| U16 | Mentions légales prep | Louis writes 4 templates this week (2h) — gate for 5-day Sprint 0. | 2026-03-30 |
+
+---
+
+*Last updated: 2026-03-30T20:45*

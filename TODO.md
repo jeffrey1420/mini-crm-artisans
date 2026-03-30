@@ -9,7 +9,7 @@
 | D1 | Positioning | Kill "CRM" — sell "devis, factures, relances" | External review | 2026-03-30 |
 | D2 | Sprint 1 timeline | RESOLVED — Sprint 1a (Days 1-5: client file + devis flow) + Sprint 1b (Days 6-10: PDF + mentions légales + sharing + polish). Parallelization of backend and mobile on PDF endpoint recovers 3-5 days. Sequential numbering is 1 day, not 2. Viable 2-week sprint. | Debate 68 (Technical Architect) | 2026-03-30 |
 | D3 | Primary persona | Marc — solo smartphone-native artisan | External review | 2026-03-30 |
-| D4 | Stack | **Supabase** (self-hosted on OVH or EU-hosted). Fastify + Postgres + Coolify retired for v1. All prior Postgres schema work transfers directly to Supabase. | Debate 100 (Technical Architect) | 2026-03-30 |
+| D4 | Stack | **Supabase EU-hosted (Frankfurt)** — self-hosted on OVH NOT recommended for v1. Fastify + Postgres + Coolify retired for v1. EU-hosted = fastest path, zero ops overhead, full GDPR compliance. Prior Postgres schema work transfers directly to Supabase. | Debate 100 (Technical Architect) + pulse-2040-architect | 2026-03-30 |
 | D5 | Pricing | Free + €29 two-tier. No €19 SKU. Drop €49/€79. Value anchor: "2h/week = 1h labor = €29/month." | Debate 33 (Product Strategist) | 2026-03-30 |
 | D6 | Trial | No time-limited trial. Free tier IS the trial (10 clients, 5 active devis). Conversion happens at Free limit. Engagement: restated by D43 — channel secondary, Free tier design determines activation. 80% limit heads-up notification. No countdown emails. | Debates 38/43 (Product Strategist) | 2026-03-30 |
 | D7 | Architecture | Nuxt 3 + OVH managed Postgres — REFINED: API-first preferred but deferred to post-MVP unless blocking Sprint 0 | Growth+Architect | 2026-03-30 |
@@ -33,7 +33,7 @@
 | D54 | Sprint 0 TVA | RESOLVED — arrondi commercial is the standard (not arithmétique vs bancaire binary). `Math.round(v * 100) / 100` is the Sprint 0 default. Audit risk is €30-80/year, not €600. No BOFiP lookup required. Sprint 0 TVA calculator implement with arrondi commercial. | Debate 69 (Technical Architect) | 2026-03-30 |
 | D55 | Buyer-user split | Dual-persona GTM. Marc = economic buyer (primary). Admin handler = operational user (secondary). Expert-comptable = Phase 2. | Debate 55 (Growth Strategist) | 2026-03-30 |
 | D56 | WoM attribution | WoM = Month 3+ lagging indicator. Digital acquisition PRIMARY at launch. "Comment connaissez-vous?" at signup. Referral codes in v1. Month 3 target: 20% peer referral. | Pulse 14:57 (Product+Growth) | 2026-03-30 |
-| D57 | Architecture | SUPERSEDED by D100 — Supabase (self-hosted or EU-hosted). Fastify retired for v1. Static landing page + Supabase backend. | Debate 100 (Technical Architect) | 2026-03-30 |
+| D57 | Architecture | SUPERSEDED by D100 — Supabase EU-hosted (Frankfurt). Fastify retired for v1. Static landing page + Supabase backend. | Debate 100 (Technical Architect) + pulse-2040-architect | 2026-03-30 |
 | D59 | Pricing credibility | **SUPERSEDED by U15 (Debate 101):** Founding member offer ELIMINATED. No lifetime deal. No founding/access tier. Replace with "Support Prioritaire" (relationship benefits: direct WhatsApp to Louis, roadmap vote, named credits). Single €29/month price, no founding/standard tiers. | Debate 101 (Growth Strategist) | 2026-03-30 |
 | D63 | Free tier pull | UPDATED — Situation financière = server-computed push notification at 8pm Paris, NOT in-app dashboard. Free tier gets daily notification. €29 tier gets full snapshot + in-app drill-down. | Debate 83 (Product Strategist) | 2026-03-30 |
 | D64 | Sprint 0 timeline | UPDATED — Sprint 0 = 5-7 days (D86 reversed offline-first, recovering 3-5 days). Full scope: offline-capable + mentions légales + WhatsApp PDF + real device testing. | Debate 84/86 (Technical Architect) | 2026-03-30 |
@@ -49,10 +49,10 @@
 | D90 | Sprint 0 timeline estimate | RESOLVED — 5.5-6.5 days with parallel backend + mobile tracks. API contract defined Day 1. | Debate 90 (Technical Architect) | 2026-03-30 |
 | D91 | Expert-comptable validation vs referral | RESOLVED — U12 split: validation (Week 1, Louis's own, no prerequisites) ≠ referral (Week 4-6, with testimonials). | Debate 91 (Growth Strategist) | 2026-03-30 |
 | D95 | Sprint 0 timeline | RESOLVED — 5 days achievable IF: (1) mentions légales templates pre-written before sprint (2h, U16), (2) Supabase replaces Fastify+Postgres+Coolify (eliminates infra setup), (3) scope holds. Without pre-conditions: accept 6.5-7 days. | Debates 95/97/100 (Technical Architect) | 2026-03-30 |
-| D96 | Conversion trigger | First paid facture (hard gate) + 3-sent-devis soft prompt for non-converters. | Debate 96 (Product Strategist) | 2026-03-30 |
+| D96 | Conversion trigger | **UPDATED:** Limit-hit (5 active devis OR 10 clients) as hard gate. First paid facture = soft milestone prompt (celebration + upgrade offer), not hard gate. 3-devis soft prompt remains. | Debates 96/104 (Product Strategist) | 2026-03-30 |
 | D97 | Sprint 0 prep | Louis writes 4 mentions légales templates this week (2h) — gate for 5-day Sprint 0. | Debate 97 (Technical Architect) | 2026-03-30 |
-| D98 | Platform default | Android-first. Week 1 geo-targeted poll validates. If Android ≥65%, iOS stays polish phase. | Debate 98 (Growth Strategist) | 2026-03-30 |
-| D99 | Usage-based pricing | DIRECTIONALLY RESOLVED — €1.50/devis sent, capped at €29/month superior for artisan cash flow. Open risk: D96 conversion trigger ("first paid facture") conflicts with usage-based billing trigger. Louis to evaluate implementation complexity. If complex: flat-rate €29 at launch, usage-based v1.1. | Debate 99 (Product Strategist) | 2026-03-30 |
+| D98 | Platform default | **REFLECTED — Direction confirmed, validation mechanism updated.** Android-first remains correct for French artisan demographic. "Week 1 poll validates" REMOVED (wrong instrument after U15 elimination). Replaced with install completion rate (≥50% in 48h) as Sprint 0 metric. D24 resolution gates Sprint 0 specificity. | Debates 98/103 (Growth Strategist) | 2026-03-30 |
+| D99 | Usage-based pricing | **RESOLVED (Implementation-Ready)** — €1.50/devis sent, capped at €29/month. Activates at conversion (limit-hit). Billing trigger aligned with conversion trigger. Flat-rate alternative (€29 unlimited) offered at conversion moment. | Debates 99/104 (Product Strategist) | 2026-03-30 |
 | U15 | Founding member offer | ELIMINATED — no lifetime deal, no founding/access tier, no "50 places" scarcity. Single €29/month. Replaced by "Support Prioritaire" (direct WhatsApp to Louis, roadmap vote, named credits). | Debate 101 (Growth Strategist) | 2026-03-30 |
 
 ## 🔄 Reopened This Pulse (Resolved in 15:17 Pulse)
@@ -227,7 +227,7 @@ All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 
 ### Sprint 0 Build (D54 + D71 + D74 + D81 + D84 + D100 — 5 Days, Supabase Backend)
 
-**D100 (Debate 100) RESOLVED:** Sprint 0 backend = Supabase (self-hosted on OVH or EU-hosted). Fastify + Postgres + Coolify retired. Prior Postgres schema work transfers directly to Supabase. Eliminates 2-4h of Coolify setup + 15-20h of Fastify scaffold. React Native connects via Supabase JS client.
+**D100 (Debate 100) RESOLVED:** Sprint 0 backend = Supabase EU-hosted (Frankfurt). Fastify + Postgres + Coolify retired. Prior Postgres schema work transfers directly to Supabase. Eliminates 2-4h of Coolify setup + 15-20h of Fastify scaffold. React Native connects via Supabase JS client. **Self-hosted on OVH NOT recommended for v1** — adds ops complexity without compensating user benefit.
 
 **D84 UPDATED:** Sprint 0 = 5.5-6.5 days (D90, per Technical Architect). D86 reversed D81 offline-first requirement. Offline-capable (optimistic UI + retry queues + AsyncStorage) + mentions légales + WhatsApp PDF + real device testing = 5.5-6.5 days IF pre-conditions met.
 
@@ -236,7 +236,9 @@ All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 - [ ] **D95 SCOPE CUTS:** Three cuts make 5.5-6.5 days achievable without pre-conditions: (1) defer mentions légales to Sprint 1 (plain text placeholder), (2) defer AsyncStorage to Sprint 1 (online-only), (3) single client type in Sprint 0. Without cuts: accept 7-day timeline.
 - [x] **D95 RESOLVED:** Sprint 0 = 5 days IF Louis writes 4 mentions légales templates before sprint (2h pre-sprint). Pre-condition is the gate — if not done, accept 6.5 days.
 - [ ] **D96 NEW:** Conversion trigger = first paid facture (hard gate). Secondary soft trigger: 3 sent devis with zero paid factures → gentle upsell prompt. NOT "first sent devis" as primary trigger.
-- [ ] **D100 NEW:** Supabase setup (Day 1): create project, configure auth (email/password), set up Postgres schema (transfers from prior debates). Self-hosted on OVH or EU-hosted (Louis to decide). No Coolify dependency.
+- [ ] **D100 CONFIRMED:** Supabase EU-hosted (Frankfurt) — sign up at supabase.com, select EU region. 10-minute setup. Self-hosted on OVH NOT recommended for v1 (reintroduces infra complexity, marginal cost saving, no user-facing benefit). Revisit at €5k/month revenue.
+- [ ] **D100 POST-LAUNCH:** At 50 paying customers: evaluate self-hosted Supabase migration. Track: Supabase bill, OVH VPS load, ops time spent. If Supabase bill >€100/month AND OVH VPS has headroom → migrate.
+- [ ] **D100 DATA PORTABILITY:** Ensure PDF export works well before any infrastructure migration conversation. French artisan data trust = "can I get my data out" not "where does it live."
 - [ ] **D81 NEW:** Sprint 0 = offline-capable (optimistic UI + retry queues). WatermelonDB/expo-sqlite deferred to v1.2. Supabase handles auth, storage, realtime.
 - [ ] **D74 RESOLVED:** Sprint 0 scope: client.type enum (4 values) + mentions légales template engine (Handlebars/Nunjucks, 4 client-type templates, devis-only). Sprint 2 adds 8 combinations.
 - [ ] **D74 RESOLVED:** Auth: Supabase auth (email/password). API key replaces JWT per D78.
@@ -743,7 +745,7 @@ The following were overengineered or wrong:
 ## New from Pulse 2026-03-30T20:08 — Three Specialist Debates
 
 ### Reopened (D4, D68, U15):
-- **D4 (Backend architecture):** REOPENED — Technical Architect argues Fastify + Postgres + Coolify is wrong v1 architecture for 5-day sprint. Supabase (self-hosted or EU-hosted) ships faster, EU sovereignty is solvable, e-invoicing compliance is not a v1 concern.
+- **D4 (Backend architecture):** RESOLVED — Supabase EU-hosted (Frankfurt) wins. Fastify + Postgres + Coolify retired. Self-hosted on OVH NOT recommended for v1 (adds ops overhead without user benefit). See pulse-2040-architect.
 - **D68 (Pricing model):** REOPENED — Product Strategist argues flat €29/month creates seasonal churn friction. Usage-based (€1.50 per devis, capped at €29) aligns payment with artisan cash flow reality and eliminates January payment friction.
 - **U15 (Founding member offer):** REOPENED — Growth Strategist argues founding member pricing undermines credibility with risk-averse French artisans. "Membre fondateur" signals beta/unproven. €90 lifetime deal undercuts €29/month. Pure free trial is the correct launch mechanism.
 
@@ -754,3 +756,25 @@ The following were overengineered or wrong:
 - [ ] **D99/D100/D101:** Louis reviews these three reopened debates and makes resolution decisions before Sprint 0 begins. These affect core pricing, architecture, and launch strategy — all must be resolved before Sprint 0 spec is finalized.
 
 *Last updated: 2026-03-30T20:08*
+
+---
+
+## New from Pulse 2026-03-30T20:40 — Three Resolutions (D92/D96/D99/D100 Resolved)
+
+### Resolved (D92 REFLECTED, D96 UPDATED, D99 RESOLVED, D100 RESOLVED):
+- **D100 (Supabase hosting):** RESOLVED — EU-hosted Supabase (Frankfurt) confirmed for v1 Sprint 0. Self-hosted on OVH NOT recommended (adds ops overhead without compensating benefit). Sign up at supabase.com, EU region, Day 1.
+- **D92 (Platform default):** REFLECTED — Android-first direction confirmed. "Week 1 poll validates" REMOVED (wrong instrument, no early cohort without founding member offer). Replaced with install completion rate (≥50% in 48h) as Sprint 0 validation metric. D24 resolution gates Sprint 0 specificity.
+- **D96 (Conversion trigger):** UPDATED — Limit-hit (5 active devis OR 10 clients) as hard gate. First paid facture = soft milestone prompt (celebration + upgrade offer), not hard gate. Billing trigger now aligned with conversion trigger.
+- **D99 (Usage-based pricing):** RESOLVED (Implementation-Ready) — €1.50/devis, cap €29 at launch. Activates at conversion (limit-hit). Billing trigger and conversion trigger now aligned. Flat-rate alternative (€29 unlimited) offered at conversion moment.
+- **D68 (Pricing model):** RESOLVED — Usage-based (€1.50/devis, cap €29) + flat-rate alternative (€29 unlimited). Seasonal cash flow benefit confirmed. Both options presented at conversion.
+
+### New Action Items from this pulse:
+- [x] **D100 RESOLVED:** EU-hosted Supabase (Frankfurt) — sign up at supabase.com, EU region. Self-hosted on OVH NOT recommended. Revisit at €5k/month revenue.
+- [x] **D92 REFLECTED:** Install completion rate replaces Week 1 poll. Target: ≥50% of signups complete install within 48h.
+- [x] **D96 UPDATED:** Limit-hit conversion (5 devis/10 clients). First paid facture = milestone prompt.
+- [x] **D99 RESOLVED:** Usage-based billing (€1.50/devis, cap €29) at launch. Billing UI: two options at limit-hit: (A) pay-per-devis or (B) €29 unlimited. Default to A with note "most start with per-deavis, can switch anytime."
+- [ ] **D92/D24 dependency:** D24 (PWA vs React Native) resolution gates Sprint 0 specificity on Android-first. If React Native → distribution sequencing (Play Store → App Store). If PWA → design priority + Android browser optimization.
+- [ ] **Play Store review timeline:** Android B2B finance apps face Play Store moderation (3-5 days). Do NOT assume faster than App Store. Factor into iOS parity timeline.
+- [ ] **Expert-comptable device audit (Week 1):** If primary acquisition channel is expert-comptable referrals, platform priority should follow referrer device split — not just end-user device. Quick WhatsApp poll to 5-10 contacts.
+
+*Last updated: 2026-03-30T20:45*
