@@ -1147,3 +1147,134 @@ U10 resolution is REFINED — wholesaler presence is NOT the primary GTM move.
 ---
 
 *Last updated: 2026-03-30T12:58*
+
+---
+
+## Pulse 2026-03-30T13:15 — Three New Challenges
+
+---
+
+## Debate 49: GTM Priority — Prescriber Networks Should Lead, Not Digital Channels
+
+**Challenge:** D48 (GTM priority) — Product Strategist challenges the "digital channels first" conclusion, arguing it confuses where Marc communicates with where he discovers professional tools.
+
+### Product Strategist — Prescriber Networks Must Lead GTM
+
+**Assumption challenged from D48:** "Digital channels (WhatsApp groups, Facebook artisan communities, SEO) = where Marc discovers tools." This conflates communication habitat with tool discovery pathway.
+
+**Core argument:**
+
+Marc lives on WhatsApp. That tells us where he *chats* — not where he *discovers professional software*. French artisans adopt new business tools through trusted intermediaries: architects who specify software requirements, property managers who vet contractors, building managers who send out RFPs. When a property manager tells Marc "use software for your devis on this renovation" — that's not marketing. It's a job requirement. The prescriber creates *pull-through demand*.
+
+**The economics are lopsided:**
+- One property manager managing 50 artisans = 50 high-intent acquisitions in a single relationship
+- One Facebook group post to 500 members = maybe 3 clicks, 0 adoptions
+- A prescriber recommendation hits at the moment of a new project — the highest possible intent moment in the artisan sales cycle
+
+**Digital channels are capture, not acquisition:**
+SEO and Facebook groups are excellent for nurturing existing leads, reinforcing brand recall, and supporting customers. They are poor for initial acquisition of professional tools where trust is paramount.
+
+**The audit gap:** D48 concluded "digital first" without asking: *"How did French artisans in this age bracket discover their last business tool?"* That answer is predictably: colleague, client, prescriber — not Facebook ad.
+
+**VERDICT on D48 / U10:** REOPENED — Product Strategist argues GTM priority should be REVERSED: prescriber networks FIRST, specialist retailers SECOND, digital channels THIRD, wholesaler presence LAST. The "digital first" conclusion was made on behavioral observation rather than discovery research.
+
+---
+
+## Debate 50: Email-Only Relances at Launch Is a Competitive Liability
+
+**Challenge:** D47/D41 — Technical Architect challenges the "email-only as acceptable bridge at launch" conclusion, arguing the 50-user complaint threshold is dangerously reactive.
+
+### Technical Architect — Email-Only Kills Early Momentum Before It Starts
+
+**Assumption challenged from D41/D47:** Email-only relances at launch is an *acceptable* bridge, with push deferred to v2 unless 50+ paying users complain. The rationale: "email worked for decades" and Expo Push complexity.
+
+**Core argument:**
+
+The 50-user threshold is reactive damage control, not proactive product management. By the time 50 paying customers complain, the narrative is already set — they've already written GetApp or Capterra reviews. They already posted on forums. "No push notifications" becomes a red X on comparison sites before we ever get a chance to prove our value.
+
+**The feature comparison problem:**
+Obat advertises "notifications et rappels en temps réel" as a core differentiator. When our exact ICP compares tools on a comparison site and sees "No push notifications" listed against our name, that's not a feature gap. That's a **disqualification flag**. Trial users don't need to try us to rule us out.
+
+**Expo Push is not exotic engineering:**
+It's a standard React Native capability, 1-2 weeks of engineering already budgeted in D47. Deferring it signals either technical incapacity or that push relances aren't actually a priority — even though D41/D47 implicitly accepted they are the preferred path.
+
+**"Email worked for decades" is the argument against progress:**
+The same logic was used to dismiss mobile apps, SaaS, and every user expectation shift. Comfort is not a competitive advantage.
+
+**VERDICT on D41/D47:** REOPENED — Technical Architect argues Expo Push must ship at launch, not defer to v2. The 1-2 weeks is already budgeted. The real cost is feature comparison disqualification that happens before signup — not after.
+
+---
+
+## Debate 51: Free Tier Converts via Habit Formation, Not Limit-Hit
+
+**Challenge:** D43/D46/D6 — Growth Strategist challenges the limit-hit + contextual prompt conversion model, arguing it assumes motivation that solo artisans don't have.
+
+### Growth Strategist — The Conversion Model Is Wrong
+
+**Assumption challenged from D43/D46/D6:** Conversion happens when artisan (a) hits the 10-client/5-devis limit, or (b) sees a contextual upgrade prompt at a "meaningful moment." Both models assume the artisan perceives his situation as *growing* — and wants more capacity.
+
+**Core argument:**
+
+Marc doesn't feel growth pressure. Marc is in equilibrium. He has 6-7 steady clients. He makes enough. He's not building an empire — he's running a living. When his 6th devis prompt appears ("vous avez un gros client — créer un 6e devis?"), he thinks: *"Non, j'ai pas besoin d'un 6e client, j'ai déjà assez de travail."*
+
+Both models — limit-hit AND contextual prompt — optimize for a conversion trigger that requires the artisan to feel capacity anxiety or growth aspiration. Solo artisans in equilibrium don't feel either.
+
+**The correct model: Free tier → Habit → Dependency → Subscription**
+
+Solo artisans upgrade not because they hit a wall, but because they've become dependent on the tool. Dependency requires repetition — daily or near-daily engagement. Habit creates switching costs that make cancellation feel costly. Limit-hit creates friction that leads to churn instead.
+
+**The 2-minute devis flow is everything:**
+Not the client count limit. Not the upgrade prompt. The *ritual*. Every evening Marc opens the app, spends 2 minutes, and his admin is done. After 3 months, that app is load-bearing in his routine. He can't imagine going back to post-it notes. That's when upgrade happens — not when he hits 10 clients.
+
+**Implication for Free tier design:**
+- Optimize for DAILY USAGE HABIT, not limit proximity
+- Raise client/devis thresholds to remove friction from the habit loop
+- Contextual prompts should reinforce the ritual ("c'est l'heure de votre devis du soir"), not sell upgrades
+- The conversion moment isn't hitting a limit. It's when Marc can't imagine his day without the app.
+
+**VERDICT on D43/D46/D6:** REOPENED — Growth Strategist argues the Free tier's primary design objective should be habit formation, not limit management. Reallocate UX focus: frictionless 2-minute evening devis flow, retention mechanics that reinforce daily ritual, raised thresholds that remove friction from the habit loop.
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D1 | Positioning | Kill "CRM" — devis, factures, relances | 2026-03-30 |
+| D2 | MVP scope | 4 features, SEQUENCED sprints. Sprint 0 = minimum devis flow (3-5d, flow-first). Sprint 1 = client+devis. Sprint 2 = facture+relances. | 2026-03-30 |
+| D3 | Primary persona | Marc — solo smartphone-native artisan | 2026-03-30 |
+| D4 | Stack | Single managed Postgres | 2026-03-30 |
+| D5 | Pricing | Free + €29 two-tier. No €19 SKU. Drop €49/€79. Value anchor: "2h/week = 1h labor = €29/month." | 2026-03-30 |
+| D6 | Trial | No time-limited trial. Free tier IS the trial. Engagement: REFINED — REOPENED Debate 51 (habit formation). | 2026-03-30 |
+| D7 | Architecture | Nuxt 3 + OVH managed Postgres | 2026-03-30 |
+| D8 | E-invoicing | v2 feature | 2026-03-30 |
+| D9 | Not MVP | No Kanban, no multi-user, no offline, no API keys | 2026-03-30 |
+| D10 | Buyer trigger | "Admin pain" not "CRM need" | 2026-03-30 |
+| D11 | Mobile | React Native from Day 1 via Expo | 2026-03-30 |
+| D12 | Landing page | Simplicity-first — "Vos devis et factures, sans vous prendre la tête" | 2026-03-30 |
+| D13 | Home view | Job-first — Active Job Card as home anchor | 2026-03-30 |
+| D14 | E-invoicing timing | v2 — NOT Day 1 | 2026-03-30 |
+| D15 | Relances differentiator | DE-EMPHASIZED — secondary feature below fold | 2026-03-30 |
+| D16 | Trial length | No countdown trial — Free tier IS the trial | 2026-03-30 |
+| D17 | Mobile strategy | React Native from Day 1 via Expo. Email-only relances at launch. — REOPENED Debate 50. | 2026-03-30 |
+| D41 | Notification infra | REFINED — Expo Push = 1-2 weeks. If deadline can't accommodate, defer to v1.1. — REOPENED Debate 50. | 2026-03-30 |
+| D43 | Free tier activation | REFINED — REOPENED Debate 51 (habit formation > limit-hit). | 2026-03-30 |
+| D46 | Free tier limits | RESOLVED — do NOT lower limits from 10/5. Trust-building before limit enforcement. | 2026-03-30 |
+| D47 | Expo Push estimate | RESOLVED — 1-2 weeks, not "few hours." Budget properly or defer. | 2026-03-30 |
+| D48 | Wholesaler GTM | REFINED — not primary GTM. Digital + specialist retailers first. — REOPENED Debate 49. | 2026-03-30 |
+| D49 | GTM Priority | REOPENED — prescriber networks may need to lead GTM, not digital channels (Debate 49) | 2026-03-30 |
+| D50 | Push at launch | REOPENED — email-only relances may be competitive liability (Debate 50) | 2026-03-30 |
+| D51 | Free tier conversion | REOPENED — habit formation > limit-hit model (Debate 51) | 2026-03-30 |
+
+| U1 | Discovery | REPLACED — readiness protocol | 2026-03-30 |
+| U2 | E-invoicing platform | Factea first when v2 | 2026-03-30 |
+| U7 | Domain | DEFERRED — subdomain/Carrd until MVP validated | 2026-03-30 |
+| U8 | WhatsApp acquisition | CLOSED — no WhatsApp CTA in devis | 2026-03-30 |
+| U9 | Free tier activation | REFINED — see D43/D46/D51 | 2026-03-30 |
+| U10 | GTM: Wholesaler | REFINED — REOPENED by D49. Prescriber networks audit added as new priority. | 2026-03-30 |
+| U11 | Prescriber GTM | NEW — audit prescriber networks (architects, property managers, building managers) as primary GTM channel. What % of Marc's new jobs come via prescriber recommendation? | 2026-03-30 |
+
+---
+
+*Last updated: 2026-03-30T13:15*
+
