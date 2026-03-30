@@ -730,3 +730,18 @@ The following were overengineered or wrong:
 - [x] **D96 RESOLVED:** Conversion trigger = first paid facture. Update conversion design spec.
 
 *Last updated: 2026-03-30T19:55*
+
+## New from Pulse 2026-03-30T20:08 — Three Specialist Debates
+
+### Reopened (D4, D68, U15):
+- **D4 (Backend architecture):** REOPENED — Technical Architect argues Fastify + Postgres + Coolify is wrong v1 architecture for 5-day sprint. Supabase (self-hosted or EU-hosted) ships faster, EU sovereignty is solvable, e-invoicing compliance is not a v1 concern.
+- **D68 (Pricing model):** REOPENED — Product Strategist argues flat €29/month creates seasonal churn friction. Usage-based (€1.50 per devis, capped at €29) aligns payment with artisan cash flow reality and eliminates January payment friction.
+- **U15 (Founding member offer):** REOPENED — Growth Strategist argues founding member pricing undermines credibility with risk-averse French artisans. "Membre fondateur" signals beta/unproven. €90 lifetime deal undercuts €29/month. Pure free trial is the correct launch mechanism.
+
+### New Action Items from this pulse:
+- [ ] **D99 NEW (D68 reopened):** Pricing model debate — evaluate usage-based model: €1.50 per devis sent, capped at €29/month. Does this better align with French artisan seasonal cash flows than flat €29/month? Does it affect the conversion trigger (first paid facture)?
+- [ ] **D100 NEW (D4 reopened):** Architecture debate — evaluate Supabase self-hosted or EU-hosted for v1. Does the 5-day sprint constraint justify BaaS over custom Fastify? What is the real e-invoicing compliance timeline for Mini-CRM's scope?
+- [ ] **D101 NEW (U15 reopened):** Founding member offer — kill founding member tier? Evaluate: does "membre fondateur" framing help or hurt credibility with 45-55 year old French artisans? Is pure free trial + €29/month the cleaner launch model?
+- [ ] **D99/D100/D101:** Louis reviews these three reopened debates and makes resolution decisions before Sprint 0 begins. These affect core pricing, architecture, and launch strategy — all must be resolved before Sprint 0 spec is finalized.
+
+*Last updated: 2026-03-30T20:08*

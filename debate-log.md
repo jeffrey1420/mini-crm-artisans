@@ -4835,3 +4835,96 @@ Any scope creep invalidates the estimate at any duration.
 ---
 
 *Last updated: 2026-03-30T19:55*
+
+---
+
+## Pulse 2026-03-30T20:08 — Three Specialist Debates
+
+---
+
+## Debate 99: D68 — Flat-Rate Pricing Creates Seasonal Friction for French Artisans
+
+**Challenge:** D68 (pricing model) — Product Strategist argues flat €29/month is structurally misaligned with seasonal, lumpy cash flows of French BTP artisans.
+
+### Product Strategist — Usage-Based Pricing Aligns With Artisan Reality
+
+**Assumption challenged from D68/D70/D71:** That flat-rate €29/month is simpler and less churn-prone than usage-based. The strategist argues flat-rate optimizes for SaaS-team simplicity, not artisan cash flow reality.
+
+**Core argument:**
+
+French BTP seasonality is documented and severe. January-February activity drops 20-30% vs. summer peak. A solo electrician may earn €0-800 in January vs. €4,000-6,000 in April. Paying €29 when income is near zero creates psychological friction that usage-based eliminates entirely.
+
+The "simpler" argument conflates product-team simplicity with customer simplicity. For Marc, "pay per devis sent, capped at €29" is MORE intuitive than "pay monthly regardless" — it maps to how he thinks about every other service (plumber by the hour, materials by the unit).
+
+January is the worst moment to ask for €29 — post-holidays, slow activity, tax pressures. Usage-based avoids this entirely.
+
+**The capped hybrid model proposed:**
+- Free tier: up to 5 clients, basic tracking
+- Pro tier: €1.50 per devis sent, capped at €29/month
+- First paid facture is the conversion trigger (hard gate — unchanged from D96)
+
+**Verdict on D68:** REOPENED — Product Strategist argues flat-rate creates seasonal churn friction. Usage-based (capped at €29) eliminates seasonal friction, aligns payment with value, and preserves the revenue ceiling. D68 not yet resolved.
+
+---
+
+## Debate 100: D4 — Fastify + Postgres Is Wrong Architecture for 5-Day v1 Sprint
+
+**Challenge:** D4 (technical architecture) — Technical Architect argues Fastify + Postgres + Coolify introduces infra complexity that consumes 20-40% of Sprint 0 before a single feature ships.
+
+### Technical Architect — Supabase BaaS Ships Faster, Complexity Is the Real Risk
+
+**Assumption challenged from D4:** That custom Fastify backend is the right choice for v1 because it gives "full control." The architect argues "full control" is a liability for a solo dev on a 5-day sprint.
+
+**Core argument:**
+
+Coolify setup alone is 2-4 hours for experienced devs, potentially half a day for first-time setup. That's 10-20% of Sprint 0 burned before writing a feature. Fastify API skeleton (auth middleware, CRUD routes, error handling, migrations) adds another 15-20 hours of non-feature work.
+
+The e-invoicing compliance argument (D74) is overblown for v1 scope. E-invoicing mandate for small companies doesn't kick in until 2027. Mini-CRM v1 is a CRM, not an invoicing system. Building for a compliance requirement that doesn't apply to current scope is premature optimization.
+
+Supabase (EU-hosted or self-hosted) gives: auth, Postgres, realtime, storage — all out of the box. French data sovereignty is solvable with EU-hosted Supabase projects or self-hosted Supabase on the same VPS.
+
+"Full control" of Fastify + Postgres + Coolify means "full responsibility for everything that breaks at 2am." BaaS means a team behind your infrastructure.
+
+**Verdict on D4:** REOPENED — Technical Architect argues Fastify + Postgres + Coolify is the wrong v1 architecture for a 5-day sprint. Supabase (self-hosted or EU-hosted) ships faster, addresses sovereignty concerns, and e-invoicing compliance is not a v1 concern. D4 not yet resolved.
+
+---
+
+## Debate 101: U15 — Founding Member Offer Undermines Credibility With Target Persona
+
+**Challenge:** U15 (founding member offer + guerrilla price validation) — Growth Strategist argues "founding member" framing signals beta/unproven to risk-averse French artisans, and lifetime €90 deal undercuts the €29/month price point.
+
+### Growth Strategist — Kill Founding Member, Go Pure Free Trial
+
+**Assumption challenged from U15:** That founding member pricing creates urgency and commitment that free trials don't. The growth strategist argues the opposite — founding member pricing attracts the wrong early users and undermines credibility.
+
+**Core argument:**
+
+"Founding member" = beta signal for this persona. French artisans aged 45-55 are late-majority consumers who buy after consensus emerges. They trust peer validation, not founder appeals. "Membre fondateur" in France signals association/non-commercial intent — the opposite of a professional B2B tool.
+
+€90 lifetime deal undercuts €29/month: signals the team doesn't believe in retention, and desperate to lock users in at a low price. For a persona who haggles with suppliers, this is a red flag.
+
+The free tier IS the acquisition mechanism: "Here's a real product, try it free" is cleaner than "join our beta club." Let the product speak for itself.
+
+The real acquisition channel is prescription (expert-comptable, groupements d'artisans, word-of-mouth) — not founding member deals. Founding member energy should be redirected to finding 5-10 genuine referrers and 2-3 expert-comptable partners.
+
+Founding member users tend to be deal hunters with high churn risk — the opposite of the reference customers this product needs.
+
+**Verdict on U15:** REOPENED — Growth Strategist argues founding member offer is counterproductive for this persona and market. Pure free trial with no lifetime deal, combined with prescription channel investment, is the correct launch strategy. U15 not yet resolved.
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D4 | Backend architecture | REOPENED — Supabase BaaS argued for v1 (vs Fastify+Postgres) | 2026-03-30 |
+| D68 | Pricing model | REOPENED — usage-based (capped at €29) argued vs flat €29/mo | 2026-03-30 |
+| D92 | Platform default | Android-first. Week 1 poll validates. | 2026-03-30 |
+| D95 | Sprint 0 timeline | 5 days. Pre-condition: mentions légales templates pre-written. | 2026-03-30 |
+| D96 | Conversion trigger | First paid facture (hard gate) + 3-sent-devis soft prompt. | 2026-03-30 |
+| U15 | Founding member offer | REOPENED — founding member offer challenged, pure free trial argued | 2026-03-30 |
+| U16 | Mentions légales prep | Louis writes 4 templates this week (2h) — gate for 5-day Sprint 0. | 2026-03-30 |
+
+---
+
+*Last updated: 2026-03-30T20:08*
