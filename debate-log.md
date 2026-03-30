@@ -3094,3 +3094,148 @@ Three specific challenges to the current resolution:
 **The verdict this debate is asking for:** D43/D46/D51/D70 are all partially right but collectively create a conversion-dead Free tier. The question is not "how do we improve Free tier?" It is: "what is the specific mechanism by which a Marc at 4/5 devis decides to pay €29?" That mechanism is not defined. Until it is, every debate about Free tier quality is rearranging furniture on a ship without a destination.
 
 **Verdict on D43/D46/D51/D70:** REOPENED — The "Better Free Tier" trap is named. Product Strategist keeps winning individual debates by improving Free tier quality. The structural consequence (reduced conversion pressure) has never been named or challenged. A specific conversion mechanism must be defined before further Free tier design debates can resolve.
+
+---
+
+## Pulse 2026-03-30T16:57 — Sprint 0 Scope Challenge
+
+---
+
+## Debate 73: Sprint 0 — 5 Days Is Unrealistic (Technical Architect Challenge)
+
+**Challenge:** D71 resolved Sprint 0 = 5 days with specific deliverables. Technical Architect challenges the estimate on three specific, independently-sufficient grounds. Any one of these being wrong means the 5-day estimate is broken. All three being wrong simultaneously is probable.
+
+### Challenge 1 — JWT Auth Is Not "Add JWT to Scaffold"
+
+**The estimate says:** "Days 4-5: Fastify REST API scaffold + JWT auth + CRUD endpoints."
+
+**The problem:** This treats JWT auth as a line item to add, not a full security system to build.
+
+JWT auth for a React Native mobile app requires:
+- **Server-side:** `@fastify/jwt` with access token (15min-1h) + refresh token rotation (7-30d), token revocation/invalidation on logout, password hashing (bcrypt/argon2), rate limiting on auth endpoints, audit logging.
+- **React Native client-side:** Secure token storage — `AsyncStorage` is NOT secure (tokens trivially extracted from APK/storage), requires `react-native-keychain` or `expo-secure-store` with native module linking. Token refresh race condition: multiple simultaneous requests hitting an expired token → thundering herd on the refresh endpoint. Requires a request queue with mutex/flag. Logout must clear Keychain AND invalidate server-side refresh token.
+
+A JWT scaffold takes 2 hours. A production auth system takes 2-3 days. These are not the same thing.
+
+### Challenge 2 — 4 Mentions Légales Templates Is Mathematically Wrong
+
+**The estimate says:** "client.type enum + 4 mentions légales template files."
+
+**The problem:** 4 templates cannot cover the required combinations.
+
+French mentions légales vary along two axes: **client type** (particulier / professionnel français / professionnel UE / professionnel hors-UE) × **document type** (devis / facture) = **8 distinct combinations**, each requiring different legal text.
+
+The 4-template assumption likely collapsed UE + hors-UE into one, or assumed "devis = same as facture." Both are wrong:
+- Professionnel hors-UE requires specific跨境tax language absent from UE content.
+- Devis mentions légales errors are less penal than factures — but the template system must be document-type-aware from Sprint 0 to avoid Sprint 1 retrofitting.
+
+The correct scope is either 8 static template files or 2-3 data-driven templates with conditional rendering (Handlebars/Nunjucks blocks per client type). That's template engineering, not copy-paste. Estimated: 0.5-1 day depending on approach.
+
+### Challenge 3 — Minimal Devis Model Will Need Sprint 1 Retrofitting
+
+**The estimate says:** "Devis document model (minimal — no facture yet)."
+
+**The problem:** Sprint 1 builds the client + devis flow. A "minimal" Devis model without status tracking (draft/sent/accepted/rejected) will require a schema migration mid-Sprint 1 — exactly when integration testing is most fragile.
+
+The Devis lifecycle requires: `draft → sent → accepted/rejected/expired`. Without these states in Sprint 0 schema, Sprint 1 must add them while building the sending UI, client acceptance flow, and expiration logic simultaneously. Database migrations during active development create integration risk and slow down feature work.
+
+**Retrofit cost was not priced into Sprint 0.** If Sprint 0 had included a proper `devis.status` enum, Sprint 1 avoids this migration entirely.
+
+### Technical Architect — Summary Position
+
+Three independent challenges to the 5-day estimate:
+1. JWT auth is 2-3 days of work, not 0.5-1 day
+2. Mentions légales requires 8 combinations or template engineering, not 4 static files
+3. Minimal Devis model guarantees a Sprint 1 migration at the worst possible time
+
+**The 5-day estimate is not wrong by a little. It's wrong by 1-3 days on JWT alone, plus an unknown on mentions légales complexity.**
+
+**Recommendation:** Split Sprint 0 into 7 days OR reduce scope: defer JWT auth to Sprint 1 (use API keys or a temporary auth bypass for Sprint 0 mobile integration), reduce mentions légales to 4 most-critical combinations only (particulier facture, professionnel français facture, professionnel UE facture, professionnel hors-UE facture — devis inherits from client type only).
+
+---
+
+## Agent A — JWT Auth Challenge (Specialist Debate)
+
+### Agent A — JWT Auth Challenge
+
+**The "Days 4-5: JWT auth + CRUD" estimate conflates two very different things: a JWT scaffold and a production auth system.**
+
+A JWT scaffold is: install `@fastify/jwt`, add `app.authenticate()` decorator, issue token. Done in 2 hours. A production auth system for a React Native mobile app requires:
+
+**1. Server-side requirements:**
+- `@fastify/jwt` with refresh token rotation (access token short-lived 15min-1h, refresh token long-lived 7-30d)
+- Token revocation list or database invalidation flag for logout
+- Rate limiting on `/auth/login` and `/auth/refresh`
+- Password hashing with bcrypt/argon2 (not plain text, not MD5)
+- Audit log of auth events (login attempts, refresh calls, logout)
+
+**2. React Native client-side requirements:**
+- Secure token storage — `AsyncStorage` is NOT secure (tokens extracted from APK trivially)
+- `react-native-keychain` or `expo-secure-store` required — requires native module linking, not a pure JS problem
+- Token refresh queue: when access token expires mid-request, multiple simultaneous requests must queue behind a single refresh call (mutex/flag pattern), not all call refresh independently (thundering herd)
+- Logout must clear Keychain AND invalidate server-side refresh token simultaneously
+- Handle app backgrounding: tokens may expire while app is in background — needs re-auth flow on resume
+
+**3. The minimum viable production auth for Sprint 0** is NOT "JWT added to scaffold." It's: access token (1h TTL) + refresh token (7d TTL) + Keychain storage + refresh queue + logout handler. That's **2-3 days** for a single developer who knows what they're doing, with zero unexpected complexity.
+
+**What "1-2 days for JWT" actually gets you:** Access token only, no refresh rotation, AsyncStorage (insecure), no logout invalidation, no refresh queue. This is a security liability that ships with the product and requires a hard retrofit before production.
+
+**Verdict: 2-3 days for production JWT auth in Sprint 0 context**
+**Key risk: AsyncStorage token storage ships as security debt that requires hard retrofit**
+
+---
+
+## Agent B — Mentions Légales Scope Challenge (Specialist Debate)
+
+### Agent B — Mentions Légales Scope Challenge
+
+**The debate log says "4 mentions légales template files" as if it's a solved problem. It isn't.**
+
+French mentions légales vary along TWO axes: **client type** and **document type**. That's 8 combinations, each with distinct legal text.
+
+**Client type × document type matrix:**
+
+| | Devis | Facture |
+|---|---|---|
+| **Particulier** | Name, address, RCS, SIRET, consumer protection info | Same + mandatory facture-specific mentions |
+| **Professionnel français** | Name, address, RCS, SIRET, TVA intracom, capital social, forme juridique | Same + facture-specific penal sanctions under L.441-9 |
+| **Professionnel UE** | Above + "TVA intracommunautaire: FRXXXXXXXX" + CGI 242 bis reference | Above + facture format requirements |
+| **Professionnel hors-UE** | Above + reverse charge language, specific跨境statement | Above + substantively different tax declaration language |
+
+**Why 4 templates is mathematically wrong:**
+The 4-template assumption likely collapsed UE + hors-UE into one (wrong — hors-UE requires different tax language), or assumed "devis = same as facture" (wrong — factures have penal sanctions for missing mentions, devis do not). For professionnel hors-UE specifically, the mentions légales are substantively different from UE content. Wrong text on a facture to a hors-UE client creates fiscal non-compliance, not just a formatting issue.
+
+**Devis vs Facture severity difference:**
+Facture mentions légales errors trigger penal sanctions under Code de commerce Article L.441-9 (amende de 75,000€ pour personnes physiques, 375,000€ pour personnes morales). Devis errors are less severe (administrative, not penal). This means: the template engine must be document-type-aware from Sprint 0 — building a "devis inherits from client-type" system that then needs to add document-type discrimination in Sprint 2 is a retrofit.
+
+**Minimum viable scope:**
+8 static files is the naive answer. The engineering answer is: 3-4 data-driven templates using a template engine (Handlebars/Nunjucks) with conditional blocks per client type, with the document-type distinction embedded in the rendering logic. This is template engineering, not copy-paste. Estimated: **0.5-1 day** for a developer who knows French legal requirements, not the same as "4 template files."
+
+**The hidden cost:** If Sprint 0 produces 4 "correct" templates and Sprint 2 discovers they're wrong for hors-UE clients, fixing retroactively means touching every generated document in production.
+
+**Verdict: 8 templates minimum if static, 3-4 data-driven templates with template engine if dynamic**
+**Key risk: hors-UE professional combination has substantively different fiscal legal text — wrong content is a compliance issue, not a formatting issue**
+
+---
+
+## Synthesis — Technical Architect Assessment
+
+**The 5-day Sprint 0 estimate has three independent technical risks:**
+
+| Risk | Challenge | Days at stake |
+|---|---|---|
+| JWT auth scope | "JWT scaffold" ≠ production auth system. Minimum 2-3 days, not 0.5-1. | ~1.5 days |
+| Mentions légales scope | 4 templates ≠ 8 required combinations. Template engineering required, not copy-paste. | ~0.5-1 day |
+| Devis minimal model | Missing status enum guarantees Sprint 1 migration during active development. | ~0.5-1 day |
+
+**Combined: 2.5-3.5 days of underestimated work in a 5-day sprint.**
+
+**Proposed resolution:**
+1. **JWT auth:** Defer to Sprint 1 OR use a temporary API key / no-auth bypass for Sprint 0 mobile integration (API contract defined, auth added in Sprint 1)
+2. **Mentions légales:** Limit to 4 most-critical combinations (particulier facture, professionnel français facture, professionnel UE facture, professionnel hors-UE facture). Devis inherits from client type. Full 8-combination system deferred to Sprint 2.
+3. **Devis model:** Add `devis.status` enum (draft/sent/accepted/rejected/expired) in Sprint 0 schema — 30 minutes of schema work that saves a full Sprint 1 migration.
+
+**Revised Sprint 0 estimate: 7 days** OR original 5 days with reduced scope (auth bypass + 4 template combinations + status enum).
+
+---
+
