@@ -157,7 +157,28 @@ The following were overengineered or wrong:
 
 ---
 
-*Last updated: 2026-03-30T11:50*
+*Last updated: 2026-03-30T12:16*
+
+---
+
+## New from Pulse 2026-03-30T12:16
+
+### Reopened (D6, D17, U8):
+- **D6 (Trial):** REOPENED — Growth Strategist argues Free tier creates activation paralysis without time urgency. The "conversion at limit" thesis requires users to reach the limit, and most won't. Proposes 3-email Days 1-7 engagement sequence instead of countdown emails. Best resolution: Keep Free tier, add value-email sequence: "Day 1: Add your first client", "Day 3: Send your first devis", "Day 7: See how it works." Not countdown, not anxiety — value-first engagement.
+- **D17 (Mobile strategy):** REOPENED — Technical Architect argues Expo's 2024 notification outages + ExpoKit deprecation history = unacceptable vendor lock-in at v1. Proposes Capacitor-Nuxt as alternative. Best resolution: Stick with Expo-RN BUT add direct FCM/APNS notification pipeline as circuit breaker if Expo fails. Add "no ExpoKit" policy. Monitor Expo notification uptime in first 3 months; if >1 outage, migrate to bare RN.
+- **U8 (WhatsApp acquisition):** REOPENED — Product Strategist proposes WhatsApp-as-acquisition-channel. Every devis sent = brand impression + potential referral. Fatal flaw: most WhatsApp recipients are homeowners, not artisans. Test as secondary acquisition mechanism for B2B clients (property managers, business owners) with UTM-tracked CTA in WhatsApp message. Not a standalone GTM — secondary test alongside existing channels.
+
+### New action items from this pulse:
+- [ ] Add 3-email Days 1-7 engagement sequence to Free tier onboarding: "Day 1: Add your first client", "Day 3: Send your first devis", "Day 7: See how it works" — value-first, not countdown urgency
+- [ ] Implement direct FCM/APNS notification pipeline as backup to Expo Notifications — circuit breaker pattern (Debate 39)
+- [ ] Add "no ExpoKit" policy to development standards to prevent managed workflow drift
+- [ ] Monitor Expo Notification service uptime for first 3 months — if >1 outage, trigger bare RN migration
+- [ ] Test WhatsApp CTA in devis messages: UTM-tracked link "Envoyez vos devis comme Marc → [LINK]" for B2B client recipients (property managers, business owners who receive from artisans) — not primary GTM, secondary test only
+
+### Challenged assumptions this pulse:
+1. Free tier removes time pressure → better activation (Growth Strategist challenged: removes urgency that forces the aha moment)
+2. Expo managed workflow = correct RN implementation for v1 (Technical Architect challenged: vendor lock-in + 2024 reliability issues)
+3. WhatsApp is a delivery feature, not an acquisition channel (Product Strategist challenged: every sent devis = brand impression + referral opportunity)
 
 ---
 

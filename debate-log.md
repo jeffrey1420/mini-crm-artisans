@@ -592,4 +592,119 @@ For French artisans aged 45-55, solo operators, the real objection is not "€29
 | U2 | E-invoicing platform | Factea first when v2 | 2026-03-30 |
 | U7 | Domain | DEFERRED — use subdomain/Carrd until MVP validated | 2026-03-30 |
 
-*Last updated: 2026-03-30T12:01*
+---
+
+## Pulse 2026-03-30T12:16 — Three New Challenges
+
+---
+
+## Debate 37: WhatsApp is a Primary Acquisition Channel, Not a Feature
+
+**Challenge:** Product Strategist challenges the implicit assumption that WhatsApp is merely a transmission mechanism for sending devis/factures. Nobody has debated whether WhatsApp can be the PRIMARY acquisition funnel.
+
+### Product Strategist — WhatsApp-as-Acquisition Case
+
+**Assumption challenged:** WhatsApp is treated as a sharing feature (how Marc sends devis to clients), not as an acquisition channel. The GTM doc lists WhatsApp only as: (1) a sharing option and (2) a channel where artisans talk in WhatsApp groups. Nobody has debated that the WhatsApp message itself sent to the CLIENT is a direct acquisition touchpoint.
+
+**Core argument:** Every time Marc sends a devis to Madame Martin via the app, she receives a beautifully formatted WhatsApp message showing professional quality. She's in "trust mode" — she's just witnessed Marc operate professionally. A CTA appended to that WhatsApp message ("Envoyez vos devis comme Marc → [LINK]") converts her admiration into a signup. Not her directly — but she likely knows other artisans. Every sent devis = a word-of-mouth delivery mechanism.
+
+**Key arguments:**
+1. 50,000 monthly brand impressions passively if 10k artisans × 5 devis/month
+2. Trust-transfer: recipient sees professional quality in real-time; highest-intent moment for conversion
+3. Acquisition and distribution are the same action — zero extra friction
+4. Network effect: client refers to artisan contacts → compounds faster than any other GTM channel
+5. Landing page CTA reframe: "Join the network of professionals your clients already trust" vs "Try it free"
+
+**Potential flaws (honest):**
+- Client recipients are often homeowners, not artisans — wrong audience for a B2B SaaS referral
+- WhatsApp message length constraints limit the CTA
+- Attribution gap — if it works, measuring it is hard
+
+**VERDICT on U3/GTM framing:** REOPENED — WhatsApp-as-acquisition is a compelling reframe that changes landing page CTA and GTM priority. The fatal flaw: most WhatsApp devis recipients are homeowners, not artisans. However, for B2B contexts (property managers, business owners who receive devis from artisans), the channel is valid. Flag as secondary acquisition mechanism (not primary), test with UTM-tracked CTA in WhatsApp message.
+
+---
+
+## Debate 38: The Free Tier Creates a Worse Activation Problem Than the Trial Did
+
+**Challenge:** Growth Strategist challenges D6 (Free tier IS the trial) — argues that removing time pressure eliminates the only mechanism forcing the aha moment before attention decays.
+
+### Growth Strategist — Free-Tier Activation Problem Case
+
+**Assumption challenged:** D6 rationale — "Free tier removes time pressure anxiety, allows organic usage, and the 10-client/5-devis limit creates a natural conversion trigger." Growth Strategist argues this inverts the truth: Free tier removes commitment friction but creates activation paralysis.
+
+**Core argument:** Urgency is the only mechanism that forces the aha moment before attention decays. Marc is a solo artisan running between job sites all day. Without a deadline, "I'll come back to this when I have a client" becomes the default — and he always has a client. The 14-day trial created a forcing function; the Free tier removes it entirely.
+
+**Key arguments:**
+1. Urgency forces the aha moment before attention decays — Free tier = indefinite deferral
+2. Free tier self-selects for non-buyers — serious buyers had acute problems NOW, Free tier lets them rationalize "later"
+3. Day-7 human check-in is too little, too late — assumes he remembers signing up
+4. 10-client/5-devis limit is too generous — he adds 2 clients, gets busy, app sits at 20% of limit forever
+5. "I'll come back when I need it" is the most dangerous phrase in SaaS onboarding for a B2B admin tool
+
+**Proposed resolution:** Free tier (10 clients, 5 devis) WITH a 7-day "activation window" after first login — soft deadline creating micro-urgency without full trial countdown anxiety.
+
+**Potential flaws (honest):**
+- "7-day window" can feel like a trial by another name — creates same anxiety D6 tried to eliminate
+- The "setup completion" frame assumes onboarding is the problem; it might be product-usability fit instead
+- Implemented wrong (aggressive countdown) it recreates D6's anxiety problem exactly
+
+**VERDICT on D6:** REOPENED — Growth Strategist raises a legitimate concern about activation without urgency. The "conversion at limit" thesis requires users to reach the limit, and most won't. Best resolution: Keep Free tier, add a 3-email engagement sequence in Days 1-7 (not countdown emails — value emails: "Day 1: Add your first client", "Day 3: Send your first devis", "Day 7: See how it works") that create soft urgency without deadline framing.
+
+---
+
+## Debate 39: Expo-RN Creates Vendor Lock-in at the Worst Moment
+
+**Challenge:** Technical Architect challenges D17's implicit assumption that Expo is the correct implementation vehicle for React Native at v1. The debate resolved "PWA-first vs React Native" but never debated "Expo managed workflow vs bare RN vs Capacitor."
+
+### Technical Architect — Capacitor-Nuxt for v1 Case
+
+**Assumption challenged:** Expo's managed workflow is the correct implementation choice for React Native at v1. Expo = fast setup, reliable push, OTA updates. Technical Architect argues these are not free advantages — they come with hidden costs that matter precisely at v1.
+
+**Core argument:** Expo's business model has pivoted before (ExpoKit deprecation broke thousands of builds). At v1, when you most need to iterate fast and fix native issues yourself, Expo makes debugging harder not easier.
+
+**Key arguments:**
+1. Expo's abstraction hides complexity precisely when v1 teams need visibility — push credential failures are the most likely launch failure mode
+2. Expo's business model instability is a real risk — ExpoKit deprecation is a precedent, not a hypothetical
+3. Capacitor-wrapped Nuxt PWA: same codebase for web+mobile, faster build, full FCM/APNS control, no Expo dependency
+4. Expo Notifications had documented reliability issues in 2024 — multiple service disruptions — unacceptable for a product where reminders ARE the core value
+5. OTA updates bypassing App Store review removes a trust signal that matters for a financial tool used by 45-55 year old artisans
+
+**Potential flaws (honest):**
+- Capacitor has its own ecosystem risk (Ionic's business model concerns)
+- "Slightly less native feel" is underselling it — web views vs true native is a real UX difference
+- Direct FCM/APNS integration is more complex to implement than Expo's one-liner
+- Migration path from Capacitor to React Native at v2 is non-trivial
+
+**VERDICT on D17:** REOPENED — Technical Architect raises valid concerns about Expo reliability (2024 outages) and vendor lock-in. However, the Capacitor alternative has its own risks. Best resolution: Stick with Expo for now BUT implement direct FCM/APNS notification pipeline as override if Expo notifications fail. Add explicit "no ExpoKit" policy. D17 stands as "Expo-RN from Day 1" but with a circuit breaker: if Expo notification service has >1 outage in first 3 months, migrate to bare RN + direct FCM/APNS.
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D1 | Positioning | Kill "CRM" — devis, factures, relances | 2026-03-30 |
+| D2 | MVP scope | 4 features, SEQUENCED sprints. Sprint 0 = minimum devis flow (3-5d, minimal schema). Sprint 1 = client+devis. Sprint 2 = facture+relances. | 2026-03-30 |
+| D3 | Primary persona | Marc — solo smartphone-native | 2026-03-30 |
+| D4 | Stack | Single managed Postgres | 2026-03-30 |
+| D5 | Pricing | Free + €29 two-tier. Drop €49/€79. | 2026-03-30 |
+| D6 | Trial | No time-limited trial. Free tier IS the trial. — REOPENED Debate 38 | 2026-03-30 |
+| D7 | Architecture | Nuxt 3 + OVH managed Postgres | 2026-03-30 |
+| D8 | E-invoicing | v2 feature | 2026-03-30 |
+| D9 | Not MVP | No Kanban, no multi-user, no offline, no API keys | 2026-03-30 |
+| D10 | Buyer trigger | "Admin pain" not "CRM need" | 2026-03-30 |
+| D11 | Mobile | React Native from Day 1 via Expo | 2026-03-30 |
+| D12 | Landing page | Simplicity-first — "Vos devis et factures, sans vous prendre la tête" | 2026-03-30 |
+| D13 | Home view | Job-first — Active Job Card as home anchor | 2026-03-30 |
+| D14 | E-invoicing timing | v2 — NOT Day 1 | 2026-03-30 |
+| D15 | Relances differentiator | DE-EMPHASIZED — secondary feature below fold | 2026-03-30 |
+| D16 | Trial length | No countdown trial — Free tier IS the trial | 2026-03-30 |
+| D17 | Mobile strategy | React Native from Day 1 — REOPENED Debate 39 (Expo reliability + vendor lock-in) | 2026-03-30 |
+
+| U1 | Discovery | REPLACED — readiness protocol | 2026-03-30 |
+| U2 | E-invoicing platform | Factea first when v2 | 2026-03-30 |
+| U7 | Domain | DEFERRED — subdomain/Carrd until MVP validated | 2026-03-30 |
+| U8 | WhatsApp acquisition | REOPENED — test as secondary acquisition mechanism (Debate 37) | 2026-03-30 |
+| U9 | Free tier activation | REOPENED — 3-email engagement sequence proposed (Debate 38) | 2026-03-30 |
+
+*Last updated: 2026-03-30T12:16*
