@@ -24,6 +24,9 @@
 | U1 | Real discovery | Need to watch 10 artisans do admin tasks before building |
 | U2 | E-invoicing platform | Which Chorus Pro alternative for MVP? |
 | U3 | Landing page angle | ROI vs simplicity framing |
+| U4 | Home view | Dashboard-first vs Client Timeline-first |
+| U5 | E-invoicing timing | Day 1 vs v2 (Debate 17 — regulatory window argument) |
+| U6 | Landing page headline | "Vos clients vous payent en 48h" vs simplicity-first |
 
 ## 📋 Current TODO
 
@@ -39,13 +42,19 @@
 - [ ] Invoice/facture feature (French-legal, sequential numbering)
 - [ ] Reminder/relance feature
 
-### NOT Building Until Post-Launch
-- [ ] Multi-user
-- [ ] Kanban pipeline
-- [ ] Per-customer VPS
-- [ ] Offline mode
-- [ ] API keys/webhooks
-- [ ] E-invoicing (v2 only)
+### If E-Invoicing Day 1 (Decision pending — see U5)
+- [ ] Pick one private provider: Factea vs Tebilis (2-3 sprint integration)
+- [ ] Integrate provider inbox API for e-invoice receiving
+- [ ] Add "E-invoice ready" badge to landing page
+
+### Landing Page (Decision pending — see U3, U6)
+- [ ] Test "Vos clients vous payent en 48h" headline (A/B vs hybrid)
+- [ ] Keep simplicity as subhead feature, not lead hook
+- [ ] Add peer social proof section (French tradespeople testimonials)
+
+### Home View (Decision pending — see U4)
+- [ ] If Dashboard-first: implement 4-card layout (Relances dues, Devis en attente, À suivre, Jobs du jour)
+- [ ] Client Timeline moves to "Clients" tab (secondary, accessible from Dashboard)
 
 ## 🚫 What We Deleted
 

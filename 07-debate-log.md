@@ -820,3 +820,139 @@ The market is viable (Tolteck: 33k users at €25/mo, Obat: 31k users). The prod
 ---
 
 *Last updated: 2026-03-30T10:17:00Z — External review applied, full pivot*
+
+---
+
+## Debate 17: E-Invoicing — Day 1 vs. v2
+
+### The Disagreement
+- **Product Strategist (challenging D8):** "E-invoicing must be Day 1. The September 2026 mandate makes this a conversion driver, not a feature."
+- **Decision D8:** "E-invoicing: v2 feature (Chorus Pro compatible)"
+
+### The Argument
+Challenger's position:
+- **Regulatory forcing function:** Sept 2026 — every French business must be able to RECEIVE e-invoices. That's ~18 months away. Capture compliance-motivated artisans NOW.
+- **Private providers remove the "complexity" excuse:** Factea, Archipelia, Tebilis offer simplified REST APIs purpose-built for artisans. Not Chorus Pro's enterprise nightmare. 2-3 sprint integration effort, not 6 months.
+- **E-invoicing as conversion engine:** "You're e-invoice ready on day one" wins the sale against competitors who punt it to v2. Being late = losing to competitors who ship Day 1.
+- **The v2 trap:** Acquiring users who can't comply in 2026, then scrambling to build under pressure while competing against better-positioned tools.
+
+D8 rationale:
+- MVP scope discipline — 4 features only, no feature creep
+- Chorus Pro API complexity deferred the decision correctly at the time
+- MVP target (Marc, solo plumber) isn't thinking about e-invoicing today
+
+### The Product Strategist's Case
+
+**Private providers ≠ Chorus Pro:** The main reason e-invoicing was deferred was complexity. That's a Chorus Pro problem, not an industry problem. Factea and Tebilis are Peppol-accessible, SMB-priced (€5-15/month), fast onboarding. The complexity objection disappears when you pick the right provider.
+
+**The regulatory window is the acquisition window:** By September 2026, every French artisan will need to receive e-invoices. By September 2027, they'll need to send via approved platforms. The tool that says "compliant from day one" at launch captures the compliance-anxious segment. The tool that says "coming in v2" signals it's not a priority — and loses that customer to someone who made it a priority.
+
+**E-invoicing at launch is a 2-3 sprint engineering effort:** Not a 6-month odyssey. Pick one provider (Factea or Tebilis), integrate their inbox API, done. This is a prioritization choice disguised as a technical choice.
+
+### Recommended Minimum Scope (Day 1)
+- Receive e-invoices via one private provider (Factea or Tebilis)
+- Simple inbox showing received invoices
+- Basic parsing and record creation
+- Sending (required Sept 2027) remains v2
+
+### Resolution
+**UNRESOLVED — Strong challenge, key strategic decision for Louis**
+
+The regulatory urgency argument is compelling. The engineering effort framing (private provider, not Chorus Pro) changes the cost calculation significantly. However, adding e-invoicing to the MVP scope expands the 4-feature MVP — and the external review specifically called out scope discipline as critical.
+
+**Key tension:** MVP scope discipline vs. regulatory timing as competitive advantage. The September 2026 compliance deadline is a real forcing function that the MVP will face regardless of what's shipped at launch.
+
+**Recommendation for Louis:** Decide based on whether the Sept 2026 mandate creates enough acquisition signal to justify expanding MVP scope by 1-2 weeks of engineering. If yes, add Factea/Tebilis inbox to MVP. If no, keep as v2 but plan e-invoicing as the first post-launch feature.
+
+---
+
+## Debate 18: Landing Page Angle — Emotional/ROI Framing vs. Simplicity-First
+
+### The Disagreement
+- **Position A (Product Strategist challenging Position B):** "Lead with emotional pain + ROI math. 'Vos clients vous payent en 48h.' Don't compare to a free app."
+- **Position B (Simplicity-first, existing):** "Simple comme WhatsApp — trust built through familiarity with a known product."
+
+### The Argument
+Position A's concerns:
+- **"Simple comme WhatsApp" compares a €29/month product to a FREE app.** Marc's subconscious: "This thing is like something I don't pay for." The comparison destroys value before saying anything about devis, factures, or relances.
+- **Simplicity is a commodity claim.** Tolteck says it. Obat says it. Every competitor says it. When everyone claims the same thing, the claim becomes noise. Differentiation requires saying something only you can say.
+- **Marc thinks in daily rates.** At €50-80/hour, €29/month = less than one hour of labor. One recovered late payment = 6 months of the tool. The ROI math is immediate and concrete — burying it in favor of "simplicity" is leaving the strongest argument on the table.
+- **The real purchase trigger is emotional: ras-le-bol.** Not "I want simplicity." The landing page should meet artisans in the emotional moment (done with chasing payments) not in a feature comparison with WhatsApp.
+- **Familiarity doesn't build trust — results do.** Peer social proof from French tradespeople beats a consumer app metaphor every time.
+
+Position B's concerns:
+- French artisans are notoriously resistant to new tech — overpromising triggers skepticism
+- WhatsApp is baseline UX expectation — comparing favorably is concrete, not vague
+- "2h/semaine" sounds like a sales pitch; "simple comme WhatsApp" respects their intelligence
+- The product's real differentiator vs. WhatsApp is organization, not productivity metrics
+
+### Product Strategist's Alternative
+
+**Headline:** "Vos clients vous payent en 48h. Sans que vous ayez à relancer."
+**Subheadline:** "Mini-CRM pour artisans : devis, factures et relances automatiques. Reprenez votre soirée."
+
+**Rationale:** Lead with the outcome (get paid faster), name the job to be done (devis, factures, relances), close with the emotional benefit (recover personal time). No feature promises, no abstract simplicity claims — just a concrete result that speaks directly to the pain.
+
+**Landing page framework (Position A):**
+1. Open with the pain — "Vous en avez marre de courir après vos clients ?"
+2. Make the math obvious — €29/mo vs. one hour of plumber time
+3. Use peer social proof — real testimonials from French tradespeople
+4. Position against competitors on outcomes, not features
+5. Keep simplicity as a supporting point, not the lead
+
+### Resolution
+**UNRESOLVED — Key landing page decision for Louis**
+
+Position A's case is strong on differentiation and competitive positioning. The "Simple comme WhatsApp" framing has a real weakness: it invites comparison to a free product. However, Position B's familiarity argument isn't entirely wrong — the WhatsApp comparison resonates with the target audience's mental model.
+
+**Key tension:** The headline must differentiate (not compare to free) while remaining familiar enough to not alienate the target audience. Position A's proposed headline ("Vos clients vous payent en 48h") is concrete, outcome-focused, and doesn't invite comparison to any other product.
+
+**Recommendation for Louis:** A/B test Position A's headline ("Vos clients vous payent en 48h") against a hybrid that incorporates the familiarity angle without the WhatsApp comparison. "Simple" belongs in the subhead or feature list — not the main hook.
+
+---
+
+## Debate 19: Home View — Dashboard-First vs. Client Timeline-First
+
+### The Disagreement
+- **Growth Strategist (challenging Debate 14):** "Dashboard must be home. Timeline is passive archive; Dashboard creates daily habit."
+- **Debate 14 Resolution:** "Client Timeline is home (reverse-chronological feed), Kanban lives in secondary Jobs tab."
+
+### The Argument
+Challenger's position:
+- **Habits win retention, not archives.** At €29/month, the only durable moat is daily habit formation. The morning is the battlefield — Dashboard answers "what do I need to do today?" in 3 seconds.
+- **Timeline is passive.** It's a ledger of what happened — not a map of what needs to happen. It rewards curiosity, not action. Marc at 6:30 AM with 12 minutes is not curious. He's operational.
+- **Daily habit loop.** Dashboard: Open → See action → Do action → See result → Return tomorrow. Timeline: Open → Browse past → Maybe act → Close → Forget to return.
+- **Debate 14 prioritized information architecture (CRM) over behavioral architecture (daily tool).** These are different products. For solo artisans, daily tool must win at the home screen.
+- **Competitive differentiation.** Tolteck and Obat both offer timeline/archive views. A Dashboard that shows "Relances dues" and "Devis en attente" is differentiated — it's a command center, not a database.
+
+Debate 14 rationale (Client Timeline home):
+- "Where did I leave off with client X?" is the primary artisan question
+- Timeline is familiar — works like WhatsApp, email, SMS
+- Stats dashboards are a manager's tool, not an artisan's tool
+
+### Proposed 4-Card Dashboard Layout
+
+| Position | Card | Purpose |
+|----------|------|---------|
+| Top-Left | **Relances dues** | Overdue invoices — sorted by days overdue |
+| Top-Right | **Devis en attente** | Quotes with no response > 7 days |
+| Bottom-Left | **À suivre** | Clients tagged for follow-up today or overdue |
+| Bottom-Right | **Jobs du jour** | Today's scheduled work |
+
+Each card: count badge, top 2-3 items as preview, "Voir tout" link.
+Navigation from Dashboard: tap card → filtered list view → tap item → record.
+
+### Resolution
+**UNRESOLVED — Challenges already-resolved Debate 14**
+
+This is a direct challenge to a resolved debate. The Growth Strategist's argument is compelling on retention mechanics but concedes that Debate 14's core insight (Kanban lives in secondary Jobs tab) is accepted and preserved.
+
+**The genuine tension:** Debate 14 optimized for "never lose track" (organizer identity). The Dashboard optimizes for "never miss an opportunity" (optimizer identity). These aren't mutually exclusive — but for the home screen, only one can be primary.
+
+**Key question for Louis:** Is Mini-CRM primarily an organizer (where did I leave off?) or an optimizer (what needs my attention today?)? For Marc the solo plumber, both matter. But which one creates the daily habit that prevents churn?
+
+**Recommendation for Louis:** The Dashboard proposal (4 cards: Relances dues, Devis en attente, À suivre, Jobs du jour) is operationally sound and differentiated vs. competitors. Consider: Client Timeline as a secondary tab ("Clients"), accessible from Dashboard navigation. This preserves both the habit-forming Dashboard home and the information-rich Timeline for deep-dive client context.
+
+---
+
+*Last updated: 2026-03-30T10:31:00Z — Pulse update: 3 new debates spawned and logged*
