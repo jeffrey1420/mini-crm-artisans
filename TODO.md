@@ -953,4 +953,28 @@ The following were overengineered or wrong:
 - [ ] **D100 UPDATED:** Add explicit Supabase exit trigger to D100: 3 consecutive months where (total_docs > 10,000 AND MAU > 100 AND Supabase_bill > €150/mo). Define target stack: OVH or Hetzner VPS + Coolify + managed Postgres (€40-60/mo at 100 MAU vs €300-600 Supabase). Add thin abstraction layer in schema design from Day 1.
 - [ ] **D124 NEW:** Document Supabase exit plan in architecture notes: trigger metrics, target stack specs, migration estimated effort (2-3 days data migration, 1 day schema transfer).
 
-*Last updated: 2026-03-30T22:43*
+*Last updated: 2026-03-30T22:56*
+
+## New from Pulse 2026-03-30T22:56 — Three Resolved
+
+### Resolved
+
+- **D12 (Landing page):** Simplicity-first RETAINED. H1 stays "Sans vous prendre la tête." H2 delivers competence via 5-minute claim. Free tier is proof mechanism. "Arrêtez de courir" rejected — too negative, selects for crisis buyers.
+- **D72/D91 (Expert-comptable timing):** Expert-comptable outreach = Phase 2 (Month 4+). Compliance liability is decisive. Louis's accountant = internal validation artifact only, not a referral mechanism. Prescriber networks primary Month 1-3 GTM.
+- **D100 (Supabase exit trigger):** Composite usage-based exit adopted. Trigger: 3 consecutive months (>10k docs + >100 MAU + >€150/mo Supabase bill). Target: OVH/Hetzner VPS + Coolify + managed Postgres (€40-60/mo vs €300-600 Supabase). Migration planned from Day 1 with thin abstraction layer.
+
+### Challenged Assumptions
+
+1. "Acute pain buyers are the majority at awareness stage" — challenged: they already shop, they don't need convincing to look
+2. "Simplicity frame selects the wrong buyer" — challenged: it selects the procrastinating artisan, not the drowning one
+3. "Expert-comptable outreach is a Month 1-2 channel" — challenged: compliance liability makes it Month 4+ minimum
+4. "Revenue-based migration triggers are sufficient" — challenged: they are lagging indicators that trigger too late
+
+### New Action Items
+
+- [ ] **D12 UPDATED:** A/B test landing page — simplicity frame vs competence frame with beta users before launch. Measure: time-on-page, signup rate, Day-7 retention. H1 stays simplicity for now.
+- [ ] **D72/D91 UPDATED:** Expert-comptable outreach = Phase 2 (Month 4+). Do not budget Week 1 hours. Prescriber networks primary Month 1-3. Document in GTM strategy.
+- [ ] **D100 UPDATED:** Add usage-based exit trigger to architecture notes: 3 months (>10k docs + >100 MAU + >€150/mo Supabase bill). Target stack: OVH/Hetzner + Coolify + managed Postgres. Build thin DB abstraction layer in Sprint 0.
+- [ ] **D124 NEW:** Document Supabase exit plan: trigger metrics, target stack specs, migration effort estimate.
+
+*Last updated: 2026-03-30T22:56*
