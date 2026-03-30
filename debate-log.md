@@ -1557,6 +1557,92 @@ This makes the simplicity claim *testable in the first session* — faster than 
 
 ---
 
+## Pulse 2026-03-30T14:24 — Three New Debates
+
+---
+
+## Debate 56: Word-of-Mouth Is Not a GTM Strategy — It's a Result
+
+**Challenge:** Growth Strategist challenges the 40% word-of-mouth attribution cited as settled wisdom since D33, used to justify the Free tier acquisition model and anchor the GTM priority order.
+
+### Growth Strategist — Word-of-Mouth Is a Lagging Indicator, Not a Leading Channel
+
+**Core argument:**
+
+The 40% word-of-mouth figure has been cited as settled wisdom since D33, used to justify the Free tier acquisition model ("strongest acquisition funnel") and to anchor the GTM priority order. It has never been stress-tested. This is the single most consequential unchallenged assumption in the debate.
+
+**Where the 40% came from:** Nothing in the debate log shows a source. It's cited as fact in D33's pricing resolution, affirmed by D55's dual-persona framing, and reinforced by D52 ("WhatsApp groups ARE the discovery pathway"). At no point has anyone asked: *is this number real, and if so, for what stage of product?*
+
+**The fundamental category error:** Word-of-mouth is a lagging indicator of product-market fit, not a leading acquisition channel. You earn high word-of-mouth by having a product that delights users to the point they proactively recommend it unprompted. You don't *engineer* word-of-mouth — you build a product worth talking about, and it emerges. Treating 40% as a GTM input is like treating "customers will love our product" as a launch strategy.
+
+**The new product problem:** This product will launch with zero paying customers, zero users who have completed the full devis → facture → relance cycle, and no one who has used it long enough to feel switching-cost dependency that drives organic advocacy. None of these conditions generate word-of-mouth. They generate hope.
+
+**The attribution vacuum:** If 40% of users arrive via word-of-mouth, how is that being measured? WhatsApp group sharing is invisible. Peer referral has no UTM. The "40%" number is either unmeasured and therefore unverifiable, or measured in a way that conflates "user heard about us from a peer" with "active advocacy." These are different.
+
+**The practical implication:** Digital acquisition (SEO, comparison sites, specialist retailer partnerships) needs to carry more weight earlier — not as a supplement to word-of-mouth but as the primary engine while the product earns its word-of-mouth reputation over months.
+
+**Verdict on D33/D52/D55:** REOPENED — 40% word-of-mouth attribution is unvalidated. D33 (Free + €29 justified partly via "Word of Mouth is primary GTM at 40%") and D52/D55's GTM priority order are both anchored on an unverified assumption. D48 priority order needs validation before being treated as settled strategy.
+
+---
+
+## Debate 57: D7 — Nuxt 3 Architecture Was Never Challenged
+
+**Challenge:** Technical Architect challenges D7 ("Nuxt 3 + OVH managed Postgres"), which was decided early in the debate log and never reopened — despite the product fundamentally pivoting since then.
+
+### Technical Architect — API-First Architecture Case
+
+**Core argument:**
+
+D7 resolved to "Nuxt 3 + OVH managed Postgres" before the product pivoted, before React Native was chosen, and before the landing page became a simplicity-first, proof-lives-in-Free-tier static page. It is the oldest unsettled assumption in the architecture and the most overdue for challenge.
+
+**The mismatch:** Nuxt 3 is a full-stack framework designed for SSR, API routes, and server-rendered web applications. It is architecturally suited to a web application with authenticated users doing document management in a browser. That is not what we're building. We're building a React Native mobile app where Marc manages clients, devis, and factures on his phone. The web app is a landing page and a Free tier signup funnel.
+
+**What Nuxt 3 provides that goes unused at MVP:**
+- SSR/SSG: Not needed — the landing page can be static HTML
+- API routes: The mobile app is React Native with Expo. Expo talks to an API, not Nuxt server routes
+- Session management, SSR auth: Not needed — mobile-only auth flow
+- Server-side rendering for the main app: Not used — main product is native mobile
+
+**The alternative: API-first backend + static web frontend.** A lightweight Node/Express or Fastify API on a single OVH VPS connects directly to both the React Native mobile app and a static web landing page. Authentication via JWT. The Postgres schema from Sprint 0 stays identical.
+
+**Why API-first is better:**
+1. **Clean separation**: The mobile app's API is not coupled to a web framework's routing conventions
+2. **Faster MVP build**: No Nuxt file-based routing, no `pages/` directory, no `useAsyncData` wrappers — just REST endpoints
+3. **Cheaper hosting**: A 2GB VPS runs a Node API + static files; Nuxt 3's SSR requires more RAM
+4. **Future-proof**: If v2 adds a web admin panel, it consumes the same API the mobile app uses
+
+**What this challenges:** D7 itself. Nuxt 3 was chosen for a web-first product that no longer exists. The current product is mobile-native with a static landing page. The real question: what does Nuxt 3 do that a Node API + static site doesn't do better, given that React Native is the primary product?
+
+**Verdict on D7:** REOPENED — Nuxt 3 architecture should be challenged given the mobile-first pivot. API-first backend + static landing page is the alternative.
+
+---
+
+## Debate 58: The "Relances" MVP Inclusion — Are We Shipping a v2 Feature in v1?
+
+**Challenge:** Product Strategist challenges the assumption that all four features (client file, devis, facture, relances) must ship together at MVP. Relances may be a retention feature, not an acquisition or activation feature.
+
+### Product Strategist — Relances Are a Retention Feature, Not MVP Material
+
+**Core argument:**
+
+The MVP scope debate has focused on what to build vs what to defer. But the underlying question — *what makes something an MVP feature vs a v2 feature* — has never been defined. The current rule is: four things, in sequence. But that doesn't answer which four, and whether relances qualifies.
+
+**The activation test:** MVP features should be things the user needs to experience the core value proposition. The core value proposition is professional devis and factures — documents that make Marc look competent and help him get paid. Relances is a *secondary* value proposition: getting paid on time. These are related but not the same thing.
+
+**When relances becomes load-bearing:** A user who signs up, creates a devis, converts to a facture, and gets paid without needing a reminder never experiences relances as valuable. The artisan who sends a devis and gets paid in 48 hours has zero use for relances in month 1. The feature only becomes relevant when invoices go unpaid — which is a month 2+ problem, not a month 1 problem.
+
+**The scope inflation problem:** Every MVP feature has a compliance, testing, and maintenance cost. Relances requires: email/SMS notification infrastructure, template management, scheduling logic, "mark as sent" state tracking, and UI for viewing pending relances. Budget 1-2 weeks for Expo Push alone (D47). If relances is v2 material, shipping it in v1 burns engineering bandwidth on a feature that doesn't drive first-conversion.
+
+**The conversion argument against relances in MVP:** The first conversion event is when a Free user upgrades to €29. What triggers that event? Not relances — it's hitting the client/devis limit, or experiencing the document quality difference vs WhatsApp templates. Relances addresses a problem that emerges *after* habitual use, not *during* initial adoption.
+
+**The counter-argument (what the debate log says):** D2 explicitly includes relances in the 4-feature MVP. D9 says no multi-user, no offline, no API keys — but relances is explicitly in. D15 de-emphasized it on landing but kept it in the product. The debate has treated relances as essential, not optional.
+
+**The Product Strategist position:** Remove relances from v1. Ship client file + devis + facture in Sprint 2. Relances in v1.1 — after the product has paying users, after the document flow is proven, after Expo Push is properly budgeted and shipped. The product can launch without relances and be immediately useful. It cannot launch without a working devis → facture flow.
+
+**Verdict on D2/D9:** REOPENED — should relances be in the MVP or deferred to v1.1? The compliance and notification infrastructure cost hasn't been weighed against the activation value of relances in month 1.
+
+---
+
 ## Pulse 2026-03-30T14:11 — D54 Resolution
 
 ---
@@ -1629,4 +1715,14 @@ This makes the simplicity claim *testable in the first session* — faster than 
 
 ---
 
-*Last updated: 2026-03-30T14:11*
+## Pulse 2026-03-30T14:24 — New Debates Opened
+
+| ID | Topic | Challenge | Challenged By |
+|----|-------|---------|--------------|
+| D56 | Word-of-mouth % | 40% WoM attribution is unvalidated. WoM is a lagging indicator, not a leading GTM channel. Anchors D33/D52/D55 decisions. | Growth Strategist |
+| D57 | Architecture (D7) | Nuxt 3 was chosen for a web-first product that no longer exists. Mobile is RN-native, web is static. API-first + static site is the alternative. | Technical Architect |
+| D58 | Relances in MVP | Relances may be v1.1 material, not v1. Compliance/notification cost vs month-1 activation value questioned. | Product Strategist |
+
+---
+
+*Last updated: 2026-03-30T14:24*

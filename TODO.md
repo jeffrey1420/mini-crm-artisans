@@ -37,7 +37,9 @@
 
 | ID | Topic | Issue | Source |
 |----|-------|-------|--------|
-| — | — | All items from 13:43 pulse are now RESOLVED (see table above) | |
+| D56 | Word-of-mouth % | 40% attribution is unvalidated. WoM is a lagging indicator, not a leading GTM channel. Anchors D33/D52/D55 decisions without evidence. | Growth Strategist |
+| D57 | Architecture (D7) | Nuxt 3 was chosen for a web-first product that no longer exists. API-first + static site is alternative. | Technical Architect |
+| D58 | Relances in MVP | Relances may be v1.1 material — compliance/notification infrastructure cost vs month-1 activation value questioned. | Product Strategist |
 
 ## New from Pulse 2026-03-30T14:11 — All Resolved
 
@@ -92,6 +94,9 @@
 - [ ] U1 readiness check: (1) Figma/clickable devis-creation prototype, (2) guerrilla test scheduled (5 artisans at Point P/Gedimat), (3) pain confirmed by competitive analysis, (4) feature set frozen
 - [ ] If prototype not ready in 1 week: proceed to build anyway, validate post-launch (Debate 31)
 - [ ] Sprint 0: Compressed compliance sprint (3-4 days). TVA per-line schema (5.5/10/20%), sequential numbering engine (gapless, server-enforced), mentions légales renderer (template-based, client-type-aware), client-type schema. THEN Sprint 1 = client+devis flow. Sprint 2 = facture+relances. (Debate 54)
+- [ ] **D57 NEW:** Resolve D7 (Nuxt 3 vs API-first). If API-first: adopt Node/Express + static landing page. If Nuxt 3: document why SSR/API routes are needed given React Native is primary product.
+- [ ] **D58 NEW:** Resolve whether relances is v1 or v1.1. If v1.1: remove from Sprint 2 scope, defer to post-launch. If v1: confirm Expo Push notification budget (1-2 weeks) is accounted for in Sprint 2.
+- [ ] **D56 NEW:** Define WoM measurement mechanism before launch — UTM-tagged referral tracking, "comment avez-vous connu l'app?" onboarding question, or explicit referral invite codes. Without measurement, 40% target is unverifiable.
 - [ ] Pick one: Tolteck competitor or Tolteck complement?
 - [ ] Buy domain (U7) — DEFERRED. Use `devis.lschvn.foo` subdomain or Carrd landing page until MVP validated post-guerrilla test. Domain purchase happens after product direction confirmed. (Debate 34)
 - [ ] Build the Active Job Card data model (`jobs.status`, `jobs.scheduled_date`, `jobs.updated_at`)
