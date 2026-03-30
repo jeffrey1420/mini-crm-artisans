@@ -16,8 +16,8 @@
 | D8 | E-invoicing | v2 feature (Chorus Pro compatible) | External review | 2026-03-30 |
 | D9 | Not MVP | No Kanban, no multi-user, no offline, no API keys | External review | 2026-03-30 |
 | D10 | Buyer trigger | "Admin pain" not "CRM need" | External review | 2026-03-30 |
-| D11 | PWA vs Native | PWA first (launch), native within 6 months | Debate 11 revision | 2026-03-30 |
-| D12 | Landing page | Simplicity-first — "Vos devis et factures, sans vous prendre la tête" | Debate 19 (Product Strategist) | 2026-03-30 |
+| D11 | Mobile | React Native from Day 1 via Expo. Push notifications: Expo Push at launch (budget 1-2 weeks). | Debates 27/44/47 (Technical Architect) | 2026-03-30 |
+| D12 | Landing page | Simplicity-first — H1: "Vos devis et factures, sans vous prendre la tête." H2: "Créez et envoyez votre premier devis en 5 minutes. Depuis votre téléphone." Proof lives in Free tier. | Debates 19/53 (Product Strategist) | 2026-03-30 |
 | D13 | Home view | Job-first — Active Job Card as home anchor, not Dashboard or Timeline | Debate 20 (Technical Architect) | 2026-03-30 |
 | D14 | E-invoicing timing | v2 — NOT Day 1 (Debate 21 Growth Strategist) | Debate 21 |
 | D15 | Relances differentiator | Secondary feature only — below fold, "Fonctionnalités" section. Frame as "Suivi de paiement" not "Relances automatiques." Not in hero. | Debate 25 (Product Strategist) |
@@ -29,48 +29,38 @@
 | D46 | Free tier limits | Do NOT lower limits from 10/5. Keep generous limits. Trust-building before limit enforcement. Limit should hit AFTER aha moment, not before. | Debate 46 (Product Strategist) | 2026-03-30 |
 | D47 | Expo Push estimate | 1-2 weeks, not "few hours." Budget properly or defer to v1.1. | Debate 47 (Technical Architect) | 2026-03-30 |
 | D48 | Wholesaler GTM | Not primary GTM. Digital + specialist retailers first. Wholesaler secondary brand-awareness play only. Audit solo artisan purchasing channels first. | Debate 48 (Growth Strategist) | 2026-03-30 |
+| D53 | Landing page framing | Simplicity-first RETAINED. H1: "Sans vous prendre la tête." H2: 5-minute specific/demonstrable claim. Proof lives in Free tier. No "professional-grade" in hero. | Debate 53 (Product Strategist) | 2026-03-30 |
+| D54 | Sprint 0 approach | Compressed compliance sprint (3-4d): TVA per-line schema, gapless sequential numbering engine, mentions légales renderer, client-type schema. Sprint 1 = client+devis flow. | Debate 54 (Technical Architect) | 2026-03-30 |
+| D55 | Buyer-user split | Dual-persona GTM. Marc = economic buyer (primary). Admin handler = operational user (secondary). Expert-comptable = Phase 2. | Debate 55 (Growth Strategist) | 2026-03-30 |
 
 ## 🔄 Reopened This Pulse (Need Resolution)
 
 | ID | Topic | Issue | Source |
 |----|-------|-------|--------|
-| — | — | All items from 11:11 and 11:50 pulses are now RESOLVED (see table above) | |
+| — | — | All items from 13:43 pulse are now RESOLVED (see table above) | |
 
-## New from Pulse 2026-03-30T13:43
+## New from Pulse 2026-03-30T14:11 — All Resolved
 
-### Reopened (D53, D54, D55):
-- **D53 (Landing page):** REOPENED — Product Strategist argues "Sans vous prendre la tête" signals basic tool at €29/month. Recommends professional-grade framing: "Votre entreprise, au complet." Simplicity as subhead feature, not headline hook.
-- **D54 (Sprint 0 approach):** REOPENED — Technical Architect argues "flow-first" creates legal risk for French invoicing. TVA multi-taux, sequential numbering gaps, mentions légales are legal requirements — not discoverable UX preferences. Recommends "Compliance Foundations" Sprint 0 (5-7 days) before any document flow.
-- **D55 (Buyer-user split):** REOPENED — Growth Strategist argues Marc is buyer but admin handler (spouse, conjoint collaborateur) is primary user/evaluator. GTM must target admin handler's discovery habits (comparison sites, expert-comptable referrals, office supply retailers).
+### Resolved (D53, D54, D55):
+- **D53 (Landing page):** Product Strategist won — simplicity-first RETAINED in H1. H2 becomes specific 5-minute claim: "Créez et envoyez votre premier devis en 5 minutes. Depuis votre téléphone." "Professional-grade" claims removed from hero — proof lives in Free tier. A/B test deferred to beta user testing.
+- **D54 (Sprint 0):** Technical Architect won — compressed compliance sprint (3-4d) beats both flow-first and extended-schema approaches. TVA per-line schema, sequential numbering engine, mentions légales renderer, client-type schema. Sprint 1 = client+devis flow. Sprint 2 = facture+relances.
+- **D55 (Buyer-user split):** Growth Strategist won — dual-persona GTM. Marc = economic buyer (primary). Admin handler = operational user (secondary). Expert-comptable referrals = Phase 2 (not early-stage).
 
 ### Challenged assumptions this pulse:
-1. "Simplicity-first" is a valid differentiator at €29/month (Product Strategist challenged: Tolteck/Obat own "simple" at lower prices; "sans vous prendre la tête" talks down to 45-55 year old professional)
-2. French invoicing requirements can be discovered through usage (Technical Architect challenged: TVA multi-taux is law, sequential gaps are illegal — cannot retrofit compliance)
-3. Marc is both buyer and user of the tool (Growth Strategist challenged: admin handlers evaluate and use; artisan owners buy)
+1. "Sans vous prendre la tête" talks down to 45-55yo professionals (Product Strategist challenged: it signals product empathy, not condescension — "we know your time is valuable")
+2. Compliance-first requires 5-7 days of pure schema (Technical Architect challenged: 3-4 days — TVA is formulaic, numbering is a counter, mentions légales is a template)
+3. Admin handler doesn't feel real pain (Growth Strategist challenged: she feels her own operational pain — forgotten follow-ups, 3h/week tracking — not Marc's pain by proxy)
 
 ### New action items from this pulse:
-- [ ] **D53 NEW:** Landing page headline test — "Votre entreprise, au complet" (completeness/professionalism) vs "Sans vous prendre la tête" (simplicity). A/B test with beta users.
-- [ ] **D53 NEW:** Document quality showcase — if professional-grade is the positioning, show actual devis document screenshots on landing page (not stock photos). This is the proof point.
-- [ ] **D54 NEW:** TVA multi-taux schema design in Sprint 0 — per-line rate selection (5.5/10/20%), per-line calculation, total TVA breakdown. This is known law, not discovery.
-- [ ] **D54 NEW:** Gapless sequential numbering engine in Sprint 0 — server-enforced, explicit cancel/void handling, annual reset with prefix.
-- [ ] **D54 NEW:** Mentions légales renderer in Sprint 0 — client-type-aware (particulier/professionnel/EU/hors EU). Client type captured at client creation.
-- [ ] **D54 UPDATED:** Sprint 0 timeline updated to 5-7 days (from 3-5). Compliance foundations add 2 days; prevents retrofitting cost that would exceed upfront investment.
-- [ ] **D55 NEW:** Expert-comptable referral program — identify 3-5 experts-comptables serving artisans in Caen region. Cold outreach: "we handle devis/factures for your artisan clients." Pilot with 1-2.
-- [ ] **D55 NEW:** Comparison site optimization — claim/optimize GMB listing and GetApp/Capterra profiles for "devis facture artisan" terms. Admin handlers search here.
-- [ ] **D55 NEW:** Messaging for admin handler pain — shift from emotional/forgetfulness framing to operational efficiency ("gagnez 2h/semaine sur l'administratif").
-- [ ] **U12 NEW:** Expert-comptable GTM — highest-leverage acquisition channel. One expert-comptable with 50 artisan clients = 50 potential conversions from one relationship.
+- [ ] **D53 UPDATED:** Landing page H2 updated — "Créez et envoyez votre premier devis en 5 minutes. Depuis votre téléphone." (5-minute specific claim replaces "Pas de formation. Pas de tableau comparatif.")
+- [ ] **D53 NEW:** Document quality showcase on landing page — actual devis document screenshots (not stock photos) as proof of professional-grade quality. Below fold only.
+- [ ] **D54 NEW:** Sprint 0 deliverables — TVA per-line schema (Day 1), sequential numbering engine (Day 2), mentions légales renderer (Day 3), client-type schema (Day 3)
+- [ ] **D54 UPDATED:** Sprint 0 timeline = 3-4 days (not 5-7). Mentions légales = template file (not a schema table). TVA = formula (not a lookup table). Compliance work is more bounded than previously estimated.
+- [ ] **D55 NEW:** Dual-persona messaging tracks — Marc: emotional/forgetfulness pain ("Sans vous prendre la tête"); Admin handler: operational efficiency ("Gagnez 2h/semaine sur l'administration")
+- [ ] **D55 NEW:** GetApp/Capterra profiles claimed and optimized before launch — admin handlers search here first
+- [ ] **D55 UPDATED:** Expert-comptable referrals moved to Phase 2 — relationship-dependent, 6-18 month build time. Not early-stage priority.
+- [ ] **D55 NEW:** U12 (Expert-comptable GTM playbook) — document what to say, what materials to leave, how to position for admin handler audience. Ready to execute in Phase 2.
 
----
-
-## 🔄 Still Unresolved
-
-| ID | Topic | blockers |
-|----|-------|----------|
-| D53 | Landing page framing | Simplicity-first vs professional-grade — needs A/B test with beta users |
-| D54 | Sprint 0 approach | Compliance-first vs flow-first — needs resolution before sprint planning |
-| D55 | Buyer-user split | Expert-comptable referrals + admin handler targeting — needs validation of buyer-user split frequency |
-
----
 
 ## New from Pulse 2026-03-30T13:28
 
@@ -94,14 +84,14 @@
 
 ---
 
-*Last updated: 2026-03-30T13:28*
+*Last updated: 2026-03-30T14:11*
 
 ## 📋 Current TODO
 
 ### Before Building (Do First)
 - [ ] U1 readiness check: (1) Figma/clickable devis-creation prototype, (2) guerrilla test scheduled (5 artisans at Point P/Gedimat), (3) pain confirmed by competitive analysis, (4) feature set frozen
 - [ ] If prototype not ready in 1 week: proceed to build anyway, validate post-launch (Debate 31)
-- [ ] Sprint 0: Build minimum devis flow (3-5 days, flow-first, minimal schema). Add client → add line items → preview → send via WhatsApp. No TVA complexity (flat rate ok). No sequential numbering enforcement. Simple mentions légales block. Schema formalization defers to Sprint 1 based on Sprint 0 usage learning. (Debate 35)
+- [ ] Sprint 0: Compressed compliance sprint (3-4 days). TVA per-line schema (5.5/10/20%), sequential numbering engine (gapless, server-enforced), mentions légales renderer (template-based, client-type-aware), client-type schema. THEN Sprint 1 = client+devis flow. Sprint 2 = facture+relances. (Debate 54)
 - [ ] Pick one: Tolteck competitor or Tolteck complement?
 - [ ] Buy domain (U7) — DEFERRED. Use `devis.lschvn.foo` subdomain or Carrd landing page until MVP validated post-guerrilla test. Domain purchase happens after product direction confirmed. (Debate 34)
 - [ ] Build the Active Job Card data model (`jobs.status`, `jobs.scheduled_date`, `jobs.updated_at`)

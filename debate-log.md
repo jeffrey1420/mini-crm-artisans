@@ -1394,6 +1394,29 @@ Speed is also decisive. Prescriber networks require months of relationship build
 
 ---
 
+## Pulse 2026-03-30T14:00 — D55 Resolution
+
+---
+
+## Debate 55: Buyer-User Split — RESOLVED
+
+**Challenge:** D3 defines primary persona as "Marc — solo smartphone-native artisan." Growth Strategist challenged: admin handler (conjoint collaborateur, spouse, office manager) is a distinct user with different pain and different discovery habits. D55 was REOPENED at 13:43.
+
+### Growth Strategist — D55 Resolution
+
+**Assumption challenged:** From the D3 defense — *"the admin handler doesn't feel the evening admin burden."* This was asserted without evidence. The conjoint collaborateur who manages devis and factures daily feels **her own operational pain**: forgotten follow-ups, duplicated effort, manual client tracking, "which devis was accepted again?" confusion. The pain is operational, not emotional — but it is real, daily, and measurable. Pennylane, Indy, and Freebe grew through expert-comptable referrals partly because the admin handler inside the artisan's business was their user. If the admin handler didn't feel pain, these tools would have no one to sell to.
+
+**Resolution: DUAL PERSONA GTM**
+
+- **Marc** = economic buyer (signs checks, responds to peer endorsement, feels emotional/forgetfulness pain). WhatsApp artisan groups remain PRIMARY acquisition channel.
+- **Admin handler** = operational user (does daily work, feels operational pain: "3h/week tracking pending"). Discovery via comparison sites + expert-comptable referrals.
+- **Messaging duality:** For Marc → professional identity / simplicity. For admin handler → "gagnez 2h/semaine" / operational efficiency.
+- **Expert-comptable referrals:** Real but relationship-dependent and slow — Phase 2 channel, not early-stage. U12 updated accordingly.
+
+**Verdict on D55:** RESOLVED — Marc remains economic buyer. Admin handler is real secondary persona with genuine pain, addressable through comparison sites (Phase 1) and expert-comptable referrals (Phase 2). D3 partially updated but Marc's buyer role stands. D55 CLOSED.
+
+---
+
 ## Pulse 2026-03-30T13:43 — Three New Debates
 
 ---
@@ -1469,7 +1492,7 @@ Speed is also decisive. Prescriber networks require months of relationship build
 | ID | Topic | Resolution | Date |
 |----|-------|-----------|------|
 | D1 | Positioning | Kill "CRM" — devis, factures, relances | 2026-03-30 |
-| D2 | MVP scope | 4 features, SEQUENCED sprints. Sprint 0 = compliance foundations + minimum devis flow (5-7d). Sprint 1 = client+devis. Sprint 2 = facture+relances. REOPENED: Sprint 0 extended (Debate 54) | 2026-03-30 |
+| D2 | MVP scope | 4 features, SEQUENCED sprints. Sprint 0 = compressed compliance sprint (3-4d): TVA per-line schema, sequential numbering engine, mentions légales renderer, client-type schema. Sprint 1 = client+devis flow. Sprint 2 = facture+relances. | 2026-03-30 |
 | D3 | Primary persona | Marc — primary buyer. Admin handler = primary user/evaluator. REOPENED: buyer-user split acknowledged in GTM (Debate 55) | 2026-03-30 |
 | D4 | Stack | Single managed Postgres | 2026-03-30 |
 | D5 | Pricing | Free + €29 two-tier. No €19 SKU. Drop €49/€79. | 2026-03-30 |
@@ -1494,9 +1517,9 @@ Speed is also decisive. Prescriber networks require months of relationship build
 | D50 | Push at launch | Email-only at v1. Expo Push in v1.1. | 2026-03-30 |
 | D51 | Free tier conversion | Forcing functions + limit-hit primary. Habit tracking secondary. | 2026-03-30 |
 | D52 | Prescriber GTM | Cannot lead. U11 audit valuable. | 2026-03-30 |
-| D53 | Landing page framing | REOPENED — professional-grade vs simplicity-first (Debate 53) | 2026-03-30 |
-| D54 | Sprint 0 approach | REOPENED — compliance-first vs flow-first (Debate 54) | 2026-03-30 |
-| D55 | Buyer-user split | REOPENED — admin handler as primary evaluator (Debate 55) | 2026-03-30 |
+| D53 | Landing page framing | Simplicity-first RETAINED with 5-minute subheadline. H1: "Vos devis et factures, sans vous prendre la tête." H2: "Créez et envoyez votre premier devis en 5 minutes. Depuis votre téléphone." No "professional-grade" claims in hero. Proof lives in free tier. | 2026-03-30 |
+| D54 | Sprint 0 approach | RESOLVED — compressed compliance sprint (3-4d): TVA per-line, sequential numbering engine, mentions légales renderer, client-type schema. Sprint 1 = client+devis flow. Sprint 2 = facture+relances. | 2026-03-30 |
+| D55 | Buyer-user split | RESOLVED — Marc = economic buyer (primary). Admin handler = operational user (secondary). Dual-persona GTM. Expert-comptable = Phase 2. | 2026-03-30 |
 
 | U1 | Discovery | REPLACED — readiness protocol | 2026-03-30 |
 | U2 | E-invoicing platform | Factea first when v2 | 2026-03-30 |
@@ -1505,9 +1528,105 @@ Speed is also decisive. Prescriber networks require months of relationship build
 | U9 | Free tier activation | Forcing function + limit-hit primary, habit tracking secondary | 2026-03-30 |
 | U10 | GTM: Wholesaler | REFINED — digital + specialist retailers first | 2026-03-30 |
 | U11 | Prescriber audit | Still valuable — if >30% of new jobs via prescriber, revisit GTM | 2026-03-30 |
-| U12 | Expert-comptable GTM | NEW — expert-comptable referral channel as HIGH priority acquisition channel (Debate 55) | 2026-03-30 |
+| U12 | Expert-comptable GTM | Phase 2 — relationship-dependent, not early-stage. Playbook to be built post-MVP. | 2026-03-30 |
 
 ---
 
-*Last updated: 2026-03-30T13:43*
+## Debate 53: Landing Page Framing — RESOLVED
 
+**Challenge:** D12 landed on "Vos devis et factures, sans vous prendre la tête" (simplicity-first). REOPENED by challenge: (1) Tolteck/Obat own "simple" at lower prices; (2) "Sans vous prendre la tête" talks down to 45-55yo professional; (3) Ease is table stakes; (4) Real differentiation is professional-quality documents.
+
+### Product Strategist — D53 Resolution
+
+**Assumption challenged:** The challenge reads "sans vous prendre la tête" as infantilizing. This misinterprets the phrase's signal to its actual audience. A 50-year-old artisan hearing it interprets it as: "this was made by people who understand my time is valuable and my patience is limited." It's a signal of product empathy, not condescension. It says "we know what your time is worth" — which is precisely what a competent professional wants to hear.
+
+**The error both sides share:** Both simplicity advocates and challenger advocates are arguing about what *claim* to make. The challenger is wrong that "Votre entreprise, au complet" is the answer — that is ALSO a claim, and at €29 with no product proof, it's equally empty. Neither claim wins without demonstration. The real question: what can the landing page *show* (not promise) that creates belief?
+
+**Synthesis — The resolution:** The headline stays. The subheadline changes from a vague reassurance to a *demonstrable fact*:
+
+> **H1:** Vos devis et factures, sans vous prendre la tête.
+> **H2:** Créez et envoyez votre premier devis en 5 minutes. Depuis votre téléphone.
+
+This makes the simplicity claim *testable in the first session* — faster than "professional-grade" which requires ongoing document output to verify. The free tier is the proof mechanism: the trial IS the demonstration. No claim on the landing page needs to be believed — it can be verified.
+
+**What the hero does NOT contain:** No "professional-grade," no "entreprise au complet," no relances. These are unprovable claims that add cognitive load without creating conversion-ready belief. Below the fold: 3 specific features, each with a one-line concrete benefit.
+
+**Verdict on D53:** RESOLVED — Simplicity-first RETAINED in H1. H2 becomes the 5-minute specific/demonstrable claim. "Professional-grade" claims moved below fold or removed. Free tier = the proof. D12 updated.
+
+*Last updated: 2026-03-30T14:11*
+
+---
+
+## Pulse 2026-03-30T14:11 — D54 Resolution
+
+---
+
+## Debate 54: Sprint 0 — Compressed Compliance Sprint Resolves the Debate
+
+**Challenge:** D54 (REOPENED) — Technical Architect challenged Debate 35's "flow-first Sprint 0" as creating legally non-compliant documents that can't be retrofitted. Two positions: flow-first (Debate 35) and extended schema sprint / 5-7 days (pulse-1343-architect). Both are wrong. A third option resolves the tension.
+
+### Technical Architect — The Synthesis: Compressed Compliance Sprint (VERDICT)
+
+**Assumption challenged:** Two assumptions were in conflict, both wrong in different ways:
+
+**Wrong Assumption 1 (from flow-first camp):** "Schema emerges from usage, so TVA complexity and sequential numbering can be deferred." This is incorrect for legally mandated document fields. TVA rates (5.5/10/20%) are in the Code général des impôts. You don't discover them through usage. You implement them because the law requires them.
+
+**Wrong Assumption 2 (from the previous Technical Architect pulse):** "Compliance-first requires 5-7 days of pure schema work." This overestimates the implementation cost. TVA per-line calculation is a formula. Gapless sequential numbering is a counter with cancel handling. Mentions légales is a template file. The total implementation time for all three compliance requirements is **3-4 days** — not 5-7.
+
+**The resolution:** The real question was never "compliance OR flow" — it was "how compressed can the compliance sprint be?" The answer: 3-4 days. The compliance requirements are known, bounded, and implementable without discovery or iteration. Once they're done, the flow work in Sprint 1 builds on a legally correct foundation.
+
+**The critical distinction:** Sprint 0 is NOT "design the entire schema." It's "implement the three known compliance requirements in the simplest possible way." Mentions légales is a template file (not a schema table). TVA calculation is a formula (not a lookup table). The work is smaller than the previous pulse estimated because the problem is more bounded than "schema design" implies.
+
+**Sprint 0 deliverables (3-4 days):**
+1. **TVA per-line schema** — `devis_lines.tva_rate` enum (5.5/10/20), server-side calculator for `montant_ht` and `montant_tva` per line
+2. **Sequential numbering engine** — database sequence with annual prefix, explicit cancel/void handling that maintains sequence integrity, server-enforced (no client-side increment)
+3. **Mentions légales renderer** — template file with conditional fields by `client.type` (particulier/professionnel/eu/hors_eu), not a schema table
+4. **Client schema with type** — `clients.type` enum, minimum viable fields
+
+**Sprint 1:** Flow on top of Sprint 0 schema — add client → add line items (with TVA rate selector) → preview (correct TVA breakdown + mentions légales) → send.
+
+**Why this resolves the debate:** Both the flow-first and extended-schema positions had valid concerns but wrong estimates. Flow-first correctly worried about delayed user feedback, but underestimated retrofit cost. Extended-schema correctly worried about legal non-compliance, but overestimated implementation time. The compressed compliance sprint gives both: legal correctness from Day 1 AND flow delivery in Sprint 1 (not Sprint 2).
+
+**Verdict on D54:** RESOLVED — Sprint 0 = Compressed Compliance Sprint (3-4 days). Sprint 1 = client+devis flow. Sprint 2 = facture+relances. D2 updated accordingly.
+
+
+---
+
+## Pulse 2026-03-30T14:11 — D55 Resolution
+
+---
+
+## Debate 55: Buyer-User Split — The Admin Handler DOES Feel the Pain
+
+**Challenge:** D3 (primary persona) — Growth Strategist challenged that Marc is both buyer and user. In many French artisanal businesses, the admin handler (conjoint collaborateur, spouse) is the primary user/evaluator, while Marc is the economic buyer.
+
+### Growth Strategist — D55 Resolution
+
+**Assumption challenged:** From the D3 defense — "the admin handler doesn't feel the evening admin burden." This is asserted without evidence. It conflates "doesn't feel Marc's physical exhaustion" with "doesn't feel any admin burden." They are different burdens, not the same one.
+
+**Why the assumption is wrong:** The admin handler who manages devis and factures daily feels **her own operational pain** — not Marc's pain by proxy. She loses sleep over forgotten follow-ups. She spends Saturday rebuilding client info from WhatsApp. She knows exactly how many hours per week admin takes. The competitive landscape proves this: Pennylane, Indy, and Freebe all grew significantly through expert-comptable referrals — because the admin handler inside the artisan's business was their actual user. If admin handlers didn't feel pain, these tools would have no one to sell to.
+
+**The resolution — dual-persona GTM:**
+
+| Persona | Role | Pain | Primary Channels |
+|---------|------|------|-----------------|
+| Marc | Economic buyer | Emotional/forgetfulness ("I forgot to follow up AGAIN") | WhatsApp artisan groups |
+| Admin handler | Operational user | Operational ("I spend 3h/week tracking what's pending") | Google/comparison sites, expert-comptable referrals |
+
+**On expert-comptable referrals:** Real but relationship-dependent and slow (6-18 months to build meaningful network). Belongs in Phase 2, not Phase 1 launch. U12 updated accordingly.
+
+**Verdict on D55:** RESOLVED — Marc = economic buyer (primary). Admin handler = operational user (secondary). Dual-persona GTM with phased channel investment. Expert-comptable referrals = Phase 2. D3 updated accordingly.
+
+---
+
+## New Resolved Summary (Pulse 2026-03-30T14:11)
+
+| ID | Topic | Resolution |
+|----|-------|-----------|
+| D53 | Landing page | Simplicity-first RETAINED. H1: "Vos devis et factures, sans vous prendre la tête." H2: "Créez et envoyez votre premier devis en 5 minutes. Depuis votre téléphone." Proof lives in Free tier. |
+| D54 | Sprint 0 | Compressed compliance sprint (3-4d): TVA per-line, sequential numbering engine, mentions légales renderer, client-type schema. Sprint 1 = client+devis flow. |
+| D55 | Buyer-user split | Dual-persona GTM. Marc = economic buyer (primary). Admin handler = operational user (secondary). Expert-comptable = Phase 2. |
+
+---
+
+*Last updated: 2026-03-30T14:11*
