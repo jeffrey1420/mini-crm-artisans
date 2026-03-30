@@ -833,3 +833,24 @@ The following were overengineered or wrong:
 - [ ] **D96/D104 NEW:** Guerrilla test validation: what % of Marc's clients require formal written devis vs verbal approval? If >40% verbal, Path B becomes the primary conversion design consideration.
 
 *Last updated: 2026-03-30T21:27*
+
+---
+
+## New from Pulse 2026-03-30T21:38 — Three New Challenges
+
+### Reopened (Debate 111, Debate 112, Debate 113):
+- **Debate 111 (Job logging Sprint 1):** Product Strategist argues job logging (Active Job Card, D13) must be a Sprint 1 non-negotiable, not v1.2 deferral. Path B conversion (verbal-agreement artisan) is structurally impossible without job logging at launch. Sprint 1 scope cuts proposed: defer WhatsApp PDF sharing (Sprint 1b), mentions légales template engine (Sprint 2), multi-taux per line (Sprint 2). Sprint 1 keeps: client file + devis CRUD + flat-rate TVA calculator + minimum viable job logging.
+- **Debate 112 (Expert-comptable conflict):** Growth Strategist argues Louis's accountant is not an outreach channel — conflict of interest creates passive non-execution. Network effect of 50 artisan clients weaker than assumed. Week 1 validation with accountant is biased feedback. Proposed: validate with non-conflicted artisan instead; use accountant only to learn what accountants need; referral playbook moved to Month 2-3.
+- **Debate 113 (Sprint 0 blockers):** Technical Architect identifies six items that must be confirmed (not scheduled) before Sprint 0 can begin: (1) 4 mentions légales templates committed to git, (2) Supabase project dashboard accessible, (3) 1-page Sprint 0 scope document written, (4) API contract defined, (5) navigation library chosen (Expo Router recommended), (6) PDF generation approach chosen (server-side Supabase Edge Function recommended).
+
+### New action items from this pulse:
+- [ ] **Debate 111 NEW:** Sprint 1 scope revision — add minimum viable job logging (job create, status update, job notes, Active Job Card home view) as Sprint 1 non-negotiable. Cut from Sprint 1: WhatsApp PDF sharing (Sprint 1b), mentions légales template engine (Sprint 2), multi-taux per line (Sprint 2). Path B conversion requires job logging to exist.
+- [ ] **Debate 111 NEW:** Sprint 1 job logging minimum scope: `jobs` table (id, client_id, title, description, status, scheduled_date, created_at, updated_at), home query (most recent in_progress/pending job), create job (title + client + date), update status (single tap), job notes (free text).
+- [ ] **Debate 112 NEW:** U12 rethink — validate with one non-conflicted artisan in Week 1, not Louis's accountant. Accountant meeting reframed: learn what accountants need before recommending, not validation of the product.
+- [ ] **Debate 112 NEW:** Expert-comptable referral playbook moved to Month 2-3. Prerequisites: 5-10 paying users, testimonials, accountant has seen product work.
+- [ ] **Debate 112 NEW:** Acknowledge conflict of interest explicitly if accountant agrees to refer: "I want you to know — I'm your client and I don't want this to look like steering. If you don't think this is right for your clients, I want that feedback more than the referral."
+- [ ] **Debate 113 NEW:** Sprint 0 pre-work (must be DONE, not scheduled): (1) 4 mentions légales templates committed to git, (2) Supabase project created (EU region), (3) 1-page Sprint 0 scope doc written, (4) API contract as shared types file, (5) Expo Router chosen for navigation, (6) server-side PDF generation chosen.
+- [ ] **Debate 113 NEW:** Total pre-sprint work estimated: ~2.5 hours. This is the actual gate for 5-day Sprint 0.
+
+*Last updated: 2026-03-30T21:38*
+

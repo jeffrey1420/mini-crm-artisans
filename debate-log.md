@@ -5538,3 +5538,97 @@ D96 is RETIRED in its current form. Replaced with dual-path conversion:
 ---
 
 *Verdict written: 2026-03-30T21:27*
+
+---
+
+## Pulse 2026-03-30T21:38 — Three Specialist Debates
+
+---
+
+## Debate 111: Sprint 1 — Job Logging Is a Sprint 1 Non-Negotiable
+
+**Challenge:** Product Strategist challenges the assumption that job logging (Active Job Card, D13) can be deferred to v1.2 while Sprint 1 focuses on client + devis flow.
+
+### Product Strategist — Job Logging Required in Sprint 1
+
+**Assumption challenged:** That job logging is secondary to devis flow and can follow Path A to market in v1.2. D96/D104 established a dual-path conversion model. Path B (verbal-agreement artisan) requires job logging to fire. Without it, Path B does not exist at launch.
+
+**Core arguments:**
+
+**Persona argument:** Marc IS the verbal-agreement artisan. His primary workflow is job-first, not document-first. Without job logging, he has no reason to open the app on Tuesday after signing up on Monday. He churns or settles into Free tier inertia before ever hitting the 5-devis limit. The conversion triggers assume the product delivers value before the limit — and value for Marc means job logging, not devis creation.
+
+**Architecture argument:** Path A fires at 5 active devis. Path B fires at 7+ jobs logged. If job logging ships in v1.2, Path B cannot fire for months. The "dual-path conversion" is structurally single-path until v1.2 ships. This is not a minor timing issue — it means the verbal-agreement segment has no conversion mechanism at launch.
+
+**Competitive differentiation argument:** Tolteck, Obat, Indy — all document-centric. None do job logging well. Job logging + devis tracking is the differentiation wedge against incumbents. Deferring it to v1.2 lets competitors close the gap.
+
+**Scope tradeoff proposal:**
+- Cut from Sprint 1: WhatsApp PDF sharing (→ Sprint 1b), mentions légales template engine (→ plain text placeholder in Sprint 1, full engine Sprint 2), multi-taux per line (→ Sprint 2)
+- Sprint 1 keeps: client file + devis CRUD + TVA calculator (flat rate) + minimum viable job logging (create job, update status, job notes, home card)
+- Path B conversion enabled from Day 1 of launch
+
+**VERDICT on D13/Sprint 1 scope:** OPEN — Job logging argued as Sprint 1 non-negotiable, not v1.2 deferral. Sprint 1 scope cuts proposed to make room. Not yet resolved.
+
+---
+
+## Debate 112: Expert-Comptable Outreach — The Conflict of Interest Problem
+
+**Challenge:** Growth Strategist challenges the assumption that Louis's existing accountant is the right first domino for expert-comptable GTM.
+
+### Growth Strategist — Louis's Accountant Is Not an Outreach Channel
+
+**Assumption challenged from D55/D72/D85/D91:** "Warm access via Louis's existing accountant = immediate outreach opportunity." The accountant is Louis's client — recommending Louis's tool to their other artisan clients creates a conflict of interest.
+
+**Core arguments:**
+
+**Conflict of interest:** Louis's accountant has artisan clients. Recommending Louis's tool to them looks like steering. The accountant likely won't refuse explicitly — they'll agree and never act. Passive non-execution is the most common outcome of relationship-dependent referrals with a conflict of interest present.
+
+**Network effect weaker than assumed:** 50 artisan clients on the accountant's roster don't automatically convert. French artisans are independent. A recommendation without urgency ("interesting, I'll think about it") rarely converts to signup.
+
+**Week 1 validation is biased:** Louis's accountant cannot give unbiased feedback on a tool Louis co-founded. All feedback will be social support, not product validation. False confidence is the outcome.
+
+**Alternative framing:** Use Louis's accountant as a reference to OTHER accountants (not artisans), not as a channel. The first referral should come from an accountant with no relationship to Louis. Week 1 validation should be with one non-conflicted artisan.
+
+**U12 rethink:**
+- U12a (Week 1): Validate with one non-conflicted artisan. Use accountant only to learn what accountants need before recommending.
+- U12b (Month 2-3): Cold outreach to 5 Caen expert-comptables for discovery — not referrals yet. Understand what they'd need before recommending.
+- Referral playbook: Month 2-3, after 5-10 paying users + testimonials + accountant has seen the product work.
+
+**VERDICT on D55/D72/D85/D91:** OPEN — Expert-comptable outreach strategy challenged. Conflict of interest named. U12 split rethinking proposed. Not yet resolved.
+
+---
+
+## Debate 113: Sprint 0 — Six Items Must Be Confirmed Before Day 1
+
+**Challenge:** Technical Architect identifies three blocking decisions and a missing spec that prevent Sprint 0 from being actionable.
+
+### Technical Architect — Sprint 0 Has Six Unresolved Blockers
+
+**Assumption challenged from D95:** That "pre-conditions confirmed" means Sprint 0 can start. The assumption is wrong because the pre-conditions are underspecified and the product spec is missing.
+
+**Core arguments:**
+
+**Missing spec:** Nobody has written the devis flow as a spec. The debates established the flow conceptually but not as a sequence of screens, states, and API calls. Without this, Day 1 is planning + building competing for the same cognitive context. A one-page scope document (30 minutes of writing) prevents days of rework.
+
+**Supabase schema not verified:** D100 said "prior schema work transfers directly." Unverified. Supabase requires explicit RLS policies, auth user linkage, and storage bucket configuration that raw Postgres schemas don't include.
+
+**Three blocking decisions not made:**
+1. React Native navigation: Expo Router or React Navigation? (D11/D17 said Expo, not which navigation)
+2. PDF generation: server-side (Supabase Edge Function) or client-side (React Native library)?
+3. Mentions légales renderer: Handlebars, Nunjucks, or string interpolation?
+
+**The sprint planning paradox:** D95 says "Sprint 0 = 5 days if pre-conditions confirmed." The pre-conditions say "U16 done before sprint." If Louis writes the mentions légales templates AS PART OF Sprint 0, then U16 IS Sprint 0 — not a pre-condition. The 5-day estimate assumes pre-conditions are done before sprint starts, not concurrent with it.
+
+**Six items that must be shown (not scheduled) before Sprint 0 begins:**
+1. 4 mentions légales templates committed to git (one per client type)
+2. Supabase project dashboard accessible (EU region, Frankfurt)
+3. 1-page Sprint 0 scope document: devis flow as step sequence
+4. API contract defined (shared types file or OpenAPI spec)
+5. Navigation library chosen (Expo Router recommended)
+6. PDF generation approach chosen (server-side via Supabase Edge Function recommended)
+
+**VERDICT on D95:** OPEN — Sprint 0 pre-conditions are insufficiently specified. Six items named that must be confirmed before sprint. D95 not yet resolved.
+
+---
+
+*Last updated: 2026-03-30T21:38*
+
