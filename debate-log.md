@@ -1726,3 +1726,118 @@ The MVP scope debate has focused on what to build vs what to defer. But the unde
 ---
 
 *Last updated: 2026-03-30T14:24*
+
+## Pulse 2026-03-30T14:41 — Agent Debates on D56/D57/D58
+
+---
+
+## Debate 57: D7 — Nuxt 3 Architecture Was Never Challenged After the Mobile Pivot
+
+**Challenge:** D7 (Nuxt 3 + OVH managed Postgres) was decided before React Native was chosen. The product is now mobile-first with a static landing page. Nuxt 3's SSR capabilities are architecturally mismatched.
+
+### Technical Architect — API-First Architecture Case
+
+**Assumption challenged:** D7 — Nuxt 3 is the right backend framework for a product whose primary interface is React Native and whose web surface is a static landing page.
+
+**Core argument:**
+
+1. **Nuxt 3 is architecturally wrong for a mobile-first product.** Nuxt 3's core value is SSR + API routes + session-managed web app. The primary product is React Native (D11/D17). The "admin backend" is not the product — it's peripheral. Using a full-stack web framework for a supporting tool adds complexity without value.
+
+2. **The landing page doesn't need Nuxt's SSR.** D53 resolved to a simplicity-first static page. A static HTML page or Vite+React static build is sufficient. Nuxt's SSR is completely unused.
+
+3. **API-first means mobile and web share the same backend contract.** Expo talks to REST/GraphQL. Building Nuxt 3 means the mobile app bypasses Nuxt's API routes entirely and talks to Postgres via a separate API layer. Nuxt becomes middleware adding nothing. A dedicated Node/Express or Fastify API is cleaner.
+
+4. **Marc is smartphone-native (D3).** A React Native app with an admin tab serves both personas from a single codebase. A separate Nuxt web admin app may not be needed at all.
+
+5. **The mobile pivot invalidated D7.** Nuxt 3 was chosen for a web-first product that no longer exists. The architecture should match the product that exists: React Native mobile app + static landing page.
+
+**Proposed resolution:** D7 overturned. Backend = Node.js/Express or Fastify on OVH VPS (2GB RAM), JWT auth, same Postgres schema from Sprint 0. Landing = static HTML or Vite+React static build. Admin backend = evaluate at v2, consumes same API as mobile.
+
+**Verdict on D57:** OPEN — Technical Architect makes a strong case. Nuxt 3 chosen before mobile pivot. API-first fits the actual product better. However, no formal resolution yet — D57 remains open.
+
+---
+
+## Debate 58: Relances in MVP — Email Relances Are v1, Expo Push Is v1.1
+
+**Challenge:** D58 (relances in MVP) — Product Strategist challenged whether relances should be in v1 at all, given Expo Push complexity (1-2 weeks, D47). Growth Strategist challenges this framing.
+
+### Growth Strategist — Email Relances Are Low-Cost v1, Push Is v1.1
+
+**Assumption challenged:** The assumption that Expo Push cost (1-2 weeks) equals "relances cost." These are two different features. Email relances are a lightweight v1 feature. Expo Push relances are a polished v1.1 feature.
+
+**Core argument:**
+
+1. **The D58 challenge conflates two separate features.** "Relances" at v1 = overdue invoice email reminder (plaintext, cron job, existing email infrastructure reused). "Relances" with Expo Push = multi-channel notification system with preference center and templating. These have different costs and different timelines.
+
+2. **Relances is part of the closing-the-loop experience.** Devis → acceptance → invoice → payment. Without relances, the loop is open and the product feels unfinished to users deciding whether to upgrade. "Can this tool handle getting me paid?" is the conversion question — relances answers it.
+
+3. **Email relances are low-cost to implement.** A "reminder" button on an overdue invoice, a cron job checking due dates, and a plaintext email template reuse the existing devis-send notification infrastructure. Not 1-2 weeks — more like 1-2 days.
+
+4. **The activation value of relances isn't month-2 — it's month-1 belief.** When a Free user decides whether to upgrade to €29, the question is "can this tool handle the full lifecycle of getting me paid?" Relances is a category completeness signal. Shipping it in v1 says "we understand that getting paid is the point."
+
+5. **Expo Push relances clearly belong in v1.1.** Push notifications require token management backend, APNS certificates, and testing. That's 1-2 weeks. But email relances — which reuse the sending infrastructure from devis sending — are the same feature, just via email instead of push. They're the same feature at different delivery channels.
+
+**Proposed resolution:**
+- **Email relances (plaintext overdue reminder, cron job, 1-2 days of work):** v1. Estimated at Sprint 2.
+- **Expo Push relances (push notification, preference center, templating):** v1.1. Estimated 1-2 weeks per D47.
+- **D2 sprint order unchanged:** Sprint 0 → Sprint 1 → Sprint 2 (factures + email relances) → v1.1 (Expo Push).
+
+**Verdict on D58:** CLOSED — email relances are v1, Expo Push relances are v1.1. The confusion in the D58 challenge was treating "Expo Push cost" as "relances cost." Split the feature into two delivery channels with two timelines. D2 sprint order stands.
+
+---
+
+## Debate 56: WoM % Is Unvalidated — RESOLVED by Prior Debate
+
+**Note:** The Product Strategist agent (pulse-d56-strategist) did not produce a substantive debate argument. D56 was identified as the challenged assumption but the debate argument was not developed. D56 remains OPEN in the decision table pending a future debate.
+
+**What is challenged:** The 40% word-of-mouth attribution has been treated as settled since D33 without empirical validation. No mechanism exists to measure it. For a new product with zero customers, 40% WoM is unachievable at launch — WoM is a lagging indicator of product-market fit, not a leading acquisition channel.
+
+**The core issue (from the debate log):** D33 used 40% WoM to justify the Free tier acquisition model. D52 and D55 relied on it for channel priority. If WoM is not a reliable launch-channel, the acquisition funnel is under-designed.
+
+**Verdict on D56:** OPEN — this is the most important unresolved assumption. It anchors multiple decisions without validation. Needs a measurement mechanism before launch: UTM-tagged referral codes, "comment avez-vous connu l'app?" onboarding question, or explicit referral invite system. Without measurement, 40% is an article of faith.
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D1 | Positioning | Kill "CRM" — devis, factures, relances | 2026-03-30 |
+| D2 | MVP scope | 4 features, SEQUENCED. Sprint 0 (3-4d compliance), Sprint 1 (client+devis), Sprint 2 (factures + email relances). | 2026-03-30 |
+| D3 | Primary persona | Marc — solo smartphone-native artisan | 2026-03-30 |
+| D4 | Stack | Single managed Postgres | 2026-03-30 |
+| D5 | Pricing | Free + €29 two-tier. Drop €49/€79. | 2026-03-30 |
+| D6 | Trial | No time-limited trial. Free tier IS the trial. | 2026-03-30 |
+| D7 | Architecture | Nuxt 3 + OVH managed Postgres — REOPENED D57 (API-first challenge) | 2026-03-30 |
+| D8 | E-invoicing | v2 feature | 2026-03-30 |
+| D9 | Not MVP | No Kanban, no multi-user, no offline, no API keys | 2026-03-30 |
+| D10 | Buyer trigger | "Admin pain" not "CRM need" | 2026-03-30 |
+| D11 | Mobile | React Native from Day 1 via Expo | 2026-03-30 |
+| D12 | Landing page | Simplicity-first — "Vos devis et factures, sans vous prendre la tête." | 2026-03-30 |
+| D13 | Home view | Job-first — Active Job Card as home anchor | 2026-03-30 |
+| D14 | E-invoicing timing | v2 — NOT Day 1 | 2026-03-30 |
+| D15 | Relances differentiator | DE-EMPHASIZED — secondary feature below fold | 2026-03-30 |
+| D16 | Trial length | No countdown trial — Free tier IS the trial | 2026-03-30 |
+| D17 | Mobile strategy | React Native from Day 1 via Expo. Email-only relances at launch. Push deferred to v1.1. | 2026-03-30 |
+| D53 | Landing page | Simplicity-first RETAINED. H1: "Sans vous prendre la tête." H2: 5-min specific claim. | 2026-03-30 |
+| D54 | Sprint 0 | Compressed compliance sprint (3-4d): TVA, sequential numbering, mentions légales, client-type. | 2026-03-30 |
+| D55 | Buyer-user split | Dual-persona GTM. Marc = economic buyer. Admin handler = operational user. Expert-comptable = Phase 2. | 2026-03-30 |
+| D56 | WoM measurement | OPEN — 40% unvalidated. Needs measurement mechanism before launch. | 2026-03-30 |
+| D57 | Architecture | OPEN — Nuxt 3 challenged. API-first + static site proposed. D7 needs formal resolution. | 2026-03-30 |
+| D58 | Relances in MVP | CLOSED — email relances = v1 (1-2 days, Sprint 2). Expo Push relances = v1.1 (1-2 weeks). | 2026-03-30 |
+
+| U1 | Discovery | REPLACED — readiness protocol | 2026-03-30 |
+| U2 | E-invoicing platform | Factea first when v2 | 2026-03-30 |
+| U7 | Domain | DEFERRED — subdomain/Carrd until MVP validated | 2026-03-30 |
+| U8 | WhatsApp acquisition | CLOSED — no WhatsApp CTA in devis | 2026-03-30 |
+| U9 | Free tier activation | Optimized for daily ritual (evening devis flow) | 2026-03-30 |
+| U10 | GTM: Wholesaler | Digital + specialist retailers first. Wholesaler secondary. Audit first. | 2026-03-30 |
+| U11 | Prescriber audit | If >30% of new jobs via prescriber, revisit GTM priority | 2026-03-30 |
+| U12 | Expert-comptable playbook | Phase 2 — relationship-dependent | 2026-03-30 |
+| U13 | WoM measurement | NEW — define referral tracking mechanism before launch (UTM codes, "comment avez-vous connu?", invite codes) | 2026-03-30 |
+| U14 | API-first architecture | NEW — resolve D57: evaluate Node/Express or Fastify vs Nuxt 3 as backend framework | 2026-03-30 |
+
+---
+
+*Last updated: 2026-03-30T14:41*
+

@@ -39,7 +39,6 @@
 |----|-------|-------|--------|
 | D56 | Word-of-mouth % | 40% attribution is unvalidated. WoM is a lagging indicator, not a leading GTM channel. Anchors D33/D52/D55 decisions without evidence. | Growth Strategist |
 | D57 | Architecture (D7) | Nuxt 3 was chosen for a web-first product that no longer exists. API-first + static site is alternative. | Technical Architect |
-| D58 | Relances in MVP | Relances may be v1.1 material — compliance/notification infrastructure cost vs month-1 activation value questioned. | Product Strategist |
 
 ## New from Pulse 2026-03-30T14:11 — All Resolved
 
@@ -86,7 +85,25 @@
 
 ---
 
-*Last updated: 2026-03-30T14:11*
+*Last updated: 2026-03-30T14:41*
+## New from Pulse 2026-03-30T14:41
+
+### Resolved (D58):
+- **D58 (Relances in MVP):** Growth Strategist won — email relances = v1 (1-2 days of work, Sprint 2). Expo Push relances = v1.1 (1-2 weeks per D47). The confusion was treating "Expo Push cost" as "relances cost" — they're two different delivery channels with different timelines. D2 sprint order unchanged: Sprint 0 → Sprint 1 → Sprint 2 (factures + email relances) → v1.1 (Expo Push).
+
+### Challenged Assumptions (D56, D57 — Still Open):
+- **D56 (WoM %):** 40% word-of-mouth attribution has been treated as settled since D33 without empirical validation. No measurement mechanism exists. WoM is a lagging indicator of product-market fit, not a leading acquisition channel. Anchors D33/D52/D55 decisions without evidence.
+- **D57 (Nuxt 3 Architecture):** D7 (Nuxt 3) was decided before React Native was chosen. The product is now mobile-first with a static landing page. Nuxt 3's SSR capabilities are architecturally mismatched. API-first (Node/Express) + static site proposed as alternative.
+
+### New Action Items:
+- [x] **D58 RESOLVED:** Email relances in v1 (Sprint 2, 1-2 days). Expo Push relances in v1.1. D2 sprint order stands.
+- [ ] **D56 NEW:** Define WoM measurement mechanism before launch — UTM-tagged referral tracking, "comment avez-vous connu l'app?" onboarding question, or explicit referral invite codes. Without measurement, 40% target is unverifiable.
+- [ ] **D57 NEW:** Resolve D7 — evaluate Node/Express or Fastify vs Nuxt 3 as backend framework. If Nuxt 3: document why SSR/API routes are needed given React Native is the primary product.
+
+### Challenged This Pulse:
+1. "Relances = Expo Push complexity" (Product Strategist D58 challenge) — challenged by Growth Strategist: conflates two separate features. Email relances (1-2 days) ≠ Expo Push (1-2 weeks). Split the feature.
+2. "Nuxt 3 is the right backend" (D7) — challenged by Technical Architect: SSR capabilities unused for mobile-first + static landing page product. API-first fits the actual architecture better.
+
 
 ## 📋 Current TODO
 
