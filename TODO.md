@@ -28,9 +28,12 @@
 
 | ID | Topic | Issue | Source |
 |----|-------|-------|--------|
-| D15 | Relances differentiator | DE-EMPHASIZED — secondary feature below fold, "Fonctionnalités" section only. NOT in hero. Frame as "Suivi de paiement." | RESOLVED — Debate 25 |
-| D16 | Trial length | 14 days, no credit card at signup, aggressive email drip in final week | RESOLVED — Debate 26 |
-| D17 | Mobile strategy | React Native from Day 1 (via Expo). PWA-first retired. | RESOLVED — Debate 27 |
+| D15 | Relances differentiator | DE-EMPHASIZED — secondary feature below fold | RESOLVED — Debate 25 |
+| D16 | Trial length | 14 days, no credit card at signup | RESOLVED — Debate 26 |
+| D17 | Mobile strategy | React Native from Day 1 via Expo | RESOLVED — Debate 27 |
+| U1 | Real discovery | REOPENED — replace 10-person discovery with 3-day guerrilla usability test + explicit readiness criteria (Debate 28) |
+| D2 | MVP scope | REOPENED — Phase 0.5 (devis-only) proposed to validate core flow before full 4-feature build (Debate 29) |
+| D5 | Pricing | REOPENED — €29/€49/€79 conflicts with simplicity positioning; €19/€29 two-tier proposed (Debate 30) |
 
 ## 🔄 Still Unresolved
 
@@ -42,13 +45,16 @@
 ## 📋 Current TODO
 
 ### Before Building (Do First)
-- [ ] Go watch 10 artisans create quotes and chase payments (U1 — NOT more docs)
+- [ ] Replace "watch 10 artisans" with 3-day guerrilla usability test (5 artisans at wholesaler, one task: create a devis on prototype) — U1 reopened (Debate 28)
+- [ ] Define explicit "ready to build" criteria to replace U1 as gating condition
 - [ ] Pick one: Tolteck competitor or Tolteck complement?
 - [ ] Buy domain (U7) — something memorable for devis/factures tool
 - [ ] Build the Active Job Card data model (`jobs.status`, `jobs.scheduled_date`, `jobs.updated_at`)
 - [x] RESOLVE D15: Relances = secondary feature below fold. "Fonctionnalités" section only. NOT in hero.
 - [x] RESOLVE D16: Trial = 14 days. No credit card at signup. Email drip day 7, 3, 1.
 - [x] RESOLVE D17: React Native from Day 1 via Expo. PWA-first retired.
+- [ ] DECIDE D2: 4-feature MVP vs Phase 0.5 (devis-only MVP) — Technical Architect argues Phase 0.5 is faster to validate (Debate 29)
+- [ ] DECIDE D5: €29/€49/€79 tiered vs €19/€29 two-tier — Product Strategist argues current structure conflicts with simplicity positioning (Debate 30)
 
 ### MVP Build (After Discovery)
 - [ ] Client file feature
@@ -137,3 +143,21 @@ The following were overengineered or wrong:
 ---
 
 *Last updated: 2026-03-30T11:11*
+
+---
+
+## New from Pulse 2026-03-30T11:38
+
+### Reopened (U1, D2, D5):
+- **U1 (Discovery):** Growth Strategist challenged — "watch 10 artisans" is a stalling tactic. Personas are sufficient. Competitive analysis already validated pain. Proposes 3-day guerrilla usability test (5 artisans at wholesaler, single devis task) + explicit "ready to build" criteria instead.
+- **D2 (MVP scope):** Technical Architect challenged — 4-feature MVP underestimates French invoice complexity (sequential numbering, multi-taux TVA 5.5/10/20%, mentions légales per client type). Proposes Phase 0.5: devis-only MVP (1 week build, 1 week test) to validate core flow before full 4-feature build.
+- **D5 (Pricing):** Product Strategist challenged — €29/€49/€79 conflicts with "simple as WhatsApp" positioning. €29 floor is 50%+ above Tolteck (€19) and Obat (€17). Proposes €19/€29 two-tier structure with explicit value anchor: "2h/week saved × €50-80/h = €100-160/week value. Monthly cost: €29."
+
+### Challenged assumptions this pulse:
+1. U1 discovery as prerequisite before building (Growth Strategist — personas sufficient, discovery = indefinite deferral)
+2. 4-feature MVP achievable in short sprint (Technical Architect — French legal invoicing adds hidden complexity)
+3. €29 floor as defensible for simplicity positioning (Product Strategist — above market, conflicts with positioning)
+
+---
+
+*Last updated: 2026-03-30T11:38*

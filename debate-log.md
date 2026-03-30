@@ -205,11 +205,131 @@ Below: **Upcoming Jobs Strip** (next 3 jobs by scheduled date) + **Quick stats b
 
 ---
 
-*Last updated: 2026-03-30T11:24*
+*Last updated: 2026-03-30T11:38*
 
 ---
 
-## Pulse 2026-03-30T11:24 — Three Reopened Debates Resolved
+## Pulse 2026-03-30T11:38 — Three New Debates
+
+---
+
+## Debate 28: U1 Discovery — Stalling Tactic?
+
+**Challenge:** Growth Strategist challenges U1 ("Go watch 10 artisans before building") as a stalling tactic that delays MVP ship by weeks.
+
+### Growth Strategist — Discovery-is-Deferral Case
+
+**Core argument:** Personas are sufficient. Marc's admin workflow is well-characterized. The feature set is locked. French artisan pain points are validated by every competitive analysis (Pennylane, Indy, Freebe exist because the pain is real). Watching artisans mostly surfaces workarounds (WhatsApp, Excel, paper notebooks) which confirm rather than redirect.
+
+**The risk:** Discovery becomes indefinite deferral. Every week of "discovery" is a week not learning from actual users on an actual product. The real failure mode is building something too complex and artisans abandon it mid-trial — only fixable by shipping and iterating.
+
+**Concrete alternative — 3-day guerrilla test:**
+- Day 1-2: Build clickable prototype (Figma) of single flow: create a devis on phone. One screen.
+- Day 3: Go to 5 artisans at a supply wholesaler (Point P, Samse, Gedimat). Saturday morning. Sit with them 10 minutes. Watch their fingers.
+- What you'll learn: Do they understand the UI? Where do they hesitate? What language do they use?
+- This is validation of usability, not discovery of pain. Pain is already known.
+- Cost: 1 designer, 1 weekend. Output: confidence to build, or one specific thing to fix.
+
+**The readiness criteria problem:** U1 never defines "ready to build." Without explicit criteria, "watch 10 artisans" can always be justified as the prerequisite.
+
+**Proposed resolution:** Replace U1 (10-person discovery sprint) with: explicit readiness criteria + 3-day guerrilla test. U1 is REOPENED.
+
+**Verdict on U1:** REOPENED — Growth Strategist challenges U1 as stalling tactic. Recommend replacing with guerrilla usability test + explicit readiness criteria.
+
+---
+
+## Debate 29: MVP Scope — 4 Features Underestimated?
+
+**Challenge:** Technical Architect argues the 4-feature MVP scope is technically underestimated. French legal invoicing requirements add hidden complexity that makes a single-sprint 4-feature build unrealistic.
+
+### Technical Architect — Phase 0.5 Case
+
+**Core argument:** The 4 features (client file, devis, facture, relance) share infrastructure that creates bottlenecks: client schema, TVA multi-taux math, sequential numbering enforcement, mentions légales per client type. "Parallel" development on shared types means constant merge conflicts and integration testing nightmares.
+
+**Hidden complexity in French invoicing:**
+1. **Numérotation séquentielle:** Server-side enforcement, annual reset with prefix, no gaps, no duplicates, recovery logic. 2-3 days.
+2. **TVA multi-taux:** French artisans use 3 rates (5.5%, 10%, 20%) per line item. Per-line calculation, TVA breakdown section, rounding accuracy. 1-2 days.
+3. **Mentions légales:** Varies by client type (particulier, professionnel, étranger EU, hors EU). Dynamic block based on document type. 1-2 days.
+4. **Facture creance:** Separate regulatory layer for factoring.
+
+**The parallel development illusion:** 4 developers on 4 features sounds fast. Reality: all 4 share the same underlying types. Feature B (devis) can't ship without Feature A (clients). Feature C (factures) depends on Feature B's data model. Integration testing reveals cross-feature breakage late in the sprint.
+
+**Proposed Phase 0.5 — devis-only MVP:**
+Scope: client file + devis creation + send via WhatsApp/email. No factures, no relances.
+- Validates the core flow: does Marc actually create and send a devis from his phone?
+- Skips TVA complexity (devis doesn't require VAT in the same way)
+- Skips sequential numbering (devis numbering is less regulated)
+- 1 week build, 1 week test, shippable
+- Lessons feed directly into factures Phase 1
+
+**Verdict on D2:** REOPENED — Technical Architect challenges 4-feature MVP scope as underestimated. Proposes Phase 0.5 (devis-only) before full 4-feature build.
+
+---
+
+## Debate 30: Pricing — €29/€49/€79 Conflicts With Simplicity Positioning?
+
+**Challenge:** Product Strategist challenges the €29/€49/€79 pricing structure as carried forward without debate. Argues it conflicts with "simple as WhatsApp" positioning and is above market vs Tolteck (€19) and Obat (€17).
+
+### Product Strategist — Pricing-Repositioning Case
+
+**Core argument:** Three tiers + simplicity positioning = cognitive dissonance. If it's "simple like WhatsApp," why parse three SKUs and decode feature differences? WhatsApp doesn't have tiers.
+
+**The price floor problem:**
+- Tolteck: €19/mo | Obat: €17/mo | This product: €29/mo (50-70% above market)
+- For a simplicity play, €29 floor signals "serious business tool" — the opposite of "simple WhatsApp energy"
+- French artisans (micro-SMBs, sole traders, ~€80k turnover) are price-sensitive. Mental model: "shouldn't cost more than Netflix" (€17-22)
+
+**The tier structure problem:**
+- €29/€49/€79 implies feature-gating that creates anxiety for a solo artisan: "Which tier do I need? Will I outgrow it? Am I paying for stuff I don't use?"
+- Two tiers max aligns with simplicity positioning. Three tiers signals complexity.
+
+**Competitor context:**
+- Tolteck (40k+ French artisans) at €19, Obat at €17 — these are established market prices
+- The differentiator (relances/follow-ups) might justify a premium, but only if clearly articulated
+
+**Proposed two-tier structure:**
+- **Starter: €19/mo** — devis + factures only (matches Tolteck, below market for "pro")
+- **Pro: €29/mo** — + relances automatisées + prioritized support
+- Drop €49/€79 entirely for v1
+
+**The value anchor problem:** "2h/week saved × €50-80/h = €100-160/week" math is compelling but buried. It belongs on the pricing page explicitly:
+> "2 heures par semaine sur les devis et relances. C'est €100-160 de travail. Votre facture mensuel? €29."
+
+**Verdict on D5:** REOPENED — Product Strategist challenges €29/€49/€79 as carried forward without debate. Conflicts with simplicity positioning and above competitor floor. Recommends €19/€29 two-tier structure.
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D1 | Positioning | Kill "CRM" — devis, factures, relances | 2026-03-30 |
+| D2 | MVP scope | 4 features only | prior |
+| D3 | Primary persona | Marc — solo smartphone-native | 2026-03-30 |
+| D4 | Stack | Single managed Postgres | 2026-03-30 |
+| D5 | Pricing | €29/€49/€79 tiered | prior — REOPENED Debate 30 |
+| D6 | Trial | 14 days | 2026-03-30 |
+| D7 | Architecture | Nuxt 3 + OVH managed Postgres | 2026-03-30 |
+| D8 | E-invoicing | v2 feature (Chorus Pro compatible) | 2026-03-30 |
+| D9 | Not MVP | No Kanban, no multi-user, no offline, no API keys | 2026-03-30 |
+| D10 | Buyer trigger | "Admin pain" not "CRM need" | 2026-03-30 |
+| D11 | Mobile | React Native from Day 1 via Expo | 2026-03-30 |
+| D12 | Landing page | Simplicity-first — "Vos devis et factures, sans vous prendre la tête" | 2026-03-30 |
+| D13 | Home view | Job-first — Active Job Card as home anchor | 2026-03-30 |
+| D14 | E-invoicing timing | v2 — NOT Day 1 | 2026-03-30 |
+| D15 | Relances differentiator | DE-EMPHASIZED — secondary feature below fold | 2026-03-30 |
+| D16 | Trial length | 14 days, no credit card, email drip | 2026-03-30 |
+| D17 | Mobile strategy | React Native from Day 1 (updated from PWA-first) | 2026-03-30 |
+| D18 | MVP scope complexity | REOPENED — Phase 0.5 proposed (Debate 29) | 2026-03-30 |
+| D19 | Pricing structure | REOPENED — €19/€29 two-tier proposed (Debate 30) | 2026-03-30 |
+
+| U1 | Real discovery | REOPENED — replace with guerrilla usability test (Debate 28) | |
+| U2 | E-invoicing platform | Factea first when v2 | 2026-03-30 |
+| U7 | Domain | Still open — buy domain | |
+
+---
+
+*Last updated: 2026-03-30T11:38*
 
 ---
 
