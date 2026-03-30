@@ -3396,3 +3396,68 @@ RESOLVED — D70 REFINED. The "Better Free Tier" trap is named:
 
 *Last updated: 2026-03-30T17:17*
 
+
+---
+
+## Pulse 2026-03-30T17:29 — Three Specialist Debates
+
+---
+
+## Debate 77: "Membre fondateur" Creates Price Anxiety It Was Meant to Resolve
+
+**Challenge:** D75 resolved that "Membre fondateur" framing (4 benefits: locked price + named in app + direct founder access + roadmap vote) creates relationship and urgency without training users to wait for discounts. This assumption is wrong.
+
+### Product Strategist — Against "Membre fondateur"
+
+**Assumption challenged:** "Creates relationship without training users to wait for discounts." The opposite happens. "Membre fondateur" *is* a discount framing. It tells users: "This is what you pay *now*, as a favor to us. Later, it will cost more." That's a discount signal wearing relationship language.
+
+**Assumption challenged:** "First 50 slots creates natural scarcity." Natural scarcity works when the product has demonstrated demand. At launch, zero traction. "50 founding spots" sounds arbitrary when nobody knows if the product works.
+
+**The latecomer problem:** Marc signs up in Month 3. He sees "50 founding members" — he wasn't invited. Either (a) resentment, or (b) waiting for "cohort 2 founding membership."
+
+**The alternative:** "Essai gratuit 14 jours, puis €29/mois. Prix définitif. Sans engagement." — makes €29 the stated price, not a promotional one.
+
+**VERDICT on D75:**
+OPEN — "Membre fondateur" framing challenged but not resolved. D75 still stands pending rebuttal. New action items generated.
+
+---
+
+## Debate 78: JWT Is the Wrong Auth Primitive for a Solo Artisan App
+
+**Challenge:** D74 resolved Sprint 0 JWT scope = contract + stubs + @fastify/jwt config (0.5-1 day). The assumption challenged: JWT is the right auth mechanism for a solo artisan app.
+
+### Technical Architect — Against JWT
+
+**The flawed premise:** JWT was designed for distributed stateless auth across microservices and multi-user sessions. A solo artisan with one phone has a single-user, single-device model. We're using a sledgehammer for a finishing nail.
+
+**What D74 got wrong:** Even the "scaffold" costs 0.5–1 day and delivers zero user-facing value. JWT introduces: @fastify/jwt dependency, token generation/signing/verification, TTL management, refresh endpoint, logout logic.
+
+**The API key alternative:** Single UUID stored in Expo SecureStore, sent as Authorization header. No library, no TTL, no refresh. ~2 hours of work vs 0.5–1 day for JWT scaffold. 2–6 hours reclaimed in Sprint 0.
+
+**When JWT makes sense:** Multi-user sessions, distributed microservices, token sharing across devices. None of these apply.
+
+**VERDICT on D74:**
+OPEN — API key auth challenge not yet resolved. Sprint 0 scope implications pending. New action items generated.
+
+---
+
+## Debate 79: Louis's Expert-Comptable Is a Validation Asset, Not a Sales Channel
+
+**Challenge:** D55/D72 resolved expert-comptable outreach = Phase 1 (warm access via Louis's existing accountant). Assumption challenged: warm access = referral opportunity.
+
+### Growth Strategist — Validation-First
+
+**The mistake:** Conflating validation with sales. Louis's accountant is a *relationship*, not a *channel*. Warm access = credible feedback opportunity, not a sales funnel.
+
+**The risk of asking for referrals now:** Best case — accountant says yes out of loyalty, sends 2-3 clients, nothing comes of it (product not ready), credibility takes a hit. Worst case — accountant says no, and Louis hasn't even validated the core persona.
+
+**The asymmetric outcome:** Validation failure is cheap. Referral failure is expensive. One costs time. The other costs the relationship AND time.
+
+**The correct order:** (1) Validation — "Can I show you the flow and get your honest reaction?" (2) Referrals — only after product has real users, testimonials, and the accountant has seen it work.
+
+**VERDICT on D55/D72:**
+OPEN — D55/D72 reframed: expert-comptable stays Phase 1 but reclassified as validation asset, not GTM channel. Referral phase deferred to Phase 2. New action items generated.
+
+---
+
+*Last updated: 2026-03-30T17:29*

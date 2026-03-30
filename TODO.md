@@ -581,3 +581,26 @@ The following were overengineered or wrong:
 - [ ] **D76 NEW:** Accepted-devis conversion notification: "Votre devis pour [Client] a été accepté. Passez à €29 pour suivre ce qui vous est dû." — fires on first `devis.status = accepted`, not on 80% limit proximity.
 - [ ] **D76 NEW:** €29 tier delivers: (1) financial snapshot ("vous avez €X en devis acceptés en attente de paiement"), (2) automatic email relances at 14/30/60 days on accepted devis. Not a dashboard — a pipeline nerve center.
 - [ ] **D76 NEW:** 80% "vous êtes presque à votre limite" notification DEPRECATED — replace in product spec with accepted-devis milestone trigger.
+
+---
+
+## New from Pulse 2026-03-30T17:29 — Three Open Debates
+
+### Open (D77, D78, D79):
+- **D77 (Membre fondateur):** OPEN — Product Strategist argues "Membre fondateur" framing creates price anxiety by signaling €29 is promotional, not the real price. Alternative proposed: "Essai gratuit 14 jours, puis €29/mois. Prix définitif. Sans engagement."
+- **D78 (JWT vs API key):** OPEN — Technical Architect argues API key auth (~2 hours) replaces JWT scaffold (0.5-1 day) in Sprint 0. Reclaims 2-6 hours for compliance work.
+- **D79 (Expert-comptable reframed):** OPEN — Growth Strategist argues Louis's accountant = validation asset, not sales channel. Phase 1 = validation ("can I show you and get your reaction?"). Phase 2 = referrals (only after product has real users + testimonials).
+
+### New Action Items from this pulse:
+- [ ] **D77 NEW:** A/B test: "Membre fondateur" (locked €29) vs "Essai gratuit → €29/mois, prix définitif" — run with first 20 signups
+- [ ] **D77 NEW:** Remove founding member language from onboarding if D75 stands — don't let it leak into in-app messaging for late adopters
+- [ ] **D77 NEW:** If scarcity is needed: use actual seats remaining ("17 places restantes ce mois") tied to real capacity, not arbitrary cohort numbers
+- [ ] **D78 NEW:** Replace JWT with API key auth in Sprint 0 scope — `artisan.api_key UUID DEFAULT gen_random_uuid()` in schema
+- [ ] **D78 NEW:** Sprint 0 auth deliverable: `/api/auth/verify` endpoint + Expo SecureStore stub, ~2 hours
+- [ ] **D78 NEW:** Re-evaluate JWT for Sprint 2 — only if multi-user or admin handler sharing becomes a requirement
+- [ ] **D79 NEW:** U12 split into two documents: (a) validation script (action this week), (b) referral script (action Phase 2)
+- [ ] **D79 NEW:** Phase 2 referral triggers: (1) product has real users, (2) Louis has testimonials, (3) accountant has seen working product
+- [ ] **D79 NEW:** Louis's meeting this week: validation-first framing — "Can I show you the flow and get your reaction?" not "Would you send me clients?"
+- [ ] **D79 NEW:** D55/D72 refined: expert-comptable = Phase 1 validation asset, not Phase 1 GTM channel
+
+*Last updated: 2026-03-30T17:29*
