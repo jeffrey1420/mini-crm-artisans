@@ -6488,3 +6488,127 @@ Building an SEO content machine takes 6-12 months to yield meaningful traffic. S
 ---
 
 *Last updated: 2026-03-30T23:08*
+
+---
+
+*Last updated: 2026-03-30T23:21*
+
+---
+
+## Pulse 2026-03-30T23:21 — Three Specialist Debates
+
+---
+
+## Debate 126: D93 — Guided Creation Flow Selects for the Wrong Users
+
+**Challenge:** D93 (Guided Creation Flow) — Product Strategist challenges the assumption that a mandatory/scheduled onboarding call belongs in Sprint 0.
+
+### Product Strategist — Against the Guided Creation Flow
+
+**Assumption challenged:** "A 15-minute scheduled onboarding call increases Day-7 retention." This assumption has never been validated and carries structural selection biases that damage the product's positioning.
+
+**Core arguments:**
+
+**The signal is lethal.** A mandatory setup call tells autonomous professionals: "We don't trust you to use this without help." French artisans aged 45-55 are solo operators who've built businesses without hand-holding. They're proud. When you demand a setup call, you're casting yourself as "complex software for people who need coaxing." Your ideal customer — the independent craftsman who chooses tools carefully — will see that call requirement and wonder what else is broken.
+
+**Wrong user selection.** The users who WILL book that call are precisely the high-touch, high-support-cost customers who erode margins. You're optimizing for the wrong cohort. Hand-holders are low-LTV, high-churn users who need constant reassurance. Autonomous professionals are your ideal customers — and they want to figure it out themselves.
+
+**Infrastructure for the wrong 70%.** If comparable solo-pro tools (Square, Mailchimp, Stripe) are any guide, 70%+ of best-fit users will skip the call entirely. Building Sprint 0 infrastructure — calendar booking, call scheduling, prep materials, follow-up sequences — for a feature most ideal users bypass is misallocated capital.
+
+**Opportunity cost.** Engineering hours in Sprint 0 are precious. Every hour on call scheduling is an hour not building PDF generation, reminder automation, or the invoice editor that every user uses daily.
+
+**The better path.** A 90-second in-app wizard with sensible defaults handles 80% of setup. Pair with an opt-in "open office hours" link — no scheduling friction, no mandatory commitment — for users who genuinely want help. This serves the hand-holder without punishing the self-sufficient user, without infrastructure bloat, and without the selection bias.
+
+**Validate before building.** Run five discovery calls with real artisans. Measure how many ask for hand-holding versus how many say "just give me a tutorial video." Build the feature the data demands.
+
+**VERDICT on D93:** Sprint 0 scope should NOT include a mandatory Guided Creation Flow. Replace with: 90-second in-app wizard (sensible defaults) + opt-in "open office hours" link. Cut mandatory call from Sprint 0 entirely.
+
+---
+
+## Debate 127: D81/C — Optimistic UI + Retry Queue Fails at Job Sites
+
+**Challenge:** D81/C (Offline scope) — Technical Architect challenges the assumption that optimistic UI + retry queue is sufficient offline architecture for job logging.
+
+### Technical Architect — Local SQLite Is the Only Acceptable Foundation
+
+**Assumption challenged:** "Offline-capable via optimistic UI + retry queue + AsyncStorage" survives real job-site conditions. The job-site reality is: phones die mid-entry, connectivity gaps last hours, OS kills background processes. A retry queue doesn't help when the phone dies while adding line items — the queue is empty.
+
+**Core arguments:**
+
+**AsyncStorage is not a database.** It's key-value storage prone to corruption on unexpected termination, with no query capabilities. Using it as the foundation for job logging is building on sand.
+
+**Retry queues assume the queue survives.** It doesn't survive phone death. It doesn't survive an OS kill after 3 hours in airplane mode. These aren't edge cases — they're Tuesday for someone working in a concrete basement installing pipes.
+
+**Job logging is the primary data entry point for Path B artisans.** For verbal-agreement workers who never send formal devis, the job entry IS the record of work done. Lost job entries = lost revenue tracking = lost faith in the product. This is not a caching concern — it's the core data capture mechanism.
+
+**Local SQLite (WatermelonDB or expo-sqlite) gives us:**
+- ACID transactions that survive phone death
+- Proper query language for complex job/lignes/photos relationships
+- Observable data that feeds React components directly
+- A sync layer we control, not a fragile queue we hope survives
+
+**The tradeoff is worth it.** Yes, this adds 1-2 days to Sprint 0. But it's foundational infrastructure that every subsequent feature builds on. The retry queue approach "saves" time by borrowing it from production bugs that surface at the worst moment.
+
+**Conflict detection is minimal.** Add `sync_status` enum (pending/synced/conflict) on mutable tables. Server-wins on conflict for v1. This is 2 hours of work.
+
+**VERDICT on D81/C:** Sprint 0 must include local SQLite (expo-sqlite or WatermelonDB) as the persistence foundation. Replace AsyncStorage + retry queue with: local SQLite + background sync worker + sync_status field. Add 1-2 days to Sprint 0 estimate.
+
+---
+
+## Debate 128: D56 — SEO Is Not the Primary Discovery Channel for This Audience
+
+**Challenge:** D56 (SEO as primary digital channel) — Growth Strategist challenges the assumption that SEO is the right primary digital acquisition channel for French BTP artisans.
+
+### Growth Strategist — SEO Is a Long-Tail Play, Not a Primary Channel
+
+**Assumption challenged:** "SEO is the primary digital discovery channel." This assumes French artisans Google for software solutions. They don't. They ask their mates.
+
+**Core arguments:**
+
+**The volume problem.** "Logiciel devis facture artisan" pulls ~200-400 monthly searches. That's not a channel — that's static. Meanwhile, French BTP WhatsApp groups represent 50,000+ monthly touchpoints across 10,000 users. We're fighting for crumbs from a table where someone else is already sitting.
+
+**The buyer journey doesn't start with Google.** Marc doesn't Google "devis facture BTP." He asks his mate Pierre over coffee. He screenshots what his colleague uses. He posts in the artisan WhatsApp group: "Qui utilise un truc pour faire ses devis rapidement?" Within hours, he has three recommendations. That's discovery. That's the real funnel.
+
+**Speed kills longevity right now.** SEO pays off in 6-12 months. We're not a Series B company with runway to wait. Community seeding in WhatsApp and Facebook BTP groups produces word-of-mouth in weeks. Build the moat later; survive now.
+
+**SEO attracts the wrong visitors.** Search traffic favors researchers, comparers, people clicking three tabs. These users need convincing. Our users need a mate to say "try this." Referral visitors arrive with social proof already embedded. They convert faster and churn less.
+
+**The reallocation.** Stop spending on 6-12 months of blog content, schema markup, and backlink outreach. Start spending on: genuine participation in 5-10 French BTP Facebook groups (value-first, not spam), referral tracking ("Comment nous avez-vous connu?" at signup + WhatsApp share codes), prescriber outreach (architects, property managers who recommend tools to artisans).
+
+**VERDICT on D56:** Move SEO to Month 6+ long-tail play. Primary Month 1-3 digital = community seeding (WhatsApp groups, Facebook BTP groups) + referral tracking + prescriber outreach. SEO is a real channel — it's not our primary channel. Not yet.
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D12 | Landing page | Simplicity-first RETAINED — "Sans vous prendre la tête" | 2026-03-30T22:56 |
+| D56 | SEO as primary channel | REOPENED — community seeding + peer referral > SEO | 2026-03-30T23:21 |
+| D72 | Expert-comptable timing | Phase 2 (Month 4+) | 2026-03-30T22:56 |
+| D81/C | Offline architecture | REOPENED — local SQLite replaces retry queue | 2026-03-30T23:21 |
+| D85 | GetApp/Capterra | REMOVED from TODO | 2026-03-30T22:30 |
+| D93 | Guided Creation Flow | REOPENED — mandatory call rejected, opt-in wizard + office hours | 2026-03-30T23:21 |
+| D99 | Pricing | Flat €29/month + €260/year annual | 2026-03-30T22:30 |
+| D100 | Supabase exit trigger | Usage-based composite trigger (>10k docs + >100 MAU + >€150/mo) | 2026-03-30T22:56 |
+| D114 | PDF Sprint 0 gate | expo-print Sprint 0 prototype, Sprint 1b storage migration | 2026-03-30T22:30 |
+
+| U1 | Discovery | Readiness protocol | 2026-03-30 |
+| U2 | E-invoicing platform | Factea first when v2 | 2026-03-30 |
+| U7 | Domain | Buy now, park it | 2026-03-30T21:27 |
+
+---
+
+## New Action Items
+
+- [ ] **D56 NEW:** Move SEO from primary GTM to Month 6+ long-tail. Redirect budget to: (1) genuine participation in 5-10 French BTP Facebook groups, (2) referral tracking at signup ("Comment nous avez-vous connu?" + WhatsApp share codes), (3) prescriber outreach list (architects, property managers)
+- [ ] **D56 NEW:** Add referral tracking to signup flow this week. Track: peer referral source, WhatsApp share codes
+- [ ] **D81/C NEW:** Replace AsyncStorage + retry queue with expo-sqlite or WatermelonDB in Sprint 0. Add 1-2 days to Sprint 0 estimate. Add `sync_status` field (pending/synced/conflict) on mutable tables. Build background sync worker that triggers on connectivity restore
+- [ ] **D81/C NEW:** Sprint 0 offline architecture: local SQLite + background sync worker + sync_status enum. Server-wins conflict resolution in v1
+- [ ] **D93 NEW:** Remove mandatory Guided Creation Flow from Sprint 0 scope entirely
+- [ ] **D93 NEW:** Replace with: 90-second in-app wizard (sensible defaults: business name, métier, currency, payment terms) + opt-in "open office hours" link in settings (Calendly, no scheduling infra)
+- [ ] **D93 NEW:** Run 5 discovery calls with real artisans before Sprint 2 to validate whether call-based onboarding has demand. Build only if data shows it
+
+---
+
+*Last updated: 2026-03-30T23:21*

@@ -994,3 +994,30 @@ The following were overengineered or wrong:
 3. "SEO is primary digital discovery channel" — challenged: artisans discover via peer networks, not Google search
 
 *Last updated: 2026-03-30T23:08*
+
+## New from Pulse 2026-03-30T23:21 — Three Debates Resolved
+
+### Resolved
+
+- **D93 (Guided Creation Flow):** RESOLVED — Sprint 0 should NOT include mandatory Guided Creation Flow. Replace with: 90-second in-app wizard (sensible defaults) + opt-in "open office hours" link. Mandatory call is rejected. Validated by: wrong user selection bias, infrastructure for 70% who skip, opportunity cost, and validation-before-build principle.
+- **D81/C (Offline architecture):** RESOLVED — AsyncStorage + retry queue is insufficient for job-site environments. Sprint 0 must include local SQLite (expo-sqlite or WatermelonDB) as persistence foundation. Add 1-2 days to Sprint 0 estimate. Add `sync_status` field on mutable tables. Server-wins conflict resolution for v1.
+- **D56 (SEO as primary channel):** RESOLVED — SEO is not the primary discovery channel for French BTP artisans. Move to Month 6+ long-tail. Primary Month 1-3 GTM = community seeding (WhatsApp/Facebook BTP groups) + referral tracking + prescriber outreach.
+
+### Challenged Assumptions:
+1. "Mandatory onboarding call increases Day-7 retention" — challenged: selects for hand-holders, repels autonomous pros
+2. "Retry queue survives phone death and hours-long connectivity gaps" — challenged: AsyncStorage is not a database; job logging is core data, not cache
+3. "SEO is the primary digital discovery channel" — challenged: artisans discover via peer networks, not Google search
+
+### New Action Items:
+- [x] **D93 RESOLVED:** Remove mandatory Guided Creation Flow from Sprint 0 scope
+- [ ] **D93 NEW:** Sprint 0 ships: 90-second in-app wizard (business name, métier, currency, payment terms as defaults) + opt-in "open office hours" Calendly link in settings/help
+- [ ] **D93 NEW:** Run 5 discovery calls with real artisans before Sprint 2 to validate call-based onboarding demand. Build only if data supports it
+- [x] **D81/C RESOLVED:** Replace AsyncStorage + retry queue with expo-sqlite or WatermelonDB in Sprint 0
+- [ ] **D81/C NEW:** Sprint 0 updated: add 1-2 days for local SQLite implementation. Add `sync_status` enum (pending/synced/conflict) on mutable tables. Build background sync worker triggered on connectivity restore
+- [ ] **D81/C NEW:** Sprint 0 offline architecture: local SQLite (foundation) + background sync worker + sync_status field. Server-wins conflict resolution in v1
+- [x] **D56 RESOLVED:** Move SEO from primary GTM to Month 6+ long-tail
+- [ ] **D56 NEW:** Add referral tracking to signup flow this week: "Comment nous avez-vous connu?" at signup + WhatsApp share codes
+- [ ] **D56 NEW:** Join 5-10 French BTP Facebook groups genuinely (no spam) this week
+- [ ] **D56 NEW:** Build prescriber outreach list (architects, property managers) — Week 2
+
+*Last updated: 2026-03-30T23:21*
