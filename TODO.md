@@ -52,8 +52,8 @@
 | D96 | Conversion trigger | **SUPERSEDED by Debate 110 — Dual-path conversion:** Path A (Formal-Devis Artisan): Limit-hit (5 active devis OR 10 clients) OR first paid facture = hard gate. Path B (Verbal-Agreement Artisan): 45 consecutive days of active product usage (job created/updated) OR 7+ jobs logged OR 5+ active clients managed = conversion trigger. Day 14 human WhatsApp check-in applies to both archetypes as primary conversion moment. | Debate 110 (Product Strategist) | 2026-03-30 |
 | D97 | Sprint 0 prep | Louis writes 4 mentions légales templates this week (2h) — gate for 5-day Sprint 0. | Debate 97 (Technical Architect) | 2026-03-30 |
 | D98 | Platform default | **REFLECTED — Direction confirmed, validation mechanism updated.** Android-first remains correct for French artisan demographic. "Week 1 poll validates" REMOVED (wrong instrument after U15 elimination). Replaced with install completion rate (≥50% in 48h) as Sprint 0 metric. D24 resolution gates Sprint 0 specificity. | Debates 98/103 (Growth Strategist) | 2026-03-30 |
-| D99 | Pricing structure | **RESOLVED — Flat €29/month + €260/year annual.** Per-devis deferred to v1.2. Annual billing solves seasonality without per-devis conversion-moment friction. Per-devis conflicts with D96 conversion trigger architecture. | Debate 120 (Product Strategist) | 2026-03-30T22:30 |
-| D114 | PDF Sprint 0 gate | **RESOLVED — expo-print Sprint 0 prototype, Sprint 1b storage migration.** Legal labeling required in Sprint 0 handoff doc. Phase 2 compliance prerequisite acknowledged. | Debate 121 (Technical Architect) | 2026-03-30T22:30 |
+| D99 | Pricing structure | **KILLED — Usage-based billing permanently retired.** Flat €29/month + €260/year annual billing at launch. Usage-based incompatible with dual-path conversion (Path B artisans can't be metered). | Debate 125 (All 3 agents) | 2026-03-30T23:31 |
+| D114 | PDF Sprint 0 gate | **RESOLVED — HTML-to-PDF Edge Function (not expo-print).** Same HTML serves WhatsApp OG preview. Mentions légales embedded in HTML string Sprint 0. | Debate 126 (Technical Architect) | 2026-03-30T23:31 |
 | U15 | Founding member offer | ELIMINATED — no lifetime deal, no founding/access tier, no "50 places" scarcity. Single €29/month. Replaced by "Support Prioritaire" (direct WhatsApp to Louis, roadmap vote, named credits). | Debate 101 (Growth Strategist) | 2026-03-30 |
 | U7 | Domain purchase | RESOLVED — buy domain now (park it), defer brand decision. Domain = infrastructure, not branding. Parking costs ~€10-15/year. Expert-comptable outreach and GetApp/Capterra profiles need a proper domain to establish credibility. Brand name decision stays open. | Debate 109 (Growth Strategist) | 2026-03-30 |
 
@@ -1021,3 +1021,27 @@ The following were overengineered or wrong:
 - [ ] **D56 NEW:** Build prescriber outreach list (architects, property managers) — Week 2
 
 *Last updated: 2026-03-30T23:21*
+
+## New from Pulse 2026-03-30T23:31 — Three Resolutions (D99, D113, D56)
+
+### Resolved
+
+- **D99 (Usage-based pricing):** KILLED — Flat €29/month + annual billing (€260/year) for seasonality. All three specialist agents independently rejected usage-based billing. Path B artisans (verbal-agreement, no formal devis) cannot be metered. Usage-based creates a two-tier billing architecture that contradicts dual-path conversion. 3-5 days of Stripe metering engineering for uncertain revenue benefit. Flat €29 requires one Stripe subscription. Annual billing solves seasonality without billing complexity.
+- **D113 (PDF Sprint 0 gate):** RESOLVED — Reject expo-print in-memory. Adopt HTML-to-PDF via Supabase Edge Function. Same HTML serves WhatsApp OG tag preview page (no separate endpoint). Mentions légales embedded in HTML string Sprint 0. Handlebars/Nunjucks template engine deferred to Sprint 1 if needed.
+- **D56 (Community seeding timing):** UPDATED — Community seeding pushed to Month 4+. Louis (solo dev) is the wrong person for community seeding right now — requires 2-4h/week commitment, 3-6 month lag before signal, social capital he doesn't have yet. Month 1-3 GTM = prescriber outreach + personal network introductions + referral tracking + GetApp/Capterra profiles.
+
+### Challenged Assumptions:
+1. "Usage-based billing helps seasonal cash flow" — challenged: benefit only applies to Path A (formal-devis artisans); Path B (verbal artisans) pay €0 indefinitely
+2. "expo-print in-memory is fast enough for Sprint 0" — challenged: TVA arrondi precision issues, no WhatsApp OG preview, 4-hour POC risk of quality failure
+3. "Community seeding is Month 1-3 priority" — challenged: solo dev lacks social capital and time for 2-4h/week community management
+
+### New Action Items:
+- [x] **D99 KILLED:** Usage-based billing (€1.50/devis, capped €29) permanently retired. Flat €29/month + €260/year annual billing at launch.
+- [x] **D113 RESOLVED:** PDF generation = Supabase Edge Function (HTML-to-PDF). WhatsApp OG preview = same HTML template. Mentions légales embedded in HTML Sprint 0.
+- [x] **D56 UPDATED:** Community seeding pushed to Month 4+. Month 1-3 GTM = prescriber outreach + personal network + referral tracking.
+- [ ] **D99 NEW:** Update pricing page to show annual billing option (€260/year) alongside flat €29/month. Frame: "2 mois offerts" annual vs monthly.
+- [ ] **D113 NEW:** Sprint 0 gate item — confirm PDF generation approach (HTML-to-PDF Edge Function) before sprint starts. POC in 2-4 hours to validate quality.
+- [ ] **D56 UPDATED:** Remove "join 5-10 French BTP Facebook groups this week" from Week 1 tasks. Replaced with: (1) referral tracking in signup flow, (2) prescriber list of 10 architects/property managers in Caen area, (3) ask 3 people in personal network for artisan introductions.
+- [ ] **D56 NEW:** Month 1-3 GTM execution order: Week 1 (referral tracking + personal network), Week 2 (prescriber list), Week 3-4 (first prescriber outreach calls), Month 2 (GetApp/Capterra profiles published with beta reviews).
+
+*Last updated: 2026-03-30T23:31*

@@ -6612,3 +6612,117 @@ Building an SEO content machine takes 6-12 months to yield meaningful traffic. S
 ---
 
 *Last updated: 2026-03-30T23:21*
+
+---
+
+## Pulse 2026-03-30T23:31 — Three Specialist Debates (D99, D113, D56)
+
+---
+
+## Debate 125: D99 — Usage-Based Billing: All Three Agents Agree — Kill It
+
+### Three-Alignment Verdict
+
+Product Strategist, Technical Architect, and Growth Strategist independently reached the same conclusion: usage-based billing (€1.50/devis, capped at €29) is incompatible with the current architecture. This convergence is significant — three different specialist lenses, one answer.
+
+**Product Strategist — Path B creates a two-tier billing contradiction:**
+Path B artisans (verbal-agreement, no formal devis) have zero per-devis events. You cannot charge €1.50 per devis to someone who creates zero devis. This forces a fallback flat-rate mechanism for Path B, which is not usage-based pricing — it is a hybrid that must be explained at conversion. "€1.50 per devis, except if you came via Path B, then it's a flat fee" is four sentences that induce doubt in a simplicity-first product. Flat €29/month is one sentence. Annual billing (€260/year) handles seasonality without this problem.
+
+**Technical Architect — 3-5 days of billing engineering for uncertain ROI:**
+Stripe metered subscriptions require four distinct subsystems: event tracking, metering API reporting, webhook handlers, and cap-aware billing logic. Louis is solo. Flat €29/month requires one Stripe subscription configuration. At 10 paying users, flat €29 equals €290/month — the same revenue as usage-based with a fraction of the complexity. Path B artisans confirm the problem: a verbal-agreement artisan who converts has zero devis events to meter. Louis would need a fallback flat-rate anyway — building two billing systems instead of one.
+
+**Growth Strategist — The billing model only helps the minority who don't need it:**
+Usage-based billing was supposed to help seasonal cash flow. But Path B artisans (verbal agreements, no formal devis) pay €0/month under usage-based — they never generate a billing event. Path A artisans (formal devis) already have formal invoicing workflows — they're the ones least cash-flow-constrained. The benefit goes to the wrong population. Additionally, D96/D110 sets Path B conversion triggers as usage milestones (45 days active, 7 jobs logged, 5 clients managed). But usage-based billing has no per-event billing for Path B. Reaching those milestones generates zero revenue. The conversion moment is also the revenue-loss moment.
+
+### Verdict on D99: RESOLVED — Kill usage-based billing.
+
+- Flat €29/month remains the pricing model
+- Annual billing (€260/year) is the seasonality fix — offered at conversion moment as an alternative
+- D99 usage-based proposal is permanently retired
+- The D96/D110 dual-path conversion architecture is preserved without billing conflicts
+
+---
+
+## Debate 126: D113 — PDF Sprint 0 Gate: Reject expo-print in-memory
+
+### Technical Architect + Product Strategist Align
+
+Both agents independently identified expo-print in-memory as the wrong approach for professional French artisan documents.
+
+**Technical Architect — expo-print doesn't exist in isolation:**
+expo-print renders React Native views to PDF. Every devis line item, TVA calculation, and mention légale variant must be expressible as React Native components. French TVA arrondi commercial (half-up rounding per line) is a mathematical precision requirement — not a visual one. expo-print doesn't give control over floating-point precision; it gives a rendered view. If the RN layout engine rounds differently than French tax law requires, the PDF is non-compliant. Additionally, WhatsApp preview cards need OG meta tags on a server-rendered HTML page. expo-print produces a binary PDF blob, not an HTML document. Louis needs a separate web preview endpoint regardless. Simpler path: one Edge Function that renders HTML with inline CSS, converts via Puppeteer. Same HTML serves OG tags for WhatsApp preview. Build once, get PDF and preview cards together.
+
+**Product Strategist — PDF quality is a Day 1 conversion problem:**
+A 4-hour POC that reveals quality problems after Sprint 0 is a 4-hour false start. The devis is a legally required document in France — mentions légales are mandatory. If the in-memory approach produces a PDF that looks like a web printout on WhatsApp, the client receives it and judges the artisan's professionalism by the document quality. The PDF IS the product quality signal at the moment of first impression. Shipping a bad PDF destroys trust at first impression — there is no recovery from a client's first devis looking unprofessional.
+
+### Verdict on D113: RESOLVED — Reject expo-print in-memory. Adopt server-side HTML-to-PDF via Supabase Edge Function.
+
+- Preferred approach: Supabase Edge Function + HTML template with inline CSS + headless browser (Puppeteer or equivalent)
+- Same HTML serves WhatsApp OG tag preview page (no separate endpoint needed)
+- Mentions légales embedded in HTML string (no template file dependency in Sprint 0)
+- Mentions légales full template engine (D74 Handlebars/Nunjucks) deferred to Sprint 1 if needed
+- expo-print in-memory retired as a candidate approach
+
+---
+
+## Debate 127: D56 — Community Seeding: Louis Is the Wrong Person Right Now
+
+### Growth Strategist — Solo dev should not be running community seeding
+
+Community seeding sounds cheap and grassroots. It isn't — not for a solo dev with a product to ship.
+
+**The time problem:** To do community seeding properly, Louis needs to: research and vet relevant BTP Facebook groups and WhatsApp clusters (hours), join and build genuine presence without spam (weeks of consistent, value-first engagement), earn trust from peers who know the difference between real help and a vendor lurking (months), and somehow track whether any of it converts. This is a 2-4 hour/week ongoing commitment with uncertain ROI and a 3-6 month lag before meaningful signal.
+
+**The leverage problem:** Louis's scarce resource is focused building time. Every hour in a Facebook group is an hour not shipping features. Contrast this with prescriber outreach: architects and property managers who refer 10-50 artisans each. One conversation with a prescriber reaches more target users than a month of group participation. The leverage is asymmetric.
+
+**The fit problem:** Louis is a 25-year-old web dev intern. He doesn't have 20 years of BTP relationships. He's not in the WhatsApp groups. He doesn't know which Facebook groups are real vs dead. Community seeding requires social capital Louis doesn't have yet.
+
+### Verdict on D56: UPDATED — Community seeding pushed to Month 4+.
+
+Month 1-3 GTM priority order:
+1. Prescriber outreach (architects, property managers, building managers) — highest leverage per conversation
+2. Direct artisan introductions via Louis's personal network — warm, fast, low friction
+3. Referral tracking from Day 1 — "Comment nous avez-vous connu?" + WhatsApp share codes
+4. GetApp/Capterra profiles claimed Week 1, published Week 3-4 (with beta reviews)
+5. Community seeding — Month 4+ when product is stable and Louis has built some network presence
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D1 | Positioning | Kill "CRM" — devis, factures, relances | 2026-03-30 |
+| D2 | MVP scope | 4 features, SEQUENCED sprints. Sprint 0 = minimum devis flow (3-5d, flow-first). Sprint 1 = client+devis. Sprint 2 = facture+relances. | 2026-03-30 |
+| D3 | Primary persona | Marc — solo smartphone-native artisan | 2026-03-30 |
+| D4 | Stack | Single managed Postgres | 2026-03-30 |
+| D5 | Pricing | Free + €29 two-tier. No €19 SKU. Drop €49/€79. Value anchor: "2h/week = 1h labor = €29/month." | 2026-03-30 |
+| D6 | Trial | No time-limited trial. Free tier IS the trial. | 2026-03-30 |
+| D7 | Architecture | Nuxt 3 + OVH managed Postgres | 2026-03-30 |
+| D8 | E-invoicing | v2 feature | 2026-03-30 |
+| D9 | Not MVP | No Kanban, no multi-user, no offline, no API keys | 2026-03-30 |
+| D10 | Buyer trigger | "Admin pain" not "CRM need" | 2026-03-30 |
+| D11 | Mobile | React Native from Day 1 via Expo | 2026-03-30 |
+| D12 | Landing page | Simplicity-first — "Vos devis et factures, sans vous prendre la tête" | 2026-03-30 |
+| D13 | Home view | Job-first — Active Job Card as home anchor | 2026-03-30 |
+| D14 | E-invoicing timing | v2 — NOT Day 1 | 2026-03-30 |
+| D15 | Relances differentiator | DE-EMPHASIZED — secondary feature below fold | 2026-03-30 |
+| D16 | Trial length | No countdown trial — Free tier IS the trial | 2026-03-30 |
+| D17 | Mobile strategy | React Native from Day 1 via Expo. Email-only relances at launch. | 2026-03-30 |
+| D81 | Offline-first | RESOLVED — expo-sqlite/WatermelonDB in Sprint 0 + background sync + sync_status field | 2026-03-30 |
+| D93 | Guided Creation | RESOLVED — Kill mandatory call. 90-second wizard + opt-in office hours link. | 2026-03-30 |
+| D99 | Usage-based pricing | KILLED — Flat €29/month + annual billing (€260/year) for seasonality. Usage-based incompatible with dual-path conversion. | 2026-03-30 |
+| D100 | Supabase EU-hosted | EU-hosted Supabase (Frankfurt) for v1. Self-hosted at €5k/month revenue. | 2026-03-30 |
+| D113 | PDF Sprint 0 gate | RESOLVED — HTML-to-PDF Edge Function (not expo-print). Handles PDF + WhatsApp OG preview. Mentions légales embedded in HTML string Sprint 0. | 2026-03-30 |
+| D56 | GTM priority | UPDATED — Community seeding pushed to Month 4+. Month 1-3: prescriber outreach + personal network + referral tracking + GetApp/Capterra. | 2026-03-30 |
+
+| U1 | Discovery | REPLACED — readiness protocol | 2026-03-30 |
+| U2 | E-invoicing platform | Factea first when v2 | 2026-03-30 |
+| U7 | Domain | RESOLVED — buy domain now (park it) | 2026-03-30 |
+| U12 | Expert-comptable playbook | Phase 2 (Month 4+) | 2026-03-30 |
+| U15 | Founding member | ELIMINATED — no founding tier | 2026-03-30 |
+
+---
+
+*Last updated: 2026-03-30T23:31*
+
