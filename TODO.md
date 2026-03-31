@@ -63,7 +63,11 @@
 | D110 | Path B trigger | **RESOLVED (04:31):** 5 jobs logged (no client contact gate required). Contextual in-app banner shown once, 60-day cooldown. Sprint 0 non-critical path item. | GS-D155 (04:31) | 2026-03-31 |
 | Sprint 0 | Timeline | **6.5 days** (revised from 5 days). Documents table work properly scoped at 3 days. Mentions légales gate + Supabase project must be pre-committed. | TA-D155 (04:31) | 2026-03-31 |
 
-| D142 | Sprint 0 gate | REFINED — mentions légales gate requires real committed strings (Louis's own business data in `legal/mentions-legales.ts`). TODO comments eliminated. Gate must be verified before Sprint 0 starts. 5-day timeline is CONDITIONAL on gate being met. | Pulse 00:58 (Product Strategist) | 2026-03-31 |
+| D142 | Sprint 0 gate | **RESOLVED (05:46):** Mentions légales is a developer-solvable boilerplate problem, NOT a Louis dependency. Sprint 0 proceeds with a developer-generated generic French micro-business mentions légales template. Louis has no action required. Gate: UNBLOCKED. | TA-0546 | 2026-03-31 |
+
+| D138 | Annual billing | CONTESTED (05:46): €29 price point is an unvalidated WTP hypothesis. Annual billing structure cannot be finalized without validating base price with 10-15 beta users. OPEN — Louis must run micro WTP experiment. | PS-D138-0547 | 2026-03-31 |
+
+| Beta Users | Sprint 0 exit criteria | CONTESTED (05:46): "Beta user" definition assumes active artisans but was never specified. Retired/casual artisans cannot validate core value proposition. Sprint 0 exit criteria must specify: currently-practicing artisan with ≥1 active client. OPEN — Louis must define. | GS-Beta-0547 | 2026-03-31 |
 
 ## New from Pulse 2026-03-31T00:58 — Three Specialist Debates (D57 CLOSED, D141, D142)
 
@@ -228,6 +232,11 @@ All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 - [x] RESOLVE D17: React Native from Day 1 via Expo. Email-only at launch. Push deferred to v2 unless 50+ paying users complain (Debate 41).
 - [x] RESOLVE D2: Sequenced sprint structure (Sprint 0 = schema, Sprint 1 = client+devis, Sprint 2 = facture+relances). Phase 0.5 retired.
 - [x] RESOLVE D5: Free + €29 two-tier. Drop €49/€79. Value anchor: "2h/week = 1h labor = €29/month." No €19 SKU at launch.
+
+### New from Pulse 2026-03-31T05:46 (D142, D138, Beta Users)
+- [x] **D142 RESOLVED:** Mentions légales = developer-generated generic template. Louis dependency eliminated. Sprint 0 starts immediately — gate UNBLOCKED.
+- [ ] **D138 NEW — WTP validation:** Louis runs micro WTP experiment with 10-15 beta users before finalizing annual billing. Offer €19/€29/€49 tiers, measure conversion. Output: confirmed or revised price.
+- [ ] **Beta Users NEW — Exit criteria specification:** Louis defines "beta user" as currently-practicing artisan with ≥1 active client. Document in Sprint 0 handoff doc before recruiting.
 
 ### New from Pulse 2026-03-31T01:15 (D143, D144, D145)
 - [x] **D40 RESOLVED (Debate D149):** WhatsApp Business API DEFERRED to v1.1. Sprint 0 notification = Expo Push only. Meta Business Verification (2-14 days) exceeds Sprint 0 timeline. No premium content to push at v1. Path B activation via Expo Push at launch. WhatsApp added in v1.1 when premium content (digest, upgrade prompts) exists.

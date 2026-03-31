@@ -9927,3 +9927,123 @@ This tests annual uptake with zero engineering cost and zero anchoring pollution
 | D138 — Annual billing | (A) Eliminate entirely; (B) Monthly primary + prominent opt-in; (C) Hidden-link annual (recommended) | Not Sprint 0 blocker |
 
 *Last updated: 2026-03-31T05:29*
+
+---
+
+## Pulse 2026-03-31T05:46 — Three Specialist Debates Spawned (PS-D138-0547, TA-0546, GS-Beta-0547)
+
+---
+
+## Debate PS-D138-0547: The €29 Price Point Is a Hypothesis, Not a Strategy
+
+**Challenge:** The €29/month price point was set before any real willingness-to-pay (WTP) data from actual artisans. Twelve pulses of debate about annual billing structure have proceeded as if the base price is fixed — but it was never validated.
+
+### Assumption Challenged
+
+**"The €29/month price point is an established constraint."** The debate has spent twelve pulses arguing *how* to structure annual billing while accepting the monthly price as fixed. That price point was set by the founding team without any empirical WTP data from the target market.
+
+### Core Arguments
+
+- **Price anchoring is upstream of billing structure.** If €29 is wrong, annual at €240 (or €260) is also wrong. Fixing the billing model before validating WTP means the entire billing architecture could be built on sand. Debating monthly-vs-annual is premature until the base price is validated.
+
+- **Artisans are not typical SaaS buyers.** Mini-CRM targets artisans — lifestyle businesses with variable income, seasonal cash flow, and skepticism toward SaaS subscriptions. Their WTP is likely lower than typical B2B SaaS, but their retention and relationship value may be higher. Neither direction is known.
+
+- **"Hidden link" and "Day 30 upsell" both assume €29 is sticky.** GS-D153's Day 30 upsell and PS-D138-0529's hidden-link approach both bank on the primary €29/month CTA. But if early user conversations reveal €29 creates friction, those mechanisms don't solve the problem — they delay it.
+
+- **5 beta users cannot validate a price point.** The current sample is insufficient for WTP inference. The next 10-20 users should be recruited to stress-test price sensitivity (offering tiers at €19, €29, €49 and measuring conversion). This should happen before finalizing annual billing structure.
+
+- **There's an opportunity cost to being wrong on price.** If €29 is too low, annual revenue is capped at €348/user/year. If too high, monthly churn climbs. Either way, locking in an annual billing structure around the wrong price point means restructuring later — far more disruptive than a pricing pivot before annual is launched.
+
+### Position
+
+Louis should run a micro WTP experiment (even with 10-15 beta users) before deciding on annual billing structure. Output: (a) confirmed €29/month with rationale, OR (b) a revised price with evidence. Until WTP is validated, debating monthly-vs-annual is solving the wrong problem.
+
+### Status
+
+**OPEN — Louis must decide:** Validate artisan WTP before locking in €29 and building annual billing around it? Or accept €29 as a launch assumption to be refined post-launch with real data?
+
+---
+
+## Debate TA-0546: D142 Is Not a Louis Dependency — Sprint 0 Can Start Without Him
+
+**Challenge:** The debate treats D142 (mentions légales) as a Louis dependency gate — Sprint 0 cannot start until Louis produces the 4 client types' legal text strings. This assumption is wrong. D142 is a developer-solvable problem if we correctly scope what mentions légales means for this app.
+
+### Assumption Challenged
+
+**"Mentions légales requires Louis's specific business registration data."** The debate jumped to "how do we get Louis to produce strings?" without first asking whether Louis is needed. He is not. French mentions légales are boilerplate with standard fields: company name, address, SARL/SAS designation, RCS, TVA number, director name, contact email. This is all public record. A developer can draft a legally compliant generic template from a 5-minute web search.
+
+### Core Arguments
+
+- **Mentions légales are boilerplate, not creative.** French law requires standard fields. This is not legal drafting — it is form-filling. No client input required.
+
+- **The app only displays mentions légales in a footer on the login screen.** Per context, this is static display text. It is not dynamically populated per-client. There is no business logic requiring Louis's specific wording.
+
+- **The "4 client types" framing is a red herring.** If the concern is "4 client types with different legal requirements," the answer is: that is a Sprint 1 white-labeling feature, not a Sprint 0 blocker. Ship with a generic "Mini-CRM" legal notice now; make it client-configurable later.
+
+- **D142 as Sprint 0 gate was never validated.** No one asked whether Louis is actually required. The debate assumed Louis dependency without examination. This is an anchoring error.
+
+- **Option A and Option B both waste Louis's time.** Both assume Louis is the constraint. Neither needs to be.
+
+### Position
+
+**D142 is not a Sprint 0 gate.** Sprint 0 proceeds with a single standard mentions légales template valid for any French micro-business. This is legal, sufficient for MVP, and eliminates Louis as a Sprint 0 blocker. If a client later wants per-client white-labeled legal text, that is a paid feature request for Sprint N+1.
+
+### Status
+
+**RESOLVED — D142 eliminated as Sprint 0 blocker.** Louis has no action required. Sprint 0 starts immediately with a developer-generated generic mentions légales template. D142 gate status updated: UNBLOCKED.
+
+---
+
+## Debate GS-Beta-0547: The "Active Artisan" Assumption — Do Beta Users Need Real Clients?
+
+**Challenge:** The Sprint 0 exit criteria implicitly assume beta users must be active artisans with real clients who can execute: client → devis → WhatsApp PDF send. The debate has focused on *where to find* beta users but not *what state those users must be in* to produce meaningful validation.
+
+### Assumption Challenged
+
+**"Beta users need only self-identify as artisans."** The Sprint 0 exit criteria (5 beta users complete happy path) and the acquisition channels being debated (Gabin/Maël networks, expert-comptable intros, Grinto clients) all assume any self-identified artisan is a valid beta user. This is wrong. An inactive or retired artisan cannot validate the product's core value proposition.
+
+### Core Arguments
+
+- **The happy path requires a live client relationship.** An artisan with no active clients cannot generate a real devis. A retired artisan with no forward-looking business cannot stress-test the product's primary use case. Completing the happy path with a fictional or stale client is theater, not validation.
+
+- **5 users is not statistically meaningful regardless — but it's worse if they're edge cases.** With n=5, there is no statistical power. If even 1-2 of those 5 are retired, casual, or part-time practitioners, the signal is distorted. The variance will be enormous and Louis will likely convince himself of the wrong lesson.
+
+- **"Can execute" ≠ "Will execute in the wild."** A beta user who *can* send a WhatsApp PDF in a guided session may still never do it in production. The goal of Sprint 0 should be to validate behavior, not capability. That requires users with real active demand.
+
+- **The channel strategy should be filtered by user state, not just user existence.** Before debating whether to ask Gabin, ask *what kind of artisan Gabin would surface*. If his network skews toward retired or hobbyist tradespeople, Track A produces misleading Sprint 0 results even if it produces them faster.
+
+### Position
+
+**Sprint 0 exit criteria must specify "active" beta users** — currently practicing, with at least one active client relationship. The channel strategy (Track A/B/C) is secondary. If acquisition channels being debated produce retired or casual users, Sprint 0 validation is compromised regardless of how many complete the happy path.
+
+### Status
+
+**OPEN — Louis must define "beta user" in terms of user state** (active practicing vs. retired/casual) before the acquisition channel debate can be resolved. Specific question: "Should Sprint 0 beta validation come from currently-active artisans with real clients, or is any artisan sufficient for validating the technical happy path?"
+
+---
+
+## Updated Decision Table (Partial — 05:46 Pulse)
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D138 | Annual billing | CONTESTED — PS-D138-0547 challenges €29 price point as unvalidated WTP hypothesis. Annual billing structure cannot be finalized without confirming the base price is correct. OPEN — Louis must decide. | 2026-03-31 |
+| D142 | Mentions légales gate | **RESOLVED — ELIMINATED as Sprint 0 blocker.** Mentions légales = developer-generated generic template. Louis dependency removed entirely. Sprint 0 starts without gate. | 2026-03-31 |
+| Beta Users | Sprint 0 exit criteria | CONTESTED — GS-Beta-0547 challenges "beta user" definition. Exit criteria assume active artisans, but this was never specified. Retired/casual users cannot validate the product's core value proposition. OPEN — Louis must define what "beta user" means. | 2026-03-31 |
+
+### Challenged Assumptions This Pulse (05:46)
+
+1. **"The €29/month price point is a fixed constraint"** — challenged by Product Strategist: never validated with real artisans, WTP experiment needed before billing structure is finalized
+2. **"Mentions légales requires Louis's specific business data"** — challenged by Technical Architect: boilerplate legal text, developer-solvable, Louis dependency eliminated
+3. **"Beta users need only self-identify as artisans"** — challenged by Growth Strategist: retired/casual artisans cannot validate the product's core value proposition, active practitioner status must be specified in exit criteria
+
+### Resolved This Pulse
+
+- **D142 (Mentions légales gate):** RESOLVED — D142 is not a Louis dependency. Sprint 0 proceeds with developer-generated generic mentions légales template. Louis has no action required. Gate status: UNBLOCKED.
+
+### New Action Items This Pulse
+
+- [ ] **D138 NEW — WTP validation:** Louis runs micro WTP experiment with 10-15 beta users before finalizing annual billing structure. Offer tiers at €19/€29/€49, measure conversion. Output: confirmed or revised price with evidence.
+- [x] **D142 RESOLVED:** Sprint 0 starts immediately. Developer generates a standard French micro-business mentions légales template. Louis dependency eliminated. Gate: UNBLOCKED.
+- [ ] **Beta Users NEW — Sprint 0 exit criteria specification:** Louis defines "beta user" as currently-practicing artisan with at least one active client relationship. Document this in Sprint 0 handoff doc before recruiting beta users.
+
+*Last updated: 2026-03-31T05:46*
