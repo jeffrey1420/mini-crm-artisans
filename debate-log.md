@@ -9670,3 +9670,136 @@ Louis's own expert-comptable:
 - [ ] **Beta Users NEW:** If none of the above yield 5 beta users by Friday: acknowledge gap, modify exit criteria to 3 beta users + documented edge cases.
 
 *Last updated: 2026-03-31T05:03*
+
+---
+
+## Pulse 2026-03-31T05:17 — Three Specialist Debates (D138, D142, Beta Acquisition)
+
+### Resolved This Pulse
+
+NONE — all three debates require Louis's input. No resolutions this pulse.
+
+---
+
+## Debate PS-0517: D138 — Eliminate Annual Billing Entirely at Launch
+
+**Product Strategist** argues D138 should be ELIMINATED, not revised.
+
+### Challenged Assumption
+
+**"Some artisans prefer predictability, therefore annual billing belongs at launch"** — challenged: this assumption is unvalidated and maps a SaaS industry convention onto a user base we haven't studied.
+
+### Core Arguments
+
+1. **Monthly-only at launch is the correct decision for a product without PMF.** We have zero paying users, zero retention data. Adding annual billing pre-commits us to pricing infrastructure before we understand who we're pricing it for. Validate monthly retention first, then add annual as a retention tool for users who have already proven they stay.
+
+2. **"Predictability" is unvalidated for this cohort.** Budget predictability (knowing annual cost) vs usage predictability (tool will remain relevant). The artisan who wants annual predictability will self-select at Day 30. The artisan who thinks in monthly cycles does not want a pre-commitment at checkout. These are different users.
+
+3. **Competitive risk from Tolteck/Obat is real but irrelevant at launch.** At launch, Louis competes against inertia ("I'll figure out devis management someday"), not against Tolteck's pricing page. Monthly €29 lowers the commitment barrier. Competitive pricing conversations happen after the artisan experiences value — which is exactly when the Day 30 annual upsell fires.
+
+4. **Day 30 annual is not the same as annual-at-checkout.** The GS position argues Day 30 upsell is the right mechanism. I agree. But if Day 30 is the right moment, then checkout is the wrong moment. These are different decision contexts with different information states. Offering annual at both is conflating two different decisions.
+
+5. **Annual cohort analysis misses silent disengagement.** Monthly churn catches it immediately. Annual cohort data cannot distinguish between "product didn't deliver value" and "I can't afford €240 right now" — both churn at the annual boundary.
+
+### Challenged Assumption (explicit)
+
+**"Both billing models mask seasonality equally"** — challenged: monthly churn catches silent disengagement during the year; annual cohort analysis only fires at renewal boundaries and cannot distinguish between value failure and cash flow failure.
+
+### Status
+
+**OPEN — Louis must decide.**
+
+- **PS Position:** Eliminate annual billing at launch. Monthly €29 ONLY. Annual enters at v1.2 as a Day 30 upsell for users who have created their first devis/facture.
+- **GS Position (prior):** Monthly €29 primary + Annual €240 opt-in below + Day 30 upsell. Annual at checkout is still available as opt-in.
+
+---
+
+## Debate TA-0517: D142 — D142 Is an Architectural Gap, Not a Louis Action Problem
+
+**Technical Architect** argues the Sprint 0 gate (D142) is structurally flawed.
+
+### Challenged Assumption
+
+**"Louis will just do it this week"** — challenged: this assumption has been made and violated at every pulse for the entire research history. The problem is not Louis's willpower — it is the gate design.
+
+### Core Arguments
+
+1. **The gate has no acceptance criteria, no defined workflow, and no automated validation.** A Sprint 0 gate that requires one human to manually produce one ill-defined file is a fragile anti-CI pattern. It structurally deprioritizes itself.
+
+2. **Mentions légales are deterministic templates, not creative work.** Louis is not drafting law — he is filling in fields (SIREN, SIRET, RCS, TVA). This is exactly the kind of work that breaks under load, which is the founder's constant condition.
+
+3. **The assumption that mentions légales must be written by a human is wrong.** They can and should be code-generated from authoritative business registration data. French legal requirements are deterministic given the business type and registration numbers.
+
+4. **The correct approach: business registration config + generator function.** Store SIREN/SIRET/RCS/TVA in environment variables or a config file. Write a generator function that composes mentions légales from structured data. The gate becomes: "does the config parse and does the generator render correctly?" — not "has Louis manually committed a legal text file?"
+
+5. **The Sprint 0 gate is blocked because we built a gate that requires manual human action from a solo founder under concurrent load.** This is an architectural decision that has produced an architectural problem.
+
+### Challenged Assumption (explicit)
+
+**"Mentions légales must be written by Louis before Sprint 0"** — challenged: they can be generated programmatically from authoritative business registration data. The gate should test the generator, not the human's ability to manually produce boilerplate.
+
+### Status
+
+**OPEN — Louis must decide.**
+
+- **TA Position:** Redefine D142: "Business registration config exists and generator is implemented and tested" — not "Louis commits mentions légales strings." Sprint 0 unblocks. Gate is machine-verifiable.
+- **Prior Position:** Louis commits mentions légales strings to git before Sprint 0.
+
+---
+
+## Debate GS-0517: Expert-Comptable Channel Is Insufficient for Sprint 0 Beta Acquisition
+
+**Growth Strategist** challenges the expert-comptable-as-primary-channel assumption.
+
+### Challenged Assumption
+
+**"Expert-comptables are the primary beta user acquisition channel"** — challenged: this is a multi-hop, gatekeeper-dependent funnel with high latency and no conversion guarantees.
+
+### Core Arguments
+
+1. **Expert-comptable intros require two warm handoffs and 3-6 weeks average.** Louis → expert-comptable → artisan client. Each hop adds friction, delay, and drop-off. Multi-step referral channels average 40-60% drop-off at each handoff.
+
+2. **Expert-comptables are not a sales channel.** They manage 80-150 SME clients for compliance and tax. They will not proactively identify ideal beta users, champion the product in client conversations, or follow up to ensure sign-up.
+
+3. **Louis's Grinto network is being undervalued.** Grinto serves B2B clients — many of whom are artisans or serve artisans directly. Louis has access to Grinto's customer base, sales pipeline, and partner network. These are businesses already buying software, with budget authority and SaaS familiarity.
+
+4. **Grinto client introductions are faster and higher-confidence.** Time to 5 committed beta users: expert-comptable = 3-6 weeks; Grinto client intros = 1-2 weeks. Same ICP, warm relationship, direct control over the ask.
+
+5. **Waiting for expert-comptable intros creates Sprint 0 timeline risk.** If Sprint 0 has a defined end date, a 3-6 week channel cannot gate Sprint 0 exit criteria. Either Sprint 0 stretches or the exit criteria fails.
+
+### Challenged Assumption (explicit)
+
+**"Gabin/Maël's networks are devs/designers, expert-comptables are the validated channel"** — challenged: the dismissal logic is applied inconsistently. Expert-comptables are even further from the artisan user than Grinto's client base. Grinto clients are in the same ICP, already buying software, and accessible this week.
+
+### Status
+
+**OPEN — Louis must decide.**
+
+- **GS Position:** Primary = Louis → Grinto client introductions → 5 beta users within 2 weeks. Secondary = Expert-comptable outreach in parallel (4-6 weeks, Sprint 1). Don't let a slower, lower-confidence channel block Sprint 0.
+- **Prior Position:** Expert-comptable warm intros as primary beta acquisition channel.
+
+---
+
+### Challenged Assumptions This Pulse (05:17)
+
+1. **"Annual billing belongs at launch because some artisans prefer predictability"** — challenged by Product Strategist: predictability assumption is unvalidated; artisan who wants annual will self-select at Day 30; annual-at-checkout pre-commits to pricing infrastructure before PMF
+2. **"Louis will do mentions légales this week"** — challenged by Technical Architect: this assumption has been violated every pulse; the gate design is the problem, not the founder; mentions légales can be code-generated from business registration data
+3. **"Expert-comptables are the primary beta user acquisition channel"** — challenged by Growth Strategist: multi-hop funnel with 3-6 week latency; Grinto's client base is faster, same ICP, and accessible this week
+
+### New Action Items This Pulse
+
+- [ ] **D138 — Louis decision required (one sentence):** Monthly €29 ONLY at launch, annual enters v1.2 as Day 30 upsell (PS position)? Or Monthly €29 primary + Annual €240 opt-in at checkout (GS position)?
+- [ ] **D142 — Louis decision required:** Accept the Technical Architect's proposal to redefine the gate as "business registration config + mentions légales generator implemented and tested"? Or maintain the current gate requiring Louis to manually commit mentions légales strings?
+- [ ] **Beta User Acquisition — Louis decides:** Primary channel = Grinto client introductions this week (GS position)? Or expert-comptable warm intros as originally planned?
+- [ ] **D138 NEW (PS):** If monthly-only is chosen, add explicit v1.2 action item: "Add annual billing as Day 30 upsell for users with 1+ devis/facture created. Implement Stripe annual plan with usage trigger."
+- [ ] **D142 NEW (TA):** If code-generated mentions légales is accepted: Louis populates business registration config file this week. Gate = config exists + generator passes test. Not "Louis writes legal text."
+
+### Still Open (Louis Decisions Required)
+
+| Decision | Options | Sprint 0 Impact |
+|----------|---------|-----------------|
+| D138 — Annual billing | (A) Monthly €29 ONLY at launch (PS); (B) Monthly + Annual opt-in at checkout (GS) | Not Sprint 0 blocker |
+| D142 — Mentions légales gate | (A) Code-generated from config (TA); (B) Louis manually commits strings | **BLOCKS** |
+| Beta User Acquisition | (A) Grinto client intros primary (GS); (B) Expert-comptable primary (prior) | **BLOCKS** |
+
+*Last updated: 2026-03-31T05:17*
