@@ -7843,3 +7843,93 @@ If mentions légales are TODO comments going into Sprint 1:
 | U15 | Founding member offer | ELIMINATED — no lifetime deal, no founding/access tier. Single €29/month. | 2026-03-30 |
 
 *Last updated: 2026-03-31T00:58*
+
+---
+
+## Pulse 2026-03-31T01:15 — Three Specialist Debates (D143, D144, D145)
+
+---
+
+## Debate 143: D40 — Channel IS the Primary Activation Lever for Path B
+
+**Challenge:** D40 (channel secondary to Free tier output design) was settled for Path A but never examined for Path B. Product Strategist challenges that "channel is secondary" is a Path A conclusion that fails catastrophically for Path B.
+
+### Product Strategist — Channel Is Non-Negotiable for Path B
+
+**Assumption challenged:** That the engagement channel (push vs email vs WhatsApp) is secondary to output design for all Free tier users. This is true for Path A (formal-devis, desk-adjacent artisans). It is false for Path B (verbal-agreement artisans, job-site primary environment).
+
+**Core argument:** Path B artisans (45-55, BTP trades) live on WhatsApp during work hours. They check email once daily at most, usually at home. Push notifications from an app they barely opened are invisible. The Path B artisan's primary business channel IS WhatsApp — with clients, suppliers, colleagues. If the product cannot meet him there, the output — however well-designed — is never seen.
+
+**The digest specification (D141/D89 "stay in touch" — now defined):**
+
+- **Trigger:** 14+ days dormant AND ≥1 job logged ever AND Path B (no formal devis workflow)
+- **Frequency:** Bi-weekly (Day 14, 28, 42), max 3 digests
+- **Channel:** WhatsApp Business API (primary) — not email, not push
+- **Content:** Plain text French, user activity metrics reflected back ("3 jobs logged, 2 clients"), single re-entry CTA, Louis contact
+- **No sales language** in digest itself — conversion happens by re-establishing usage habit until natural limit-hit trigger fires
+- **What it does NOT contain:** upgrade prompts, tier comparisons, urgency language
+
+**D40 VERDICT:** REFINED — For Path A: channel is secondary to output design. For Path B: channel IS the primary activation lever. WhatsApp is non-negotiable for Path B. Sprint 0 notification architecture must build WhatsApp Business API as first-class, not optional.
+
+---
+
+## Debate 144: D110 + D140 — Path B Has No Conversion Context, and AsyncStorage Cannot Survive Phone Death
+
+**Challenge:** Technical Architect challenges two assumptions: (1) D110's Path B usage-based triggers create a conversion prompt without a conversion context, and (2) D140's AsyncStorage + retry queue is inadequate for Sprint 0 offline reliability.
+
+### Technical Architect — Path B Triggers Lack Friction
+
+**Assumption challenged (D110):** That usage-based milestones (45 days active OR 7+ jobs OR 5+ clients) function as equivalent conversion triggers to Path A's limit-hit moment. They do not. Path A converts because the artisan *feels* the limit blocking his workflow. Path B's counters (day 45, job 7) fire without any felt friction — the artisan has been using the Free tier without obstruction for 45 days. The upgrade ask at day 46 has no justification the artisan can feel.
+
+**Core argument:** Path B needs a visible Free tier soft limit (e.g., 1 client / 3 jobs cap) that creates friction equivalent to Path A's limit-hit. Without felt friction, the upgrade prompt is a cold ask. The current D110 resolution specifies the trigger but not the friction moment that makes it meaningful.
+
+**D110 REFINED:** Path B requires a corresponding Free tier soft limit that creates a blocked workflow at a specific threshold. Without it, Path B conversion rates will be materially lower than Path A.
+
+### Technical Architect — AsyncStorage Cannot Survive Phone Death
+
+**Assumption challenged (D140):** AsyncStorage + retry queues is adequate offline infrastructure for Sprint 0. It is not.
+
+**Core argument:** The primary use case (rural French BTP artisan, daily connectivity gaps, job sites in basements and rural zones) routinely kills phones mid-entry. AsyncStorage stores the retry queue in key-value storage. When the phone dies mid-write, the queue loses operations in memory that were never persisted. The retry queue then processes stale data against a diverged client ID universe (local UUIDs vs server UUIDs), creating silent orphaning.
+
+**The scenario:** Month 1: 15 jobs. Month 2: phone dies twice mid-entry. Month 3: 2 weeks airplane mode. Day 90: 50-job sync burst arrives at server with client ID divergence. Server-wins conflict resolution orphans the artisan's local jobs from their client records.
+
+**This is not an edge case. This is the primary use case.**
+
+**D140 REFINED:** Expo-sqlite (+2 days to Sprint 0) is required for production-grade offline reliability. Alternatively: honestly label Sprint 0 offline as demonstration-only. There is no "+1 day" that ships production offline with AsyncStorage — the real cost is +2 days or a degraded, honestly-labeled Sprint 0.
+
+---
+
+## Debate 145: D138 + D139 — Annual Is Too Passive, and Week 1 Outreach Is the Wrong Priority
+
+**Challenge:** Growth Strategist challenges: (1) D138's annual billing as opt-in will achieve ~10% uptake, not meaningful revenue, and (2) D139's expert-comptable Week 1 outreach wastes Louis's most valuable hours before the product exists.
+
+### Growth Strategist — Annual Billing Default Is Backwards
+
+**Assumption challenged (D138):** Monthly €29 is PRIMARY. Annual €240/year is an opt-in discount at conversion. This framing trains users to think annual is the expensive option with a discount — wrong for cash-flow-sensitive artisans.
+
+**Core argument:** Opt-in annual achieves 5-15% uptake (industry benchmark). Default annual achieves 35-45%. The €240/year = €20/month framing (31% discount vs monthly) is psychologically powerful if annual is the default. French artisans think month-to-month, not annually. Presenting annual as the standard with monthly as fallback reframes the choice correctly.
+
+**D138 REFINED:** Annual billing should be the DEFAULT at checkout (€240/year = €20/month), monthly is the fallback (€29/mois). "Payez quand vous êtes chargé" seasonal framing is wrong frame — real concern is predictability, not high-season cash flow.
+
+### Growth Strategist — Week 1 Expert-Comptable Outreach Is Premature
+
+**Assumption challenged (D139):** Expert-comptable outreach in Week 1 (Louis's own accountant = first call) is appropriate because it's validation, not sales.
+
+**Core argument:** Week 1 is Sprint 0 — Louis's most constrained, highest-value hours. Outreach before a working product exists means showing a prototype or PowerPoint to professionals who will judge it severely. Louis's own accountant has a conflict of interest (Louis pays them directly). Week 3, with a working iOS/Android build and a real devis to show, produces genuine feedback. Week 1 outreach produces polite disinterest.
+
+**D139 REFINED:** Expert-comptable outreach moves to Week 3. Sprint 0 = build only. Week 3 = working product + real devis = meaningful validation conversation. Hours currently allocated to Week 1 expert-comptable outreach reallocated to Sprint 0.
+
+---
+
+## Updated Decision Table (Pulse 2026-03-31T01:15)
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D40 | Engagement channel | REFINED — Path A: channel secondary to output. Path B: channel IS primary activation lever. WhatsApp non-negotiable for Path B. Sprint 0 must build WhatsApp Business API as first-class. | 2026-03-31 |
+| D89/D141 | Stay in touch digest | RESTATED (fully specified) — WhatsApp bi-weekly, 14+ days dormant + ≥1 job logged + Path B. Plain text, user metrics, single CTA, no sales language. Re-engagement restores habit until limit-hit fires. | 2026-03-31 |
+| D110 | Path B conversion triggers | REFINED — Usage-based triggers (45d/7jobs/5clients) create prompt without friction context. Path B needs visible soft limit (1 client/3 jobs cap) that creates blocked workflow equivalent to Path A's limit-hit. | 2026-03-31 |
+| D138 | Annual billing | REFINED — Annual €240/year should be DEFAULT at checkout (€20/month), monthly €29 fallback. Opt-in annual achieves ~10% uptake. Default annual targets 35-45%. | 2026-03-31 |
+| D139 | Expert-comptable timing | REFINED — Move outreach from Week 1 to Week 3. Sprint 0 = build only. Week 3 = working product + genuine feedback. Hours reallocated from Week 1 outreach to Sprint 0 build. | 2026-03-31 |
+| D140 | Offline architecture | REFINED — AsyncStorage + retry queue inadequate. Phone death mid-write loses data (primary use case, not edge case). Expo-sqlite +2 days required, or Sprint 0 offline labeled demonstration-only. | 2026-03-31 |
+
+*Last updated: 2026-03-31T01:15*
