@@ -1419,3 +1419,39 @@ NONE — both debates are CONTESTED. Louis decisions required.
 | Path B trigger (D110) | (A) 3 jobs + client contact info; (B) 3 jobs logged | Post-Sprint 1 |
 
 *Last updated: 2026-03-31T02:43*
+
+---
+
+## New from Pulse 2026-03-31T03:20 — Three Specialist Debates (GS-D152, TA-D152, PS-D152)
+
+### Resolved This Pulse
+
+NONE — all three debates remain OPEN and require Louis decisions.
+
+### Challenged Assumptions This Pulse
+
+1. **"3 active clients" meaningfully discriminates conversion intent** (PS-D146-3P) — challenged by Growth Strategist: trivially gameable in 10 minutes via client import, measures proximity to existing relationships not product engagement
+2. **Path B trigger must be built in Sprint 0** (GS-D146-3G) — challenged by Technical Architect: Sprint 0 is at capacity with 3 deliverables; Path B observed via Supabase analytics post-launch, trigger built in v1.2 with real cohort data
+3. **Annual billing solves seasonality** (D138) — challenged by Product Strategist: masks seasonality problem rather than solving it; converts temporary churn signal into permanent customer loss; €240 upfront is anti-empathetic for cash-flow-sensitive solo artisans
+
+### Louis's Decisions Required (03:20 Updated)
+
+| Decision | Options | Sprint 0 Status |
+|----------|---------|-----------------|
+| Offline scope (D81) | **RESOLVED — draft-mode + expo-sqlite (+2.5 days)** | ~~BLOCKS~~ Confirmed |
+| Mentions légales gate | Commit real strings to git | **BLOCKS** |
+| Supabase project | Confirm EU project live | **BLOCKS** |
+| Sprint 0 scope | **RESOLVED — 3 deliverables (Core Devis Flow + Auth/Offline + Expo Push Skeleton = 5 days)** | ~~BLOCKS~~ Confirmed |
+| Path A trigger (D96) | (A) **3 accepted devis from 3 distinct clients** (GS-D152); (B) first accepted devis + 3 active clients | Post-Sprint 1 |
+| Path B trigger (D110) | (A) **Defer to v1.2** (TA-D152 — observe via analytics, build trigger in v1.2 with real data); (B) build in Sprint 0 | ~~BLOCKS Sprint 0~~ Post-Sprint 1 |
+| Annual billing (D138) | (A) **Eliminate entirely — monthly €29 ONLY** (PS-D152); (B) monthly €29 primary + annual €240 opt-in (GS-D147) | Post-Sprint 1 |
+
+### New Action Items This Pulse
+
+- [ ] **D96 — Path A trigger confirmation:** Louis confirms "3 accepted devis from 3 distinct clients" as the resolved Path A conversion trigger. PS-D146-3P's "3 active clients" alternative rejected by GS-D152 as trivially gameable. **Low urgency — Post-Sprint 1.**
+- [ ] **D110 — Path B deferred to v1.2:** Louis confirms Path B trigger (30-day + 3 jobs threshold) deferred to v1.2. Sprint 0 observes Path B behavior via Supabase analytics. Trigger built in v1.2 sprint planning with real cohort data. **Post-Sprint 1.**
+- [ ] **D138 — Annual billing elimination:** Louis confirms: (A) eliminate annual billing entirely — monthly €29 ONLY at launch; OR (B) keep monthly €29 primary + annual €240 as opt-in below. PS-D152 argues eliminate entirely (no second SKU before PMF, no anchoring effect, no prepaid-trap for cash-flow-sensitive artisans). GS-D147 argues keep opt-in annual (some artisans prefer predictability). **Post-Sprint 1.**
+- [ ] **GS-D152 — Acceptance event tracking:** Louis confirms that "accepted devis" tracking via in-app prompt (when client responds after devis sent) is acceptable. If artisans manually mark accepted, rate will be near zero. Fix: prompt Marc when client responds — "Client accepted? Tap yes — this counts toward your free trial completion." One-day onboarding addition.
+- [ ] **TA-D152 — Path B analytics instrumentation:** Supabase event tracking for `devis.created`, `client.created`, `job.logged` begins at launch. No in-app trigger required for observation. Free tier usage generates analytics automatically.
+
+*Last updated: 2026-03-31T03:20*
