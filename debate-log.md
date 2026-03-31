@@ -10357,3 +10357,109 @@ This captures informal artisan behavior (no formal devis, relies on factures) us
 - [ ] **Beta Users definition:** Still OPEN — relevant for beta recruitment, not for Sprint 0 technical gate.
 
 *Last updated: 2026-03-31T06:30*
+
+---
+
+## Pulse 2026-03-31T06:50 — Three New Debates
+
+---
+
+## Debate D156: Sprint 0 Cannot Proceed Before WTP Validation
+
+**Challenge:** Sprint 0 (6.5 days) and WTP validation are treated as parallel workstreams. Product Strategist challenges this independence assumption.
+
+### Product Strategist — Sprint 0 Depends on Validated Pricing
+
+**Assumption challenged:** "Sprint 0 should proceed while WTP validation happens in parallel."
+
+**Core argument:** Sprint 0 builds features whose conversion logic, billing triggers, and success metrics are all anchored to €29/month. If WTP reveals €29 is too high, Sprint 0's output must be rebuilt — and Louis cannot meaningfully run both tracks simultaneously.
+
+**Key dependency chain:**
+- D138 billing structure decision (monthly €29 primary, annual €240 available) → requires €29 to be the right price
+- Day-30 conversion target (3%) → calibrated to the wrong price if €29 is wrong
+- Sprint 0 exit gate ("5 beta users paid €29") → meaningless if price was wrong
+
+**Louis's capacity:** Running 5 × 20-minute WTP conversations + synthesis while building a 6.5-day sprint = cognitive context-switching that degrades both. WTP done properly consumes 2-3 days of focused research. Sprint 0 done properly requires deep technical focus over 6.5 consecutive days. These cannot overlap.
+
+**Verdict on Sprint 0 timing:** REOPENED — WTP is a Sprint 0 prerequisite, not a parallel workstream. Sprint 0 begins when €29 is directionally validated (not after).
+
+---
+
+## Debate D157: 6.5 Days Is Insufficient for a Testable Artifact
+
+**Challenge:** Both the Growth Strategist and Product Strategist debate whether beta users can "validate" the app — but neither questions whether the app will exist in a testable state by day 6.5. Technical Architect challenges this.
+
+### Technical Architect — Sprint 0 Will Not Produce a Testable Artifact
+
+**Assumption challenged:** "Sprint 0 produces a testable artifact by day 6.5."
+
+**Core argument:** The Sprint 0 scope includes: Supabase setup, Expo project, offline architecture, TVA calculator (3 rate tiers), sequential numbering with locking, mentions légales templates, and the full devis→facture→WhatsApp flow. Each is a full day of work. Together: 8-10 developer-days. The 6.5-day estimate assumes perfect parallelization and zero debugging time — neither holds for a solo developer.
+
+**The schema-first problem:** Current Sprint 0 plan front-loads schema complexity (TVA tiers, sequential numbering, mentions légales, documents table). Days 1-3: schema and backend (nothing to show). Days 4-5: fragmented frontend. Day 6: integration scramble. Day 6.5: smoke test would begin as the sprint ends.
+
+**The alternative — Happy Path First:**
+- Day 1: Minimal schema (clients + devis only), Expo project + auth
+- Day 2: Devis creation screen (hardcoded TVA, sequential counter)
+- Day 3: WhatsApp share, PDF generation, client list
+- Day 4: Real device testing, bug fixes
+- Day 5: Beta smoke test — testable or not
+
+**Verdict on D95/D84:** REOPENED — 6.5-day timeline is unachievable under schema-first approach. Either shrink the Sprint 0 artifact (hardcoded TVA, placeholder mentions légales, no offline) or extend to 10 days.
+
+---
+
+## Debate D158: Path B Artisans Will Never Hit the "3 Factures" Trigger
+
+**Challenge:** Technical Architect proposed replacing the Sprint 1 Path B trigger ("5 jobs logged") with "3 factures created, 0 accepted devis." Growth Strategist challenges the threshold and the premise.
+
+### Growth Strategist — Path B Is Structurally Invisible in Sprint 0 Data
+
+**Assumption challenged:** Path B artisans will naturally produce enough factures to trigger conversion.
+
+**Core argument:** Path B artisans operate on verbal agreements and cash payments — by definition, they bypass formal invoicing. They will not suddenly start creating formal factures just because the app offers the capability. The "3 factures" threshold is arbitrary (why not 1? 10?) and unvalidated. Path B artisans who download the app will churn silently without ever creating a single formal invoice — not because they're disengaged, but because the product asks them to change a deeply ingrained workflow.
+
+**The silent failure mode:**
+- Path B artisan logs 1-2 jobs out of curiosity
+- Payment is cash, handed over at job site
+- They give a handwritten receipt or nothing
+- They never open "Create Facture" because it doesn't match how they operate
+- The "3 factures" trigger never fires — artisan churns without any conversion signal
+
+**Verdict on D110/TA-pathB-trigger:** Path B is out of scope for Sprint 0 conversion triggers. Path A metrics ("1 accepted devis") should be used instead. Path B discovery research is a Sprint 1 task — observe what Path B actually does in the app before designing any trigger for them.
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D1 | Positioning | Kill "CRM" — devis, factures, relances | 2026-03-30 |
+| D2 | MVP scope | 4 features, sequenced sprints | 2026-03-30 |
+| D3 | Primary persona | Marc — solo smartphone-native | 2026-03-30 |
+| D4 | Stack | Single managed Postgres | 2026-03-30 |
+| D5 | Pricing | Free + €29 two-tier | 2026-03-30 |
+| D6 | Trial | No time-limited trial. Free tier IS the trial. | 2026-03-30 |
+| D7 | Architecture | Nuxt 3 eliminated from v1 | 2026-03-31 |
+| D8 | E-invoicing | v2 feature | 2026-03-30 |
+| D9 | Not MVP | No Kanban, no multi-user, no offline, no API keys | 2026-03-30 |
+| D10 | Buyer trigger | "Admin pain" not "CRM need" | 2026-03-30 |
+| D11 | Mobile | React Native from Day 1 via Expo | 2026-03-30 |
+| D12 | Landing page | Simplicity-first — "Vos devis et factures, sans vous prendre la tête" | 2026-03-30 |
+| D13 | Home view | Job-first — Active Job Card as home anchor | 2026-03-30 |
+| D14 | E-invoicing timing | v2 — NOT Day 1 | 2026-03-30 |
+| D15 | Relances differentiator | DE-EMPHASIZED — secondary feature below fold | 2026-03-30 |
+| D16 | Trial length | 14 days (superseded by D6 Free tier approach) | 2026-03-30 |
+| D17 | Mobile strategy | React Native from Day 1 via Expo | 2026-03-30 |
+| D95 | Sprint 0 timeline | 6.5 days — REOPENED D157: may be insufficient for testable artifact | 2026-03-31 |
+| D110 | Path B trigger | REOPENED D158: "5 jobs logged" requires Sprint 1 infrastructure; "3 factures" is arbitrary and fails for informal artisans | 2026-03-31 |
+| D138 | Annual billing | CONTESTED — WTP validation required before billing structure decision | 2026-03-31 |
+| D156 | Sprint 0 entry gate | REOPENED — WTP is a Sprint 0 prerequisite, not parallel workstream | 2026-03-31 |
+
+| U1 | Discovery | Replaced by readiness protocol | 2026-03-30 |
+| U2 | E-invoicing platform | Factea first when v2 | 2026-03-30 |
+| U7 | Domain | Buy domain now (park it) | 2026-03-30 |
+| U16 | Path B discovery | Sprint 1 task — observe actual Path B behavior before designing trigger | 2026-03-31 |
+
+---
+
+*Last updated: 2026-03-31T06:50*

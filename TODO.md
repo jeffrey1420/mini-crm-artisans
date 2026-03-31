@@ -1865,3 +1865,14 @@ Sprint 0 scope: client file + devis flow + offline (expo-sqlite draft-mode) + me
 - [ ] **D138 CONTESTED:** WTP experiment required before billing structure decision. Sprint 0 blocker. Design: 5 conversations × 20 min, prototype shown, "most you'd pay?" asked directly. Decision rule: median ≤€15 → €29 too high; €20-35 → €29 in range; ≥€40 → €29 underpriced.
 
 *Last updated: 2026-03-31T06:30*
+
+### New from Pulse 2026-03-31T06:50 — Sprint 0 Entry Gate Reopened
+
+- [ ] **D156 NEW — WTP is Sprint 0 prerequisite:** Sprint 0 cannot begin until €29 price is directionally validated. 2-day Phase 0: recruit 5 real artisans (not current beta pool), conduct 20-min semi-structured conversation, ask WTP directly. Decision rule: median ≤€15 → €29 too high (revisit pricing); €20-35 → €29 in range (proceed); ≥€40 → €29 underpriced (consider raising). Louis's capacity is insufficient to run WTP research and Sprint 0 build simultaneously.
+- [ ] **D157 NEW — Sprint 0 timeline in question:** 6.5-day timeline may be unachievable under schema-first plan. Consider Option A (shrink artifact to clients + devis only, hardcoded TVA, placeholder mentions légales, no offline) for testable day 4-5 smoke test. OR Option B (extend to 10 days if full scope non-negotiable). OR Option C (move all Louis-dependent pre-conditions to pre-Sprint 0 blockers: Supabase project created, legal text committed to git).
+- [ ] **D158 NEW — Path B out of scope for Sprint 0:** "3 factures created" trigger is arbitrary (threshold unvalidated) and fails for informal Path B artisans who bypass formal invoicing. Path B conversion tracking is a Sprint 1 task, not Sprint 0. Sprint 0 uses Path A trigger only ("1 accepted devis" or equivalent).
+- [x] **D110 REOPENED:** "3 factures created, 0 accepted devis" trigger (added at 06:30 pulse) is now challenged by D158. Path B is structurally invisible in Sprint 0 data. Sprint 0 should use only Path A-aligned metrics. D110 is CONTESTED pending Path B discovery research.
+- [ ] **D95 UPDATED:** Sprint 0 6.5-day timeline CONTESTED by D157. Pre-Sprint 0 decision required: shrink artifact (Option A) or extend timeline (Option B). Cannot proceed with current scope and timeline.
+- [ ] **U16 NEW:** Path B discovery research is a Sprint 1 prerequisite. Before designing any Path B conversion trigger, observe 5-10 artisans who operate on verbal agreements: what do they actually do in the app? Then design trigger matching their behavior — not a document-creation threshold that assumes formal invoicing workflows.
+
+*Last updated: 2026-03-31T06:50*
