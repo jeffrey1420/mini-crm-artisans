@@ -1308,3 +1308,58 @@ NONE — all three debates remain OPEN, requiring Louis's adjudication.
 - [ ] **Sprint 0 gate verification (D142 — still open):** Louis must commit `legal/mentions-legales.ts` to git with real business data BEFORE Sprint 0 begins. Sprint 0 = 4.5 days if gate met, 6+ days if not. This week.
 
 *Last updated: 2026-03-31T01:59*
+
+## New from Pulse 2026-03-31T02:13 — Three Specialist Debates (PS-D147, TA-D147, GS-D147)
+
+*Note: Technical Architect position paper (TA-D147) was still processing at time of this pulse. Position paper expected at debate-pulse-0213-architect.md.*
+
+### Resolved This Pulse
+NONE — all three debates require Louis's input on scope and pricing decisions.
+
+### Challenged Assumptions This Pulse
+
+1. **"Simplicity-first and competence-first are mutually exclusive in Sprint 0."** Challenged by Product Strategist: a simplicity-first Sprint 0 that does one thing well is both. Path B mechanics are not Sprint 0 work.
+2. **"35-45% annual uptake validates annual-as-default."** Challenged by Growth Strategist: that figure is coerced uptake in mature products, not applicable to first-conversion v1 SaaS. Monthly €29 PRIMARY confirmed.
+3. **"Path B must be designed in Sprint 0."** Challenged by Product Strategist: you cannot validate conversion mechanics for users who don't exist yet.
+4. **"WhatsApp Business API belongs in Sprint 0."** Challenged by Product Strategist: Meta verification alone blows the sprint timeline; Path B digest should be in-app/email, not WhatsApp.
+5. **"D140, D40, D110 are independent Sprint 0 deliverables."** Challenged by Technical Architect: they form a tightly coupled dependency chain. [TA-D147 verdict pending]
+
+### New Action Items from This Pulse
+
+- [ ] **PS-D147 — Sprint 0 scope cuts:** Louis decides: accept 3-deliverable Sprint 0 (Core Devis Flow 3d + Auth/Offline-Capable 1.5d + Expo Push Skeleton 0.5d = 5 days). Cuts: WhatsApp Business API, Path B mechanics, dual-path architecture, mentions légales template engine (→ static strings), expo-sqlite (→ AsyncStorage), full push, expert-comptable prep. **Blocks Sprint 0.**
+- [ ] **PS-D147 — Path B deferral confirmed:** Louis confirms: Path B conversion mechanics deferred to v1.2. Sprint 0 ships Path A only. Confirms D110, D141, D40 deferral.
+- [ ] **GS-D147 — Pricing page architecture:** Louis confirms: monthly €29 as PRIMARY, annual €240 as secondary opt-in savings ("épargnez €108/an"), quarterly €79 as mid-tier. Three-zone layout. Annual as contextual upgrade prompt at 30+ active days (5+ devis sent), NOT at first checkout.
+- [ ] **GS-D147 — Pricing KPI:** Confirm: 40%+ of monthly users who hit engagement triggers upgrade to annual within 60 days. Replaces conversion rate as pricing health KPI.
+- [ ] **GS-D147 — Challenged assumption:** 35-45% annual uptake stat retired. Correct benchmark: 10-15% opt-in annual uptake at month-1 conversion (genuine preference signal). Coerced annual conversions generate involuntary churn at renewal.
+- [ ] **TA-D147 — Path B architectural gate:** Louis decides: D140 (offline scope) → D40 (notification channel, conditioned on D140) → D110 (soft limit threshold, conditioned on D40). All three resolved as one unit before Sprint 0. [PENDING Technical Architect position paper]
+- [ ] **D142 — Sprint 0 gate (URGENT):** Louis commits `legal/mentions-legales.ts` to git with real business data (his own). NOT TODO comments. Gate must be verified before Sprint 0 begins. 5-day Sprint 0 is CONDITIONAL on this.
+- [ ] **D142 — Supabase project:** Louis confirms Supabase EU project (Frankfurt) is live and accessible. Gate item 2.
+
+### Louis's Decisions Required Before Sprint 0 (02:13 Updated)
+
+| Decision | Options | Sprint 0 Status |
+|----------|---------|-----------------|
+| Sprint 0 scope cuts | Accept 3-deliverable OR negotiate | BLOCKS Sprint 0 |
+| Path B deferral | Confirm v1.2 | BLOCKS Sprint 0 |
+| Pricing page architecture | Confirm monthly €29 primary | Unblocks planning |
+| Path B architectural gate | Resolve D140→D40→D110 | BLOCKS Sprint 0 |
+| Mentions légales gate | Commit real strings to git | BLOCKS Sprint 0 |
+| Supabase project | Confirm EU project live | BLOCKS Sprint 0 |
+
+### Sprint 0 Scope (PS-D147 Proposal — Requires Louis Confirmation)
+
+**If accepted (5 days):**
+
+| Day | Deliverable |
+|-----|-------------|
+| 1 | Supabase EU project + schema (clients, devis, line_items, TVA calculator) + auth |
+| 2 | RN client list + devis list screens, Supabase integration |
+| 3 | Devis creation flow, TVA per-line, expo-print PDF, native share |
+| 4 | Mentions légales as static strings, sequential numbering, offline caching, retry queues |
+| 5 | Auth completion, Expo Push skeleton, real device testing (Android) |
+
+**Cuts accepted:** WhatsApp Business API, Path B mechanics, dual-path architecture, mentions légales template engine, expo-sqlite, full push implementation, expert-comptable prep.
+
+**Floor: 5.5 days** if mentions légales gate not met.
+
+*Last updated: 2026-03-31T02:13*

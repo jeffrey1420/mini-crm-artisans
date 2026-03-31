@@ -8213,3 +8213,186 @@ The structural risk: D138's framing will be imported into D139's conversations b
 ---
 
 *Last updated: 2026-03-31T01:59*
+
+---
+
+## Pulse 2026-03-31T02:13 — Three Specialist Debates (PS-D147, TA-D147, GS-D147)
+
+*Note: Technical Architect (TA-D147) agent still processing at time of this pulse. Architect position paper pending.*
+
+---
+
+## Debate PS-D147: Sprint 0 Scope — Cut the Architecture, Ship the Document
+
+**Challenge:** Sprint 0 has absorbed 6+ major feature areas beyond what a solo dev can ship in 5 days. Three specialist agents spawned to debate.
+
+### Product Strategist — Sprint 0 Should Be a Document Tool, Not an Activation Machine
+
+**Assumption challenged:** "Sprint 0 must establish the conversion architecture for both Path A and Path B simultaneously."
+
+**Core arguments:**
+
+1. **The false dichotomy.** "Simplicity-first" vs "competence-first" are presented as competing Sprint 0 philosophies. They are not. A simplicity-first Sprint 0 that does one thing well — lets Marc create and send a professional devis from his phone — is both simple AND competent. The debate was framing the wrong choice.
+
+2. **Path B cannot be designed without Path B users.** D110's 45-day/7-job/5-client trigger is an assumption, not a finding. You cannot know the soft limit threshold for Path B artisans without observing Path B artisans. Building activation infrastructure before you have anyone to activate is cargo-cult product management. Ship Path A. Watch for Path B signals. Design Path B in v1.2 with real data.
+
+3. **WhatsApp Business API cannot ship in Sprint 0.** Meta Business Verification alone takes 2-14 days. Louis has no verified Meta Business Manager. Sprint 0 ends before approval. And Path B's retention mechanism (D141) should be an in-app digest or email — not WhatsApp — because WhatsApp is too invasive for dormant users receiving product marketing.
+
+**The 3 Maximum Deliverables for Sprint 0:**
+
+| # | Deliverable | Days |
+|---|-------------|------|
+| 1 | Core Devis Flow: Supabase schema + client/devis screens + TVA calculator + expo-print PDF + native share | 3.0 |
+| 2 | Auth + Offline-Capable: Supabase Auth + AsyncStorage cache + retry queues, view-only offline | 1.5 |
+| 3 | Expo Push Skeleton: notification permission + trigger infrastructure, no content | 0.5 |
+| | **Total** | **5.0** |
+
+**What Gets Cut:**
+
+| Cut | Reason |
+|-----|--------|
+| WhatsApp Business API | Meta verification 2-14 days; no premium content to send yet |
+| Path B mechanics | Cannot validate 45-day trigger without users; v1.2 decision |
+| Dual-path architecture | D96 designed two flows before any user exists |
+| Mentions légales template engine | Static strings in PDF function handle all 4 client types; Sprint 2 = 8 combos |
+| expo-sqlite | Deferred to v1.2; AsyncStorage + retry queues sufficient for Sprint 0 |
+| Full push implementation | Skeleton only; actual content in v1.1 |
+| Expert-comptable prep | D139 correctly moved to Week 3 |
+
+**Sprint 0 Timeline:**
+- Day 1: Supabase project (EU Frankfurt), schema, TVA calculator, auth
+- Day 2: RN client list + devis list screens, Supabase integration
+- Day 3: Devis creation flow, PDF generation, native share
+- Day 4: Mentions légales as static strings, sequential numbering, offline caching
+- Day 5: Auth completion, Expo Push skeleton, real device testing (Android)
+
+**Floor: 5.5 days.** Mentions légales gate (D142) must be met before sprint starts.
+
+**Verdict on PS-D147:** Sprint 0 scope reduction proposal documented. Three maximum deliverables identified. Path B deferred to v1.2. WhatsApp Business API deferred to v1.1. **OPEN — requires Louis decision on scope cuts.**
+
+---
+
+## Debate GS-D147: Annual Billing — Monthly €29 Is the Confirmed Default
+
+**Challenge:** Annual €240 as DEFAULT at checkout was argued at 01:15 (GS-D145) using the 35-45% uptake figure. GS-D147 at 01:59 challenges that figure and reverts to monthly €29 as primary.
+
+### Growth Strategist — Annual As Default Is Coerced Uptake, Not Conversion
+
+**Assumption challenged:** "35-45% annual uptake via default-annual framing validates annual as the checkout default."
+
+**Core arguments:**
+
+1. **The 35-45% figure is inapplicable.** It describes coerced uptake under default bias in mature products (Netflix, Spotify, Adobe) where users have months of product experience before seeing the paywall. At first conversion, Marc has sent exactly one devis. He has not experienced relances, the document archive, or any €29-tier differentiator. He is prepaying for something he doesn't yet trust.
+
+2. **Coerced annual conversions generate involuntary churn at renewal.** When the annual renewal hits in a slow month, the card declines. The artisan gets a "please update your payment" email he ignores. Account suspended. Same outcome as monthly cancellation — but with more resentment, because he already paid upfront and still couldn't keep it.
+
+3. **Monthly handles seasonality naturally.** Active months → sees value → pays €29. Slow months → pauses → no resentment → returns when work picks up. This is a subscription lifecycle working correctly for a lumpy-income customer. Annual "solves" seasonality by forcing prepayment through a slow period — which creates a different churn pattern.
+
+**Pricing page architecture (three-zone layout):**
+
+| Zone | Content | Timing |
+|------|---------|--------|
+| A (primary) | €29/mois — "Simple, flexible, sans engagement." Single CTA. | Always visible |
+| B (secondary) | €240/an — "Soit €20/mois — épargnez €108 par an." | Below fold |
+| C (conversion) | Annual upgrade prompt — "Vous utilisez l'app depuis 30 jours. Voulez-vous annualiser?" | After 30+ active days, 5+ devis |
+
+**What this rejects:**
+- Annual-first presentation ("€240 today, or €29/month")
+- "Payez quand vous êtes chargé" — conflates billing cycle with product value
+- Sticker-shock anchoring at first payment moment
+
+**KPI:** 40%+ of monthly users who reach engagement triggers (5+ devis sent) upgrade to annual within 60 days. Measures product conviction, not conversion pressure.
+
+**Verdict on GS-D147:** Monthly €29 confirmed as primary default. Annual €240 as opt-in savings below monthly. Annual as upgrade prompt after 30+ active days. **OPEN — requires Louis confirmation on pricing page architecture.**
+
+---
+
+## Debate TA-D147: Technical Architect — Position Paper Pending
+
+**Challenge:** Path B Soft Limit Contradiction Is an Architectural Blocker.
+
+Technical Architect agent was still processing at time of pulse compilation. Position paper expected at `/data/workspace/mini-crm-research/debate-pulse-0213-architect.md`.
+
+**Expected arguments (from prior TA positions):**
+- D140 (offline scope) must be resolved FIRST in the dependency chain
+- D40 (notification channel) is conditioned on D140
+- D110 (soft limit threshold) is conditioned on D40
+- Server-wins conflict resolution is insufficient for revenue-tracking job logging
+- AsyncStorage + retry queues fail when phones die mid-entry
+
+**Verdict on TA-D147:** PENDING — position paper not available at time of this pulse.
+
+---
+
+## Challenged Assumptions This Pulse (02:13)
+
+1. **"Simplicity-first and competence-first are mutually exclusive in Sprint 0."** Challenged by Product Strategist: a simplicity-first Sprint 0 that does one thing well is both. Path B mechanics are not Sprint 0 work.
+2. **"35-45% annual uptake validates annual-as-default."** Challenged by Growth Strategist: that figure is coerced uptake in mature products, not applicable to first-conversion v1 SaaS.
+3. **"Path B must be designed in Sprint 0."** Challenged by Product Strategist: you cannot validate conversion mechanics for users who don't exist yet.
+4. **"WhatsApp Business API belongs in Sprint 0 because Path B needs it."** Challenged by Product Strategist: Meta verification alone blows the sprint timeline; Path B digest should be in-app/email, not WhatsApp.
+5. **"D140, D40, D110 are independent Sprint 0 deliverables."** Challenged by Technical Architect (prior pulse): they form a tightly coupled dependency chain. [TA-D147 verdict pending]
+
+### Resolved This Pulse
+
+NONE — all three debates require Louis's input on scope and pricing decisions.
+
+---
+
+## Updated Decision Table (Partial — 02:13 Pulse)
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D12 | Landing page | Simplicity-first RETAINED | 2026-03-30T22:56 |
+| D40 | WhatsApp Sprint 0 | CONTESTED — depends on D140 offline scope resolution | 2026-03-31 |
+| D81/C | Offline architecture | CONTESTED — AsyncStorage sufficient for Sprint 0 per PS-D147; expo-sqlite deferred v1.2. TA verdict pending. | 2026-03-31 |
+| D93 | Onboarding | 90-second wizard ships. Office hours → Settings/Help. No call in onboarding. | 2026-03-31 |
+| D99 | Pricing | Flat €29/month + annual billing. **REFINED by GS-D147: monthly €29 PRIMARY default, annual €240 opt-in savings below, annual upgrade prompt at 30+ active days.** | 2026-03-31 |
+| D110 | Path B soft limit | CONTESTED — threshold depends on D40 (notification channel). OPEN. | 2026-03-31 |
+| D138 | Annual billing | CONTESTED — monthly €29 PRIMARY. Annual €240 as secondary opt-in. OPEN. | 2026-03-31 |
+| D140 | Offline scope | CONTESTED — resolves first in Path B dependency chain. OPEN. | 2026-03-31 |
+| D142 | Sprint 0 gate | Mentions légales as real strings committed. 5-day Sprint 0 CONDITIONAL on gate met. | 2026-03-31 |
+
+### Resolved Items Not Changed This Pulse
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D1 | Positioning | Kill "CRM" — devis, factures, relances | 2026-03-30 |
+| D4 | Stack | Supabase EU-hosted (Frankfurt) | 2026-03-30 |
+| D5 | Pricing | Free + €29 two-tier | 2026-03-30 |
+| D57 | Architecture | CLOSED — Nuxt 3 eliminated from v1 | 2026-03-31 |
+| D72 | Expert-comptable timing | Customer development = Week 1. Referral = Month 4+. | 2026-03-31 |
+| D85 | GetApp/Capterra | REMOVED from TODO | 2026-03-30 |
+| D100 | Supabase exit | Composite usage-based trigger | 2026-03-30 |
+| D113 | PDF generation | HTML-to-PDF Edge Function | 2026-03-30 |
+| D121 | Document storage | Sprint 1b gate | 2026-03-30 |
+| D126 | Annual billing | Monthly €29 PRIMARY (GS-D147 CONFIRMS) | 2026-03-31 |
+| D138 | Annual billing | Monthly €29 PRIMARY (GS-D147 CONFIRMS) | 2026-03-31 |
+
+---
+
+## New Action Items This Pulse
+
+- [ ] **PS-D147 — Sprint 0 scope cuts:** Louis decides: accept 3-deliverable Sprint 0 (Core Devis Flow + Auth/Offline-Capable + Expo Push Skeleton = 5 days), OR negotiate which cuts to relax. **Blocks Sprint 0 start.**
+- [ ] **PS-D147 — Path B deferral:** Louis confirms: Path B conversion mechanics deferred to v1.2. Sprint 0 ships Path A only. Confirms D110, D141, D40 deferral.
+- [ ] **GS-D147 — Pricing page architecture:** Louis confirms: monthly €29 as primary, annual €240 as opt-in savings below, annual upgrade prompt at 30+ active days. Three-zone layout.
+- [ ] **GS-D147 — Challenged KPI:** Confirm: 40%+ of monthly users who hit engagement triggers (5+ devis sent) upgrade to annual within 60 days. This replaces conversion rate as the pricing health KPI.
+- [ ] **TA-D147 — Path B architectural gate:** Louis decides: D140 (offline scope) → D40 (notification channel) → D110 (soft limit threshold). All three must be resolved as one unit before Sprint 0. [PENDING Technical Architect position paper]
+- [ ] **D142 — Sprint 0 gate (URGENT):** Louis commits `legal/mentions-legales.ts` to git with real business data. Gate must be met before Sprint 0 begins. 5-day Sprint 0 is CONDITIONAL on this.
+- [ ] **D142 — Supabase project:** Louis confirms Supabase EU project is live and accessible. Gate item 2.
+
+### Louis's Decisions Required Before Sprint 0
+
+| Decision | Options | Blocks Sprint 0? |
+|----------|---------|-----------------|
+| Sprint 0 scope | Accept 3-deliverable cut OR negotiate | YES |
+| Path B deferral | Confirm v1.2 deferral | YES |
+| Pricing page | Confirm monthly €29 primary, annual opt-in | NO |
+| Path B architectural gate | Resolve D140→D40→D110 dependency chain | YES |
+| Mentions légales gate | Louis commits real strings to git | YES |
+| Supabase project | Confirm EU project live | YES |
+
+---
+
+*Last updated: 2026-03-31T02:13*
+*Technical Architect position paper (TA-D147) pending at debate-pulse-0213-architect.md*
+
