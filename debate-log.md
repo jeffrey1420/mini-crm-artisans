@@ -10047,3 +10047,55 @@ Louis should run a micro WTP experiment (even with 10-15 beta users) before deci
 - [ ] **Beta Users NEW — Sprint 0 exit criteria specification:** Louis defines "beta user" as currently-practicing artisan with at least one active client relationship. Document this in Sprint 0 handoff doc before recruiting beta users.
 
 *Last updated: 2026-03-31T05:46*
+$
+
+## Pulse 2026-03-31T05:59 — PS-WTP-0559
+
+**Topic:** WTP Experiment Is a Red Herring
+
+**Product Strategist** challenges the framing of the WTP validation debate (PS-D138-0547). Four core challenges:
+
+1. **Sequencing is circular:** WTP experiment requires beta users. Beta acquisition is unsolved. You cannot validate price without users, and you cannot get users without resolving acquisition. "Run a WTP experiment" is a deferral, not a plan.
+
+2. **n=5 is statistically meaningless:** Sprint 0 exit criteria is 5 beta users. Even expanded to 10-15, the experiment has zero statistical power. Any result is noise.
+
+3. **Behavior IS the experiment:** Stated WTP (survey) is unreliable. Revealed WTP (5 beta users actually paying €29) is the only signal that matters. The experiment is already running — stop surveying, start shipping.
+
+4. **Price is not the conversion barrier:** €29/mo ≈ €1/day ≈ less than cigarettes. Awareness and trust are the barriers, not price. Misallocated debate energy.
+
+**Status:** OPEN — recommends shipping with €29, validating through actual payment behavior in Sprint 0, and redirecting debate energy to beta acquisition.
+
+## Pulse 2026-03-31T05:59 — TA-BetaState-0559
+
+**Debate TA-BetaState-0559 filed.** Technical Architect challenges GS-Beta-0547's "active practitioner" requirement for Sprint 0 beta users.
+
+**Four challenges raised:**
+1. **Conflation error** — GS-Beta-0547 mixes product validation (does the workflow make sense?) with business validation (does the user generate revenue?). Sprint 0 only tests the former. A retired artisan can validate workflow comprehension fully.
+2. **Retired artisans are better validators** — Institutional memory of invoicing pain, TVA chaos, and expert-comptable friction is deeper in recently-retired artisans. Active artisans may have workarounds that make our solution feel less urgent.
+3. **The filter selects against the best feedback-givers** — Busy active artisans = no time. Retired artisans = thorough, detailed feedback. The "active client" requirement paradoxically filters for shallow engagement.
+4. **"Active" is unmeasurable at signup** — SIREN lookup, self-declaration, and expert-comptable referrals all fail the verification test. The criterion cannot be applied consistently, making it theater rather than a useful filter.
+
+**Recommendation:** Sprint 0 validates technical and workflow comprehension — not commercial momentum. Correct filter: anyone who has been a practicing artisan and can articulate the problem. Full debate at `debate-ta-BetaState-0559.md`.
+
+## Pulse 2026-03-31T05:59 — GS-Sprint0Timing-0559
+
+**Topic:** Sprint 0 Beta Validation Is Validation Theater
+
+**Growth Strategist** challenges the entire framing of Sprint 0 beta acquisition as a meaningful validation milestone. Four arguments:
+
+1. **n=5 validates nothing commercially.** Sample is too small, self-selected early adopters are not the market, Louis's personal involvement biases results, and guided test conditions bear no resemblance to real-world usage. Sprint 0 beta testing is internal QA, not market validation.
+
+2. **Real validation is post-Sprint 1.** After Sprint 1 ships with a landing page and real distribution, Louis gets: real install funnels, real dropout data, real WhatsApp sharing events, real conversion behavior. Sprint 0 validates the thing builds. Sprint 1 validates the thing sells. Different questions, different data.
+
+3. **The Sprint 0 beta obsession is founder ego.** Recruiting and managing 5 beta users creates emotional relief (humans said nice things) but no durable data asset. It generates commitment bias that will distort future decisions. It delays the actual hard work of real distribution.
+
+4. **Sprint 0 exit criteria should be "builds, installs, doesn't crash on real Android" — not user happiness.** The correct gate is technical, not behavioral. Everything beyond "app runs without crash on real device with French SIM" is aspirational bonus, not Sprint 0 exit criteria.
+
+**Status:** OPEN
+
+**Recommendation:** Eliminate beta user completion as Sprint 0 gate. Make Sprint 0 exit criteria purely technical: app builds, installs, and runs on real Android without crash. Move all beta user validation to post-Sprint 1 as tracked metrics against real distribution — not as a gate.
+4. **Sprint 0 exit criteria should be "builds, installs, doesn't crash on real Android" — not user happiness.** The correct gate is technical, not behavioral. Everything beyond "app runs without crash on real device with French SIM" is aspirational bonus, not Sprint 0 exit criteria.
+
+**Status:** OPEN
+
+**Recommendation:** Eliminate beta user completion as Sprint 0 gate. Make Sprint 0 exit criteria purely technical: app builds, installs, and runs on real Android without crash. Move all beta user validation to post-Sprint 1 as tracked metrics against real distribution — not as a gate.

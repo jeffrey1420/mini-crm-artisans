@@ -88,7 +88,7 @@
 - [ ] **D57 CLOSED:** Nuxt 3 is eliminated from v1 architecture. No Nuxt dependency in any Sprint 0 planning. Update any existing Nuxt project references in the repo.
 - [ ] **D141 NEW — Path B retention mechanism:** Define the recurring "stay in touch" digest for dormant Free users (14+ days inactive) — content, frequency, delivery channel. This is Path B's primary retention touch.
 - [ ] **D141 NEW — Path A notification timing:** The "situation financière" first-accepted-devis event trigger should also include: "your pipeline is now worth €X" (server-computed from accepted devis amounts). Conversion ask follows the notification.
-- [ ] **D142 — Sprint 0 gate (URGENT):** Louis must commit `legal/mentions-legales.ts` to git with real business data BEFORE Sprint 0 begins. If not committed: Sprint 0 = 7-8 days. If committed: 5-day Sprint 0 stands. This week.
+- [x] **D142 — Sprint 0 gate (RESOLVED 05:46):** Louis dependency ELIMINATED. Mentions légales = developer-generated boilerplate. Sprint 0 gate: UNBLOCKED. Louis has no action required.
 - [ ] **D142 NEW — Sprint 0 handoff doc:** Add explicit note: "Mentions légales gate: Louis's own data committed as real strings, not TODO comments. Gate verified by: git status legal/"
 - [ ] **D141 UPDATED — D83/D89 updated:** "Situation financière" notification is Path A conversion trigger ONLY. Path B excluded by workflow design. D83 entry in this doc updated accordingly.
 
@@ -1305,7 +1305,7 @@ NONE — all three debates remain OPEN, requiring Louis's adjudication.
   - **Redesign checkout copy:** monthly €29 as positive confident choice, not the lesser alternative
   - **New KPI:** 40%+ of monthly users upgrade to annual within 60 days of hitting engagement triggers — measures product-market fit, not conversion pressure
 
-- [ ] **Sprint 0 gate verification (D142 — still open):** Louis must commit `legal/mentions-legales.ts` to git with real business data BEFORE Sprint 0 begins. Sprint 0 = 4.5 days if gate met, 6+ days if not. This week.
+- [x] **Sprint 0 gate verification (D142 — RESOLVED 05:46):** Louis dependency ELIMINATED. Developer generates generic mentions légales template. Louis has no action required. Sprint 0 gate: UNBLOCKED.
 
 *Last updated: 2026-03-31T01:59*
 
@@ -1332,7 +1332,7 @@ NONE — all three debates require Louis's input on scope and pricing decisions.
 - [ ] **GS-D147 — Pricing KPI:** Confirm: 40%+ of monthly users who hit engagement triggers upgrade to annual within 60 days. Replaces conversion rate as pricing health KPI.
 - [ ] **GS-D147 — Challenged assumption:** 35-45% annual uptake stat retired. Correct benchmark: 10-15% opt-in annual uptake at month-1 conversion (genuine preference signal). Coerced annual conversions generate involuntary churn at renewal.
 - [ ] **TA-D147 — Path B architectural gate:** Louis decides: D140 (offline scope) → D40 (notification channel, conditioned on D140) → D110 (soft limit threshold, conditioned on D40). All three resolved as one unit before Sprint 0. [PENDING Technical Architect position paper]
-- [ ] **D142 — Sprint 0 gate (URGENT):** Louis commits `legal/mentions-legales.ts` to git with real business data (his own). NOT TODO comments. Gate must be verified before Sprint 0 begins. 5-day Sprint 0 is CONDITIONAL on this.
+- [x] **D142 — Sprint 0 gate (RESOLVED 05:46):** Louis dependency ELIMINATED. Developer generates generic mentions légales template. Sprint 0 proceeds without gate.
 - [ ] **D142 — Supabase project:** Louis confirms Supabase EU project (Frankfurt) is live and accessible. Gate item 2.
 
 ### Louis's Decisions Required Before Sprint 0 (02:13 Updated)
@@ -1755,3 +1755,33 @@ NONE — all three debates require Louis's input. New arguments surfaced but no 
 | Sprint 0 timeline | **6.5 days** | — |
 
 *Last updated: 2026-03-31T05:29*
+
+## New from Pulse 2026-03-31T05:59 — Three Specialist Debates (WTP Framing, Beta State, Sprint 0 Exit Criteria)
+
+### Resolved This Pulse
+
+NONE — all three debates remain OPEN with new arguments. Louis decisions still required.
+
+### Challenged Assumptions This Pulse (05:59)
+
+1. **"Run a WTP experiment before finalizing billing"** — challenged by Product Strategist (PS-WTP-0559): circular dependency (needs beta users to run experiment, acquisition is unsolved), n=5 gives zero statistical power, revealed preference (actual payment) beats stated preference (survey), €29 is below pain threshold
+2. **"Beta users must be currently-practicing artisans with active clients"** — challenged by Technical Architect (TA-BetaState-0559): conflates product validation with business validation, retired artisans have deeper institutional memory of the pain, "active" is unmeasurable at signup, the filter paradoxically selects against the best feedback-givers
+3. **"Sprint 0 beta validation with 5 users is a meaningful milestone"** — challenged by Growth Strategist (GS-Sprint0Timing-0559): n=5 validates nothing commercially, real validation is post-Sprint 1, the obsession is founder ego, Sprint 0 exit should be technical not behavioral
+
+### New Action Items This Pulse
+
+- [ ] **D138 UPDATE — Stop deferring on €29:** PS-WTP-0559 argues the WTP experiment framing is circular and n=5 is statistically meaningless. Recommend: ship with €29, validate through actual payment behavior from 5 beta users in Sprint 0. Redirect debate energy to beta acquisition.
+- [ ] **Beta Users UPDATE — Remove "active client" requirement:** TA-BetaState-0559 argues retired/part-time artisans are valid Sprint 0 validators and may give better feedback. Sprint 0 filter = anyone who has been a practicing artisan and can articulate the problem, not "currently active with real clients."
+- [ ] **Sprint 0 Exit Criteria UPDATE — GS-Sprint0Timing-0559 recommends:** Eliminate beta user completion as Sprint 0 gate. Sprint 0 exit = purely technical: app builds, installs, runs without crash on real Android with French SIM. Move all beta user validation to post-Sprint 1 as tracked metrics.
+
+### Sprint 0 Blockers — Updated Status (05:59 Pulse)
+
+| Blocker | Status | Louis Action Required |
+|---------|--------|---------------------|
+| Mentions légales gate (D142) | **RESOLVED (05:46)** — developer-generated generic template | None — Sprint 0 starts |
+| Supabase EU project | **OPEN** — confirm EU project live | Confirm at supabase.com |
+| Beta user acquisition | **OPEN** | Ask Gabin + Maëli ONE question; expert-comptable call |
+| Sprint 0 beta exit criteria | **OPEN** — contested | Louis: accept purely technical exit (GS), or maintain behavioral gate (GS-Beta-0547)? |
+| D138 — Annual billing | **OPEN** | Ship with €29, validate through payment behavior (PS recommendation) |
+
+*Last updated: 2026-03-31T05:59*
