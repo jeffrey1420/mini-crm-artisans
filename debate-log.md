@@ -9143,3 +9143,164 @@ Structure:
 - [ ] **D138 NEW — Cohort analytics:** Build from Day 1. Monthly: "churned in [month]" + seasonal overlay. Annual: "renewed/not renewed in [month]" + mid-year cancellation flag. Overlay with Louis's own seasonal business data.
 
 *Last updated: 2026-03-31T04:05*
+
+---
+
+## Pulse 2026-03-31T04:17 — Three Specialist Debates
+
+---
+
+## Debate GS-D154: D141 — Unresolved Scope Debt (Stay-in-Touch Digest for Dormant Path B Users)
+
+**Challenge:** D141 has been "RESTATED" or "REFINED" at four consecutive pulses (00:58, 01:15, 01:29, 02:59) but has never received a formal verdict. This is not a living document — it is unresolved scope debt that creates ambiguous Sprint 0 scope.
+
+### Assumption Challenged
+
+That D141 remains an open item that can be "refined" indefinitely without a verdict. The 02:59 pulse settled the Sprint 0 notification architecture as Expo Push only and explicitly deferred WhatsApp to v1.1. D141's digest was designed as a WhatsApp deliverable. This creates a logical gap: D141's digest was implicitly killed by the 02:59 WhatsApp deferral, but was never formally recorded as such.
+
+### Core Argument
+
+- **D141 has been restated 4 times without a verdict:** 00:58 (origin), 01:15 (restated with content specs), 01:29 (restated with in-app alternative), 02:59 (refined: WhatsApp deferred to v1.1). "Restated" is indecision documented as progress — it is not a verdict.
+- **The 02:59 pulse implicitly killed D141's digest:** By settling Expo Push as the Sprint 0 notification architecture and deferring WhatsApp to v1.1, D141's WhatsApp-based digest lost its delivery channel with no replacement specified. The digest is dead unless formally re-scoped.
+- **A digest is not a notification:** The 02:59 "Expo Push" resolution covers event-driven notifications, not periodic batched digests. These require different infrastructure (scheduled/batched vs event-driven). Even accepting Expo Push as the vehicle, the digest requires a separate explicit resolution.
+- **Four pulses of specification without resolution creates scope debt:** D141 now carries accumulated specification from 4 pulses with zero verdicts. This cannot persist as "restated" indefinitely.
+
+### Proposed Resolution
+
+**Two options — Louis must choose:**
+
+**Option A (Kill):** D141's WhatsApp digest = KILLED. Re-opened as D141-v1.1 (WhatsApp digest, Sprint 0 scope excluded). Sprint 0 has no re-activation digest for dormant Path B users.
+
+**Option B (Re-scope as Expo Push digest):** D141 re-scoped as minimum viable Expo Push digest for Sprint 0:
+- Trigger: 14+ days dormant + ≥1 job logged + Path B user
+- Frequency: Bi-weekly (max once per 14-day window)
+- Channel: Expo Push (not WhatsApp)
+- Content: "Vous avez [X] devis en attente et [Y] factures non payées depuis votre dernière visite." — plain text, no metrics, no sales language
+- Single CTA: Deep link to home view
+- Anti-spam: Cooldown resets on any app open
+
+### Status
+
+**OPEN — requires Louis or pulse resolution.**
+
+Full position paper: `/data/workspace/mini-crm-research/debate-d141-resolution-pulse.md`
+
+---
+
+*Last updated: 2026-03-31T04:17*
+
+---
+
+## Pulse 2026-03-31T04:17 — Three Specialist Debates
+
+---
+
+## Debate D110 — Path B Trigger Deferral: CHALLENGED
+
+**Challenge:** TA-D152 deferred D110 (Path B soft limit trigger) to v1.2 at 03:20, arguing Sprint 0 is at capacity and Path B should be observed via analytics before designing the trigger. This deferral is challenged as premature.
+
+### Product Strategist (PS-D154) — D110 Deferral Should Be Reversed
+
+**Assumption being challenged:**  
+"Sprint 0 is at capacity" and "observe via analytics before designing the trigger"
+
+**Core argument (bullet points):**
+
+- **"Sprint 0 at capacity" is a scoping choice, not a physical constraint.** Sprint 0 has been cut four times already: WhatsApp removed (→ v1.1), dual-path deferred, mentions légales simplified, e-invoicing removed (→ v2). Each cut reduced what Louis ships. The pattern is: hard things get deferred. Path B trigger is the latest. The question is whether Louis wants to prioritize it — not whether physics allows it.
+
+- **"Observe via analytics first" is backwards logic.** Analytics observe behavior; they do not create conversion. We already know the problem: Path B users (verbal-agreement artisans, 40-50% of target market) churn silently at 45 days with no upgrade prompt. Analytics can measure this after launch. They cannot design the upgrade prompt. Waiting for analytics to tell us "when" to prompt is confusing discovery with conversion.
+
+- **The minimum viable Path B trigger is not 1 day of work.** TA-D152 appears to conflate Path B trigger with WhatsApp Business API integration. The minimum viable trigger is: (1) a threshold flag — `jobs.count >= N AND client_contact_exists = true` — and (2) an in-app banner, shown once, dismissible, with 60-day cooldown. No WhatsApp. No push notifications. No external API. Estimated: 2-4 hours, not a Sprint 0 blocker.
+
+- **Path B represents 40-50% of the target market.** Launching without a Path B conversion mechanism means launching with a systemic conversion gap covering nearly half the market. Path A users create devis → first facture → trigger. Path B users log jobs → never hit Path A (no accepted devis) → churn silently. Louis ships an MVP that converts one path and loses the other.
+
+- **The risk of NOT having a Path B trigger:** At 45 days, Path B users churn with zero upgrade prompt, zero friction, zero re-engagement. Analytics will later confirm "40-50% churned at 45 days." But by then, v1.2 is already scoped and the fix is still not designed. The 45-day churn window is the conversion opportunity. Missing it at launch is not recoverable via analytics.
+
+- **Every threshold is unvalidated at launch.** The 3-job threshold is reasonable but unvalidated. A 5-job threshold is more conservative. A 30-day threshold is most conservative. "Unvalidated" is not a reason to defer — it's a reason to ship a reasonable default and measure.
+
+**Proposed resolution:**
+
+Add to Sprint 0 (non-critical path):
+- Threshold flag: `jobs.count >= 3 AND (client_phone IS NOT NULL OR client_email IS NOT NULL)` → `user.upgrade_flag = 'path_b'`
+- In-app banner component: shown once, dismissible, 60-day cooldown, no WhatsApp
+
+**Louis must decide:**
+
+> **Decision D110: Path B trigger threshold = [3 / 5 / 30 days of jobs logged with client contact]?**
+
+One number. That's the decision. No WhatsApp. No complex architecture.
+
+**Note:** WhatsApp Business API remains deferred to v1.1. This debate does not revisit that deferral.
+
+**Status: OPEN — Louis decision required on threshold value (D110).**
+
+---
+
+## Debate D96-ADDENDUM — SIREN/SIRET Enforcement (v1.2 Enhancement Flag)
+
+**Context:** D96 (Path A trigger = first `facture` created) was resolved at 04:05. PS-D153 noted in the resolution that SIREN/SIRET validation for client uniqueness enforcement is deferred to v1.2.
+
+**Flag for v1.2 scoping:**
+- SIREN/SIRET validation on client creation would close the "fake company" anti-gaming gap in Path A
+- This is a v1.2 enhancement, not a Sprint 0 requirement
+- Tracking here so it is not lost when v1.2 scoping begins
+
+**Status: OPEN — Deferred to v1.2**
+
+---
+
+## Debate D138-ADDENDUM — Annual Billing: Day 30 Upsell Trigger Clarification
+
+**Context:** D138 (Monthly €29 + Annual €240 opt-in + Day 30 upsell) was resolved at 04:05. GS-D153's resolution specified the upsell fires "after user creates their first devis/facture."
+
+**Clarification needed (does not reopen D138):**
+- "Day 30 upsell" fires on `devis.created` OR `facture.created` (first document event, not calendar day 30)
+- If user creates first document on Day 5, upsell fires on Day 5 (not Day 30)
+- If user is still on Day 3 with no document created, upsell does not fire yet
+- Rationale: value establishment is document creation, not calendar time. A user who signs up but never creates a document has not established value.
+
+**Status: OPEN — Clarification only, does not reopen D138**
+
+---
+
+## Debate TA-D155: Sprint 0 5-Day Timeline — Documents Table Underestimates Scope
+
+**Challenge:** The 04:05 pulse confirmed Sprint 0 at 5 days and assigned Days 1-2 to "offline architecture + devis flow." It simultaneously resolved the documents table schema (UUID, type, status, JSON blob, timestamps) as the Sprint 0 offline architecture and estimated it at "half-day to 1-day." Technical Architect challenges both the estimate and the gate status as incompatible with a true 5-day Sprint 0.
+
+### Assumption Challenged
+
+That the documents table + draft-mode implementation is a "half-day to 1-day" task within Sprint 0, and that Sprint 0 can be completed in 5 days given current gate status.
+
+### Core Argument (Bullet Points)
+
+- **The documents table is a new schema entity added to Sprint 0 scope at 04:05.** It was discussed across multiple prior debates (D140, TA-D153) but was never formally committed as a Sprint 0 deliverable until this pulse. New scope added without re-estimating is scope debt.
+
+- **"Half-day to 1-day" underestimates the actual task stack.** The offline work requires: (1) expo-sqlite setup + migration runner — 0.5 days; (2) documents table schema — 0.25 days; (3) CRUD helpers (create, update, promote, list, delete) — 0.5 days; (4) draft semantics logic (status transitions, sync triggers, confirmed-only server sync) — 0.5 days; (5) Pending Drafts UI (list view, resume/discard/confirm actions) — 0.5 days; (6) Confirm/Discard flows with optimistic UI and error handling — 0.25 days; (7) Devis form integration (draft saves on blur, Envoyer promotes to confirmed) — 0.5 days. Total: 3.0 days, not 0.5 to 1.0 days.
+
+- **The 04:05 estimate conflates schema with implementation.** The documents table schema is simple to define. The full draft-mode semantics + UI + integration is not. The original +2.5 days estimate (TA-D153) was for a complete database architecture. The documents table simplification reduces scope from multi-table to single-table — but not from 2.5 days to 0.5 days.
+
+- **Sprint 0 gate status is 0/2 committed before work begins.** Mentions légales (D142): Louis must commit real business data to `legal/mentions-legales.ts` — not done. Supabase EU project: must be created on supabase.com with Frankfurt region — not confirmed done. If Sprint 0 starts with gates open, Louis's parallel track (mentions légales + Supabase setup, Days 4-5 per 04:05) is either blocked or becomes sequential — adding directly to Sprint 0 duration.
+
+- **"Days 4-5: mentions légales + Supabase project setup (parallel, independent)" assumes gates are pre-completed.** If Louis has not done these before Sprint 0 begins, they are not parallel — they are sequential. Two gates at 0.5 days each = +1 day minimum to Sprint 0.
+
+- **Revised Sprint 0 estimate: 5.5 to 6.5 days.** If gate items are pre-committed: 5.5 days (offline work takes 2 days instead of 1). If gate items are not pre-committed: 6.5 to 7.0 days (gates block development or extend timeline).
+
+- **This is not a request to cut scope.** Draft-mode semantics are correct and necessary (TA-D153 arguments stand). The documents table is the right architecture. The challenge is to the timeline estimate — specifically to the "half-day to 1-day" characterization of work that, properly scoped, is 2 to 3 days of implementation.
+
+### Proposed Resolution
+
+**Louis must confirm before Sprint 0 begins:**
+
+1. **Mentions légales gate:** Can Louis commit real business data to `legal/mentions-legales.ts` before Sprint 0 Day 1? If yes, parallel track assumption holds. If no, Sprint 0 is 6 days minimum.
+
+2. **Supabase EU project:** Has the Supabase project been created (EU/Frankfurt)? If yes, offline sync work (Day 3+) can proceed. If no, Days 3-5 sync track is blocked.
+
+3. **Buffer acknowledgment:** Accept that offline implementation is realistically 1.5 to 2.0 days (not 0.5 to 1.0). Add 0.5 to 1.0 day buffer, making Sprint 0: **5.5 to 6.0 days** to absorb the realistic estimate.
+
+**Status: OPEN — Louis decision required. Do not start Sprint 0 until gate status is confirmed.**
+
+Full position paper: `/data/workspace/mini-crm-research/debate-sprint0-timeline-challenge.md`
+
+---
+
+*Last updated: 2026-03-31T04:17*

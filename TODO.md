@@ -1598,3 +1598,38 @@ NONE — all three debates (D96, D138, D140) remain open. No items resolved this
 | Supabase EU project | Confirm EU project live | BLOCKS Sprint 0 |
 
 *Last updated: 2026-03-31T04:05*
+
+---
+
+## New from Pulse 2026-03-31T04:17 — Three Specialist Debates (All OPEN)
+
+### Resolved This Pulse
+
+NONE — all three debates are OPEN and require Louis's input.
+
+### New Debates
+
+**GS-D154 (D141 — Stay-in-Touch Digest):** D141 has been "restated" at four consecutive pulses without a formal verdict. The 02:59 pulse deferred WhatsApp to v1.1, implicitly killing D141's WhatsApp-based digest. Growth Strategist proposes: (A) kill D141 entirely, Sprint 0 has no re-activation digest; or (B) re-scope as minimum viable Expo Push digest (14+ days dormant, Path B only, bi-weekly, single re-entry CTA). **OPEN — Louis chooses.**
+
+**PS-D154 (D110 — Path B Trigger Deferral):** TA-D152 deferred Path B trigger to v1.2. Product Strategist challenges: Sprint 0 at capacity is a scoping choice, not physics; analytics observe but don't create conversion; minimum viable Path B trigger = threshold flag (jobs.count >= N) + in-app banner, 2-4 hours, not a Sprint 0 blocker. Path B = 40-50% of target market. **OPEN — Louis decides threshold value (3 / 5 / 30 jobs with client contact).**
+
+**TA-D154 (Sprint 0 Timeline):** Technical Architect challenges 5-day estimate: "half-day to 1-day" for documents table + draft semantics is too aggressive; mentions légales + Supabase project gates remain uncommitted; if Louis hasn't done them before Sprint 0 starts, Sprint 0 becomes 5.5-6.5 days. **OPEN — Louis confirms gate status and buffer.**
+
+### Louis's Decisions Required (04:17)
+
+| Decision | Options | Sprint 0 Impact |
+|----------|---------|----------------|
+| D141 — Stay-in-touch digest | (A) Kill — no digest in Sprint 0; (B) Expo Push digest (14d dormant, Path B, bi-weekly) | Not a sprint blocker |
+| D110 — Path B threshold | (A) 3 jobs + client contact; (B) 5 jobs; (C) 30 days | Non-critical path, ~2-4h |
+| Sprint 0 timeline | (A) Confirm 5 days with gates done; (B) Acknowledge 5.5-6.5 days if gates not done | Acknowledges realistic buffer |
+
+### Sprint 0 Blockers — Unchanged
+
+| Blocker | Status |
+|---------|--------|
+| Mentions légales gate (D142) | OPEN — Louis commits real strings to git |
+| Supabase EU project | OPEN — confirm supabase.com project created (EU region) |
+| Offline scope (D140) | RESOLVED — expo-sqlite + draft-mode |
+| Sprint 0 scope | 3 deliverables, 5 days |
+
+*Last updated: 2026-03-31T04:17*
