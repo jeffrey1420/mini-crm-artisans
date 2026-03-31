@@ -8095,4 +8095,121 @@ The structural risk: D138's framing will be imported into D139's conversations b
 - [ ] **D138/D139 NEW — Dual framing protocol:** Louis prepares two separate pricing narratives before expert-comptable outreach: (1) landing page version = €29/month, "sans engagement," consumer frame; (2) expert-comptable version = daily anchor ("moins d'un euro/jour ouvré") OR competitive anchor ("moins que Sage en licences"). These are not the same pitch.
 - [ ] **D138/D139 NEW — Expert-comptable Week 1 talking points:** Louis writes 5-question problem-framing script for expert-comptable conversations. Include pricing narrative section with the expert-comptable-specific anchor. Do not bring landing page copy to expert-comptable meetings.
 
-*Last updated: 2026-03-31T01:47*
+*Last updated: 2026-03-31T01:59*
+
+---
+
+## Pulse 2026-03-31T01:59 — Three Specialist Debates (D147)
+
+---
+
+## Debate PS-D147: Sprint 0 Scope Has Grown Beyond What a Solo Dev Can Ship
+
+**Challenge:** Sprint 0 can realistically deliver a 5-day sprint with the current scope (offline-capable + mentions légales + PDF generation + WhatsApp Business API + Path B conversion triggers + dual-path conversion architecture).
+
+### Product Strategist — Sprint 0 Has Absorbed 6+ Major Feature Areas
+
+**Assumption challenged:** "Sprint 0 can deliver the current scope in 5 days."
+
+**Core arguments:**
+
+1. **Path B conversion mechanics are premature.** D110 and D141 are designing conversion mechanics for users who don't exist yet. You can't validate a 45-day/7-job/5-client trigger without real users. These are v1.2 decisions being treated as Sprint 0 infrastructure.
+
+2. **WhatsApp Business API in Sprint 0 is impossible.** Meta Business Verification alone is 2-14 days. Louis doesn't have a verified Meta Business Manager. Even if he started today, Sprint 0 ends before approval. And there's nothing premium to send yet. Expo Push only for Sprint 0. WhatsApp → v1.1.
+
+3. **Dual-path architecture is over-engineering.** D96 designed two conversion paths, but Sprint 0 has zero users. You don't know if Path B exists as a meaningful segment. Ship Path A (limit-hit on formal devis) as a single flow. Let real usage tell you whether Path B is even a real thing.
+
+4. **Mentions légales gate isn't met.** D142 confirms Louis hasn't committed the legal text to git. The 5-day estimate is already conditional on a gate he hasn't satisfied. And Sprint 0 doesn't need a Handlebars/Nunjucks template engine — static strings are fine for the single-devis use case.
+
+**Proposed resolution:** Pick 3 maximum deliverables for Sprint 0:
+1. Core devis flow (3 days): schema, client creation, devis creation, TVA calculator, expo-print PDF, WhatsApp share via native sheet, plain text mentions légales
+2. Auth + basic offline (1 day): Supabase auth, AsyncStorage caching, retry queues, view-only offline
+3. Notification foundation (0.5 days): Expo Push skeleton only, no WhatsApp
+
+**Revised timeline: 4.5 days** (buffer included for real device testing).
+
+**What gets cut:** WhatsApp Business API, Path B mechanics, dual-path architecture, mentions légales template engine, expo-sqlite, full push implementation, expert-comptable prep.
+
+---
+
+## Debate TA-D147: Path B Soft Limit Contradiction Is an Architectural Blocker
+
+**Challenge:** That a Path B soft limit can be designed in Sprint 0 alongside the full dual-path conversion architecture, as independent deliverables.
+
+### Technical Architect — Three Decisions, One Dependency Chain
+
+**Assumption challenged:** That D110 (soft limit threshold), D40 (notification channel), and D140 (offline scope) are three independent Sprint 0 deliverables.
+
+**Core arguments:**
+
+1. **The soft limit threshold is meaningless without the notification channel.** A 1-client / 3-jobs cap delivered via WhatsApp is a completely different product decision than the same threshold delivered via in-app digest. The felt friction of the threshold depends entirely on notification intensity. You cannot specify the threshold without specifying the channel.
+
+2. **The notification channel is meaningless without the offline scope.** If offline scope is view-only, in-app digests cannot work offline — the artisan who opens the app without signal gets nothing. If offline scope includes editing, the in-app digest becomes viable as the primary notification surface. D40 (WhatsApp) cannot be committed to Sprint 0 until D140 (offline scope) is resolved.
+
+3. **The offline scope is meaningless without knowing the conversion funnel requirements.** If view-only offline ships, the Path B artisan who works in a basement cannot create his first job entry offline. Path B's conversion funnel starts broken. If full offline editing ships, the artisan who creates 3 jobs offline and comes back online needs the notification to reference his offline work accurately — requiring the notification system to sync with the offline queue before firing.
+
+4. **Shipping three undecideds in Sprint 0 guarantees one wrong decision.** The dependency chain forms a loop: soft limit threshold → notification channel → offline scope → back to soft limit threshold. These three decisions form a tightly coupled architectural unit. Treating them as independent Sprint 0 deliverables means at least one will be wrong.
+
+**Proposed resolution:**
+1. Resolve offline scope first (D140) — gates whether Path B artisans can create jobs offline
+2. Resolve notification channel second (D40), conditioned on D140
+3. Resolve soft limit threshold third (D110), conditioned on D40
+
+**These three must appear as a single gated decision block in the TODO:** *"Path B conversion funnel architecture — resolve before Sprint 0 begins."*
+
+---
+
+## Debate GS-D147: Annual Billing Default Cannibalizes Free-to-Paid Conversions
+
+**Challenge:** That presenting annual €240/year as the DEFAULT at checkout (with monthly €29 as fallback) maximizes conversion.
+
+### Growth Strategist — Annual at Checkout Is a Conversion Killer
+
+**Assumption challenged:** "Annual €240/year = €20/month = DEFAULT at checkout. Monthly €29 = fallback. Default annual achieves 35-45% uptake."
+
+**Core arguments:**
+
+1. **Psychological anchoring at the wrong moment destroys conversion intent.** Showing €240 at first conversion anchors the user's mental budget to "expensive" before they've validated any product value. The artisan came in ready to spend €29. Seeing €240 creates sticker shock that doesn't recover — even if they select monthly, they've already emotionally labeled the product as pricey. The 35-45% annual uptake figure conflates coerced uptake with true conversion.
+
+2. **The product has not delivered value yet.** At the moment of first payment, the artisan has sent exactly ONE devis. They have not experienced relances, job logging, document archive, or any of the €29 tier's real differentiators. Asking for 8 months of prepaid commitment (€240) based on a single devis send is asking for marriage on the first date.
+
+3. **Monthly as "fallback" poisons the monthly tier with buyer's remorse.** Users who choose monthly after being shown annual first don't feel like they're making a free, positive choice. They feel like they're settling. This poisons retention, expansion revenue, and word of mouth.
+
+4. **The 35-45% annual uptake stat measures pressure, not product-market fit.** Default annual works at Netflix/Spotify because the user has months of experience before seeing the paywall. At first facture for an artisan who's sent one devis, you're comparing a cold high-pressure conversion moment against mature product funnels. The stat is inapplicable.
+
+**Proposed resolution:**
+- Checkout shows €29/month as the primary, clean choice — no framing as fallback
+- After 30+ days of active usage (5+ devis sent, or 3+ relances, or 10+ archived documents), present a contextual annual upgrade prompt
+- Add a 3-month prepaid quarterly option at €79 (€26.33/month equivalent) as a middle path for price-sensitive artisans
+- Redesign checkout copy: monthly €29 as positive confident choice — "Simple, flexible, cancel anytime"
+- New KPI: 40%+ of monthly users upgrade to annual within 60 days of hitting engagement triggers — measures product-market fit, not conversion pressure
+
+**Annual billing is a retention play, not a conversion play. Move it to day 30+.**
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D40 | WhatsApp Sprint 0 | CONTESTED — depends on D140 (offline scope). If view-only offline: WhatsApp is necessary in Sprint 0. If full offline editing: in-app digest viable, WhatsApp defers to v1.1. | 2026-03-31 |
+| D110 | Path B soft limit | CONTESTED — threshold depends on D40 (notification channel). Must be resolved as single unit with D40 and D140. | 2026-03-31 |
+| D138 | Annual billing | CONTESTED — monthly should be DEFAULT at checkout. Annual as opt-in upgrade after 30+ days of usage. Default annual kills conversion. | 2026-03-31 |
+| D140 | Offline scope | CONTESTED — resolves first in the Path B dependency chain. Gates D40 and D110. | 2026-03-31 |
+
+### Challenged Assumptions This Pulse (01:59)
+
+1. "Sprint 0 can deliver the current scope in 5 days" — challenged: 6+ major feature areas absorbed, solo dev can't ship this
+2. "D110, D40, D140 are independent Sprint 0 deliverables" — challenged: they form a tightly coupled dependency chain, must be resolved as one architectural unit
+3. "Annual €240 as DEFAULT at checkout maximizes conversion" — challenged: anchoring at wrong moment, product hasn't delivered value, poisons monthly tier
+
+### New Action Items This Pulse
+
+- [ ] **Sprint 0 scope reduction:** Pick 3 maximum deliverables. Cut: WhatsApp Business API, Path B mechanics, dual-path architecture, mentions légales template engine, expo-sqlite. Revised timeline: 4.5 days.
+- [ ] **Path B architectural gate:** D140 (offline scope) → D40 (notification channel, conditioned on D140) → D110 (soft limit threshold, conditioned on D40). All three resolved together before Sprint 0. Single TODO item, not three.
+- [ ] **D138 revised:** Monthly €29 as DEFAULT at checkout. Annual €240 as opt-in upgrade after 30+ days of usage. Quarterly €79 option added as mid-tier. Checkout copy redesigned: "Simple, flexible, cancel anytime" — not a fallback.
+- [ ] **New KPI:** 40%+ of monthly users upgrade to annual within 60 days of hitting engagement triggers (measures product-market fit, not conversion pressure).
+
+---
+
+*Last updated: 2026-03-31T01:59*

@@ -1274,3 +1274,37 @@ NONE — all three debates remain OPEN, requiring Louis's adjudication.
 - [ ] **D141 NEW — In-app digest (D146 refinement):** If WhatsApp deferred to v1.1, D141 digest becomes in-app digest (Expo Push) for Sprint 0. Triggers at 14+ days dormant, Path B, ≥1 job logged. Plain text, user metrics reflected back, single re-entry CTA, no sales language.
 
 *Last updated: 2026-03-31T01:47*
+
+---
+
+## New from Pulse 2026-03-31T01:59 — Three Specialist Debates (PS-D147, TA-D147, GS-D147)
+
+### Challenged Assumptions This Pulse
+
+1. "Sprint 0 can deliver the current scope in 5 days" — Product Strategist: 6+ major feature areas absorbed (WhatsApp Business API, Path B mechanics, dual-path architecture, mentions légales template engine, expo-sqlite), solo dev can't ship this in 5 days
+2. "D110, D40, D140 are independent Sprint 0 deliverables" — Technical Architect: they form a tightly coupled dependency chain (soft limit threshold → notification channel → offline scope → back to threshold), must be resolved as one architectural unit before Sprint 0
+3. "Annual €240 as DEFAULT at checkout maximizes conversion" — Growth Strategist: anchoring at wrong moment (product hasn't delivered value), monthly as "fallback" poisons the monthly tier, 35-45% uptake stat measures pressure not product-market fit
+
+### New Action Items This Pulse
+
+- [ ] **Sprint 0 scope reduction (PS-D147):** Pick 3 maximum deliverables for Sprint 0:
+  1. Core devis flow (3 days): schema + client creation + devis creation + TVA calculator + expo-print PDF + WhatsApp share via native sheet + plain text mentions légales
+  2. Auth + basic offline (1 day): Supabase auth + AsyncStorage caching + retry queues + view-only offline
+  3. Notification foundation (0.5 days): Expo Push skeleton only, no WhatsApp
+  Revised timeline: **4.5 days** (buffer for real device testing included)
+  **Cut from Sprint 0:** WhatsApp Business API, Path B mechanics, dual-path architecture, mentions légales template engine, expo-sqlite, full push implementation, expert-comptable outreach prep
+
+- [ ] **Path B architectural gate (TA-D147):** Restructure TODO — D140, D40, D110 cannot appear as three independent Sprint 0 workstream items. Single gated decision block:
+  - **[BLOCKER] Path B conversion funnel:** D140 (offline scope, resolve first) → D40 (notification channel, conditioned on D140) → D110 (soft limit threshold, conditioned on D40). All three resolved together before Sprint 0 begins. This is one nested decision, not three parallel ones.
+
+- [ ] **D138 revised — Annual billing (GS-D147):**
+  - **Remove:** annual as default at checkout from D138 checkout flow spec
+  - **Add:** monthly €29 as PRIMARY default at checkout — "Simple, flexible, cancel anytime" (not a fallback framing)
+  - **Add:** annual €240 as opt-in upgrade presented AFTER 30+ days of active usage (5+ devis sent OR 3+ relances OR 10+ archived documents) — contextual upgrade prompt with value proof
+  - **Add:** 3-month prepaid quarterly option at €79 (€26.33/month equivalent) as mid-tier for price-sensitive artisans
+  - **Redesign checkout copy:** monthly €29 as positive confident choice, not the lesser alternative
+  - **New KPI:** 40%+ of monthly users upgrade to annual within 60 days of hitting engagement triggers — measures product-market fit, not conversion pressure
+
+- [ ] **Sprint 0 gate verification (D142 — still open):** Louis must commit `legal/mentions-legales.ts` to git with real business data BEFORE Sprint 0 begins. Sprint 0 = 4.5 days if gate met, 6+ days if not. This week.
+
+*Last updated: 2026-03-31T01:59*
