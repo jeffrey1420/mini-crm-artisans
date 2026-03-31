@@ -7994,3 +7994,105 @@ All three debates this pulse challenged open items from the 01:15 pulse. None re
 - [ ] **D40 NEW — WhatsApp Business API deferral:** Push WhatsApp to v1.1. Sprint 0 notification infra = Expo Push only. WhatsApp Business API setup (Meta Business Verification) happens post-Sprint 0 when v1 core loop is validated.
 
 *Last updated: 2026-03-31T01:29*
+
+---
+
+## Pulse 2026-03-31T01:47 — Three Specialist Debates (D146)
+
+---
+
+### Resolved This Pulse: NONE
+
+All three debates challenged open items from the 01:29 pulse. None reached resolution — all represent genuine new arguments Louis must adjudicate.
+
+---
+
+## Debate PS-D146: D40 + D110 Create a Contradictory Conversion Funnel
+
+**Challenge:** Product Strategist argues that D40 (WhatsApp non-negotiable for Path B) and D110 (soft limit as Path B conversion trigger) are not just different features — they create a self-undermining conversion funnel when both ship in Sprint 0.
+
+### Product Strategist — D40 and D110 Are Psychologically Incompatible
+
+**Assumption challenged:** That WhatsApp digest (D40/D141) and soft limit friction (D110) are complementary re-activation mechanisms. They are operationally incompatible.
+
+**Core argument:** D110's soft limit fires on *active engagement* (user hits cap, feels blocked, upgrade prompt makes sense). D40's WhatsApp digest fires on *recency/inactivity* (14+ days dormant, "come back to us" message). One says "you're too powerful for this tier, upgrade." The other says "you've been away, we miss you." They serve opposite psychological states, fire on opposite behaviors, and point toward opposite desired outcomes.
+
+The scenario no one has spec'd: a user who is dormant AND simultaneously hits their soft limit. Which signal wins? There is no answer. The result is a confused funnel where the re-activation message actively undermines the upgrade message — within the same session, potentially.
+
+**D40 refinement needed:** WhatsApp Sprint 0 commitment cannot be evaluated without resolving D110 first. If D110's soft limit is the primary conversion mechanism, WhatsApp's re-activation role is redundant and potentially counterproductive. The D110 + D141 in-app loop (soft limit → friction → upgrade; dormant → digest → return) is complete without WhatsApp.
+
+**Status:** OPEN — requires Louis to decide: is WhatsApp a re-activation channel for dormant users (D40 original intent), or a conversion channel for active users hitting limits (D110 territory)? These are different jobs.
+
+---
+
+## Debate TA-D146: "Demonstration Only" Is a Trap, Not a Scope
+
+**Challenge:** Technical Architect argues that labeling AsyncStorage-based offline editing as "demonstration only" does not mitigate the product risk — it hides it while forming bad user habits that persist into production.
+
+### Technical Architect — Labels Are for Developers. Users Don't Read Them.
+
+**Assumption challenged (D140):** That "demonstration only" is an acceptable scope constraint for AsyncStorage-based offline editing in Sprint 0. The label satisfies the team but does not protect the product.
+
+**Core argument:** When Louis shows Sprint 0 to the first beta artisan in Week 2, the offline editing feature will behave exactly like a real offline editing system: enter changes, go offline, come back online, queue processes. The artisan has no access to the spec. They see an app that works offline. They will use it that way — on job sites, in basements — because that's what it showed them it does.
+
+The scenario: artisan enters 3 client modifications offline. Server-wins silently discards 2 of 3 when connectivity returns. Artisan sees data disappear. Their conclusion: "this app loses my data." Not "this was a known demo limitation." By Month 3, the artisan has workarounds (screenshots, notebooks, spreadsheets). When Louis finally ships real offline sync in Sprint 2, that artisan's mental model is already broken.
+
+"demonstration only" features in a beta become permanent user habits. The label protects the team legally. It does not protect the product reputationally. Louis will hear positive feedback in Week 2 ("offline editing works great!") and won't learn about the data loss until a paying customer walks away in Month 4.
+
+**Recommended resolution:** Remove offline editing from Sprint 0 entirely. Not "demonstration only" offline editing — *no* offline editing. Users may view cached data offline. Tapping edit while offline shows a connectivity prompt. This is an honest scope constraint that sets correct expectations and eliminates the silent data loss scenario.
+
+**Status:** OPEN — requires Louis to choose: (A) no offline editing in Sprint 0, honest scope, or (B) "demonstration only" offline editing, accept the trust erosion risk and label it in the beta onboarding
+
+---
+
+## Debate GS-D146: D138 and D139 Cross-Pollute — Pricing Page and Expert-Comptable Outreach Are Not Independent
+
+**Challenge:** Growth Strategist argues that D138's landing page pricing ("€29/month, sans engagement") and D139's expert-comptable Week 1 outreach are not parallel, independent workstreams — they are structurally interdependent and will contaminate each other if not explicitly separated.
+
+### Growth Strategist — The Landing Page Pricing Frame Will Poison the Expert-Comptable Conversation
+
+**Assumption challenged:** That D138 (landing page pricing) and D139 (expert-comptable outreach) can be planned and executed independently. They cannot.
+
+**Core argument:** D138's "€29/month, sans engagement" framing solves a consumer-conversion problem (removes upfront commitment barrier for artisanal end users scrolling a landing page). It does not solve — and actively harms — an expert-comptable credibility problem.
+
+Expert-comptables think in annual contracts, TVA-deductible line items, and client cash-flow management. When Louis describes the product in a Week 1 expert-comptable conversation, the first substantive question will be "ça coûte combien?" If Louis says "€29/month, sans engagement," the likely response from someone who manages dozens of client businesses: *"Les artisans que je connais ne paieraient pas ça par mois."* Worse: *"Sans engagement, donc sans engagement pour vous aussi?"*
+
+"Sans engagement" reads as "no skin in the game" to a professional advisor. It signals low commitment, not low risk. It does not create urgency — it signals the vendor doesn't believe enough in the product to ask for commitment. This is not a product failure; it's a pricing frame mismatch that poisons the most promising B2B channel (expert-comptable referrals = potentially 10-20 client referrals per advisor).
+
+The structural risk: D138's framing will be imported into D139's conversations by default. Louis will use the same numbers, the same language, the same anchor. Unless explicitly corrected, the consumer pricing logic bleeds directly into the expert-comptable outreach.
+
+**Recommended resolution:** Build a dual framing protocol:
+1. **Landing page (D138, unchanged):** €29/month, "sans engagement," "Payez quand vous êtes chargé." Consumer frame — correct for artisanal end users.
+2. **Expert-comptable outreach (D139, new framing required):** Use a purpose-built anchor — "moins d'un euro par jour ouvré" (daily expense frame) or "moins que ce que vous coûte Sage en licences annuelles" (competitive frame the expert-comptable already thinks in). These are not the same pitch and cannot be the same talking points.
+
+**Status:** OPEN — requires Louis to acknowledge D138 and D139 as coupled decisions and build separate purpose-built narratives for each audience.
+
+---
+
+## Updated Decision Table (Pulse 2026-03-31T01:47)
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D40 | WhatsApp for Path B | CONTESTED — D40 refined at 01:15 (Path B non-negotiable); now challenged at D146 (D40 + D110 funnel contradiction). No resolution. Sprint 0 commitment blocked on D110 + D40 interaction. | 2026-03-31 |
+| D110 | Path B soft limit friction | REFINED — soft limit creates conversion friction for Path B. Must be paired with defined conversion moment (not just limit-hit). Still OPEN on exact threshold (1 client / 3 jobs cap not confirmed). | 2026-03-31 |
+| D138 | Landing page pricing | UNCHANGED — €29/month primary, "sans engagement," seasonal framing. D146 adds: this frame is consumer-specific and cannot be imported into expert-comptable outreach. | 2026-03-31 |
+| D139 | Expert-comptable timing | CONTESTED — Week 1 problem-discovery confirmed. D146 adds: requires separate purpose-built pricing narrative, not copy of D138 landing page. | 2026-03-31 |
+| D140 | Offline architecture | CONTESTED — "demonstration only" AsyncStorage editing labeled inadequate by D146. Remove offline editing entirely vs. label-and-ship. No resolution. Sprint 0 offline scope blocked. | 2026-03-31 |
+| D141 | Stay in touch digest | RESTATED — bi-weekly WhatsApp digest for dormant Path B users. D146 proposes treating as in-app digest only (no WhatsApp in Sprint 0). | 2026-03-31 |
+
+### Challenged Assumptions This Pulse (01:47)
+
+1. "WhatsApp digest and soft limit friction are complementary re-activation mechanisms" — challenged: they fire on opposite user states, serve opposite goals, and create a contradictory conversion funnel
+2. "'demonstration only' is an acceptable scope constraint for offline editing" — challenged: labels don't protect products; beta habits become production mental models; silent data loss will erode trust before it can be recovered
+3. "D138 (pricing) and D139 (expert-comptable outreach) are independent workstreams" — challenged: consumer pricing frame will contaminate expert-comptable conversations without explicit separation; most promising B2B channel at risk
+
+### New Action Items This Pulse
+
+- [ ] **D40/D110 NEW — Sprint 0 conversion funnel design:** Louis must decide: is WhatsApp a re-activation channel (dormant users) or a conversion channel (active users hitting limits)? These are different jobs. D40 Sprint 0 commitment blocked until D110 + D40 interaction is spec'd. Do not ship both without defining priority.
+- [ ] **D40 NEW — WhatsApp deferral confirmation:** If Louis accepts D146 argument: explicitly defer WhatsApp Business API to v1.1. Sprint 0 notification infra = Expo Push only. If Louis rejects: must spec the D40/D110 priority interaction before committing WhatsApp to Sprint 0.
+- [ ] **D140 NEW — Sprint 0 offline scope decision (updated):** Louis chooses: (A) remove offline editing entirely from Sprint 0, ship view-only offline cache with connectivity prompt on edit attempts. Honest scope, no silent data loss. OR (B) ship AsyncStorage offline editing with "demonstration only" label, accept trust erosion risk in beta period.
+- [ ] **D140 NEW — D146 offline labeling argument:** Even if option B chosen, "demonstration only" label must appear in beta onboarding screen, not just internal docs. Users must see the limitation before forming habits.
+- [ ] **D138/D139 NEW — Dual framing protocol:** Louis prepares two separate pricing narratives before expert-comptable outreach: (1) landing page version = €29/month, "sans engagement," consumer frame; (2) expert-comptable version = daily anchor ("moins d'un euro/jour ouvré") OR competitive anchor ("moins que Sage en licences"). These are not the same pitch.
+- [ ] **D138/D139 NEW — Expert-comptable Week 1 talking points:** Louis writes 5-question problem-framing script for expert-comptable conversations. Include pricing narrative section with the expert-comptable-specific anchor. Do not bring landing page copy to expert-comptable meetings.
+
+*Last updated: 2026-03-31T01:47*
