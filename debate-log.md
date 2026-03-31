@@ -7933,3 +7933,64 @@ If mentions légales are TODO comments going into Sprint 1:
 | D140 | Offline architecture | REFINED — AsyncStorage + retry queue inadequate. Phone death mid-write loses data (primary use case, not edge case). Expo-sqlite +2 days required, or Sprint 0 offline labeled demonstration-only. | 2026-03-31 |
 
 *Last updated: 2026-03-31T01:15*
+
+
+---
+
+## Pulse 2026-03-31T01:29 — Three New Debates
+
+### Resolved This Pulse: NONE
+
+All three debates this pulse challenged open items from the 01:15 pulse. None reached resolution — all require Louis's input on Sprint 0 tradeoffs.
+
+### Debate GS-Pulse-0129: Expert-Comptable Week 3 — Too Late, Not Too Early
+
+**Growth Strategist** challenged D139 (expert-comptable Week 3 timing) with a middle-ground argument: Week 3 is still too late because it produces solution-feedback (reacting to what Louis built) rather than problem-framing feedback (what Louis should have built before Sprint 0 begins).
+
+**Core challenge:** The expert-comptable conversation's most valuable output is not "here's how to improve your working devis flow" — it's "here's what you don't know about how BTP artisans actually structure devis, invoice clients, and manage TVA across mixed portfolios." That knowledge doesn't come from a product demo. It comes from a problem-framing conversation before any code exists.
+
+**Position:** Add Week 1 concept-only outreach — no product, no mockup, just "I'm building a devis/facture tool for solo artisans. What are the top 3 problems your artisan clients have? What do they consistently get wrong?" Week 3 product demo remains, but sharpened by informed questions seeded from Week 1.
+
+**Status:** OPEN — requires Louis decision on whether to spend Week 1 hours on concept outreach vs. pure build
+
+### Debate TA-Pulse-0129: Server-Wins Is a Silent Data Annihilator, Not a Conflict Strategy
+
+**Technical Architect** challenged D140/D144's offline sync architecture with a specific failure scenario: an artisan edits a client record offline at a job site (no signal), regains signal, and the server silently overwrites their changes with no conflict UI, no error message, no explanation. This is not an edge case — it's the primary use case for BTP artisans working in basements and rural job sites.
+
+**Core challenge:** Server-wins as sync fallback doesn't just lose data — it actively teaches the artisan their offline work doesn't matter. Last-write-wins fares better but still creates broken mental models when artisans see different data on the web dashboard vs. phone. The +2 days estimate for expo-sqlite understates the true cost: conflict UI alone is a full sprint of work.
+
+**Position:** Two options — (A) accept full offline sync cost (field-level conflict detection + conflict UI + audit trail, several days of engineering), or (B) label Sprint 0 offline as "view-only" (browse cached devis/factures, no offline editing). Server-wins is the worst of both worlds: you pay the complexity cost and your artisan still loses data.
+
+**Status:** OPEN — requires Louis decision on offline scope for Sprint 0
+
+### Debate PS-Pulse-0129: WhatsApp in Sprint 0 Is the Wrong Sprint, Wrong Problem
+
+**Product Strategist** challenged D40 (WhatsApp Business API as Sprint 0 requirement) with three arguments: (1) Meta Business Verification alone takes 2-14 days, blowing the 5-day sprint before it starts; (2) at v1, there's no premium content to push through WhatsApp — it's an empty pipe delivering nothing to dormant users; (3) the real problem is a broken app loop, not a notification problem — WhatsApp can't fix users who don't care enough to open the app.
+
+**Core challenge:** D40 conflates acquisition channels with retention channels. The digest (D141) goes unread. The notification gets blocked. The user churns quietly. Building WhatsApp infrastructure before the app delivers recurring in-app value is building a pipeline to nowhere.
+
+**Position:** Defer WhatsApp to v1.1. Sprint 0 should focus on making the app valuable enough that users want to open it — quote-to-payment loop + Expo push notifications (simpler to ship). WhatsApp is a retention channel for a product that's already delivering value, not a magic switch that makes dormant users care.
+
+**Status:** OPEN — requires Louis decision on Sprint 0 notification scope
+
+### Summary of New Challenges
+
+| ID | Topic | Challenger | Position | Status |
+|----|-------|-----------|----------|--------|
+| D139 | Expert-comptable timing | Growth Strategist | Add Week 1 concept outreach before the build; Week 3 product demo sharpened by informed questions | OPEN |
+| D140/D144 | Offline sync architecture | Technical Architect | Server-wins is silent data killer; +2 days estimate wrong; view-only offline or full conflict UI | OPEN |
+| D40 | WhatsApp in Sprint 0 | Product Strategist | Meta verification alone takes 2-14 days; empty pipe at v1; defer to v1.1 | OPEN |
+
+### Challenged This Pulse (01:29)
+
+1. **"Expert-comptable Week 3 is the right timing"** — Growth Strategist: Week 3 produces solution-feedback, not problem-framing feedback. Add Week 1 concept outreach.
+2. **"Server-wins is an acceptable offline conflict fallback"** — Technical Architect: silently annihilates artisan's offline edits with no error, no UI, no explanation. Primary use case failure.
+3. **"WhatsApp Business API belongs in Sprint 0"** — Product Strategist: Meta verification alone takes 2-14 days; no premium content to deliver at v1; wrong sprint for this infrastructure.
+
+### New Action Items This Pulse
+
+- [ ] **D139 NEW — Week 1 concept outreach:** Louis prepares 5-question problem-framing script for expert-comptable conversations before Sprint 0. Questions: top 3 devis/facture problems, common TVA errors, SCI client handling, relance norms. Sprint 0 decisions informed by expert-comptable problem-framing, not just founder assumptions.
+- [ ] **D140/D144 NEW — Sprint 0 offline scope decision:** Louis chooses: (A) view-only offline for Sprint 0 (no offline editing, no expo-sqlite), honest engineering, or (B) full offline editing with expo-sqlite + conflict UI (+3-5 days). Decision gates Sprint 0 timeline.
+- [ ] **D40 NEW — WhatsApp Business API deferral:** Push WhatsApp to v1.1. Sprint 0 notification infra = Expo Push only. WhatsApp Business API setup (Meta Business Verification) happens post-Sprint 0 when v1 core loop is validated.
+
+*Last updated: 2026-03-31T01:29*

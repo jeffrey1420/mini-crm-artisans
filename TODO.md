@@ -234,6 +234,17 @@ All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 - [ ] **D139 REFINED — Expert-comptable MOVED to Week 3:** Sprint 0 = build only. Expert-comptable Week 3 with working build + real devis. Louis's own accountant = Week 3 validation. Week 1 hours reallocated to Sprint 0.
 - [ ] **D140 REFINED — Expo-sqlite required Sprint 0:** Decision: (+2 days) OR (label Sprint 0 offline as demonstration-only). AsyncStorage loses data on phone death (primary use case). Expo-sqlite + background sync is production-grade.
 
+### New from Pulse 2026-03-31T01:29 (D40/D139/D140 challenged — OPEN)
+
+**D40 CHALLENGED (PS-Pulse-0129):** Product Strategist challenges WhatsApp Business API in Sprint 0: Meta Business Verification alone takes 2-14 days (blowing 5-day sprint), delivers zero value at v1 (no premium content to push), and conflates acquisition with retention. Position: defer WhatsApp to v1.1; Sprint 0 notification = Expo Push only.
+- [ ] **D40 DECISION NEEDED:** Louis chooses — WhatsApp in Sprint 0 (accept timeline risk) OR defer to v1.1 (Expo Push only in Sprint 0). Gates Sprint 0 notification architecture.
+
+**D139 CHALLENGED (GS-Pulse-0129):** Growth Strategist challenges Week 3 expert-comptable timing: Week 3 produces solution-feedback (reacting to what Louis built), not problem-framing feedback (what he should have built). Position: add Week 1 concept-only outreach before Sprint 0 begins.
+- [ ] **D139 DECISION NEEDED:** Louis prepares 5-question problem-framing script for expert-comptable conversations this week. Sprint 0 decisions informed by expert-comptable problem domain knowledge, not just founder assumptions.
+
+**D140 CHALLENGED (TA-Pulse-0129):** Technical Architect challenges server-wins as offline sync fallback: silently annihilates artisan's offline edits (phone dies mid-write, no conflict UI, no error). Position: (A) full offline with field-level conflict detection + conflict UI (+3-5 days), or (B) view-only offline for Sprint 0.
+- [ ] **D140 DECISION NEEDED:** Louis chooses offline scope: (A) view-only offline (browse cached, no offline editing, honest engineering), or (B) full offline editing with expo-sqlite + conflict UI (+3-5 days to Sprint 0). Gates Sprint 0 timeline.
+
 - [ ] A/B test pricing page value anchor: "€1/jour" vs "une heure de main d'oeuvre" framing with beta users before launch (Debate 33)
 - [ ] Engagement channel for Free tier onboarding: push notifications + optional WhatsApp opt-in (NOT email). Replace Growth Strategist's 3-email Days 1-7 sequence. (Debates 38/40)
 - [ ] Optional WhatsApp opt-in during Free tier onboarding — artisans who prefer it over push. This is their native channel. (Debate 40)
