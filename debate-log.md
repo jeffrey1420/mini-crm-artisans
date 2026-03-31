@@ -7656,4 +7656,190 @@ Given the disagreement: the real issue is not "+1 day vs +2 days" — it's wheth
 
 ---
 
-*Last updated: 2026-03-31T00:40*
+*Last updated: 2026-03-31T00:54*
+
+---
+
+## Pulse 2026-03-31T00:54 — D57 CLOSED (Technical Architect, Architectural Resolution)
+
+---
+
+## Debate 57: Nuxt 3 vs API-First — CLOSED
+
+**Status:** D57 has been REFINED (14:57 pulse) but never formally CLOSED. It is the oldest unresolved architectural question. D100 resolved the *backend* stack (Supabase EU-hosted) but left the Nuxt 3 question dangling. That omission ends now.
+
+---
+
+### Technical Architect — The Nuxt 3 Question Is Architecturally Moot. Close It.
+
+**Assumption challenged:** That D57 is still an open question between "Nuxt 3 + OVH Postgres" and "API-first (Fastify + Supabase)." This false framing treats Supabase as having merely *replaced* the Fastify API layer, leaving Nuxt 3 as a potential web UI layer to be evaluated separately. It does not.
+
+**The challenged assumption:** "Supabase replaces the API layer but Nuxt 3 remains relevant as a web framework."
+
+This assumption fails on three grounds:
+
+**1. There is no web application to build with Nuxt 3.**
+The web surface at v1 launch is: (a) a static landing page — one HTML file, CDN-cacheable, no server rendering, (b) a Free tier signup funnel — a React Native onboarding screen, not a web page, (c) zero server-rendered pages. Nuxt 3's core value proposition — SSR + file-based routing + server middleware + session-managed web app — is entirely unused. Every Nuxt feature is dead weight.
+
+**2. The React Native app bypasses Nuxt's API routes entirely.**
+Expo connects to Supabase directly via `@supabase/supabase-js`. It does not and will not use Nuxt API routes. The mobile app's API contract is `@supabase/client`, not `localhost:3000/api/devis`. Nuxt as an API layer would be a second API layer sitting in front of Supabase — adding latency, adding complexity, and serving no purpose.
+
+**3. The "admin panel in v2" is not a Nuxt 3 use case.**
+The TODO lists no admin panel in MVP scope (D9). If a web admin panel materializes in v2, it consumes the Supabase API just as the mobile app does. There is no scenario where Nuxt 3's SSR capabilities are the right tool for that job — a static admin UI talking to Supabase is cleaner than Nuxt SSR for an internal tool.
+
+**What prior debates got wrong:**
+
+The 14:57 pulse (D57 REFINED) deferred the question: "API-first preferred but deferred to post-MVP unless Nuxt 3 actively blocks Sprint 0." This was the wrong framing. The question isn't "should we migrate away from Nuxt 3?" The question is "does Nuxt 3 have any role in v1 at all?" The answer is no — and this was knowable from D11/D17 (React Native chosen), D12 (static landing page), and D100 (Supabase backend). Three independent decisions all point to Nuxt 3 having zero purpose in the v1 architecture.
+
+The 15:17 pulse (D61) called it "REFINED — Nuxt 3 deferred unless blocking Sprint 0." Deferral was appropriate when there was a live Nuxt 3 codebase to preserve. There isn't one. Sprint 0 starts with Supabase, not Nuxt. The deferral had no subject.
+
+**The concrete verdict:**
+
+| Decision | Status |
+|----------|--------|
+| Backend | Supabase EU-hosted (Frankfurt) — D100 resolved |
+| Landing page | Static HTML — served from same VPS or Cloudflare Pages |
+| Mobile app | React Native (Expo) → Supabase client directly |
+| Nuxt 3 role in v1 | NONE |
+| Nuxt 3 role in v2 | NONE unless a web application materializes (not currently in scope) |
+| D57 status | **CLOSED — Nuxt 3 eliminated from v1 architecture** |
+
+**What this does NOT challenge:**
+- D100 (Supabase EU-hosted) — confirmed, correct, unchanged
+- The Sprint 0 stack (Supabase + static landing page) — confirmed, correct, unchanged
+
+**What this DOES challenge:**
+- The framing that D57 was merely "deferred" — it should have been closed when D100 was resolved, because D100's backend decision renders the Nuxt 3 question moot
+- The TODO's continued listing of D57 as "SUPERSEDED" when it should read "CLOSED"
+
+**Action required:**
+1. Update TODO.md: D57 status → CLOSED (not "SUPERSEDED")
+2. Sprint 0 proceeds immediately: Supabase schema + static landing page + React Native/Expo app. No Nuxt dependency.
+3. Nuxt 3 returns to consideration only if a v2 web application enters scope — at which point the question is evaluated fresh, not inherited from D7
+
+---
+
+**Verdict on D57:** **CLOSED — Nuxt 3 has no role in v1. D100 settled the backend. The mobile app bypasses Nuxt entirely. The landing page is static. There is no web application. The debate is over.**
+
+---
+
+## Pulse 2026-03-31T00:58 — Two New Specialist Debates
+
+---
+
+## Debate 141: D63/D83/D89 — "Situation Financière" Is Path A-Only, Not Universal
+
+**Challenge:** D63 → D83 → D89 resolved "situation financière" as the primary Free tier retention mechanism. Growth Strategist challenges that it is structurally Path A-only and cannot serve as the universal Free tier retention tool the debate log treats it as.
+
+### Growth Strategist — The Universal Retention Assumption Is Path A-Only
+
+**Assumption challenged:** That "situation financière" (D63/D83/D89) is the Free tier's primary retention mechanism applicable to all Free tier users regardless of archetype.
+
+**The assumption driving D63 → D83 → D89:**
+D63 claimed "situation financière" as the PRIMARY Free tier value output. D83 built push notification architecture around it. D89 refined it to event-only (first accepted devis). All three treated this notification as universal — available to and effective for all Free tier users.
+
+**This assumption is only valid for Path A. It fails for Path B.**
+
+The dual-path conversion model (D96/D110) creates two fundamentally different Free tier users:
+
+| | Path A (Formal-Devis) | Path B (Verbal-Agreement) |
+|---|---|---|
+| Primary workflow | Creates and sends formal written devis | Logs jobs, manages clients verbally |
+| Conversion trigger | Limit-hit OR first paid facture | 45+ days active OR 7+ jobs logged OR 5+ clients managed |
+| "Situation financière" fires? | YES — on first accepted devis | **NEVER — no formal devis means no trigger event** |
+
+For Path B artisans, the "situation financière" notification **never fires**. They don't produce formal written devis. The event (D89: "Votre devis pour [Client] a été accepté") is a document-production event their workflow doesn't generate.
+
+**The second assumption challenged: a conversion trigger cannot function as a retention tool.**
+
+D89 says: "This IS the conversion trigger. One notification, one moment, one ask." But the same verdict says: "Recurring digest for dormant Free users: kept as a separate 'stay in touch' mechanism."
+
+This is an implicit acknowledgment that the event-only notification cannot be the retention tool. A conversion trigger fires once. A retention tool fires repeatedly. They are structurally different.
+
+**The resolution:**
+
+1. **"Situation financière" notification = Path A conversion trigger ONLY.** Not a universal Free tier retention mechanism. For Path B artisans, the notification never fires. The debate log's framing of it as PRIMARY Free tier value is inaccurate for ~40-50% of the target market.
+
+2. **Path B retention is usage-based, not notification-based.** The Path B artisan's value comes from active job logging — the Active Job Card, job notes, client management. Retaining him requires the product working well for his job-first workflow. The "soir ritual" (8pm push of situation financière) is irrelevant to this population.
+
+3. **Path B has a separate retention mechanism:** The recurring "stay in touch" digest for dormant Free users (D89) applies to Path B when they've been inactive 14+ days. This is the correct retention touch for Path B — not "situation financière."
+
+4. **The notification architecture is now clean:**
+   - Path A: event-driven "situation financière" on first accepted devis → conversion ask
+   - Path B: recurring "stay in touch" digest when 14+ days dormant → re-engagement
+   - Both: Day 14 human WhatsApp check-in for all new Free users
+
+**Verdict on D63/D83/D89:** REFINED — "situation financière" notification is Path A (formal-devis) conversion trigger ONLY. Path B has no "situation financière" trigger. Path B retention is usage-based (job logging habit). Recurring "stay in touch" digest for dormant Free users is Path B's retention mechanism. The debate log's framing of "situation financière" as universal PRIMARY Free tier value is incorrect.
+
+---
+
+## Debate 142: D94/D97 — Sprint 0 Gate Has Not Been Met, 5-Day Timeline Invalid
+
+**Challenge:** D97 (Louis writes 4 mentions légales templates this week as Sprint 0 gate) was treated as a pre-sprint prep task that, once done, enables a 5-day Sprint 0. D136 confirmed mentions légales as TODO comments are NOT an acceptable compliance shortcut. The gate must be real strings. There is no evidence Louis has committed the 4 mentions légales templates. The Sprint 0 gate has not been satisfied.
+
+### Product Strategist — Mentions Légales as TODO Comments Is Not a Compliance Shortcut
+
+**Assumption challenged from D97:** That "Louis writes 4 mentions légales templates this week" is a done gate-clearing item, enabling a 5-day Sprint 0.
+
+**The logical inverse of D97:**
+D97 established: "If Louis writes the 4 mentions légales templates this week, Sprint 0 becomes 5 days." The inverse is equally true: **If Louis has not written the 4 mentions légales templates this week, Sprint 0 remains 7-8 days.** The pre-condition has not been satisfied. The 5-day claim is therefore invalid as of this pulse.
+
+**The gate must be verifiable before Sprint 0 starts, not after:**
+
+The Sprint 0 gate from D137/D94 is:
+1. `legal/mentions-legales.ts` exists in the repo
+2. Contains 4 exported `const string` values — one per client type
+3. Each string contains Louis's actual business registration data (SIRET, RCS, TVA number)
+4. **File committed to git before Sprint 0 begins**
+
+This is verifiable in 30 seconds: `git status legal/` returns the file as committed. No interpretation required.
+
+**The TODO comment shortcut defeats the purpose of Sprint 0:**
+
+Sprint 0 is called "Compliance Foundations" for a reason. The legal scaffolding (TVA per-line schema, sequential numbering, mentions légales renderer) is the foundation everything else builds on. A foundation made of TODO comments is not a foundation — it's a suggestion.
+
+If mentions légales are TODO comments going into Sprint 1:
+- Sprint 1's PDF generation (D113, D121) renders legal text that Louis forgot to fill in
+- Sprint 1's document archive (D121) stores PDFs with empty legal blocks
+- The expert-comptable who reviews a beta client's documents in Month 2 sees: nothing
+
+**The real risk:** Louis discovers in Week 2 of Sprint 1 that the legal strings are missing, retrofits them into every already-sent document, and questions whether any of the previous output was legally compliant.
+
+**The honest Sprint 0 timeline:**
+
+| Gate status | Sprint 0 duration |
+|---|---|
+| Louis commits 4 real mentions légales strings before Sprint 0 | 5 days (target) |
+| Louis does NOT commit mentions légales strings before Sprint 0 | 7-8 days (floor) OR defer mentions légales to Sprint 1 plain text placeholder |
+
+**Louis's choices for this week:**
+- **Option A (preferred):** Spend 2 hours this week writing the 4 mentions légales strings. Commit them. Sprint 0 = 5 days, compliance foundations solid.
+- **Option B:** Don't write them. Sprint 0 = 7-8 days, and Sprint 1 begins with the compliance retrofit problem.
+- **Option C:** Don't write them. Sprint 0 ships with mentions légales placeholder text. Louis explicitly accepts the compliance risk and must fill in before any beta user sees a real document.
+
+**Verdict on D94/D97:** REFINED — The Sprint 0 gate (mentions légales as real committed strings) has not been met as of this pulse. The 5-day Sprint 0 estimate is therefore CONDITIONAL. If Louis commits real strings this week: 5-day Sprint 0 stands. If not: 7-8 days. The TODO comment shortcut is eliminated. Sprint 0 handoff doc must list mentions légales strings as a gate item with explicit Louis action required.
+
+---
+
+## Updated Decision Table (Pulse 2026-03-31T00:58)
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D57 | Architecture | **CLOSED** — Nuxt 3 has no role in v1. Backend = Supabase EU-hosted (D100). Mobile = Expo/React Native direct to Supabase. Landing = static HTML. | 2026-03-31 |
+| D63 | Situation financière | REFINED — notification is Path A conversion trigger ONLY. Path B has no "situation financière" trigger. Path B retention = usage-based (job logging habit) + "stay in touch" digest for dormant users. | 2026-03-31 |
+| D83 | Notification timing | REFINED — "situation financière" notification is Path A-only. Path B gets recurring "stay in touch" digest for dormant Free users (14+ days inactive). | 2026-03-31 |
+| D89 | Situation financière notification | REFINED — event-only first-accepted-devis trigger applies to Path A only. Path B excluded by workflow design. | 2026-03-31 |
+| D94 | Sprint 0 gate | REFINED — mentions légales gate requires real committed strings (Louis's own business data). TODO comments eliminated. Gate must be verified before Sprint 0 starts. | 2026-03-31 |
+| D97 | Sprint 0 prep | REFINED — gate NOT met as of this pulse. 5-day Sprint 0 is CONDITIONAL on Louis committing 4 mentions légales strings. If not committed: 7-8 days or defer to Sprint 1 placeholder. | 2026-03-31 |
+
+| U1 | Discovery | REPLACED — readiness protocol | 2026-03-30 |
+| U2 | E-invoicing platform | Factea first when v2 | 2026-03-30 |
+| U7 | Domain | Buy domain now (park it). Domain = infrastructure, not branding. | 2026-03-30 |
+| U8 | WhatsApp acquisition | CLOSED — no WhatsApp CTA in devis | 2026-03-30 |
+| U9 | Free tier activation | Forcing function + limit-hit primary, habit tracking secondary | 2026-03-30 |
+| U10 | GTM: Wholesaler | REFINED — digital + specialist retailers first, wholesaler secondary | 2026-03-30 |
+| U11 | Prescriber audit | Still valuable — if >30% of new jobs via prescriber, revisit GTM | 2026-03-30 |
+| U12 | Expert-comptable GTM | Phase 2 — relationship-dependent, not early-stage. Playbook to be built post-MVP. | 2026-03-30 |
+| U15 | Founding member offer | ELIMINATED — no lifetime deal, no founding/access tier. Single €29/month. | 2026-03-30 |
+
+*Last updated: 2026-03-31T00:58*

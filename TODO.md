@@ -33,16 +33,16 @@
 | D54 | Sprint 0 TVA | RESOLVED — arrondi commercial is the standard (not arithmétique vs bancaire binary). `Math.round(v * 100) / 100` is the Sprint 0 default. Audit risk is €30-80/year, not €600. No BOFiP lookup required. Sprint 0 TVA calculator implement with arrondi commercial. | Debate 69 (Technical Architect) | 2026-03-30 |
 | D55 | Buyer-user split | Dual-persona GTM. Marc = economic buyer (primary). Admin handler = operational user (secondary). Expert-comptable = Phase 2. | Debate 55 (Growth Strategist) | 2026-03-30 |
 | D56 | WoM attribution | WoM = Month 3+ lagging indicator. Digital acquisition PRIMARY at launch. "Comment connaissez-vous?" at signup. Referral codes in v1. Month 3 target: 20% peer referral. | Pulse 14:57 (Product+Growth) | 2026-03-30 |
-| D57 | Architecture | SUPERSEDED by D100 — Supabase EU-hosted (Frankfurt). Fastify retired for v1. Static landing page + Supabase backend. | Debate 100 (Technical Architect) + pulse-2040-architect | 2026-03-30 |
+| D57 | Architecture | **CLOSED — Nuxt 3 eliminated from v1 architecture.** No role for Nuxt 3 — no web application, landing is static, mobile app bypasses Nuxt entirely. Backend = Supabase EU-hosted (D100). | Pulse 00:58 (Technical Architect) | 2026-03-31 |
 | D59 | Pricing credibility | **SUPERSEDED by U15 (Debate 101):** Founding member offer ELIMINATED. No lifetime deal. No founding/access tier. Replace with "Support Prioritaire" (relationship benefits: direct WhatsApp to Louis, roadmap vote, named credits). Single €29/month price, no founding/standard tiers. | Debate 101 (Growth Strategist) | 2026-03-30 |
-| D63 | Free tier pull | UPDATED — Situation financière = server-computed push notification at 8pm Paris, NOT in-app dashboard. Free tier gets daily notification. €29 tier gets full snapshot + in-app drill-down. | Debate 83 (Product Strategist) | 2026-03-30 |
+| D63 | Free tier pull | UPDATED — Situation financière = server-computed push notification at 8pm Paris, NOT in-app dashboard. Free tier gets daily notification. €29 tier gets full snapshot + in-app drill-down. **REFINED: Path A (formal-devis) conversion trigger ONLY. Path B (verbal-agreement) excluded — see D141.** | Debate 83 (Product Strategist) + Pulse 00:58 (Growth Strategist) | 2026-03-30 |
 | D64 | Sprint 0 timeline | UPDATED — Sprint 0 = 5-7 days (D86 reversed offline-first, recovering 3-5 days). Full scope: offline-capable + mentions légales + WhatsApp PDF + real device testing. | Debate 84/86 (Technical Architect) | 2026-03-30 |
 | D70 | Document archive | RESOLVED — document archive PRIMARY, financial snapshot to €29 tier. | Pulse 16:44 | 2026-03-30 |
 | D71 | Sprint 0 scope | RESOLVED — 5 days, sequential numbering deferred to Sprint 2 (factures). | Pulse 16:44 | 2026-03-30 |
 | D72 | Expert-comptable Phase 1 | UPDATED — Expert-comptable outreach = Week 1 (recommendation channel, not data-sync). Data-sync portal = Phase 2. GetApp/Capterra profiles claimed before launch. | Debate 85 (Growth Strategist) | 2026-03-30 |
 | D81 | Offline-first | REVERSED — Sprint 0 = offline-capable (optimistic UI + retry queues + AsyncStorage). WatermelonDB/expo-sqlite + background sync + conflict UI deferred to v1.2. Sprint 0 recovers 3-5 days. | Debate 86 (Technical Architect) | 2026-03-30 |
 | D82 | Digital peer communities | Retention/engagement spaces, NOT acquisition channels. WhatsApp groups + Facebook = brand recall + peer support. SEO = primary digital discovery. Prescriber = highest-trust acquisition. | debate-DigitalChannels.md | 2026-03-30 |
-| D83 | Situation financière delivery | REFINED by D89 — configurable notification window KILLED. Event-only notification on first accepted devis. Recurring digest for dormant Free users (14+ days no accepted devis) as "stay in touch" mechanism below conversion trigger line. Sprint 0 adds: push infra + accepted-devis trigger. | Debates 83/88/89 (Product Strategist) | 2026-03-30 |
+| D83 | Situation financière delivery | REFINED by D89 — configurable notification window KILLED. Event-only notification on first accepted devis. Recurring digest for dormant Free users (14+ days no accepted devis) as "stay in touch" mechanism. **REFINED by D141: applies to Path A only. Path B excluded.** Sprint 0 adds: push infra + accepted-devis trigger. | Debates 83/88/89 (Product Strategist) + Pulse 00:58 (Growth Strategist) | 2026-03-30 |
 | D84 | Sprint 0 realistic timeline | REFINED by D90 — 5.5-6.5 days (updated from 8-10). D86 (offline-capable) + D74 (API key auth) eliminate sequential dependency. Parallel backend + mobile tracks from Day 1. | Debates 84/90 (Technical Architect) | 2026-03-30 |
 | D85 | GetApp/Capterra | **RESOLVED — REMOVED from TODO.** Channel does not match D55 buyer journey (admin handler validates, does not discover). Week 1 hours reallocated to expert-comptable outreach. Revisit Month 3 only if artisan survey contradicts peer-referral model. | Debate 122 (Growth Strategist) | 2026-03-30T22:30 |
 | D89 | Situation financière notification | RESOLVED — event-only notification (first accepted devis). Configurable digest window REMOVED. D76 conversion trigger = notification trigger. | Debate 89 (Product Strategist) | 2026-03-30 |
@@ -50,7 +50,7 @@
 | D91 | Expert-comptable validation vs referral | RESOLVED — U12 split: validation (Week 1, Louis's own, no prerequisites) ≠ referral (Week 4-6, with testimonials). | Debate 91 (Growth Strategist) | 2026-03-30 |
 | D95 | Sprint 0 timeline | **RESOLVED (FINAL) — Debate 108:** 5 days (target) if pre-conditions confirmed before sprint. 6.5 days (floor) if pre-conditions not confirmed. Do NOT cut corners on TVA rounding or mentions légales to hit 5 days. Pre-sprint gates: (1) Louis shows written 4 mentions légales templates (file/git commit), (2) Louis shows Supabase project dashboard. Cut order if pressure: mentions légales plain text → AsyncStorage. | Debate 108 (Technical Architect) | 2026-03-30 |
 | D96 | Conversion trigger | **SUPERSEDED by Debate 110 — Dual-path conversion:** Path A (Formal-Devis Artisan): Limit-hit (5 active devis OR 10 clients) OR first paid facture = hard gate. Path B (Verbal-Agreement Artisan): 45 consecutive days of active product usage (job created/updated) OR 7+ jobs logged OR 5+ active clients managed = conversion trigger. Day 14 human WhatsApp check-in applies to both archetypes as primary conversion moment. | Debate 110 (Product Strategist) | 2026-03-30 |
-| D97 | Sprint 0 prep | Louis writes 4 mentions légales templates this week (2h) — gate for 5-day Sprint 0. | Debate 97 (Technical Architect) | 2026-03-30 |
+| D97 | Sprint 0 prep | Louis writes 4 mentions légales templates this week (2h) — gate for 5-day Sprint 0. **REFINED by D142: gate NOT met as of 2026-03-31. 5-day timeline CONDITIONAL on real committed strings. See D142.** | Debate 97 (Technical Architect) + Pulse 00:58 (Product Strategist) | 2026-03-30 |
 | D98 | Platform default | **REFLECTED — Direction confirmed, validation mechanism updated.** Android-first remains correct for French artisan demographic. "Week 1 poll validates" REMOVED (wrong instrument after U15 elimination). Replaced with install completion rate (≥50% in 48h) as Sprint 0 metric. D24 resolution gates Sprint 0 specificity. | Debates 98/103 (Growth Strategist) | 2026-03-30 |
 | D99 | Pricing structure | **KILLED — Usage-based billing permanently retired.** Flat €29/month + €260/year annual billing at launch. Usage-based incompatible with dual-path conversion (Path B artisans can't be metered). | Debate 125 (All 3 agents) | 2026-03-30T23:31 |
 | D114 | PDF Sprint 0 gate | **RESOLVED — HTML-to-PDF Edge Function (not expo-print).** Same HTML serves WhatsApp OG preview. Mentions légales embedded in HTML string Sprint 0. | Debate 126 (Technical Architect) | 2026-03-30T23:31 |
@@ -59,6 +59,38 @@
 | D138 | Annual billing implementation | Monthly €29 PRIMARY. Annual €240/year opt-in discount at conversion. Stripe subscription with annual plan (monthly installments). "Payez quand vous êtes chargé" seasonal framing. Annual-first KILLED. | Pulse 00:40 (All 3 agents) | 2026-03-31 |
 | D139 | Expert-comptable timing | Customer development = Week 1 (Louis's own accountant = first call). Referral program = Month 4+. Customer development ≠ sales referral. | Pulse 00:40 (Growth+Product) | 2026-03-31 |
 | D140 | Offline architecture | AsyncStorage + retry queues Sprint 0. expo-sqlite deferred Sprint 1. sync_status field Sprint 0 schema. Conflict detection Sprint 1.2. | Pulse 00:40 (Technical Architect) | 2026-03-31 |
+| D141 | Situation financière notification | REFINED — notification is Path A (formal-devis) conversion trigger ONLY. Path B (verbal-agreement) has no "situation financière" trigger. Path B retention = usage-based (job logging habit) + recurring "stay in touch" digest for dormant Free users (14+ days inactive). | Pulse 00:58 (Growth Strategist) | 2026-03-31 |
+| D142 | Sprint 0 gate | REFINED — mentions légales gate requires real committed strings (Louis's own business data in `legal/mentions-legales.ts`). TODO comments eliminated. Gate must be verified before Sprint 0 starts. 5-day timeline is CONDITIONAL on gate being met. | Pulse 00:58 (Product Strategist) | 2026-03-31 |
+
+## New from Pulse 2026-03-31T00:58 — Three Specialist Debates (D57 CLOSED, D141, D142)
+
+### Resolved
+
+- **D57 CLOSED (Architecture):** Technical Architect closed the oldest open architectural question — Nuxt 3 has no role in v1. Backend = Supabase EU-hosted (D100). Landing = static HTML. Mobile = Expo/React Native direct to Supabase. No Nuxt 3 anywhere in the stack. D57 was SUPERSEDED by D100 but never formally CLOSED — now closed.
+- **D141 (Situation financière notification):** Growth Strategist revealed "situation financière" notification is Path A (formal-devis) conversion trigger ONLY. Path B (verbal-agreement artisan) has no "situation financière" trigger — they never produce formal accepted devis. Path B retention = usage-based (job logging habit) + recurring "stay in touch" digest for dormant Free users (14+ days inactive). Debate log's framing of "situation financière" as universal PRIMARY Free tier value was incorrect for ~40-50% of target market.
+- **D142 (Sprint 0 gate):** Product Strategist confirmed the Sprint 0 gate has NOT been met. Louis has not committed the 4 mentions légales templates to the repo. The 5-day Sprint 0 estimate is CONDITIONAL on this gate being satisfied. Mentions légales as TODO comments eliminated. Gate must be: `legal/mentions-legales.ts` committed to git with Louis's actual business data before Sprint 0 begins.
+
+### Challenged Assumptions This Pulse
+
+1. "Nuxt 3 remains relevant as a web framework given Supabase replaced Fastify" — challenged by Technical Architect: no web application exists to justify Nuxt 3's SSR capabilities; mobile app bypasses Nuxt entirely
+2. "Situation financière is the universal Free tier retention mechanism" — challenged by Growth Strategist: Path B artisans never produce an accepted devis event; notification is Path A-only
+3. "5-day Sprint 0 is achievable this week" — challenged by Product Strategist: gate not met, mentions légales as TODO comments not acceptable, 7-8 days is the realistic floor
+
+### New Action Items
+
+- [ ] **D57 CLOSED:** Nuxt 3 is eliminated from v1 architecture. No Nuxt dependency in any Sprint 0 planning. Update any existing Nuxt project references in the repo.
+- [ ] **D141 NEW — Path B retention mechanism:** Define the recurring "stay in touch" digest for dormant Free users (14+ days inactive) — content, frequency, delivery channel. This is Path B's primary retention touch.
+- [ ] **D141 NEW — Path A notification timing:** The "situation financière" first-accepted-devis event trigger should also include: "your pipeline is now worth €X" (server-computed from accepted devis amounts). Conversion ask follows the notification.
+- [ ] **D142 — Sprint 0 gate (URGENT):** Louis must commit `legal/mentions-legales.ts` to git with real business data BEFORE Sprint 0 begins. If not committed: Sprint 0 = 7-8 days. If committed: 5-day Sprint 0 stands. This week.
+- [ ] **D142 NEW — Sprint 0 handoff doc:** Add explicit note: "Mentions légales gate: Louis's own data committed as real strings, not TODO comments. Gate verified by: git status legal/"
+- [ ] **D141 UPDATED — D83/D89 updated:** "Situation financière" notification is Path A conversion trigger ONLY. Path B excluded by workflow design. D83 entry in this doc updated accordingly.
+
+### Challenged This Pulse
+
+1. "Nuxt 3 + Supabase is the architecture" — Technical Architect: Nuxt 3 is irrelevant, mobile bypasses it, landing is static
+2. "Situation financière is the universal Free tier retention mechanism" — Growth Strategist: Path B artisans never trigger it
+3. "5-day Sprint 0 is achievable" — Product Strategist: gate not met, mentions légales not committed
+
 
 ## 🔄 Reopened This Pulse (Resolved in 15:17 Pulse)
 
@@ -147,7 +179,7 @@ All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 
 ### New Action Items from this pulse:
 - [x] **D56 RESOLVED:** WoM = Month 3+ lagging indicator. Digital acquisition PRIMARY at launch. "Comment connaissez-vous?" at signup. Referral codes in v1.
-- [ ] **D57 UPDATED:** API-first preferred but deferred — don't let architecture debate delay Sprint 0. Migrate post-MVP if Nuxt 3 not blocking.
+- [ ] **D57 CLOSED:** Nuxt 3 eliminated from v1 architecture. Backend = Supabase EU-hosted (D100). Sprint 0 uses Supabase directly — no Fastify, no Nuxt 3. Verify no Nuxt references in any Sprint 0 code.
 - [x] **D59 RESOLVED:** Kill €19 founding member offer. Replace with "early access, first 50 users lock €29/month for life."
 - [ ] **D59 UPDATED:** Guerrilla price validation — show demo, ask artisans their time spent on devis/week, let THEM anchor the price. Use micro-artisan rates (€25-40/h) not consultant rates (€50-80/h).
 - [x] **D59 RESOLVED:** 3% Day-30 conversion target stands as KPI. If Month 2 with <1% conversion, price is likely the barrier.
@@ -175,11 +207,11 @@ All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 
 ### Before Building (Do First)
 - [ ] U1 readiness check: (1) Figma/clickable devis-creation prototype, (2) guerrilla test scheduled (workshop/job site via warm network — NOT wholesaler), (3) pain confirmed by competitive analysis, (4) feature set frozen
-- [ ] **D64 RESOLVED:** Sprint 0 starts with Fastify + Postgres API (NOT Nuxt 3). Day 1 = Postgres schema (TVA per-line, sequential numbering, mentions légales, client-type) + Fastify scaffold. Day 2 = TVA service + sequential numbering engine + mentions légales renderer. Day 3 = full CRUD REST API ready for React Native integration. Nuxt 3 retired from backend — static landing page only. (Debate 64)
+- [ ] **D64 RESOLVED:** Sprint 0 starts with Supabase EU-hosted (D100). Day 1 = Supabase schema (TVA per-line, sequential numbering, mentions légales, client-type). Day 2 = TVA calculator + sequential numbering engine + mentions légales renderer. Day 3 = full CRUD REST via Supabase client ready for React Native integration. Fastify retired. Nuxt 3 eliminated. (Debate 64 + D100 + D57 CLOSED)
 - [ ] **D65 RESOLVED:** U15 three-phase guerrilla protocol — (1) 20-min observation of actual admin workflow, no demo, no pitch; (2) pain quantification (time spent/week, emotional weight 1-10, lost revenue from forgotten devis); (3) payment conversation ONLY if pain is confirmed. Remove "show demo, ask price" from U15. (Debate 65)
-- [ ] **D63 RESOLVED:** Design the "situation financière" snapshot for Free tier home — automatically-produced weekly output showing: outstanding devis (with days-open), pending factures (aging buckets: 15/30/45/60+ days), revenue this month vs last month, dormant clients (30+ days inactive). This is the Free tier's primary value output. Push-ready content. Notification channel debates are secondary until this exists. (Debate 63)
+- [ ] **D63 RESOLVED:** Design the "situation financière" snapshot for Free tier home — automatically-produced weekly output showing: outstanding devis (with days-open), pending factures (aging buckets: 15/30/45/60+ days), revenue this month vs last month, dormant clients (30+ days inactive). This is the Free tier's primary value output for Path A. Push-ready content. **For Path B: "stay in touch" digest for dormant users (14+ days inactive) is the retention mechanism.**
 - [ ] If prototype not ready in 1 week: proceed to build anyway, validate post-launch (Debate 31)
-- [ ] Sprint 0: Fastify + Postgres only (NOT Nuxt 3). Compliance foundations first (3-4 days): TVA per-line schema, sequential numbering engine, mentions légales renderer, client-type schema. Sprint 1 = client+devis flow. Sprint 2 = facture+email relances. (Debates 54/64)
+- [ ] Sprint 0: Supabase EU-hosted only (NOT Fastify, NOT Nuxt 3). Compliance foundations first (3-4 days): TVA per-line schema, sequential numbering engine, mentions légales renderer, client-type schema. Sprint 1 = client+devis flow. Sprint 2 = facture+email relances. (Debates 54/64 + D100 + D57 CLOSED)
 - [ ] **D81 NEW (SUPERSEDED by D86):** Sprint 0 is offline-first. WatermelonDB/expo-sqlite for local-first storage (~2 days mobile work). Backend: add `updated_at` timestamps + accept client-generated UUIDs on all entities (~2 hours). Sync: last-write-wins with conflict UI. No changes to API endpoint contracts.
 - [ ] **D81 UPDATED (SUPERSEDED by D86):** Sprint 0 timeline updated to 7 days (was 5 days, +2 days for offline-first). Offline-first is required at launch — D9's "no offline" decision was made before React Native stack was chosen and no longer applies.
 - [x] **D57 RESOLVED:** API-first (Node/Fastify + static landing + JWT) preferred. Nuxt 3 deferred unless blocking Sprint 0. OVH managed Postgres retained. (Debate 61)
