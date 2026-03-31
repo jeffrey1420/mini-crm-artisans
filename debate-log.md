@@ -6953,3 +6953,146 @@ The prescriber list has value **only when Louis has something concrete to show**
 
 *Last updated: 2026-03-30T23:55*
 
+
+---
+
+## Pulse 2026-03-31T00:12 — Three New Debates
+
+---
+
+## Debate 126: D99 — Annual Billing Creates Acquisition Friction That Exceeds Its Benefit
+
+**Challenge:** D120 resolved to "Flat €29/month + €260/year annual billing at launch." Product Strategist challenges whether annual billing is the right default for French micro-SMBs with lumpy cash flow.
+
+### Product Strategist — Monthly Should Be the Default
+
+**Assumption challenged:** That annual billing solves seasonality churn while annual commitment is justified by the product's value.
+
+**Core argument:**
+
+**1. The target customer's cash flow reality is NOT monthly.**
+French artisans have project-based income. A plumber might earn €8,500 in March and €800 in February. Annual billing at €260 upfront requires €260 in a single moment — which in a slow month is a genuine barrier. Monthly billing at €29 removes this barrier entirely.
+
+**2. Annual billing solves seasonality churn OR delays it — not the same thing.**
+Forced retention through annual billing doesn't eliminate seasonality churn — it converts it into resentment that erupts at renewal. Monthly billing lets customers self-select: active months → sees value, stays; slow months → pauses/cancels, returns when work picks up. Natural ebb-and-flow is not churn.
+
+**3. Annual commitment requires trust the product hasn't earned.**
+For annual billing to reduce churn, customers need: brand recognition, network effects, data lock-in, team coordination, proven ROI. Mini-CRM V1 has none of these. Asking for 12-month commitment on day one from a customer who has never paid anything for a product they haven't fully tested is backwards.
+
+**4. French consumer protection law creates involuntary churn.**
+L221-28 Code de la consommation gives 14-day cooling-off period for annual subscriptions purchased remotely. Users who forget to cancel within 14 days and then resent the company is a churn pattern that looks like voluntary cancellation but isn't. Monthly billing eliminates this entirely.
+
+**5. The math on acquisition friction vs churn reduction:**
+If monthly converts at 100 and annual converts at 60 (conservative for cash-constrained micro-SMBs), the annual-first approach costs 40% of potential customers before they even try the product. Even if annual's churn rate is 30% better, the base is so much smaller it never catches up.
+
+**Proposed resolution:** Monthly billing at €29 should be the DEFAULT. Annual billing repositioned as an opt-in discount (€240/year = ~€20/month, saving €108/year). Lead with monthly on the pricing page; annual offer appears as a secondary option.
+
+**Verdict on D120:** REOPENED — Product Strategist makes a compelling cash-flow argument. The seasonality churn benefit of annual billing may be offset by acquisition friction. Needs real artisan validation before committing to either default.
+
+---
+
+## Debate 127: Sprint 0 Gate — 6 Items Is Bureaucratic Overhead for a Solo Technical Founder
+
+**Challenge:** Last pulse (23:55) found Sprint 0 gate status = CLOSED — 0/6 items committed. Louis needs 3-4 hours gate-opening work. Technical Architect challenges whether the gate itself is the problem.
+
+### Technical Architect — Simplify Gate to 2 Items Maximum
+
+**Assumption challenged:** That gate items must be committed before Sprint 0 starts, and that 3-4 hours of gate-opening work is the realistic estimate.
+
+**Core argument:**
+
+**1. The gate is a governance artifact misapplied to a solo dev.**
+Gates exist for: teams needing shared alignment, non-technical founders needing scaffolding, large orgs with compliance checkpoints. Louis is a web developer intern who writes TypeScript daily. The gate assumes he needs to be taught how to scaffold a project. He doesn't.
+
+**2. The time estimate is wrong — it's 6-8 hours, not 3-4.**
+| Gate Item | Realistic Time | Notes |
+|-----------|---------------|-------|
+| Mentions légales templates (4x) | 2-3 hours | Requires legal research: siret verification, tribunal de commerce, hébergeur CNIL compliance |
+| Supabase project with proper region | 30-45 min | Project creation + env vars + first migration |
+| sprint-0-scope.md | 45-60 min | Scope refinement, acceptance criteria |
+| shared-types.ts | 30-45 min | Schema design (iterative with actual Supabase setup) |
+| Expo Router decision | 15-30 min | Already decided per context |
+| PDF Edge Function scaffold | 1-2 hours | Deployment, testing, cold start verification |
+
+Real total: 6-8 hours minimum. The gate costs Louis a full day of Sprint 0 with zero risk reduction.
+
+**3. What the gate actually mitigates: nothing that applies here.**
+- "Louis won't know how to scaffold" → He writes TypeScript daily
+- "Louis doesn't know what a devis is" → He's thought about this for weeks
+- "Louis needs legal guidance" → Mentions légales can be drafted as inline TODO comments
+- "Louis needs infrastructure decisions upfront" → Solo dev can iterate on Day 1
+
+**Proposed solution — 2-item gate maximum:**
+1. **Supabase project created** — infrastructure, regional implications, do it first
+2. **Mentions légales drafted as inline comments** — not a separate file, just TODO blocks in the code where they'll eventually render
+
+Everything else deferred to Sprint 0 Day 1. The scope doc lives in his head. The shared types emerge from the schema work. The PDF scaffold is a 30-minute task when he's ready.
+
+**Verdict on Sprint 0 gate:** RESOLVED — Gate simplified to 2 items maximum. All other items deferred to Sprint 0 Day 1. Louis opens Sprint 0 tomorrow by creating the Supabase project and drafting mentions légales as inline comments in the codebase.
+
+---
+
+## Debate 128: D72 — Expert-Comptable Outreach at Month 4+ Costs 3-4 Months of Referral Pipeline
+
+**Challenge:** D72/D91 resolved expert-comptable outreach to Month 4+ (relationship-dependent, product must exist first). Growth Strategist challenges whether waiting 4 months destroys the referral pipeline window entirely.
+
+### Growth Strategist — Week 1 of Month 1, But Not as Sales
+
+**Assumption challenged:** That building the product first then doing outreach maximizes the chance of successful expert-comptable referrals.
+
+**Core argument:**
+
+**1. The chicken-and-egg problem Louis faces at Month 4.**
+By Month 4, Louis has: no reference clients, no testimonials, no case studies, no "Marc" whose success story becomes the currency of expert-comptable referrals. Expert-comptables don't refer based on demos. They refer based on peer validation: "Mon client Marc utilise cet outil et ça a résolu ses problèmes de conformité TVA." Month 4+ leaves Louis with a polished product and nothing to say.
+
+**2. Expert-comptables need 2-3 months of relationship building before they'll refer anyone.**
+The referral pipeline takes as long to fill as the product takes to build. If Louis waits:
+- Month 1-4: Build product
+- Month 4: First expert-comptable meeting
+- Month 6-7: Expert-comptable starts referring (after relationship builds)
+- Month 8-9: First referred clients convert
+
+If Louis starts in Week 1:
+- Month 1: First expert-comptable meetings (relationship seeds planted)
+- Month 2-3: Product builds; relationship continues
+- Month 3-4: Expert-comptable starts referring (relationship already established)
+- Month 5-6: First referred clients convert
+
+Waiting costs 3-4 months of referral pipeline.
+
+**3. Expert-comptables are not evaluating product features.**
+Their only real question: "Will this tool create more work for me, or less?" For devis/factures compliance, the answer is less work. Louis's pitch: "Your clients will send you clean, compliant invoices. You won't fix them anymore." This value prop works with or without a polished UI.
+
+**4. Month 1 outreach is not a sales motion — it's customer development.**
+The conversations are informational interviews:
+- "What invoice compliance issues do you see with artisans?"
+- "I'm building something in this space — can I keep you posted?"
+- "When it's ready, would you be open to a quick look?"
+
+No product claim is made. No compliance exposure exists.
+
+**Proposed resolution:**
+- **Month 1, Weeks 1-4:** Talk to 3 expert-comptables. Not sales. Problem discovery + relationship seeding.
+- **Month 2-3:** Product builds; relationship continues via LinkedIn/email updates
+- **Month 3-4:** Expert-comptable starts referring (relationship established)
+- **Month 4+:** First referred clients convert
+
+**Verdict on D72:** REOPENED — Growth Strategist makes a compelling pipeline timing argument. Expert-comptable outreach should be Week 1 of Month 1 as a customer development motion, not Month 4+ as a sales motion.
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D99 | Pricing | Flat €29/month + €260/year annual — REOPENED Debate 126 (monthly vs annual default) | 2026-03-31 |
+| Sprint 0 Gate | Gate items | RESOLVED — simplified to 2 items: Supabase project created + mentions légales as inline TODO comments. All other items deferred to Sprint 0 Day 1. | 2026-03-31 |
+| D72 | Expert-comptable timing | REOPENED — Week 1 Month 1 customer development conversations, not Month 4+ sales motion (Debate 128) | 2026-03-31 |
+
+| U7 | Domain | RESOLVED — buy domain now (park it) | 2026-03-30 |
+| U12 | Expert-comptable playbook | UPDATED — customer development conversations Week 1 Month 1, not Month 4+ sales motion | 2026-03-31 |
+
+---
+
+*Last updated: 2026-03-31T00:12*
+

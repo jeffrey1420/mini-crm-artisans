@@ -1104,3 +1104,33 @@ The following were overengineered or wrong:
 
 *Last updated: 2026-03-30T23:55*
 
+
+---
+
+## New from Pulse 2026-03-31T00:12 — Three New Debates (D126, Sprint 0 Gate, D128)
+
+### Reopened (D126, D72/D91, Sprint 0 Gate)
+
+- **D126 (Annual billing default):** REOPENED — Product Strategist argues annual billing (€260/year) creates acquisition friction that exceeds its churn benefit. French artisans have lumpy project-based cash flow — €260 upfront in a slow month is a genuine barrier. Monthly €29 removes this friction. Annual commitment also requires trust the product hasn't earned (no switching costs, no brand recognition, no data lock-in). L221-28 Code de la consommation 14-day cooling-off period creates involuntary churn window. Recommendation: monthly €29 as DEFAULT, annual €240/year as opt-in discount.
+
+- **Sprint 0 Gate:** RESOLVED — Gate simplified to 2 items maximum. Louis is a solo technical founder — gate assumes non-technical founder scenario. Real gate-opening time is 6-8 hours, not 3-4. All other items deferred to Sprint 0 Day 1. Gate now: (1) Supabase project created, (2) mentions légales drafted as inline TODO comments in code.
+
+- **D72/D91 (Expert-comptable timing):** REOPENED — Growth Strategist argues waiting until Month 4+ costs 3-4 months of referral pipeline. Expert-comptables need 2-3 months of relationship building before referring. By Month 4, Louis has no reference clients, no testimonials, no "Marc" success story to tell. Month 1 outreach is NOT a sales motion — it's customer development: problem discovery + relationship seeding. Expert-comptables evaluate "will this create more work or less?" — the answer is "less" regardless of UI polish.
+
+### Challenged Assumptions This Pulse
+
+1. "Annual billing solves seasonality churn" — challenged: forces retention through slow months, building resentment that erupts at renewal; monthly lets artisans self-select
+2. "Gate items must be committed before Sprint 0" — challenged: gates are coordination tools for teams; Louis is solo and technical; real gate time is 6-8 hours
+3. "Build product first, then do expert-comptable outreach" — challenged: referral pipeline takes 2-3 months to fill; building first means outreach starts when the pipeline should be delivering
+
+### New Action Items from This Pulse
+
+- [ ] **D126 NEW:** Evaluate monthly €29 as the DEFAULT pricing page offer, with annual €240/year (2 months free) as opt-in discount shown below monthly. Does this reduce acquisition friction vs leading with €260/year annual? Get artisan validation before committing.
+- [ ] **D126 NEW:** If annual is still preferred: change landing page to show monthly first (€29/month), annual as secondary option. Annual-first positioning was never validated with real artisans.
+- [ ] **D126 NEW:** Test cash flow framing: "Payez quand vous êtes chargé" (pay when you're busy) vs standard monthly/annual framing. Seasonal billing alignment may be a stronger conversion argument than annual discount.
+- [ ] **Sprint 0 Gate UPDATED:** Simplified to 2 items. Louis creates Supabase project (EU region) + drafts mentions légales as inline TODO comments in code. All other gate items deferred to Sprint 0 Day 1.
+- [ ] **Sprint 0 Gate NEW:** Louis completes gate-opening sequence this week (before Sprint 0 begins): Supabase project + 4 inline mentions légales TODO blocks. Estimated 2-3 hours total.
+- [ ] **D72/D91 UPDATED:** Expert-comptable outreach = Week 1 Month 1 customer development conversations (NOT sales). Louis talks to 3 expert-comptables: problem discovery + relationship seeding. No product demo, no pitch, no brochures. Frame: "What compliance issues do you see with artisan clients?" and "I'm building something in this space — can I keep you posted?"
+- [ ] **D72/D91 NEW:** Expert-comptable referral conversations (NOT validation) remain Month 4+ with prerequisites: real beta users, testimonials, production-validated mentions légales. The distinction is: customer development (Month 1) ≠ sales referral (Month 4+).
+
+*Last updated: 2026-03-31T00:12*
