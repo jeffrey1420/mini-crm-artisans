@@ -10463,3 +10463,133 @@ This captures informal artisan behavior (no formal devis, relies on factures) us
 ---
 
 *Last updated: 2026-03-31T06:50*
+
+---
+
+## Pulse 2026-03-31T07:09 — Three Specialist Debates (PS-D156, TA-D157-Revisited, GS-D158-Revisited)
+
+---
+
+## Debate PS-D156: WTP Validation Does Not Block Sprint 0
+
+**Challenge:** D156 argued Sprint 0 cannot start until WTP is validated — the €29 price point must be confirmed before building. Product Strategist challenges this.
+
+### Product Strategist — WTP and Sprint 0 Are Parallel Tracks
+
+**Assumption challenged:** "Sprint 0 cannot begin until €29 WTP is validated. Building without confirmed willingness-to-pay risks building features nobody will buy."
+
+**Core arguments:**
+
+1. **Sprint 0's deliverables are tech-stack decisions, price-independent.** React Native app shell, Supabase auth, free-tier limits, upgrade flow UI stub — none of these depend on whether the paid tier costs €19, €29, or €49. The conversion mechanism is identical regardless of price point. Stripe price ID and webhook handler are Sprint 1+ work.
+
+2. **Stripe billing is not a Sprint 0 deliverable.** Billing integration is explicitly out of Sprint 0 scope. WTP cannot be validated for Stripe in Sprint 0 because Stripe isn't being built yet. The sequential dependency collapses on its own terms.
+
+3. **WTP with n=5 is statistical noise.** Small-N qualitative interviews have ±40% error bars minimum. Hypothetical price questions overstate actual conversion by 2-4x. What is needed: working product, real Stripe checkout, real conversion data. Not possible before Sprint 0 ships.
+
+4. **Price research without a prototype produces hypothetical answers.** Asking artisans "would you pay €29?" before they see the app answers what they imagine they'd pay — not what they'll actually pay. Sprint 0 produces the artifact that makes WTP validation real.
+
+5. **Sprint 0 produces the testable artifact — THEN WTP validation becomes meaningful.** Post-Sprint 0: working app, real backend, 5 in-person demos. Now "would you pay?" with a credit card in hand. That is a real signal.
+
+6. **The real fear beneath D156 is not price certainty — it's product-market fit.** Louis's underlying question is "will any French artisan pay for this at all?" Sprint 0 is the fastest path to an answer. WTP research delays that answer by 1-2 weeks.
+
+**VERDICT on D156:** REVERSED. Sprint 0 and WTP validation are parallel tracks, not sequential gates. Sprint 0 starts now. WTP interviews run concurrently. WTP is not a Sprint 0 blocker. Sprint 1 Stripe integration is where billing decisions are implemented — informed by real usage data, not pre-launch surveys.
+
+---
+
+## Debate TA-D157-Revisited: Sprint 0 Is Not 6.5 Days — It's 4 Days (Happy Path First)
+
+**Challenge:** D157 argued 6.5 days is insufficient for a testable artifact. Technical Architect challenges not the diagnosis but the conclusion.
+
+### Technical Architect — D157's Diagnosis Is Right, Conclusion Is Wrong
+
+**Assumption challenged:** "The problem is that 6.5 days isn't enough time. Either shrink scope or extend to 10 days."
+
+**Core arguments:**
+
+1. **TVA multi-taux does not belong on Sprint 0 critical path.** Hardcoded 10% TVA is sufficient for Sprint 0 beta validation. Beta user's question: "Can I send a professional devis via WhatsApp?" — not "Is the VAT calculation legally compliant per rate-tier edge cases?" Three TVA tiers are Sprint 1 refinement. What is lost with hardcoded 10%: nothing testable.
+
+2. **Sequential numbering with locking is Sprint 1.** Auto-increment without locking is fine for Sprint 0. Locking is a multi-user concern — Louis is the only user in Sprint 0. Numbering enforcement is a compliance concern for formal facturas, not devis. What is lost: cosmetic duplicate-numbering defect that won't manifest with one user.
+
+3. **Mentions légales are boilerplate, not schema.** One hardcoded block is sufficient for Sprint 0. Client-type variants are Sprint 1. What is lost: nothing testable. The devis looks professional with a standard mentions légales block.
+
+4. **Offline architecture is a D9 item — not Sprint 0.** D9 explicitly deferred offline. Sprint 0 is about the happy path. Beta users are on real devices with connectivity.
+
+5. **The "testable artifact" bar is set wrong.** Real bar: "Can I send a professional devis to myself on WhatsApp?" Not "does it pass a French invoicing compliance audit?"
+
+**Revised Sprint 0: Happy Path First, 4 Days**
+
+| Day | Deliverable |
+|-----|-------------|
+| 1 | Expo project + Supabase auth + minimal schema (clients, devis, devis_items — no TVA tiers, no numbering locking |
+| 2 | Devis creation screen (hardcoded 10% TVA, simple auto-increment, preview) |
+| 3 | WhatsApp share + PDF generation + static mentions légales |
+| 4 | Real device smoke test — send devis to own WhatsApp |
+| 5 | Buffer / beta prep |
+
+**What Sprint 1 adds:** TVA multi-taux, sequential numbering with locking, mentions légales per client type, offline architecture, documents table generalization.
+
+**VERDICT on D157:** REVISED. Sprint 0 is a 4-day Happy Path First sprint, not 6.5 days of schema-first development. The complexity belongs in Sprint 1, not Sprint 0's critical path. The question for Louis: if beta users can complete the happy path with hardcoded TVA, what is actually lost?
+
+---
+
+## Debate GS-D158-Revisited: Path B Trigger Is Built on a Contradiction
+
+**Challenge:** D110's "3 factures created, 0 accepted devis" trigger. Growth Strategist argues this is not just wrong — it is logically incoherent.
+
+### Growth Strategist — "3 Factures" Requires Path B Artisans to Become Path A Before Converting
+
+**Assumption challenged:** Path B artisans will naturally begin creating formal factures once they have the app and accumulate enough to hit the threshold.
+
+**Core arguments:**
+
+1. **The trigger fires after the behavior change — it's backwards.** "3 factures created" means the artisan has already transformed their workflow from verbal/cash to formal invoicing. But Path B artisans don't do this organically. The trigger presupposes the very behavior it is meant to prompt. This is not a threshold calibration problem — adjusting from 3 to 1 doesn't fix it.
+
+2. **Path B's actual conversion moment is identical to Path A's.** Both archetypes share the same trigger moment: first time a client asks for a formal devis and the artisan feels pain without the tool. For Path B, this is a rupture event — a client who previously accepted verbal suddenly requests a formal document. The conversion trigger should fire at the first formal-devis attempt, not a downstream document count.
+
+3. **The intent signal has already fired — we're discarding it.** The Path B artisan who downloads the app already recognized a formalization need. We discard that signal and wait for downstream documents that never come.
+
+4. **Designing a document-based trigger for non-document users is building for a phantom.** Path B artisans, by definition, operate outside formal document workflows. "3 factures created" is a trigger for a user who doesn't exist in our product.
+
+5. **Correct trigger: behavior gap, not document count.** "7 days active + ≥3 client entries + 0 formal documents" — fires on the gap between engagement (active, adding clients) and formalization (no devis/facture sent). The prompt: "Vos clients et vos travaux sont enregistrés. Quand un client vous demande un devis officiel, vous serez prêt."
+
+6. **Expert-comptable is the structural Path B channel — not in-app conversion.** The expert-comptable who serves Path B artisans is the natural formalization force. In-app conversion triggers may be retention/bridge tools for Path B users who will formalize later — not the primary conversion path for this segment.
+
+**Proposed replacement trigger:**
+- "7 days active + at least 3 client entries + 0 formal documents created"
+- Fires on behavior gap (active but not formalizing)
+- Contextual prompt: "Vos clients sont là. Pour €29/mois, vos devis s'ajoutent sans limite."
+- Not a hard upgrade gate — a soft nudge toward formalization
+
+**VERDICT on D158:** OPEN. D110's "3 factures created" trigger challenged as logically incoherent for Path B. Behavior-gap trigger ("7d active + ≥3 clients + 0 docs") proposed as replacement. Expert-comptable channel identified as structural Path B conversion path. Louis must decide: accept that document-count triggers are wrong for Path B, or defend the current logic.
+
+---
+
+## Updated Decision Table (Partial — 07:09 Pulse)
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D156 | Sprint 0 WTP gate | **REVERSED** — Sprint 0 and WTP validation run as parallel tracks. WTP is not a Sprint 0 blocker. Sprint 0 starts immediately. | 2026-03-31 |
+| D157 | Sprint 0 timeline | **REVISED** — 4-day Happy Path First (not 6.5 days schema-first). Excludes: TVA multi-taux, sequential numbering locking, mentions légales per client type, offline. | 2026-03-31 |
+| D158 | Path B trigger | **OPEN** — "3 factures created" challenged as logically incoherent. Behavior-gap trigger proposed. Expert-comptable as structural Path B channel. Louis must decide. | 2026-03-31 |
+| D138 | Annual billing | CONTESTED — WTP validation still required. Three positions still on table (monthly-only, default-annual, hidden-link). | 2026-03-31 |
+
+### Challenged Assumptions This Pulse (07:09)
+
+1. **"Sprint 0 must wait for WTP validation"** — challenged by Product Strategist: sequential dependency is false; Sprint 0 tech stack independent of price; Stripe not in Sprint 0; n=5 WTP interviews are noise
+2. **"6.5 days is the floor for Sprint 0"** — challenged by Technical Architect: schema-first is wrong approach; Happy Path First = 4 days; TVA multi-taux, numbering locking, mentions légales variants belong in Sprint 1
+3. **"3 factures created is the correct Path B trigger"** — challenged by Growth Strategist: requires Path B to become Path A before triggering; behavior-gap trigger proposed instead; expert-comptable is the structural Path B channel
+
+### Resolved This Pulse
+
+- **D156 REVERSED:** Sprint 0 and WTP validation are parallel tracks. Sprint 0 starts now.
+- **D157 REVISED:** Sprint 0 = 4-day Happy Path First. Not 6.5 days. Schema-first replaced with narrowest-possible path to testable WhatsApp-devis artifact.
+
+### New Action Items This Pulse
+
+- [ ] **D156 NEW — Sprint 0 starts immediately:** Louis begins 4-day Happy Path First sprint. WTP interviews run concurrently. Stripe billing integration = Sprint 1.
+- [ ] **D157 NEW — Sprint 0 scope confirmed:** Happy Path First. Days 1-2: minimal schema + devis creation. Day 3: WhatsApp + PDF. Day 4: real device smoke test. Buffer day 5.
+- [ ] **D157 NEW — Sprint 1 scope defined:** TVA multi-taux, sequential numbering with locking, mentions légales per client type, offline architecture, documents table generalization.
+- [ ] **D158 NEW — Louis decision required:** Accept that document-count triggers are structurally wrong for Path B? If yes: implement behavior-gap trigger ("7d + ≥3 clients + 0 docs"). Acknowledge expert-comptable as structural Path B channel.
+- [ ] **D138 NEW — Sprint 1 billing:** After Sprint 0 ships and real users are on the product, run 5 in-person demos with credit card in hand. Only then finalize annual billing structure.
+
+*Last updated: 2026-03-31T07:09*

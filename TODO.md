@@ -1876,3 +1876,34 @@ Sprint 0 scope: client file + devis flow + offline (expo-sqlite draft-mode) + me
 - [ ] **U16 NEW:** Path B discovery research is a Sprint 1 prerequisite. Before designing any Path B conversion trigger, observe 5-10 artisans who operate on verbal agreements: what do they actually do in the app? Then design trigger matching their behavior — not a document-creation threshold that assumes formal invoicing workflows.
 
 *Last updated: 2026-03-31T06:50*
+
+---
+
+## New from Pulse 2026-03-31T07:09 — Three Specialist Debates
+
+### Resolved This Pulse
+
+- [x] **D156 REVERSED:** Sprint 0 and WTP validation are parallel tracks, not sequential gates. Sprint 0 starts immediately. WTP interviews run concurrently. WTP is not a Sprint 0 blocker. Sprint 1 Stripe integration is where billing decisions are implemented.
+- [x] **D157 REVISED:** Sprint 0 is 4-day Happy Path First — not 6.5 days schema-first. TVA multi-taux, sequential numbering locking, mentions légales per client type, and offline are all Sprint 1 items. Happy Path First: Days 1-2 (minimal schema + devis creation), Day 3 (WhatsApp + PDF), Day 4 (real device smoke test). Day 5 buffer.
+
+### Challenged This Pulse
+
+1. "Sprint 0 must wait for WTP validation" — challenged by Product Strategist: Stripe not in Sprint 0; n=5 WTP interviews are noise; Sprint 0 produces the artifact that makes WTP validation real
+2. "6.5 days is the floor for Sprint 0" — challenged by Technical Architect: schema-first is wrong approach; Happy Path First = 4 days; complexity belongs in Sprint 1
+3. "3 factures created is the correct Path B trigger" — challenged by Growth Strategist: requires Path B to become Path A before converting; behavior-gap trigger proposed instead
+
+### Still Open
+
+| ID | Topic | Options | Sprint 0 Impact |
+|----|-------|---------|-----------------|
+| D158 | Path B trigger | (A) Accept behavior-gap trigger: "7d + ≥3 clients + 0 docs"; (B) Keep "3 factures" trigger | Sprint 1 |
+| D138 | Annual billing | (A) Monthly-only; (B) monthly-primary + default-annual; (C) hidden-link annual | Sprint 1 |
+
+### New Action Items This Pulse
+
+- [x] **D156 RESOLVED:** Sprint 0 starts immediately. WTP validation runs concurrently. Sprint 1 Stripe integration implements billing — informed by real usage data.
+- [x] **D157 RESOLVED:** Sprint 0 = 4-day Happy Path First. Scope: minimal schema + devis creation + WhatsApp PDF share. Sprint 1 adds: TVA multi-taux, sequential numbering locking, mentions légales per client type, offline architecture.
+- [ ] **D158 — Louis decision required:** Accept that document-count triggers are structurally wrong for Path B artisans? If confirmed: implement behavior-gap trigger ("7d active + ≥3 clients + 0 formal documents"). Acknowledge expert-comptable as structural Path B conversion channel. Sprint 1 conversion design.
+- [ ] **D138 — Sprint 1 billing:** After Sprint 0 ships and real users are on the product, run 5 in-person demos with credit card in hand. Only then finalize annual billing structure.
+
+*Last updated: 2026-03-31T07:09*
