@@ -1515,4 +1515,37 @@ NONE — all three debates are CONTESTED. Louis decisions required.
 1. **Mentions légales gate (D142):** Commit real strings to git. 5-day Sprint 0 CONDITIONAL on this.
 2. **Supabase EU project:** Confirm project live with EU region.
 
-*Last updated: 2026-03-31T03:31*
+*Last updated: 2026-03-31T03:50*
+
+## New from Pulse 2026-03-31T03:50 — Three Specialist Debates (D153)
+
+### Resolved
+
+NONE — all three debates (D96, D138, D140) remain open. No items resolved this pulse.
+
+### Challenged Assumptions This Pulse
+
+1. **"AsyncStorage + retry queues is sufficient for Sprint 0 offline"** — challenged by TA-D153: shifts complexity into production failure modes that are harder to debug; 2.5-day estimate is inflated (net delta ~1 day); view-only offline is a different product; server-wins = silent document annihilation under Code civil Art. 1127-1
+2. **"3 accepted devis from 3 distinct clients" is the right Path A trigger** — challenged by PS-D153: dummy-client attack (3 fake companies, 3 accepted devis, trigger fires with zero real business); trigger measures deal-closing ability not product value; "3" is a legacy number never re-validated; "accepting to yourself" may be legitimate product usage not gaming
+3. **"Annual billing should be eliminated entirely at launch"** — challenged by GS-D153: both billing models mask seasonality (annual gives better calendar anchor); payment frequency ≠ SKU (Stripe handles as billing interval); anchoring argument proves too much (would eliminate Free tier); Day 30 upsell ≠ annual-as-default; competitor enters with annual if Louis doesn't
+
+### New Action Items This Pulse
+
+- [ ] **D96 — Path A trigger: Louis decides.** (A) First facture created — PS-D153 proposes; requires full end-to-end workflow (devis → accepted → facture); definitionally unambiguous; no dummy-client attack possible; fires at 1 event. (B) 3 accepted devis from 3 distinct clients — GS-D152 defends; requires 3 real closed deals across 3 different humans; diversity requirement is load-bearing anti-gaming measure. Post-Sprint 1 decision, low urgency.
+- [ ] **D138 — Annual billing: Louis decides.** (A) Eliminate entirely — monthly €29 ONLY at launch (PS-D152); no second SKU before PMF, no anchoring effect, no prepaid-trap for cash-flow-sensitive artisans. (B) Monthly €29 primary + annual €240 opt-in below + Day 30 framed upsell "épargnez €108" (GS-D153); not Sprint 0 blocker. Note: GS-D153 raises competitive risk — if a competitor enters with annual pricing, Louis's monthly-only appears more expensive in peer WhatsApp conversations.
+- [ ] **D140 — Offline scope: Louis decides (BLOCKS Sprint 0).** (A) Draft-mode + expo-sqlite (TA-D153); architecturally safe, ~1 day net new work beyond shared UI; server-wins rejected as silent document annihilation. (B) AsyncStorage + retry queues (PS-D147); simpler but shifts cost into production failure modes; phone death mid-write = data gone, queue never entered.
+- [ ] **D96 — PS-D153 proposes first facture created as Path A trigger (NEW).** Replaces both GS-D152 ("3 accepted devis") and PS-D146-3P ("first accepted devis + 3 active clients"). Requires full workflow validation before trigger fires. Single event (not 3). No legacy number. Measures end-to-end product usage. Post-Sprint 1.
+- [ ] **D96 — PS-D153 retracts PS-D146-3P.** "3 active clients" conceded as gameable. PS-D153 endorses neither GS-D152 nor PS-D146-3P — proposes a third path (first facture created).
+- [ ] **D138 — GS-D153 raises competitive scenario.** If Tolteck or new entrant launches with annual pricing (€20/month effective), Louis's monthly-only product appears more expensive in artisan WhatsApp peer conversations. Louis voluntarily cedes the €108 savings story to competitors.
+
+### Sprint 0 Blockers Still Requiring Louis Action
+
+| Decision | Options | Sprint 0 Impact |
+|----------|---------|----------------|
+| D140 — Offline scope | (A) Draft-mode + expo-sqlite; (B) AsyncStorage + retry queues | **BLOCKS** |
+| Mentions légales gate (D142) | Louis commits real strings to git | **BLOCKS** |
+| Supabase EU project | Confirm EU project live | **BLOCKS** |
+| D96 — Path A trigger | (A) First facture created; (B) 3 accepted devis from 3 distinct clients | Post-Sprint 1 |
+| D138 — Annual billing | (A) Eliminate entirely; (B) monthly primary + annual opt-in | Not Sprint 0 blocker |
+
+*Last updated: 2026-03-31T03:50*

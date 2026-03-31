@@ -8905,4 +8905,113 @@ Three sub-agents spawned at 03:31 UTC to debate remaining contested items:
 3. **Offline scope (D140):** Confirm draft-mode semantics + expo-sqlite is the Sprint 0 offline architecture.
 4. **Sprint 0 scope:** 3 confirmed deliverables (Core Devis Flow + Auth/Offline-Capable + Expo Push Skeleton = 5 days). Path B trigger, WhatsApp Business API, dual-path architecture, mentions légales template engine — all deferred to v1.1/v1.2.
 
-*Last updated: 2026-03-31T03:31*
+*Last updated: 2026-03-31T03:50*
+
+---
+
+## Pulse 2026-03-31T03:50 — Three Specialist Debates (D153)
+
+---
+
+## Debate TA-D153: Draft-Mode Is the Only Architecturally Safe Sprint 0 Offline Answer
+
+**Challenge:** D140 — PS-D147 argued AsyncStorage + retry queues is "sufficient for Sprint 0." Technical Architect challenges the sufficiency framing.
+
+### Technical Architect — AsyncStorage Shifts Cost Into Production Failure Modes
+
+**Core arguments:**
+
+1. **AsyncStorage + retry queues is not simpler — it defers complexity into failure modes that are harder to debug.** A retry queue assumes the write entered the queue before the phone died. In practice, death happens mid-write, before the queue enqueue. Data is gone. This failure mode is the common case for mobile crash scenarios. Debugging "why did this devis disappear" in production, with no local trace and a server that never saw the record, is a nightmare that costs more than the 2.5 days being argued about.
+
+2. **The 2.5-day estimate is conservative because expo-sqlite + draft_status is well-understood.** expo-sqlite is battle-tested. The draft_status enum (pending / synced / conflict) is a straightforward schema addition. The Pending Drafts UI is required by BOTH approaches (AsyncStorage still needs a queue-status UI). Net delta for draft-mode is SQLite setup + migration — perhaps 1 day. The remaining 1.5 days is shared UI work both options require.
+
+3. **"Sprint 0 is maxed out" proves too much.** If Sprint 0 is truly at capacity, the thing to cut is NOT draft-mode — it is the view-only offline feature itself. View-only offline without draft-mode gives users the illusion of offline capability while creating a silent data-loss surface. A user who makes changes offline and sees them vanish has been actively harmed. If capacity is the constraint, the correct answer is to reduce scope to a narrower offline story — not ship a dangerous one.
+
+4. **View-only offline ≠ offline.** The Mini-CRM use case centers on devis creation and modification. A field agent who captures requirements offline and returns expecting their devis to be there is not doing view-only work. View-only serves "reference existing devis on the metro." It does not serve "create a new devis from a client site with no connectivity." Draft-mode serves both.
+
+5. **Server-wins = silent document annihilation under Code civil Art. 1127-1.** A devis is a legally-binding commercial document the moment it is presented to a client. If the server silently overwrites a local draft on conflict, the agent's work is gone without warning, without recovery path, and potentially without the agent ever knowing. This is not a UX inconvenience — it is a data-integrity failure with legal exposure.
+
+**Verdict on D140:** D140 draft-mode semantics stands. If Sprint 0 capacity is genuinely the constraint, delay offline entirely rather than ship view-only with a hidden write failure mode. **OPEN — Louis decision required.**
+
+---
+
+## Debate GS-D153: Eliminate Annual Billing Entirely? No. Monthly Primary + Annual Opt-In.
+
+**Challenge:** PS-D152 (03:20) argued eliminate annual billing entirely — "annual masks seasonality, Louis can't see insufficient value signal, second SKU before PMF, anchoring poisons monthly tier, €240 upfront IS expensive."
+
+### Growth Strategist — Against Elimination
+
+**Core arguments:**
+
+1. **Both billing models mask seasonality — the question is which masking is more actionable.** Monthly churn data shows: "12% churn in August" — no internal reference. Annual cohort data shows: "8 of 14 prepaid customers churned at their annual renewal in September" — calendar anchor makes seasonality correlation visible. Annual gives Louis a reference point monthly lacks.
+
+2. **"Second SKU" is the wrong frame.** €29/month vs €29/year is a payment frequency, not a product tier. No feature difference. No limit difference. Stripe implements this as a billing interval, not a separate SKU. The "SKU complexity" costs PS-D152 enumerates apply to product variants, not payment frequencies.
+
+3. **The anchoring argument proves too much.** If annual poisons monthly tier perception ("why pay €29 when €20 exists?"), the Free tier poisons the paid tier by the same logic ("why pay anything when free exists?"). PS-D152 doesn't argue for eliminating Free tier — so anchoring is manageable, not disqualifying.
+
+4. **The Day 30 upsell frame is categorically different from annual-as-default.** Monthly €29 primary. After 30 days of active usage: "Vous utilisez l'app depuis 30 jours — voulez-vous annualiser et épargner €108?" This is how Spotify, Netflix, and every successful subscription introduces annual — not at signup, but after value is established. Users who have experienced 30 days of value are the right population for an annual upgrade prompt. Day 0 users are not.
+
+5. **If Louis launches monthly-only and a competitor enters with annual, what happens?** Competitor advertises "€20/month." Louis advertises "€29/month." In peer conversation in artisan WhatsApp groups, Louis's product appears more expensive — even though the monthly commitment is identical. The €108 savings becomes a referral accelerant Louis cannot match. Louis voluntarily disarms against a standard competitive move.
+
+**Verdict on D138:** GS-D153 vs PS-D152 remain in direct conflict. Monthly €29 primary + annual €240 opt-in below + Day 30 framed upsell vs monthly-only at launch. **OPEN — Louis decision required.**
+
+---
+
+## Debate PS-D153: Against "3 Accepted Devis From 3 Distinct Clients" — First Facture Created
+
+**Challenge:** GS-D152's Path A trigger ("3 accepted devis from 3 distinct clients"). Product Strategist challenges on grounds of gameability, wrong signal, legacy number, and proposes an alternative.
+
+### Product Strategist — First Facture Created
+
+**Core arguments:**
+
+1. **"Distinct client" is gameable — the anti-gaming table has a blind spot.** GS-D152's table never addresses the dummy-client attack: Marc creates "SARL Martin," "EI Dupont," "SCI Ahmed" (fake companies, phone numbers he controls), sends devis to each, marks each accepted. 3 accepted devis. 3 distinct clients. Trigger fires. Zero real business done. The "distinct" requirement is a natural-language constraint, not an enforceable technical one.
+
+2. **The trigger measures deal-closing ability, not product value.** GS-D152 argues: "3 different jobs won is the product earning its keep." But the software doesn't win jobs — it creates devis. Marc's ability to win deals depends on pricing, reputation, relationships, luck. None of these are influenced by the software. The trigger fires regardless. The software's contribution is: professional-looking devis, sent quickly, tracked, paid through the product. That downstream value isn't captured by "accepted devis" — it IS captured by "facture created."
+
+3. **"3 accepted devis" is a legacy number never re-validated.** GS-D152 itself acknowledged: "The '3' number traces to D96's paid-facture era and was never re-validated." We have no evidence that 3 is the right threshold vs. 1, 2, 4, or 5. We don't know the drop-off rate. We don't know if French artisans regularly produce 3 accepted devis within a reasonable window. Building trigger infrastructure on an unvalidated number is guessing.
+
+4. **"Accepting a devis to yourself" may not be gaming.** If Marc creates a devis and marks it accepted in the product, he has completed the full acceptance workflow: client record + line items + accepted status + timestamps. He used the product correctly. The trigger fired. The gaming label assumes bad faith, but stress-testing the acceptance workflow is a feature, not a bug.
+
+5. **Primary counter-proposal: first facture created.** Creating a facture requires: client record (exists) + devis (created and sent) + marked accepted + facture created from accepted devis. Every step of the product's value chain is validated before the trigger fires. This is the moment the product has demonstrably moved money into the business. Fires sooner (1 event), no dummy-client attack possible, definitionally unambiguous, no legacy number, measures end-to-end product usage.
+
+**PS-D153 explicitly retracts PS-D146-3P:** "3 active clients" is gameable. GS-D152 is correct on that. But the correct answer is not "3 accepted devis from 3 distinct clients" — it is "first facture created."
+
+**Verdict on D96:** PS-D153 proposes first facture created. GS-D152 proposes "3 accepted devis from 3 distinct clients." Direct conflict. **OPEN — Louis decision required. Low urgency — Post-Sprint 1 conversion design.**
+
+---
+
+## Updated Decision Table (Partial — 03:50 Pulse)
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D96 | Path A trigger | CONTESTED — "first facture created" (PS-D153) vs "3 accepted devis from 3 distinct clients" (GS-D152). Direct conflict. | 2026-03-31 |
+| D138 | Annual billing | CONTESTED — eliminate entirely (PS-D152) vs monthly €29 primary + annual €240 opt-in + Day 30 upsell (GS-D153). | 2026-03-31 |
+| D140 | Offline scope | CONTESTED — draft-mode + expo-sqlite (TA-D153) vs AsyncStorage + retry queues (PS-D147). TA argues 2.5-day estimate is inflated, net delta ~1 day. Sprint 0 capacity issue. | 2026-03-31 |
+
+### Still Open (Louis Decisions Required)
+
+| ID | Topic | Options | Sprint 0 Impact |
+|----|-------|---------|-----------------|
+| D96 | Path A trigger | (A) First facture created (PS-D153); (B) 3 accepted devis from 3 distinct clients (GS-D152) | Post-Sprint 1 |
+| D110 | Path B trigger | (A) 3 jobs + client contact; (B) 3 jobs logged | Post-Sprint 1 |
+| D138 | Annual billing | (A) Eliminate entirely — monthly only at launch (PS-D152); (B) Monthly €29 primary + annual €240 opt-in + Day 30 upsell (GS-D153) | Not Sprint 0 blocker |
+| D140 | Offline scope | (A) Draft-mode + expo-sqlite (TA-D153); (B) AsyncStorage + retry queues (PS-D147) | **BLOCKS Sprint 0** |
+| D142 | Mentions légales gate | Louis commits real strings to git | **BLOCKS Sprint 0** |
+| — | Supabase EU project | Confirm EU project live | **BLOCKS Sprint 0** |
+
+### Sprint 0 Blockers Still Requiring Louis Action
+
+1. **D140 (Offline scope):** Draft-mode + expo-sqlite vs AsyncStorage — Louis decides.
+2. **Mentions légales gate (D142):** Commit `legal/mentions-legales.ts` to git with Louis's own business data. 5-day Sprint 0 is CONDITIONAL on this gate.
+3. **Supabase EU project:** Confirm supabase.com project created with EU (Frankfurt) region.
+
+### New from This Pulse (03:50)
+
+**D96 re-opened — new position PS-D153:** First facture created as Path A trigger. Withdrawn position: PS-D146-3P ("first accepted devis + 3 active clients") — conceded as gameable. GS-D152 ("3 accepted devis from 3 distinct clients") challenged on gameability, wrong signal, and legacy number. **Direct conflict with GS-D152 — Louis decides.**
+
+**D138 re-opened — GS-D153 counter to PS-D152 elimination:** Monthly €29 primary + Annual €240 opt-in below + Day 30 framed upsell. Arguments: (1) both billing models mask seasonality, annual gives better calendar anchor, (2) payment frequency ≠ SKU, (3) anchoring argument proves too much (would eliminate Free tier), (4) Day 30 upsell ≠ annual-as-default, (5) competitor enters with annual if Louis doesn't. **Louis decides.**
+
+**D140 — TA-D153 reinforces draft-mode:** New arguments: AsyncStorage shifts cost to production failure modes, 2.5-day estimate is inflated (net delta ~1 day), view-only ≠ offline (different product), server-wins = silent document annihilation under Code civil Art. 1127-1. **Louis decides.**
+
+*Last updated: 2026-03-31T03:50*
