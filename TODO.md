@@ -1065,3 +1065,42 @@ The following were overengineered or wrong:
 - [ ] **D93 NEW:** Office hours link lives in Settings → Help only. Not in onboarding flow. Last resort.
 - [ ] **D93 NEW:** Guerrilla test at Point P in Week 1 of Sprint 1 — 5 artisans with 90-second wizard prototype. Not warm-network discovery calls.
 - [ ] **D93 NEW:** If Sprint 1 guerrilla testing shows friction points solvable by human touch, office hours re-emerges with different positioning ("Louis is a real artisan tech guy") not as onboarding infrastructure.
+
+---
+
+## New from Pulse 2026-03-30T23:55 — Three Resolved (D24, Sprint 0 Gate, D56 Prescriber Timing)
+
+### Resolved
+
+- **D24 (PWA vs React Native):** REVISED — PWA-first for Android. React Native deferred. D11/D17 superseded by D92 Android-first context. PWA eliminates Play Store moderation delay, enables APK direct distribution, and matches French artisan BTP download behavior. React Native reconsidered if iOS polish phase requires App Store presence, or if PWA proves insufficient for offline/camera/push requirements.
+- **Sprint 0 Gate:** **CLOSED** — 0/6 items committed to git. All six gate items are decisions in debate log, not committed artifacts. Louis needs 3-4 hours gate-opening work before Sprint 0 can begin.
+- **D56 (Prescriber outreach timing):** REVISED — Prescriber cold outreach deferred to Sprint 1 Week 1 (requires working demo). Month 1 GTM = warm network (Grinto alumni, MyDigitalSchool) + SEO content + landing page with email capture. Expert-comptable = Month 4+ (unchanged).
+
+### Challenged Assumptions This Pulse
+
+1. "App Store / Play Store distribution is required for mobile credibility" — challenged: French artisan BTP demographic installs via APK/WhatsApp, not App Store browsing
+2. "Sprint 0 can start tomorrow" — challenged: zero of six gate items are committed to git; gate is closed
+3. "Prescriber list building should happen in parallel with Sprint 0" — challenged: cold outreach without product = relationship damage; warm network is Month 1 channel
+
+### New Action Items from This Pulse
+
+- [ ] **D24 NEW:** Define PWA capabilities boundary for Sprint 0 — what offline sync is possible within 50MB service worker storage
+- [ ] **D24 NEW:** Test APK direct download + home screen install flow with 3-5 artisan beta users before committing to PWA-only
+- [ ] **D24 NEW:** Document deferred React Native criteria (push notifications, deep iOS integration, performance)
+- [ ] **D24 NEW:** Confirm iOS secondary strategy — web-only iOS acceptable as Phase 1, or native App Store required?
+- [ ] **Gate NEW — Louis completes gate-opening sequence (3-4 hours total):**
+  - [ ] Write 4 mentions légales HTML template strings (one per client type). Commit to `legal/mentions-legales/`
+  - [ ] Sign up at supabase.com → create project (EU region, Frankfurt). Share project URL
+  - [ ] Write `docs/sprint-0-scope.md` — 1 page step sequence of devis flow. Commit
+  - [ ] Create `src/shared-types.ts` — minimum type definitions (devis, client, line item, user). Commit
+  - [ ] Formally choose Expo Router — add to scope doc + `package.json`. Commit
+  - [ ] Scaffold `supabase/functions/generate-pdf/index.ts` — HTML template stub + Puppeteer. Commit
+- [ ] **Gate NEW:** Sprint 0 cannot start until all six gate items are confirmed committed
+- [ ] **D56 UPDATED:** Warm network outreach (Grinto alumni, MyDigitalSchool) = Month 1 primary GTM. Not cold prescriber outreach.
+- [ ] **D56 UPDATED:** Prescriber cold outreach = Sprint 1 Week 1 (needs working demo URL/screenshots in hand)
+- [ ] **D72 UNCHANGED:** Expert-comptable = Month 4+. Compliance liability is decisive. No change.
+
+---
+
+*Last updated: 2026-03-30T23:55*
+

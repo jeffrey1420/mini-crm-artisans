@@ -6824,3 +6824,132 @@ The second problem: "5 discovery calls with warm contacts" validates whether peo
 ---
 
 *Last updated: 2026-03-30T23:48*
+
+---
+
+*Last updated: 2026-03-30T23:55*
+
+---
+
+## Pulse 2026-03-30T23:55 — Three Specialist Debates
+
+---
+
+## Debate 132: D24 — PWA vs React Native: Android-First Changes Everything
+
+**Challenge:** D11/D17 resolved React Native from Day 1 via Expo — before Android-first was established as the primary platform in D92. The debate has never formally resolved WHY React Native over PWA given Android-first distribution context.
+
+### Product Strategist — PWA-First for Android, React Native Deferred
+
+**Core argument:**
+
+D92's Android-first resolution creates a fundamental tension with D11/D17's React Native mandate that was never formally resolved. If Android is primary, why accept React Native's complexity overhead?
+
+For French artisans in BTP trades — primary user — Android penetration exceeds 70%. This demographic installs apps via direct download, WhatsApp shares, and APK files, not App Store curated browsing. PWA distribution via Chrome addresses this: installable to home screen, zero moderation delay, works offline via service workers, no Play Store dependency.
+
+React Native's strength — App Store distribution — becomes secondary when iOS represents under 30% of the target market. Meanwhile, React Native introduces real costs: complex build pipeline via Expo, larger APK size, two separate codebase concerns, slower iteration velocity.
+
+**Assumption challenged:** "App Store / Play Store distribution is required for mobile app credibility and adoption." This was never validated for French artisan BTP demographic. Field workers share APKs via WhatsApp, receive download links via SMS, distrust App Store discovery. Play Store curation value is zero for this audience.
+
+**Verdict on D24:** REVISED — PWA-first for Android. React Native deferred. D11/D17 superseded by D92 Android-first context. Sprint 0 should validate PWA capabilities boundary, test APK distribution mechanics with 3-5 artisan users, and document deferred React Native criteria (push notifications architecture, deep iOS integration, performance bottlenecks).
+
+**Action items:**
+- Sprint 0: Define PWA capabilities boundary — what offline/sync is possible within 50MB service worker storage
+- Test APK direct download + home screen install flow with 3-5 artisan users
+- Document specific triggers that resurrect React Native decision
+- Confirm iOS secondary strategy — is web-only iOS experience acceptable as Phase 1?
+
+---
+
+## Debate 133: Sprint 0 Gate — All Six Items Are Decisions, Not Commits
+
+**Challenge:** D113 established six Sprint 0 gate criteria. The debate log resolved them as decisions. None are committed to git. Sprint 0 cannot start.
+
+### Technical Architect — Gate Status: CLOSED
+
+**Core argument:**
+
+The six Sprint 0 gate items are **design decisions documented in a debate log** — they are not **code committed to git**. This distinction is load-bearing and non-negotiable.
+
+The debate log resolved D113 (PDF approach) at 23:31 — HTML-to-PDF via Supabase Edge Function. That is a decision. It is not a committed artifact. The Edge Function does not exist. The HTML template does not exist. The same applies to every other gate item:
+
+- Supabase is a decision ("EU-hosted, Frankfurt"), not a live dashboard
+- The navigation library is "recommended" but not chosen
+- The API contract is discussed but undefined
+- The Sprint 0 scope doc doesn't exist as a file
+- The mentions légales templates are a to-do item scheduled "this week"
+
+A Sprint 0 gate is a **readiness protocol**, not a **planning session**. Gates open when the artifacts exist — when Louis can show a Supabase project URL, a git commit containing four mentions légales HTML strings, a `shared-types.ts` file, an Expo Router decision, and an Edge Function scaffold.
+
+**Assumption challenged:** "Sprint 0 can start tomorrow." The 5-day estimate is a target contingent on all six gates being open. The correct framing from D95 was: "Gate opens when all six confirmed." Zero are confirmed.
+
+**Verdict on Sprint 0 gate:** **CLOSED** — 0/6 items committed to git. Gate opens when all six items are git-committed.
+
+**Action items — Louis's gate-opening sequence (estimated 3-4 hours):**
+1. Write 4 mentions légales HTML template strings (one per client type). Commit to `legal/mentions-legales/`
+2. Sign up at supabase.com → create project → confirm EU region (Frankfurt). Share project URL
+3. Write `docs/sprint-0-scope.md` — 1 page, step sequence of devis flow. Commit
+4. Create `src/shared-types.ts` — minimum viable type definitions for devis, client, line item, user. Commit
+5. Formally choose Expo Router — add to scope doc and `package.json` dependency. Commit
+6. Scaffold `supabase/functions/generate-pdf/index.ts` — HTML template stub + Puppeteer call. Commit
+
+---
+
+## Debate 134: Prescriber Outreach — Cold Outreach Without Product Is Relationship Damage
+
+**Challenge:** D56 (23:48) set prescriber list building as a Week 2 task. The product doesn't exist yet. Sprint 0 hasn't started. Cold outreach to prescribers without a working demo is counterproductive.
+
+### Growth Strategist — Prescriber Outreach Deferred to Sprint 1 Week 1
+
+**Core argument:**
+
+Cold outreach to prescribers without a product is relationship damage dressed up as lead generation. Architects and property managers are busy professionals who get pitched constantly. When you reach out saying "I might have something interesting in 6 weeks — want to hear about it?", you train them to ignore you. The worst outcome isn't a "no" — it's a "I don't remember this" when you actually have something to show.
+
+Louis's real Month 1 GTM advantage is his warm network: Grinto colleagues, MyDigitalSchool alumni, existing contacts who've already met him and trust him. These are people who'll give him 15 minutes out of curiosity. A cold email to a stranger architect in Caen won't.
+
+The prescriber list has value **only when Louis has something concrete to show**: a demo URL, screenshots, a landing page with working sign-up. Without that, you're asking people to evaluate a concept — which is sales 101 failure.
+
+**Assumption challenged:** "Outreach list building and product development can run in parallel, with outreach warming up relationships until the product is ready." This assumes prescribers have infinite patience and will remember a vague pitch 6-8 weeks later. They won't.
+
+**Verdict on prescriber outreach timing:** Deferred to Sprint 1 Week 1 — when Louis has a working demo in hand. Month 1 GTM = warm network (Grinto alumni, MyDigitalSchool network) + SEO content + landing page with email capture.
+
+**Revised Month 1 GTM for Louis:**
+- Week 1: LinkedIn outreach to warm contacts (share Sprint 0 progress, not a pitch)
+- Week 1: Write 3 LinkedIn posts about industry problem to seed SEO content foundation
+- Week 2: Build landing page with email capture (collect leads for when product is ready)
+- Week 2: Identify 10 prescribers for research purposes (not outreach yet)
+- Week 3: Begin outreach to warm network with landing page + early access angle
+- Week 4: With Sprint 0 demo delivered — launch first outreach to warm prescriber contacts
+- Expert-comptable outreach: Month 4+ (unchanged — compliance liability)
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D11 | Mobile strategy | SUPERSEDED by D24 — PWA-first for Android. React Native deferred. | 2026-03-30T23:55 |
+| D17 | Mobile strategy | SUPERSEDED by D24 — PWA-first for Android. React Native deferred. | 2026-03-30T23:55 |
+| D24 | PWA vs React Native | REVISED — PWA-first for Android. React Native reconsidered at D92 review gate if iOS polish requires App Store. | 2026-03-30T23:55 |
+| D92 | Platform default | Android-first CONFIRMED (D24 revised: PWA is the Android-first delivery mechanism) | 2026-03-30T23:55 |
+| D56 | SEO/community | SEO Month 1-3 primary. Warm network outreach Week 1. Prescriber cold outreach Sprint 1 Week 1 (needs working demo). | 2026-03-30T23:55 |
+| D72 | Expert-comptable timing | Phase 2 (Month 4+) UNCHANGED. | 2026-03-30T23:55 |
+| Sprint 0 Gate | Gate status | **CLOSED** — 0/6 items committed to git. Louis needs 3-4 hours gate-opening work before sprint can begin. | 2026-03-30T23:55 |
+
+---
+
+## New Action Items
+
+- [ ] **D24 NEW:** Define PWA capabilities boundary for Sprint 0 — what offline/sync is possible within 50MB service worker storage
+- [ ] **D24 NEW:** Test APK direct download + home screen install flow with 3-5 artisan beta users (cheap validation before committing to PWA-only)
+- [ ] **D24 NEW:** Document deferred React Native criteria: push notifications architecture, deep iOS integration needs, performance bottlenecks
+- [ ] **D24 NEW:** Confirm iOS secondary strategy — is web-only iOS experience acceptable as Phase 1, or is native iOS App Store required?
+- [ ] **Gate NEW:** Louis completes gate-opening sequence (3-4 hours): 4 mentions légales templates committed, Supabase project created, sprint-0-scope.md committed, shared-types.ts committed, Expo Router chosen, PDF Edge Function scaffolded
+- [ ] **D56 UPDATED:** Warm network outreach (Grinto alumni, MyDigitalSchool network) is Month 1 primary channel — not prescriber cold outreach
+- [ ] **D56 UPDATED:** Prescriber cold outreach moved to Sprint 1 Week 1 — requires working demo in hand before outreach begins
+- [ ] **D72 UNCHANGED:** Expert-comptable outreach = Month 4+. Compliance liability unchanged. Not a sprint-gate item.
+
+---
+
+*Last updated: 2026-03-30T23:55*
+
