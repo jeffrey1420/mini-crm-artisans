@@ -8747,3 +8747,50 @@ NONE — all debates require Louis input.
 | — | Supabase EU project | Confirm EU project live | BLOCKS Sprint 0 |
 
 *Last updated: 2026-03-31T03:20*
+
+---
+
+## Pulse 2026-03-31T03:20 — Technical Architect (TA-D152)
+
+---
+
+## Debate TA-D152: Path B Trigger Belongs in v1.2, Not Sprint 0
+
+**Challenge:** GS-D146-3G's proposal to add Path B trigger + upgrade prompt + instrumentation to Sprint 0. Growth Strategist argued: (1) Path A = minority (~50-60%), Path B = 40-50%, (2) trigger ≠ full feature, just threshold flag + banner, (3) no instrumentation = no Path B signals, (4) rough thresholds valid for learning, (5) competitive risk if deferred.
+
+### Technical Architect — Sprint 0 Is Maxed Out. Path B Instrumentation Is v1.2 Work.
+
+**Assumption challenged:** GS-D146-3G's assertion that "we won't see Path B signals without an in-app trigger" — and the corollary that Path B (~40-50% of target market) requires immediate trigger infrastructure in Sprint 0.
+
+**Core arguments:**
+
+1. **Sprint 0 has exactly 3 deliverables, already at capacity.** PS-D147 established the hard ceiling: Core Devis Flow (3 days), Auth/Offline-Capable (1.5 days), Expo Push Skeleton (0.5 days). Total = 5.0 days. GS-D146-3G's proposal adds a fourth deliverable. That is scope creep, full stop.
+
+2. **"Path B trigger" is not one thing — it is five things, none free.** Sprint 0 trigger requires: (a) event instrumentation to track job-logged events server-side, (b) threshold computation logic (30-day clock + 3-job counter), (c) upgrade prompt UI component, (d) prompt trigger condition wiring, (e) test scenarios for both Path A and Path B. Minimum: 1 full day not currently budgeted. That blows the 5-day sprint.
+
+3. **"We won't see Path B signals" is wrong. We see them via analytics without any in-app trigger.** Path B artisans who never reach Path A's threshold will still USE the Free tier. They log jobs, create clients, send devis. All of this generates server-side events in Supabase — `devis.created`, `client.created`, `job.logged`. We query this directly in the Supabase dashboard. The trigger IS NOT the observation mechanism. Analytics are. The trigger is a conversion mechanism. Different things.
+
+4. **"Path B is 40-50% of target market" is an unvalidated estimate, not a finding.** It appears in the debate log as a given but has not been derived from user research or market sizing. Building Sprint 0 infrastructure for an unvalidated segment is spending real development days on a hypothesis. If Path B is actually 15% of users, we wasted 2 days on minority infrastructure.
+
+5. **"Rough thresholds are valid for learning" — true, but you don't need to BUILD the trigger to START learning.** You start measuring by instrumenting the analytics pipeline (free with Supabase), observing behavior for 30-60 days post-launch, then building the trigger in v1.2 with real cohort data. Build trigger in Sprint 0 with a guess = either fires too early (annoys users) or too late (misses conversion window). Neither is acceptable.
+
+6. **Building the trigger before having data to calibrate it is backwards.** The trigger threshold (30-day + 3 jobs vs. 45-day + 5 jobs) is a calibration question. Answered with data, not intuition. Wait 4 weeks, observe the actual distribution, build a calibrated trigger in v1.2. Basic cohort analysis. Costs nothing extra. Produces better results.
+
+7. **Competitive risk argument applies equally to every feature.** "A competitor designing for verbal workflows from the start will own that segment." True — and a competitor with rock-solid Path A devis flow will win every formal-devis artisan first. Path A is NOT a minority that can be ignored. It is the primary segment for v1. Dominating formal-devis at launch is worth more than spreading thin across both with mediocre execution on either.
+
+**Verdict:** Sprint 0 must NOT include Path B trigger infrastructure. Close GS-D146-3G's proposal with:
+
+- **Path B trigger deferred to v1.2.** Sprint 0 ships Path A conversion flow only.
+- **Path B observation begins at launch via Supabase analytics.** No in-app trigger required.
+- **Path B threshold calibration:** After 4-6 weeks of production data, Louis designs Path B trigger in v1.2 sprint planning with real cohort numbers.
+- **Path B upgrade prompt:** Built alongside calibrated trigger in v1.2, not Sprint 0.
+
+**This resolves:**
+- Sprint 0 stays at 5.0 days with 3 confirmed deliverables.
+- Path B is not ignored — it is observed via analytics from Day 1.
+- Trigger is not built on guesses — it is built on data.
+- Louis makes one decision: confirm Path B deferral to v1.2.
+
+**Blocking:** Sprint 0 scope is technically unconfirmed until GS-D146-3G is resolved.
+
+*Last updated: 2026-03-31T03:20*
