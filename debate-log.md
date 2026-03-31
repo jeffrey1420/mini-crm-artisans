@@ -9803,3 +9803,127 @@ NONE — all three debates require Louis's input. No resolutions this pulse.
 | Beta User Acquisition | (A) Grinto client intros primary (GS); (B) Expert-comptable primary (prior) | **BLOCKS** |
 
 *Last updated: 2026-03-31T05:17*
+
+---
+
+## Pulse 2026-03-31T05:29 — Three Specialist Debates (D142, Beta Acquisition, D138)
+
+### Resolved This Pulse
+
+NONE — all three debates require Louis's input. Key new arguments surfaced.
+
+---
+
+## Debate TA-D142-0529: Code-Gen Does Not Resolve D142
+
+**Challenge:** TA-0517 proposed code-generating mentions légales from business registration config as the solution to D142. Technical Architect challenges this — code-gen still needs inputs.
+
+### Technical Architect — Code-Gen Still Needs Inputs Louis Doesn't Have
+
+**Assumption challenged:** TA-0517's "code generator from business registration config makes D142 machine-verifiable."
+
+**Core arguments:**
+
+1. **Code-gen is useless without inputs.** If Louis doesn't have SIREN/SIRET/RCS/TVA on Day 1 of Sprint 0, the generator produces nothing. D142 says the gate is not met. TA-0517 assumes the data exists. The actual problem is it doesn't.
+
+2. **Code-gen adds complexity and a dependency.** The generator requires: structured config, error handling for missing fields, a template rendering layer. None of this is free. A placeholder mentions légales block is simpler.
+
+3. **Placeholder in generator = placeholder in manually-written block.** If Louis puts `[A COMPLETER]` in a generator, it is functionally identical to `[A COMPLETER]` in a manually-written block. Neither is legally valid. The legal validity problem is not solved by generation — it is solved by Louis having the real data.
+
+**Two options for Louis:**
+
+**Option A — Partial config now, generate what you can:**
+Populate whatever business registration data Louis has TODAY. Even one SIREN number is enough for partial generation. Remaining fields marked clearly as placeholders. Gate met in spirit. Sprint 0 proceeds. Missing data tracked as open items.
+
+**Option B — One generic mentions légales block for all client types:**
+Single block of placeholder mentions légales, structurally valid, everything else marked [A COMPLETER]. Defers client-specific nuance to post-Sprint 0. Gate met technically. Sprint 0 proceeds.
+
+**Verdict on D142:** OPEN — Code-gen is good long-term architecture. Not a sprint-unblocking solution today. Louis chooses Option A or Option B and executes. Gate remains unmet until Louis takes action.
+
+---
+
+## Debate GS-Beta-0529: The "Same ICP" Claim for Grinto Is Unverified
+
+**Challenge:** GS-0517 proposed Grinto client introductions as primary beta acquisition channel, claiming "Grinto serves the same ICP." Growth Strategist challenges this.
+
+### Growth Strategist — Grinto Clients Are Likely Not Artisans
+
+**Assumption challenged:** GS-0517's "same ICP" claim for Grinto clients = Mini-CRM target market.
+
+**Core arguments:**
+
+1. **Grinto is B2B SaaS. Mini-CRM is for plumbers and electricians.** These are not the same customer. Expert-comptables literally serve artisans as their core business. Grinto serves businesses that buy software. The overlap is accidental.
+
+2. **"Many are artisans or serve artisans directly" is a guess.** Zero evidence that Grinto's client base skews toward tradespeople. GS-0517 asserts this without support.
+
+3. **If ICP is wrong, timeline comparison is irrelevant.** 2 weeks getting intros to the wrong ICP = 2 weeks wasted. Expert-comptable intros are slower but pointed at the right destination.
+
+4. **The fastest path is one question to Gabin and Maëli.** "Are there any artisans in your family or close circle?" This costs 2 minutes. Could yield a beta user in 24-48 hours. GS-0517 spent paragraphs on multi-hop channels while ignoring the fastest 1-hop question.
+
+**Three-track beta acquisition strategy:**
+
+**Track A — Immediate (this week):** Louis asks Gabin one question. Louis asks Maëli one question. If either says yes, Louis gets a direct 1-hop intro to the actual ICP. Time to contact: 24-48 hours.
+
+**Track B — Parallel, reliable (2-4 weeks):** Expert-comptable outreach runs in parallel. Multi-hop, slow — but highest ICP match. Conversion rate per intro will be higher than Grinto.
+
+**Track C — Warm but wrong-ICP backup:** Grinto client ask happens this week, low-weight expectation. If Grinto has artisan clients, Track C works. If not, Track C is dead and Louis falls back to Tracks A and B.
+
+**Verdict on Beta Acquisition:** OPEN — Louis must ask the Gabin/Maël question first. That single data point determines whether Sprint 0 is unblockable in 48 hours or dependent on slower channels.
+
+---
+
+## Debate PS-D138-0529: Hidden-Link Annual — The Middle Ground
+
+**Challenge:** PS-D152 (eliminate annual) vs GS-D153 (prominent opt-in). Neither extreme is correct.
+
+### Product Strategist — Hidden-Link Annual Availability
+
+**Assumptions challenged:**
+
+**Challenge 1 to GS-D153:** "Annual cohort analysis gives better seasonality signal."
+
+Annual churn data tells Louis what happened 12 months ago. Monthly churn tells Louis in real time. At 5 beta users, there is no statistically valid cohort. The "calendar anchor" is a delayed, confounded signal, not a better one.
+
+**Challenge 2 to own position (PS-D152):** "€240 IS expensive for solo artisan."
+
+Wrong as a universal claim. A heating engineer in September — peak cash-flow mode, just received a large payment — would happily prepay €240. The correct claim is not "€240 is always expensive." It is "€240 is expensive at the wrong moment in the seasonal cycle." Seasonal users in peak windows may prefer annual.
+
+**Middle ground: Hidden-link annual availability**
+
+Monthly €29 as primary and only advertised CTA. Annual €240 available at checkout but not prominently displayed — a small text link below the main CTA in muted styling: "facturation annuelle disponible — €240/an."
+
+This is different from GS-D153's prominent opt-in because:
+- Annual does not appear on the pricing page
+- No anchoring ("€20/month vs €29/month") at the decision point
+- A user who wants annual can find it. A snap-decision user sees €29/month cleanly.
+
+This tests annual uptake with zero engineering cost and zero anchoring pollution. If 1 of 5 beta users chooses annual, there is real demand worth a proper upsell flow. If none do, monthly-only is confirmed.
+
+**Verdict on D138:** OPEN — with recommended resolution. Hidden-link approach: Monthly €29 primary, annual available but not prominent. One-line copy change, not a Sprint 0 blocker.
+
+---
+
+## Updated Decision Table (Partial — 05:29 Pulse)
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D142 | Mentions légales gate | OPEN — Code-gen doesn't unblock Sprint 0 without Louis's business data. Option A (partial config) or Option B (generic placeholder). Louis must choose and execute. | 2026-03-31 |
+| Beta Acquisition | Sprint 0 exit criteria | OPEN — Louis asks Gabin one question + Maëli one question this week. That data point determines primary channel. Expert-comptable runs parallel. Grinto ask is low-weight backup. | 2026-03-31 |
+| D138 | Annual billing | OPEN — Hidden-link annual availability recommended: Monthly €29 primary CTA, annual €240 available but not prominent. Tests uptake without anchoring. One-line copy decision. | 2026-03-31 |
+
+### Challenged Assumptions This Pulse
+
+1. **"Code-gen from business registration config resolves D142"** — challenged by Technical Architect: generator needs inputs Louis doesn't have; placeholder in generator = placeholder in manual block; neither is legally valid without real data
+2. **"Grinto serves the same ICP as Mini-CRM"** — challenged by Growth Strategist: Grinto is B2B SaaS, likely not artisans; expert-comptable literally serves artisans; "same ICP" claim unverified
+3. **"€240 IS expensive for solo artisan"** — challenged by own position (Product Strategist): seasonal users in peak cash-flow mode may prefer annual; correct claim is "€240 is expensive at the wrong seasonal moment"
+4. **"Annual cohort analysis gives better seasonality signal than monthly churn"** — challenged by Product Strategist: annual data is delayed and confounded; monthly churn fires in real time; at 5 users there is no valid cohort
+
+### Louis Decisions Required
+
+| Decision | Options | Sprint 0 Impact |
+|----------|---------|-----------------|
+| D142 — Mentions légales gate | (A) Partial config now — whatever data Louis has; (B) Generic placeholder block | **BLOCKS Sprint 0** |
+| Beta Acquisition — First action | (A) Ask Gabin/Maël one question each this week; (B) Start expert-comptable outreach immediately | **BLOCKS Sprint 0 exit** |
+| D138 — Annual billing | (A) Eliminate entirely; (B) Monthly primary + prominent opt-in; (C) Hidden-link annual (recommended) | Not Sprint 0 blocker |
+
+*Last updated: 2026-03-31T05:29*

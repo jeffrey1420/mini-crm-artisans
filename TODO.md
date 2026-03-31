@@ -1709,3 +1709,40 @@ NONE — all three debates are OPEN and require Louis's input.
 | Sprint 0 timeline | 6.5 days |
 
 *Last updated: 2026-03-31T05:03*
+
+---
+
+## New from Pulse 2026-03-31T05:29 — Three Specialist Debates (D142, Beta Acquisition, D138)
+
+### Resolved This Pulse
+
+NONE — all three debates require Louis's input. New arguments surfaced but no resolutions.
+
+### Challenged Assumptions This Pulse
+
+1. **"Code-gen from business registration config resolves D142"** — Technical Architect: generator needs inputs Louis doesn't have; placeholder in generator = placeholder in manual block
+2. **"Grinto serves the same ICP as Mini-CRM"** — Growth Strategist: Grinto is B2B SaaS, likely not artisans; expert-comptable literally serves artisans; "same ICP" claim unverified
+3. **"€240 IS expensive for solo artisan"** — Product Strategist (self-challenge): seasonal users in peak cash-flow mode may prefer annual; correct claim is "€240 is expensive at the wrong seasonal moment"
+4. **"Annual cohort analysis gives better seasonality signal than monthly churn"** — Product Strategist: annual data is delayed and confounded; monthly churn fires in real time; at 5 users there is no valid cohort
+
+### New Action Items This Pulse
+
+- [ ] **D142 — Louis chooses Option A or Option B:** (A) Partial config now — populate whatever business registration data Louis has TODAY; (B) One generic placeholder mentions légales block covering all client types. Gate is NOT "Louis writes legal text." Gate is "mentions légales component is non-empty and structurally correct, with missing fields flagged." Execute this week.
+- [ ] **D142 — Code-gen long-term:** Even if Louis picks Option B now, create a `legal/mentions-legales.config.ts` structure for future code-generation from SIREN/SIRET/RCS/TVA. This is the right architecture — but requires real data Louis doesn't have yet.
+- [ ] **Beta Acquisition — Ask Gabin and Maëli ONE question each:** "Are there any artisans in your family or close circle?" 2 minutes total. If either says yes → direct 1-hop intro to correct ICP, potentially unblocking Sprint 0 exit criteria in 48 hours.
+- [ ] **Beta Acquisition — Expert-comptable outreach starts this week regardless:** Even if Gabin/Maël question yields beta users, expert-comptable outreach runs in parallel (3-6 week timeline). This week: Louis calls his own expert-comptable — problem-framing only, no product demo.
+- [ ] **Beta Acquisition — Grinto ask at low weight:** Louis asks one person at Grinto: "Do any of Grinto's clients serve artisans?" If yes → Track C activates. If no → Track C is dead, do not spend time on it.
+- [ ] **D138 — Hidden-link annual availability (recommended resolution):** Monthly €29 as primary CTA. Below: small muted text link "facturation annuelle disponible — €240/an." Annual does NOT appear on the pricing page as a tier. Only discoverable at checkout decision. Tests uptake without anchoring pollution. One-line copy decision.
+- [ ] **D138 — If Louis prefers simplicity:** Monthly €29 ONLY at launch. Annual enters v1.2 as Day 30 upsell for users with 1+ devis/facture created. Eliminates any anchoring debate entirely.
+
+### Sprint 0 Blockers — Updated Status (05:29 Pulse)
+
+| Blocker | Status | Louis Action Required |
+|---------|--------|---------------------|
+| Mentions légales gate (D142) | **OPEN** — Code-gen doesn't unblock without data | Choose Option A (partial config) or Option B (generic placeholder). Execute. |
+| Supabase EU project | **OPEN** — confirm EU project live | Confirm at supabase.com |
+| Beta user acquisition | **OPEN** — depends on Gabin/Maël question | Ask ONE question to Gabin and Maëli this week |
+| D138 — Annual billing | **OPEN** — hidden-link recommended | One-line copy decision (not Sprint 0 blocker) |
+| Sprint 0 timeline | **6.5 days** | — |
+
+*Last updated: 2026-03-31T05:29*
