@@ -9015,3 +9015,131 @@ Three sub-agents spawned at 03:31 UTC to debate remaining contested items:
 **D140 — TA-D153 reinforces draft-mode:** New arguments: AsyncStorage shifts cost to production failure modes, 2.5-day estimate is inflated (net delta ~1 day), view-only ≠ offline (different product), server-wins = silent document annihilation under Code civil Art. 1127-1. **Louis decides.**
 
 *Last updated: 2026-03-31T03:50*
+
+---
+
+## Pulse 2026-03-31T04:05 — Three Specialist Debates Resolved (D96, D140, D138)
+
+---
+
+## Debate D96 — Path A Conversion Trigger: RESOLVED
+
+**Product Strategist (PS-D153)** challenged and resolved both competing positions:
+
+### Key Challenges
+
+**Challenge to GS-D152 ("3 accepted devis from 3 distinct clients"):** "Distinct client" has no technical enforcement mechanism. Marc can create fake company clients ("SARL Marc", "Marc BTP", "Entreprise Marc") to satisfy the distinctness requirement. Without SIREN/SIRET validation or phone/email verification, the anti-gaming table is cosmetic. The position is correct in spirit but wrong in implementation.
+
+**Challenge to PS-D146-3P's "first accepted devis + 3 active clients":** Already conceded as gameable. Marc imports 6 old contacts, accepts 1 devis to himself — trigger fires. This position was withdrawn.
+
+### Resolution
+
+**Path A conversion trigger = first `facture` created (document, not payment)**
+
+Key clarification: `facture.created` (document creation) does NOT require payment integration (Stripe/Lydia/Pix). French invoicing flows through virement/cheque/cash — all outside the app. The trigger fires on the database event `facture.created`, not `facture.paid`. This resolves the "payment infrastructure not in MVP" objection entirely.
+
+The trigger requires: client exists + accepted devis exists + facture created from accepted devis. Every step of the product's value chain is validated. Anti-gaming: you cannot create a fake company and issue a legally-standing facture to it without going through the full workflow.
+
+**Anti-gaming clarification:** GS-D152's "distinct client" concern is valid but unenforceable in MVP. The `facture.created` trigger implicitly requires real client engagement — you cannot issue a facture to a fake company without creating real business documentation. SIREN/SIRET enforcement is a v1.2 enhancement.
+
+---
+
+## Debate D140 — Sprint 0 Offline Architecture: RESOLVED
+
+**Technical Architect (TA-D153)** challenged and overturned PS-D147's AsyncStorage position:
+
+### Key Challenge
+
+**The AsyncStorage retry queue has a fundamental atomicity gap:** The queue only retries operations that successfully entered the queue. Phone death mid-write (the dominant failure mode for field artisans) means the operation never entered the queue. Data is gone. This is not an edge case — it is the primary failure scenario for workers on job sites, in vans, in basements.
+
+**The +2 days estimate is inflated:** expo-sqlite + a minimal single-table documents schema (UUID, type, status, JSON content blob, timestamps) is a half-day to 1-day task — not 2 days. The full +2.5 days was conflating a complete database architecture with a minimal document store.
+
+### Resolution
+
+**Draft-mode semantics with expo-sqlite — minimal schema:**
+
+```
+Table: documents
+- id: TEXT PRIMARY KEY (UUID)
+- type: TEXT ('devis' | 'facture')
+- status: TEXT ('pending_draft' | 'confirmed')
+- content: TEXT (JSON blob — full document snapshot)
+- created_at: INTEGER
+- updated_at: INTEGER
+- synced_at: INTEGER (nullable)
+```
+
+Draft semantics: saves always create/update `pending_draft` records. Artisan explicitly promotes draft to `confirmed`. Confirmed records sync to Supabase. Phone death mid-write = atomic SQLite transaction ensures draft is recoverable. Partial write corruption eliminated (JSON blob = single value).
+
+**Deferred to Sprint 1:** Multi-device conflict resolution, background sync service workers, multi-table schema normalization.
+
+**Revised Sprint 0 timeline (parallel tracks):**
+- Days 1-2: expo-sqlite + documents table + draft save/confirm flow
+- Day 3: Supabase sync for confirmed docs
+- Days 4-5: Mentions légales + Supabase project setup (parallel, independent)
+- Day 5: Buffer / real device testing
+
+---
+
+## Debate D138 — Annual Billing: RESOLVED
+
+**Growth Strategist (GS-D153)** countered PS-D152's elimination argument:
+
+### Key Challenges
+
+**"Annual masks seasonality" applies equally to monthly:** Monthly churn shows "churned in August" with no root cause. Annual cohort analysis shows exactly which calendar month renewals fail — more actionable signal, not less. The masking is in the analytics, not the billing model.
+
+**"€240 is expensive" is a value proposition problem, not a billing problem:** If the product delivers obvious ROI (2h/month saved @ €50/h = €100/month value), €240/year is cheap. The issue is landing page clarity, not the billing interval.
+
+**Payment frequency ≠ SKU:** Stripe implements billing intervals as configuration, not separate products. Monthly €29 and annual €240 are two prices on the same product — not two SKUs.
+
+### Resolution
+
+**Monthly €29 primary + Annual €240 opt-in + Day 30 upsell**
+
+Structure:
+1. Pricing page: Monthly €29 prominent (primary CTA)
+2. Annual €240 available as opt-in below: "Save €108/year"
+3. Day 30 upsell: shown ONLY after user creates their first devis/facture (value established)
+4. Cohort analytics built from Day 1: monthly churn + annual renewal tracking with seasonal overlays
+
+**Rejected:** Annual-first framing, "pay when you're charged" language, founding/early-access tiers.
+
+---
+
+## Updated Decision Table (Partial — 04:05 Pulse)
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D96 | Path A trigger | **RESOLVED — first `facture` created** (document, not payment). Fires on `facture.created` database event. Requires client + accepted devis + facture. No payment integration required. Anti-gaming via workflow enforcement. SIREN/SIRET enforcement deferred to v1.2. | 2026-03-31 |
+| D140 | Sprint 0 offline | **RESOLVED — expo-sqlite + draft-mode semantics.** Minimal documents table (UUID, type, status, JSON blob, timestamps). Half-day to 1-day implementation, not 2+ days. Phone death = atomic SQLite transaction = recoverable draft. Sprint 0 timeline: 5 days with parallel tracks. | 2026-03-31 |
+| D138 | Annual billing | **RESOLVED — Monthly €29 primary + Annual €240 opt-in + Day 30 upsell.** Monthly-first, annual opt-in, upsell only after first devis/facture created. Cohort analytics from Day 1. Annual-first and "pay when charged" language rejected. | 2026-03-31 |
+| D110 | Path B trigger | OPEN — "3 jobs + client contact" vs "3 jobs logged." Deferred to v1.2 with real usage data. | 2026-03-31 |
+
+### Sprint 0 Blockers — Updated Status
+
+| Blocker | Status |
+|---------|--------|
+| Mentions légales gate (D142) | OPEN — Louis commits real strings to git |
+| Supabase EU project | OPEN — confirm supabase.com project created (EU region) |
+| Offline scope (D140) | **RESOLVED — expo-sqlite + draft-mode** |
+| Sprint 0 scope | 3 confirmed deliverables = 5 days |
+
+### Challenged This Pulse
+
+1. **"First facture created requires payment infrastructure"** — challenged by Product Strategist: virement/cheque/cash are separate from document creation. Trigger fires on `facture.created`, not `facture.paid`.
+2. **"Distinct client requirement is anti-gaming"** — challenged by Product Strategist: no technical enforcement in MVP. Fake company clients bypass the distinctness check.
+3. **"AsyncStorage + retry queues is sufficient for Sprint 0"** — challenged by Technical Architect: phone death mid-write = operation never enters queue = data gone. Dominant failure mode for field artisans.
+4. **"Annual billing masks seasonality worse than monthly"** — challenged by Growth Strategist: monthly churn also masks root cause. Annual cohort analysis gives more actionable signal.
+5. **"€240 is expensive for solo artisan"** — challenged by Growth Strategist: only true if product delivers marginal value. Fix value prop, not billing model.
+
+### New Action Items This Pulse
+
+- [ ] **D96 NEW — Sprint 1 conversion design:** Implement `facture.created` as Path A trigger. Soft notification on first facture: "Votre première facture a été créée." No hard conversion pitch at this moment.
+- [ ] **D96 NEW — v1.2 enhancement:** Evaluate SIREN/SIRET validation for client uniqueness enforcement. Until then, accepted-devis + facture workflow is the anti-gaming mechanism.
+- [ ] **D140 NEW — Sprint 0 offline implementation:** expo-sqlite + documents table (UUID, type, status enum, JSON blob, timestamps). Draft semantics: saves → pending_draft, explicit confirm → confirmed, confirmed syncs to Supabase. Half-day to 1-day implementation.
+- [ ] **D140 NEW — Sprint 0 timeline confirmed:** 5 days. Days 1-2: offline architecture + devis flow. Day 3: Supabase sync. Days 4-5: mentions légales + Supabase setup (parallel) + buffer.
+- [ ] **D138 NEW — Pricing page:** Monthly €29 primary CTA. Annual €240 opt-in below ("Save €108/year"). No annual-first framing. Day 30 upsell triggered after first devis/facture created.
+- [ ] **D138 NEW — Cohort analytics:** Build from Day 1. Monthly: "churned in [month]" + seasonal overlay. Annual: "renewed/not renewed in [month]" + mid-year cancellation flag. Overlay with Louis's own seasonal business data.
+
+*Last updated: 2026-03-31T04:05*

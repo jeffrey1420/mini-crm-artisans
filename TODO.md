@@ -1549,3 +1549,52 @@ NONE — all three debates (D96, D138, D140) remain open. No items resolved this
 | D138 — Annual billing | (A) Eliminate entirely; (B) monthly primary + annual opt-in | Not Sprint 0 blocker |
 
 *Last updated: 2026-03-31T03:50*
+
+---
+
+## New from Pulse 2026-03-31T04:05 — Three Specialist Debates Resolved
+
+### Resolved This Pulse
+
+- **D96 (Path A trigger):** RESOLVED — First `facture` created (document, not payment). Fires on `facture.created` database event. No payment integration required. Requires: client + accepted devis + facture. Anti-gaming via workflow enforcement (cannot issue legally-standing facture to fake company). SIREN/SIRET enforcement deferred to v1.2.
+- **D140 (Sprint 0 offline):** RESOLVED — expo-sqlite + draft-mode semantics. Minimal documents table (UUID, type, status, JSON blob, timestamps). Half-day to 1-day implementation. Phone death = atomic SQLite transaction = recoverable draft. Sprint 0 timeline: 5 days with parallel tracks. AsyncStorage retired.
+- **D138 (Annual billing):** RESOLVED — Monthly €29 primary + Annual €240 opt-in + Day 30 upsell. Monthly-first, annual opt-in below ("Save €108/year"), upsell only after first devis/facture created. Cohort analytics from Day 1. Annual-first and "pay when charged" language rejected.
+
+### Challenged Assumptions This Pulse
+
+1. **"First facture created requires payment integration"** — challenged by Product Strategist: virement/cheque/cash are separate from document creation. `facture.created` (draft or sent status) fires without any payment API.
+2. **"Distinct client requirement is enforceable"** — challenged by Product Strategist: fake company clients bypass distinctness without SIREN/SIRET enforcement.
+3. **"AsyncStorage + retry queues is sufficient"** — challenged by Technical Architect: phone death mid-write = operation never enters queue = data gone. Dominant failure mode for field artisans.
+4. **"Annual masks seasonality worse than monthly"** — challenged by Growth Strategist: both mask equally. Annual cohort analysis gives more actionable signal.
+5. **"€240 is expensive for solo artisan"** — challenged by Growth Strategist: value proposition problem, not billing model problem.
+
+### New Action Items This Pulse
+
+- [x] **D96 RESOLVED:** Path A trigger = first `facture` created (draft/sent). Sprint 1 conversion design updated accordingly.
+- [x] **D140 RESOLVED:** Sprint 0 offline = expo-sqlite + draft-mode. Minimal documents table. Half-day to 1-day. Sprint 0 timeline confirmed at 5 days.
+- [x] **D138 RESOLVED:** Monthly €29 primary + Annual €240 opt-in + Day 30 upsell. Pricing page updated. Cohort analytics added.
+- [ ] **D96 NEW — Sprint 1:** Implement `facture.created` as Path A trigger. Soft notification on first facture: "Votre première facture a été créée." No hard conversion pitch.
+- [ ] **D96 NEW — v1.2:** Evaluate SIREN/SIRET validation for client uniqueness enforcement. Until then, accepted-devis + facture workflow is anti-gaming mechanism.
+- [ ] **D140 NEW — Sprint 0:** expo-sqlite + documents table (UUID, type, status enum, JSON blob, timestamps). Draft semantics: saves → pending_draft, explicit confirm → confirmed, confirmed syncs to Supabase.
+- [ ] **D140 NEW — Sprint 0 timeline:** Days 1-2: offline architecture + devis flow. Day 3: Supabase sync. Days 4-5: mentions légales + Supabase setup (parallel) + buffer.
+- [ ] **D138 NEW — Pricing page:** Monthly €29 primary CTA. Annual €240 opt-in below ("Save €108/year"). No annual-first framing. Day 30 upsell triggered after first devis/facture created.
+- [ ] **D138 NEW — Cohort analytics:** Build from Day 1. Monthly: "churned in [month]" + seasonal overlay. Annual: "renewed/not renewed in [month]" + mid-year cancellation flag. Overlay with Louis's own seasonal business data.
+
+### Sprint 0 Blockers — Updated
+
+| Blocker | Status |
+|---------|--------|
+| Mentions légales gate (D142) | OPEN — Louis commits real strings to git |
+| Supabase EU project | OPEN — confirm supabase.com project created (EU region) |
+| Offline scope (D140) | RESOLVED — expo-sqlite + draft-mode |
+| Sprint 0 scope | 3 deliverables, 5 days |
+
+### Still Open
+
+| Item | Status | Impact |
+|------|--------|--------|
+| D110 — Path B trigger | Deferred to v1.2 with real usage data | Post-Sprint 1 |
+| Mentions légales gate | Louis commits real strings to git | BLOCKS Sprint 0 |
+| Supabase EU project | Confirm EU project live | BLOCKS Sprint 0 |
+
+*Last updated: 2026-03-31T04:05*
