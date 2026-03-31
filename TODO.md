@@ -1363,3 +1363,35 @@ NONE — all three debates require Louis's input on scope and pricing decisions.
 **Floor: 5.5 days** if mentions légales gate not met.
 
 *Last updated: 2026-03-31T02:13*
+
+## New from Pulse 2026-03-31T02:28 — Three Specialist Debates (D146-3A, D146-3G, D146-3P)
+
+### Resolved This Pulse
+
+NONE — all three debates are CONTESTED. Louis decisions required before Sprint 0 can proceed.
+
+### Challenged Assumptions This Pulse
+
+1. **AsyncStorage + retry queues is sufficient for Sprint 0 offline** (Debate 81/86) — challenged by Technical Architect: power loss mid-write = data lost, retry queues have fatal blind spot, view-only or expo-sqlite required
+2. **Path B can wait for v1.2** (PS-D147) — challenged by Growth Strategist: Path A is minority segment (~50-60%), Path B = 40-50% of target market, threshold trigger + upgrade prompt + instrumentation should be Sprint 0
+3. **"First paid facture" is the Path A conversion trigger** (D96) — challenged by Product Strategist: requires payment infrastructure outside product control, "first accepted devis + 3 clients" is better conversion moment
+
+### New/Updated Action Items
+
+- [ ] **D81 UPDATED — Offline scope decision (URGENT):** Louis chooses — (A) view-only offline for Sprint 0 (honest engineering disclosure, browse cached only, no offline editing), OR (B) expo-sqlite in Sprint 0 (+2 days, production-grade offline editing). **Blocks Sprint 0.**
+- [ ] **D110 UPDATED — Path B in Sprint 0:** Sprint 0 must include Path B threshold trigger (30-day + 3 jobs) + upgrade prompt + conversion instrumentation. WhatsApp digest deferrable to v1.2. **Path B is not v1.2 optional — it covers 40-50% of target market.** **Blocks Sprint 0 scope.**
+- [ ] **D96 UPDATED — Path A conversion trigger:** Replace "first paid facture" with **"first accepted devis + 3 active clients managed."** "Paid facture" requires payment infrastructure (Stripe/Lydia/Pix) not in MVP scope. Accepted devis = committed client intent = maximum emotional investment moment. **Low urgency — affects post-Sprint 1 conversion design.**
+- [ ] **D81 UPDATED — Sprint 0 timeline revised:** If option (B) accepted (expo-sqlite): Sprint 0 = 7 days (was 5.5-6.5). If option (A) accepted (view-only): Sprint 0 = 5.5 days with honest disclosure note.
+- [ ] **D140/D40/D110 dependency chain — REVISED:** D81 (offline scope) → D40 (notification channel) → D110 (Path B threshold). All three must be resolved as one unit before Sprint 0. Louis resolves D81 first.
+
+### Louis's Decisions Required Before Sprint 0 (02:28 Updated)
+
+| Decision | Options | Sprint 0 Status |
+|----------|---------|-----------------|
+| Offline scope (D81) | (A) View-only OR (B) expo-sqlite (+2d) | **BLOCKS** |
+| Path B trigger in Sprint 0 (D110) | (A) Sprint 0 trigger + prompt + instrumentation OR (B) defer to v1.2 | **BLOCKS** |
+| Path A trigger (D96) | (A) First accepted devis + 3 clients OR (B) first paid facture | Post-Sprint 1 |
+| Mentions légales gate | Commit real strings to git | **BLOCKS** |
+| Supabase project | Confirm EU project live | **BLOCKS** |
+
+*Last updated: 2026-03-31T02:28*

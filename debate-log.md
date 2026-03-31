@@ -8396,3 +8396,88 @@ NONE — all three debates require Louis's input on scope and pricing decisions.
 *Last updated: 2026-03-31T02:13*
 *Technical Architect position paper (TA-D147) pending at debate-pulse-0213-architect.md*
 
+
+---
+
+## Pulse 2026-03-31T02:28 — Three Specialist Debates (D146-3 Architect, D146-3 Growth, D146-3 Product)
+
+---
+
+## Debate D146-3A: Offline Architecture — AsyncStorage + Retry Queues Is Insufficient for Sprint 0
+
+**Challenge:** Debate 81/86 concluded AsyncStorage + retry queues provides sufficient offline capability for Sprint 0, deferring expo-sqlite to v1.2. Technical Architect challenges this.
+
+### Technical Architect — View-Only Offline or Bust
+
+**Assumption challenged:** AsyncStorage + retry queues is "sufficient" for the primary offline use case of French artisans on job sites.
+
+**Core arguments:**
+1. **Fatal blind spot in retry queues.** They only retry operations that successfully reached the queue. Phone power loss mid-write = operation never entered queue = data gone. This IS the common failure mode for a phone used outdoors, in vans, on dusty job sites.
+2. **AsyncStorage has no atomicity.** Building a write-ahead log on top of it requires transaction-like semantics from scratch — essentially building a worse SQLite with more bugs.
+3. **Audience amplifies damage.** Non-tech-savvy artisans won't detect silent sync failures. They assume devis was saved. Data loss destroys client trust irreparably.
+4. **View-only is honest Scope 0.** Still valuable: show cached devis/factures to clients offline. Zero data loss risk.
+5. **Deferring sqlite costs more.** Building AsyncStorage retry infrastructure in Sprint 0 is wasted work when v1.2 replaces it anyway.
+
+**Verdict:** Sprint 0 ships view-only offline. expo-sqlite added to Sprint 0 (+2 days) or deferred to v1.1 with honest disclosure. Debate 81/86 decision should be **overturned**.
+
+---
+
+## Debate D146-3G: Path B Cannot Be Deferred to v1.2
+
+**Challenge:** PS-D147 argued Path B conversion mechanics are v1.2 decisions since D110's trigger numbers are "assumptions not findings." Growth Strategist challenges this.
+
+### Growth Strategist — Path B Is a Majority-Equivalent Segment, Not Optional
+
+**Assumption challenged:** Path B can wait for v1.2 because "we don't have Path B users to observe yet."
+
+**Core arguments:**
+1. **Path A = minority.** Formal-devis artisans are ~50-60% of target market. Deferring Path B means ignoring 40-50% from Day 1.
+2. **Trigger ≠ full feature.** Sprint 0 needs only a threshold flag (30-day + 3 jobs) and a simple in-app banner. The WhatsApp digest is a separate delivery layer still deferrable to v1.2.
+3. **No instrumentation = no signals.** Without a trigger, verbal-agreement artisans will churn silently. We won't see Path B signals — we'll see absence.
+4. **Rough thresholds are valid for learning.** 30-day + 3 jobs is directionally sound. Perfect numbers aren't needed to start measuring.
+5. **Competitive risk.** A competitor designing for verbal workflows from the start will own that segment if we cede it at launch.
+
+**Verdict:** Sprint 0 must include Path B threshold trigger + upgrade prompt + instrumentation. WhatsApp digest deferrable. **D110 modified: Path B trigger is Sprint 0, not v1.2 optional.**
+
+---
+
+## Debate D146-3P: Conversion Trigger for Path A Should Be "First Accepted Devis"
+
+**Challenge:** D96 established "first paid facture" as the hard conversion gate for Path A. Product Strategist challenges this.
+
+### Product Strategist — "Paid Facture" Requires External Payment Infrastructure
+
+**Assumption challenged:** First paid facture is the appropriate conversion trigger for Path A. It stacks multiple behavioral changes (invoicing through app + client paying through app) that may never happen for cash/check artisans.
+
+**Core arguments:**
+1. **Payment layer is a future feature.** If Stripe/Lydia/Pix isn't in MVP scope, "paid facture" never triggers for cash artisans. They're locked out of conversion permanently.
+2. **"Accepted devis" is committed intent.** Client says yes to quote = job won. This is the first real business outcome, not a payment admin follow-through.
+3. **Emotional investment peaks at quote acceptance.** Aha moment = landing a job through the app. Payment is anticlimactic.
+4. **3 active clients filters for real usage.** Accepted devis + 3 clients is a more robust signal than a single anomalous payment event.
+5. **Path A and Path B should measure the same underlying behavior.** "Paid facture" introduces external dependencies outside product control.
+
+**Verdict:** Replace "first paid facture" with **"first accepted devis + 3 active clients managed"** as Path A conversion trigger. Payment processing → post-v1 enhancement.
+
+---
+
+## Updated Decision Table (Partial — 02:28 Pulse)
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D81 | Offline architecture | CONTESTED — view-only OR expo-sqlite in Sprint 0 (+2 days). Debate 81/86 assumption challenged. | 2026-03-31 |
+| D110 | Path B trigger | CONTESTED — threshold trigger + upgrade prompt should be Sprint 0, not v1.2 | 2026-03-31 |
+| D96 | Path A conversion trigger | CONTESTED — "first accepted devis + 3 active clients" vs "first paid facture" | 2026-03-31 |
+
+### Louis Decisions Still Required
+
+| Decision | Options | Blocks Sprint 0? |
+|----------|---------|-----------------|
+| Offline scope | (A) View-only offline, honest disclosure; (B) expo-sqlite in Sprint 0 (+2 days) | YES |
+| Path B trigger | (A) Sprint 0 trigger + upgrade prompt + instrumentation; (B) defer to v1.2 | YES |
+| Path A trigger | (A) First accepted devis + 3 clients; (B) first paid facture | NO |
+| Mentions légales gate | Louis commits real strings to git | YES |
+| Supabase project | Confirm EU project live | YES |
+
+---
+
+*Last updated: 2026-03-31T02:28*
