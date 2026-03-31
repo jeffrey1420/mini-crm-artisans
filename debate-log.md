@@ -8481,3 +8481,103 @@ NONE — all three debates require Louis's input on scope and pricing decisions.
 ---
 
 *Last updated: 2026-03-31T02:28*
+
+---
+
+## Pulse 2026-03-31T02:43 — Two Specialist Debates (TA-D148, GS-D148)
+
+*Note: PS-D148 (Product Strategist — Conversion Moment Design) was still processing at time of pulse compilation. Position paper expected at debate-ps-D148-pulse.md.*
+
+---
+
+## Debate TA-D148: Offline Capability Is the Wrong Problem — Multi-Device Conflict Resolution Is
+
+**Challenge:** The 02:28 pulse debated AsyncStorage vs expo-sqlite and concluded both are insufficient. But the framing — "the real problem is offline capability" — is still wrong. The actual architectural gap is multi-device conflict resolution on versioned business documents.
+
+### Technical Architect — Multi-Device Conflict Resolution Is the Real Sprint 0 Blocker
+
+**Assumptions challenged:**
+
+1. **"Offline capability is the core technical problem"** (D140, D144) — challenged: the problem is not which local storage engine but what offline edits mean when they rejoin a shared document store. A devis is a versioned legal document with TVA implications — not a key-value overwrite.
+
+2. **"D9's 'no multi-user' exclusion covers the spouse/assistant scenario"** (D9) — challenged: D9 excluded multi-user as a product feature, but enabling offline editing implicitly creates a second writer (the offline device) that will conflict with the web dashboard (first writer). The "solo device" assumption in D3 is a persona constraint, not an architectural guarantee.
+
+3. **"Server-wins is a valid offline fallback"** (D140) — challenged: server-wins on a devis document is not sync strategy — it is document destruction. When Marc's phone comes online 3 days after his wife updated the same devis via the web dashboard, server-wins discards Marc's local edits silently. Client-wins overwrites the sent document with a stale version. Neither is acceptable for a legally-standing business document.
+
+**Core arguments:**
+
+1. **The real scenario no debate has addressed:** Marc edits a devis on his phone offline. His wife simultaneously edits the same devis via the web dashboard. When the phone comes back online 3 days later, which version is the legal record? The debate log has no decision for this scenario.
+
+2. **This is a business logic problem, not a sync problem:** A devis has a séquentiel number (D32), TVA per line item (5.5/10/20%), and legal standing once sent. There is no "merge" operation for a TVA-per-line document — only "which version do we treat as real?" CRDT or OT for business documents is a research problem, not a Sprint 0 deliverable.
+
+3. **The honest Sprint 0 answer — Frozen Window / Draft Mode:** When the app goes offline, record a frozen timestamp. While offline, edits are saved as **draft edits** — not overwrites to the live document. When connectivity returns, the artisan manually reviews both versions before confirming. This eliminates silent data destruction and is implementable in half a day.
+
+**Sprint 0 deliverable change:**
+- OLD: "Offline editing with retry queue. Server-wins fallback. Conflict UI in v1.2."
+- NEW: "Offline editing with draft-mode semantics. Changes offline queue as drafts pending review. They do not overwrite the live document until manual confirmation. Real bidirectional sync = v1.2 minimum."
+
+**Verdict on TA-D148:** OPEN — introduces multi-device conflict resolution as the correct architectural frame. Sprint 0 offline scope must adopt draft-mode semantics. Louis must decide: (A) accept draft-mode for Sprint 0 (+0.5 days), or (B) defer all offline editing to v1.2 and ship view-only. **Blocks Sprint 0 offline scope.**
+
+---
+
+## Debate GS-D148: The "3 Active Clients" Threshold Is Arbitrary and Gameable
+
+**Challenge:** PS-D146-3P proposed Path A conversion trigger = "first accepted devis + 3 active clients." GS-D148 argues the "3 active clients" component is a false discriminator that will generate false-positive conversions.
+
+### Growth Strategist — Replace "3 Active Clients" With "3 Accepted Devis From 3 Distinct Clients"
+
+**Assumption challenged:** "3 active clients" meaningfully discriminates between casual browser behavior and genuine product commitment (PS-D146-3P).
+
+**Core arguments:**
+
+1. **"3 active clients" is trivially gameable:** Marc can import 6 old clients from memory in 10 minutes, accept one devis to himself, and satisfy the trigger without any genuine product adoption. It measures proximity to existing relationships, not product engagement.
+
+2. **"3 accepted devis from 3 distinct clients" is harder to game:** Requires 3 closed deals across 3 different clients — not 1 deal + 3 contacts imported from memory. Diversity requirement prevents gaming via one active relationship.
+
+3. **The "3" number is a D96 legacy that was never re-validated:** D96 originally used "3+ devis sent" under the paid-facture hard gate. When D104/D110 restructured the funnel, the number migrated without behavioral validation.
+
+4. **Path B "3 jobs logged" without scope is equally gameable:** "Travail chez Jean-Paul — rapide." x 3 = trigger fires. Revised: require client contact info (name + phone/email) with each logged job.
+
+**Revised dual-path trigger proposal:**
+- **Path A:** 3 accepted devis from 3 distinct clients (not "first accepted devis + 3 active clients")
+- **Path B:** 3 jobs logged with client contact info captured (name + phone or email)
+
+**Verdict on GS-D148:** OPEN — GS-D148 and PS-D146-3P are in direct conflict on Path A trigger. Louis decides. **Low urgency — post-Sprint 1 conversion design.**
+
+---
+
+## Challenged Assumptions This Pulse (02:43)
+
+1. **"Offline capability is the core architectural problem"** — challenged by Technical Architect: multi-device conflict resolution on versioned business documents is the gap, not local storage engine choice (D140, D144)
+2. **"D9's 'no multi-user' exclusion covers the spouse/shared-account scenario"** — challenged by Technical Architect: enabling offline editing implicitly creates a second writer, violating D9's intent without formally reopening it (D9)
+3. **"Server-wins is a valid offline fallback"** — challenged by Technical Architect: it discards the user's offline work silently; not conflict resolution, just arbitrary data destruction (D140)
+4. **"3 active clients" meaningfully discriminates conversion intent** — challenged by Growth Strategist: trivially gameable with existing client imports; measures existing relationships, not product adoption (PS-D146-3P)
+5. **"3 active clients" as a validated threshold** — challenged by Growth Strategist: number traces to D96's paid-facture era, never re-validated for accepted-devis trigger (D96, D110)
+
+### Resolved This Pulse
+
+NONE — all debates require Louis input.
+
+---
+
+## Updated Decision Table (Partial — 02:43 Pulse)
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D81 | Offline architecture | CONTESTED — draft-mode semantics proposed. AsyncStorage vs expo-sqlite secondary. View-only OR draft-mode (+0.5d) OR full offline deferred v1.2. | 2026-03-31 |
+| D96 | Path A conversion trigger | CONTESTED — GS-D148 proposes "3 accepted devis from 3 distinct clients" vs PS-D146-3P's "first accepted devis + 3 active clients." Direct conflict. | 2026-03-31 |
+| D110 | Path B trigger | CONTESTED — GS-D148 proposes "3 jobs + client contact info" vs D110's "3 jobs logged." | 2026-03-31 |
+| D140 | Offline scope | CONTESTED — draft-mode proposed as honest Sprint 0 answer. Server-wins fallback rejected. | 2026-03-31 |
+
+### Louis Decisions Required Before Sprint 0
+
+| Decision | Options | Sprint 0 Status |
+|----------|---------|-----------------|
+| Offline scope (D81) | (A) View-only; (B) draft-mode (+0.5d); (C) full offline defer v1.2 | **BLOCKS** |
+| Mentions légales gate | Commit real strings to git | **BLOCKS** |
+| Supabase project | Confirm EU project live | **BLOCKS** |
+| Path A trigger (D96) | (A) 3 accepted devis from 3 distinct clients; (B) first accepted devis + 3 active clients | Post-Sprint 1 |
+| Path B trigger (D110) | (A) 3 jobs + client contact; (B) 3 jobs logged | Post-Sprint 1 |
+
+*Last updated: 2026-03-31T02:43*
+*PS-D148 position paper pending at debate-ps-D148-pulse.md*

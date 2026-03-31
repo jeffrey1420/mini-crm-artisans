@@ -1395,3 +1395,39 @@ NONE — all three debates are CONTESTED. Louis decisions required before Sprint
 | Supabase project | Confirm EU project live | **BLOCKS** |
 
 *Last updated: 2026-03-31T02:28*
+
+## New from Pulse 2026-03-31T02:43 — Two Specialist Debates (TA-D148, GS-D148)
+
+*Note: PS-D148 (Product Strategist — Conversion Moment Design) was still processing at time of this pulse. Position paper expected.*
+
+### Resolved This Pulse
+
+NONE — both debates are CONTESTED. Louis decisions required.
+
+### Challenged Assumptions This Pulse
+
+1. **"Offline capability is the core architectural problem"** — challenged by Technical Architect: multi-device conflict resolution on versioned business documents is the gap, not local storage engine choice (D140, D144)
+2. **"D9's 'no multi-user' exclusion covers the spouse/shared-account scenario"** — challenged by Technical Architect: enabling offline editing implicitly creates a second writer, violating D9's intent (D9)
+3. **"Server-wins is a valid offline fallback"** — challenged by Technical Architect: it discards the user's offline work silently; not conflict resolution, just arbitrary data destruction (D140)
+4. **"3 active clients" meaningfully discriminates conversion intent** — challenged by Growth Strategist: trivially gameable with existing client imports; measures existing relationships, not product adoption (PS-D146-3P)
+5. **"3 active clients" as a validated threshold** — challenged by Growth Strategist: number traces to D96's paid-facture era, never re-validated for accepted-devis trigger (D96, D110)
+
+### New/Updated Action Items
+
+- [ ] **D81 REVISED — Offline scope decision (URGENT):** Louis chooses — (A) view-only offline for Sprint 0 (no offline editing), OR (B) draft-mode offline (+0.5 days, changes queue as drafts pending review, not overwrites), OR (C) full offline editing deferred to v1.2. **Blocks Sprint 0.** TA-D148 argues that the choice of local storage engine (AsyncStorage vs expo-sqlite) is secondary to the semantic model (draft vs overwrite).
+- [ ] **D140 REVISED — Offline edit semantics:** Sprint 0 offline editing must adopt draft-mode semantics: offline changes saved as drafts pending manual review. They do NOT overwrite the live document until the artisan explicitly confirms after reviewing concurrent changes. This eliminates silent data destruction from server-wins fallback. Real bidirectional sync = v1.2 minimum.
+- [ ] **D96 REVISED — Path A conversion trigger:** GS-D148 and PS-D146-3P are in direct conflict. GS-D148 proposes: "3 accepted devis from 3 distinct clients" (harder to game, requires 3 closed deals across different clients). PS-D146-3P proposed: "first accepted devis + 3 active clients" (easier to satisfy with dummy imports). Louis decides. **Post-Sprint 1 — low urgency.**
+- [ ] **D110 REVISED — Path B trigger refinement:** GS-D148 proposes: "3 jobs logged with client contact info captured (name + phone or email)" — prevents placeholder job logging. D110 original: "3 jobs logged" (no scope floor). Louis decides. **Post-Sprint 1 — low urgency.**
+- [ ] **D9 REVIEWED — Multi-user architecture note:** TA-D148 identified that D9 (no multi-user) is implicitly violated by enabling offline editing on an account that also has web dashboard access (spouse/assistant sharing). Sprint 0 architecture must document this constraint: offline editing is single-device-only (the offline device is the sole writer while offline). Multi-device concurrent editing = v1.2.
+
+### Louis's Decisions Required Before Sprint 0 (02:43 Updated)
+
+| Decision | Options | Sprint 0 Status |
+|----------|---------|-----------------|
+| Offline scope (D81) | (A) View-only; (B) draft-mode (+0.5d); (C) full offline defer v1.2 | **BLOCKS** |
+| Mentions légales gate | Commit real strings to git | **BLOCKS** |
+| Supabase project | Confirm EU project live | **BLOCKS** |
+| Path A trigger (D96) | (A) 3 accepted devis from 3 distinct clients; (B) first accepted devis + 3 active clients | Post-Sprint 1 |
+| Path B trigger (D110) | (A) 3 jobs + client contact info; (B) 3 jobs logged | Post-Sprint 1 |
+
+*Last updated: 2026-03-31T02:43*
