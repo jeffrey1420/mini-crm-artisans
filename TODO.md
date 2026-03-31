@@ -1636,3 +1636,42 @@ NONE — all three debates are OPEN and require Louis's input.
 | Sprint 0 scope | 3 deliverables, 5 days |
 
 *Last updated: 2026-03-31T04:17*
+
+---
+
+## New from Pulse 2026-03-31T04:49
+
+### Expert-Comptable GTM (D72/D139 — RESOLVED)
+
+- [ ] **D72/D139 NEW:** Louis writes 5-question problem-framing script for Week 1 expert-comptable conversation. Questions: (1) TVA errors BTP artisans make most often on devis/factures, (2) how SCI clients are handled differently, (3) mentions légales gaps seen most, (4) do artisans follow up on unpaid invoices or let them age, (5) what would make you confident recommending a devis tool?
+- [ ] **D72/D139 NEW:** Louis explicitly frames his own expert-comptable conversation as problem research, not product demo. Opening: *"Je construis un outil pour les artisans qui gèrent leurs devis et factures depuis leur téléphone. Avant de commencer le développement, je veux comprendre ce que vous observez chez vos clients artisans — les erreurs récurrentes, les points de friction."* No demo. No URL. No pitch.
+- [ ] **D72/D139 NEW:** Week 3 expert-comptable outreach targets 2-3 external accountants only (not Louis's). Requires social proof: real beta users + real devis sent. Social proof frame: "J'ai 5 beta-testeurs qui envoient de vrais devis depuis leur téléphone."
+- [x] **D72/D139 RESOLVED:** Week 1 = problem-framing only (Louis's own accountant, no product). Week 3 = product demo (2-3 external expert-comptables). Louis's own accountant = problem-knowledge asset only, permanently excluded from validation/referral role.
+
+### Sprint 1 Conversion UX (NEW)
+
+- [ ] **Sprint 1 NEW:** Implement celebratory modal for Path A (first `facture.created`). Copy sequence: (1) "Votre première facture a été créée" — celebration, (2) "Vous avez un vrai business — il mérite un vrai outil." — value reframe, (3) "Pour €29/mois, vous débloquez: devis illimités, factures avec mentions légales, relances automatiques, et export PDF professionnel." — feature framing. CTA: "Continuer avec €29/mois" (monthly framing). Secondary: "Peut-être plus tard" (dismiss, no guilt, no countdown).
+- [ ] **Sprint 1 NEW:** Copy constraints — never: "limite," "bloqué," "vous avez atteint," "il ne vous reste que." Always: "vous avez," "vous voilà," "votre business." Value-forward, not scarcity-forward.
+- [ ] **Sprint 1 NEW:** Store `conversionModalShown: true` on user record — fire Path A modal only once per lifetime.
+- [ ] **Sprint 1 NEW:** Implement informational banner for Path B (5 jobs logged) per D110 resolution language: "Vous utilisez [App] depuis 3 semaines pour suivre vos interventions. Pour €29/mois, vos devis et factures sont générés automatiquement." 60-day cooldown with `bannerShownAt` timestamp check. Not a full modal — informational banner only.
+- [ ] **Sprint 1 NEW:** Anti-gaming for Path A is workflow-enforced — `facture.created` requires accepted devis + client record. Modal does not need its own anti-gaming logic.
+
+### Sprint 0 Exit Criteria (NEW)
+
+- [ ] **Sprint 0 NEW:** Define 5-beta-user test protocol before Sprint 0 starts. Select artisans in Gabin/Maël's network. One task: "Create a client, create a devis, send it to yourself via WhatsApp." 30 minutes each. Document what happens. Success = 5/5 or 4/5 with documented edge case. Failure = 3/5 or worse means Sprint 0 continues.
+- [ ] **Sprint 0 NEW:** Add draft-mode disclosure to first-launch screen: "Le mode hors-ligne est en version draft. Vos données ne seront pas sauvegardées sans connexion." This disclosure makes draft-mode acceptable for beta.
+- [ ] **Sprint 0 NEW:** Create PDF review checklist. Louis reviews one devis PDF for particulier client + one for professionnel client against mentions légales checklist (SIRET, RCS, TVA intracom if applicable). Takes 15 minutes. Must pass before launch.
+- [ ] **Sprint 0 NEW:** WhatsApp PDF sharing works on both Android and iOS — one test on each OS. Document opens in WhatsApp conversation. 10-minute test.
+- [ ] **Sprint 0 NEW:** Budget 1 day post-Sprint 0 for hotfixes based on 5-user test. If 2 of first 5 beta users hit a crash: 1 day of fixes before official ship, not "Sprint 0 is done, ship it anyway."
+- [ ] **Sprint 0 NEW:** Launch bar for Louis: "Ship" = APK distributed to beta users + landing page has working signup. Not "all scope is complete." Scope is a plan, not a contract.
+
+### Sprint 0 Blockers — Updated Status (04:49 Pulse)
+
+| Blocker | Status |
+|---------|--------|
+| Mentions légales gate (D142) | OPEN — Louis commits real strings to `legal/mentions-legales.ts` |
+| Supabase EU project | OPEN — confirm supabase.com project created (EU region, Frankfurt) |
+| Offline scope (D140) | RESOLVED — expo-sqlite + draft-mode |
+| Sprint 0 timeline | 6.5 days (D140) |
+
+*Last updated: 2026-03-31T04:49*

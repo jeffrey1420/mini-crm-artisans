@@ -9420,3 +9420,100 @@ Thirty days of active usage without job activity is a worse proxy than job count
 - [x] **D110 RESOLVED:** Path B trigger = 5 jobs logged (no client contact gate). Contextual in-app banner with value framing. Sprint 0 non-critical path item.
 
 *Last updated: 2026-03-31T04:31*
+
+---
+
+## Pulse 2026-03-31T04:49 — Three Specialist Debates (Expert-Comptable Timing, Sprint 1 Conversion Flow, Sprint 0 Exit Criteria)
+
+---
+
+## Debate PS-Pulse-0449: D72/D139 — Expert-Comptable Outreach: Week 1 Problem-Framing vs Week 3 Product Demo
+
+**Challenge:** D139 refined expert-comptable outreach to Week 1 (concept-only, Louis's own accountant) vs Week 3 (product demo with external accountants). The assumption being challenged: that "validation" means "show them the product and see if they like it."
+
+### Product Strategist — Week 1 Problem-Framing Is the Only Right Move
+
+**Core argument:**
+
+1. **The expert-comptable's most valuable input comes before any product exists.** TVA structuring errors, SCI client handling, common devis mistakes — this is *problem knowledge*, not *solution feedback*. Once Louis shows a working build, the accountant shifts into reaction mode and the problem knowledge vanishes.
+
+2. **Week 3 product demo creates anchor bias that corrupts problem feedback.** The artifact on screen hijacks the conversation. The open-ended "what do artisan clients consistently get wrong?" gets short-circuited.
+
+3. **Louis's accountant has a conflict of interest that disqualifies them from validation.** Louis pays them directly. Supportive validation ≠ real validation. They are useful for one thing: filling gaps in Louis's assumptions before Sprint 0 begins.
+
+4. **Week 3 is too late for problem knowledge.** Sprint 0 commits schema design, TVA calculator logic, mentions légales block, and client data model in Week 1. Week 3 feedback can't change what Sprint 0 already built.
+
+**VERDICT on D72/D139:** RESOLVED — Week 1 = problem-framing only (Louis's own accountant). Week 3 = product demo with 2-3 *external* expert-comptables only. Louis's own accountant is permanently excluded from validation/referral role — they are a problem-knowledge asset only.
+
+---
+
+## Debate TA-Pulse-0449: Sprint 1 Conversion Flow — Celebratory Modal vs Hard Paywall
+
+**Challenge:** D96 (Path A = first `facture.created`) and D110 (Path B = 5 jobs logged) are resolved. The question: what does the user see when the trigger fires? Hard paywall? Soft banner? Conversion modal?
+
+### Technical Architect — Celebratory Value-Forward Modal
+
+**Core argument:**
+
+1. **The trigger fires at a high-intent moment — exploit it, don't neutralize it.** First facture created = accomplishment. 5 jobs logged = habitual use. These are the highest-intent moments in the Free tier lifecycle. A hard paywall punishes the behavior we want to encourage. A soft banner wastes the moment.
+
+2. **The modal must feel like a celebration before it feels like an ask.** Copy sequence: acknowledge accomplishment ("Votre première facture a été créée") → reframe through value lens ("Vous avez un vrai business — il mérite un vrai outil") → make upgrade feel obvious. Never use "limite," "bloqué," or countdown language.
+
+3. **Path A and Path B experiences differ in intensity.** Path A (first facture): full-screen celebratory modal, fires after send confirmation, once per lifetime. Path B (5 jobs): contextual in-app banner (not modal), 60-day cooldown, informational framing per D110.
+
+4. **Anti-gaming is workflow-enforced, not modal-enforced.** `facture.created` requires accepted devis + client record. The modal does not need its own anti-gaming logic.
+
+**VERDICT on Sprint 1 conversion UX:** Path A = celebratory modal. Path B = informational banner per D110. Value-forward, never scarcity-forward. No countdown, no artificial urgency.
+
+---
+
+## Debate GS-Pulse-0449: Sprint 0 Exit Criteria — How Does Louis Know When to Ship?
+
+**Challenge:** Sprint 0 is 6.5 days with scope: client file + devis flow + offline (expo-sqlite draft-mode) + mentions légales + PDF + WhatsApp sharing. The assumption challenged: Sprint 0 is done when scope is complete.
+
+### Growth Strategist — 5 Beta Users Complete the Happy Path
+
+**Core argument:**
+
+1. **Sprint 0 is done when 5 beta users complete client → devis → WhatsApp PDF send without assistance.** This is measurable, external, removes founder-blindness. 5/5 or 4/5 with documented edge case = done. 3/5 or worse = Sprint 0 continues.
+
+2. **"Draft mode" offline is not a blocker — it's an honest label.** D9 explicitly excludes offline from MVP. Draft mode means: doesn't crash on airplane mode, beta users are told it's draft. That's the exit criterion, not "data persists offline."
+
+3. **PDF output must meet professional standard.** At least one beta user opens the PDF and says "this looks like something I'd send to a client" — genuine professional approval, not polite tolerance.
+
+4. **Mentions légales renders correctly for test particulier and professionnel clients.** Louis reviews against checklist. 15-minute task. WhatsApp PDF sharing works on both Android and iOS.
+
+**What CAN be deferred past Sprint 0 (explicitly):** offline data persistence (draft-labeled), email relances (Sprint 2), sequential numbering for factures (Sprint 2), Expo Push (v1.1), e-invoicing (v2), expert-comptable referral (Phase 1).
+
+**What CANNOT be deferred:** Happy path must not crash. White screen on "envoyer" = launch blocker, not "draft mode issue."
+
+**VERDICT on Sprint 0 exit criteria:** Sprint 0 is done when: (1) 5 beta users complete happy path without assistance, (2) PDF output earns genuine professional approval, (3) mentions légales render correctly for test clients, (4) WhatsApp sharing works on both OS, (5) no crash on airplane mode.
+
+---
+
+## Updated Decision Table (Partial — 04:49 Pulse)
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D72/D139 | Expert-comptable timing | **RESOLVED** — Week 1 = problem-framing only (Louis's own accountant, no product). Week 3 = product demo (2-3 external expert-comptables only). Louis's accountant = problem-knowledge asset only, permanently excluded from validation/referral. | 2026-03-31 |
+| Sprint 1 | Conversion UX | **NEW** — Path A (first facture): celebratory value-forward modal. Path B (5 jobs): informational in-app banner per D110. Value-forward, never scarcity-forward. No countdown or limit language. | 2026-03-31 |
+| Sprint 0 | Exit criteria | **NEW** — 5 beta users complete happy path + professional PDF approval + mentions légales checklist + WhatsApp sharing works both OS + no crash on airplane mode. | 2026-03-31 |
+
+### Challenged Assumptions This Pulse
+
+1. **"Validation = show them the product and see if they like it"** — challenged by Product Strategist: expert-comptable value is problem knowledge, not solution feedback. Demo hijacks the conversation.
+2. **"Sprint 0 is done when scope is complete"** — challenged by Growth Strategist: it's done when 5 beta users confirm the happy path works. Scope is a plan, not a contract.
+3. **"Upgrade prompt should feel like a boundary"** — challenged by Technical Architect: upgrade prompt should feel like a milestone (outgrowing Free tier), not a blockage.
+
+### New Action Items This Pulse
+
+- [ ] **D72/D139 NEW:** Louis writes 5-question problem-framing script for Week 1 expert-comptable conversation. Questions: (1) TVA errors BTP artisans make most often, (2) SCI client handling differences, (3) mentions légales gaps seen most, (4) do artisans follow up on unpaid invoices, (5) what would make you confident recommending a devis tool?
+- [ ] **D72/D139 NEW:** Louis explicitly frames his own expert-comptable conversation as problem research, not product demo. Opening: *"Je construis un outil pour les artisans — avant de développer, je veux comprendre ce que vous observez chez vos clients artisans."*
+- [ ] **D72/D139 NEW:** Week 3 expert-comptable outreach targets 2-3 external accountants only (not Louis's). Requires social proof: real beta users + real devis sent.
+- [ ] **Sprint 1 NEW:** Implement celebratory modal for Path A (first `facture.created`). Never use "limite," "bloqué," countdown language. Store `conversionModalShown: true` on user record — once per lifetime.
+- [ ] **Sprint 1 NEW:** Implement informational banner for Path B (5 jobs logged) per D110 resolution language. 60-day cooldown with `bannerShownAt` timestamp.
+- [ ] **Sprint 0 NEW:** Define 5-beta-user test protocol before Sprint 0 starts. Select artisans in Gabin/Maël's network. One task: client → devis → WhatsApp PDF send. 30 minutes each.
+- [ ] **Sprint 0 NEW:** Add draft-mode disclosure to first-launch screen: "Le mode hors-ligne est en version draft. Vos données ne seront pas sauvegardées sans connexion."
+- [ ] **Sprint 0 NEW:** Create PDF review checklist. Louis reviews one devis PDF for particulier client + one for professionnel client against mentions légales checklist. 15 minutes.
+
+*Last updated: 2026-03-31T04:49*
