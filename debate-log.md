@@ -9304,3 +9304,119 @@ Full position paper: `/data/workspace/mini-crm-research/debate-sprint0-timeline-
 ---
 
 *Last updated: 2026-03-31T04:17*
+
+---
+
+## Pulse 2026-03-31T04:31 — Three Specialist Debates (D141, TA-D155, D110)
+
+---
+
+## Debate PS-D155: D141 — Kill the Stay-in-Touch Digest
+
+**Challenge:** D141 has been "RESTATED" or "REFINED" at four consecutive pulses but never received a formal verdict. Product Strategist challenges whether it should exist at all.
+
+### Product Strategist — Option A: Kill D141
+
+**Assumption challenged:** "Path B users need a digest." Dormant users have been absent 14+ days. Some fraction have consciously decided the product isn't worth their time. A digest presumes we know better — that another touchpoint will change their mind. It won't. For a French artisan juggling real work, one more push notification is noise, not value.
+
+**Core argument:**
+
+D141's entire value proposition depended on WhatsApp. The 02:59 pulse settled Expo Push as the Sprint 0 notification architecture and deferred WhatsApp to v1.1. D141 lost its delivery channel — it wasn't "delivered via WhatsApp," it was *designed for* WhatsApp. Porting it to Expo Push isn't re-scoping; it's substituting a fundamentally different (and inferior) deliverable and calling it the same feature.
+
+WhatsApp in France is personal. A message there carries weight. Expo Push is just another notification competing with 200 others on a user's phone. What might have been a 15-20% re-activation rate on WhatsApp becomes 2-5% on Expo Push. Sprint 0's focus should be establishing core value with active users, not engineering workarounds for dormant ones.
+
+There's also a brand risk: sending low-quality notifications to dormant users trains them to ignore our app entirely — including when active users receive genuine notifications.
+
+**Verdict on D141: KILLED**
+
+Kill D141. Ship it properly in v1.1 with WhatsApp. The feature's DNA is WhatsApp-native; without that channel it's a ghost of the original idea. Engineering resources are better spent on core invoice/quote flows that serve active users.
+
+**Status: RESOLVED — D141 KILLED**
+
+---
+
+## Debate TA-D155-Revised: Sprint 0 Is 6.5 Days, Not 5
+
+**Challenge:** The 04:05 pulse confirmed Sprint 0 at 5 days. Technical Architect challenges the "half-day to 1-day" estimate for the documents table as fundamentally optimistic.
+
+### Technical Architect — Revised Assessment
+
+**Assumption challenged:** "5 days is achievable if gates are pre-committed." The documents table (UUID, type, status, JSON blob, timestamps) was called a "half-day to 1-day" task. This conflates schema definition with implementation.
+
+**Core argument:**
+
+A JSON blob is not a schema — it's an admission that you don't know what the schema will be. The draft semantics logic (auto-save on app close, conflict resolution when the same document is edited on two devices) is not 0.5 days of work. It's 1.0 to 1.5 days. The Pending Drafts UI and Confirm/Discard flows touch the full PDF rendering pipeline — which doesn't exist yet.
+
+The "parallel tracks" argument assumes Louis has three developers of capacity. He has one. Context-switching between the SQLite migration runner and the devis form UI carries a 20-30% productivity tax that the 5-day estimate doesn't account for.
+
+**Revised task breakdown:**
+
+| Task | Estimate |
+|------|---------|
+| expo-sqlite setup + migration runner | 0.5 days |
+| Documents table schema | 0.25 days |
+| CRUD helpers | 0.5 days |
+| Draft semantics logic | 0.5 days |
+| Pending Drafts UI | 0.5 days |
+| Confirm/Discard flows | 0.25 days |
+| Devis form integration | 0.5 days |
+| **Total** | **3.0 days** |
+
+Plus mentions légales + Supabase gate items = 1+ days if not pre-committed.
+
+**Verdict: Sprint 0 is 6.5 days.** Accept the buffer or cut the Confirm flow scope.
+
+**Status: RESOLVED — Sprint 0 = 6.5 days**
+
+---
+
+## Debate GS-D155: D110 — Path B Trigger Threshold
+
+**Challenge:** D110 was deferred to v1.2 at 03:20 by Technical Architect. PS-D154 reversed the deferral at 04:17, arguing Sprint 0 should include minimum viable Path B trigger. The threshold value is still undecided: 3 / 5 / 30 jobs.
+
+### Growth Strategist — 5 Jobs Logged (No Client Contact Gate)
+
+**Assumption challenged:** "Client contact is the right scope floor for Path B trigger."
+
+Every version of the Path B threshold debate has treated client contact capture as a proxy for product engagement. The logic: if Marc logs a job with phone number, he's genuinely using the product as a business tool. If he just logs job titles with no contact data, he's placeholder logging.
+
+This assumption is wrong for a specific reason: **the Path B artisan's mental model is job-first, not client-first.** For a verbal-agreement electrician who has worked with Madame Dupont for 15 years, logging a new job for "Madame Dupont, 12 rue des Lilas" feels redundant — he already knows who she is. Requiring phone number capture means we miss the most engaged Path B users: those who have internalized the product into their daily workflow so completely that they only log the job, not the contact.
+
+**The client contact requirement should be informational, not a gate.** The trigger fires on job count. Client contact is surfaced in the upgrade prompt as a value-add ("vous avez 5 clients — pour €29/mois, vos devis et factures sont générés automatiquement"), not a prerequisite.
+
+**Threshold argument — why 5, not 3:**
+
+Three jobs can be hit in the first week by a curious explorer who signed up, played with the UI, and logged 3 fake jobs out of novelty. The conversion trigger needs to fire when the product has demonstrated habitual value — not when a user has completed 20 minutes of exploration. Five jobs requires genuine, repeated use across multiple sessions. That's behavioral habit formation, not UI curiosity.
+
+**Threshold argument — why not 30 days:**
+
+Thirty days of active usage without job activity is a worse proxy than job count alone. A Path B artisan who uses the product for 30 days but logs no jobs is a dormant user, not a converted one. Time alone without job activity misses the goal.
+
+**Verdict on D110:** Path B trigger = **5 jobs logged** (no client contact gate required) + contextual in-app banner ("Vous utilisez [App] depuis 3 semaines pour suivre vos interventions. Pour €29/mois, vos devis et factures sont générés automatiquement."). Shown once, 60-day cooldown. Client contact is informational, not a gate.
+
+**Status: RESOLVED — D110 = 5 jobs logged, no client contact gate**
+
+---
+
+## Updated Decision Table (Partial — 04:31 Pulse)
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D141 | Stay-in-touch digest | **KILLED** — WhatsApp-native feature lost its channel when WhatsApp deferred to v1.1. No Expo Push substitute. Reopen in v1.1 with WhatsApp. | 2026-03-31 |
+| D110 | Path B trigger threshold | **RESOLVED — 5 jobs logged, no client contact gate** + contextual in-app banner, 60-day cooldown. Sprint 0 non-critical path. | 2026-03-31 |
+| Sprint 0 | Timeline | **6.5 days** (revised from 5 days) — documents table work properly scoped at 3 days. Gates must be pre-committed. | 2026-03-31 |
+
+### Challenged Assumptions This Pulse
+
+1. **"Path B users need a digest"** — challenged by Product Strategist: dormant users have decided the product isn't for them; more touchpoints ≠ better retention
+2. **"5 days is achievable if gates are pre-committed"** — challenged by Technical Architect: documents table work is 3 days, not 0.5-1; parallel tracks assume team capacity Louis doesn't have
+3. **"D141 can be re-scoped as Expo Push digest"** — challenged by Product Strategist: WhatsApp was the feature's DNA; Expo Push is a fundamentally different delivery vehicle with 5-10x lower engagement
+
+### New Action Items This Pulse
+
+- [x] **D141 RESOLVED:** Kill D141. Sprint 0 has no re-activation digest. Path B dormant users are not a Sprint 0 concern. Reopen in v1.1 alongside WhatsApp Business API.
+- [ ] **Sprint 0 scope:** Accept 6.5-day timeline OR cut Confirm flow (manual share instead of auto-PDF) to recover 0.5 days. Louis decides.
+- [ ] **Sprint 0 gate confirmation (URGENT):** Louis commits `legal/mentions-legales.ts` to git with real business data. Supabase EU project confirmed live. Both gates must be satisfied before Sprint 0 begins.
+- [x] **D110 RESOLVED:** Path B trigger = 5 jobs logged (no client contact gate). Contextual in-app banner with value framing. Sprint 0 non-critical path item.
+
+*Last updated: 2026-03-31T04:31*

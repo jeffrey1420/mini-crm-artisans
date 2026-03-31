@@ -49,17 +49,20 @@
 | D90 | Sprint 0 timeline estimate | RESOLVED — 5.5-6.5 days with parallel backend + mobile tracks. API contract defined Day 1. | Debate 90 (Technical Architect) | 2026-03-30 |
 | D91 | Expert-comptable validation vs referral | RESOLVED — U12 split: validation (Week 1, Louis's own, no prerequisites) ≠ referral (Week 4-6, with testimonials). | Debate 91 (Growth Strategist) | 2026-03-30 |
 | D95 | Sprint 0 timeline | **RESOLVED (FINAL) — Debate 108:** 5 days (target) if pre-conditions confirmed before sprint. 6.5 days (floor) if pre-conditions not confirmed. Do NOT cut corners on TVA rounding or mentions légales to hit 5 days. Pre-sprint gates: (1) Louis shows written 4 mentions légales templates (file/git commit), (2) Louis shows Supabase project dashboard. Cut order if pressure: mentions légales plain text → AsyncStorage. | Debate 108 (Technical Architect) | 2026-03-30 |
-| D96 | Conversion trigger | **SUPERSEDED by Debate 110 — Dual-path conversion:** Path A (Formal-Devis Artisan): Limit-hit (5 active devis OR 10 clients) OR first paid facture = hard gate. Path B (Verbal-Agreement Artisan): 45 consecutive days of active product usage (job created/updated) OR 7+ jobs logged OR 5+ active clients managed = conversion trigger. Day 14 human WhatsApp check-in applies to both archetypes as primary conversion moment. | Debate 110 (Product Strategist) | 2026-03-30 |
+| D96 | Path A trigger | **SUPERSEDED by D96 (04:05):** First `facture.created` (document, not payment). Fires on `facture.created` database event. Requires client + accepted devis + facture. No payment integration required. Anti-gaming via workflow enforcement. SIREN/SIRET enforcement deferred to v1.2. | Debate D96 (04:05) | 2026-03-31 |
 | D97 | Sprint 0 prep | Louis writes 4 mentions légales templates this week (2h) — gate for 5-day Sprint 0. **REFINED by D142: gate NOT met as of 2026-03-31. 5-day timeline CONDITIONAL on real committed strings. See D142.** | Debate 97 (Technical Architect) + Pulse 00:58 (Product Strategist) | 2026-03-30 |
 | D98 | Platform default | **REFLECTED — Direction confirmed, validation mechanism updated.** Android-first remains correct for French artisan demographic. "Week 1 poll validates" REMOVED (wrong instrument after U15 elimination). Replaced with install completion rate (≥50% in 48h) as Sprint 0 metric. D24 resolution gates Sprint 0 specificity. | Debates 98/103 (Growth Strategist) | 2026-03-30 |
 | D99 | Pricing structure | **KILLED — Usage-based billing permanently retired.** Flat €29/month + €260/year annual billing at launch. Usage-based incompatible with dual-path conversion (Path B artisans can't be metered). | Debate 125 (All 3 agents) | 2026-03-30T23:31 |
 | D114 | PDF Sprint 0 gate | **RESOLVED — HTML-to-PDF Edge Function (not expo-print).** Same HTML serves WhatsApp OG preview. Mentions légales embedded in HTML string Sprint 0. | Debate 126 (Technical Architect) | 2026-03-30T23:31 |
 | U15 | Founding member offer | ELIMINATED — no lifetime deal, no founding/access tier, no "50 places" scarcity. Single €29/month. Replaced by "Support Prioritaire" (direct WhatsApp to Louis, roadmap vote, named credits). | Debate 101 (Growth Strategist) | 2026-03-30 |
 | U7 | Domain purchase | RESOLVED — buy domain now (park it), defer brand decision. Domain = infrastructure, not branding. Parking costs ~€10-15/year. Expert-comptable outreach and GetApp/Capterra profiles need a proper domain to establish credibility. Brand name decision stays open. | Debate 109 (Growth Strategist) | 2026-03-30 |
-| D138 | Annual billing implementation | REFINED — Annual €240/year = €20/month = DEFAULT at checkout. Monthly €29 = fallback option. Annual-first framing: "La plupart de nos artisans préfèrent l'abonnement annuel." Opt-in annual achieves ~10% uptake; default annual targets 35-45%. "Payez quand vous êtes chargé" seasonal framing KILLED — wrong frame for cash-flow-sensitive artisans. | Debate 145 (Growth Strategist) | 2026-03-31 |
+| D138 | Annual billing | **RESOLVED (04:05):** Monthly €29 primary + Annual €240 opt-in + Day 30 upsell (first devis/facture created). Annual-first framing rejected. | GS-D153/PS-D152 (04:05) | 2026-03-31 | REFINED — Annual €240/year = €20/month = DEFAULT at checkout. Monthly €29 = fallback option. Annual-first framing: "La plupart de nos artisans préfèrent l'abonnement annuel." Opt-in annual achieves ~10% uptake; default annual targets 35-45%. "Payez quand vous êtes chargé" seasonal framing KILLED — wrong frame for cash-flow-sensitive artisans. | Debate 145 (Growth Strategist) | 2026-03-31 |
 | D139 | Expert-comptable timing | REFINED — Customer development = Week 3 (not Week 1). Sprint 0 = build only. Week 3 = working iOS/Android build + real devis = genuine feedback conversation. Louis's own accountant = Week 3 validation call (not Week 1). Referral program = Month 4+. Week 1 hours reallocated from outreach to Sprint 0 build. | Debate 145 (Growth Strategist) | 2026-03-31 |
 | D140 | Offline architecture | REFINED — AsyncStorage + retry queues inadequate for Sprint 0. Phone death mid-write loses in-memory operations (primary use case, not edge case). 50-job sync burst creates client ID divergence risk with server-wins resolution. Expo-sqlite (+2 days to Sprint 0) required for production-grade offline reliability, OR Sprint 0 offline labeled demonstration-only with honest engineering disclosure. | Debate 144 (Technical Architect) | 2026-03-31 |
-| D141 | Situation financière notification | REFINED — notification is Path A (formal-devis) conversion trigger ONLY. Path B (verbal-agreement) has no "situation financière" trigger. Path B retention = usage-based (job logging habit) + recurring "stay in touch" digest for dormant Free users (14+ days inactive). | Pulse 00:58 (Growth Strategist) | 2026-03-31 |
+| D141 | Stay-in-touch digest | **KILLED (04:31):** WhatsApp-native digest lost its delivery channel when WhatsApp deferred to v1.1. No Expo Push substitute. Dormant Path B users are not a Sprint 0 concern. Reopen in v1.1 with WhatsApp. | PS-D155 (04:31) | 2026-03-31 |
+| D110 | Path B trigger | **RESOLVED (04:31):** 5 jobs logged (no client contact gate required). Contextual in-app banner shown once, 60-day cooldown. Sprint 0 non-critical path item. | GS-D155 (04:31) | 2026-03-31 |
+| Sprint 0 | Timeline | **6.5 days** (revised from 5 days). Documents table work properly scoped at 3 days. Mentions légales gate + Supabase project must be pre-committed. | TA-D155 (04:31) | 2026-03-31 |
+
 | D142 | Sprint 0 gate | REFINED — mentions légales gate requires real committed strings (Louis's own business data in `legal/mentions-legales.ts`). TODO comments eliminated. Gate must be verified before Sprint 0 starts. 5-day timeline is CONDITIONAL on gate being met. | Pulse 00:58 (Product Strategist) | 2026-03-31 |
 
 ## New from Pulse 2026-03-31T00:58 — Three Specialist Debates (D57 CLOSED, D141, D142)
@@ -1587,7 +1590,7 @@ NONE — all three debates (D96, D138, D140) remain open. No items resolved this
 | Mentions légales gate (D142) | OPEN — Louis commits real strings to git |
 | Supabase EU project | OPEN — confirm supabase.com project created (EU region) |
 | Offline scope (D140) | RESOLVED — expo-sqlite + draft-mode |
-| Sprint 0 scope | 3 deliverables, 5 days |
+| Sprint 0 scope | 3 deliverables, **6.5 days** |
 
 ### Still Open
 
@@ -1615,13 +1618,13 @@ NONE — all three debates are OPEN and require Louis's input.
 
 **TA-D154 (Sprint 0 Timeline):** Technical Architect challenges 5-day estimate: "half-day to 1-day" for documents table + draft semantics is too aggressive; mentions légales + Supabase project gates remain uncommitted; if Louis hasn't done them before Sprint 0 starts, Sprint 0 becomes 5.5-6.5 days. **OPEN — Louis confirms gate status and buffer.**
 
-### Louis's Decisions Required (04:17)
+### Louis's Decisions Required (04:17 — RESOLVED in 04:31 Pulse)
 
 | Decision | Options | Sprint 0 Impact |
 |----------|---------|----------------|
-| D141 — Stay-in-touch digest | (A) Kill — no digest in Sprint 0; (B) Expo Push digest (14d dormant, Path B, bi-weekly) | Not a sprint blocker |
-| D110 — Path B threshold | (A) 3 jobs + client contact; (B) 5 jobs; (C) 30 days | Non-critical path, ~2-4h |
-| Sprint 0 timeline | (A) Confirm 5 days with gates done; (B) Acknowledge 5.5-6.5 days if gates not done | Acknowledges realistic buffer |
+| D141 — Stay-in-touch digest | **(A) RESOLVED — Kill D141** | Not a sprint blocker |
+| D110 — Path B threshold | **(B) RESOLVED — 5 jobs logged, no client contact gate** | Non-critical path |
+| Sprint 0 timeline | **RESOLVED — 6.5 days** (revised from 5 days) | Gates must be pre-committed |
 
 ### Sprint 0 Blockers — Unchanged
 
