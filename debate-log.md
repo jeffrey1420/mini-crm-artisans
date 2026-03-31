@@ -7096,3 +7096,343 @@ No product claim is made. No compliance exposure exists.
 
 *Last updated: 2026-03-31T00:12*
 
+---
+
+## Debate 129: D72 — The Compliance Liability Argument Proves Too Much
+
+**Challenge:** D72 (Month 4+) resolved on the basis that compliance liability blocks expert-comptable outreach until the product has been through a real-user compliance review cycle. This challenge accepts the compliance argument's validity while questioning its scope — and arguing it was applied to the wrong question entirely.
+
+### Growth Strategist — Compliance Liability Blocks REFERRAL Asks, Not Relationship Seeding
+
+**Assumption challenged:** That compliance liability justifies delaying ALL expert-comptable outreach to Month 4+.
+
+**The compliance argument is correct. It is also misapplied.**
+
+The Month 4+ resolution treated compliance liability as a blanket blocker on expert-comptable conversations. This conflates two fundamentally different actions:
+
+**Action 1 — Relationship Seeding (Week 1 of Month 1):**
+"Bonjour, je suis artisan en Normandie. Je construis un outil pour gérer les devis et factures. Je ne vous demande rien — juste si vous auriez 20 minutes pour parler des problèmes que vous voyez avec vos clients artisans."
+
+This creates zero compliance exposure. The expert-comptable is not endorsing anything. They're having a conversation about pain points. No product claims are made. No recommendation is requested. The only risk is 20 minutes of the accountant's time.
+
+**Action 2 — Referral Ask (Month 4+):**
+"Bonjour, je souhaiterais que vous recommandiez cet outil à vos clients artisans."
+
+This absolutely requires compliance vetting. And the Month 4+ timeline is probably even optimistic — a real compliance review cycle (test invoices under real conditions, review mentions légales accuracy, assess TVA multi-taux handling) takes 3-6 months minimum.
+
+The Month 4+ resolution conflated these two actions. It said: because Action 2 requires compliance vetting, Action 1 must wait until Month 4. This is like saying: because you can't ask someone to marry you on a first date, you shouldn't introduce yourself until the third date.
+
+**The compliance argument, applied consistently, actually supports Week 1 outreach:**
+
+If the expert-comptable's referral credibility depends on seeing real artisan invoices reviewed through a compliance cycle, then the expert-comptable needs to witness that cycle in real time — starting Week 1 of Month 1. An expert-comptable who follows Louis's product development from the beginning, sees early prototypes, and watches real artisans use the tool is far more likely to refer confidently at Month 4 than one who receives a polished pitch deck in Month 4 with no prior context.
+
+The compliance review doesn't happen in a vacuum. It happens within a relationship. Starting that relationship at Month 4 means the compliance review doesn't complete until Month 7-8. Starting at Week 1 means the compliance review is already underway by Month 4.
+
+**What Louis actually does in Week 1 of Month 1:**
+
+Not a sales pitch. Not a product demo. A single 20-minute conversation with his own expert-comptable, framed as:
+
+> "Je travaille sur un outil pour aider les artisans à gérer leurs devis et factures. Rien de prêt pour le moment — je fais de la découverte. Est-ce que vous verriez 20 minutes la semaine prochaine pour parler des problèmes que vous observez chez vos clients artisans?"
+
+That's it. One conversation. No deck. No claims. No ask.
+
+The goal is not referral. The goal is:
+1. To understand the expert-comptable's actual pain points with artisan invoicing
+2. To plant a seed: "when this is ready, would you be open to a look?"
+3. To begin the relationship that makes Month 4 compliance review feel like confirmation rather than audition
+
+By Month 4, the expert-comptable has seen the product develop in the background. They know Louis. They have context. The referral conversation requires far less from them because the relationship already exists.
+
+**The specific failure mode the Month 4+ resolution creates:**
+
+Louis waits until Month 4. He has a polished product and a pitch deck. He calls his expert-comptable: "Bonjour, j'ai un outil à vous montrer." The expert-comptable, who has never heard of this project, asks: "Combien d'artisans l'utilisent? Est-ce que mes clients l'utilisent? Est-ce que les factures sont conformes?" Louis has no answers. The expert-comptable delays any recommendation pending review. Louis waits 3-6 months. First referrals arrive at Month 7-10.
+
+Alternatively: Louis starts Week 1. The expert-comptable follows along. By Month 4, they have context. They have seen the product. They have watched artisans use it. The referral conversation at Month 4 is not "should I recommend this?" — it's "I've been watching this develop. Happy to send a note to a few clients." First referrals arrive at Month 5-6.
+
+**The compliance argument proves too much because it ignores asymmetric information:**
+
+D72 assumed that delaying outreach until Month 4 gives Louis time to build a product worth recommending. But the expert-comptable's question at Month 4 is not "is the product polished?" It is "do your clients actually use it and does it work?" A polished product with zero users fails this test. A rough product with 20 real users who had their invoices reviewed by their own accountants passes it. Louis cannot manufacture the social proof needed for expert-comptable referrals in Month 4. He can only start building the relationship that makes referrals organic.
+
+**What this means for the GTM calendar:**
+
+The expert-comptable referral channel is not a "Month 4+" channel. It is a "Month 1 relationship seeding → Month 4 referral" channel. The outreach happens in Week 1. The referrals happen in Month 4-5. The Month 4+ resolution implicitly treated expert-comptable outreach as a single event rather than a multi-month relationship process. It started the clock at the wrong moment.
+
+**VERDICT on D72:**
+
+RESOLVED — Expert-comptable outreach is a **Week 1 relationship-seeding motion**, not a Month 4+ sales motion.
+
+Specific actions for Week 1 of Month 1:
+1. Louis books his own expert-comptable for a 20-minute problem-discovery call. Frame: customer development, not product pitch.
+2. At that meeting, asks: "Would you be open to staying updated as this develops? Would you be open to a quick look when there's something to see?"
+3. If yes: adds expert-comptable to a lightweight update list (monthly email or LinkedIn message with one-sentence progress update — no ask)
+4. U12 playbook updated: Week 1 = relationship seeding. Month 4 = referral ask, contingent on real artisan users and compliance-reviewed invoices.
+
+The compliance liability argument is correct and decisive — but it applies to the referral ask, not to the relationship seeding. D72 resolved the wrong question.
+
+---
+
+## Debate 126 — Product Strategist CLOSES THE CASE: Monthly Is the Only Defensible Default
+
+**I want to close this debate with a definitive position, because the "annual as default" case keeps gesturing at seasonality benefits without quantifying them — while the acquisition friction case has real math behind it.**
+
+### Assumption I Am Challenging
+
+**"The seasonality benefit of annual outweighs acquisition friction."**
+
+This is presented as settled wisdom. It is not. It is an assumption dressed up as a conclusion.
+
+Let me stress-test it:
+
+**What is "seasonality churn"?** The idea that artisans cancel during slow months (winter for exterior work, August for everyone in France) and never return. Annual billing "locks them in" through the slow period.
+
+**The problem with this logic:** It assumes the cancellation is voluntary and preventable. But what if the artisan has literally zero income that month? He cannot pay €22/month if he has €400 in revenue and €400 in direct costs. "Lock in" doesn't generate money he doesn't have. He pauses, resents the charge he can't afford, and returns to a product he associates with financial pressure rather than relief.
+
+**The annual billing "solution" creates a different churn pattern:** Involuntary churn through payment failures in slow months. When the annual renewal hits in a slow period, the card declines. The artisan gets a "please update your payment" email he ignores. Account suspended. Same outcome as monthly cancellation — but with more resentment, because he already paid upfront and still couldn't keep it.
+
+**Monthly billing handles seasonality naturally:** Active months → sees value → pays €29. Slow months → pauses → no resentment → returns when work picks up. This is not churn. This is a subscription lifecycle working correctly for a lumpy-income customer.
+
+### The Acquisition Friction Case Is Not Theoretical — It Has Numbers
+
+The context states: "If annual converts at 60 and monthly at 100, annual-first costs 40% of potential customers before they try the product."
+
+This is not a worst case. It is optimistic. Here's why:
+
+**The French artisan cash flow reality is more extreme than modeled:**
+- France's auto-entrepreneur regime means quarterly revenue can swing 80-90% from quarter to quarter
+- Q3 (July-September) is effectively dead for exterior trades due to vacation culture
+- An artisan earning €6,000 in Q2 and €400 in Q3 cannot responsibly commit €260 upfront in Q3
+
+**"But €260/year is only €22/month!"** This framing is arithmetic deception. Yes, mathematically €260/12 = €21.67/month. But the *cash flow* question is: do you have €260 available in a single moment? For a micro-SMB with irregular income, the answer is frequently no. The monthly budget exists; the annual reserve does not.
+
+**The trust problem is compounded for v1:**
+- The product has no brand recognition
+- There are zero testimonials
+- The artisan has never paid anything for it
+- He is being asked to prepay for 12 months of a product he hasn't validated
+
+This is not "confidence in the product." It is optimistic billing based on hoped-for retention that annual billing cannot actually deliver.
+
+### My Position: Monthly Is the Default. Annual Is an Opt-In Discount.
+
+**The pricing page architecture should be:**
+1. **Primary:** €29/month — the default, the face of the product, the answer to "how much?"
+2. **Secondary:** €240/year (~€20/month, save €108) — offered as an opt-in for artisans who want to commit and save
+
+**Why this works:**
+- Monthly removes the acquisition barrier entirely
+- Annual appears as a natural saving for engaged users — not a requirement for access
+- The conversion moment is clean: artisan is already using the product, has seen value, is being offered a discount they can calculate ("I save €108/year")
+
+**This is how every successful SaaS handles it:** Netflix, Spotify, Dropbox — monthly default, annual discount for committed users. Not a single successful SMB SaaS leads with annual as the default for cash-constrained users.
+
+### The Conversion Moment: What It Should Look Like
+
+**Under monthly-as-default, the upgrade prompt appears at the right moment — after value is established:**
+
+**Trigger:** User hits 80% of Free tier limit (8 clients or 4 active devis)
+
+**Prompt design:**
+> "Vous utilisez [AppName] régulièrement — merci. Si vous savez déjà que cet outil vous fait gagner du temps, vous pouvez choisir de payer annually et économiser €108/an. C'est entirely optional."
+>
+> [Payer €29/mois] [Économiser €108 — payer €240/an]
+
+**Why this is the right conversion moment:**
+1. **Value established.** They've been using the product. They know it works.
+2. **Limit is relevant.** They're hitting the ceiling of the free tier — the upgrade is directly contextual.
+3. **Annual appears as a discount, not a requirement.** "Save €108" is a positive frame. "Commit to €260" is a negative one.
+4. **Self-selection works in your favor.** Artisans who choose annual are precisely the ones with stable enough cash flow to commit — and those are the customers you want to keep anyway.
+5. **No coercion.** No annual commitment required to access the product. No 14-day cooling-off period trap. No resentment.
+
+**What the annual-first conversion moment looks like (the current broken model):**
+- Landing page: "€260/year" (or worse, "€29/month or €260/year" with annual first)
+- Signup moment: "You'll pay €260 today"
+- User who just signed up for a free product, has zero experience with it, is asked for €260 before they've sent a single devis
+- This is the definition of acquisition friction
+
+### On the French Consumer Protection (L221-28) Argument
+
+The 14-day cooling-off period deserves its own mention because it is frequently dismissed but has real operational implications.
+
+**What L221-28 actually requires:** Remote contracts must include a 14-day withdrawal right. For annual subscriptions, this means:
+- User signs up for €260/year
+- User has 14 days to cancel and get a full refund
+- If they cancel at day 13, you have 14 days to process the refund
+- If you're processing hundreds of these manually, this is a significant operational burden
+
+**Monthly billing eliminates this entire category of operational complexity.** No cooling-off period confusion. No refund processing. No customer service overhead at the exact moment you're trying to establish a sustainable business.
+
+### What I Am NOT Arguing
+
+I am not arguing annual billing should be eliminated. It should exist as an opt-in discount for engaged users who want to commit and save. This is genuinely valuable for:
+- Artisans with stable, predictable revenue (some exist)
+- Artisans who have been using the product for months and want to lock in savings
+- Artisans who prefer annual commitments for tax/deduction reasons (common in France)
+
+But offering it as the *default* — or even as a *required alternative* presented alongside monthly — creates friction for the majority who need the monthly flexibility that matches their lumpy income.
+
+### Final Position
+
+**D99 should resolve to:** Monthly billing (€29/month) as the ONLY pricing option at launch. Annual billing (€240/year, save €108) offered as an opt-in discount at the conversion moment (80% of Free tier limit). No annual-first presentation. No "€260 today" barrier at signup.
+
+**The seasonality argument is real but misapplied.** Monthly billing handles seasonality through natural pause/resume cycles. Annual billing doesn't prevent seasonality churn — it converts it into payment failure and renewal resentment.
+
+**The acquisition math is decisive.** Every artisan who doesn't convert because of the €260 upfront cost is a customer you will never have the chance to serve. Monthly removes that barrier. Annual discount rewards the ones who stay.
+
+**This is the only pricing model that respects both the product's v1 status (no trust established) and the customer's cash flow reality (lumpy, project-based, unpredictable).**
+
+---
+
+*Last updated: 2026-03-31T00:26*
+*Debate 126 — Product Strategist CLOSES THE CASE submitted.*
+
+
+---
+
+## Pulse 2026-03-31T00:32 — Three Specialist Debates
+
+### New from This Pulse
+
+**Debate 126 (Product Strategist):** D99 reopened — "Monthly Is the Only Defensible Default." Challenged the assumption that annual billing solves seasonality churn. Argued acquisition friction (€260 upfront) exceeds seasonality benefit. Position: €29/month as primary, €240/year as opt-in discount at conversion. NOT YET RESOLVED.
+
+**Debate 129 (Growth Strategist):** D72 reopened — "The Compliance Liability Argument Proves Too Much." Challenged the assumption that compliance liability blocks ALL expert-comptable conversations. Argued it only blocks the referral ask, not relationship seeding. Week 1 outreach should be customer development conversations, not sales pitches. Position: Week 1 expert-comptable outreach as problem-discovery, not product pitch. NOT YET RESOLVED.
+
+**Debate 135 (Technical Architect):** D81/C reopened — "Server-Wins Is Revenue Loss Disguised as Simplicity." Challenged server-wins conflict resolution as inappropriate for job logging where data loss = revenue loss. Argued for sync_status: conflict detection in Sprint 0. NOT YET RESOLVED.
+
+**Debate 136 (Technical Architect):** Sprint 0 gate reopened — "Mentions Légales Cannot Be TODO Comments." Challenged the 2-item gate simplification for treating legal compliance as deferrable. Mentions légales must be committed as real strings (Louis's own data), not TODO comments. Gate = 2.5 items. NOT YET RESOLVED.
+
+**Debate 137 (Technical Architect):** D81/C reopened — "+1 Day Is a False Estimate." Challenged the "+1 day to Sprint 0" for expo-sqlite as never broken down into actual tasks. Real estimate: 1.5-2.5 days. Options: +2 days for full offline, or defer expo-sqlite to Sprint 1. NOT YET RESOLVED.
+
+### Challenged Assumptions This Pulse
+
+1. "Annual billing solves seasonality churn" — challenged by Product Strategist: creates involuntary churn via payment failures, acquisition friction exceeds retention benefit
+2. "Compliance liability blocks all expert-comptable outreach" — challenged by Growth Strategist: blocks referral ask, not relationship seeding
+3. "Server-wins conflict resolution is acceptable for v1" — challenged by Technical Architect: invisible data corruption, not acceptable for revenue-tracking job logging
+4. "Mentions légales as TODO comments is sufficient for Sprint 0" — challenged by Technical Architect: French legal invoicing requirements are non-negotiable
+5. "+1 day to Sprint 0 for expo-sqlite" — challenged by Technical Architect: real estimate is 1.5-2.5 days, not 1
+
+### Open Items Requiring Resolution
+
+| ID | Topic | Status | Key Question |
+|----|-------|--------|--------------|
+| D99 | Pricing: monthly vs annual default | REOPENED | €29/month primary OR €260/year primary? |
+| D72 | Expert-comptable timing | REOPENED | Week 1 outreach (customer dev) OR Month 4+ referral? |
+| D81/C | Offline architecture timeline | REOPENED | +1 day OR +2 days OR defer to Sprint 1? |
+| Sprint 0 Gate | Mentions légales gate items | REOPENED | Real strings OR TODO comments? |
+
+---
+
+*Last updated: 2026-03-31T00:32*
+
+
+---
+
+## Pulse 2026-03-31T00:26 — D81/C Reopened: Three Fatal Flaws in the Sprint 0 Gate
+
+---
+
+## Debate 135: D81/C — Server-Wins Is Not Acceptable for Job Logging Where Data Loss = Revenue Loss
+
+**Challenge:** D81/C (RESOLVED at 23:48) — expo-sqlite + background sync worker + server-wins conflict resolution was settled without challenge to the conflict resolution strategy. Technical Architect challenges server-wins as fundamentally inappropriate for the core use case.
+
+### Technical Architect — Server-Wins Is Revenue Loss Disguised as Simplicity
+
+**Assumption challenged:** "Server-wins conflict resolution is acceptable for v1."
+
+**Core argument:**
+
+The debate at 23:48 resolved server-wins as "simple enough for v1." This framing is backwards. Server-wins is the *easiest thing to implement* — not the *least harmful to the user*. These are not the same.
+
+Consider the actual job-site scenario that server-wins produces:
+
+Marc is a façadier. He arrives at a rural renovation site. No signal. He spends the morning logging his team: 4 workers, 6 tasks, photos of wall conditions, material notes. He's been using the app for 3 weeks. He trusts it. He creates a `jobs` record with `sync_status: pending` and starts adding line items. His phone has 12% battery. He rushes through the remaining entries, hits save, and heads to his next site.
+
+What he doesn't know: his colleague Sophie, back at the office, just updated the client's address in the web dashboard. The sync fires. Marc's offline job entry arrives at the server. Server has Sophie's updated client data. Server-wins means: Sophie's client update survives, Marc's job entry survives, but the *linkage* between them may break — or worse, the job entry silently adopts the *old* client ID that existed before Sophie's update, orphaning the job from the correct client record.
+
+What does Marc see? He opens the app that evening. The job is there. It says "Client: Martin Rénovations." But the contact information is wrong, or the address is stale, or the job is attached to the wrong project. He doesn't discover this until he's back at the job site with a client standing in front of him.
+
+**Server-wins is invisible corruption.** Last-write-wins with a sync_status flag means: the last write to any field wins globally. If Marc's phone writes `client_id` at 11:47 and Sophie's desktop wrote `address` at 11:46, the merged record has Sophie's address with Marc's client_id. This might be fine. It might not be. There's no UI that shows Marc what was resolved and how. He just sees "the data looks wrong" with no mechanism to recover it.
+
+**The "v1 is solo users" argument doesn't save server-wins.** Even solo users have this problem: they update a client on their phone, then update the same client on their desktop before sync completes. Server-wins means whichever device synced last wins — silently, invisibly. For a solo artisan with one device, this is rare. For anyone who checks their web dashboard on a laptop while standing at a job site with their phone — which is everyone — it's inevitable.
+
+**What v1 actually needs:** Last-write-wins with a conflict log. Not a full conflict resolution UI — that's v1.2. But a `sync_status: conflict` state that prevents silent overwrites, with a notification: "1 élément en conflit — vérifié dans Paramètres." Marc can live with occasional conflicts he has to manually resolve. He cannot live with silent data corruption that erodes his trust in the record.
+
+**The +1 day cost is real — but the cost of server-wins is higher.** The debate resolved: "no conflict UI until v1.2." That's the wrong call. Conflict *detection* (sync_status: conflict flag) is not the same as conflict *resolution UI*. Adding the flag costs half a day. Adding the notification costs another half day. Full conflict resolution UI (showing diffs, letting user pick) is v1.2. But silent server-wins until v1.2 means every sync is a potential silent data loss event.
+
+**VERDICT on D81/C:** REOPENED — Server-wins is insufficient for v1. Add `sync_status: conflict` detection (not resolution UI) in Sprint 0. Cost: +0.5 days. Never silently overwrite with server-wins. Conflict UI deferred to v1.2 as planned.
+
+---
+
+## Debate 136: Sprint 0 Gate — 2-Item Gate Creates Compliance Risk for a Solo Dev
+
+**Challenge:** Debate 127 simplified Sprint 0 gate to 2 items (Supabase project + mentions légales as inline TODO comments). Technical Architect challenges whether this simplification creates risk precisely where Sprint 0 is most vulnerable: legal compliance.
+
+### Technical Architect — Mentions Légales Cannot Be TODO Comments
+
+**Assumption challenged from Debate 127:** "Mentions légales drafted as inline comments" — this framing treats French legal invoicing requirements as placeholder content that can be filled in later.
+
+**Core argument:**
+
+**1. Mentions légales are not optional.**
+Article 441-3 of the French Code de commerce requires that every invoice include: nom et adresse du vendeur, numéro de TVA intracommunautaire, numéro RCS, tribunal de commerce compétent, and for micro-entrepreneurs:capacité professionnelle where applicable. These are not suggestions. Missing or incorrect mentions légales on a facture makes it legally invalid. An invalid facture cannot be used for VAT deduction by the buyer. This is not a UX problem — it's a legal liability that exposes the artisan to tax authority challenge.
+
+"Mentions légales as TODO comments" means: Louis ships Sprint 0 with `// TODO: Add SIRET, RCS, TVA intracom`. He sends his first invoice to a client. The invoice goes to his accountant. The accountant flags: "Your invoice is missing your RCS tribunal." Louis scrambles to fix it. Except the fix requires understanding which tribunal covers his commerce registration — which depends on his business structure, which depends on whether he's RCS or RM registered. This is not a 30-minute fix. This is legal research.
+
+**2. The simplification conflates "gate overhead" with "legal compliance scaffolding."**
+Debate 127 correctly identified that gates can be bureaucratic overhead for a solo technical founder. But it applied this logic uniformly — including to the one gate item that is non-negotiable legal infrastructure. Supabase project created? Deferrable. Mentions légales templates? Not deferrable to Sprint 1 when factures ship in Sprint 1 and invoices go out Day 1.
+
+**3. The 2-item gate misidentifies what Louis actually needs.**
+What Louis needs for Sprint 0 readiness is:
+- A `legal/` directory with 4 template strings (one per client type: particulier, professionnel France, EU B2B, hors-EU)
+- Each template is a `const string` with placeholders: `SIRET_PLACEHOLDER`, `TVA_PLACEHOLDER`, `RCS_PLACEHOLDER`
+- He fills these in from his business registration documents in under 1 hour
+- The TODO comments go INSIDE the template strings, not as comments in the codebase
+
+This is not 2-3 hours of legal research. Louis already knows his own business registration details. He's the one who'll use the app. The legal research was done when he registered his micro-enterprise.
+
+**4. Mentions légales as TODO comments in the codebase creates a discovery problem.**
+When Louis opens the app on Day 1 and sends his first devis to a test client, there's no legal text rendered anywhere. He has to remember to go find the TODO comments and fill them in. By the time he does that, he may have already sent 2-3 test devis with missing legal text. If one of those gets forwarded to a real client or accountant, it creates liability.
+
+**Proposed resolution:** Mentions légales templates should be committed to `legal/mentions-legales.ts` as filled-in strings (Louis uses his own business data for Sprint 0) with a comment noting "Replace with real values before production use." Not TODO comments. Actual content, even if Louis's personal data, so the app renders correctly from Day 1.
+
+**VERDICT on Sprint 0 Gate:** REFINE — 2-item gate is correct for process items (Supabase project). Mentions légales should be: committed as actual strings, not TODO comments. Louis fills in his own data in under 1 hour. Gate = 2.5 items: Supabase project + mentions légales committed as real content (not TODOs) + all other deferred items (shared-types, PDF scaffold, scope doc) Sprint 0 Day 1. The overhead is ~1 hour, not 3-4 hours.
+
+---
+
+## Debate 137: D81/C — "+1 Day to Sprint 0" Is a False Estimate for What Was Actually Resolved
+
+**Challenge:** D81/C (RESOLVED at 23:48) assigned "+1 day to Sprint 0" for expo-sqlite integration. Technical Architect challenges this estimate as non-existent — it was never derived from actual work units.
+
+### Technical Architect — The "+1 Day" Was Pulled From Thin Air
+
+**Assumption challenged:** That expo-sqlite + background sync worker adds exactly "+1 day" to Sprint 0.
+
+**Core argument:**
+
+The 23:48 resolution states: "Sprint 0 impact: +1 day." Where did this number come from? Looking at the debate: Debate 130 (D81/C) opens with "The '1-2 day cost' framing is the most dangerous settled assumption" — citing the Technical Architect in Debate 86. Then Debate 130 resolves with "+1 day" as if the concern was addressed. It wasn't. The "+1 day" was never broken down into actual tasks.
+
+Let's break it down honestly:
+
+**What "expo-sqlite + background sync worker" actually requires in Sprint 0:**
+
+1. `expo-sqlite` package installation + permissions configuration — 1 hour
+2. Database schema design: `clients`, `devis`, `line_items`, `sync_queue` — 2-3 hours (includes thinking through indexes, foreign keys, sync_status enum)
+3. SQLite wrapper functions (CRUD helpers with sync_status tracking) — 3-4 hours
+4. Background sync worker logic (connectivity detection + queue processing) — 4-6 hours (this is where complexity lives: partial sync, retry backoff, dead letter queue)
+5. Integration with existing devis flow (replace in-memory state with SQLite reads/writes) — 2-3 hours
+6. Error handling for sync failures (phone dies mid-write, OS kills process) — 2-3 hours
+7. Testing on physical device (cannot test offline sync in simulator reliably) — 2-3 hours
+
+**Real total: 1.5 to 2.5 days**, not 1 day. The estimate that appeared in Debate 130's verdict was aspirational, not derived.
+
+**The correct resolution:** Either budget the real 2 days (+2 days to Sprint 0), or cut expo-sqlite and accept the retry queue failure modes. There is no "+1 day" that ships production-grade offline persistence. The number doesn't exist.
+
+**The false estimate is dangerous because:** Louis will plan Sprint 0 against "+1 day" and discover at Day 8 that he's 1.5 days over. He'll either cut the sync reliability layer (returning us to the fragile retry queue) or ship incomplete offline functionality and discover the problems on a real job site.
+
+**VERDICT on D81/C:** REFINED — Sprint 0 offline scope requires honest timeline. Options:
+- **Option A (if +2 days acceptable):** Full expo-sqlite + background sync worker with proper error handling. 2-day buffer. Offline persistence that actually survives phone death.
+- **Option B (if 5-day Sprint 0 required):** Defer expo-sqlite to Sprint 1. Ship with in-memory state only. Mark clearly: "Sprint 0 offline is demonstration only — do not use for real job logging."
+- **Never:** Pretend "+1 day" gets you production offline. It doesn't.
+
+**The debate entry ends with a challenge to the gate simplification at 00:12:**
+Debate 127's 2-item gate resolution was correct in spirit (eliminate bureaucratic overhead for a solo dev) but wrong in execution (mentions légales as TODO comments is not a valid compliance shortcut). The real risk in Sprint 0 is not gate overhead — it's scope creep from under-engineered infrastructure. The offline architecture decisions (SQLite vs retry queue, conflict resolution strategy, sync worker reliability) are not gate items. They're Sprint 0 architecture. If they're not committed before Sprint 0 starts, they get re-litigated mid-sprint — which is where solo dev sprints die.
+

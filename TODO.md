@@ -1134,3 +1134,38 @@ The following were overengineered or wrong:
 - [ ] **D72/D91 NEW:** Expert-comptable referral conversations (NOT validation) remain Month 4+ with prerequisites: real beta users, testimonials, production-validated mentions légales. The distinction is: customer development (Month 1) ≠ sales referral (Month 4+).
 
 *Last updated: 2026-03-31T00:12*
+
+---
+
+## New from Pulse 2026-03-31T00:32 — Three Specialist Debates (D99, D72, D81/C)
+
+### Reopened (D99 Annual Billing, D72 Expert-Comptable, D81/C Offline Architecture)
+
+- **D99 (Annual billing — REOPENED again):** Product Strategist closes the case: monthly €29 is the ONLY defensible default. Annual €260/year creates acquisition friction (40% of potential customers won't pay upfront), creates involuntary churn at renewal via payment failures, and requires trust the product hasn't earned at v1. Monthly handles seasonality naturally through pause/resume cycles. Annual should be opt-in discount (€240/year, save €108) offered at conversion moment (80% Free tier limit hit). NOT YET RESOLVED.
+- **D72 (Expert-comptable timing — REOPENED again):** Growth Strategist challenges the compliance liability argument as applied to the wrong action. Compliance liability blocks the REFERRAL ASK (Month 4+), but NOT relationship seeding (Week 1). The expert-comptable's question at Month 4 is "do your clients use it and does it work?" — requires real users, not polish. Week 1 outreach = problem discovery conversations. Referral conversation = Month 4+ after real users exist. NOT YET RESOLVED.
+- **D81/C (Offline architecture — REOPENED again, THREE new challenges):**
+  - Debate 135: Server-wins conflict resolution is invisible data corruption, not acceptable for job logging where data loss = revenue loss. Add sync_status: conflict detection (+0.5 days). NOT YET RESOLVED.
+  - Debate 136: Mentions légales as TODO comments creates compliance discovery risk. Must be committed as real strings (Louis's own business data). Gate = 2.5 items, not 2. NOT YET RESOLVED.
+  - Debate 137: "+1 day to Sprint 0" for expo-sqlite was never broken down into tasks. Real estimate: 1.5-2.5 days. Options: +2 days for full offline, or defer to Sprint 1. NOT YET RESOLVED.
+
+### Challenged Assumptions This Pulse
+
+1. "Annual billing solves seasonality churn while being acquisition-neutral" — challenged by Product Strategist: €260 upfront is a barrier for cash-constrained artisans; monthly handles seasonality through natural pause/resume
+2. "Compliance liability blocks all expert-comptable conversations" — challenged by Growth Strategist: blocks referral ask only, not relationship seeding
+3. "Server-wins conflict resolution is acceptable for v1" — challenged by Technical Architect: invisible corruption, not acceptable for revenue-tracking
+4. "Mentions légales as TODO comments is a valid compliance shortcut" — challenged by Technical Architect: real strings with Louis's data required
+5. "+1 day to Sprint 0 for expo-sqlite" — challenged by Technical Architect: real estimate is 1.5-2.5 days when broken into actual tasks
+
+### New Action Items from This Pulse
+
+- [ ] **D99 NEW (Product Strategist):** Pricing page architecture: €29/month as PRIMARY and ONLY required option. €240/year as opt-in discount (save €108) shown below monthly at conversion moment only. No annual-first presentation. No "€260 upfront" at signup.
+- [ ] **D99 NEW:** Conversion prompt at 80% Free tier limit: "Vous utilisez [AppName] régulièrement — merci. Si vous savez déjà que cet outil vous fait gagner du temps, vous pouvez choisir de payer annually et économiser €108/an." [Payer €29/mois] [Économiser €108 — payer €240/an]
+- [ ] **D99 NEW:** Test "Payez quand vous êtes chargé" framing (seasonal alignment) vs standard billing. Could be stronger conversion argument than annual discount.
+- [ ] **D72 UPDATED:** Expert-comptable outreach = Week 1 Month 1 customer development conversations (problem discovery, relationship seeding). NOT a sales motion. NOT a product demo. Frame: "Je construis quelque chose dans ce domaine — quelles difficultés voyez-vous avec vos clients artisans?"
+- [ ] **D72 NEW:** Louis books his own expert-comptable this week for a 20-minute problem-discovery call. Bring: questions about invoicing compliance pain points, NOT a product pitch. Ask if they'd be open to updates as the product develops.
+- [ ] **D72 NEW:** Expert-comptable referral conversations stay Month 4+. Prerequisites: real beta users, testimonials, production-validated mentions légales. These prerequisites cannot be manufactured in Month 1-3 — they take time.
+- [ ] **D81/C NEW (Technical Architect):** Sprint 0 offline scope decision required before sprint starts. Options: (A) +2 days budget for full expo-sqlite + background sync + conflict detection, OR (B) defer expo-sqlite to Sprint 1, ship with in-memory state only, label clearly as "demonstration only."
+- [ ] **D81/C NEW:** If +2 days adopted: add sync_status: conflict detection in Sprint 0 (not just pending/synced). Half-day cost. Never silently overwrite with server-wins.
+- [ ] **D81/C NEW:** Sprint 0 gate updated: mentions légales must be Louis's own business data committed as real strings (not TODO comments). Estimated 1 hour to fill in. Supabase project created remains gate item 1.
+
+*Last updated: 2026-03-31T00:32*
