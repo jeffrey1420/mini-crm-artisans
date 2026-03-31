@@ -8581,3 +8581,115 @@ NONE — all debates require Louis input.
 
 *Last updated: 2026-03-31T02:43*
 *PS-D148 position paper pending at debate-ps-D148-pulse.md*
+
+---
+
+## Pulse 2026-03-31T02:59 — Three Specialist Debates (D149, D150, D151)
+
+---
+
+## Debate D149: WhatsApp Business API Does Not Belong in Sprint 0
+
+**Challenge:** D141 (Path B WhatsApp-as-primary-activation) and the proposal to include WhatsApp Business API in Sprint 0 notification architecture. Product Strategist challenges.
+
+### Product Strategist — Defer WhatsApp to v1.1, Expo Push Only in Sprint 0
+
+**Assumption challenged:** D141 — WhatsApp Business API is the "PRIMARY activation channel for Path B (~40-50% of target market)." This conflates acquisition with retention and ignores the Meta Business Verification timeline.
+
+**Core arguments:**
+
+1. **Meta Business Verification alone takes 2–14 business days.** This exceeds the 5-day Sprint 0 floor before a single line of code ships. WhatsApp Business Account setup, phone number compliance, and message template approval add another 3–5 days minimum. Sprint 0 cannot be both self-contained and dependent on Meta's approval queue.
+
+2. **At v1, there is no premium content to push via WhatsApp.** The Free tier IS the product at launch. D141's proposed use case — bi-weekly WhatsApp digest to dormant Path B users — requires content that doesn't exist at v1. Building the pipeline before the product delivers zero user-facing value.
+
+3. **Path B users have a retention problem, not an acquisition problem.** They downloaded the app, set up clients, sent quotes. They stopped opening it. A WhatsApp reminder doesn't recreate value — it reminds them of admin anxiety they already decided to ignore. WhatsApp cannot fix a broken value loop.
+
+4. **Expo Push reaches the same dormant users without Meta.** Push notifications via Expo reach Path B users directly on their device — faster to implement (days, not weeks), no third-party gatekeeper, no verification queue.
+
+5. **WhatsApp belongs in v1.1 where it delivers real value.** Once the core value loop is validated (devis → facture → relance), WhatsApp becomes the re-activation layer for users who have lapsed from push. Building WhatsApp on top of a validated product is sprint planning. Building it on top of a hypothesis is speculation.
+
+**Assumptions challenged:** D141's characterization of WhatsApp as Path B's "primary activation channel" — activation already happened (they downloaded and used the app). Path B's problem is retention, and WhatsApp cannot restore habit formation on top of a broken value loop.
+
+**Sprint 0 implications:** Expo Push only. WhatsApp Business API added in v1.1 sprint planning, with Meta Business Verification timeline factored in (2-week parallel track).
+
+---
+
+## Debate D150: Draft-Mode Semantics — The Only Architecturally Honest Sprint 0 Offline Choice
+
+**Challenge:** D140 — server-wins as offline fallback. Technical Architect challenges.
+
+### Technical Architect — Draft-Mode Semantics Eliminate Silent Data Destruction
+
+**Assumption challenged:** D86/D140 — "offline-capable" means edits are eventually applied to the live document, with server-wins as fallback conflict resolution. This treats offline editing as "same as online, just delayed." It is not.
+
+**Core arguments:**
+
+1. **A devis is a legally-standing document. Server-wins is silent document annihilation.** French devis establish contractual obligations under Code civil Art. 1127-1. When server-wins silently overwrites an artisan's offline edit (phone died mid-write), the artisan has no record of what was lost, the client may have already received the devis, and the legal standing is compromised. There is no remediation path because the event was silent.
+
+2. **Draft-mode removes the conflict by removing the overwrite.** Under draft-mode: offline edits are stored locally with `draft_status = pending_draft`. They do NOT overwrite the live server document. When connectivity returns, the artisan reviews pending drafts and explicitly confirms — only then does the draft become the live document. Phone death mid-draft = draft persisted in SQLite, recoverable on app reopen.
+
+3. **Draft-mode requires no conflict UI (+0.5 days, not +3-5).** Conflict UI (field-level versioning, comparison view, decision logic) costs 3-5 days. Draft-mode requires: a `draft_status` enum, a "pending drafts" list view, and a "confirm draft" action. This is CRUD extension, not conflict resolution.
+
+4. **Draft-mode matches artisan mental model.** The mental model of an artisan working across job sites: "I'm drafting this devis. When I'm done and back in signal, I'll send it." This is already a draft workflow. Server-wins fights this mental model. Draft-mode serves it.
+
+5. **Draft-mode is the correct layer for future conflict resolution.** If v1.2 implements field-level conflict detection, it operates on confirmed drafts — not ephemeral in-memory edits. Conflicts surface at the publish step, not the sync step.
+
+**Sprint 0 deliverable change:**
+- OLD: AsyncStorage + retry queues + server-wins fallback
+- NEW: expo-sqlite + draft_status enum + Pending Drafts UI + Confirm/Discard actions (+2.5 days total vs original Sprint 0)
+
+**Verdict:** D140 RESOLVED — draft-mode semantics. Accept as Sprint 0 offline architecture. Not view-only (removes primary value prop), not full conflict UI (deferred to v1.2). The architecturally honest middle path.
+
+---
+
+## Debate D151: Expert-Comptable Outreach Should Happen in Week 1, Not Week 3
+
+**Challenge:** D91/D145 — expert-comptable validation as solution-feedback at Week 3 (after working build). Growth Strategist challenges.
+
+### Growth Strategist — Week 1 Problem-Framing Conversations Before Sprint 0 Begins
+
+**Assumption challenged:** D91/D145 — expert-comptable feedback is most useful as *solution validation* (after working build, Week 3) rather than *problem framing* (before any code exists, Week 1). Both decisions assume the expert-comptable's primary value is reacting to what Louis built. This is the wrong kind of feedback.
+
+**Core arguments:**
+
+1. **Week 3 feedback arrives after the most expensive decisions are already made.** By Week 3, Louis has committed to Supabase schema design, Flutter state management, and architectural choices. Expert-comptable feedback at that point can only suggest adjustments — it cannot reframe the problem. Problem-framing conversations must happen before the schema is set.
+
+2. **"Real devis" makes feedback less malleable, not more valid.** A working devis shown to an expert-comptable is a solution artifact. The expert-comptable reacts to Louis's answer, not the problem. Feedback becomes: "move that field higher," "change the invoice number format." These are polish notes, not structural insights.
+
+3. **Expert-comptables have problem-domain knowledge Louis doesn't know he lacks.** BTP artisans invoice in specific ways. TVA auto-calculation must handle simultaneous rates (10% + 20%). SCI clients have distinct mention requirements. Mentions obligatoires for BTP are stricter than standard. Relance timelines are legally defined. None of this appears in a working app demo. All of it appears in a 30-minute problem-framing conversation — and directly shapes Sprint 0 decisions.
+
+4. **Week 1 concept conversations are zero-prep.** No demo to prepare, no production data to anonymize, no mockup to build. The conversation is: "I'm building a devis/facture tool for BTP artisans. What are the top problems your clients have? What do they consistently get wrong?" This takes 2-3 hours total (scheduling + conversation). It is the lowest-friction expert validation available.
+
+5. **Week 1 and Week 3 conversations are sequential and complementary, not competing.** Louis walks into Week 3 with domain-informed questions and sharper context. Sprint 0 is better because it was built on expert knowledge, not founder assumption.
+
+**5-Question Problem-Framing Script:**
+1. "What are the top 3 problems your artisan clients have with devis and factures — not software problems, but compliance or process problems?"
+2. "Where do artisans most often make TVA errors? Rate classification, calculation, or how it appears on the document?"
+3. "Do any of your BTP clients invoice to SCI or property companies? Special mention requirements for those clients?"
+4. "What does a correct relance process look like for an artisan with a 45-day payment term? What do most get wrong?"
+5. "If a solo artisan could only fix one thing in their devis/facture workflow, what would make the biggest difference for their compliance?"
+
+**Verdict on D139:** REFINED — Add Week 1 concept-only outreach (problem framing) before Sprint 0 begins. Week 3 product demo remains. Sprint 0 informed by expert domain knowledge. No delay to Sprint 0 — 2-3 hours total outreach time.
+
+---
+
+## Updated Decision Table (Partial — 02:59 Pulse)
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D40 | WhatsApp in Sprint 0 | RESOLVED — defer to v1.1. Expo Push only in Sprint 0. | 2026-03-31 |
+| D81 | Offline architecture | RESOLVED — draft-mode semantics. expo-sqlite + draft_status + Pending Drafts UI. | 2026-03-31 |
+| D139 | Expert-comptable timing | REFINED — Week 1 problem-framing (2-3h) before Sprint 0 begins. Week 3 demo remains. | 2026-03-31 |
+| D140 | Offline scope | RESOLVED — draft-mode semantics adopted. Server-wins rejected as unsafe for legally-standing devis. | 2026-03-31 |
+| D141 | WhatsApp as Path B activation | REFINED — WhatsApp is a retention layer, not acquisition. Path B activation at v1 = Expo Push. WhatsApp in v1.1 when premium content exists. | 2026-03-31 |
+
+### Still Open (Louis Decision Required)
+
+| ID | Topic | Options | Sprint 0 Impact |
+|----|-------|---------|-----------------|
+| D96 | Path A trigger | (A) 3 accepted devis from 3 distinct clients; (B) first accepted devis + 3 active clients | Post-Sprint 1 |
+| D110 | Path B trigger | (A) 3 jobs + client contact; (B) 3 jobs logged | Post-Sprint 1 |
+| D142 | Mentions légales gate | Louis commits real strings to git | BLOCKS Sprint 0 |
+| — | Supabase EU project | Confirm EU project live | BLOCKS Sprint 0 |
+
+*Last updated: 2026-03-31T02:59*

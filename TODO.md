@@ -227,23 +227,12 @@ All items below were resolved in the 15:17 pulse — see D60, D61, D62 above.
 - [x] RESOLVE D5: Free + €29 two-tier. Drop €49/€79. Value anchor: "2h/week = 1h labor = €29/month." No €19 SKU at launch.
 
 ### New from Pulse 2026-03-31T01:15 (D143, D144, D145)
-- [ ] **D40 NEW — WhatsApp Business API Sprint 0:** For Path B, WhatsApp is the primary activation channel, not optional. Sprint 0 notification architecture must include WhatsApp Business API as first-class delivery. This is the activation mechanism for ~40-50% of the target market (verbal-agreement artisans).
-- [ ] **D141 NEW — Path B digest spec:** WhatsApp Business API, bi-weekly (Day 14, 28, 42), max 3 digests, 14+ days dormant + ≥1 job logged + Path B. Plain text, user metrics reflected, single re-entry CTA, Louis contact. No upgrade prompts. Conversion by re-establishing habit until limit-hit fires.
+- [x] **D40 RESOLVED (Debate D149):** WhatsApp Business API DEFERRED to v1.1. Sprint 0 notification = Expo Push only. Meta Business Verification (2-14 days) exceeds Sprint 0 timeline. No premium content to push at v1. Path B activation via Expo Push at launch. WhatsApp added in v1.1 when premium content (digest, upgrade prompts) exists.
+- [ ] **D141 REFINED:** WhatsApp is a retention layer, not acquisition. Path B users stopped opening the app — WhatsApp cannot fix a broken value loop. Expo Push at launch reaches dormant users. WhatsApp in v1.1 as re-activation layer for users who have lapsed from push.
+- [x] **D81/D140 RESOLVED (Debate D150):** Draft-mode semantics adopted for Sprint 0 offline. Offline edits queue as `pending_draft` — never overwrite live server document until artisan explicitly confirms. Phone death = draft recoverable in SQLite. Server-wins rejected as unsafe for legally-standing devis. Sprint 0 offline = expo-sqlite + draft_status enum + Pending Drafts UI (+2.5 days total).
+- [x] **D139 REFINED (Debate D151):** Expert-comptable outreach MOVED to Week 1 (problem-framing, 2-3h total). Week 3 product demo remains. Sprint 0 informed by expert domain knowledge. 5-question script: TVA errors, BTP specifics, SCI clients, relance norms, highest-impact fix.
 - [ ] **D110 REFINED — Path B soft limit:** Define Free tier soft limit for Path B (e.g., 1 client / 3 jobs cap) that creates blocked workflow equivalent to Path A's limit-hit. Usage-based triggers (45d/7jobs/5clients) fire without felt friction — Sprint 0 must specify this.
 - [ ] **D138 REFINED — Annual as DEFAULT checkout:** Present annual €240/year = €20/month as DEFAULT. Monthly €29 is fallback. Stripe annual plan with monthly installments. Framing: "La plupart de nos artisans préfèrent l'abonnement annuel." Remove opt-in discount language.
-- [ ] **D139 REFINED — Expert-comptable MOVED to Week 3:** Sprint 0 = build only. Expert-comptable Week 3 with working build + real devis. Louis's own accountant = Week 3 validation. Week 1 hours reallocated to Sprint 0.
-- [ ] **D140 REFINED — Expo-sqlite required Sprint 0:** Decision: (+2 days) OR (label Sprint 0 offline as demonstration-only). AsyncStorage loses data on phone death (primary use case). Expo-sqlite + background sync is production-grade.
-
-### New from Pulse 2026-03-31T01:29 (D40/D139/D140 challenged — OPEN)
-
-**D40 CHALLENGED (PS-Pulse-0129):** Product Strategist challenges WhatsApp Business API in Sprint 0: Meta Business Verification alone takes 2-14 days (blowing 5-day sprint), delivers zero value at v1 (no premium content to push), and conflates acquisition with retention. Position: defer WhatsApp to v1.1; Sprint 0 notification = Expo Push only.
-- [ ] **D40 DECISION NEEDED:** Louis chooses — WhatsApp in Sprint 0 (accept timeline risk) OR defer to v1.1 (Expo Push only in Sprint 0). Gates Sprint 0 notification architecture.
-
-**D139 CHALLENGED (GS-Pulse-0129):** Growth Strategist challenges Week 3 expert-comptable timing: Week 3 produces solution-feedback (reacting to what Louis built), not problem-framing feedback (what he should have built). Position: add Week 1 concept-only outreach before Sprint 0 begins.
-- [ ] **D139 DECISION NEEDED:** Louis prepares 5-question problem-framing script for expert-comptable conversations this week. Sprint 0 decisions informed by expert-comptable problem domain knowledge, not just founder assumptions.
-
-**D140 CHALLENGED (TA-Pulse-0129):** Technical Architect challenges server-wins as offline sync fallback: silently annihilates artisan's offline edits (phone dies mid-write, no conflict UI, no error). Position: (A) full offline with field-level conflict detection + conflict UI (+3-5 days), or (B) view-only offline for Sprint 0.
-- [ ] **D140 DECISION NEEDED:** Louis chooses offline scope: (A) view-only offline (browse cached, no offline editing, honest engineering), or (B) full offline editing with expo-sqlite + conflict UI (+3-5 days to Sprint 0). Gates Sprint 0 timeline.
 
 - [ ] A/B test pricing page value anchor: "€1/jour" vs "une heure de main d'oeuvre" framing with beta users before launch (Debate 33)
 - [ ] Engagement channel for Free tier onboarding: push notifications + optional WhatsApp opt-in (NOT email). Replace Growth Strategist's 3-email Days 1-7 sequence. (Debates 38/40)
@@ -733,8 +722,7 @@ The following were overengineered or wrong:
 - **D88 (8pm notification):** REFINED — Fixed 8pm notification REPLACED with: configurable notification window (morning/midday/evening, user chooses in onboarding) + event-driven triggers (devis pending 3+ days, facture 15+ days unpaid) + timezone awareness + 10pm night guardrail. (Debate 88)
 
 ### New Action Items from this pulse:
-- [ ] **D81 NEW:** Sprint 0 = offline-capable. Implement optimistic UI (immediate local feedback, background server sync), retry queues with exponential backoff, AsyncStorage cache for last 10 clients/recent devis. No WatermelonDB until v1.2.
-- [ ] **D81 UPDATED:** Sprint 0 timeline reverts to 5-7 days (was 8-10 with offline-first). Those recovered 3-5 days go to devis flow and real device testing. NOTE: D90 further updated to 5.5-6.5 days — see D95 challenge re: solo dev parallelization.
+- [ ] **D81 RESOLVED:** Sprint 0 offline = draft-mode semantics (Debate D150). expo-sqlite + `draft_status` enum (confirmed/pending_draft) + Pending Drafts UI + Confirm/Discard actions. Offline edits do NOT overwrite live server document until artisan explicitly confirms. Phone death = draft recoverable. Server-wins fallback REJECTED — unsafe for legally-standing devis. Sprint 0 timeline: +2.5 days total.
 - [ ] **D85 UPDATED:** Expert-comptable outreach DEFERRED to Week 4-6. Prerequisites: 10-20 active beta users, 1-2 testimonials, production mentions légales, sample BTP devis. Week 1: claim GetApp/Capterra profiles only.
 - [ ] **D88 NEW:** Add notification preference to onboarding flow — "Quand voulez-vous recevoir vos rappels?" Morning / Midday / Evening. Default to user's stated preference.
 - [ ] **D88 NEW:** Replace daily 8pm financial digest push with event-driven triggers: (1) devis unanswered 3+ days → "Ce devis attend une réponse depuis 3 jours", (2) facture unpaid 15+ days → "Cette facture est impayée depuis 15 jours"
