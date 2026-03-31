@@ -1785,3 +1785,77 @@ NONE — all three debates remain OPEN with new arguments. Louis decisions still
 | D138 — Annual billing | **OPEN** | Ship with €29, validate through payment behavior (PS recommendation) |
 
 *Last updated: 2026-03-31T05:59*
+
+## New from Pulse 2026-03-31T06:10 — Sprint 0 Exit Criteria, D138 Annual Billing
+
+### Resolved This Pulse
+
+NONE — no resolutions this pulse. Three debates filed.
+
+### Three New Position Papers Filed
+
+| File | Author | Topic |
+|------|--------|-------|
+| debate-gs-Sprint0Timing-0610.md | Growth Strategist | Sprint 0 beta validation is validation theater — n=5 meaningless, real validation is post-Sprint 1, technical gate only |
+| debate-ta-Sprint0Exit-0610.md | Technical Architect | Sprint 0 exit: beta gate is uncontrollable blocker, technical gate is correct |
+| debate-ps-D138-0610.md | Product Strategist | Annual billing: hidden-link is correct launch decision |
+
+### Cross-Cutting Consensus: GS + TA Converge on Sprint 0 Exit
+
+Both Growth Strategist and Technical Architect independently reached the same conclusion: **beta user completion is the wrong Sprint 0 gate.**
+
+- Sprint 0 validates the build works, not that the market wants it
+- Beta user gate introduces uncontrollable external dependency
+- Technical gate (builds, installs, no crash, PDF correct) is binary and Louis-verifiable
+- Behavioral validation moves to post-Sprint 1 with real distribution
+
+**This directly conflicts with the 04:49 decision: "5 beta users complete the happy path."**
+
+### Challenged Assumptions This Pulse
+
+1. **"5 beta users complete the happy path" is a valid Sprint 0 exit gate** — challenged by both GS and TA: beta availability is outside Louis's control, n=5 is statistically meaningless, guided conditions ≠ real-world usage, this is validation theater not evidence
+2. **"Annual billing should be a prominent opt-in alongside monthly €29"** — challenged by Product Strategist: checkout context is wrong moment for €240 anchor, cohort analysis meaningless at n=5, hidden-link is cleaner experimental design
+
+### Sprint 0 Exit Criteria — Louis Must Decide
+
+| Option | Description | Sprint 0 Impact |
+|--------|-------------|----------------|
+| **A (current 04:49)** | 5 beta users complete happy path | Beta acquisition becomes Sprint 0 blocker |
+| **B (GS+TA consensus)** | Technical gate only — builds, installs on 3 real Android devices, no crash, PDF correct | Beta moves to post-Sprint 1 |
+
+### D138 Annual Billing — Louis Must Decide (One-Line Decision)
+
+| Option | Description |
+|--------|-------------|
+| **A** | Monthly €29 ONLY at launch (PS-D152) |
+| **B** | Monthly €29 primary + prominent Annual €240 opt-in at checkout (GS-D153) |
+| **C** | Monthly €29 primary + hidden-link Annual €240 available in account settings (PS-D138-0610, recommended by PS) |
+
+### Sprint 0 Blockers — Updated Status (06:10 Pulse)
+
+| Blocker | Status | Louis Action Required |
+|---------|--------|---------------------|
+| Mentions légales gate (D142) | **RESOLVED** — developer-generated generic template | None — Sprint 0 unblocked |
+| Supabase EU project | **OPEN** | Confirm at supabase.com with EU/Frankfurt region |
+| Sprint 0 beta exit criteria | **OPEN — CONFLICT** | Louis: accept technical-only gate (GS+TA consensus) or maintain behavioral gate (04:49)? |
+| D138 — Annual billing | **OPEN** | Louis: one of A / B / C above |
+| Beta user acquisition | **OPEN** | Ask Gabin + Maëli ONE question; expert-comptable call this week |
+
+### Sprint 0 Timeline: 6.5 Days (Confirmed)
+
+Sprint 0 scope: client file + devis flow + offline (expo-sqlite draft-mode) + mentions légales + PDF + WhatsApp sharing.
+
+- Days 1-2: offline architecture + devis flow
+- Day 3: Supabase sync
+- Days 4-5.5: mentions légales + Supabase setup (parallel) + buffer
+- Days 5.5-6.5: real device testing, PDF review, smoke test
+
+### Key Unchanged Decisions (Still Valid)
+
+- D96: Path A trigger = first `facture.created`
+- D110: Path B trigger = 5 jobs logged, no client contact gate, contextual banner
+- D140: Offline = expo-sqlite + draft-mode semantics
+- Sprint 1 conversion UX: Path A = celebratory modal; Path B = informational banner
+- Expert-comptable Week 1: problem-framing only, no product demo
+
+*Last updated: 2026-03-31T06:10*

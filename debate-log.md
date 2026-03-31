@@ -10047,7 +10047,146 @@ Louis should run a micro WTP experiment (even with 10-15 beta users) before deci
 - [ ] **Beta Users NEW — Sprint 0 exit criteria specification:** Louis defines "beta user" as currently-practicing artisan with at least one active client relationship. Document this in Sprint 0 handoff doc before recruiting beta users.
 
 *Last updated: 2026-03-31T05:46*
-$
+
+---
+
+## Pulse 2026-03-31T06:10 — Three Specialist Debates (Sprint 0 Exit Criteria, D138 Annual Billing)
+
+---
+
+## Debate GS-Sprint0Timing-0610: Sprint 0 Beta Validation Is Validation Theater
+
+**Challenge:** The Sprint 0 exit criteria requires "5 beta users complete the happy path without assistance." Growth Strategist challenges this as the wrong instrument for the stage.
+
+### Growth Strategist — Beta Validation Produces Feeling, Not Evidence
+
+**Assumption challenged:** "5 beta users complete the happy path without assistance" is a meaningful Sprint 0 exit gate.
+
+**Core argument:**
+
+1. **n=5 is statistically and commercially meaningless.** Self-selected beta users from Louis's network are not a random sample of 45-55yo French artisans. Guided test conditions bear no resemblance to real-world usage. A 40% crash rate could be missed; a 100% success rate could be meaningless.
+
+2. **Real validation requires real distribution infrastructure — which doesn't exist until Sprint 1.** A landing page that communicates value, real install dropout data, WhatsApp sharing behavior, and actual conversion behavior cannot be observed with 5 hand-picked users. Sprint 0 validates the code runs; Sprint 1 validates the thing sells.
+
+3. **The Sprint 0 beta criterion is founder ego disguised as process.** "5 beta users confirmed" produces emotional relief and commitment bias. The team has emotionally invested before the product has real users. No durable data asset is created.
+
+4. **The correct Sprint 0 gate is technical, not behavioral.** Build succeeds. APK installs on 3 real Android devices. Devis creation flow completes end-to-end. PDF export produces correct output. No crashes during 10-minute smoke test. Binary, reproducible, Louis-verifiable alone.
+
+**Verdict on Sprint 0 exit criteria:** OPEN — Growth Strategist proposes eliminating beta user completion as Sprint 0 gate. Replace with technical gate. Behavioral validation moves to post-Sprint 1 with real distribution.
+
+---
+
+## Debate TA-Sprint0Exit-0610: Sprint 0 Exit Criteria — Beta Dependency Is the Wrong Gate
+
+**Challenge:** The beta user gate introduces a blocker Louis cannot control. Technical Architect argues for technical exit criteria.
+
+### Technical Architect — Beta User Gate Introduces an Uncontrollable Blocker
+
+**Assumption challenged:** "5 beta users complete the happy path" is the correct Sprint 0 exit criterion.
+
+**Core argument:**
+
+1. **Beta user availability is not within Louis's control.** Expert-comptable referrals are 3-6 weeks away. Gabin/Maël networks are unverified. Grinto clients are wrong ICP (B2B SaaS clients, not field artisans). Sprint 0 has a fixed time budget; beta user availability does not. Gate could stall Sprint 0 indefinitely.
+
+2. **Technical gates are measurable, repeatable, and not subject to social bias.** Binary tests: APK installs on Android 12/13/14 without crash. Devis creation completes with test data. PDF export is readable. No unhandled exceptions. No judgment call, no interpretation.
+
+3. **Beta users without real client relationships produce theater.** Real validation requires real business context: real client lists, real French business terminology, real TVA calculations, real mentions légales. Friends and family doing a favor cannot provide this.
+
+4. **Sprint 0 cannot simulate field conditions.** WhatsApp sharing from a real Android device, low-bandwidth connectivity on-site, 45-55yo smartphone literacy — only production traffic validates these. Sprint 0's job is technically sound build; real validation is post-launch.
+
+**Proposed Sprint 0 exit (Technical Architect):**
+- Technical gate (required, Louis-only): APK installs and launches on Android 12/13/14 without crash. Devis flow completes with test data. PDF export produces correct document. No unhandled exceptions on first launch.
+- Beta engagement: post-Sprint 0 parallel activity, not a Sprint 0 gate.
+
+**Verdict on Sprint 0 exit criteria:** OPEN — Technical Architect agrees with Growth Strategist that beta user gate is wrong. Both propose technical-only gate. Neither has issued a formal resolution; both positions filed.
+
+---
+
+## Debate PS-D138-0610: Annual Billing — Hidden-Link Is the Correct Launch Decision
+
+**Challenge:** GS-D153 proposed Monthly €29 primary + Annual €240 prominent opt-in at checkout. Product Strategist argues hidden-link annual is better.
+
+### Product Strategist — Hidden-Link Tests Demand Without Polluting Primary Conversion
+
+**Assumption challenged:** "Annual billing should be a prominent opt-in option at checkout alongside monthly €29."
+
+**Core argument:**
+
+1. **Checkout context is the wrong moment for annual anchor pricing.** €240 triggers "significant purchase" psychology. €29 triggers "coffee money" psychology. At first conversion with an unproven product and skeptical artisan demographic, surfacing annual prominently suppresses monthly conversion — it doesn't drive annual uptake.
+
+2. **Cohort analysis with n=5 beta users is statistically meaningless.** Annual renewal signal takes 12 months. Monthly churn fires in 30 days. With n=5, delayed signal is worse than no signal — it produces false confidence while burning runway.
+
+3. **Hidden-link is a clean experimental design.** Monthly-primary CTA is uncontaminated. Annual available via settings/account page. If 1 in 5 beta users independently finds and selects annual, there's genuine demand worth a proper upsell flow. If 0, monthly-only is confirmed. Zero anchoring cost. Clean signal.
+
+4. **"Seasonal preference for annual" is unvalidated.** Hidden-link tests the hypothesis without betting the checkout conversion rate on it.
+
+**Proposed resolution (Product Strategist):**
+- Primary CTA: Monthly €29 — featured, single action
+- Annual €240: Available in account settings/billing section — not at checkout
+- Demand signal: analytics track whether any user navigates to annual option within 30 days
+- Post-launch (month 3+): if hidden-link uptake ≥ 1 in 10, commission proper annual upsell flow
+
+**Verdict on D138:** OPEN — Three positions now on table: (A) Monthly-only at launch (PS-D152), (B) Monthly-primary + prominent annual opt-in (GS-D153), (C) Monthly-primary + hidden-link annual (PS-D138-0610). Louis must decide.
+
+---
+
+## Cross-Cutting Consensus This Pulse
+
+**Growth Strategist and Technical Architect converge on Sprint 0 exit criteria:**
+
+Both independently reach the same conclusion: beta user completion is the wrong Sprint 0 gate. Beta user validation is a post-Sprint 1 activity with real distribution. Sprint 0 gate should be purely technical.
+
+This represents a direct challenge to the prior decision (04:49 pulse): "5 beta users complete the happy path without assistance."
+
+**Decision conflict this creates:**
+
+| Source | Sprint 0 Exit Criterion |
+|--------|------------------------|
+| 04:49 pulse | 5 beta users complete happy path |
+| GS-Sprint0Timing-0610 | Technical gate only (builds, installs, no crash) |
+| TA-Sprint0Exit-0610 | Technical gate only (builds, installs, no crash) |
+
+**Status: OPEN — Louis must decide between behavioral gate (04:49) vs technical-only gate (0610 consensus).**
+
+---
+
+## Updated Decision Table (Partial — 06:10 Pulse)
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D138 | Annual billing | OPEN — three positions: (A) monthly-only (PS-D152); (B) monthly-primary + prominent annual opt-in (GS-D153); (C) monthly-primary + hidden-link annual (PS-D138-0610). Louis must decide. | 2026-03-31 |
+| Sprint 0 exit | Beta gate | OPEN — 04:49 criterion (5 beta users complete happy path) challenged by GS+TA consensus. Technical-only gate proposed. Louis must decide. | 2026-03-31 |
+| D142 | Mentions légales gate | RESOLVED — developer-generated generic template. Louis has no action required. Gate: UNBLOCKED. | 2026-03-31T05:46 |
+| D140 | Offline architecture | RESOLVED — expo-sqlite + draft-mode semantics. 6.5-day Sprint 0. | 2026-03-31T04:31 |
+| D110 | Path B trigger | RESOLVED — 5 jobs logged, no client contact gate. Contextual in-app banner, 60-day cooldown. | 2026-03-31T04:31 |
+| Beta Users | Definition | OPEN — "currently practicing artisan with ≥1 active client" (proposed) vs "anyone who has been a practicing artisan and can articulate the problem" (TA position). Louis must define. | 2026-03-31 |
+
+### Position Papers Filed This Pulse
+
+| File | Author | Topic |
+|------|--------|-------|
+| debate-gs-Sprint0Timing-0610.md | Growth Strategist | Sprint 0 beta validation is validation theater |
+| debate-ta-Sprint0Exit-0610.md | Technical Architect | Sprint 0 exit: beta gate is wrong instrument |
+| debate-ps-D138-0610.md | Product Strategist | Annual billing: hidden-link is correct launch decision |
+
+### New from This Pulse
+
+**Sprint 0 exit criteria — Louis decision required:**
+- Option A (current): 5 beta users complete happy path without assistance (04:49 pulse criterion)
+- Option B (GS+TA consensus): Technical gate only — builds, installs on 3 real Android devices, no crash, PDF correct, no unhandled exceptions. Beta engagement moves to post-Sprint 0 parallel activity.
+
+**D138 Annual billing — Louis decision required:**
+- Option A: Monthly €29 ONLY at launch (PS-D152)
+- Option B: Monthly-primary + prominent annual opt-in (GS-D153)
+- Option C: Monthly-primary + hidden-link annual available (PS-D138-0610)
+
+**Beta Users definition — Louis decision required:**
+- Option A: Currently practicing artisan with ≥1 active client (prior)
+- Option B: Anyone who has been a practicing artisan and can articulate the problem (TA-0559)
+
+---
+
+*Last updated: 2026-03-31T06:10*
 
 ## Pulse 2026-03-31T05:59 — PS-WTP-0559
 
