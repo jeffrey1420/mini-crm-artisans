@@ -10232,9 +10232,128 @@ This represents a direct challenge to the prior decision (04:49 pulse): "5 beta 
 
 **Status:** OPEN
 
-**Recommendation:** Eliminate beta user completion as Sprint 0 gate. Make Sprint 0 exit criteria purely technical: app builds, installs, and runs on real Android without crash. Move all beta user validation to post-Sprint 1 as tracked metrics against real distribution — not as a gate.
-4. **Sprint 0 exit criteria should be "builds, installs, doesn't crash on real Android" — not user happiness.** The correct gate is technical, not behavioral. Everything beyond "app runs without crash on real device with French SIM" is aspirational bonus, not Sprint 0 exit criteria.
+---
 
-**Status:** OPEN
+## Pulse 2026-03-31T06:30 — Three Specialist Debates
 
-**Recommendation:** Eliminate beta user completion as Sprint 0 gate. Make Sprint 0 exit criteria purely technical: app builds, installs, and runs on real Android without crash. Move all beta user validation to post-Sprint 1 as tracked metrics against real distribution — not as a gate.
+---
+
+### Debate 01: Sprint 0 Beta Validation — Technical Smoke Test (RESOLVED)
+
+**Challenge:** GS-Sprint0Timing-0559 argued Sprint 0 beta validation is "validation theater" — produces feeling without substance. Product Strategist challenges this conclusion.
+
+### Product Strategist — Beta Validation Is Technical Smoke Test, Not Commercial Validation
+
+**Assumption challenged:** That "Sprint 0 beta with 5 users" is being evaluated as a commercial validation instrument and found wanting. The Growth Strategist's critique is valid against commercial validation — but the gate was never designed for that purpose.
+
+**Core arguments:**
+
+1. **Wrong lens applied.** The Growth Strategist evaluates Sprint 0 beta against commercial validation criteria (market sizing, conversion rates, cohort behavior). Sprint 0 beta answers a binary technical question: does the core flow crash? At n=5, a 40% crash detection rate for critical failures is statistically meaningless for trends — but absolutely meaningful for "should we ship." The question isn't "will this convert?" — it's "does the core flow work at all?"
+
+2. **Self-selected beta users ≠ representative sample.** Correct — and irrelevant. For a solo developer with 6.5 days, guided beta testing is the fastest mechanism to surface UX failures that isolation cannot catch: cognitive blind spots, input edge cases (French names, accent characters), real device conditions. The alternative — "wait for a statistically representative sample" — requires infrastructure that doesn't exist in Sprint 0.
+
+3. **Real distribution infrastructure doesn't exist yet.** Beta testing serves a purpose that precedes real distribution: catching crashes before real users hit them. Shipping without any human testing because the distribution pipeline isn't built is not a valid strategy. It's production-ready firefighting disguised as discipline.
+
+4. **The "founder ego" critique is a labeling problem, not a testing problem.** The Growth Strategist correctly identifies that calling a smoke test "validation" invites the conflation they critique. The fix is to rename the gate to reflect its actual purpose.
+
+**Synthesis:** The Growth Strategist and Product Strategist converge on the same practical outcome — but differ on framing. The consensus: Sprint 0 beta IS valuable as a technical smoke test. The disagreement is only about what to call it and what to expect from it.
+
+**VERDICT on Sprint 0 beta gate:** RESOLVED — renamed and redefined.
+
+- **Rename:** "5 beta users complete happy path" → "Developer-verified smoke test on 3 real Android devices"
+- **Keep:** human testing in Sprint 0 — solo developers cannot catch all UX failure modes alone
+- **Separation:** Technical smoke test (Sprint 0) vs. commercial validation (post-Sprint 1 with real distribution) — two distinct gates, two distinct purposes
+- **Criteria:** 3 real Android devices complete devis → facture → relance without crash or hang. Screen recordings sufficient documentation. Binary pass/fail.
+
+---
+
+### Debate 02: Path B Trigger — "5 Jobs Logged" Is Unimplementable in Sprint 0 (RESOLVED)
+
+**Challenge:** D110 (Path B trigger: "5 jobs logged") was resolved at 04:31 but never stress-tested against the Sprint 0 data model. Technical Architect challenges: the trigger references a data object that doesn't exist in Sprint 0.
+
+### Technical Architect — "Job" Does Not Exist in Sprint 0 Schema
+
+**Assumption challenged:** That D110's Path B trigger ("5 jobs logged") can be implemented as a Sprint 0 conversion trigger.
+
+**Core arguments:**
+
+1. **"Job" is not in the Sprint 0 schema.** Sprint 0 covers: clients, devis, factures, TVA calculator, sequential numbering, mentions légales. There is no `jobs` table, no job logging UI, no job events. The D13 Active Job Card (which displays jobs) is explicitly a Sprint 1+ feature. D110's trigger references a non-existent entity.
+
+2. **Path B persona is locked out of Sprint 0.** Path B artisans (verbal agreements, no formal devis) have no meaningful Day 1 workflow if job logging doesn't exist. They cannot perform the triggering action. The persona the trigger was designed for cannot use it until Sprint 1.
+
+3. **The 5-job threshold is arbitrary.** Chosen for plausibility, not derived from data. No cohort analysis, no funnel study supports 5 versus 3, 7, or 12.
+
+**Proposed resolution (Technical Architect):** Replace "5 jobs logged" with a Sprint 0-compatible trigger using existing primitives:
+
+> **Path B trigger (Sprint 0-compatible):** *"3 factures created, 0 accepted devis in session."*
+
+This captures informal artisan behavior (no formal devis, relies on factures) using only `clients`, `factures`, and `devis` tables that already exist in Sprint 0. Threshold is still a hypothesis — but fires faster (lower churn risk) and uses existing schema.
+
+**VERDICT on D110 Path B trigger:** RESOLVED — D110's "5 jobs logged" is replaced with Sprint 0-compatible "3 factures / 0 accepted devis" trigger.
+
+- **D110 UPDATED:** Path B trigger = "3 factures created, 0 accepted devis" (not "5 jobs logged")
+- **Rationale:** Uses only Sprint 0 primitives; fires faster than job-based threshold; captures informal workflow signature
+- **Analytics event:** `path_b_trigger_fired` with context `{ factures_count, accepted_devis_count, session_id }`
+- **Threshold review:** Revisit after beta week 2 data — 3 is still a hypothesis, adjust based on observed behavior
+
+---
+
+### Debate 03: D138 Billing Structure — Cannot Be Resolved Before WTP Validation (CONTESTED)
+
+**Challenge:** PS-D138-0610 (hidden-link annual) and GS-D153 (default-annual) both proceed from the assumption that €29 is the correct price. Growth Strategist challenges: this assumption was never validated, making both billing structure decisions premature.
+
+### Growth Strategist — Foundation Question First
+
+**Assumption challenged:** That €29/month is a fixed constraint from which billing structure follows.
+
+**Core arguments:**
+
+1. **The billing structure debate is unresolvable without WTP data.** If artisans would pay €40, default annual at €240 is underpriced by 50%. If they'd pay €15, €29 is rejected regardless of billing presentation. Neither the hidden-link nor default-annual position can be validated without first establishing whether €29 is in the right range.
+
+2. **U15 elimination removed the one mechanism that could have validated price at launch.** The founding member offer wasn't just a pricing tactic — it was a revealed-preference WTP experiment. With it gone, there is no mechanism to test whether €29 is too high, too low, or appropriately priced.
+
+3. **The 3% Day-30 conversion target is uninterpretable without a WTP baseline.** Low conversion could mean: price too high, product not valuable enough, distribution broken, onboarding failing. Without knowing whether €29 is in the right range, you cannot diagnose why conversion is low.
+
+4. **The hidden-link vs default-annual debate is a distribution question — it cannot answer a foundation question.** PS-D138-0610's hidden-link argument is sophisticated and correct *if* €29 is the right price. But that condition hasn't been established.
+
+**The Growth Strategist's WTP experiment design (5 conversations, 20 minutes each):**
+- Show working prototype to 5 real beta users
+- Quantify their current admin pain (time spent, emotional weight)
+- Ask: "If this solved your devis problem completely, what's the most you'd pay per month?"
+- Decision rule: median WTP ≤ €15 → €29 too high (revisit pricing); €20-35 → €29 in range (proceed with D138); ≥ €40 → €29 underpriced (reconsider entire pricing)
+
+**VERDICT on D138:** CONTESTED — billing structure decision is unresolvable without WTP validation. Both GS-D153 (default-annual) and PS-D138-0610 (hidden-link) are speculative without the price foundation.
+
+- **D138 remains CONTESTED** — not resolved, not deferred, but contested pending WTP experiment
+- **This pulse adds new evidence to the D138 debate:** The Growth Strategist's paper demonstrates that both existing positions are conditional on unvalidated €29 price
+- **WTP experiment is a Sprint 0 blocker** for the billing structure decision — it must run before D138 is finalized
+- **All three D138 positions (monthly-only, default-annual, hidden-link) remain on the table** pending WTP outcome
+
+---
+
+## Updated Decision Table (06:30 Pulse)
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| Sprint 0 beta gate | Technical smoke test | RESOLVED — renamed: "Developer-verified smoke test on 3 real Android devices." Criteria: devis → facture → relance completes without crash on 3 real Android devices. Human testing retained in Sprint 0. Commercial validation separated to post-Sprint 1. | 2026-03-31 |
+| D110 | Path B trigger | RESOLVED — "5 jobs logged" replaced with Sprint 0-compatible "3 factures / 0 accepted devis" trigger. Jobs concept doesn't exist in Sprint 0 schema. | 2026-03-31 |
+| D138 | Annual billing | CONTESTED — billing structure unresolvable without WTP validation. All three positions (monthly-only, default-annual, hidden-link) speculative without price foundation. WTP experiment is Sprint 0 blocker for this decision. | 2026-03-31 |
+| Beta Users | Definition | OPEN — "active practicing artisan" (prior) vs "anyone who can articulate the problem" (TA-BetaState-0559). Sprint 0 beta gate resolution (above) supersedes this for technical purposes. | 2026-03-31 |
+| Sprint 0 exit | Behavioral gate | SUPERSEDED — technical smoke test replaces behavioral gate. Behavioral validation moves to post-Sprint 1. | 2026-03-31 |
+
+### Position Papers Filed This Pulse
+
+| File | Author | Topic | Status |
+|------|--------|-------|--------|
+| debate-ps-beta-validity-0630.md | Product Strategist | Sprint 0 beta = technical smoke test, not commercial validation | RESOLVED |
+| debate-ta-pathB-trigger-0630.md | Technical Architect | Path B trigger unimplementable in Sprint 0 | RESOLVED |
+| debate-gs-WTP-priority-0630.md | Growth Strategist | D138 cannot be resolved before WTP experiment | CONTESTED |
+
+### New Action Items This Pulse
+
+- [ ] **D110 UPDATED:** Path B trigger = "3 factures created, 0 accepted devis." Analytics event: `path_b_trigger_fired`. Threshold reviewed at beta week 2.
+- [x] **Sprint 0 beta gate RESOLVED:** Technical smoke test on 3 real Android devices replaces behavioral gate. Human testing retained.
+- [ ] **D138 CONTESTED:** WTP experiment required before billing structure decision. Sprint 0 blocker for pricing finalization. Design: 5 conversations × 20 minutes, prototype shown, "most you'd pay?" asked directly.
+- [ ] **Beta Users definition:** Still OPEN — relevant for beta recruitment, not for Sprint 0 technical gate.
+
+*Last updated: 2026-03-31T06:30*

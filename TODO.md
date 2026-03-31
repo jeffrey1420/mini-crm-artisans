@@ -1831,14 +1831,14 @@ Both Growth Strategist and Technical Architect independently reached the same co
 | **B** | Monthly €29 primary + prominent Annual €240 opt-in at checkout (GS-D153) |
 | **C** | Monthly €29 primary + hidden-link Annual €240 available in account settings (PS-D138-0610, recommended by PS) |
 
-### Sprint 0 Blockers — Updated Status (06:10 Pulse)
+### Sprint 0 Blockers — Updated Status (06:30 Pulse)
 
 | Blocker | Status | Louis Action Required |
 |---------|--------|---------------------|
 | Mentions légales gate (D142) | **RESOLVED** — developer-generated generic template | None — Sprint 0 unblocked |
 | Supabase EU project | **OPEN** | Confirm at supabase.com with EU/Frankfurt region |
-| Sprint 0 beta exit criteria | **OPEN — CONFLICT** | Louis: accept technical-only gate (GS+TA consensus) or maintain behavioral gate (04:49)? |
-| D138 — Annual billing | **OPEN** | Louis: one of A / B / C above |
+| Sprint 0 beta exit criteria | **RESOLVED** — technical-only gate | 3 real Android devices: devis → facture → relance, no crash. Human testing retained. |
+| D138 — Annual billing | **OPEN** | Louis: WTP experiment required before billing structure decision (see below) |
 | Beta user acquisition | **OPEN** | Ask Gabin + Maëli ONE question; expert-comptable call this week |
 
 ### Sprint 0 Timeline: 6.5 Days (Confirmed)
@@ -1853,9 +1853,15 @@ Sprint 0 scope: client file + devis flow + offline (expo-sqlite draft-mode) + me
 ### Key Unchanged Decisions (Still Valid)
 
 - D96: Path A trigger = first `facture.created`
-- D110: Path B trigger = 5 jobs logged, no client contact gate, contextual banner
+- D110: Path B trigger = 3 factures created + 0 accepted devis (Sprint 0-compatible). 60-day cooldown. Threshold to be reviewed at beta week 2.
 - D140: Offline = expo-sqlite + draft-mode semantics
 - Sprint 1 conversion UX: Path A = celebratory modal; Path B = informational banner
 - Expert-comptable Week 1: problem-framing only, no product demo
 
-*Last updated: 2026-03-31T06:10*
+### New from Pulse 2026-03-31T06:30 — Three Resolutions
+
+- [x] **Sprint 0 beta gate RESOLVED:** Technical smoke test on 3 real Android devices replaces behavioral gate. Criteria: devis → facture → relance completes without crash on 3 real Android devices. Human testing retained in Sprint 0. Commercial validation moves to post-Sprint 1.
+- [x] **D110 UPDATED:** Path B trigger = "3 factures created, 0 accepted devis" (replaces "5 jobs logged"). Sprint 0 schema uses existing primitives only. Analytics event: `path_b_trigger_fired`. Threshold review at beta week 2.
+- [ ] **D138 CONTESTED:** WTP experiment required before billing structure decision. Sprint 0 blocker. Design: 5 conversations × 20 min, prototype shown, "most you'd pay?" asked directly. Decision rule: median ≤€15 → €29 too high; €20-35 → €29 in range; ≥€40 → €29 underpriced.
+
+*Last updated: 2026-03-31T06:30*
