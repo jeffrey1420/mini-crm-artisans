@@ -1455,3 +1455,64 @@ NONE — all three debates remain OPEN and require Louis decisions.
 - [ ] **TA-D152 — Path B analytics instrumentation:** Supabase event tracking for `devis.created`, `client.created`, `job.logged` begins at launch. No in-app trigger required for observation. Free tier usage generates analytics automatically.
 
 *Last updated: 2026-03-31T03:20*
+
+## New from Pulse 2026-03-31T03:31 — Three Specialist Debates (PS-AnnualBilling, TA-DraftMode, GS-Triggers)
+
+### Spawned Debate Files
+
+- `debate-ps-annualbilling-pulse.md` — Product Strategist defends eliminate-annual-billing-at-launch position
+- `debate-ta-draftmode-pulse.md` — Technical Architect defends draft-mode as already-resolved
+- `debate-gs-triggers-pulse.md` — Growth Strategist defends "3 accepted devis from 3 distinct clients"
+
+### Resolved This Pulse
+
+NONE — all three debates are CONTESTED. Louis decisions required.
+
+### Key Arguments From Each Debate
+
+**PS-AnnualBilling (D138 — ELIMINATE annual billing):**
+- Annual masks seasonality — prepaid customers don't signal churn until renewal, Louis can't see "insufficient value in slow months"
+- Annual is a second SKU before PMF — copy, onboarding, churn logic, accounting all doubled
+- "Annual-first" framing poisons monthly tier even as opt-in — "why €29 when €20 exists?" shifts mental frame
+- €240 upfront IS expensive for solo artisan regardless of monthly equivalent framing
+- Monthly is honest tier — measures whether product delivers value every single month
+
+**TA-DraftMode (D140 — Draft-mode already resolved):**
+- AsyncStorage corrupts on phone death — not a real database, not a safe foundation
+- Retry queues only retry what entered the queue — phone dying mid-write = queue empty = data gone
+- A devis is legally-standing under Code civil 1127-1 — server-wins silently destroys offline edits = document annihilation
+- Draft-mode: offline edits saved as `pending_draft`, never overwrite live document until artisan confirms
+- D150/D151 already resolved this — PS-D147's reopening didn't introduce new evidence
+
+**GS-Triggers (D96 — 3 accepted devis from 3 distinct clients):**
+- "3 active clients" is trivially gameable — import 6 old contacts, accept 1 devis to yourself, trigger fires
+- "3 accepted devis from 3 distinct clients" requires 3 real closed deals across 3 different people — hard to game
+- Anti-gaming table: GS-D152 fires ONLY in genuine adoption scenario; PS-D146-3P fires in 3 of 4 gaming scenarios
+- PS-D146-3P's "tracking gap" argument (BTP acceptance happens over WhatsApp/phone) actually SUPPORTS GS-D152 — because the fix is to prompt Marc to mark acceptance, which creates a value-delivery moment
+- French BTP reality: acceptance over WhatsApp/phone → Marc marks "Accepté" in app → 3rd acceptance fires celebratory upgrade prompt
+
+### Louis's Decisions Required (03:31 Updated)
+
+| Decision | Options | Sprint 0 Status |
+|----------|---------|-----------------|
+| Annual billing (D138) | (A) **Eliminate entirely — monthly €29 ONLY** (PS); (B) monthly €29 primary + annual €240 opt-in (GS) | Not Sprint 0 blocker |
+| Mentions légales gate | Commit real strings to git | **BLOCKS Sprint 0** |
+| Supabase EU project | Confirm EU project live | **BLOCKS Sprint 0** |
+| Path A trigger (D96) | (A) **3 accepted devis from 3 distinct clients** (GS); (B) first accepted devis + 3 active clients (PS) | Post-Sprint 1 |
+| Path B trigger (D110) | **Defer to v1.2** — observe via Supabase analytics, build trigger with real data | Post-Sprint 1 |
+
+### New Action Items This Pulse
+
+- [ ] **D138 — Annual billing decision:** Louis confirms: (A) eliminate annual billing entirely — monthly €29 ONLY at launch (PS position); OR (B) monthly €29 primary + annual €240 as opt-in below (GS position). PS argues: no second SKU before PMF, no anchoring effect, no prepaid-trap for cash-flow-sensitive artisans. GS argues: some artisans prefer predictability, opt-in doesn't poison monthly tier if positioned as "épargnez €108/an" savings below.
+- [ ] **D96 — Path A trigger confirmation:** Louis confirms "3 accepted devis from 3 distinct clients" as resolved Path A trigger. PS-D146-3P's "first accepted devis + 3 active clients" rejected as trivially gameable. Anti-gaming table is decisive. Post-Sprint 1 decision.
+- [ ] **GS-Triggers — Acceptance tracking UX:** Add in-app prompt when client responds after devis sent: "Client accepted? Tap yes — this counts toward your free trial completion." Turns tracking gap (BTP acceptance over WhatsApp/phone) into growth opportunity. One-day Sprint 1 addition.
+- [ ] **D140 — Draft-mode confirmed as Sprint 0 offline architecture:** Sprint 0 offline = expo-sqlite + `pending_draft` status + Pending Drafts UI + Confirm/Discard actions. AsyncStorage retired. Server-wins fallback rejected. This was already resolved at D150/D151; PS-D147's reopening did not introduce new evidence.
+- [ ] **D142 — Mentions légales gate (URGENT):** Louis commits `legal/mentions-legales.ts` to git with real business data. NOT TODO comments. Gate must be verified before Sprint 0 begins.
+- [ ] **Supabase EU project:** Louis confirms supabase.com project created with EU (Frankfurt) region. Gate item 2.
+
+### Pre-Existing Sprint 0 Blockers (Unchanged This Pulse)
+
+1. **Mentions légales gate (D142):** Commit real strings to git. 5-day Sprint 0 CONDITIONAL on this.
+2. **Supabase EU project:** Confirm project live with EU region.
+
+*Last updated: 2026-03-31T03:31*

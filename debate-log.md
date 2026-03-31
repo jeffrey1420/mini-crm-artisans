@@ -8842,3 +8842,67 @@ GS-D152 fires only in the genuine adoption scenario. PS-D146-3P fires in three o
 **Verdict on D96:** GS-D152 confirms "3 accepted devis from 3 distinct clients" as Path A trigger. PS-D146-3P's "first accepted devis + 3 active clients" rejected. Louis should confirm this as the resolved Path A trigger. **OPEN — Louis decision required.**
 
 *Last updated: 2026-03-31T03:35*
+
+---
+
+## Pulse 2026-03-31T03:31 — Three Specialist Debates Spawned (Annual Billing, Draft-Mode, Path A Trigger)
+
+---
+
+## Spawned Debates This Pulse
+
+Three sub-agents spawned at 03:31 UTC to debate remaining contested items:
+
+### debate-ps-annualbilling-pulse.md (Product Strategist)
+**Topic:** D138 — Eliminate annual billing entirely at launch?
+**Position:** ELIMINATE annual billing. Monthly €29 ONLY at launch.
+**Arguments to defend:**
+- Annual masks seasonality rather than solving it — Louis can't see insufficient value signal when customer prepaid through slow months
+- Annual is a second SKU before PMF — adds separate copy, churn logic, accounting treatment, LTV calculations
+- "Annual-first" framing poisons monthly tier even as opt-in — "why pay €29 when €20 exists?" shifts mental frame from "worth it?" to "am I being ripped off?"
+- €240 upfront IS expensive for solo artisan regardless of monthly equivalent
+- Monthly is honest tier — measures genuine product value each month
+**Challenge to address:** GS-D147 argues monthly ALSO hides seasonality signal (just shows as churn). Why is monthly better at revealing the signal?
+
+### debate-ta-draftmode-pulse.md (Technical Architect)
+**Topic:** D140 — expo-sqlite + draft-mode semantics — has this been properly resolved?
+**Position:** Draft-mode is the ONLY architecturally honest Sprint 0 offline answer. expo-sqlite + `pending_draft` status + Pending Drafts UI.
+**Arguments to defend:**
+- AsyncStorage corrupts on phone death — not a real database
+- Retry queue only retries what entered the queue — phone dying mid-write = data gone, queue empty
+- A devis is legally-standing under Code civil 1127-1 — server-wins silently destroys user's offline edits = document annihilation
+- Draft-mode: offline edits saved as `pending_draft`, never overwrite live document until artisan explicitly confirms
+- Phone death = draft recoverable in SQLite
+**Challenge to address:** PS-D147 argues AsyncStorage + retry queues is "sufficient for Sprint 0" and expo-sqlite adds 2 days. Counter: draft-mode with expo-sqlite is actually the FASTER path because it eliminates hidden retry-queue debugging cost.
+
+### debate-gs-triggers-pulse.md (Growth Strategist)
+**Topic:** D96 — Path A conversion trigger
+**Position:** "3 accepted devis from 3 distinct clients" (GS-D152)
+**Arguments to defend:**
+- "3 active clients" is trivially gameable — import 6 old contacts, accept 1 devis to yourself, trigger fires
+- "3 accepted devis from 3 distinct clients" requires 3 real closed deals across 3 different people
+- The "3" number traces to D96's paid-facture era and was never re-validated for accepted-devis context
+- Anti-gaming table: GS-D152 fires ONLY in genuine adoption scenario
+**Challenge to address:** PS-D146-3P argues acceptance events are hard to track in French BTP (WhatsApp/phone/in-person acceptance, not in-app). Counter: tracking gap SUPPORTS "3 accepted devis" because it requires better onboarding around marking acceptance.
+
+---
+
+## Pre-Existing Open Items (Not Changed This Pulse)
+
+| ID | Topic | Status | Sprint 0 Impact |
+|----|-------|--------|----------------|
+| D96 | Path A trigger | CONTESTED — "3 accepted devis from 3 distinct clients" (GS) vs "first accepted devis + 3 active clients" (PS) | Post-Sprint 1 |
+| D110 | Path B trigger | CONTESTED — threshold depends on D140 (notification channel) | Post-Sprint 1 |
+| D138 | Annual billing | CONTESTED — eliminate entirely (PS) vs monthly primary + annual opt-in (GS) | Not Sprint 0 blocker |
+| D140 | Offline scope | CONTESTED — draft-mode semantics (TA) vs AsyncStorage + retry queues (PS) | BLOCKS Sprint 0 |
+| D142 | Mentions légales gate | OPEN — Louis must commit real strings to git | BLOCKS Sprint 0 |
+| — | Supabase EU project | OPEN — confirm EU project live | BLOCKS Sprint 0 |
+
+### Sprint 0 Blockers Still Requiring Louis Action
+
+1. **Mentions légales gate (D142):** Commit `legal/mentions-legales.ts` to git with Louis's own business data. 5-day Sprint 0 is CONDITIONAL on this gate.
+2. **Supabase EU project:** Confirm supabase.com project created with EU (Frankfurt) region.
+3. **Offline scope (D140):** Confirm draft-mode semantics + expo-sqlite is the Sprint 0 offline architecture.
+4. **Sprint 0 scope:** 3 confirmed deliverables (Core Devis Flow + Auth/Offline-Capable + Expo Push Skeleton = 5 days). Path B trigger, WhatsApp Business API, dual-path architecture, mentions légales template engine — all deferred to v1.1/v1.2.
+
+*Last updated: 2026-03-31T03:31*
