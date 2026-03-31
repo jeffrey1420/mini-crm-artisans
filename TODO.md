@@ -56,6 +56,9 @@
 | D114 | PDF Sprint 0 gate | **RESOLVED — HTML-to-PDF Edge Function (not expo-print).** Same HTML serves WhatsApp OG preview. Mentions légales embedded in HTML string Sprint 0. | Debate 126 (Technical Architect) | 2026-03-30T23:31 |
 | U15 | Founding member offer | ELIMINATED — no lifetime deal, no founding/access tier, no "50 places" scarcity. Single €29/month. Replaced by "Support Prioritaire" (direct WhatsApp to Louis, roadmap vote, named credits). | Debate 101 (Growth Strategist) | 2026-03-30 |
 | U7 | Domain purchase | RESOLVED — buy domain now (park it), defer brand decision. Domain = infrastructure, not branding. Parking costs ~€10-15/year. Expert-comptable outreach and GetApp/Capterra profiles need a proper domain to establish credibility. Brand name decision stays open. | Debate 109 (Growth Strategist) | 2026-03-30 |
+| D138 | Annual billing implementation | Monthly €29 PRIMARY. Annual €240/year opt-in discount at conversion. Stripe subscription with annual plan (monthly installments). "Payez quand vous êtes chargé" seasonal framing. Annual-first KILLED. | Pulse 00:40 (All 3 agents) | 2026-03-31 |
+| D139 | Expert-comptable timing | Customer development = Week 1 (Louis's own accountant = first call). Referral program = Month 4+. Customer development ≠ sales referral. | Pulse 00:40 (Growth+Product) | 2026-03-31 |
+| D140 | Offline architecture | AsyncStorage + retry queues Sprint 0. expo-sqlite deferred Sprint 1. sync_status field Sprint 0 schema. Conflict detection Sprint 1.2. | Pulse 00:40 (Technical Architect) | 2026-03-31 |
 
 ## 🔄 Reopened This Pulse (Resolved in 15:17 Pulse)
 
@@ -1168,4 +1171,30 @@ The following were overengineered or wrong:
 - [ ] **D81/C NEW:** If +2 days adopted: add sync_status: conflict detection in Sprint 0 (not just pending/synced). Half-day cost. Never silently overwrite with server-wins.
 - [ ] **D81/C NEW:** Sprint 0 gate updated: mentions légales must be Louis's own business data committed as real strings (not TODO comments). Estimated 1 hour to fill in. Supabase project created remains gate item 1.
 
-*Last updated: 2026-03-31T00:32*
+## New from Pulse 2026-03-31T00:40 — Three Resolutions (D138, D139, D140)
+
+### Resolved (D138, D139, D140)
+
+- **D138 (Annual billing implementation):** RESOLVED — Monthly €29 as PRIMARY and ONLY required option on pricing page. Annual €240/year as opt-in discount shown BELOW monthly at conversion moment only. Stripe subscription with annual pricing plan (monthly installments), NOT pre-payment. "Payez quand vous êtes chargé" (seasonal alignment) as primary conversion argument. Annual-first presentation KILLED.
+- **D139 (Expert-comptable timing):** RESOLVED — Week 1 Month 1 customer development conversations with expert-comptables (Louis's own accountant = first call this week). Problem-discovery only: "What invoicing problems do your artisan clients bring to you?" NOT a product demo or sales pitch. Referral program = Month 4+ with prerequisites (real beta users, testimonials, production-validated mentions légales). Customer development ≠ sales referral.
+- **D140 (Offline architecture):** PARTIALLY RESOLVED — Sprint 0 ships with AsyncStorage + retry queues (NOT expo-sqlite). Labeled as "demonstration only" if shipped in Sprint 0. expo-sqlite deferred to Sprint 1 (add 1.5-2.5 days to Sprint 1 estimate). sync_status field added to Sprint 0 schema regardless (30 min). Conflict detection UI deferred to Sprint 1.2 (after multi-user scenarios exist). Sprint 0 gate: mentions légales must be Louis's own business data committed as real strings, not TODO comments.
+
+### Challenged Assumptions This Pulse
+
+1. "+1 day" estimate for expo-sqlite was never task-broken (Technical Architect challenged: real estimate is 1.5-2.5 days when properly scoped)
+2. "Annual billing solves seasonality" — challenged by Product Strategist: €260 upfront at conversion moment creates friction, not benefit; monthly handles seasonality through natural pause/resume
+3. "Compliance liability blocks all expert-comptable conversations" — challenged by Growth Strategist: 14-day cooling-off applies to service contracts, not software recommendations; customer development ≠ referral sales
+
+### New Action Items from This Pulse
+
+- [x] **D138 RESOLVED:** Pricing page — €29/month PRIMARY, €240/year opt-in discount BELOW monthly. Stripe annual plan (monthly installments), not pre-payment.
+- [x] **D138 NEW:** Update pricing page copy: primary CTA = "€29/mois — sans engagement." Secondary = "€240/an — soit 2 mois offerts." Add "Payez quand vous êtes chargé" seasonal framing.
+- [ ] **D138 NEW:** Stripe configuration: set up annual pricing plan as subscription with monthly installments (not one-time €260 charge).
+- [x] **D139 RESOLVED:** Expert-comptable customer development = Week 1. Louis books his own accountant this week for 20-min problem-discovery call.
+- [ ] **D139 UPDATED:** Expert-comptable referral program = Month 4+. Prerequisites unchanged. Do not conflate customer development with sales referral.
+- [ ] **D140 NEW:** Sprint 0 offline = AsyncStorage + retry queues. expo-sqlite deferred to Sprint 1. Add to Sprint 1 estimate: +1.5-2.5 days.
+- [ ] **D140 NEW:** Sprint 0 adds sync_status field to schema (pending/synced/conflict) — 30 min, does not require expo-sqlite.
+- [ ] **D140 NEW:** Sprint 0 gate: Louis commits 4 mentions légales templates as real strings (his own business data) before sprint starts.
+- [ ] **D140 UPDATED:** Conflict detection UI deferred to Sprint 1.2. Marc is solo — no multi-user conflicts exist in v1.
+
+*Last updated: 2026-03-31T00:40*

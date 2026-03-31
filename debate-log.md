@@ -7321,7 +7321,7 @@ But offering it as the *default* — or even as a *required alternative* present
 
 ---
 
-*Last updated: 2026-03-31T00:32*
+*Last updated: 2026-03-31T00:40*
 
 
 ---
@@ -7436,3 +7436,224 @@ Let's break it down honestly:
 **The debate entry ends with a challenge to the gate simplification at 00:12:**
 Debate 127's 2-item gate resolution was correct in spirit (eliminate bureaucratic overhead for a solo dev) but wrong in execution (mentions légales as TODO comments is not a valid compliance shortcut). The real risk in Sprint 0 is not gate overhead — it's scope creep from under-engineered infrastructure. The offline architecture decisions (SQLite vs retry queue, conflict resolution strategy, sync worker reliability) are not gate items. They're Sprint 0 architecture. If they're not committed before Sprint 0 starts, they get re-litigated mid-sprint — which is where solo dev sprints die.
 
+
+---
+
+## Pulse 2026-03-31T00:40 — Three Specialist Debates (D99 Annual Billing, D72 Expert-Comptable, D81/C Offline)
+
+### Reopened (D99, D72, D81/C) — ALL THREE RESOLVED
+
+---
+
+## Debate 138: D99 — Monthly €29 as Default, Annual as Opt-In Discount (RESOLVED)
+
+**Challenge:** D99 was previously resolved (flat €29 + annual €260/year). But the framing of "annual as default" vs "monthly as default" was never fully settled.
+
+### Product Strategist — Monthly €29 as Default
+
+**Assumption challenged:** The previous resolution (flat €29 + €260/year) left ambiguity: which appears first on the pricing page? Product Strategist argues annual-first creates acquisition friction.
+
+**Core argument:**
+
+The conversion moment (80% Free tier limit hit) is not a sales opportunity — it's a friction-reduction moment. The artisan has hit a wall and needs relief. Asking for €260 upfront at that exact moment is a commitment-heavy ask at the worst psychological moment.
+
+**The correct order of operations:**
+1. User hits 80% limit → sees clean upgrade prompt
+2. Monthly €29 as PRIMARY option
+3. Below: "Ou payez €260/an — soit 2 mois offerts" (annual as discount reveal, not demand)
+4. User chooses, gets relief
+
+**Additional arguments:**
+- "Payez quand vous êtes chargé" aligns billing with seasonal cash flow — stronger conversion argument than "save €108"
+- €260 auto-renewal creates involuntary churn via payment failures and card expiries
+- 14-day cooling-off period for annual subscriptions creates administrative overhead for solo-founder Louis
+- Monthly is more resilient to payment failure than annual pre-payment
+
+### Growth Strategist — Agrees with Product Strategist
+
+**Additional argument:** Default monthly, offer annual as opt-in. Annual-first positioning was never validated with real artisans.
+
+### Technical Architect — Stripe Annual Plan (Not Pre-Payment)
+
+**Additional argument:** If annual is offered, implement as Stripe subscription with annual pricing plan — not pre-payment. This preserves billing flexibility (can introduce usage-based as upgrade from monthly later) and eliminates cash flow liability (refund risk, chargeback exposure) that comes with pre-payment.
+
+**VERDICT on D99:** **RESOLVED — All three agents aligned.**
+
+- **Pricing page:** €29/month as PRIMARY and ONLY required option. €240/year (save €108) as opt-in discount shown below monthly at conversion moment.
+- **Stripe implementation:** Annual pricing as Stripe subscription plan (monthly installments), NOT pre-payment model.
+- **Conversion prompt framing:** "Payez quand vous êtes chargé" (seasonal alignment) as primary argument, not "save €108."
+- **Annual-first presentation:** KILLED. Never show €260 upfront at signup.
+
+---
+
+## Debate 139: D72 — Expert-Comptable Week 1 Customer Development (RESOLVED)
+
+**Challenge:** D72 (expert-comptable timing) was reopened multiple times. The compliance liability argument was applied to the wrong action — blocking ALL expert-comptable conversations rather than just the referral ask.
+
+### Growth Strategist + Product Strategist — Aligned on Week 1 Customer Development
+
+**Assumption challenged:** The compliance liability argument confuses two distinct actions:
+1. **Customer development conversation** (Month 1): "Tell me about your artisan clients' invoicing problems." Zero compliance exposure. Not a sales motion.
+2. **Referral program** (Month 4+): "Send us clients and we'll pay you." Higher compliance exposure. Requires structure and disclaimers.
+
+**Core argument (Growth Strategist):**
+
+The 14-day cooling-off period under Article L.122-1 of the French Consumer Code applies to **service contracts** — someone paying for advisory services. An expert-comptable *recommending* a software tool to their clients is not a regulated act. There is no cooling-off period trigger, no professional liability issue, no "vente forcée."
+
+The referral pipeline takes 2-3 months to build. If Louis waits until Month 4 to start, the pipeline is empty when he needs early traction validation. Starting Month 1 means Month 3-4 referrals. Starting Month 4 means Month 6-7 referrals — a 3-month opportunity cost.
+
+**Core argument (Product Strategist):**
+
+The expert-comptable outreach in Week 1 is **research**, not sales. We are not saying "use our tool." We are saying "help us understand your clients." That's fundamentally different from a commercial relationship.
+
+**What to avoid (at any phase):**
+- Claiming the tool meets specific regulatory standards not verified
+- Giving specific advice on invoicing compliance requirements
+- Acting as if a referral relationship creates compliance endorsement
+
+These are solvable with good scripting, not silence.
+
+**VERDICT on D72:** **RESOLVED — All agents aligned.**
+
+- **Expert-comptable customer development:** Week 1 Month 1. Louis's own accountant = first call this week. Problem-discovery conversation only: "What invoicing problems do your artisan clients bring to you?" No product demo. No pitch.
+- **Expert-comptable referral program:** Month 4+. Prerequisites: real beta users, testimonials, production-validated mentions légales.
+- **Distinction is explicit:** Customer development (Month 1) ≠ sales referral (Month 4+). Do not conflate the two.
+- **Expert-comptable data-sync portal:** Phase 2. Sprint 1b document storage (D121) is a hard prerequisite — cannot integrate without stored PDFs.
+
+---
+
+## Debate 140: D81/C — Offline Architecture: Real Estimate vs Aspirational (PARTIALLY RESOLVED)
+
+**Challenge:** D81/C previously resolved as "+1 day to Sprint 0" for expo-sqlite. Technical Architect challenges this as an aspirational estimate that was never task-broken.
+
+### Technical Architect — The +1 Day Estimate Is Wrong
+
+**Assumption challenged:** "+1 day" for expo-sqlite assumed offline-first is a library swap. It is not.
+
+**Real task breakdown:**
+
+| Task | Hours |
+|------|-------|
+| expo-sqlite setup + schema creation | 4-6h |
+| Background sync worker (connectivity restore + queue processor) | 4-6h |
+| sync_status enum + conflict detection UI | 6-8h |
+| Integration testing on real devices (job site conditions) | 4h |
+| **Total** | **18-24h = 1.5–2.5 dev days** |
+
+**The critical observation:** Marc is solo. His offline "conflicts" don't exist in v1 — one phone, one user. Conflict resolution UI built for multi-user scenarios solves a problem Marc doesn't have at launch. Building it in v1 adds cost without benefit.
+
+**The false estimate is dangerous:** Louis will plan Sprint 0 against "+1 day" and discover at Day 8 he's 1.5 days over. He'll either cut the sync reliability layer or ship incomplete offline functionality discovered on a real job site.
+
+### Product Strategist + Growth Strategist — Want Full Offline (+2 days)
+
+**Product Strategist:** Server-wins is not acceptable for revenue-tracking data. Revenue-tracking data cannot be silently overwritten. Full expo-sqlite + conflict detection is required.
+
+**Growth Strategist:** Retry queues fail when phones die. A client signs a devis on a dusty worksite with 2 bars of 4G that drops to zero. If Louis's revenue-tracking data can't survive that moment, he has a data integrity problem. Full offline with local persistence is table stakes, not a nice-to-have.
+
+### Technical Architect — Revised Position
+
+Given the disagreement: the real issue is not "+1 day vs +2 days" — it's whether full offline ships in Sprint 0 or gets deferred to Sprint 1.
+
+**Two honest options:**
+- **Option A (if +2 days acceptable):** Full expo-sqlite + background sync worker with proper error handling. 2-day buffer.
+- **Option B (if 5-day Sprint 0 required):** Defer expo-sqlite to Sprint 1. Ship with in-memory state only. Label clearly: "Sprint 0 offline is demonstration only — do not use for real job logging."
+
+**The offline architecture risk that D81/C didn't surface:** Mentions légales as TODO comments (Debate 136) means the compliance strings aren't committed. This is a gate problem, not a sync problem. Sprint 0 gate must include real mentions légales strings — not placeholders.
+
+**VERDICT on D81/C:** **PARTIALLY RESOLVED — Sprint 0 scope decision deferred to Louis.**
+
+- **Sprint 0 offline:** AsyncStorage + retry queues (not expo-sqlite) for Sprint 0. Label as "demonstration only" if shipped.
+- **expo-sqlite:** Deferred to Sprint 1. Add 1.5-2.5 days to Sprint 1 estimate.
+- **sync_status field:** Added to Sprint 0 schema anyway (30 min) — does not require expo-sqlite to implement.
+- **Conflict detection:** Deferred to Sprint 1.2 (after we have actual multi-user scenarios).
+- **Sprint 0 gate UPDATED:** Mentions légales must be Louis's own business data committed as real strings (not TODO comments). This is non-negotiable regardless of offline architecture choice.
+
+---
+
+## Updated Decision Table
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D1 | Positioning | Kill "CRM" — devis, factures, relances | 2026-03-30 |
+| D2 | MVP scope | 4 features, SEQUENCED sprints. Sprint 0 = minimum devis flow (3-5d, flow-first). Sprint 1 = client+devis+job logging. Sprint 2 = facture+relances. | 2026-03-30 |
+| D3 | Primary persona | Marc — solo smartphone-native artisan | 2026-03-30 |
+| D4 | Stack | Single managed Postgres | 2026-03-30 |
+| D5 | Pricing | Free + €29 two-tier. No €19 SKU. Drop €49/€79. | 2026-03-30 |
+| D6 | Trial | No time-limited trial. Free tier IS the trial. | 2026-03-30 |
+| D7 | Architecture | Nuxt 3 + OVH managed Postgres | 2026-03-30 |
+| D8 | E-invoicing | v2 feature | 2026-03-30 |
+| D9 | Not MVP | No Kanban, no multi-user, no offline, no API keys | 2026-03-30 |
+| D10 | Buyer trigger | "Admin pain" not "CRM need" | 2026-03-30 |
+| D11 | Mobile | React Native from Day 1 via Expo | 2026-03-30 |
+| D12 | Landing page | Simplicity-first — "Vos devis et factures, sans vous prendre la tête" | 2026-03-30 |
+| D13 | Home view | Job-first — Active Job Card as home anchor | 2026-03-30 |
+| D14 | E-invoicing timing | v2 — NOT Day 1 | 2026-03-30 |
+| D15 | Relances differentiator | DE-EMPHASIZED — secondary feature below fold | 2026-03-30 |
+| D16 | Trial length | No countdown trial — Free tier IS the trial | 2026-03-30 |
+| D17 | Mobile strategy | React Native from Day 1 via Expo. Email-only relances at v1 launch. Expo Push in v1.1. | 2026-03-30 |
+| D41 | Notification infra | Email-only relances at v1 launch. Expo Push in v1.1. | 2026-03-30 |
+| D43 | Free tier activation | Forcing function + limit-hit primary, habit tracking secondary. | 2026-03-30 |
+| D46 | Free tier limits | Do NOT lower limits from 10/5. Trust-building before limit enforcement. | 2026-03-30 |
+| D47 | Expo Push estimate | 1-2 weeks. Budget properly or defer to v1.1. | 2026-03-30 |
+| D48 | Wholesaler GTM | Not primary. Digital + specialist retailers first. Wholesaler secondary. | 2026-03-30 |
+| D49 | GTM Priority | D48 priority order stands. Digital channels → Specialist retailers → Prescriber networks → Wholesaler. | 2026-03-30 |
+| D50 | Push at launch | Email-only at v1. Expo Push in v1.1. | 2026-03-30 |
+| D51 | Free tier conversion | Forcing functions + limit-hit primary. Habit tracking secondary. | 2026-03-30 |
+| D52 | Prescriber GTM | Cannot lead. U11 audit valuable. | 2026-03-30 |
+| D53 | Landing page framing | Simplicity-first RETAINED. H1: "Sans vous prendre la tête." H2: 5-minute claim. Proof lives in Free tier. | 2026-03-30 |
+| D54 | Sprint 0 approach | Compressed compliance sprint (3-4d): TVA per-line, sequential numbering, mentions légales renderer, client-type schema. | 2026-03-30 |
+| D55 | Buyer-user split | Marc = economic buyer. Admin handler = operational user. Dual-persona GTM. Expert-comptable = Phase 2. | 2026-03-30 |
+| D56 | SEO / GTM | SEO = Month 6+. Community seeding = Month 4+. Month 1-3 = warm network + prescriber outreach + referral tracking. | 2026-03-30 |
+| D57 | Architecture | API-first preferred, deferred post-MVP. OVH managed Postgres retained. | 2026-03-30 |
+| D58 | Relances in MVP | Email relances in v1 (Sprint 2). Expo Push in v1.1. | 2026-03-30 |
+| D59 | Pricing credibility | Single €29/month. No founding/standard tiers. "Accès Fondateur" killed. | 2026-03-30 |
+| D60 | WoM attribution | Month 3+ lagging indicator. "Comment connaissez-vous?" at signup. Referral codes in v1. | 2026-03-30 |
+| D63 | Situation financière | Server-computed push notification at 8pm Paris. Free = daily count. €29 = full snapshot + drill-down. | 2026-03-30 |
+| D64 | Sprint 0 timeline | 5.5-6.5 days with pre-conditions confirmed. 7-8 days without. | 2026-03-30 |
+| D70 | Document archive | Document archive = PRIMARY Free tier value. Financial snapshot = €29 tier. | 2026-03-30 |
+| D71 | Mentions légales | 4 templates (devis × client type). Sprint 2 = 8 combinations (devis + facture). | 2026-03-30 |
+| D72 | Expert-comptable timing | Customer development = Week 1 Month 1 (not sales). Referral program = Month 4+. | 2026-03-31 |
+| D74 | Mentions légales engine | Handlebars/Nunjucks deferred to Sprint 1. Sprint 0 = HTML string templates. | 2026-03-30 |
+| D75 | Pricing structure | Single €29/month. Annual €240/year as opt-in discount. No founding tier. | 2026-03-31 |
+| D81 | Offline architecture | AsyncStorage + retry queues in Sprint 0. expo-sqlite deferred to Sprint 1. sync_status field in Sprint 0 schema. | 2026-03-31 |
+| D83 | Notification timing | Event-only. Configurable window killed. | 2026-03-30 |
+| D84 | Sprint 0 timeline | 5.5-6.5 days. Offline deferred. | 2026-03-30 |
+| D85 | GetApp/Capterra | Claim Week 1, publish Week 3-4 (after beta reviews exist). | 2026-03-30 |
+| D90 | Sprint 0 timeline estimate | 5.5-6.5 days with pre-conditions. | 2026-03-30 |
+| D91 | Expert-comptable validation | Louis's accountant = validation only, not referral channel. | 2026-03-30 |
+| D92 | Android-first | Android-first remains. iOS secondary. Install completion rate ≥50% in 48h as metric. | 2026-03-30 |
+| D93 | Guided Creation Flow | Mandatory call rejected. 90-second wizard + opt-in office hours in Settings. | 2026-03-30 |
+| D94 | Sprint 0 gate | Mentions légales must be real strings (Louis's own data), not TODO comments. Supabase project created. | 2026-03-31 |
+| D95 | Sprint 0 timeline | 5 days target / 6.5 days floor with pre-conditions. | 2026-03-30 |
+| D96 | Conversion trigger | Dual-path: Path A (formal-devis) = limit-hit or first paid facture. Path B (verbal) = 45+ days active OR 7+ jobs logged OR 5+ clients managed. | 2026-03-30 |
+| D97 | Sprint 0 prep | Louis writes 4 mentions légales templates this week (gate item). | 2026-03-30 |
+| D98 | Platform default | Android-first. Install completion rate ≥50% in 48h as metric. | 2026-03-30 |
+| D99 | Pricing billing | Monthly €29 PRIMARY. Annual €240/year opt-in discount at conversion. Stripe subscription with annual plan (not pre-payment). "Payez quand vous êtes chargé" as seasonal framing. | 2026-03-31 |
+| D100 | Supabase EU-hosted | EU-hosted (Frankfurt). Self-hosted NOT recommended for v1. Exit trigger: 3 months (>10k docs + >100 MAU + >€150/mo Supabase bill). | 2026-03-30 |
+| D106 | WhatsApp sharing | React Native Share API + placeholder attachment Sprint 0. Server-side PDF in Sprint 1b. | 2026-03-30 |
+| D107 | Document archive + conversion | Archive PRIMARY Free tier. Financial snapshot teaser (count only) in Free tier. "Votre activité grandit" upgrade prompt framing. | 2026-03-30 |
+| D110 | Dual-path conversion | Path A (formal-devis) + Path B (verbal-agreement). Day 14 WhatsApp check-in for both. | 2026-03-30 |
+| D111 | Job logging Sprint 1 | Active Job Card (minimum viable) = Sprint 1 non-negotiable. Sprint 1 scope: client file + devis flow + Active Job Card. | 2026-03-30 |
+| D113 | PDF generation | HTML-to-PDF via Supabase Edge Function. Same HTML for WhatsApp OG preview. | 2026-03-30 |
+| D114 | PDF Sprint 0 gate | expo-print rejected. HTML-to-PDF Edge Function adopted. Mentions légales embedded in HTML string Sprint 0. | 2026-03-30 |
+| D120 | Pricing billing (updated) | Flat €29/month + €260/year annual. Per-devis deferred to v1.2. Annual billing solves seasonality. | 2026-03-30 |
+| D121 | Document storage Sprint 1b | Supabase blob + documents table + PDF URL in API response. Legal compliance gate for Phase 2. 2-3 days. | 2026-03-30 |
+| D122 | GetApp/Capterra | REMOVED from TODO. Channel doesn't match admin handler buyer journey. | 2026-03-30 |
+| D124 | Supabase exit plan | Trigger: 3 months (>10k docs + >100 MAU + >€150/mo). Target: OVH/Hetzner + Coolify + managed Postgres. | 2026-03-30 |
+| D126 | Annual billing default | Monthly €29 as DEFAULT. Annual €240/year as opt-in discount. Annual-first KILLED. | 2026-03-31 |
+| D138 | Annual billing implementation | Stripe subscription with annual plan (monthly installments), NOT pre-payment. Proration complexity avoided. | 2026-03-31 |
+| D139 | Expert-comptable timing | Customer development Week 1 (Louis's own accountant first). Referral Month 4+. | 2026-03-31 |
+| D140 | Offline architecture | AsyncStorage + retry queues Sprint 0. expo-sqlite deferred Sprint 1. sync_status field Sprint 0 schema. Conflict detection Sprint 1.2. | 2026-03-31 |
+
+| U1 | Discovery | REPLACED — readiness protocol | 2026-03-30 |
+| U2 | E-invoicing platform | Factea first when v2 | 2026-03-30 |
+| U7 | Domain | Buy domain now (park it). Domain = infrastructure, not branding. | 2026-03-30 |
+| U8 | WhatsApp acquisition | CLOSED — no WhatsApp CTA in devis | 2026-03-30 |
+| U9 | Free tier activation | Forcing function + limit-hit primary, habit tracking secondary | 2026-03-30 |
+| U10 | GTM: Wholesaler | REFINED — digital + specialist retailers first, wholesaler secondary | 2026-03-30 |
+| U11 | Prescriber audit | Still valuable — if >30% of new jobs via prescriber, revisit GTM | 2026-03-30 |
+| U12 | Expert-comptable GTM | Phase 2 — relationship-dependent, not early-stage. Playbook to be built post-MVP. | 2026-03-30 |
+
+---
+
+*Last updated: 2026-03-31T00:40*
