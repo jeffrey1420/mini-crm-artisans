@@ -1675,3 +1675,37 @@ NONE — all three debates are OPEN and require Louis's input.
 | Sprint 0 timeline | 6.5 days (D140) |
 
 *Last updated: 2026-03-31T04:49*
+
+---
+
+## New from Pulse 2026-03-31T05:03 — D138, D140, Beta User Acquisition
+
+### D138 — Annual Billing at Checkout: OPEN — Louis Decision Required
+
+- [ ] **D138 — Louis must decide one sentence:** Monthly €29 PRIMARY at checkout (annual offered below) OR Annual €240 DEFAULT at checkout (monthly as fallback)? Product Strategist argues Monthly-primary (seasonal cash flow, checkout friction, anchoring). Growth Strategist argues Annual-default (seasonal planning window, cohort signal, competitive response). This is a one-sentence decision.
+
+### D140 — Offline Architecture RESOLVED: expo-sqlite + Draft-Mode
+
+- [x] **D140 RESOLVED:** Sprint 0 offline = expo-sqlite + draft-mode. D81 (AsyncStorage + retry queues) OVERRIDDEN. Phone-death-mid-write atomicity gap cannot be solved with retry queues. Draft-mode disclosure updated: "vos données sont sauvegardées atomiquement sur votre téléphone et synchronisées quand vous êtes reconnecté" — not AsyncStorage's failure mode.
+- [ ] **D140 — Update Sprint 0 handoff doc:** Add SQLite schema (documents table: UUID, type, status enum, JSON blob, timestamps). Add `saveDraft()`, `confirmDraft()`, `discardDraft()`, `listPendingDrafts()`, sync worker. Confirm 6.5-day timeline absorbs 2-day offline work correctly.
+- [ ] **D140 — Update draft-mode disclosure:** Replace "vos données ne seront pas sauvegardées" with accurate expo-sqlite behavior: "Vos devis sont sauvegardés sur votre téléphone — même si l'app se ferme. Ils se synchronisent automatiquement quand vous êtes reconnecté."
+
+### Beta User Acquisition — NEW (05:03)
+
+- [ ] **Beta Users — Expert-comptable call (THIS WEEK):** Louis calls his expert-comptable. Ask: "Je cherche 2-3 personnes qui pourraient me donner leur avis honnête. Est-ce que vous avez des clients artisans qui seraient ouverts à tester quelque chose?" Not a product demo. A favor. Get 2-3 names + contact info.
+- [ ] **Beta Users — Gabin network audit (THIS WEEK):** Louis asks Gabin specifically: "Est-ce qu'il y a des artisans dans ta famille? Électricien, plombier, maçon?" One question. Document answer same day.
+- [ ] **Beta Users — Maëli network audit (THIS WEEK):** Louis asks Maëli the same. Designers work with small businesses — she may have artisan contacts.
+- [ ] **Beta Users — Grinto check (THIS WEEK):** Louis asks Grinto directly: any clients who are tradespeople? One question to manager or team.
+- [ ] **Beta Users — Exit criteria fallback (if < 5 users by Friday):** If none of the above yield 5 beta users by Friday, acknowledge gap. Modified exit criterion: 3 beta users + documented edge cases. Flag as GTM learning: artisan acquisition is a real problem, not a logistics afterthought.
+
+### Sprint 0 Blockers — Updated Status (05:03 Pulse)
+
+| Blocker | Status |
+|---------|--------|
+| Mentions légales gate (D142) | OPEN — Louis commits real strings to `legal/mentions-legales.ts` |
+| Supabase EU project | OPEN — confirm supabase.com project created (EU region, Frankfurt) |
+| Beta user acquisition | OPEN — expert-comptable call THIS WEEK |
+| D138 decision | OPEN — Louis: Monthly-primary or Annual-default? |
+| Sprint 0 timeline | 6.5 days |
+
+*Last updated: 2026-03-31T05:03*

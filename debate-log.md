@@ -9517,3 +9517,156 @@ Thirty days of active usage without job activity is a worse proxy than job count
 - [ ] **Sprint 0 NEW:** Create PDF review checklist. Louis reviews one devis PDF for particulier client + one for professionnel client against mentions légales checklist. 15 minutes.
 
 *Last updated: 2026-03-31T04:49*
+
+---
+
+## Pulse 2026-03-31T05:03 — Three Specialist Debates (D138, D140, Beta User Acquisition)
+
+---
+
+## Debate PS-0503: D138 — Annual Billing at Checkout: Monthly Primary vs Annual Default
+
+**Challenge:** D138 (Annual billing at checkout) has been debated across multiple pulses. GS-D153 at 04:49 argued Annual €240 = DEFAULT at checkout ("La plupart de nos artisans préfèrent l'abonnement annuel"). Product Strategist challenges this at 05:03.
+
+### Product Strategist — Monthly €29 Primary at Checkout
+
+**Assumption challenged 1:** "Annual-first = aggressive sales tactic."
+
+Annual-first activates "big purchase" psychology. €240 jumps off the page as a commitment. Marc, who agonizes over every tool purchase, sees this and thinks: "Do I really need this? Let me sleep on it." He doesn't come back. Monthly-first activates "operating cost" psychology — €29/month is coffee money, doesn't require justification.
+
+**Assumption challenged 2:** "Monthly-first is always better for price-sensitive audiences."
+
+This characterization is wrong for the checkout moment. Marc's cash flow is *seasonal*, not uniformly tight:
+- January–March: Slow, cash genuinely tight
+- September–November: **Peak season** — artisans receive large payments, mentally planning annually
+
+Annual-first framing during the September–November window could actually convert better. But a checkout page that only works 3 months a year is broken for 9 months. Monthly-first works across the entire cash flow calendar.
+
+**Assumption challenged 3:** "Annual poisons the monthly tier — anchoring effect."
+
+GS-D153's anchoring argument: "Why pay €29/month when I could pay €20/month?" But Marc is not doing math. He's asking: "Which do I pick?" When annual is default, monthly feels like "I'm not sure yet" — the uncommitted option. For a first-time conversion, "monthly = uncommitted" is a feature. Annual-first framing belongs at Day 30, post-value, when the artisan has already experienced the product.
+
+**What PS-0503 keeps from GS-D153:**
+- The Day 30 upsell framing is genuinely good ("Vous utilisez l'app depuis 30 jours — voulez-vous annualiser et épargner €108?")
+- Seasonality signal from annual cohort data is a real analytics benefit
+- The competitive scenario (Tolteck advertising €20/month) is real — but the response is compete on time-saved, not match monthly equivalent
+
+**VERDICT on D138:** NOT RESOLVED. Two positions:
+- **Product Strategist:** Monthly €29 PRIMARY at checkout. Annual €240 offered below. Day 30 upsell for retained users. Revisit at 6-month review with real data.
+- **GS-D153 (prior pulse):** Annual €240 DEFAULT at checkout. Monthly €29 as fallback.
+
+**Louis must decide: Monthly-primary or Annual-default at checkout?**
+
+---
+
+## Debate TA-0503: D140 — Offline Architecture: AsyncStorage vs expo-sqlite
+
+**Challenge:** D81 was resolved as "AsyncStorage + retry queues sufficient for Sprint 0." TA-D153 challenged this with the phone-death-mid-write atomicity problem. PS-D147 countered. TA-0503 makes the definitive case.
+
+### Technical Architect — expo-sqlite + Draft-Mode Is Correct for Sprint 0
+
+**Assumption challenged:** D81's "AsyncStorage + retry queues" is sufficient for Sprint 0.
+
+**The failure mode AsyncStorage cannot recover from:**
+
+```
+User fills devis → taps "Enregistrer" → phone dies BEFORE write completes →
+Operation never entered retry queue → Data is GONE
+```
+
+This is NOT an edge case. This IS the dominant failure scenario for field artisans: low battery, pocket-dial, basement/no signal, memory pressure from radio stack fighting for signal. A retry queue only retries what entered the queue. Phone death mid-write = no queue entry = nothing to retry.
+
+**The +2 days estimate is inflated by 50-75%:**
+
+PS-D147's +2 days conflates "expo-sqlite" with "full offline-first sync engine." Sprint 0 doesn't need a sync engine — it needs a storage engine. The minimal schema:
+
+```sql
+CREATE TABLE documents (
+  id TEXT PRIMARY KEY,
+  type TEXT NOT NULL,
+  status TEXT NOT NULL,
+  content TEXT NOT NULL,
+  created_at INTEGER NOT NULL,
+  updated_at INTEGER NOT NULL,
+  synced_at INTEGER
+);
+```
+
+Four columns. One index. ~100 lines of TypeScript. Net delta over AsyncStorage: ~7 hours, not 16 hours. One day, not two.
+
+**The real cost comparison:**
+
+| Approach | Day 1-5 Cost | Week 2-4 Cost | Total |
+|----------|-------------|---------------|-------|
+| AsyncStorage + retry | Low (appears) | High (production bugs, data loss) | Higher |
+| expo-sqlite | Medium (known) | Low (robust by design) | Lower |
+
+**The disclosure problem:**
+Current Sprint 0 draft-mode disclosure reads: "Le mode hors-ligne est en version draft. Vos données ne seront pas sauvegardées sans connexion." — This describes AsyncStorage's failure mode, not expo-sqlite's behavior. expo-sqlite delivers: "your devis is saved atomically, survives phone death, syncs when you're back online."
+
+**VERDICT on D140:** RESOLVED — Sprint 0 uses expo-sqlite + draft-mode. D81 (AsyncStorage + retry queues) is OVERRIDDEN.
+
+**Sprint 0 offline implementation:**
+- `saveDraft()`: atomic SQLite transaction — survives phone death
+- `confirmDraft()`: promote pending_draft → confirmed
+- `discardDraft()`: delete pending draft
+- `listPendingDrafts()`: Pending Drafts UI (list view + resume/discard/confirm)
+- Sync worker: reads confirmed-but-not-synced rows, upserts to Supabase, marks synced_at
+- **Defer to v1.2:** conflict resolution UI, multi-device sync, background sync (expo-task manager)
+
+**Sprint 0 timeline remains 6.5 days.** The 2-day offline work estimate is properly scoped within the already-accepted 6.5-day buffer.
+
+---
+
+## Debate GS-0503: Beta User Acquisition — The Unchallenged Assumption
+
+**Challenge:** The Sprint 0 exit criteria (04:49 pulse) require "5 beta users complete happy path without assistance." The debate log appends: "Select artisans in Gabin/Maël's network." This assumption has NEVER been challenged.
+
+### Growth Strategist — Gabin/Maël's Network Is Not the Right Channel
+
+**Assumption challenged:** "5 beta users will be easy to find via Gabin/Maël's network."
+
+Louis = web developer intern at Grinto. Co-founder of Kuroba with Gabin (backend dev) and Maëli (designer). Their networks = developers and designers, NOT French artisans. The assumption that their networks contain tradespeople is unfounded.
+
+**The guerrilla test vs beta recruitment conflation:**
+
+The U15 guerrilla usability test (5 artisans at Point P on a Saturday) was designed for usability validation — watching whether Marc understands the UI. It was NOT designed as a beta user recruitment pipeline. A one-time 10-minute observation does not convert into an ongoing beta user who installs the app, uses it for days/weeks, and provides honest feedback.
+
+**The expert-comptable channel — fastest path to 5 real beta users:**
+
+Louis's own expert-comptable:
+- Already has warm relationship with Louis (not cold outreach)
+- Serves artisan clients professionally (already filtered for quality)
+- Can make introductions this week, before Sprint 0 begins
+- Can introduce 2-3 validated artisan clients in a single phone call
+
+**The ask is small and low-stakes:** *"Je cherche 2-3 personnes qui pourraient me donner leur avis honnête. Est-ce que vous avez des clients artisans qui seraient ouverts à tester quelque chose?"* Not a product demo. Not a sales pitch. A favor.
+
+**VERDICT on Beta User Acquisition:** NEW ACTION ITEMS — Louis executes this week.
+
+---
+
+## Updated Decision Table (Partial — 05:03 Pulse)
+
+| ID | Topic | Resolution | Date |
+|----|-------|-----------|------|
+| D138 | Annual billing at checkout | **OPEN** — Monthly €29 PRIMARY (PS-0503) vs Annual €240 DEFAULT (GS-D153). Louis must decide. | 2026-03-31 |
+| D140 | Offline architecture | **RESOLVED** — expo-sqlite + draft-mode. D81 (AsyncStorage + retry queues) OVERRIDDEN. Phone-death-mid-write atomicity gap cannot be solved with retry queues. Timeline: 6.5 days (within existing buffer). | 2026-03-31 |
+| Beta Users | Sprint 0 exit criteria | **NEW ACTION** — Expert-comptable warm intro is primary channel. Louis calls this week. Network audit with Gabin and Maëli (specific questions) as secondary. | 2026-03-31 |
+
+### Challenged Assumptions This Pulse
+
+1. **"Annual-first framing = aggressive sales tactic"** — challenged by Product Strategist: annual-first activates "big purchase" psychology, wrong for cash-flow-sensitive artisans at checkout
+2. **"AsyncStorage + retry queues is sufficient for Sprint 0 offline"** — challenged by Technical Architect: phone-death-mid-write atomicity gap, retry queues cannot recover what never entered them
+3. **"Gabin/Maël's network will yield 5 beta users"** — challenged by Growth Strategist: Louis's network is developers and designers, not tradespeople; expert-comptable is the validated channel
+
+### New Action Items This Pulse
+
+- [ ] **D138 — Louis decision required:** Monthly €29 PRIMARY at checkout OR Annual €240 DEFAULT at checkout? One sentence answer needed.
+- [ ] **D140 RESOLVED:** Sprint 0 offline = expo-sqlite + draft-mode (overrides D81). 6.5-day timeline stands. Update Sprint 0 handoff doc with SQLite schema + draft semantics.
+- [ ] **Beta Users NEW:** Louis calls expert-comptable this week — asks for 2-3 artisan client introductions. One phone call, low-stakes favor.
+- [ ] **Beta Users NEW:** Louis asks Gabin specifically: "Est-ce qu'il y a des artisans dans ta famille?" One question, same day, answer documented.
+- [ ] **Beta Users NEW:** Louis asks Maëli the same. Designers work with small businesses — she may have artisan contacts.
+- [ ] **Beta Users NEW:** If none of the above yield 5 beta users by Friday: acknowledge gap, modify exit criteria to 3 beta users + documented edge cases.
+
+*Last updated: 2026-03-31T05:03*
